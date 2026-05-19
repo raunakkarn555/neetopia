@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET 2026 Complete Official Syllabus — Physics, Chemistry, Biology | NEETopia</title>
+  <meta name="description" content="NEET UG 2026 ka poora official syllabus — NTA aur NMC UGMEB dwara updated. Physics ke 20 units, Chemistry ke 20 units, Biology ke 10 units. Har chapter, har topic, NEET weightage ke saath. Free." />
+  <meta name="keywords" content="NEET 2026 syllabus, NTA NEET syllabus, NEET biology syllabus, NEET chemistry syllabus, NEET physics syllabus, NEET UG syllabus PDF, NEET official syllabus India" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://neetopia.in/syllabus/syllabus.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NEET 2026 Complete Official Syllabus | NEETopia" />
+  <meta property="og:description" content="NTA ka official NEET 2026 syllabus — Physics, Chemistry, Biology har topic covered. Free." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* ═══════════════════════════════════════
+       SYLLABUS PAGE — Extra Styles
+    ═══════════════════════════════════════ */
+
+    /* Page hero — compact */
+    .syllabus-hero {
+      padding-top: calc(var(--nav-h) + 52px);
+      padding-bottom: 52px;
+      padding-left: clamp(20px,5%,80px);
+      padding-right: clamp(20px,5%,80px);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .syllabus-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(61,191,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .syllabus-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: .68rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: currentColor; }
+    .syllabus-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 800; letter-spacing: -1.5px; line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .syllabus-hero h1 .hl { color: var(--accent); }
+    .syllabus-hero .sub {
+      font-size: clamp(.9rem,1.6vw,1.05rem); color: var(--text2);
+      max-width: 640px; line-height: 1.7; font-weight: 300; margin-bottom: 24px;
+    }
+    .hero-badges {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .badge-updated {
+      background: var(--green-bg); border: 1px solid var(--green-border);
+      color: var(--green); font-family: var(--font-mono); font-size: .68rem;
+      padding: 5px 12px; border-radius: 999px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .badge-nta {
+      background: var(--accent-dim); border: 1px solid rgba(61,191,255,0.25);
+      color: var(--accent); font-family: var(--font-mono); font-size: .68rem;
+      padding: 5px 12px; border-radius: 999px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .badge-nmc {
+      background: rgba(168,124,245,.08); border: 1px solid rgba(168,124,245,.2);
+      color: var(--purple); font-family: var(--font-mono); font-size: .68rem;
+      padding: 5px 12px; border-radius: 999px; letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* Stats bar in hero */
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; max-width: 780px; margin-top: 10px;
+    }
+    .hero-stat {
+      flex: 1; min-width: 120px; padding: 18px 20px; text-align: center;
+      border-right: 1px solid var(--border); transition: background .2s;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat:hover { background: var(--surface); }
+    .hero-stat-num {
+      font-family: var(--font-head); font-size: 1.75rem;
+      font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 4px;
+    }
+    .hero-stat-num.blue { color: var(--accent); }
+    .hero-stat-num.green { color: var(--green); }
+    .hero-stat-num.amber { color: var(--amber); }
+    .hero-stat-num.red   { color: var(--red); }
+    .hero-stat-label { font-size: .71rem; color: var(--text3); }
+
+    /* ── SUBJECT TABS ── */
+    .syllabus-body {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(20px,5%,80px);
+    }
+    .subject-tabs {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      padding: 40px 0 32px;
+      position: sticky; top: var(--nav-h); z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: .875rem; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text2);
+      transition: all .2s; letter-spacing: .2px;
+    }
+    .tab-btn:hover { color: var(--text); border-color: var(--border2); }
+    .tab-btn.active-bio  { color: var(--green); background: var(--green-bg); border-color: var(--green-border); }
+    .tab-btn.active-chem { color: var(--amber); background: var(--amber-bg); border-color: var(--amber-border); }
+    .tab-btn.active-phy  { color: var(--accent); background: var(--accent-dim); border-color: rgba(61,191,255,.3); }
+    .tab-count {
+      font-family: var(--font-mono); font-size: .63rem;
+      background: var(--bg4); color: var(--text3);
+      padding: 2px 8px; border-radius: 999px;
+    }
+    .tab-btn.active-bio  .tab-count { background: rgba(61,232,160,.15); color: var(--green); }
+    .tab-btn.active-chem .tab-count { background: rgba(244,185,66,.15); color: var(--amber); }
+    .tab-btn.active-phy  .tab-count { background: rgba(61,191,255,.15); color: var(--accent); }
+
+    /* ── SUBJECT SECTIONS ── */
+    .subject-section { display: none; padding: 40px 0 80px; }
+    .subject-section.active { display: block; }
+
+    .class-block { margin-bottom: 56px; }
+    .class-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .class-badge {
+      font-family: var(--font-mono); font-size: .65rem; font-weight: 500;
+      padding: 5px 14px; border-radius: 999px; text-transform: uppercase; letter-spacing: 1.2px;
+    }
+    .class-badge.c11-bio  { background: rgba(61,232,160,.1); color: var(--green);  border: 1px solid rgba(61,232,160,.2); }
+    .class-badge.c12-bio  { background: rgba(61,232,160,.15); color: var(--green); border: 1px solid rgba(61,232,160,.3); }
+    .class-badge.c11-chem { background: rgba(244,185,66,.1); color: var(--amber);  border: 1px solid rgba(244,185,66,.2); }
+    .class-badge.c12-chem { background: rgba(244,185,66,.15); color: var(--amber); border: 1px solid rgba(244,185,66,.3); }
+    .class-badge.c11-phy  { background: rgba(61,191,255,.1); color: var(--accent);  border: 1px solid rgba(61,191,255,.2); }
+    .class-badge.c12-phy  { background: rgba(61,191,255,.15); color: var(--accent); border: 1px solid rgba(61,191,255,.3); }
+
+    .class-title {
+      font-family: var(--font-head); font-size: 1.3rem; font-weight: 700;
+      letter-spacing: -.5px;
+    }
+    .class-meta { font-family: var(--font-mono); font-size: .68rem; color: var(--text3); margin-left: auto; }
+
+    /* ── CHAPTER GRID ── */
+    .chapters-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    @media (max-width: 780px) { .chapters-grid { grid-template-columns: 1fr; } }
+
+    .chapter-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 20px 16px;
+      text-decoration: none; color: var(--text);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      display: flex; flex-direction: column; gap: 12px;
+      position: relative; overflow: hidden;
+    }
+    .chapter-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--border); border-radius: 3px 0 0 3px;
+      transition: background .2s;
+    }
+    .chapter-card.bio::before   { background: rgba(61,232,160,.3); }
+    .chapter-card.chem::before  { background: rgba(244,185,66,.3); }
+    .chapter-card.phy::before   { background: rgba(61,191,255,.3); }
+    .chapter-card:hover { transform: translateY(-2px); }
+    .chapter-card.bio:hover  { border-color: rgba(61,232,160,.35);  box-shadow: 0 8px 32px rgba(61,232,160,.06); }
+    .chapter-card.chem:hover { border-color: rgba(244,185,66,.35);  box-shadow: 0 8px 32px rgba(244,185,66,.06); }
+    .chapter-card.phy:hover  { border-color: rgba(61,191,255,.35);  box-shadow: 0 8px 32px rgba(61,191,255,.06); }
+
+    .chapter-top {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    }
+    .chapter-num {
+      font-family: var(--font-mono); font-size: .6rem; color: var(--text3);
+      background: var(--bg4); padding: 3px 8px; border-radius: 5px;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .chapter-name {
+      font-family: var(--font-head); font-size: .97rem; font-weight: 600;
+      letter-spacing: -.3px; line-height: 1.3; flex: 1;
+    }
+    .weightage {
+      font-family: var(--font-mono); font-size: .6rem; font-weight: 500;
+      padding: 3px 10px; border-radius: 999px; flex-shrink: 0;
+      text-transform: uppercase; letter-spacing: .8px;
+    }
+    .w-high   { background: var(--red-bg);    color: var(--red);   border: 1px solid rgba(245,101,101,.2); }
+    .w-medium { background: var(--amber-bg);  color: var(--amber); border: 1px solid rgba(244,185,66,.2); }
+    .w-low    { background: var(--green-bg);  color: var(--green); border: 1px solid rgba(61,232,160,.2); }
+
+    .chapter-topics {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .topic-pill {
+      font-size: .71rem; color: var(--text3);
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 999px;
+      line-height: 1.4;
+    }
+
+    .chapter-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 10px; border-top: 1px solid var(--border);
+      font-size: .75rem;
+    }
+    .chapter-topic-count { color: var(--text3); font-family: var(--font-mono); font-size: .62rem; }
+    .chapter-arrow { color: var(--text3); font-size: .78rem; display: flex; align-items: center; gap: 4px; }
+    .chapter-card:hover .chapter-arrow { color: var(--accent); }
+
+    /* ── IMPORTANT NOTE BOX ── */
+    .note-section { padding: 0 clamp(20px,5%,80px) 60px; }
+    .note-box {
+      max-width: 1200px; margin: 0 auto;
+      background: var(--amber-bg); border: 1px solid var(--amber-border);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .note-icon {
+      width: 38px; height: 38px; background: rgba(244,185,66,.15);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--amber); font-size: 1.1rem;
+    }
+    .note-content h3 {
+      font-family: var(--font-head); font-size: .95rem; font-weight: 600;
+      color: var(--amber); margin-bottom: 8px;
+    }
+    .note-content p {
+      font-size: .84rem; color: var(--text2); line-height: 1.7; font-weight: 300;
+    }
+    .note-content a {
+      color: var(--amber); text-decoration: underline; text-underline-offset: 3px;
+    }
+
+    /* ── TOPIC DEEP DIVE PILLS (all topics listed) ── */
+    .all-topics-section {
+      background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 32px clamp(20px,5%,80px);
+    }
+    .all-topics-inner { max-width: 1200px; margin: 0 auto; }
+    .all-topics-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    }
+    .topic-pills-grid {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .tpill {
+      font-size: .76rem; padding: 5px 13px; border-radius: 999px;
+      border: 1px solid var(--border); color: var(--text2); background: var(--bg3);
+      cursor: default; transition: all .15s;
+    }
+    .tpill:hover { color: var(--text); border-color: var(--border2); }
+    .tpill.bio   { border-color: rgba(61,232,160,.2); color: rgba(61,232,160,.8); }
+    .tpill.chem  { border-color: rgba(244,185,66,.2); color: rgba(244,185,66,.8); }
+    .tpill.phy   { border-color: rgba(61,191,255,.2); color: rgba(61,191,255,.8); }
+    .tpill.high  { background: rgba(245,101,101,.06); border-color: rgba(245,101,101,.2); color: var(--red); }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .hero-stats { flex-direction: column; }
+      .hero-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-stat:last-child { border-bottom: none; }
+      .subject-tabs { top: calc(var(--nav-h)); padding-top: 20px; padding-bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="syllabus.html" class="active-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="../pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="../physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="../biology/biology-home.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     PAGE HERO
+══════════════════════════════ -->
+<section class="syllabus-hero">
+  <div class="syllabus-hero-inner">
+    <p class="hero-eyebrow">Official NTA Syllabus · NEET UG 2026</p>
+    <h1>NEET 2026 — <span class="hl">Poora Syllabus</span></h1>
+    <p class="sub">
+      NTA aur NMC (UGMEB) ka official updated syllabus — teeno subjects, Class 11 aur 12, unit-by-unit, topic-by-topic.
+      Yahan jo hai wahi NEET mein aata hai. Koi guess nahi, sirf official content.
+    </p>
+    <div class="hero-badges">
+      <span class="badge-updated">✓ Updated Jan 2026</span>
+      <span class="badge-nta">NTA Official</span>
+      <span class="badge-nmc">NMC UGMEB Verified</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num blue">50</div>
+        <div class="hero-stat-label">Total Units</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num green">10</div>
+        <div class="hero-stat-label">Bio Units</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num amber">20</div>
+        <div class="hero-stat-label">Chem Units</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num blue">20</div>
+        <div class="hero-stat-label">Physics Units</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num red">180</div>
+        <div class="hero-stat-label">Total Questions</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num amber">720</div>
+        <div class="hero-stat-label">Total Marks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     MAIN SYLLABUS BODY
+══════════════════════════════ -->
+<div class="syllabus-body">
+
+  <!-- TABS -->
+  <div class="subject-tabs" role="tablist" aria-label="Subject tabs">
+    <button class="tab-btn active-bio" id="tab-bio" onclick="showTab('bio')" role="tab" aria-selected="true" aria-controls="sec-bio">
+      🧬 Biology <span class="tab-count">10 Units</span>
+    </button>
+    <button class="tab-btn" id="tab-chem" onclick="showTab('chem')" role="tab" aria-selected="false" aria-controls="sec-chem">
+      ⚗️ Chemistry <span class="tab-count">20 Units</span>
+    </button>
+    <button class="tab-btn" id="tab-phy" onclick="showTab('phy')" role="tab" aria-selected="false" aria-controls="sec-phy">
+      ⚛️ Physics <span class="tab-count">20 Units</span>
+    </button>
+  </div>
+
+  <!-- ══════════════════════════
+       BIOLOGY SECTION
+  ══════════════════════════ -->
+  <div id="sec-bio" class="subject-section active" role="tabpanel" aria-labelledby="tab-bio">
+
+    <!-- Bio Class 11 -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c11-bio">Class 11</span>
+        <h2 class="class-title">Biology — Class XI Units</h2>
+        <span class="class-meta">Units 1–5 · ~45% of Bio questions from Class 11</span>
+      </div>
+      <div class="chapters-grid">
+
+        <!-- Unit 1 -->
+        <a class="chapter-card bio" href="../biology/class11/ch01-living-world.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 01</span>
+            <span class="chapter-name">Diversity in Living World</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">What is Living?</span>
+            <span class="topic-pill">Biodiversity</span>
+            <span class="topic-pill">Taxonomy & Systematics</span>
+            <span class="topic-pill">Binomial Nomenclature</span>
+            <span class="topic-pill">Five Kingdom Classification</span>
+            <span class="topic-pill">Monera, Protista, Fungi</span>
+            <span class="topic-pill">Lichens, Viruses, Viroids</span>
+            <span class="topic-pill">Algae, Bryophytes, Pteridophytes</span>
+            <span class="topic-pill">Gymnosperms</span>
+            <span class="topic-pill">Animal Classification — Phyla & Classes</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 2 -->
+        <a class="chapter-card bio" href="../biology/class11/ch02-structural-organisation.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 02</span>
+            <span class="chapter-name">Structural Organisation in Animals & Plants</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Root, Stem, Leaf Morphology</span>
+            <span class="topic-pill">Inflorescence — Cymose & Racemose</span>
+            <span class="topic-pill">Flower, Fruit & Seed</span>
+            <span class="topic-pill">Plant Families (Malvaceae, Cruciferae etc.)</span>
+            <span class="topic-pill">Animal Tissues</span>
+            <span class="topic-pill">Frog — Anatomy & Physiology</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">6 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 3 -->
+        <a class="chapter-card bio" href="../biology/class11/ch03-cell-structure.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 03</span>
+            <span class="chapter-name">Cell Structure and Function</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Cell Theory</span>
+            <span class="topic-pill">Prokaryotic vs Eukaryotic Cell</span>
+            <span class="topic-pill">Cell Membrane & Cell Wall</span>
+            <span class="topic-pill">Endomembrane System</span>
+            <span class="topic-pill">Mitochondria, Ribosomes, Plastids</span>
+            <span class="topic-pill">Cytoskeleton, Cilia, Flagella</span>
+            <span class="topic-pill">Nucleus — Chromatin, Nucleolus</span>
+            <span class="topic-pill">Biomolecules — Proteins, Carbs, Lipids, NA</span>
+            <span class="topic-pill">Enzymes — Types, Action, Classification</span>
+            <span class="topic-pill">Cell Cycle, Mitosis, Meiosis</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 4–5 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 4 -->
+        <a class="chapter-card bio" href="../biology/class11/ch04-plant-physiology.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 04</span>
+            <span class="chapter-name">Plant Physiology</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Photosynthesis — Pigments & Site</span>
+            <span class="topic-pill">Photochemical & Biosynthetic Phases</span>
+            <span class="topic-pill">Cyclic & Non-Cyclic Photophosphorylation</span>
+            <span class="topic-pill">Chemiosmotic Hypothesis</span>
+            <span class="topic-pill">Photorespiration, C3 & C4 Pathways</span>
+            <span class="topic-pill">Cellular Respiration — Glycolysis, TCA</span>
+            <span class="topic-pill">Fermentation (Anaerobic)</span>
+            <span class="topic-pill">ATP Molecules Generated</span>
+            <span class="topic-pill">Plant Growth Regulators — Auxin, GA, CK, ABA</span>
+            <span class="topic-pill">Seed Germination & Differentiation</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 4–5 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 5 -->
+        <a class="chapter-card bio" href="../biology/class11/ch05-human-physiology.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 05</span>
+            <span class="chapter-name">Human Physiology</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Breathing & Respiration — Mechanism, Regulation</span>
+            <span class="topic-pill">Respiratory Volumes & Disorders</span>
+            <span class="topic-pill">Blood Composition, Groups, Coagulation</span>
+            <span class="topic-pill">Heart Structure — Cardiac Cycle, ECG</span>
+            <span class="topic-pill">Double Circulation & Disorders</span>
+            <span class="topic-pill">Excretory System — Urine Formation, Osmoregulation</span>
+            <span class="topic-pill">Renin-Angiotensin, ADH, Diabetes Insipidus</span>
+            <span class="topic-pill">Locomotion — Skeletal Muscle, Contraction</span>
+            <span class="topic-pill">Nervous System — CNS, PNS, Nerve Impulse</span>
+            <span class="topic-pill">Endocrine System — All Glands & Hormones</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 6–8 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div><!-- /chapters-grid -->
+    </div><!-- /class-block bio-11 -->
+
+    <!-- Bio Class 12 -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c12-bio">Class 12</span>
+        <h2 class="class-title">Biology — Class XII Units</h2>
+        <span class="class-meta">Units 6–10 · ~55% of Bio questions from Class 12</span>
+      </div>
+      <div class="chapters-grid">
+
+        <!-- Unit 6 -->
+        <a class="chapter-card bio" href="../biology/class12/ch06-reproduction.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 06</span>
+            <span class="chapter-name">Reproduction</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Flower Structure & Gametophyte Development</span>
+            <span class="topic-pill">Pollination — Types, Agencies</span>
+            <span class="topic-pill">Pollen-Pistil Interaction</span>
+            <span class="topic-pill">Double Fertilization</span>
+            <span class="topic-pill">Endosperm, Embryo, Seed Formation</span>
+            <span class="topic-pill">Apomixis, Parthenocarpy, Polyembryony</span>
+            <span class="topic-pill">Male & Female Reproductive Systems</span>
+            <span class="topic-pill">Spermatogenesis & Oogenesis</span>
+            <span class="topic-pill">Menstrual Cycle, Fertilisation, Implantation</span>
+            <span class="topic-pill">Reproductive Health, STDs, Birth Control</span>
+            <span class="topic-pill">IVF, ZIFT, GIFT (ART)</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">11 topics · 5–6 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 7 -->
+        <a class="chapter-card bio" href="../biology/class12/ch07-genetics-evolution.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 07</span>
+            <span class="chapter-name">Genetics and Evolution</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Mendelian Inheritance</span>
+            <span class="topic-pill">Incomplete Dominance, Co-dominance</span>
+            <span class="topic-pill">Multiple Alleles, Blood Groups, Pleiotropy</span>
+            <span class="topic-pill">Polygenic Inheritance</span>
+            <span class="topic-pill">Chromosome Theory, Sex Determination</span>
+            <span class="topic-pill">Linkage & Crossing Over</span>
+            <span class="topic-pill">Sex-Linked — Haemophilia, Colour Blindness</span>
+            <span class="topic-pill">Thalassemia, Down's, Turner's, Klinefelter's</span>
+            <span class="topic-pill">DNA Structure, RNA, DNA Packaging</span>
+            <span class="topic-pill">DNA Replication, Transcription, Translation</span>
+            <span class="topic-pill">Lac Operon, Human Genome Project</span>
+            <span class="topic-pill">DNA Fingerprinting</span>
+            <span class="topic-pill">Origin of Life, Darwin's Theory, Hardy-Weinberg</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">13 topics · 8–10 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 8 -->
+        <a class="chapter-card bio" href="../biology/class12/ch08-biology-human-welfare.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 08</span>
+            <span class="chapter-name">Biology and Human Welfare</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Pathogens & Human Diseases</span>
+            <span class="topic-pill">Malaria, Filariasis, Ascariasis</span>
+            <span class="topic-pill">Typhoid, Pneumonia, Common Cold</span>
+            <span class="topic-pill">Dengue, Chikungunya, Amoebiasis, Ringworm</span>
+            <span class="topic-pill">Immunology Basics — Vaccines</span>
+            <span class="topic-pill">Cancer, HIV & AIDS</span>
+            <span class="topic-pill">Adolescence, Drug, Alcohol & Tobacco Abuse</span>
+            <span class="topic-pill">Microbes — Food Processing, Sewage, Energy</span>
+            <span class="topic-pill">Biocontrol Agents & Biofertilizers</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">9 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 9 -->
+        <a class="chapter-card bio" href="../biology/class12/ch09-biotechnology.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 09</span>
+            <span class="chapter-name">Biotechnology and Its Applications</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Genetic Engineering — Recombinant DNA Technology</span>
+            <span class="topic-pill">Human Insulin Production</span>
+            <span class="topic-pill">Vaccine Production via Biotechnology</span>
+            <span class="topic-pill">Gene Therapy</span>
+            <span class="topic-pill">Bt Crops — GMOs</span>
+            <span class="topic-pill">Transgenic Animals</span>
+            <span class="topic-pill">Biosafety Issues, Biopiracy & Patents</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <!-- Unit 10 -->
+        <a class="chapter-card bio" href="../biology/class12/ch10-ecology-environment.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 10</span>
+            <span class="chapter-name">Ecology and Environment</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Population Interactions — Mutualism, Competition, Predation</span>
+            <span class="topic-pill">Population Attributes — Growth, Birth/Death Rate</span>
+            <span class="topic-pill">Ecosystem — Patterns, Productivity, Decomposition</span>
+            <span class="topic-pill">Energy Flow in Ecosystem</span>
+            <span class="topic-pill">Pyramids — Number, Biomass, Energy</span>
+            <span class="topic-pill">Biodiversity Concept & Patterns</span>
+            <span class="topic-pill">Importance & Loss of Biodiversity</span>
+            <span class="topic-pill">Hotspots, Endangered Species, Red Data Book</span>
+            <span class="topic-pill">Biosphere Reserves, National Parks, Sanctuaries</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">9 topics · 4–5 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div><!-- /class-block bio-12 -->
+
+    <!-- Biology Topic Count Summary -->
+    <div class="note-section" style="padding-left:0;padding-right:0;padding-bottom:30px;">
+      <div style="background:var(--bio-bg);border:1px solid rgba(61,232,160,.2);border-radius:var(--radius);padding:20px 24px;max-width:100%;">
+        <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">📊 Biology Topic Count — Official Syllabus</p>
+        <p style="font-size:.84rem;color:var(--text2);line-height:1.8;">
+          <strong style="color:var(--green);">Total Biology Topics (across all 10 units): ~85 discrete topics</strong><br>
+          Unit 1: 10 · Unit 2: 6 · Unit 3: 10 · Unit 4: 10 · Unit 5: 10 (Class 11 = 46 topics)<br>
+          Unit 6: 11 · Unit 7: 13 · Unit 8: 9 · Unit 9: 7 · Unit 10: 9 (Class 12 = 49 topics)<br>
+          <span style="color:var(--red);">High Weightage:</span> Cell Structure, Human Physiology, Genetics & Evolution, Reproduction, Ecology<br>
+          <span style="color:var(--amber);">Medium Weightage:</span> Structural Organisation, Biotechnology, Human Welfare<br>
+          <span style="color:var(--green);">90 questions</span> in NEET from Biology · 360 marks
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /sec-bio -->
+
+  <!-- ══════════════════════════
+       CHEMISTRY SECTION
+  ══════════════════════════ -->
+  <div id="sec-chem" class="subject-section" role="tabpanel" aria-labelledby="tab-chem">
+
+    <!-- Chem Class 11 — Physical -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c11-chem">Class 11</span>
+        <h2 class="class-title">Chemistry — Class XI (Units 1–8)</h2>
+        <span class="class-meta">Physical + Inorganic + Organic Part 1 · ~50% of Chem</span>
+      </div>
+      <div class="chapters-grid">
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch01-basic-concepts.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 01</span>
+            <span class="chapter-name">Some Basic Concepts in Chemistry</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Dalton's Atomic Theory</span>
+            <span class="topic-pill">Laws of Chemical Combination</span>
+            <span class="topic-pill">Atomic & Molecular Masses</span>
+            <span class="topic-pill">Mole Concept & Molar Mass</span>
+            <span class="topic-pill">Percentage Composition</span>
+            <span class="topic-pill">Empirical & Molecular Formulae</span>
+            <span class="topic-pill">Stoichiometry</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch02-atomic-structure.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 02</span>
+            <span class="chapter-name">Atomic Structure</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Photoelectric Effect</span>
+            <span class="topic-pill">Hydrogen Spectrum</span>
+            <span class="topic-pill">Bohr's Model — Energy & Radii</span>
+            <span class="topic-pill">de Broglie's Relationship</span>
+            <span class="topic-pill">Heisenberg Uncertainty Principle</span>
+            <span class="topic-pill">Quantum Mechanical Model</span>
+            <span class="topic-pill">Atomic Orbitals — ψ & ψ²</span>
+            <span class="topic-pill">Quantum Numbers (n, l, m, s)</span>
+            <span class="topic-pill">Shapes of s, p, d Orbitals</span>
+            <span class="topic-pill">Aufbau, Pauli, Hund's Rules</span>
+            <span class="topic-pill">Electronic Configuration</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">11 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch03-chemical-bonding.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 03</span>
+            <span class="chapter-name">Chemical Bonding and Molecular Structure</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Ionic & Covalent Bond Formation</span>
+            <span class="topic-pill">Lattice Enthalpy</span>
+            <span class="topic-pill">Electronegativity, Fajan's Rule, Dipole Moment</span>
+            <span class="topic-pill">VSEPR Theory & Molecular Shapes</span>
+            <span class="topic-pill">Hybridization — s, p, d Orbitals</span>
+            <span class="topic-pill">Resonance</span>
+            <span class="topic-pill">MOT — Bonding/Antibonding MOs</span>
+            <span class="topic-pill">Sigma & Pi Bonds, Bond Order</span>
+            <span class="topic-pill">Metallic Bonding</span>
+            <span class="topic-pill">Hydrogen Bonding & Applications</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch04-thermodynamics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 04</span>
+            <span class="chapter-name">Chemical Thermodynamics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">System, Surroundings, State Functions</span>
+            <span class="topic-pill">First Law — Heat, Work, Internal Energy</span>
+            <span class="topic-pill">Enthalpy, Molar Heat Capacity</span>
+            <span class="topic-pill">Hess's Law</span>
+            <span class="topic-pill">Bond Dissociation, Combustion, Formation Enthalpies</span>
+            <span class="topic-pill">Second Law — Spontaneity</span>
+            <span class="topic-pill">Entropy (ΔS) of Universe</span>
+            <span class="topic-pill">Gibbs Energy (ΔG) & Equilibrium</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch05-solutions.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 05</span>
+            <span class="chapter-name">Solutions</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Concentration — Molality, Molarity, Mole Fraction</span>
+            <span class="topic-pill">Vapour Pressure & Raoult's Law</span>
+            <span class="topic-pill">Ideal & Non-Ideal Solutions</span>
+            <span class="topic-pill">Colligative Properties</span>
+            <span class="topic-pill">Depression of Freezing Point, Elevation of BP</span>
+            <span class="topic-pill">Osmotic Pressure</span>
+            <span class="topic-pill">van't Hoff Factor</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch06-equilibrium.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 06</span>
+            <span class="chapter-name">Equilibrium</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Dynamic Equilibrium</span>
+            <span class="topic-pill">Henry's Law</span>
+            <span class="topic-pill">Law of Chemical Equilibrium — Kp & Kc</span>
+            <span class="topic-pill">Le Chatelier's Principle</span>
+            <span class="topic-pill">Weak & Strong Electrolytes</span>
+            <span class="topic-pill">Acids & Bases — Arrhenius, Bronsted-Lowry, Lewis</span>
+            <span class="topic-pill">pH Scale, Common Ion Effect</span>
+            <span class="topic-pill">Hydrolysis of Salts</span>
+            <span class="topic-pill">Solubility Product (Ksp)</span>
+            <span class="topic-pill">Buffer Solutions</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch07-redox-electrochemistry.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 07</span>
+            <span class="chapter-name">Redox Reactions & Electrochemistry</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Oxidation Number & Balancing Redox</span>
+            <span class="topic-pill">Electrolytic & Metallic Conduction</span>
+            <span class="topic-pill">Molar Conductivity & Kohlrausch's Law</span>
+            <span class="topic-pill">Galvanic & Electrolytic Cells</span>
+            <span class="topic-pill">Electrode Potentials & EMF</span>
+            <span class="topic-pill">Nernst Equation</span>
+            <span class="topic-pill">Gibbs Energy & Cell Potential</span>
+            <span class="topic-pill">Dry Cell, Lead Accumulator, Fuel Cells</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class11/ch08-chemical-kinetics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 08</span>
+            <span class="chapter-name">Chemical Kinetics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Rate of Reaction & Factors</span>
+            <span class="topic-pill">Order & Molecularity</span>
+            <span class="topic-pill">Rate Law & Rate Constant</span>
+            <span class="topic-pill">Zero & First Order Reactions</span>
+            <span class="topic-pill">Half-Life</span>
+            <span class="topic-pill">Arrhenius Theory & Activation Energy</span>
+            <span class="topic-pill">Collision Theory (Bimolecular)</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div><!-- /class-block chem-11 -->
+
+    <!-- Chem Class 12 — Inorganic + Organic -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c12-chem">Class 12</span>
+        <h2 class="class-title">Chemistry — Class XII (Units 9–20)</h2>
+        <span class="class-meta">Inorganic + Organic Chemistry · ~50% of Chem</span>
+      </div>
+      <div class="chapters-grid">
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch09-classification-elements.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 09</span>
+            <span class="chapter-name">Classification of Elements & Periodicity</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Modern Periodic Law</span>
+            <span class="topic-pill">s, p, d, f Block Elements</span>
+            <span class="topic-pill">Atomic & Ionic Radii</span>
+            <span class="topic-pill">Ionization Enthalpy</span>
+            <span class="topic-pill">Electron Gain Enthalpy</span>
+            <span class="topic-pill">Oxidation States & Chemical Reactivity</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">6 topics · 1–2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch10-p-block.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 10</span>
+            <span class="chapter-name">P-Block Elements (Groups 13–18)</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Group 13 — Boron Family</span>
+            <span class="topic-pill">Group 14 — Carbon Family</span>
+            <span class="topic-pill">Group 15 — Nitrogen Family</span>
+            <span class="topic-pill">Group 16 — Oxygen Family</span>
+            <span class="topic-pill">Group 17 — Halogens</span>
+            <span class="topic-pill">Group 18 — Noble Gases</span>
+            <span class="topic-pill">First Element Unique Behaviour</span>
+            <span class="topic-pill">Physical & Chemical Trends</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch11-d-f-block.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 11</span>
+            <span class="chapter-name">d- and f-Block Elements</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Transition Elements — General Properties</span>
+            <span class="topic-pill">Ionization Enthalpy, Colour, Magnetism</span>
+            <span class="topic-pill">Catalytic Behaviour, Complex Formation</span>
+            <span class="topic-pill">K₂Cr₂O₇ & KMnO₄ — Properties & Uses</span>
+            <span class="topic-pill">Lanthanoids — Configuration, Contraction</span>
+            <span class="topic-pill">Actinoids — Configuration & States</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">6 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch12-coordination-compounds.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 12</span>
+            <span class="chapter-name">Co-ordination Compounds</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Werner's Theory</span>
+            <span class="topic-pill">Ligands, Coordination Number, Denticity</span>
+            <span class="topic-pill">IUPAC Nomenclature</span>
+            <span class="topic-pill">Isomerism in Coordination Compounds</span>
+            <span class="topic-pill">Valence Bond Approach</span>
+            <span class="topic-pill">Crystal Field Theory — Colour & Magnetism</span>
+            <span class="topic-pill">Biological & Industrial Importance</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch13-purification-characterisation.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 13</span>
+            <span class="chapter-name">Purification & Characterisation of Organic Compounds</span>
+            <span class="weightage w-low">Low</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Crystallization, Sublimation, Distillation</span>
+            <span class="topic-pill">Differential Extraction, Chromatography</span>
+            <span class="topic-pill">Detection of N, S, P, Halogens</span>
+            <span class="topic-pill">Quantitative Analysis — C, H, N estimation</span>
+            <span class="topic-pill">Empirical & Molecular Formulae Calculation</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">5 topics · 1 Q/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch14-basic-organic-chemistry.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 14</span>
+            <span class="chapter-name">Basic Principles of Organic Chemistry</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Tetravalency of Carbon & Hybridization</span>
+            <span class="topic-pill">Functional Group Classification</span>
+            <span class="topic-pill">Homologous Series & Isomerism</span>
+            <span class="topic-pill">IUPAC Nomenclature</span>
+            <span class="topic-pill">Homolytic & Heterolytic Fission</span>
+            <span class="topic-pill">Free Radicals, Carbocations, Carbanions</span>
+            <span class="topic-pill">Electrophiles & Nucleophiles</span>
+            <span class="topic-pill">Inductive, Electromeric, Resonance Effects</span>
+            <span class="topic-pill">Hyperconjugation</span>
+            <span class="topic-pill">Substitution, Addition, Elimination Reactions</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch15-hydrocarbons.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 15</span>
+            <span class="chapter-name">Hydrocarbons</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Alkanes — Conformations (Sawhorse, Newman)</span>
+            <span class="topic-pill">Halogenation of Alkanes</span>
+            <span class="topic-pill">Alkenes — Geometrical Isomerism</span>
+            <span class="topic-pill">Electrophilic Addition — H₂, HX, H₂O, X₂</span>
+            <span class="topic-pill">Markownikov & Peroxide Effect</span>
+            <span class="topic-pill">Ozonolysis & Polymerization</span>
+            <span class="topic-pill">Alkynes — Acidic Character, Reactions</span>
+            <span class="topic-pill">Benzene — Structure, Aromaticity</span>
+            <span class="topic-pill">EAS — Halogenation, Nitration, Friedel-Crafts</span>
+            <span class="topic-pill">Directive Influence of Substituents</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch16-haloalkanes.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 16</span>
+            <span class="chapter-name">Organic Compounds Containing Halogens</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">C–X Bond Nature</span>
+            <span class="topic-pill">Preparation & Properties</span>
+            <span class="topic-pill">Nucleophilic Substitution Mechanisms</span>
+            <span class="topic-pill">Chloroform, Iodoform, Freons & DDT</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">4 topics · 2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch17-oxygen-compounds.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 17</span>
+            <span class="chapter-name">Organic Compounds Containing Oxygen</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Alcohols — 1°, 2°, 3°; Dehydration Mechanism</span>
+            <span class="topic-pill">Phenols — Acidic Nature, EAS</span>
+            <span class="topic-pill">Reimer-Tiemann Reaction</span>
+            <span class="topic-pill">Ethers — Structure</span>
+            <span class="topic-pill">Carbonyl Group — Nucleophilic Addition</span>
+            <span class="topic-pill">Aldehydes vs Ketones — Reactivity</span>
+            <span class="topic-pill">Grignard, Aldol Condensation</span>
+            <span class="topic-pill">Cannizzaro, Clemmensen, Wolf-Kishner</span>
+            <span class="topic-pill">Haloform Reaction</span>
+            <span class="topic-pill">Carboxylic Acids — Acidic Strength</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 4–5 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch18-nitrogen-compounds.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 18</span>
+            <span class="chapter-name">Organic Compounds Containing Nitrogen</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Amines — Classification, Basic Character</span>
+            <span class="topic-pill">Identification of 1°, 2°, 3° Amines</span>
+            <span class="topic-pill">Diazonium Salts — Synthetic Importance</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">3 topics · 2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch19-biomolecules.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 19</span>
+            <span class="chapter-name">Biomolecules</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Carbohydrates — Aldoses, Ketoses</span>
+            <span class="topic-pill">Monosaccharides — Glucose & Fructose</span>
+            <span class="topic-pill">Disaccharides — Sucrose, Lactose, Maltose</span>
+            <span class="topic-pill">Proteins — α-Amino Acids, Peptide Bond</span>
+            <span class="topic-pill">Protein Structure — 1°, 2°, 3°, 4°</span>
+            <span class="topic-pill">Denaturation & Enzymes</span>
+            <span class="topic-pill">Vitamins — Classification & Functions</span>
+            <span class="topic-pill">Nucleic Acids — DNA & RNA Constitution</span>
+            <span class="topic-pill">Biological Functions of Nucleic Acids</span>
+            <span class="topic-pill">Hormones — General Introduction</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card chem" href="../chemistry/class12/ch20-practical-chemistry.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 20</span>
+            <span class="chapter-name">Principles Related to Practical Chemistry</span>
+            <span class="weightage w-low">Low</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Detection of N, S, Halogens in Organics</span>
+            <span class="topic-pill">Functional Group Detection</span>
+            <span class="topic-pill">Inorganic Compounds — Mohr's Salt, Potash Alum</span>
+            <span class="topic-pill">Organic — Acetanilide, p-Nitroacetanilide</span>
+            <span class="topic-pill">Titrimetric Exercises — Acid-Base, KMnO₄</span>
+            <span class="topic-pill">Qualitative Salt Analysis (Cations & Anions)</span>
+            <span class="topic-pill">Enthalpy of Solution & Neutralization</span>
+            <span class="topic-pill">Lyophilic & Lyophobic Sols</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 1–2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div><!-- /class-block chem-12 -->
+
+    <!-- Chemistry Topic Count Summary -->
+    <div class="note-section" style="padding-left:0;padding-right:0;padding-bottom:30px;">
+      <div style="background:var(--chem-bg);border:1px solid rgba(244,185,66,.2);border-radius:var(--radius);padding:20px 24px;">
+        <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--amber);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">📊 Chemistry Topic Count — Official Syllabus</p>
+        <p style="font-size:.84rem;color:var(--text2);line-height:1.8;">
+          <strong style="color:var(--amber);">Total Chemistry Topics (across 20 units): ~104 discrete topics</strong><br>
+          Class 11 (Units 1–8): 7+11+10+8+7+10+8+7 = <strong>68 topics</strong><br>
+          Class 12 (Units 9–20): 6+8+6+7+5+10+10+4+10+3+10+8 = <strong>87 topics</strong><br>
+          <span style="color:var(--red);">High Weightage:</span> Atomic Structure, Chemical Bonding, Thermodynamics, Equilibrium, Electrochemistry, Kinetics, P-Block, Hydrocarbons, Aldehydes-Ketones, Biomolecules<br>
+          <span style="color:var(--green);">45 questions</span> in NEET from Chemistry · 180 marks
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /sec-chem -->
+
+  <!-- ══════════════════════════
+       PHYSICS SECTION
+  ══════════════════════════ -->
+  <div id="sec-phy" class="subject-section" role="tabpanel" aria-labelledby="tab-phy">
+
+    <!-- Physics Class 11 -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c11-phy">Class 11</span>
+        <h2 class="class-title">Physics — Class XI (Units 1–10)</h2>
+        <span class="class-meta">Mechanics, Thermal, Waves · ~50% of Physics</span>
+      </div>
+      <div class="chapters-grid">
+
+        <a class="chapter-card phy" href="../physics/class11/ch01-measurement.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 01</span>
+            <span class="chapter-name">Physics and Measurement</span>
+            <span class="weightage w-low">Low</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Units of Measurement, SI System</span>
+            <span class="topic-pill">Fundamental & Derived Units</span>
+            <span class="topic-pill">Least Count & Significant Figures</span>
+            <span class="topic-pill">Errors in Measurement</span>
+            <span class="topic-pill">Dimensional Analysis & Applications</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">5 topics · 1–2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch02-kinematics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 02</span>
+            <span class="chapter-name">Kinematics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Frame of Reference, Position-Time Graph</span>
+            <span class="topic-pill">Uniform & Non-Uniform Motion</span>
+            <span class="topic-pill">Uniformly Accelerated Motion</span>
+            <span class="topic-pill">Scalars & Vectors, Resolution</span>
+            <span class="topic-pill">Relative Velocity</span>
+            <span class="topic-pill">Projectile Motion</span>
+            <span class="topic-pill">Uniform Circular Motion</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch03-laws-of-motion.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 03</span>
+            <span class="chapter-name">Laws of Motion</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Newton's 1st, 2nd, 3rd Laws</span>
+            <span class="topic-pill">Momentum, Impulse</span>
+            <span class="topic-pill">Conservation of Linear Momentum</span>
+            <span class="topic-pill">Concurrent Forces & Equilibrium</span>
+            <span class="topic-pill">Static, Kinetic & Rolling Friction</span>
+            <span class="topic-pill">Centripetal Force</span>
+            <span class="topic-pill">Vehicle on Level & Banked Road</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch04-work-energy-power.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 04</span>
+            <span class="chapter-name">Work, Energy, and Power</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Work by Constant & Variable Force</span>
+            <span class="topic-pill">Kinetic & Potential Energy</span>
+            <span class="topic-pill">Work-Energy Theorem</span>
+            <span class="topic-pill">Power</span>
+            <span class="topic-pill">Spring Potential Energy</span>
+            <span class="topic-pill">Conservation of Mechanical Energy</span>
+            <span class="topic-pill">Conservative & Non-Conservative Forces</span>
+            <span class="topic-pill">Elastic & Inelastic Collisions (1D & 2D)</span>
+            <span class="topic-pill">Motion in a Vertical Circle</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">9 topics · 3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch05-rotational-motion.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 05</span>
+            <span class="chapter-name">Rotational Motion</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Centre of Mass (2-particle & rigid body)</span>
+            <span class="topic-pill">Torque & Angular Momentum</span>
+            <span class="topic-pill">Conservation of Angular Momentum</span>
+            <span class="topic-pill">Moment of Inertia & Radius of Gyration</span>
+            <span class="topic-pill">MI for Simple Geometrical Objects</span>
+            <span class="topic-pill">Parallel & Perpendicular Axes Theorems</span>
+            <span class="topic-pill">Equilibrium of Rigid Bodies</span>
+            <span class="topic-pill">Equations of Rotational Motion</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch06-gravitation.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 06</span>
+            <span class="chapter-name">Gravitation</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Universal Law of Gravitation</span>
+            <span class="topic-pill">g — Variation with Altitude & Depth</span>
+            <span class="topic-pill">Kepler's Laws of Planetary Motion</span>
+            <span class="topic-pill">Gravitational Potential Energy & Potential</span>
+            <span class="topic-pill">Escape Velocity</span>
+            <span class="topic-pill">Orbital Velocity, Time Period, Energy of Satellite</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">6 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch07-properties-solids-liquids.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 07</span>
+            <span class="chapter-name">Properties of Solids and Liquids</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Elastic Behaviour — Stress-Strain, Hooke's Law</span>
+            <span class="topic-pill">Young's, Bulk, Rigidity Moduli</span>
+            <span class="topic-pill">Pascal's Law & Fluid Pressure</span>
+            <span class="topic-pill">Viscosity, Stokes' Law, Terminal Velocity</span>
+            <span class="topic-pill">Streamline & Turbulent Flow</span>
+            <span class="topic-pill">Bernoulli's Principle</span>
+            <span class="topic-pill">Surface Tension, Angle of Contact</span>
+            <span class="topic-pill">Excess Pressure, Capillary Rise</span>
+            <span class="topic-pill">Heat Transfer — Conduction, Convection, Radiation</span>
+            <span class="topic-pill">Specific Heat, Calorimetry, Latent Heat</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch08-thermodynamics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 08</span>
+            <span class="chapter-name">Thermodynamics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Zeroth Law & Thermal Equilibrium</span>
+            <span class="topic-pill">First Law — Heat, Work, Internal Energy</span>
+            <span class="topic-pill">Isothermal & Adiabatic Processes</span>
+            <span class="topic-pill">Second Law — Reversible & Irreversible Processes</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">4 topics · 2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch09-kinetic-theory.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 09</span>
+            <span class="chapter-name">Kinetic Theory of Gases</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Equation of State of Perfect Gas</span>
+            <span class="topic-pill">Kinetic Theory — Assumptions & Pressure</span>
+            <span class="topic-pill">Kinetic Interpretation of Temperature</span>
+            <span class="topic-pill">RMS Speed of Gas Molecules</span>
+            <span class="topic-pill">Degrees of Freedom</span>
+            <span class="topic-pill">Law of Equipartition of Energy</span>
+            <span class="topic-pill">Specific Heat Capacities of Gases</span>
+            <span class="topic-pill">Mean Free Path, Avogadro's Number</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class11/ch10-oscillations-waves.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 10</span>
+            <span class="chapter-name">Oscillations and Waves</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">SHM — Equation, Phase, Periodic Functions</span>
+            <span class="topic-pill">Spring Oscillations — Force Constant</span>
+            <span class="topic-pill">Energy in SHM — KE & PE</span>
+            <span class="topic-pill">Simple Pendulum — Time Period Derivation</span>
+            <span class="topic-pill">Wave Motion — Transverse & Longitudinal</span>
+            <span class="topic-pill">Displacement Relation for Progressive Wave</span>
+            <span class="topic-pill">Superposition of Waves & Reflection</span>
+            <span class="topic-pill">Standing Waves in Strings & Organ Pipes</span>
+            <span class="topic-pill">Harmonics & Beats</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">9 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div><!-- /class-block phy-11 -->
+
+    <!-- Physics Class 12 -->
+    <div class="class-block reveal">
+      <div class="class-header">
+        <span class="class-badge c12-phy">Class 12</span>
+        <h2 class="class-title">Physics — Class XII (Units 11–20)</h2>
+        <span class="class-meta">Electromagnetism, Optics, Modern Physics · ~50% of Physics</span>
+      </div>
+      <div class="chapters-grid">
+
+        <a class="chapter-card phy" href="../physics/class12/ch11-electrostatics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 11</span>
+            <span class="chapter-name">Electrostatics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Electric Charges & Conservation</span>
+            <span class="topic-pill">Coulomb's Law, Superposition</span>
+            <span class="topic-pill">Electric Field — Point Charge, Dipole</span>
+            <span class="topic-pill">Torque on Dipole in Uniform Field</span>
+            <span class="topic-pill">Electric Flux & Gauss's Law</span>
+            <span class="topic-pill">Applications — Wire, Plane, Spherical Shell</span>
+            <span class="topic-pill">Electric Potential — Point Charge, Dipole</span>
+            <span class="topic-pill">Equipotential Surfaces, PE of System</span>
+            <span class="topic-pill">Dielectrics & Electric Polarization</span>
+            <span class="topic-pill">Capacitors — Series, Parallel Combinations</span>
+            <span class="topic-pill">Parallel Plate Capacitor, Energy Stored</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">11 topics · 4–5 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch12-current-electricity.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 12</span>
+            <span class="chapter-name">Current Electricity</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Drift Velocity, Mobility & Current Relation</span>
+            <span class="topic-pill">Ohm's Law, V-I Characteristics</span>
+            <span class="topic-pill">Electrical Resistivity & Conductivity</span>
+            <span class="topic-pill">Series & Parallel Resistors</span>
+            <span class="topic-pill">Temperature Dependence of Resistance</span>
+            <span class="topic-pill">EMF, Internal Resistance, Cell Combinations</span>
+            <span class="topic-pill">Kirchhoff's Laws</span>
+            <span class="topic-pill">Wheatstone Bridge & Metre Bridge</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch13-magnetic-effects.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 13</span>
+            <span class="chapter-name">Magnetic Effects of Current & Magnetism</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Biot-Savart Law — Circular Loop</span>
+            <span class="topic-pill">Ampere's Law — Straight Wire & Solenoid</span>
+            <span class="topic-pill">Force on Moving Charge (Lorentz Force)</span>
+            <span class="topic-pill">Force on Current-Carrying Conductor</span>
+            <span class="topic-pill">Torque on Current Loop — Galvanometer</span>
+            <span class="topic-pill">Galvanometer to Ammeter/Voltmeter</span>
+            <span class="topic-pill">Bar Magnet as Solenoid, Magnetic Field Lines</span>
+            <span class="topic-pill">Torque on Magnetic Dipole</span>
+            <span class="topic-pill">Para, Dia & Ferromagnetic Substances</span>
+            <span class="topic-pill">Effect of Temperature on Magnetic Properties</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">10 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch14-em-induction-ac.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 14</span>
+            <span class="chapter-name">Electromagnetic Induction & Alternating Currents</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Faraday's Law, Lenz's Law</span>
+            <span class="topic-pill">Eddy Currents</span>
+            <span class="topic-pill">Self & Mutual Inductance</span>
+            <span class="topic-pill">AC — Peak & RMS Values</span>
+            <span class="topic-pill">Reactance & Impedance</span>
+            <span class="topic-pill">LCR Series Circuit & Resonance</span>
+            <span class="topic-pill">Power in AC Circuits, Wattless Current</span>
+            <span class="topic-pill">AC Generator & Transformer</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">8 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch15-em-waves.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 15</span>
+            <span class="chapter-name">Electromagnetic Waves</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Displacement Current</span>
+            <span class="topic-pill">EM Waves — Characteristics & Transverse Nature</span>
+            <span class="topic-pill">EM Spectrum — Radio, Micro, IR, Visible, UV, X-ray, Gamma</span>
+            <span class="topic-pill">Applications of EM Waves</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">4 topics · 1–2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch16-optics.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 16</span>
+            <span class="chapter-name">Optics</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Reflection, Spherical Mirrors, Mirror Formula</span>
+            <span class="topic-pill">Refraction at Plane & Spherical Surfaces</span>
+            <span class="topic-pill">Thin Lens Formula, Lens Maker's Formula</span>
+            <span class="topic-pill">Total Internal Reflection & Applications</span>
+            <span class="topic-pill">Combination of Thin Lenses</span>
+            <span class="topic-pill">Refraction through Prism</span>
+            <span class="topic-pill">Microscope & Astronomical Telescope</span>
+            <span class="topic-pill">Wavefront & Huygens' Principle</span>
+            <span class="topic-pill">Young's Double Slit Experiment — Fringe Width</span>
+            <span class="topic-pill">Single Slit Diffraction</span>
+            <span class="topic-pill">Polarization — Brewster's Law, Polaroid</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">11 topics · 5–6 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch17-dual-nature.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 17</span>
+            <span class="chapter-name">Dual Nature of Matter and Radiation</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Photoelectric Effect</span>
+            <span class="topic-pill">Hertz & Lenard's Observations</span>
+            <span class="topic-pill">Einstein's Photoelectric Equation</span>
+            <span class="topic-pill">Particle Nature of Light</span>
+            <span class="topic-pill">de Broglie Relation — Wave Nature of Particles</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">5 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch18-atoms-nuclei.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 18</span>
+            <span class="chapter-name">Atoms and Nuclei</span>
+            <span class="weightage w-high">High</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Alpha-Particle Scattering & Rutherford's Model</span>
+            <span class="topic-pill">Bohr's Model — Energy Levels, H Spectrum</span>
+            <span class="topic-pill">Nucleus — Composition & Size</span>
+            <span class="topic-pill">Atomic Masses, Mass-Energy Relation</span>
+            <span class="topic-pill">Mass Defect & Binding Energy</span>
+            <span class="topic-pill">BE/Nucleon vs Mass Number</span>
+            <span class="topic-pill">Nuclear Fission & Fusion</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">7 topics · 3–4 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch19-electronic-devices.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 19</span>
+            <span class="chapter-name">Electronic Devices</span>
+            <span class="weightage w-medium">Medium</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Semiconductors</span>
+            <span class="topic-pill">p-n Junction Diode — Forward & Reverse Bias</span>
+            <span class="topic-pill">Diode as Rectifier</span>
+            <span class="topic-pill">LED, Photodiode, Solar Cell I-V Characteristics</span>
+            <span class="topic-pill">Zener Diode — Voltage Regulator</span>
+            <span class="topic-pill">Logic Gates — OR, AND, NOT, NAND, NOR</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">6 topics · 2–3 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+        <a class="chapter-card phy" href="../physics/class12/ch20-experimental-skills.html">
+          <div class="chapter-top">
+            <span class="chapter-num">UNIT 20</span>
+            <span class="chapter-name">Experimental Skills</span>
+            <span class="weightage w-low">Low</span>
+          </div>
+          <div class="chapter-topics">
+            <span class="topic-pill">Vernier Callipers & Screw Gauge</span>
+            <span class="topic-pill">Simple Pendulum — Energy Dissipation</span>
+            <span class="topic-pill">Young's Modulus — Metallic Wire</span>
+            <span class="topic-pill">Surface Tension by Capillary Rise</span>
+            <span class="topic-pill">Terminal Velocity — Coefficient of Viscosity</span>
+            <span class="topic-pill">Speed of Sound — Resonance Tube</span>
+            <span class="topic-pill">Specific Heat by Mixtures Method</span>
+            <span class="topic-pill">Resistivity via Metre Bridge</span>
+            <span class="topic-pill">Galvanometer — Figure of Merit</span>
+            <span class="topic-pill">Focal Length — Convex/Concave Mirror & Lens</span>
+            <span class="topic-pill">Angle of Deviation vs Angle of Incidence (Prism)</span>
+            <span class="topic-pill">Refractive Index — Travelling Microscope</span>
+            <span class="topic-pill">Zener Diode & p-n Diode Characteristics</span>
+          </div>
+          <div class="chapter-footer">
+            <span class="chapter-topic-count">13 topics · 1–2 Qs/year avg</span>
+            <span class="chapter-arrow">Study Now →</span>
+          </div>
+        </a>
+
+      </div>
+    </div><!-- /class-block phy-12 -->
+
+    <!-- Physics Topic Count Summary -->
+    <div class="note-section" style="padding-left:0;padding-right:0;padding-bottom:30px;">
+      <div style="background:var(--phy-bg);border:1px solid rgba(61,191,255,.2);border-radius:var(--radius);padding:20px 24px;">
+        <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">📊 Physics Topic Count — Official Syllabus</p>
+        <p style="font-size:.84rem;color:var(--text2);line-height:1.8;">
+          <strong style="color:var(--accent);">Total Physics Topics (across 20 units): ~119 discrete topics</strong><br>
+          Class 11 (Units 1–10): 5+7+7+9+8+6+10+4+8+9 = <strong>73 topics</strong><br>
+          Class 12 (Units 11–20): 11+8+10+8+4+11+5+7+6+13 = <strong>83 topics</strong><br>
+          <span style="color:var(--red);">High Weightage:</span> Kinematics, Laws of Motion, Rotational Motion, Thermodynamics, Electrostatics, Current Electricity, Magnetism, EMI & AC, Optics, Atoms & Nuclei<br>
+          <span style="color:var(--green);">45 questions</span> in NEET from Physics · 180 marks
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /sec-phy -->
+
+</div><!-- /syllabus-body -->
+
+<!-- ══════════════════════════════
+     IMPORTANT NOTE BOX
+══════════════════════════════ -->
+<div class="note-section" style="padding-top:0">
+  <div class="note-box reveal">
+    <div class="note-icon">⚠️</div>
+    <div class="note-content">
+      <h3>Syllabus Source & Important Notice</h3>
+      <p>
+        Yeh page NMC UGMEB ke <strong>Public Notice dated 22-12-2025</strong> aur NTA ke <strong>Public Notice dated 08-01-2026</strong> par based hai.
+        NEET (UG)-2026 ka syllabus officially finalized karke NMC ki website par publish kiya gaya hai.
+        Sabhi students ko advise kiya jaata hai ki is official syllabus ko reference karein aur
+        <a href="https://www.nta.ac.in/Download/Notice/Notice_20260108180635.pdf" target="_blank" rel="noopener">NTA ka official PDF</a> zaroor download karein.
+        Koi bhi coaching ya third-party source se confirm karein ki unka material is updated syllabus ke saath aligned hai ya nahi.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     OVERALL STATS ROW
+══════════════════════════════ -->
+<section style="padding:40px clamp(20px,5%,80px) 80px;">
+  <div class="container">
+    <p class="section-eyebrow">NEET 2026 at a Glance</p>
+    <h2 class="section-title" style="margin-bottom:32px">Exam Structure — Numbers That Matter</h2>
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-num">50</div>
+        <div class="stat-label">Total Units (Syllabus)</div>
+      </div>
+      <div class="stat-item" style="--accent:var(--green)">
+        <div class="stat-num" style="color:var(--green)">~85</div>
+        <div class="stat-label">Biology Topics</div>
+      </div>
+      <div class="stat-item" style="--accent:var(--amber)">
+        <div class="stat-num" style="color:var(--amber)">~104</div>
+        <div class="stat-label">Chemistry Topics</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">~119</div>
+        <div class="stat-label">Physics Topics</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="color:var(--red)">180</div>
+        <div class="stat-label">Total Questions</div>
+      </div>
+      <div class="stat-item" style="color:var(--amber)">
+        <div class="stat-num" style="color:var(--amber)">720</div>
+        <div class="stat-label">Total Marks</div>
+      </div>
+    </div>
+
+    <!-- Question Distribution -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;" class="reveal">
+      <div style="background:var(--bio-bg);border:1px solid rgba(61,232,160,.2);border-radius:var(--radius);padding:20px 22px;text-align:center;">
+        <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--green);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">🧬 Biology</div>
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--green);letter-spacing:-1px">90 Qs</div>
+        <div style="font-size:.78rem;color:var(--text3);margin-top:4px">360 Marks · 50% of NEET</div>
+      </div>
+      <div style="background:var(--chem-bg);border:1px solid rgba(244,185,66,.2);border-radius:var(--radius);padding:20px 22px;text-align:center;">
+        <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">⚗️ Chemistry</div>
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--amber);letter-spacing:-1px">45 Qs</div>
+        <div style="font-size:.78rem;color:var(--text3);margin-top:4px">180 Marks · 25% of NEET</div>
+      </div>
+      <div style="background:var(--phy-bg);border:1px solid rgba(61,191,255,.2);border-radius:var(--radius);padding:20px 22px;text-align:center;">
+        <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">⚛️ Physics</div>
+        <div style="font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-1px">45 Qs</div>
+        <div style="font-size:.78rem;color:var(--text3);margin-top:4px">180 Marks · 25% of NEET</div>
+      </div>
+    </div>
+    @media(max-width:600px){
+      /* inline override for 3-col won't work on tiny phones — handled below */
+    }
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            Twitter
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="../chemistry/chemistry-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="../physics/physics-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="../pattern/pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="../pyq/pyq-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="../biology/class11/ch01-living-world.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Living World
+        </a>
+        <a href="../biology/class12/ch01-reproduction.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Reproduction
+        </a>
+        <a href="../chemistry/class11/ch01-basic-concepts.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Basic Chemistry
+        </a>
+        <a href="../physics/class11/ch02-kinematics.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Kinematics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          1 Year Plan
+        </a>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          2 Year Plan
+        </a>
+        <a href="mailto:hello@neetopia.in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global JS -->
+<script src="../assets/js/main.js"></script>
+
+<script>
+  /* ── TAB SWITCHING ── */
+  function showTab(subject) {
+    // Hide all sections
+    document.querySelectorAll('.subject-section').forEach(s => s.classList.remove('active'));
+    // Remove all active states from tabs
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active-bio','active-chem','active-phy');
+      b.setAttribute('aria-selected','false');
+    });
+    // Show selected section
+    document.getElementById('sec-' + subject).classList.add('active');
+    // Activate selected tab
+    const btn = document.getElementById('tab-' + subject);
+    btn.classList.add('active-' + subject);
+    btn.setAttribute('aria-selected','true');
+
+    // Re-trigger reveal for newly visible section
+    document.querySelectorAll('#sec-' + subject + ' .reveal').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      }, 50);
+    });
+  }
+
+  /* ── INIT REVEAL for default (bio) section ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#sec-bio .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
+  });
+
+  /* ── SCROLL REVEAL for all sections ── */
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.04 });
+
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* ── Mobile: fix 3-col grid on small screens ── */
+  (function () {
+    function fixGrid() {
+      const grid = document.querySelector('.stats-grid-3');
+      if (!grid) return;
+      if (window.innerWidth < 600) {
+        grid.style.gridTemplateColumns = '1fr';
+      } else {
+        grid.style.gridTemplateColumns = 'repeat(3,1fr)';
+      }
+    }
+    window.addEventListener('resize', fixGrid);
+    fixGrid();
+  })();
+</script>
+
+</body>
+</html>
