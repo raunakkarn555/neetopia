@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET Exam Pattern 2025 — Structure, Marking, Cutoff | NEETopia</title>
+  <meta name="description" content="NEET UG ka poora exam pattern — 180 questions, 720 marks, section A & B, marking scheme, subject weightage, cutoff data, aur time strategy. Sab kuch ek jagah." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* ═══════════════════════════════════════
+       PATTERN PAGE — Extra Styles
+    ═══════════════════════════════════════ */
+
+    /* ── Page Hero ── */
+    .pattern-hero {
+      padding-top: calc(var(--nav-h) + 52px);
+      padding-bottom: 52px;
+      padding-left: clamp(20px,5%,80px);
+      padding-right: clamp(20px,5%,80px);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .pattern-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 85% 40%, rgba(61,191,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pattern-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(61,191,255,0.25), transparent);
+    }
+    .pattern-hero-inner { max-width: 1200px; margin: 0 auto; }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: .68rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: currentColor; }
+
+    .pattern-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 800; letter-spacing: -1.5px; line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .pattern-hero h1 .hl { color: var(--accent); }
+    .pattern-hero .sub {
+      font-size: clamp(.9rem,1.6vw,1.05rem); color: var(--text2);
+      max-width: 640px; line-height: 1.7; font-weight: 300; margin-bottom: 24px;
+    }
+    .hero-badges { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .badge {
+      font-family: var(--font-mono); font-size: .68rem;
+      padding: 5px 12px; border-radius: 999px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .badge-green  { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+    .badge-blue   { background: var(--accent-dim); border: 1px solid rgba(61,191,255,0.25); color: var(--accent); }
+    .badge-amber  { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+
+    /* ── Quick Stats Bar ── */
+    .quick-stats {
+      display: flex; flex-wrap: wrap;
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden; max-width: 900px;
+    }
+    .qs-item {
+      flex: 1; min-width: 140px; padding: 24px 20px; text-align: center;
+      border-right: 1px solid var(--border); transition: background .2s;
+    }
+    .qs-item:last-child { border-right: none; }
+    .qs-item:hover { background: var(--surface); }
+    .qs-num {
+      font-family: var(--font-head); font-size: 2rem;
+      font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 5px;
+    }
+    .qs-num.blue  { color: var(--accent); }
+    .qs-num.green { color: var(--green); }
+    .qs-num.red   { color: var(--red); }
+    .qs-num.amber { color: var(--amber); }
+    .qs-label { font-size: .72rem; color: var(--text3); line-height: 1.4; }
+
+    /* ── Page Sections Container ── */
+    .pattern-body {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(20px,5%,80px);
+    }
+    .pattern-section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .pattern-section:last-of-type { border-bottom: none; }
+
+    /* ── Paper Structure Table ── */
+    .structure-table { margin-top: 40px; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .st-header {
+      display: grid; grid-template-columns: 1.8fr 1fr 1.5fr 1fr 1fr;
+      background: var(--bg3); border-bottom: 1px solid var(--border);
+      padding: 14px 24px; gap: 12px;
+    }
+    .st-header span {
+      font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text3); font-weight: 500;
+    }
+    .st-row {
+      display: grid; grid-template-columns: 1.8fr 1fr 1.5fr 1fr 1fr;
+      padding: 18px 24px; gap: 12px; align-items: center;
+      border-bottom: 1px solid var(--border); transition: background .2s;
+    }
+    .st-row:last-child { border-bottom: none; }
+    .st-row:hover { background: var(--surface); }
+    .st-row.total-row {
+      background: var(--bg3); border-top: 2px solid var(--border2);
+      border-bottom: none;
+    }
+    .st-subject { display: flex; align-items: center; gap: 10px; }
+    .subj-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .subj-dot.bio  { background: var(--bio); box-shadow: 0 0 6px rgba(61,232,160,.5); }
+    .subj-dot.chem { background: var(--chem); box-shadow: 0 0 6px rgba(244,185,66,.5); }
+    .subj-dot.phy  { background: var(--phy); box-shadow: 0 0 6px rgba(61,191,255,.5); }
+    .subj-dot.total { background: var(--text3); }
+    .subj-name { font-family: var(--font-head); font-size: .95rem; font-weight: 600; }
+    .subj-name.bio  { color: var(--bio); }
+    .subj-name.chem { color: var(--chem); }
+    .subj-name.phy  { color: var(--phy); }
+    .subj-name.total { color: var(--text); font-weight: 700; }
+    .st-cell { font-size: .875rem; color: var(--text2); }
+    .st-cell.highlight { color: var(--accent); font-weight: 500; font-family: var(--font-mono); font-size: .82rem; }
+    .st-cell .note { font-size: .72rem; color: var(--text3); display: block; margin-top: 2px; }
+    .st-cell.big { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--text); }
+
+    .structure-note {
+      margin-top: 16px; display: flex; gap: 12px;
+      background: var(--accent-dim); border: 1px solid rgba(61,191,255,0.2);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      font-size: .83rem; color: var(--text2);
+    }
+    .structure-note svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+
+    /* ── Marking Cards ── */
+    .marking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .mark-card {
+      border-radius: var(--radius); padding: 28px 24px; text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .mark-card:hover { transform: translateY(-3px); }
+    .mark-card.correct {
+      background: var(--green-bg); border: 1px solid var(--green-border);
+    }
+    .mark-card.wrong {
+      background: var(--red-bg); border: 1px solid rgba(245,101,101,0.22);
+    }
+    .mark-card.skip {
+      background: var(--surface); border: 1px solid var(--border);
+    }
+    .mark-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; font-size: 1.3rem;
+    }
+    .mark-icon.green-i { background: rgba(61,232,160,0.15); }
+    .mark-icon.red-i   { background: rgba(245,101,101,0.15); }
+    .mark-icon.grey-i  { background: rgba(255,255,255,0.06); }
+    .mark-score {
+      font-family: var(--font-head); font-size: 2.8rem;
+      font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 6px;
+    }
+    .mark-score.g { color: var(--green); }
+    .mark-score.r { color: var(--red); }
+    .mark-score.s { color: var(--text3); }
+    .mark-label { font-family: var(--font-head); font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .mark-label.g { color: var(--green); }
+    .mark-label.r { color: var(--red); }
+    .mark-label.s { color: var(--text2); }
+    .mark-desc { font-size: .82rem; color: var(--text2); line-height: 1.6; font-weight: 300; }
+
+    .marking-warning {
+      margin-top: 20px; display: flex; gap: 14px; align-items: flex-start;
+      background: var(--amber-bg); border: 1px solid var(--amber-border);
+      border-radius: var(--radius); padding: 18px 22px;
+    }
+    .warning-icon { flex-shrink: 0; color: var(--amber); margin-top: 2px; }
+    .marking-warning p { font-size: .875rem; color: var(--text2); line-height: 1.7; }
+    .marking-warning strong { color: var(--amber); }
+
+    /* ── Weightage Cards ── */
+    .weightage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .wt-card {
+      border-radius: var(--radius-lg); padding: 30px 26px;
+      transition: transform .2s, box-shadow .2s; position: relative; overflow: hidden;
+    }
+    .wt-card::before {
+      content: attr(data-pct) '%';
+      position: absolute; right: -10px; bottom: -20px;
+      font-family: var(--font-head); font-size: 7rem; font-weight: 800;
+      opacity: 0.06; line-height: 1; pointer-events: none;
+    }
+    .wt-card:hover { transform: translateY(-4px); }
+    .wt-card.bio  { background: rgba(61,232,160,.05);  border: 1px solid rgba(61,232,160,.2);  }
+    .wt-card.chem { background: rgba(244,185,66,.05);  border: 1px solid rgba(244,185,66,.2);  }
+    .wt-card.phy  { background: rgba(61,191,255,.05);  border: 1px solid rgba(61,191,255,.2);  }
+    .wt-card:hover.bio  { box-shadow: 0 16px 48px rgba(61,232,160,.07); }
+    .wt-card:hover.chem { box-shadow: 0 16px 48px rgba(244,185,66,.07); }
+    .wt-card:hover.phy  { box-shadow: 0 16px 48px rgba(61,191,255,.07); }
+    .wt-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .wt-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .wt-icon.bio  { background: rgba(61,232,160,.15); }
+    .wt-icon.chem { background: rgba(244,185,66,.15); }
+    .wt-icon.phy  { background: rgba(61,191,255,.15); }
+    .wt-pct {
+      font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; line-height: 1;
+    }
+    .wt-pct.bio  { color: var(--bio); }
+    .wt-pct.chem { color: var(--chem); }
+    .wt-pct.phy  { color: var(--phy); }
+    .wt-subject { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+    .wt-subject.bio  { color: var(--bio); }
+    .wt-subject.chem { color: var(--chem); }
+    .wt-subject.phy  { color: var(--phy); }
+    .wt-meta { font-size: .82rem; color: var(--text3); margin-bottom: 18px; }
+    .wt-bar-wrap { background: var(--bg3); border-radius: 99px; height: 6px; overflow: hidden; }
+    .wt-bar { height: 100%; border-radius: 99px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .wt-bar.bio  { background: linear-gradient(90deg, var(--bio), rgba(61,232,160,.4)); }
+    .wt-bar.chem { background: linear-gradient(90deg, var(--chem), rgba(244,185,66,.4)); }
+    .wt-bar.phy  { background: linear-gradient(90deg, var(--phy), rgba(61,191,255,.4)); }
+    .wt-stats-row { display: flex; gap: 20px; margin-top: 16px; }
+    .wt-stat-mini { font-size: .78rem; }
+    .wt-stat-mini span { display: block; font-family: var(--font-mono); font-size: .88rem; font-weight: 500; }
+    .wt-stat-mini.bio  span { color: var(--bio); }
+    .wt-stat-mini.chem span { color: var(--chem); }
+    .wt-stat-mini.phy  span { color: var(--phy); }
+    .wt-stat-mini label { color: var(--text3); font-size: .7rem; }
+
+    /* ── Cutoff Table ── */
+    .cutoff-grid { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+    .cutoff-section-title { font-family: var(--font-head); font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text2); }
+    .ctable { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .ctable-head {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      background: var(--bg3); border-bottom: 1px solid var(--border); padding: 12px 20px; gap: 10px;
+    }
+    .ctable-head span {
+      font-family: var(--font-mono); font-size: .62rem; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--text3);
+    }
+    .ctable-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      padding: 14px 20px; gap: 10px; align-items: center;
+      border-bottom: 1px solid var(--border); font-size: .85rem; transition: background .15s;
+    }
+    .ctable-row:last-child { border-bottom: none; }
+    .ctable-row:hover { background: var(--surface); }
+    .ctable-row .college { font-weight: 500; color: var(--text); font-size: .875rem; }
+    .ctable-row .score { font-family: var(--font-mono); font-size: .8rem; color: var(--text2); }
+    .ctable-row .score.top { color: var(--accent); }
+    .ctable-row .score.green { color: var(--green); }
+    .ctable-row .score.amber { color: var(--amber); }
+    .ctable-row .score.red   { color: var(--red); }
+    .score-badge {
+      display: inline-block; background: var(--accent-dim); color: var(--accent);
+      font-family: var(--font-mono); font-size: .62rem; padding: 2px 8px;
+      border-radius: 999px; letter-spacing: 1px; margin-left: 8px;
+    }
+    .score-badge.elite { background: rgba(168,124,245,.1); color: var(--purple); }
+    .safe-target-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+    .safe-card {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 18px; text-align: center; transition: border-color .2s;
+    }
+    .safe-card:hover { border-color: var(--border2); }
+    .safe-card .sc-score { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
+    .safe-card .sc-label { font-size: .75rem; color: var(--text3); margin-bottom: 8px; }
+    .safe-card .sc-status { font-size: .78rem; font-weight: 500; }
+    .safe-card.c1 .sc-score { color: var(--text3); }
+    .safe-card.c2 .sc-score { color: var(--amber); } .safe-card.c2 { border-color: rgba(244,185,66,.2); }
+    .safe-card.c3 .sc-score { color: var(--green); } .safe-card.c3 { border-color: rgba(61,232,160,.2); }
+    .safe-card.c4 .sc-score { color: var(--accent); } .safe-card.c4 { border-color: rgba(61,191,255,.3); }
+    .safe-card.c1 .sc-status { color: var(--text3); }
+    .safe-card.c2 .sc-status { color: var(--amber); }
+    .safe-card.c3 .sc-status { color: var(--green); }
+    .safe-card.c4 .sc-status { color: var(--accent); }
+    .cutoff-disclaimer {
+      margin-top: 16px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      font-size: .8rem; color: var(--text3); display: flex; gap: 10px; align-items: flex-start;
+    }
+    .cutoff-disclaimer svg { flex-shrink: 0; color: var(--text3); margin-top: 1px; }
+
+    /* ── Time Strategy ── */
+    .time-strategy { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .time-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px 20px; transition: border-color .2s, transform .2s;
+    }
+    .time-card:hover { transform: translateY(-2px); border-color: var(--border2); }
+    .tc-phase {
+      font-family: var(--font-mono); font-size: .62rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--text3); margin-bottom: 10px;
+    }
+    .tc-time-range {
+      font-family: var(--font-head); font-size: 1.25rem; font-weight: 700;
+      letter-spacing: -0.5px; margin-bottom: 6px; line-height: 1;
+    }
+    .tc-time-range.p1 { color: var(--bio); }
+    .tc-time-range.p2 { color: var(--bio); }
+    .tc-time-range.p3 { color: var(--chem); }
+    .tc-time-range.p4 { color: var(--phy); }
+    .tc-subject {
+      font-size: .82rem; font-weight: 500; margin-bottom: 14px;
+      padding: 3px 10px; border-radius: 999px; display: inline-block;
+    }
+    .tc-subject.bio  { background: var(--bio-bg);  color: var(--bio);  border: 1px solid rgba(61,232,160,.2); }
+    .tc-subject.chem { background: var(--chem-bg); color: var(--chem); border: 1px solid rgba(244,185,66,.2); }
+    .tc-subject.phy  { background: var(--phy-bg);  color: var(--phy);  border: 1px solid rgba(61,191,255,.2); }
+    .tc-tip { font-size: .82rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
+    .tc-mins {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: .7rem; color: var(--text3);
+    }
+
+    /* ── Common Mistakes ── */
+    .mistakes-box {
+      margin-top: 40px;
+      background: var(--amber-bg); border: 1px solid var(--amber-border);
+      border-radius: var(--radius-lg); padding: 32px 32px;
+    }
+    .mistakes-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .mistakes-icon { width: 44px; height: 44px; background: rgba(244,185,66,.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--amber); flex-shrink: 0; }
+    .mistakes-header h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--amber); }
+    .mistakes-header p { font-size: .82rem; color: var(--text2); margin-top: 2px; }
+    .mistake-list { display: flex; flex-direction: column; gap: 12px; }
+    .mistake-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: rgba(244,185,66,.04); border: 1px solid rgba(244,185,66,.1);
+      border-radius: var(--radius-sm); padding: 14px 16px; transition: background .2s;
+    }
+    .mistake-item:hover { background: rgba(244,185,66,.07); }
+    .mistake-num {
+      font-family: var(--font-mono); font-size: .72rem; color: var(--amber);
+      background: rgba(244,185,66,.12); border-radius: 6px;
+      width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .mistake-text { font-size: .875rem; color: var(--text2); line-height: 1.65; }
+    .mistake-text strong { color: var(--amber); }
+
+    /* ── CTA Section ── */
+    .cta-section {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 80px clamp(20px,5%,80px); text-align: center;
+    }
+    .cta-inner { max-width: 560px; margin: 0 auto; }
+    .cta-inner h2 { font-family: var(--font-head); font-size: clamp(1.7rem,3vw,2.3rem); font-weight: 700; letter-spacing: -1px; margin-bottom: 12px; }
+    .cta-inner p { color: var(--text2); font-size: .95rem; margin-bottom: 28px; font-weight: 300; line-height: 1.7; }
+
+    /* ── Buttons (reused from global) ── */
+    .btn-primary {
+      background: var(--accent); color: #07090f;
+      padding: 13px 26px; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: .92rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: background .2s, transform .15s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border2); padding: 12px 24px;
+      border-radius: var(--radius-sm); font-family: var(--font-body);
+      font-size: .9rem; font-weight: 400; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-ghost:hover { border-color: var(--border-glow); transform: translateY(-2px); }
+
+    /* ── Scroll Reveal ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Mobile ── */
+    @media (max-width: 900px) {
+      .marking-grid { grid-template-columns: 1fr; }
+      .weightage-grid { grid-template-columns: 1fr; }
+      .time-strategy { grid-template-columns: 1fr 1fr; }
+      .safe-target-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .st-header, .st-row { grid-template-columns: 1.4fr 0.8fr 1.2fr 0.7fr 0.8fr; gap: 6px; padding: 12px 14px; }
+      .ctable-head, .ctable-row { grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 6px; padding: 12px 14px; }
+      .ctable-head span:nth-child(5),
+      .ctable-head span:nth-child(6),
+      .ctable-row > *:nth-child(5),
+      .ctable-row > *:nth-child(6) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .time-strategy { grid-template-columns: 1fr; }
+      .safe-target-grid { grid-template-columns: 1fr 1fr; }
+      .qs-item { min-width: 100px; }
+      .st-header span:nth-child(3),
+      .st-row .st-cell:nth-child(3) { display: none; }
+      .st-header, .st-row { grid-template-columns: 1.5fr 1fr 0.8fr 0.9fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="pattern.html" class="active-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="../physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="../biology/biology-home.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     PAGE HERO
+══════════════════════════════ -->
+<section class="pattern-hero">
+  <div class="pattern-hero-inner">
+    <div class="hero-eyebrow">Exam Pattern</div>
+
+    <h1>NEET ka poora pattern —<br /><span class="hl">ek jagah</span></h1>
+
+    <p class="sub">
+      180 questions. 720 marks. 3 hours 20 minutes.
+      Sab kuch samjho — phir strategy banao.
+    </p>
+
+    <div class="hero-badges">
+      <span class="badge badge-green">2025 Updated</span>
+      <span class="badge badge-blue">NTA Official</span>
+      <span class="badge badge-amber">720 Marks</span>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="quick-stats">
+      <div class="qs-item">
+        <div class="qs-num blue">180</div>
+        <div class="qs-label">Total Questions</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-num blue">720</div>
+        <div class="qs-label">Total Marks</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-num green">+4</div>
+        <div class="qs-label">Correct Answer</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-num red">−1</div>
+        <div class="qs-label">Wrong Answer</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-num amber">200</div>
+        <div class="qs-label">Minutes Duration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     BODY SECTIONS
+══════════════════════════════ -->
+<div class="pattern-body">
+
+  <!-- ── 1. PAPER STRUCTURE ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow">Paper Structure</p>
+    <h2 class="section-title reveal">Exam ki poori structure</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:600px;font-weight:300;line-height:1.7;" class="reveal">
+      Har subject mein Section A aur Section B dono hote hain. Section A compulsory hai — Section B mein 15 mein se sirf 10 attempt karne hain.
+    </p>
+
+    <div class="structure-table reveal">
+      <div class="st-header">
+        <span>Subject</span>
+        <span>Section A</span>
+        <span>Section B</span>
+        <span>Total Qs</span>
+        <span>Total Marks</span>
+      </div>
+
+      <!-- Physics -->
+      <div class="st-row">
+        <div class="st-subject">
+          <div class="subj-dot phy"></div>
+          <span class="subj-name phy">Physics</span>
+        </div>
+        <div class="st-cell highlight">35 Qs</div>
+        <div class="st-cell">
+          15 Qs
+          <span class="note">Attempt any 10</span>
+        </div>
+        <div class="st-cell big">45</div>
+        <div class="st-cell big" style="color:var(--phy)">180</div>
+      </div>
+
+      <!-- Chemistry -->
+      <div class="st-row">
+        <div class="st-subject">
+          <div class="subj-dot chem"></div>
+          <span class="subj-name chem">Chemistry</span>
+        </div>
+        <div class="st-cell highlight">35 Qs</div>
+        <div class="st-cell">
+          15 Qs
+          <span class="note">Attempt any 10</span>
+        </div>
+        <div class="st-cell big">45</div>
+        <div class="st-cell big" style="color:var(--chem)">180</div>
+      </div>
+
+      <!-- Botany -->
+      <div class="st-row">
+        <div class="st-subject">
+          <div class="subj-dot bio"></div>
+          <span class="subj-name bio">Botany</span>
+        </div>
+        <div class="st-cell highlight">35 Qs</div>
+        <div class="st-cell">
+          15 Qs
+          <span class="note">Attempt any 10</span>
+        </div>
+        <div class="st-cell big">45</div>
+        <div class="st-cell big" style="color:var(--bio)">180</div>
+      </div>
+
+      <!-- Zoology -->
+      <div class="st-row">
+        <div class="st-subject">
+          <div class="subj-dot bio"></div>
+          <span class="subj-name bio">Zoology</span>
+        </div>
+        <div class="st-cell highlight">35 Qs</div>
+        <div class="st-cell">
+          15 Qs
+          <span class="note">Attempt any 10</span>
+        </div>
+        <div class="st-cell big">45</div>
+        <div class="st-cell big" style="color:var(--bio)">180</div>
+      </div>
+
+      <!-- Total -->
+      <div class="st-row total-row">
+        <div class="st-subject">
+          <div class="subj-dot total"></div>
+          <span class="subj-name total">TOTAL</span>
+        </div>
+        <div class="st-cell highlight">140 Qs</div>
+        <div class="st-cell">
+          60 Qs
+          <span class="note">Attempt any 40</span>
+        </div>
+        <div class="st-cell big">180</div>
+        <div class="st-cell big" style="color:var(--accent)">720</div>
+      </div>
+    </div>
+
+    <div class="structure-note reveal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong style="color:var(--accent)">Section A:</strong> Sare 35 questions compulsory hain — koi choice nahi. &nbsp;|&nbsp; <strong style="color:var(--accent)">Section B:</strong> 15 questions diye jaate hain, inka koi bhi 10 attempt karo. Agar 10 se zyada attempt kiye toh sirf pehle 10 count honge.</span>
+    </div>
+  </div>
+
+  <!-- ── 2. MARKING SCHEME ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow">Marking Scheme</p>
+    <h2 class="section-title reveal">Marks kaise milte hain?</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:560px;font-weight:300;line-height:1.7;" class="reveal">
+      NEET mein negative marking hoti hai. Ek galat jawab seedha ek sahi jawab cancel karta hai — isliye educated guess sahi, random guess galat strategy hai.
+    </p>
+
+    <div class="marking-grid">
+      <!-- Correct -->
+      <div class="mark-card correct reveal">
+        <div class="mark-icon green-i">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="mark-score g">+4</div>
+        <div class="mark-label g">Correct Answer</div>
+        <div class="mark-desc">Har sahi jawab par 4 marks milte hain. Accuracy hi sab se bada weapon hai NEET mein.</div>
+      </div>
+
+      <!-- Wrong -->
+      <div class="mark-card wrong reveal">
+        <div class="mark-icon red-i">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f56565" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <div class="mark-score r">−1</div>
+        <div class="mark-label r">Wrong Answer</div>
+        <div class="mark-desc">Galat jawab par 1 mark katta hai. Ek galat = ek sahi waste. 4 galat = ek sahi cancel.</div>
+      </div>
+
+      <!-- Skip -->
+      <div class="mark-card skip reveal">
+        <div class="mark-icon grey-i">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d5e72" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <div class="mark-score s">0</div>
+        <div class="mark-label s">Unattempted</div>
+        <div class="mark-desc">Agar answer nahi pata toh chhodna better hai. No marks gained, no marks lost.</div>
+      </div>
+    </div>
+
+    <div class="marking-warning reveal">
+      <div class="warning-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <p>
+        <strong>Section B important rule:</strong> Agar Section B mein 10 se zyada questions attempt karo toh only the <strong>first 10 attempted</strong> count honge — remaining automatically cancelled. Isliye carefully 10 best questions choose karo aur wahi attempt karo.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── 3. SUBJECT WEIGHTAGE ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow green">Subject Weightage</p>
+    <h2 class="section-title reveal">Konsa subject kitna important hai?</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:580px;font-weight:300;line-height:1.7;" class="reveal">
+      Biology NEET ka backbone hai — 50% marks akele Biology se aate hain. Ye sabse pehle master karo.
+    </p>
+
+    <div class="weightage-grid">
+      <!-- Biology -->
+      <div class="wt-card bio reveal" data-pct="50">
+        <div class="wt-top">
+          <div class="wt-icon bio">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </div>
+          <span class="wt-pct bio">50%</span>
+        </div>
+        <div class="wt-subject bio">Biology</div>
+        <div class="wt-meta">Botany + Zoology combined</div>
+        <div class="wt-bar-wrap">
+          <div class="wt-bar bio" style="width:50%"></div>
+        </div>
+        <div class="wt-stats-row">
+          <div class="wt-stat-mini bio">
+            <span>360</span>
+            <label>Total Marks</label>
+          </div>
+          <div class="wt-stat-mini bio">
+            <span>90</span>
+            <label>Questions</label>
+          </div>
+          <div class="wt-stat-mini bio">
+            <span>2 sections</span>
+            <label>Botany + Zoo</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chemistry -->
+      <div class="wt-card chem reveal" data-pct="25">
+        <div class="wt-top">
+          <div class="wt-icon chem">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          </div>
+          <span class="wt-pct chem">25%</span>
+        </div>
+        <div class="wt-subject chem">Chemistry</div>
+        <div class="wt-meta">Physical + Organic + Inorganic</div>
+        <div class="wt-bar-wrap">
+          <div class="wt-bar chem" style="width:25%"></div>
+        </div>
+        <div class="wt-stats-row">
+          <div class="wt-stat-mini chem">
+            <span>180</span>
+            <label>Total Marks</label>
+          </div>
+          <div class="wt-stat-mini chem">
+            <span>45</span>
+            <label>Questions</label>
+          </div>
+          <div class="wt-stat-mini chem">
+            <span>Target 150+</span>
+            <label>Safe Score</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physics -->
+      <div class="wt-card phy reveal" data-pct="25">
+        <div class="wt-top">
+          <div class="wt-icon phy">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <span class="wt-pct phy">25%</span>
+        </div>
+        <div class="wt-subject phy">Physics</div>
+        <div class="wt-meta">Mechanics to Modern Physics</div>
+        <div class="wt-bar-wrap">
+          <div class="wt-bar phy" style="width:25%"></div>
+        </div>
+        <div class="wt-stats-row">
+          <div class="wt-stat-mini phy">
+            <span>180</span>
+            <label>Total Marks</label>
+          </div>
+          <div class="wt-stat-mini phy">
+            <span>45</span>
+            <label>Questions</label>
+          </div>
+          <div class="wt-stat-mini phy">
+            <span>Target 140+</span>
+            <label>Safe Score</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. CUTOFF / ADMISSION REALITY ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow amber">Admission Reality</p>
+    <h2 class="section-title reveal">Govt MBBS ke liye kitna score chahiye?</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:620px;font-weight:300;line-height:1.7;" class="reveal">
+      Ye approximate safe score ranges hain based on All India Quota + State trends. Actual cutoff har saal paper difficulty, candidates ki sankhya, aur reservation ke hisaab se change hoti hai.
+    </p>
+
+    <!-- General Category Table -->
+    <div class="cutoff-grid reveal">
+      <div class="ctable">
+        <div class="ctable-head">
+          <span>College Type</span>
+          <span>General (UR)</span>
+          <span>OBC / EWS</span>
+          <span>SC Category</span>
+          <span>ST Category</span>
+          <span>UR-PwD</span>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">AIIMS Delhi <span class="score-badge elite">Elite</span></div>
+          <div class="score top">705–715+</div>
+          <div class="score top">700+</div>
+          <div class="score green">670–690</div>
+          <div class="score green">650–680</div>
+          <div class="score amber">500–620</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">Top AIIMS Institutes</div>
+          <div class="score top">690–705</div>
+          <div class="score top">685–700</div>
+          <div class="score green">650–680</div>
+          <div class="score green">600–650</div>
+          <div class="score amber">480–580</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">MAMC / VMMC Delhi</div>
+          <div class="score top">680–705</div>
+          <div class="score green">665–690</div>
+          <div class="score green">580–640</div>
+          <div class="score amber">520–600</div>
+          <div class="score amber">460–560</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">BHU / KGMU Level</div>
+          <div class="score top">665–680</div>
+          <div class="score green">640–665</div>
+          <div class="score green">560–610</div>
+          <div class="score amber">480–540</div>
+          <div class="score amber">440–520</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">Top State Govt Colleges</div>
+          <div class="score green">650–680</div>
+          <div class="score green">610–650</div>
+          <div class="score amber">500–580</div>
+          <div class="score amber">450–520</div>
+          <div class="score red">420–480</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">Average Govt MBBS</div>
+          <div class="score green">620–650</div>
+          <div class="score amber">580–620</div>
+          <div class="score amber">450–520</div>
+          <div class="score red">400–470</div>
+          <div class="score red">380–450</div>
+        </div>
+
+        <div class="ctable-row">
+          <div class="college">Semi-Govt / Borderline</div>
+          <div class="score amber">570–620</div>
+          <div class="score amber">550–580</div>
+          <div class="score red">420–450</div>
+          <div class="score red">350–420</div>
+          <div class="score red">300–380</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safe Score Targets -->
+    <h3 style="font-family:var(--font-head);font-size:1rem;font-weight:600;margin-top:40px;margin-bottom:4px;color:var(--text2);" class="reveal">Subject-wise Smart Targets (General Category)</h3>
+    <p style="color:var(--text3);font-size:.8rem;margin-bottom:0;" class="reveal">Yeh targets achieve karne ka aim rakhoge toh 640–680 overall achievable hai</p>
+    <div class="safe-target-grid reveal" style="margin-top:16px;">
+      <div class="safe-card c4">
+        <div class="sc-score" style="color:var(--bio)">340–355</div>
+        <div class="sc-label">Biology Target</div>
+        <div class="sc-status" style="color:var(--bio)">50% weightage</div>
+      </div>
+      <div class="safe-card c3">
+        <div class="sc-score" style="color:var(--chem)">150–165</div>
+        <div class="sc-label">Chemistry Target</div>
+        <div class="sc-status" style="color:var(--chem)">25% weightage</div>
+      </div>
+      <div class="safe-card c2">
+        <div class="sc-score" style="color:var(--phy)">140–160</div>
+        <div class="sc-label">Physics Target</div>
+        <div class="sc-status" style="color:var(--phy)">25% weightage</div>
+      </div>
+      <div class="safe-card c4">
+        <div class="sc-score">640–680</div>
+        <div class="sc-label">Total Target</div>
+        <div class="sc-status">Strong score</div>
+      </div>
+    </div>
+
+    <!-- Score Status Cards -->
+    <h3 style="font-family:var(--font-head);font-size:1rem;font-weight:600;margin-top:40px;margin-bottom:16px;color:var(--text2);" class="reveal">Score ka matlab kya hai?</h3>
+    <div class="safe-target-grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
+      <div class="safe-card c1">
+        <div class="sc-score" style="font-size:1.4rem;color:var(--text3)">450</div>
+        <div class="sc-label">Private MBBS possible</div>
+        <div class="sc-status" style="color:var(--text3)">Borderline</div>
+      </div>
+      <div class="safe-card c1">
+        <div class="sc-score" style="font-size:1.4rem;color:var(--text3)">550</div>
+        <div class="sc-label">Some Govt possibility</div>
+        <div class="sc-status" style="color:var(--text3)">Low chances</div>
+      </div>
+      <div class="safe-card c2">
+        <div class="sc-score" style="font-size:1.4rem">620</div>
+        <div class="sc-label">Competitive range</div>
+        <div class="sc-status">Good fight</div>
+      </div>
+      <div class="safe-card c3">
+        <div class="sc-score" style="font-size:1.4rem">650</div>
+        <div class="sc-label">Strong candidate</div>
+        <div class="sc-status">Good govt likely</div>
+      </div>
+      <div class="safe-card c4">
+        <div class="sc-score" style="font-size:1.4rem">680</div>
+        <div class="sc-label">Excellent score</div>
+        <div class="sc-status">Top state colleges</div>
+      </div>
+      <div class="safe-card c4" style="border-color:rgba(168,124,245,.3)">
+        <div class="sc-score" style="font-size:1.4rem;color:var(--purple)">705+</div>
+        <div class="sc-label">Elite zone</div>
+        <div class="sc-status" style="color:var(--purple)">AIIMS level</div>
+      </div>
+    </div>
+
+    <div class="cutoff-disclaimer reveal">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Disclaimer:</strong> Ye cutoffs approximate hain aur har saal change hoti hain — paper difficulty, total candidates, state quota, domicile rules sab depend karta hai. High competition states (Rajasthan, Delhi, UP, Bihar, Haryana) mein General category ko often 650+ chahiye even for average govt colleges. NEET ab sirf qualifying exam nahi — rank inflation real hai.</span>
+    </div>
+  </div>
+
+  <!-- ── 5. TIME STRATEGY ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow">Time Strategy</p>
+    <h2 class="section-title reveal">200 minutes kaise divide karo?</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:580px;font-weight:300;line-height:1.7;" class="reveal">
+      Sahi time allocation mein Biology pehle aata hai — wahan se sabse zyada marks hain aur confidence bhi milta hai baaki paper ke liye.
+    </p>
+
+    <div class="time-strategy">
+      <!-- Phase 1 -->
+      <div class="time-card reveal">
+        <div class="tc-phase">Phase 01</div>
+        <div class="tc-time-range p1">0 – 20 min</div>
+        <div><span class="tc-subject bio">Biology — Scan</span></div>
+        <div class="tc-tip">Poora Biology paper ek baar quickly scan karo. Easy questions mark karo, tough wale skip karo for now. First impression mein hi 30+ questions identify ho jaate hain.</div>
+        <div class="tc-mins">⏱ 20 minutes · Scan only</div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="time-card reveal">
+        <div class="tc-phase">Phase 02</div>
+        <div class="tc-time-range p2">20 – 80 min</div>
+        <div><span class="tc-subject bio">Biology — Complete</span></div>
+        <div class="tc-tip">Marked easy questions pehle attempt karo. Phir medium difficulty. Very tough ones pe 2 min se zyada mat lago — move on karo. Section B mein best 10 carefully choose karo.</div>
+        <div class="tc-mins">⏱ 60 minutes · Full Biology</div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="time-card reveal">
+        <div class="tc-phase">Phase 03</div>
+        <div class="tc-time-range p3">80 – 140 min</div>
+        <div><span class="tc-subject chem">Chemistry</span></div>
+        <div class="tc-tip">Inorganic aur Organic pehle — ye zyada conceptual hain. Physical Chemistry ke numerical baad mein. Har question pe 80 seconds average rakhne ki koshish karo.</div>
+        <div class="tc-mins">⏱ 60 minutes · Full Chemistry</div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="time-card reveal">
+        <div class="tc-phase">Phase 04</div>
+        <div class="tc-time-range p4">140 – 200 min</div>
+        <div><span class="tc-subject phy">Physics + Revision</span></div>
+        <div class="tc-tip">Physics attempt karo — ye sabse time-consuming hota hai toh iska buffer last mein sahi rahta hai. Last 15 min mein no new questions — sirf revision karo aur marked questions re-check karo.</div>
+        <div class="tc-mins">⏱ 60 min · Physics + 15 min revision</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. COMMON MISTAKES ── -->
+  <div class="pattern-section">
+    <p class="section-eyebrow amber">Common Mistakes</p>
+    <h2 class="section-title reveal">Yeh galtiyan mat karna</h2>
+    <p style="color:var(--text2);font-size:.9rem;max-width:580px;font-weight:300;line-height:1.7;" class="reveal">
+      Har saal lakhs students in basic mistakes ki wajah se marks loose karte hain. Ye sirf awareness se avoid ho jaate hain.
+    </p>
+
+    <div class="mistakes-box reveal">
+      <div class="mistakes-header">
+        <div class="mistakes-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <h3>5 Critical Mistakes</h3>
+          <p>In sab ko exam se pehle internalize kar lo</p>
+        </div>
+      </div>
+
+      <div class="mistake-list">
+        <div class="mistake-item">
+          <span class="mistake-num">01</span>
+          <span class="mistake-text"><strong>Section B mein 10 se zyada attempt karna</strong> — Agar 12 questions mark karte ho, sirf pehle 10 count honge. 2 questions waste, aur agar 11th ya 12th galat tha toh bhi wo count nahi hoga — par confusion zaroor hoga.</span>
+        </div>
+        <div class="mistake-item">
+          <span class="mistake-num">02</span>
+          <span class="mistake-text"><strong>Negative marking ignore karna</strong> — Ek galat answer = ek sahi answer cancel. 4 galat = ek extra sahi questionka fayda zero. Doubt hai toh chhodna better hai — unless elimination se 2 options tak aa sako.</span>
+        </div>
+        <div class="mistake-item">
+          <span class="mistake-num">03</span>
+          <span class="mistake-text"><strong>Physics mein time zyada lagana aur Biology neglect karna</strong> — Biology se 360 marks aate hain, Physics se 180. Physics mein stuck rehne se double loss hota hai — time bhi, marks bhi. Biology pehle karo.</span>
+        </div>
+        <div class="mistake-item">
+          <span class="mistake-num">04</span>
+          <span class="mistake-text"><strong>Unattempted questions mein randomly guess karna</strong> — Random guess mein chance of being correct is 25%, chance of losing 1 mark is 75%. Expected value negative hai. Don't guess randomly.</span>
+        </div>
+        <div class="mistake-item">
+          <span class="mistake-num">05</span>
+          <span class="mistake-text"><strong>Last 10 minutes mein naye questions attempt karna</strong> — Last 10-15 min sirf revision ke liye hain. Naaya question attempt karna = rushed answer = higher chance of negative marking. Jo already marked hai usse check karo.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end pattern-body -->
+
+<!-- ══════════════════════════════
+     CTA SECTION
+══════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <p class="section-eyebrow" style="justify-content:center">Next Step</p>
+    <h2>Pattern samajh gaye?<br />Ab syllabus dekho →</h2>
+    <p>Exam pattern clear hai — ab har subject ka detailed syllabus samjho. Kaun sa chapter important hai, NEET weightage kya hai, kahan se questions aate hain.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
+      <a href="../syllabus/syllabus.html" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Full Syllabus Dekho
+      </a>
+      <a href="../biology/biology-home.html" class="btn-ghost">
+        Biology Se Shuru Karo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            Twitter
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="../chemistry/chemistry-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="../physics/physics-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../syllabus/syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="../pyq/pyq-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="../biology/class11/ch01-living-world.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Living World
+        </a>
+        <a href="../biology/class12/ch01-reproduction.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Reproduction
+        </a>
+        <a href="../chemistry/class11/ch01-basic-concepts.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Basic Chemistry
+        </a>
+        <a href="../physics/class11/ch02-motion.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Kinematics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          1 Year Plan
+        </a>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          2 Year Plan
+        </a>
+        <a href="mailto:hello@neetopia.in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global JS -->
+<script src="../assets/js/main.js"></script>
+
+<script>
+  // Animate weightage bars on scroll
+  (function() {
+    const bars = document.querySelectorAll('.wt-bar');
+    const barObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const target = e.target.style.width;
+          e.target.style.width = '0';
+          setTimeout(() => { e.target.style.width = target; }, 100);
+          barObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(b => barObs.observe(b));
+
+    // Re-init scroll reveal since main.js may run before pattern-specific elements
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  })();
+</script>
+</body>
+</html>
