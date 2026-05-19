@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEETopia — India's Complete NEET Preparation Platform</title>
+  <meta name="description" content="India's most honest, detailed NEET preparation platform. Physics, Chemistry, Biology — har chapter, har concept, PYQs, syllabus, free. Ek platform se medical college tak." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="syllabus/syllabus.html" class="active-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="biology/biology-home.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    India's most complete NEET preparation platform — bilkul free
+  </div>
+
+  <h1>
+    Ek platform.<br />
+    <span class="hl">Medical college</span> tak.
+  </h1>
+
+  <p class="hero-sub">
+    Class 11 &amp; 12 ka poora syllabus — Physics, Chemistry, Biology — har chapter detail mein.
+    PYQs, exam pattern, study plan. Koi paywall nahi. Sirf real preparation.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="syllabus/syllabus.html" class="btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Preparation Shuru Karo
+    </a>
+    <a href="roadmap/roadmap.html" class="btn-ghost">
+      Study Roadmap Dekho
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+
+  <!-- Terminal window -->
+  <div class="hero-terminal">
+    <div class="terminal-bar">
+      <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+      <span class="terminal-title">neet-prep.sh</span>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line">
+        <span class="t-prompt">$</span>
+        <span>neetopia <span class="t-hl-b">start</span> --goal=MBBS</span>
+      </div>
+      <div class="t-out t-comment"># Loading your NEET preparation roadmap...</div>
+      <div class="t-out">✓ <span class="t-hl-g">Biology</span> — 97 chapters · Class 11 + 12 <span class="t-hl-g">unlocked</span></div>
+      <div class="t-out">✓ <span class="t-hl-a">Chemistry</span> — Physical, Organic, Inorganic <span class="t-hl-a">unlocked</span></div>
+      <div class="t-out">✓ <span class="t-hl-b">Physics</span> — Mechanics to Modern Physics <span class="t-hl-b">unlocked</span></div>
+      <div class="t-out">✓ PYQs 2013–2024 · Exam Pattern · Study Plans <span class="t-hl-b">unlocked</span></div>
+      <div class="t-out t-comment"># 180 questions · 720 marks · 0 paywalls</div>
+      <div class="t-line" style="margin-top:4px">
+        <span class="t-prompt">$</span>
+        <span class="t-cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="hero-trust">
+    <span class="check">✓</span> Koi ad nahi
+    <span class="sep">·</span>
+    <span class="check">✓</span> Koi paywall nahi
+    <span class="sep">·</span>
+    <span class="check">✓</span> Free YouTube resources embedded
+    <span class="sep">·</span>
+    <span class="check">✓</span> NCERT-aligned content
+  </p>
+</section>
+
+<!-- ══════════════════════════════
+     ALERT BANNER
+══════════════════════════════ -->
+<div class="alert-banner">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <p class="alert-banner-text">
+    <strong>NEET 2025 cutoff aur pattern badal gaya.</strong>
+    Naye pattern ke hisaab se updated content, subject-wise weightage aur strategy yahan milegi.
+  </p>
+  <a href="pattern/pattern.html" class="alert-banner-link">
+    Exam Pattern Dekho
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+
+<!-- ══════════════════════════════
+     STATS BAR
+══════════════════════════════ -->
+<section style="padding: 0 clamp(20px,5%,80px); background: var(--bg2); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num">97+</div>
+        <div class="stat-label">Total Chapters</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Subjects Complete</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Years of PYQs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">720</div>
+        <div class="stat-label">Max NEET Score</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0₹</div>
+        <div class="stat-label">Cost Forever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SUBJECT CARDS
+══════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-eyebrow green">Subjects</p>
+      <h2 class="section-title">Teeno subjects — ek hi jagah</h2>
+      <p class="section-sub">Har subject ke andar har chapter ka detailed explanation, NCERT-based notes, free video lectures aur PYQs. Sab kuch structured sequence mein.</p>
+    </div>
+
+    <div class="subjects-grid">
+
+      <!-- Biology -->
+      <a href="biology/biology-home.html" class="subject-card bio reveal">
+        <div class="subject-card-top">
+          <div class="subject-icon bio">🧬</div>
+          <div>
+            <span class="badge badge-green">Highest Weightage</span><br />
+            <span class="subject-card-meta" style="margin-top:4px;display:block">360 marks · 50%</span>
+          </div>
+        </div>
+        <div>
+          <h3 style="color: var(--green)">Biology</h3>
+          <p>Botany + Zoology — Class 11 &amp; 12. Living World se Human Reproduction tak. Har concept diagram ke saath, NCERT line-by-line.</p>
+        </div>
+        <div class="subject-chapters">
+          <span class="topic-pill">Cell Biology</span>
+          <span class="topic-pill">Genetics</span>
+          <span class="topic-pill">Plant Kingdom</span>
+          <span class="topic-pill">Human Physiology</span>
+          <span class="topic-pill">Ecology</span>
+          <span class="topic-pill">+30 more</span>
+        </div>
+        <div class="subject-cta">
+          <span style="font-size:.8rem;color:var(--text3)">38 chapters · Class 11 + 12</span>
+          <span style="color:var(--green)">
+            Start Biology
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Chemistry -->
+      <a href="chemistry/chemistry-home.html" class="subject-card chem reveal">
+        <div class="subject-card-top">
+          <div class="subject-icon chem">⚗️</div>
+          <div>
+            <span class="badge badge-amber">High Weightage</span><br />
+            <span class="subject-card-meta" style="margin-top:4px;display:block">180 marks · 25%</span>
+          </div>
+        </div>
+        <div>
+          <h3 style="color: var(--amber)">Chemistry</h3>
+          <p>Physical, Organic, Inorganic — teeno sections detail mein. Reactions, mechanisms, named reactions, periodic table — sab cover.</p>
+        </div>
+        <div class="subject-chapters">
+          <span class="topic-pill">Mole Concept</span>
+          <span class="topic-pill">Chemical Bonding</span>
+          <span class="topic-pill">Thermodynamics</span>
+          <span class="topic-pill">Organic Chemistry</span>
+          <span class="topic-pill">Coordination Compounds</span>
+          <span class="topic-pill">+25 more</span>
+        </div>
+        <div class="subject-cta">
+          <span style="font-size:.8rem;color:var(--text3)">30 chapters · Class 11 + 12</span>
+          <span style="color:var(--amber)">
+            Start Chemistry
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Physics -->
+      <a href="physics/physics-home.html" class="subject-card phy reveal">
+        <div class="subject-card-top">
+          <div class="subject-icon phy">⚛️</div>
+          <div>
+            <span class="badge badge-blue">180 Marks</span><br />
+            <span class="subject-card-meta" style="margin-top:4px;display:block">180 marks · 25%</span>
+          </div>
+        </div>
+        <div>
+          <h3 style="color: var(--accent)">Physics</h3>
+          <p>Mechanics se Modern Physics tak. Formulas, derivations, numerical approach. Concepts clear karo — marks automatic aayenge.</p>
+        </div>
+        <div class="subject-chapters">
+          <span class="topic-pill">Kinematics</span>
+          <span class="topic-pill">Laws of Motion</span>
+          <span class="topic-pill">Electrostatics</span>
+          <span class="topic-pill">Optics</span>
+          <span class="topic-pill">Modern Physics</span>
+          <span class="topic-pill">+20 more</span>
+        </div>
+        <div class="subject-cta">
+          <span style="font-size:.8rem;color:var(--text3)">29 chapters · Class 11 + 12</span>
+          <span style="color:var(--accent)">
+            Start Physics
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     PREPARATION ROADMAP / PHASES
+══════════════════════════════ -->
+<section class="roadmap-section">
+  <div class="container">
+    <div class="roadmap-intro reveal">
+      <p class="section-eyebrow">Complete Preparation Path</p>
+      <h2 class="section-title">Sahi sequence mein sab kuch</h2>
+      <p class="section-sub">NEET mein qualify karne ka ek proven order hai. Is sequence ko follow karo — koi step skip mat karo. Yeh order toppers follow karte hain.</p>
+    </div>
+
+    <div class="phase-list">
+
+      <!-- PHASE 0 -->
+      <div class="phase-item active reveal">
+        <div class="phase-left"><div class="phase-node">00</div><div class="phase-line"></div></div>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div class="phase-title-row">
+              <div class="phase-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <div class="phase-name">Syllabus &amp; Exam Pattern — Pehle Yeh Samjho</div>
+            </div>
+            <div class="phase-badges"><span class="badge badge-blue">Start Here</span><span class="badge badge-green">Must Do</span></div>
+          </div>
+          <p class="phase-desc">Bina syllabus jaane prepare karna andhere mein teer chalana hai. Pehle jaano ki NEET mein aata kya hai, kitne marks kahan se, aur konse chapters high-priority hain. Pattern samjho phir strategy banao.</p>
+          <div class="phase-topics">
+            <span class="topic-pill">NTA NEET syllabus 2025</span>
+            <span class="topic-pill">Subject-wise weightage</span>
+            <span class="topic-pill">180 Qs breakdown</span>
+            <span class="topic-pill">Marking scheme</span>
+            <span class="topic-pill">High priority chapters</span>
+            <span class="topic-pill">Time management</span>
+          </div>
+          <div class="phase-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1–2 days
+            </span>
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <a href="syllabus/syllabus.html" style="color:var(--accent);text-decoration:none">Syllabus Page →</a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-item bio-item reveal">
+        <div class="phase-left"><div class="phase-node">01</div><div class="phase-line"></div></div>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div class="phase-title-row">
+              <div class="phase-icon bio">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              </div>
+              <div class="phase-name">Biology — Sabse Pehle, Sabse Zyada</div>
+            </div>
+            <div class="phase-badges"><span class="badge badge-green">360 Marks</span><span class="badge badge-green">50% of NEET</span></div>
+          </div>
+          <p class="phase-desc">Biology NEET ka backbone hai — 360 marks akele isi subject se aate hain. Isme score karna relatively easy hai agar NCERT line-by-line padho. Pehle yahi karni chahiye. Botany aur Zoology dono Class 11 se shuru karo.</p>
+          <div class="phase-topics">
+            <span class="topic-pill">Living World</span>
+            <span class="topic-pill">Cell Biology</span>
+            <span class="topic-pill">Biomolecules</span>
+            <span class="topic-pill">Plant Kingdom</span>
+            <span class="topic-pill">Animal Kingdom</span>
+            <span class="topic-pill">Human Physiology</span>
+            <span class="topic-pill">Genetics &amp; Evolution</span>
+            <span class="topic-pill">Ecology</span>
+            <span class="topic-pill">Biotechnology</span>
+            <span class="topic-pill">+29 more chapters</span>
+          </div>
+          <div class="phase-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3–4 months
+            </span>
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              38 chapters
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-item chem-item reveal">
+        <div class="phase-left"><div class="phase-node">02</div><div class="phase-line"></div></div>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div class="phase-title-row">
+              <div class="phase-icon chem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+              </div>
+              <div class="phase-name">Chemistry — Physical → Inorganic → Organic</div>
+            </div>
+            <div class="phase-badges"><span class="badge badge-amber">180 Marks</span><span class="badge badge-amber">25% of NEET</span></div>
+          </div>
+          <p class="phase-desc">Chemistry ke teen sections hain — Physical (calculations), Inorganic (memory-based), Organic (reactions). Is sequence mein padho: Physical pehle kyunki woh foundation hai, phir Inorganic, phir Organic.</p>
+          <div class="phase-topics">
+            <span class="topic-pill">Mole Concept</span>
+            <span class="topic-pill">Atomic Structure</span>
+            <span class="topic-pill">Chemical Bonding</span>
+            <span class="topic-pill">Thermodynamics</span>
+            <span class="topic-pill">Equilibrium</span>
+            <span class="topic-pill">Periodic Table</span>
+            <span class="topic-pill">d-block elements</span>
+            <span class="topic-pill">Hydrocarbons</span>
+            <span class="topic-pill">Biomolecules</span>
+            <span class="topic-pill">+21 more chapters</span>
+          </div>
+          <div class="phase-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2–3 months
+            </span>
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              30 chapters
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-item reveal">
+        <div class="phase-left"><div class="phase-node">03</div><div class="phase-line"></div></div>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div class="phase-title-row">
+              <div class="phase-icon phy">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="phase-name">Physics — Concept First, Numerical Second</div>
+            </div>
+            <div class="phase-badges"><span class="badge badge-blue">180 Marks</span><span class="badge badge-blue">25% of NEET</span></div>
+          </div>
+          <p class="phase-desc">Physics mein galti yeh hoti hai ki log seedha numerical karte hain bina concept samjhe. Pehle theory aur derivations clear karo. Har chapter mein NEET mein kitna weight hai woh samjhke prioritize karo.</p>
+          <div class="phase-topics">
+            <span class="topic-pill">Units &amp; Dimensions</span>
+            <span class="topic-pill">Kinematics</span>
+            <span class="topic-pill">Laws of Motion</span>
+            <span class="topic-pill">Work, Energy, Power</span>
+            <span class="topic-pill">Waves</span>
+            <span class="topic-pill">Electrostatics</span>
+            <span class="topic-pill">Current Electricity</span>
+            <span class="topic-pill">Optics</span>
+            <span class="topic-pill">Modern Physics</span>
+            <span class="topic-pill">+20 more chapters</span>
+          </div>
+          <div class="phase-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2–3 months
+            </span>
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              29 chapters
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORK NOTE -->
+      <div class="phase-item reveal" style="grid-template-columns: 48px 1fr;">
+        <div class="phase-left"><div class="phase-node" style="opacity:0;pointer-events:none"></div><div class="phase-line"></div></div>
+        <div class="fork-wrapper">
+          <div class="fork-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M18 9V7a2 2 0 0 0-2-2H8"/></svg>
+            <div><strong>Teeno subjects ke baad:</strong> Ab revision aur PYQ practice mode mein aao. Sirf ek baar padhna kaafi nahi hota NEET ke liye — revision cycle minimum 3 baar karni chahiye. Is platform pe har chapter ke saath PYQs bhi hain.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="phase-item reveal">
+        <div class="phase-left"><div class="phase-node">04</div><div class="phase-line"></div></div>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div class="phase-title-row">
+              <div class="phase-icon pyq">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="phase-name">PYQs — Past 12 Years Practice</div>
+            </div>
+            <div class="phase-badges"><span class="badge badge-purple">Most Important</span><span class="badge badge-purple">2013–2024</span></div>
+          </div>
+          <p class="phase-desc">PYQs sirf practice nahi hain — yeh NEET ka pattern samjhne ka sabse accurate tarika hai. Ek hi question alag-alag roop mein baar baar aata hai. 2013 se 2024 tak ke questions yahan organized hain — year-wise aur subject-wise.</p>
+          <div class="phase-topics">
+            <span class="topic-pill">2024 PYQ</span>
+            <span class="topic-pill">2023 PYQ</span>
+            <span class="topic-pill">2022 PYQ</span>
+            <span class="topic-pill">2021 PYQ</span>
+            <span class="topic-pill">2020 PYQ</span>
+            <span class="topic-pill">2013–2019</span>
+            <span class="topic-pill">Chapter-wise PYQ</span>
+            <span class="topic-pill">Answer key + Explanation</span>
+          </div>
+          <div class="phase-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Ongoing throughout prep
+            </span>
+            <span>
+              <a href="pyq/pyq-home.html" style="color:var(--purple);text-decoration:none;display:flex;align-items:center;gap:4px">
+                PYQ Page →
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phase-list -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     WHY NEETopia
+══════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-eyebrow amber">Why NEETopia</p>
+      <h2 class="section-title">Doosre platforms se kya alag hai?</h2>
+      <p class="section-sub">Bahut saare NEET platforms hain — lekin zyaadatar ya toh incomplete hain, ya paywall ke peeche band hain, ya surface-level content dete hain.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon wi-green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="why-title">NCERT-First Approach</div>
+        <div class="why-desc">Har chapter NCERT pe based hai — line by line. Koi extra books ki zaroorat nahi. NEET 90% NCERT se hi aata hai — yeh platform wohi karata hai jo actually kaam karta hai.</div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon wi-blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="why-title">Free Video Lectures Embedded</div>
+        <div class="why-desc">Har chapter ke saath best free YouTube lectures — Physics Wallah, Vedantu, Unacademy — directly embed hain. Ek page kholo, sab kuch mil jaata hai. Searching band karo, padhna shuru karo.</div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon wi-amber">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="why-title">Chapter-wise PYQs With Explanation</div>
+        <div class="why-desc">Sirf questions nahi — answers aur detailed explanations bhi. 2013 se 2024 tak ke PYQs chapter-wise organize hain taaki tum dekh sako ki ek chapter se kaun se questions aaye hain historically.</div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon wi-purple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="why-title">Progress Tracker</div>
+        <div class="why-desc">Har chapter ke saath checkbox hai — mark karo ki kya padh liya, kya baaki hai. Progress browser mein save hota hai. Tumhara data sirf tumhare paas — koi account, koi login nahi.</div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon wi-red">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="why-title">Koi Fake Promise Nahi</div>
+        <div class="why-desc">"Guarantee se qualify karo" — yeh platform yeh nahi kehta. NEET qualify karna mehnat maangta hai. Yeh platform sirf best possible resources ek jagah deta hai — baaki tumhara kaam hai.</div>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon wi-green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+        </div>
+        <div class="why-title">Study Plans — 1 Year &amp; 2 Year</div>
+        <div class="why-desc">Agar 1 saal bacha hai ya 2 saal — dono ke liye alag study plans hain. Daily targets, weekly revision schedule, aur mock test planning sab roadmap page pe milega.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CTA SECTION
+══════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <p class="section-eyebrow" style="justify-content:center">Ready?</p>
+      <h2 class="section-title">Aaj se shuru karo. Seriously.</h2>
+      <p>NEET qualify karna ek goal nahi — ek daily habit hai. Yeh platform free hai, hamesha rahega. Sirf ek kaam karo: aaj ka chapter padh lo. Kal ka apne aap hoga.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">
+        <a href="biology/biology-home.html" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology Se Shuru Karo
+        </a>
+        <a href="pyq/pyq-home.html" class="btn-ghost">
+          PYQ Practice Karo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            Twitter
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="biology/biology-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="chemistry/chemistry-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="physics/physics-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="pattern/pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="pyq/pyq-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="biology/class11/ch01-living-world.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Living World
+        </a>
+        <a href="biology/class12/ch01-reproduction.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Reproduction
+        </a>
+        <a href="chemistry/class11/ch01-basic-concepts.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Basic Chemistry
+        </a>
+        <a href="physics/class11/ch02-motion.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Kinematics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          1 Year Plan
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          2 Year Plan
+        </a>
+        <a href="mailto:hello@neetopia.in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global JS -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>
