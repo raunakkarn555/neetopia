@@ -78,6 +78,9 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
 }
 .storage-notice .notice-icon {
   width: 36px;
@@ -1383,18 +1386,20 @@
 <!-- ══════════════════════════════ STICKY SUBNAV ══════════════════════════════ -->
 <nav class="tracker-subnav" aria-label="Tracker sections">
   <div class="tracker-subnav-inner">
-    <button class="snav-btn active" data-section="dashboard">📊 Dashboard</button>
-    <button class="snav-btn" data-section="profile">👤 Profile</button>
-    <button class="snav-btn" data-section="syllabus">📚 Syllabus</button>
-    <button class="snav-btn" data-section="daily">🗓 Daily</button>
-    <button class="snav-btn" data-section="todo">✅ To-Do</button>
-    <button class="snav-btn" data-section="tests">🧪 Tests</button>
-    <button class="snav-btn" data-section="books">📖 Books</button>
-    <button class="snav-btn" data-section="analytics">📈 Analytics</button>
-    <button class="snav-btn" data-section="personal">🗒 My Space</button>
-    <button class="snav-btn" data-section="motivation">💡 Motivation</button>
-    <button class="snav-btn" data-section="backup">💾 Backup</button>
-    <button class="snav-btn" data-section="faq">❓ FAQ</button>
+    <button class="snav-btn active" data-section="dashboard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</button>
+    <button class="snav-btn" data-section="profile"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile</button>
+    <button class="snav-btn" data-section="syllabus"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Syllabus</button>
+    <button class="snav-btn" data-section="overview"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Overview</button>
+    <button class="snav-btn" data-section="daily"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Daily</button>
+    <button class="snav-btn" data-section="todo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> To-Do</button>
+    <button class="snav-btn" data-section="tests"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg> Tests</button>
+    <button class="snav-btn" data-section="books"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Books</button>
+    <button class="snav-btn" data-section="analytics"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Analytics</button>
+    <button class="snav-btn" data-section="personal"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> My Space</button>
+    <button class="snav-btn" data-section="motivation"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Motivation</button>
+    <button class="snav-btn" data-section="backup"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Backup</button>
+    <button class="snav-btn" data-section="guide"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Guide</button>
+    <button class="snav-btn" data-section="faq"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> FAQ</button>
   </div>
 </nav>
 
@@ -1570,9 +1575,9 @@
     <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Track every chapter and topic. Check off topics as you complete them. Each subject is tracked separately.</p>
 
     <div class="subject-tabs">
-      <button class="subj-tab bio active" data-subj="bio">🌿 Biology (10 Units)</button>
-      <button class="subj-tab chem" data-subj="chem">⚗️ Chemistry (20 Units)</button>
-      <button class="subj-tab phy" data-subj="phy">⚡ Physics (20 Units)</button>
+      <button class="subj-tab bio active" data-subj="bio">🌿 Biology (32 Chapters)</button>
+      <button class="subj-tab chem" data-subj="chem">⚗️ Chemistry (22 Chapters)</button>
+      <button class="subj-tab phy" data-subj="phy">⚡ Physics (29 Chapters)</button>
     </div>
 
     <!-- BIOLOGY PANEL -->
@@ -1705,7 +1710,7 @@
       <div class="test-form-grid">
         <div class="form-group">
           <label>Test Name</label>
-          <input type="text" id="test-name" placeholder="e.g. Allen Minor Test 3" />
+          <input type="text" id="test-name" placeholder="e.g. NEETopia Minor Test 3" />
         </div>
         <div class="form-group">
           <label>Date</label>
@@ -2031,6 +2036,137 @@
     </div>
   </section>
 
+  <!-- ═══════════════ SECTION: OVERVIEW ═══════════════ -->
+  <section class="tracker-section" id="section-overview">
+    <h2 class="section-title"><span class="section-icon phy" style="background:rgba(61,191,255,.15)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Complete Progress Overview</h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:24px;">Total topics aur chapters ki tracking — subject aur chapter wise. Importance weightage bhi dekho.</p>
+
+    <!-- Summary Cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px;" id="overviewSummaryCards">
+    </div>
+
+    <!-- Subject-wise detailed overview -->
+    <div id="overviewContent"></div>
+  </section>
+
+  <!-- ═══════════════ SECTION: GUIDE ═══════════════ -->
+  <section class="tracker-section" id="section-guide">
+    <h2 class="section-title"><span class="section-icon purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> How to Use This Progress Tracker</h2>
+
+    <div style="background:linear-gradient(135deg,rgba(168,124,245,.08),rgba(61,232,160,.05));border:1px solid rgba(168,124,245,.25);border-radius:var(--card-radius);padding:24px;margin-bottom:24px;">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:8px;">Welcome to NEETopia Progress Tracker</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">This tracker is your complete NEET 2026 operating system. Yahan har cheez locally store hoti hai — no accounts, no servers, 100% private. Neeche guide padho ki kaise use karein.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(61,232,160,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--bio)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 1 — Dashboard</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Dashboard tab mein jaake apna overall progress dekho. Stats grid mein chapters done, topics done, tests diye, streak, best score aur consistency — sab ek jagah. Subject-wise progress bars bhi hain.</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(168,124,245,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 2 — Setup Profile</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Profile tab mein jaake apna naam, class (11th/12th/Dropper), target year, score goal, daily study hours aur weak subject set karo. Apna photo bhi upload kar sakte ho. Profile save karo.</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(61,232,160,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--bio)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 3 — Syllabus Tracker</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;margin-bottom:10px;">Yeh sabse important feature hai! Syllabus tab mein Biology, Chemistry, Physics ke <strong style="color:var(--fg);">chapter-wise topics</strong> hain — exactly NCERT ke hisaab se.</p>
+        <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+          <li><strong style="color:var(--fg);">Chapter expand karo</strong> — click karo chapter pe to open topics</li>
+          <li><strong style="color:var(--fg);">Topic checkbox</strong> — check karo jab topic complete ho</li>
+          <li><strong style="color:var(--fg);">Notes field</strong> — topic ke neeche apni notes likhoo</li>
+          <li><strong style="color:var(--fg);">Stars (confidence)</strong> — 1-3 stars apni confidence rate karo</li>
+          <li><strong style="color:var(--fg);">Revision flag</strong> — ✓ green flag lagao revision ke liye</li>
+          <li><strong style="color:var(--fg);">Doubt flag</strong> — ? red flag lagao doubt topics pe</li>
+          <li><strong style="color:var(--fg);">Priority flag</strong> — ! yellow flag high priority topics pe</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(61,191,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--phy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 4 — Overview Tab</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Overview tab mein jaake dekho ki total kitne topics hain, kitne complete ho gaye — subject aur chapter wise. <strong style="color:var(--danger);">Bahut Zaruri</strong>, <strong style="color:var(--warn);">Zaruri</strong>, aur Normal topics ki weightage analysis bhi yahan dikhai deti hai. High-priority topics pehle padho!</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(244,185,66,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--chem)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 5 — Daily Tracker</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Daily tab mein roz log karo: study hours, sleep, water intake, mood. Streak dekhte raho. Heatmap mein apni consistency visualize karo. Roz log karna zaroori hai streak ke liye — "Log Today's Progress" button dabao din ke end mein.</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(61,191,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--phy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 6 — Test Tracker</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Har mock test ke baad Tests tab mein log karo — test name, date, score, accuracy, time taken, weak area aur notes. Tumhara score trend analytics mein dikhega. Mistake analysis likho taaki agli baar na dohrayo.</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(255,95,95,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Step 7 — Backup (MUST DO)</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Yeh <strong style="color:var(--danger);">sabse important step</strong> hai! Backup tab mein jaake "Export Backup (JSON)" click karo. File download hogi. Use Google Drive ya email pe save karo. <strong style="color:var(--fg);">Hafte mein ek baar zaroor karo</strong> — browser clear hua toh sab data chala jaayega!</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(168,124,245,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">My Space — Journal &amp; Photos</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">My Space tab bilkul private hai — sirf tumhare liye. Apna journal likhoo (mood select karo), achievement photos upload karo, aur apne goals wall pe goals add karo. Yeh sab sirf tumhare browser mein stored hai.</p>
+      </div>
+
+    </div>
+
+    <!-- Tips Box -->
+    <div style="background:linear-gradient(135deg,rgba(61,232,160,.08),rgba(61,191,255,.06));border:1px solid rgba(61,232,160,.25);border-radius:var(--card-radius);padding:24px;margin-top:24px;">
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:12px;color:var(--bio);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Pro Tips — Zyada Effective Use ke Liye</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Routine banao:</strong> Roz ek fixed time pe tracker open karo — subah ya raat ke end mein. Consistency hi success hai.</div>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Doubt flag use karo:</strong> Jab bhi koi concept samajh na aaye, topic pe doubt flag lagao. Phir revision ke waqt sab doubtful topics ek saath dekh sakte ho.</div>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Confidence stars update karo:</strong> Pehli reading mein 1 star. Revision ke baad 2 star. Full confidence = 3 stars. Analytics mein weak chapters pata chalenge.</div>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Overview regularly check karo:</strong> Overview tab mein dekho ki kaunse subjects mein zyada topics baaki hain. Accordingly plan karo ki pehle kya padho.</div>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">To-Do list use karo:</strong> Kal ke study plan — kaunsa chapter, kaunsa topic — Todo mein add karo. Priority set karo High/Medium/Low. Completed tasks mark karo.</div>
+        <div style="background:var(--bg2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Weekly backup:</strong> Hafte mein ek baar Backup tab se export karo. Date-wise files rakho Google Drive pe. Kabhi bhi restore ho sakta hai kisi bhi device pe.</div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
@@ -2126,566 +2262,909 @@ document.querySelectorAll('.snav-btn').forEach(btn => {
   });
 });
 
-// ─── FULL NEET 2026 SYLLABUS ───
+// ─── FULL NEET 2026 SYLLABUS — CHAPTER-WISE (from NMC official syllabus) ───
+// HIGH weightage chapters marked with high:true (🔥 badge in syllabus.html)
 const SYLLABUS = {
   bio: [
-    { id:'bio-u1', name:'Unit 1: Diversity in Living World', color:'bio', topics:[
+    { id:'bio-ch01', name:'Ch 1 — The Living World', color:'bio', high:false, topics:[
       'What is living? Biodiversity, Need for classification',
-      'Taxonomy & Systematics, Concept of species, Taxonomical hierarchy, Binomial nomenclature',
-      'Five kingdom classification — salient features',
-      'Monera: classification into major groups',
-      'Protista: classification into major groups',
-      'Fungi: classification into major groups, Lichens',
-      'Viruses and Viroids',
+      'Taxonomy & Systematics, Concept of species',
+      'Taxonomical hierarchy, Binomial nomenclature',
+      'Taxonomic aids: Herbaria, Museums, Botanical gardens, Keys',
+    ]},
+    { id:'bio-ch02', name:'Ch 2 — Biological Classification', color:'bio', high:false, topics:[
+      'Five kingdom system — basis of classification',
+      'Monera: major groups, salient features',
+      'Protista: major groups, salient features',
+      'Fungi: major groups, salient features, Lichens',
+      'Viruses, Viroids, Prions',
+    ]},
+    { id:'bio-ch03', name:'Ch 3 — Plant Kingdom', color:'bio', high:false, topics:[
       'Algae: salient features and classification',
       'Bryophytes: salient features and classification',
       'Pteridophytes: salient features and classification',
-      'Gymnosperms: salient features and classification (3-5 features, 2 examples each)',
-      'Animals: Non-chordates up to phyla level (3-5 salient features)',
-      'Animals: Chordates up to classes level (3-5 salient features)',
+      'Gymnosperms: salient features and classification',
+      'Angiosperms: brief account',
+      'Plant life cycles and Alternation of generations',
     ]},
-    { id:'bio-u2', name:'Unit 2: Structural Organisation in Animals and Plants', color:'bio', topics:[
-      'Morphology and modifications of plants',
-      'Tissues in plants',
-      'Anatomy and functions: Root, stem, leaf',
-      'Inflorescence — cymose and racemose',
-      'Flower, fruit and seed structure',
-      'Plant families: Malvaceae, Cruciferae, Leguminosae, Compositae, Graminae',
-      'Animal tissues: types and characteristics',
-      'Frog: Morphology, anatomy and functions of digestive system',
-      'Frog: Circulatory, respiratory, nervous systems',
-      'Frog: Reproductive system (brief account)',
+    { id:'bio-ch04', name:'Ch 4 — Animal Kingdom', color:'bio', high:false, topics:[
+      'Basis of classification: symmetry, coelom, segmentation, notochord',
+      'Porifera: salient features',
+      'Coelenterata: salient features',
+      'Platyhelminthes, Nematoda, Annelida: salient features',
+      'Arthropoda: salient features',
+      'Mollusca, Echinodermata: salient features',
+      'Chordata: salient features and classes',
     ]},
-    { id:'bio-u3', name:'Unit 3: Cell Structure and Function', color:'bio', topics:[
+    { id:'bio-ch05', name:'Ch 5 — Morphology of Flowering Plants', color:'bio', high:false, topics:[
+      'Root: morphology and modifications',
+      'Stem: morphology and modifications',
+      'Leaf: morphology, venation, modifications',
+      'Inflorescence: cymose and racemose',
+      'Flower structure and parts',
+      'Fruit: types and structure',
+      'Seed: structure and types',
+      'Families: Malvaceae, Cruciferae, Leguminosae, Compositae, Graminae',
+    ]},
+    { id:'bio-ch06', name:'Ch 6 — Anatomy of Flowering Plants', color:'bio', high:false, topics:[
+      'Meristematic tissues: apical, lateral, intercalary',
+      'Permanent tissues: simple (parenchyma, collenchyma, sclerenchyma) and complex',
+      'Tissue systems: epidermal, ground, vascular',
+      'Anatomy of dicot and monocot root',
+      'Anatomy of dicot and monocot stem',
+      'Anatomy of dicot and monocot leaf',
+    ]},
+    { id:'bio-ch07', name:'Ch 7 — Structural Organisation in Animals', color:'bio', high:false, topics:[
+      'Animal tissues: epithelial, connective, muscular, neural',
+      'Frog morphology: external features',
+      'Frog: digestive system anatomy and function',
+      'Frog: circulatory system',
+      'Frog: respiratory system',
+      'Frog: nervous system',
+      'Frog: reproductive system (brief)',
+    ]},
+    { id:'bio-ch08', name:'Ch 8 — Cell: The Unit of Life', color:'bio', high:true, topics:[
       'Cell theory and cell as basic unit of life',
-      'Structure of prokaryotic cell',
-      'Structure of eukaryotic cell — plant and animal cell',
-      'Cell envelope, cell membrane, cell wall',
-      'Endomembrane system: ER, Golgi bodies, lysosomes, vacuoles',
-      'Mitochondria, ribosomes, plastids, microbodies',
-      'Cytoskeleton, cilia, flagella, centrioles — ultrastructure and function',
+      'Prokaryotic cell: structure and features',
+      'Eukaryotic cell: plant vs animal cell comparison',
+      'Cell membrane: fluid mosaic model, transport mechanisms',
+      'Cell wall: structure and function',
       'Nucleus: nuclear membrane, chromatin, nucleolus',
-      'Biomolecules: structure and function of proteins',
-      'Biomolecules: carbohydrates, lipids, nucleic acids',
-      'Enzymes: types, properties, enzyme action, classification and nomenclature',
-      'Cell division: Cell cycle, mitosis and its significance',
-      'Meiosis and its significance',
+      'Endomembrane system: ER, Golgi bodies, lysosomes, vacuoles',
+      'Mitochondria: structure and function',
+      'Plastids: chloroplast, chromoplast, leucoplast',
+      'Ribosomes, microbodies',
+      'Cytoskeleton, cilia, flagella, centrioles — ultrastructure',
     ]},
-    { id:'bio-u4', name:'Unit 4: Plant Physiology', color:'bio', topics:[
-      'Photosynthesis: autotrophic nutrition, site of photosynthesis',
-      'Photosynthesis: pigments involved (elementary idea)',
-      'Photochemical and biosynthetic phases',
+    { id:'bio-ch09', name:'Ch 9 — Biomolecules', color:'bio', high:true, topics:[
+      'Carbohydrates: classification, structure and function',
+      'Proteins: amino acids, peptide bonds, structure levels, denaturation',
+      'Lipids: types and functions',
+      'Nucleic acids: DNA and RNA structure',
+      'Enzymes: types, properties',
+      'Enzyme action: lock and key, induced fit models',
+      'Classification and nomenclature of enzymes',
+      'Cofactors, coenzymes, prosthetic groups',
+    ]},
+    { id:'bio-ch10', name:'Ch 10 — Cell Cycle and Cell Division', color:'bio', high:true, topics:[
+      'Cell cycle: phases (G1, S, G2, M)',
+      'Mitosis: prophase, metaphase, anaphase, telophase',
+      'Cytokinesis: plant vs animal cell',
+      'Significance of mitosis',
+      'Meiosis I: all stages',
+      'Meiosis II: all stages',
+      'Significance of meiosis',
+    ]},
+    { id:'bio-ch11', name:'Ch 11 — Transport in Plants', color:'bio', high:false, topics:[
+      'Means of transport: diffusion, osmosis, active transport',
+      'Apoplast and symplast pathways',
+      'Osmosis, plasmolysis, water potential',
+      'Long distance transport of water: ascent of sap, cohesion-tension theory',
+      'Transpiration: types, factors affecting, significance',
+      'Phloem transport: pressure flow hypothesis',
+      'Source-sink concept',
+    ]},
+    { id:'bio-ch12', name:'Ch 12 — Mineral Nutrition', color:'bio', high:false, topics:[
+      'Essential minerals: macro and micronutrients',
+      'Role of macro and micronutrients',
+      'Deficiency symptoms and toxicity',
+      'Nitrogen metabolism: nitrogen cycle',
+      'Nitrogen fixation: biological and industrial',
+      'Nodule formation, symbiosis',
+    ]},
+    { id:'bio-ch13', name:'Ch 13 — Photosynthesis in Higher Plants', color:'bio', high:true, topics:[
+      'Photosynthesis as autotrophic nutrition',
+      'Site of photosynthesis: chloroplast structure',
+      'Photosynthetic pigments: chlorophylls, carotenoids',
+      'Light reactions: photosystem I and II',
       'Cyclic and non-cyclic photophosphorylation',
-      'Chemiosmotic hypothesis',
-      'Photorespiration, C3 and C4 pathways',
+      'Chemiosmotic hypothesis: ATP synthesis',
+      'Calvin cycle (C3 pathway)',
+      'C4 pathway (Hatch-Slack cycle)',
+      'Photorespiration',
       'Factors affecting photosynthesis',
-      'Respiration: exchange of gases, cellular respiration',
-      'Glycolysis, fermentation (anaerobic)',
-      'TCA cycle and electron transport system (aerobic)',
-      'Energy relations: ATP molecules generated, amphibolic pathways, respiratory quotient',
-      'Plant growth: seed germination, phases of growth, growth rate',
-      'Differentiation, dedifferentiation and redifferentiation',
-      'Growth regulators: auxin, gibberellin, cytokinin, ethylene, ABA',
     ]},
-    { id:'bio-u5', name:'Unit 5: Human Physiology', color:'bio', topics:[
-      'Breathing and Respiration: respiratory organs overview',
-      'Respiratory system in humans: mechanism of breathing and regulation',
-      'Exchange of gases, transport of gases',
+    { id:'bio-ch14', name:'Ch 14 — Respiration in Plants', color:'bio', high:false, topics:[
+      'Glycolysis: steps and products',
+      'Fermentation (anaerobic): types, products',
+      'Aerobic respiration: overview',
+      'Krebs cycle (TCA cycle): steps and products',
+      'Electron transport chain and oxidative phosphorylation',
+      'ATP yield: energy calculations',
+      'Amphibolic pathways',
+      'Respiratory quotient (RQ)',
+    ]},
+    { id:'bio-ch15', name:'Ch 15 — Plant Growth and Development', color:'bio', high:false, topics:[
+      'Seed germination: types and conditions',
+      'Growth: phases, arithmetic and geometric growth',
+      'Plant growth rate, conditions of growth',
+      'Differentiation, dedifferentiation, redifferentiation',
+      'Auxins: discovery, mechanism, applications',
+      'Gibberellins: discovery, role, applications',
+      'Cytokinins: discovery, role, applications',
+      'Ethylene: role and applications',
+      'ABA (Abscisic acid): role as stress hormone',
+    ]},
+    { id:'bio-ch16', name:'Ch 16 — Digestion and Absorption', color:'bio', high:true, topics:[
+      'Alimentary canal: structure of each part',
+      'Digestive glands: salivary, gastric, pancreas, liver',
+      'Digestion of carbohydrates (oral, gastric, intestinal)',
+      'Digestion of proteins',
+      'Digestion of fats (emulsification, micelle formation)',
+      'Absorption: mechanisms, sites',
+      'Disorders: PEM, constipation, vomiting, jaundice, diarrhea',
+    ]},
+    { id:'bio-ch17', name:'Ch 17 — Breathing and Exchange of Gases', color:'bio', high:false, topics:[
+      'Respiratory organs in different animals',
+      'Human respiratory system: anatomy',
+      'Mechanism of breathing: inspiration and expiration',
+      'Regulation of respiration: neural and chemical',
+      'Exchange of gases: pulmonary and tissue',
+      'Transport of O2: oxyhaemoglobin dissociation curve',
+      'Transport of CO2: carbamate, carbonic acid, dissolved',
       'Respiratory volumes and capacities',
-      'Respiratory disorders: Asthma, Emphysema, Occupational respiratory disorders',
-      'Body fluids: composition of blood, blood groups, coagulation',
-      'Composition of lymph and its function',
-      'Human circulatory system: structure of heart and blood vessels',
-      'Cardiac cycle, cardiac output, ECG, double circulation',
-      'Regulation of cardiac activity, circulatory disorders',
-      'Excretory products: modes of excretion (ammonotelism, ureotelism, uricotelism)',
-      'Human excretory system: structure and function',
-      'Urine formation and osmoregulation',
-      'Regulation of kidney function (Renin-angiotensin, ADH, ANF)',
-      'Kidney disorders: Uraemia, Renal failure, Renal calculi, Nephritis, Dialysis',
-      'Locomotion and Movement: types of movement',
-      'Skeletal muscle, contractile proteins, muscle contraction',
-      'Skeletal system and its functions, joints',
+      'Disorders: Asthma, Emphysema, Occupational disorders',
+    ]},
+    { id:'bio-ch18', name:'Ch 18 — Body Fluids and Circulation', color:'bio', high:true, topics:[
+      'Blood composition: plasma, RBC, WBC, platelets',
+      'Blood groups: ABO and Rh system',
+      'Coagulation of blood: steps and factors',
+      'Lymph: composition and function',
+      'Human heart: structure (chambers, valves)',
+      'Blood vessels: arteries, veins, capillaries',
+      'Cardiac cycle: systole, diastole, cardiac output',
+      'ECG: interpretation',
+      'Double circulation: pulmonary and systemic',
+      'Regulation of cardiac activity',
+      'Disorders: Hypertension, CAD, Angina pectoris, Heart failure',
+    ]},
+    { id:'bio-ch19', name:'Ch 19 — Excretory Products and Their Elimination', color:'bio', high:true, topics:[
+      'Modes of excretion: Ammonotelism, Ureotelism, Uricotelism',
+      'Human excretory system: kidney structure (cortex, medulla, nephron)',
+      'Urine formation: glomerular filtration, tubular reabsorption, secretion',
+      'Osmoregulation',
+      'Regulation of kidney function: Renin-angiotensin system',
+      'ADH (vasopressin) and Diabetes insipidus',
+      'Atrial Natriuretic Factor (ANF)',
+      'Role of other organs in excretion',
+      'Disorders: Uraemia, Renal failure, Renal calculi, Nephritis, Dialysis',
+    ]},
+    { id:'bio-ch20', name:'Ch 20 — Locomotion and Movement', color:'bio', high:false, topics:[
+      'Types of movement: ciliary, flagellar, muscular',
+      'Skeletal muscle: structure, types of fibres',
+      'Contractile proteins: actin, myosin, tropomyosin, troponin',
+      'Muscle contraction: sliding filament theory',
+      'Skeletal system: axial and appendicular skeleton',
+      'Joints: types and examples',
       'Disorders: Myasthenia gravis, Tetany, Muscular dystrophy, Arthritis, Osteoporosis, Gout',
-      'Neural control: Neuron and nerves, Nervous system in humans (CNS, PNS, ANS)',
-      'Generation and conduction of nerve impulse',
-      'Chemical coordination: Endocrine glands and hormones',
-      'Human endocrine system: Hypothalamus, Pituitary, Pineal, Thyroid, Parathyroid, Adrenal, Pancreas, Gonads',
-      'Mechanism of hormone action, role of hormones',
-      'Hypo- and hyperactivity disorders: Dwarfism, Acromegaly, Cretinism, Goiter, Diabetes, Addison\'s disease',
     ]},
-    { id:'bio-u6', name:'Unit 6: Reproduction', color:'bio', topics:[
-      'Sexual reproduction in flowering plants: flower structure',
-      'Development of male and female gametophytes',
-      'Pollination: types, agencies and examples',
-      'Outbreeding devices, pollen-pistil interaction',
-      'Double fertilization',
-      'Post-fertilization: endosperm, embryo, seed, fruit development',
-      'Special modes: apomixis, parthenocarpy, polyembryony',
-      'Significance of seed and fruit formation',
-      'Human Reproduction: male and female reproductive systems',
-      'Microscopic anatomy of testis and ovary',
-      'Gametogenesis: spermatogenesis and oogenesis',
-      'Menstrual cycle',
-      'Fertilisation and embryo development up to blastocyst formation, implantation',
-      'Pregnancy, placenta formation, parturition, lactation (elementary)',
-      'Reproductive health: STD prevention, birth control methods',
-      'Contraception, MTP, amniocentesis',
-      'Infertility and ART: IVF, ZIFT, GIFT (elementary)',
+    { id:'bio-ch21', name:'Ch 21 — Neural Control and Coordination', color:'bio', high:true, topics:[
+      'Neuron: structure (dendrites, soma, axon, synapse)',
+      'Types of neurons',
+      'Nervous system: CNS, PNS, ANS',
+      'Brain: structure (forebrain, midbrain, hindbrain)',
+      'Spinal cord: structure and function',
+      'Generation of nerve impulse: resting and action potential',
+      'Conduction of impulse along nerve fibre',
+      'Synaptic transmission: chemical and electrical',
+      'Reflex action and reflex arc',
     ]},
-    { id:'bio-u7', name:'Unit 7: Genetics and Evolution', color:'bio', topics:[
-      'Mendelian Inheritance: Mendel\'s laws',
-      'Deviations: Incomplete dominance, Co-dominance',
-      'Multiple alleles, inheritance of blood groups, Pleiotropy',
-      'Polygenic inheritance (elementary), chromosome theory of inheritance',
-      'Chromosomes and genes, sex determination in humans, birds, honeybee',
+    { id:'bio-ch22', name:'Ch 22 — Chemical Coordination and Integration', color:'bio', high:true, topics:[
+      'Endocrine glands: location and hormones',
+      'Hypothalamus: releasing and inhibiting hormones',
+      'Pituitary gland: anterior and posterior, all hormones',
+      'Pineal gland: melatonin',
+      'Thyroid gland: T3, T4, calcitonin',
+      'Parathyroid gland: PTH',
+      'Adrenal gland: cortex (mineralocorticoids, glucocorticoids) and medulla',
+      'Pancreas: insulin, glucagon, somatostatin',
+      'Gonads: androgens, estrogens, progesterone',
+      'Mechanism of hormone action: protein vs steroid hormones',
+      'Disorders: Dwarfism, Acromegaly, Cretinism, Goiter, Diabetes, Addison\'s disease',
+    ]},
+    { id:'bio-ch23', name:'12/Ch 1 — Sexual Reproduction in Flowering Plants', color:'bio', high:true, topics:[
+      'Flower structure: stamen and pistil',
+      'Development of male gametophyte (pollen grain)',
+      'Development of female gametophyte (embryo sac)',
+      'Pollination: types (self and cross)',
+      'Pollinating agencies: wind, water, insects, animals',
+      'Outbreeding devices',
+      'Pollen-Pistil interaction',
+      'Double fertilization: syngamy and triple fusion',
+      'Post-fertilization: endosperm development',
+      'Embryo development: dicot and monocot',
+      'Seed and fruit formation',
+      'Special modes: Apomixis, Parthenocarpy, Polyembryony',
+    ]},
+    { id:'bio-ch24', name:'12/Ch 2 — Human Reproduction', color:'bio', high:true, topics:[
+      'Male reproductive system: anatomy and functions',
+      'Testis: microscopic anatomy (Sertoli cells, Leydig cells)',
+      'Female reproductive system: anatomy',
+      'Ovary: microscopic anatomy (Graafian follicle)',
+      'Spermatogenesis: stages and products',
+      'Oogenesis: stages and products',
+      'Menstrual cycle: phases and hormonal control',
+      'Fertilization: acrosome reaction, cortical reaction',
+      'Embryo development: cleavage to blastocyst',
+      'Implantation: trophoblast, decidua',
+      'Pregnancy and placenta: structure and functions',
+      'Parturition and Lactation',
+    ]},
+    { id:'bio-ch25', name:'12/Ch 3 — Reproductive Health', color:'bio', high:false, topics:[
+      'Need for reproductive health and awareness',
+      'Prevention of STDs',
+      'Birth control: need and methods (barrier, hormonal, IUD, surgical)',
+      'Contraception: mechanisms and types',
+      'Medical Termination of Pregnancy (MTP)',
+      'Amniocentesis: use and ethical issues',
+      'Infertility: causes and treatment',
+      'ART: IVF, ZIFT, GIFT, AI',
+    ]},
+    { id:'bio-ch26', name:'12/Ch 4 — Principles of Inheritance and Variation', color:'bio', high:true, topics:[
+      'Mendelian inheritance: laws of segregation and independent assortment',
+      'Test cross and back cross',
+      'Deviations from Mendelism: Incomplete dominance',
+      'Co-dominance and multiple alleles',
+      'Pleiotropy and polygenic inheritance',
+      'Inheritance of blood groups (ABO)',
+      'Chromosome theory of inheritance',
+      'Sex determination: humans (XX/XY), birds (ZW/ZZ), honeybee (haplo-diploid)',
       'Linkage and crossing over',
       'Sex-linked inheritance: Haemophilia, Colour blindness',
-      'Mendelian disorders: Thalassemia',
-      'Chromosomal disorders: Down\'s syndrome, Turner\'s, Klinefelter\'s syndromes',
-      'Molecular basis of Inheritance: DNA as genetic material',
-      'Structure of DNA and RNA',
-      'DNA packaging, DNA replication',
-      'Central dogma, transcription, genetic code, translation',
-      'Gene expression and regulation: Lac Operon',
-      'Genome and Human Genome Project, DNA fingerprinting',
-      'Evolution: origin of life',
-      'Biological evolution and evidences (paleontology, comparative anatomy, embryology, molecular)',
-      'Darwin\'s contribution, Modern Synthetic theory',
-      'Mechanism of evolution: Variation (mutation and recombination), Natural selection',
-      'Types of natural selection, gene flow and genetic drift',
-      'Hardy-Weinberg\'s principle, Adaptive Radiation, Human evolution',
+      'Thalassemia: types and inheritance',
+      'Chromosomal disorders: Down\'s syndrome, Turner\'s, Klinefelter\'s',
     ]},
-    { id:'bio-u8', name:'Unit 8: Biology and Human Welfare', color:'bio', topics:[
-      'Health and Disease: pathogens overview',
-      'Parasites causing human diseases: Malaria, Filariasis, Ascariasis',
-      'Typhoid, Pneumonia, Common cold, Amoebiasis, Ringworm',
-      'Dengue, Chikungunya',
-      'Basic concepts of immunology, vaccines',
-      'Cancer, HIV and AIDS',
+    { id:'bio-ch27', name:'12/Ch 5 — Molecular Basis of Inheritance', color:'bio', high:true, topics:[
+      'Search for genetic material: Griffith, Avery, Hershey-Chase experiments',
+      'DNA as genetic material: properties',
+      'DNA structure: Watson-Crick double helix model',
+      'RNA structure and types (mRNA, tRNA, rRNA)',
+      'DNA packaging: nucleosome, chromatin',
+      'DNA replication: semi-conservative model, enzymes involved',
+      'Central dogma of molecular biology',
+      'Transcription: template strand, promoter, RNA polymerase, termination',
+      'Genetic code: properties, codons, stop codons',
+      'Translation: initiation, elongation, termination, ribosomes',
+      'Gene expression and regulation: Lac Operon (Jacob-Monod model)',
+      'Human Genome Project: goals and significance',
+      'DNA fingerprinting: VNTR, applications',
+    ]},
+    { id:'bio-ch28', name:'12/Ch 6 — Evolution', color:'bio', high:false, topics:[
+      'Origin of life: chemical evolution, Miller-Urey experiment',
+      'Evolutionary theories: Lamarckism, Darwinism',
+      'Modern Synthetic Theory of Evolution',
+      'Natural selection: types (stabilizing, directional, disruptive)',
+      'Variation: mutation and recombination',
+      'Gene flow and genetic drift',
+      'Hardy-Weinberg law and equilibrium',
+      'Adaptive radiation: examples',
+      'Human evolution: Dryopithecus to Homo sapiens',
+    ]},
+    { id:'bio-ch29', name:'12/Ch 7 — Human Health and Disease', color:'bio', high:true, topics:[
+      'Health and disease: WHO definition, types of disease',
+      'Malaria: Plasmodium life cycle, symptoms, control',
+      'Filariasis and Ascariasis: causative agents',
+      'Typhoid and Pneumonia: causative agents and symptoms',
+      'Common cold: causative agent and prevention',
+      'Amoebiasis and Ringworm',
+      'Dengue and Chikungunya',
+      'Basic immunology: innate and adaptive immunity',
+      'Antibodies, antigens, lymphocytes (B and T cells)',
+      'Vaccines and vaccination principles',
+      'Cancer: types, causes, treatment',
+      'HIV and AIDS: transmission, life cycle, prevention',
       'Adolescence, drug and alcohol abuse, tobacco abuse',
-      'Microbes in food processing (household)',
-      'Industrial production using microbes',
-      'Sewage treatment, energy generation using microbes',
-      'Biocontrol agents and biofertilizers',
     ]},
-    { id:'bio-u9', name:'Unit 9: Biotechnology and Its Applications', color:'bio', topics:[
-      'Principles of biotechnology: genetic engineering (recombinant DNA technology)',
-      'Process of biotechnology: tools and techniques',
-      'Application in health: human insulin and vaccine production',
-      'Gene therapy',
-      'Genetically modified organisms: Bt crops',
-      'Transgenic animals',
-      'Biosafety issues, biopiracy and patents',
+    { id:'bio-ch30', name:'12/Ch 8 — Microbes in Human Welfare', color:'bio', high:false, topics:[
+      'Microbes in household products: curd, bread, idli, dosa',
+      'Industrial microbiology: antibiotics, vitamins, enzymes, bioactive molecules',
+      'Sewage treatment: primary and secondary',
+      'Biogas production: biogas plant, microbes involved',
+      'Biocontrol agents: Bacillus thuringiensis, Trichoderma',
+      'Biofertilisers: Rhizobium, mycorrhiza, Azospirillum, blue-green algae',
     ]},
-    { id:'bio-u10', name:'Unit 10: Ecology and Environment', color:'bio', topics:[
-      'Organisms and environment: population interactions',
-      'Mutualism, competition, predation, parasitism',
-      'Population attributes: growth, birth rate, death rate, age distribution',
-      'Ecosystem: patterns and components',
-      'Productivity and decomposition, energy flow',
-      'Ecological pyramids: number, biomass, energy',
-      'Biodiversity: concept and patterns',
-      'Importance and loss of biodiversity',
-      'Biodiversity conservation: hotspots, endangered organisms, extinction',
-      'Red Data Book, biosphere reserves, national parks, sanctuaries, sacred groves',
+    { id:'bio-ch31', name:'12/Ch 9 — Biotechnology: Principles and Processes', color:'bio', high:false, topics:[
+      'Genetic engineering: recombinant DNA technology principles',
+      'Tools: restriction enzymes (restriction endonucleases)',
+      'Vectors: plasmids, bacteriophages',
+      'PCR: polymerase chain reaction — steps and applications',
+      'Gel electrophoresis: principle and applications',
+      'Cloning: steps in recombinant DNA technology',
+    ]},
+    { id:'bio-ch32', name:'12/Ch 10 — Biotechnology and Its Applications', color:'bio', high:false, topics:[
+      'Applications in health: human insulin production (Humulin)',
+      'Vaccine production using biotechnology',
+      'Gene therapy: somatic and germline',
+      'Genetically modified organisms: Bt crops (Bt cotton, Bt brinjal)',
+      'Transgenic animals: applications',
+      'Biosafety issues and bioethics',
+      'Biopiracy and patents',
+    ]},
+    { id:'bio-ch33', name:'12/Ch 11 — Organisms and Populations', color:'bio', high:true, topics:[
+      'Organisms and environment: abiotic factors',
+      'Responses to abiotic factors: regulate, conform, migrate, suspend',
+      'Adaptation: types and examples',
+      'Population attributes: birth rate, death rate, sex ratio, age distribution',
+      'Population growth: exponential and logistic models',
+      'Population interactions: Mutualism (+/+)',
+      'Competition (-/-), Predation (+/-)',
+      'Parasitism (+/-), Commensalism (+/0), Amensalism (-/0)',
+    ]},
+    { id:'bio-ch34', name:'12/Ch 12 — Ecosystem', color:'bio', high:false, topics:[
+      'Ecosystem: definition, types, structure',
+      'Patterns and components of ecosystem',
+      'Productivity: gross and net primary productivity',
+      'Decomposition: steps (fragmentation, leaching, humification, mineralisation)',
+      'Energy flow: food chains, food webs',
+      'Ecological pyramids: number, biomass, energy (upright and inverted)',
+      'Ecosystem services',
+    ]},
+    { id:'bio-ch35', name:'12/Ch 13 — Biodiversity and Conservation', color:'bio', high:true, topics:[
+      'Biodiversity: genetic, species, ecosystem levels',
+      'Patterns of biodiversity: latitudinal gradient, species-area relationship',
+      'Importance of biodiversity: direct and indirect values',
+      'Loss of biodiversity: HIPPO factors',
+      'Conservation: in-situ and ex-situ',
+      'Biodiversity hotspots: examples',
+      'Endangered organisms, extinction, Red Data Book',
+      'Biosphere reserves, National parks, sanctuaries, Sacred Groves',
     ]},
   ],
   chem: [
-    { id:'chem-u1', name:'Unit 1: Some Basic Concepts in Chemistry', color:'chem', topics:[
+    { id:'chem-ch01', name:'Ch 1 — Some Basic Concepts of Chemistry', color:'chem', high:false, topics:[
       'Matter and its nature, Dalton\'s atomic theory',
       'Concept of atom, molecule, element, compound',
       'Laws of chemical combination',
-      'Atomic and molecular masses, mole concept, molar mass',
-      'Percentage composition, empirical and molecular formulae',
+      'Atomic and molecular masses',
+      'Mole concept and molar mass',
+      'Percentage composition',
+      'Empirical and molecular formulae',
       'Chemical equations and stoichiometry',
     ]},
-    { id:'chem-u2', name:'Unit 2: Atomic Structure', color:'chem', topics:[
+    { id:'chem-ch02', name:'Ch 2 — Structure of Atom', color:'chem', high:true, topics:[
       'Nature of electromagnetic radiation, photoelectric effect',
       'Spectrum of hydrogen atom',
-      'Bohr model of hydrogen atom: postulates, energy and radii relations, limitations',
+      'Bohr model: postulates, energy levels, radii, limitations',
       'Dual nature of matter, de Broglie\'s relationship',
       'Heisenberg uncertainty principle',
-      'Elementary ideas of quantum mechanics, quantum mechanical model of atom',
-      'Concept of atomic orbitals as one-electron wave functions',
-      'Variation of ψ and ψ² with r for 1s and 2s orbitals',
+      'Quantum mechanical model of atom',
+      'Atomic orbitals as one-electron wave functions',
       'Quantum numbers: principal, angular momentum, magnetic, spin',
       'Shapes of s, p, d orbitals',
-      'Rules for filling electrons: Aufbau, Pauli\'s exclusion, Hund\'s rule',
+      'Filling rules: Aufbau, Pauli\'s exclusion, Hund\'s rule',
       'Electronic configuration, extra stability of half-filled and fully-filled orbitals',
     ]},
-    { id:'chem-u3', name:'Unit 3: Chemical Bonding and Molecular Structure', color:'chem', topics:[
-      'Kossel-Lewis approach to chemical bond formation',
-      'Ionic bonding: formation, factors, lattice enthalpy calculation',
-      'Covalent bonding: electronegativity, Fajan\'s rule, dipole moment',
-      'VSEPR theory and shapes of simple molecules',
-      'Valence bond theory: hybridization (s, p, d orbitals), resonance',
-      'Molecular Orbital Theory: LCAOs, types of MOs, sigma and pi bonds',
-      'MO electronic configurations of homonuclear diatomic molecules',
-      'Bond order, bond length, bond energy',
-      'Elementary idea of metallic bonding',
-      'Hydrogen bonding and its applications',
-    ]},
-    { id:'chem-u4', name:'Unit 4: Chemical Thermodynamics', color:'chem', topics:[
-      'Fundamentals: system, surroundings, extensive/intensive properties, state functions, types of processes',
-      'First law of thermodynamics: work, heat, internal energy, enthalpy',
-      'Heat capacity, molar heat capacity, Hess\'s law',
-      'Enthalpies: bond dissociation, combustion, formation, atomization, sublimation',
-      'Phase transition, hydration, ionization, solution enthalpies',
-      'Second law of thermodynamics: spontaneity, entropy of universe',
-      'Gibbs energy: ΔG as criterion for spontaneity, ΔG° and equilibrium constant',
-    ]},
-    { id:'chem-u5', name:'Unit 5: Solutions', color:'chem', topics:[
-      'Methods for expressing concentration: molality, molarity, mole fraction, percentage',
-      'Vapour pressure of solutions and Raoult\'s law',
-      'Ideal and non-ideal solutions, vapour pressure-composition plots',
-      'Colligative properties: relative lowering of vapour pressure',
-      'Depression of freezing point, elevation of boiling point',
-      'Osmotic pressure, determination of molecular mass using colligative properties',
-      'Abnormal molar mass, van\'t Hoff factor and significance',
-    ]},
-    { id:'chem-u6', name:'Unit 6: Equilibrium', color:'chem', topics:[
-      'Meaning of equilibrium, dynamic equilibrium concept',
-      'Physical process equilibria: solid-liquid, liquid-gas, solid-gas, Henry\'s law',
-      'Chemical equilibrium: law, equilibrium constants (Kp and Kc)',
-      'Significance of ΔG and ΔG° in chemical equilibrium',
-      'Factors affecting equilibrium: concentration, pressure, temperature, catalyst',
-      'Le Chatelier\'s principle',
-      'Ionic equilibrium: weak and strong electrolytes, ionization',
-      'Concepts of acids and bases: Arrhenius, Bronsted-Lowry, Lewis',
-      'Acid-base equilibria, ionization constants, ionization of water, pH scale',
-      'Common ion effect, hydrolysis of salts and pH of their solutions',
-      'Solubility of sparingly soluble salts, solubility products, buffer solutions',
-    ]},
-    { id:'chem-u7', name:'Unit 7: Redox Reactions and Electrochemistry', color:'chem', topics:[
-      'Electronic concepts of oxidation and reduction, redox reactions, oxidation number',
-      'Rules for assigning oxidation number, balancing redox reactions',
-      'Electrolytic and metallic conduction, molar conductivities and variation with concentration',
-      'Kohlrausch\'s law and applications',
-      'Electrochemical cells: electrolytic and galvanic cells, types of electrodes',
-      'Electrode potentials, standard electrode potential, half-cell and cell reactions',
-      'EMF of galvanic cell, Nernst equation and applications',
-      'Relationship between cell potential and Gibbs energy',
-      'Dry cell, lead accumulator, fuel cells',
-    ]},
-    { id:'chem-u8', name:'Unit 8: Chemical Kinetics', color:'chem', topics:[
-      'Rate of chemical reaction, factors affecting rate: concentration, temperature, pressure, catalyst',
-      'Elementary and complex reactions, order and molecularity',
-      'Rate law, rate constant and its units',
-      'Differential and integral forms of zero and first-order reactions',
-      'Half-lives, effect of temperature on rate of reactions',
-      'Arrhenius theory, activation energy and its calculation',
-      'Collision theory of bimolecular gaseous reactions',
-    ]},
-    { id:'chem-u9', name:'Unit 9: Classification of Elements and Periodicity', color:'chem', topics:[
-      'Modern periodic law and present form of the periodic table',
+    { id:'chem-ch03', name:'Ch 3 — Classification of Elements and Periodicity', color:'chem', high:false, topics:[
+      'Modern periodic law and present form of periodic table',
       's, p, d and f block elements',
       'Periodic trends: atomic and ionic radii',
       'Ionization enthalpy, electron gain enthalpy',
-      'Valence, oxidation states, chemical reactivity across periods and down groups',
+      'Electronegativity',
+      'Valence, oxidation states, chemical reactivity',
     ]},
-    { id:'chem-u10', name:'Unit 10: P-Block Elements (Group 13-18)', color:'chem', topics:[
-      'Electronic configuration and general trends in physical and chemical properties',
+    { id:'chem-ch04', name:'Ch 4 — Chemical Bonding and Molecular Structure', color:'chem', high:true, topics:[
+      'Kossel-Lewis approach to chemical bond formation',
+      'Ionic bonding: formation, factors, lattice enthalpy',
+      'Covalent bonding: electronegativity, Fajan\'s rule, dipole moment',
+      'VSEPR theory and shapes of molecules',
+      'Valence bond theory: hybridization (s, p, d orbitals)',
+      'Resonance structures',
+      'Molecular Orbital Theory: LCAOs, sigma and pi bonds',
+      'MO electronic configurations of homonuclear diatomic molecules',
+      'Bond order, bond length, bond energy',
+      'Metallic bonding (elementary)',
+      'Hydrogen bonding: types and applications',
+    ]},
+    { id:'chem-ch05', name:'Ch 5 — Chemical Thermodynamics', color:'chem', high:true, topics:[
+      'System, surroundings, extensive/intensive properties, state functions',
+      'Types of processes: isothermal, adiabatic, isobaric, isochoric',
+      'First law of thermodynamics: internal energy, enthalpy, work, heat',
+      'Heat capacity, molar heat capacity',
+      'Hess\'s law of constant heat summation',
+      'Enthalpy of bond dissociation, combustion, formation',
+      'Enthalpy of atomisation, sublimation, hydration, ionisation',
+      'Second law: spontaneity, entropy of universe',
+      'Gibbs energy: ΔG, ΔG° and equilibrium constant',
+    ]},
+    { id:'chem-ch06', name:'Ch 6 — Equilibrium', color:'chem', high:true, topics:[
+      'Dynamic equilibrium concept',
+      'Physical equilibria: solid-liquid, liquid-gas, Henry\'s law',
+      'Law of mass action, Kp and Kc',
+      'ΔG and ΔG° significance in chemical equilibrium',
+      'Le Chatelier\'s principle and applications',
+      'Ionic equilibrium: weak and strong electrolytes',
+      'Concepts of acids and bases: Arrhenius, Bronsted-Lowry, Lewis',
+      'Acid-base equilibria, ionization constants, pH scale',
+      'Common ion effect',
+      'Hydrolysis of salts and pH',
+      'Solubility product (Ksp) and buffer solutions',
+    ]},
+    { id:'chem-ch07', name:'Ch 7 — Redox Reactions', color:'chem', high:false, topics:[
+      'Electronic concepts of oxidation and reduction',
+      'Oxidation number: rules for assigning',
+      'Balancing redox reactions: ion-electron and oxidation number methods',
+    ]},
+    { id:'chem-ch08', name:'Ch 8 — p-Block Elements (Class 11)', color:'chem', high:true, topics:[
+      'Electronic configuration and general trends: Groups 13 and 14',
+      'Physical and chemical properties trends',
       'Unique behaviour of first element in each group',
-      'Group 13 elements: general properties and compounds',
-      'Group 14 elements: general properties and compounds',
-      'Group 15 elements: general properties and compounds',
-      'Group 16 elements: general properties and compounds',
-      'Group 17 elements: general properties and compounds',
-      'Group 18 elements: general properties',
+      'Groups 15, 16, 17, 18 elements (introduced in class 11)',
     ]},
-    { id:'chem-u11', name:'Unit 11: d- and f-Block Elements', color:'chem', topics:[
-      'Transition elements: general intro, electronic configuration, occurrence, characteristics',
-      'General trends: physical properties, ionization enthalpy, oxidation states, atomic radii',
-      'Colour, catalytic behaviour, magnetic properties, complex formation',
-      'Interstitial compounds, alloy formation',
-      'Preparation, properties and uses of K₂Cr₂O₇ and KMnO₄',
-      'Lanthanoids: electronic configuration, oxidation states, lanthanoid contraction',
-      'Actinoids: electronic configuration and oxidation states',
+    { id:'chem-ch09', name:'Ch 9 — Organic Chemistry — Basic Principles', color:'chem', high:true, topics:[
+      'Tetravalency of carbon, shapes of organic compounds',
+      'Hybridisation: sp, sp2, sp3',
+      'Classification of organic compounds by functional groups',
+      'Homologous series',
+      'Structural isomerism: chain, position, functional group, metamerism',
+      'Stereoisomerism: geometric, optical',
+      'Nomenclature: IUPAC rules',
+      'Covalent bond fission: homolytic and heterolytic',
+      'Free radicals, carbocations, carbanions',
+      'Inductive, electromeric, resonance and hyperconjugation effects',
+      'Types of reactions: substitution, addition, elimination, rearrangement',
+      'Purification: crystallisation, sublimation, distillation, chromatography',
     ]},
-    { id:'chem-u12', name:'Unit 12: Co-ordination Compounds', color:'chem', topics:[
-      'Introduction to coordination compounds, Werner\'s theory',
-      'Ligands, coordination number, denticity, chelation',
+    { id:'chem-ch10', name:'Ch 10 — Hydrocarbons', color:'chem', high:true, topics:[
+      'Alkanes: conformations, Sawhorse and Newman projections',
+      'Alkanes: halogenation (free radical mechanism)',
+      'Alkenes: geometrical isomerism',
+      'Alkenes: electrophilic addition (H2, X2, H2O, HX)',
+      'Markovnikov\'s rule, peroxide effect (anti-Markovnikov)',
+      'Alkenes: ozonolysis, polymerisation',
+      'Alkynes: acidic character, addition reactions',
+      'Aromatic hydrocarbons: benzene structure, aromaticity',
+      'EAS: halogenation, nitration, sulphonation, Friedel-Crafts',
+      'Directive influence of substituents',
+    ]},
+    { id:'chem-ch11', name:'12/Ch 1 — Solutions', color:'chem', high:true, topics:[
+      'Methods of expressing concentration: molality, molarity, mole fraction, percentage',
+      'Vapour pressure of solutions and Raoult\'s law',
+      'Ideal and non-ideal solutions',
+      'Colligative properties: relative lowering of vapour pressure',
+      'Depression of freezing point (Δtf)',
+      'Elevation of boiling point (Δtb)',
+      'Osmotic pressure: van\'t Hoff equation',
+      'Determination of molecular mass using colligative properties',
+      'Abnormal molar mass, van\'t Hoff factor (i)',
+    ]},
+    { id:'chem-ch12', name:'12/Ch 2 — Electrochemistry', color:'chem', high:true, topics:[
+      'Electrolytic and metallic conduction',
+      'Molar conductivities and variation with concentration',
+      'Kohlrausch\'s law and applications',
+      'Electrolytic vs galvanic cells',
+      'Types of electrodes, standard electrode potential',
+      'Half-cell and cell reactions, EMF of galvanic cell',
+      'Nernst equation and applications',
+      'Relationship between cell potential and Gibbs energy',
+      'Dry cell, lead accumulator, fuel cells',
+    ]},
+    { id:'chem-ch13', name:'12/Ch 3 — Chemical Kinetics', color:'chem', high:true, topics:[
+      'Rate of chemical reaction and factors affecting it',
+      'Elementary and complex reactions, order and molecularity',
+      'Rate law and rate constant (units)',
+      'Differential and integral forms of zero-order reactions',
+      'Differential and integral forms of first-order reactions',
+      'Half-lives and their significance',
+      'Arrhenius theory, activation energy calculation',
+      'Collision theory of bimolecular gaseous reactions',
+    ]},
+    { id:'chem-ch14', name:'12/Ch 4 — d- and f-Block Elements', color:'chem', high:true, topics:[
+      'Transition elements: electronic configuration, occurrence',
+      'General trends: physical properties, ionisation enthalpy',
+      'Oxidation states, atomic radii, colour',
+      'Catalytic behaviour, magnetic properties',
+      'Complex formation, interstitial compounds, alloy formation',
+      'K₂Cr₂O₇: preparation, properties, uses',
+      'KMnO₄: preparation, properties, uses',
+      'Lanthanoids: electronic config, oxidation states, lanthanoid contraction',
+      'Actinoids: electronic config and oxidation states',
+    ]},
+    { id:'chem-ch15', name:'12/Ch 5 — Coordination Compounds', color:'chem', high:true, topics:[
+      'Introduction and Werner\'s theory',
+      'Ligands: types (monodentate, polydentate, ambidentate)',
+      'Coordination number and denticity, chelation',
       'IUPAC nomenclature of mononuclear coordination compounds',
-      'Isomerism in coordination compounds',
-      'Bonding: Valence bond approach, basic ideas of Crystal Field Theory',
+      'Isomerism: structural (linkage, ionisation, hydrate, coordination) and stereoisomerism',
+      'Bonding: valence bond approach',
+      'Crystal field theory: splitting of d-orbitals',
       'Colour and magnetic properties in coordination compounds',
       'Importance in qualitative analysis, metal extraction, biological systems',
     ]},
-    { id:'chem-u13', name:'Unit 13: Purification and Characterisation of Organic Compounds', color:'chem', topics:[
-      'Purification: crystallization, sublimation, distillation, differential extraction',
-      'Chromatography: principles and applications',
-      'Qualitative analysis: detection of N, S, P, halogens',
-      'Quantitative analysis (basic principles): estimation of C, H, N, halogens, S, P',
-      'Calculations of empirical and molecular formulae',
-      'Numerical problems in organic quantitative analysis',
+    { id:'chem-ch16', name:'12/Ch 6 — Haloalkanes and Haloarenes', color:'chem', high:false, topics:[
+      'Classification and nomenclature',
+      'Nature of C-X bond',
+      'Methods of preparation of haloalkanes',
+      'Physical and chemical properties of haloalkanes',
+      'Mechanisms of substitution reactions: SN1 and SN2',
+      'Preparation and reactions of haloarenes',
+      'Environmental effects: chloroform, iodoform, freons, DDT',
     ]},
-    { id:'chem-u14', name:'Unit 14: Some Basic Principles of Organic Chemistry', color:'chem', topics:[
-      'Tetravalency of carbon, shapes and hybridization (s and p)',
-      'Classification of organic compounds based on functional groups',
-      'Homologous series, structural and stereoisomerism',
-      'Nomenclature: Trivial and IUPAC',
-      'Covalent bond fission: homolytic and heterolytic, free radicals, carbocations, carbanions',
-      'Stability of carbocations and free radicals, electrophiles and nucleophiles',
-      'Electronic displacement: inductive effect, electromeric effect, resonance, hyperconjugation',
-      'Common types of organic reactions: substitution, addition, elimination, rearrangement',
+    { id:'chem-ch17', name:'12/Ch 7 — Alcohols, Phenols and Ethers', color:'chem', high:true, topics:[
+      'Classification and nomenclature of alcohols',
+      'Identification of 1°, 2°, 3° alcohols',
+      'Preparation of alcohols, physical properties',
+      'Chemical properties: reactions with Na, HX, dehydration',
+      'Mechanism of dehydration',
+      'Phenols: acidic nature, preparation',
+      'Electrophilic substitution of phenols: halogenation, nitration, sulphonation',
+      'Reimer-Tiemann reaction, Kolbe\'s reaction',
+      'Ethers: structure, preparation, reactions',
     ]},
-    { id:'chem-u15', name:'Unit 15: Hydrocarbons', color:'chem', topics:[
-      'Classification, isomerism, IUPAC nomenclature of hydrocarbons',
-      'Alkanes: conformations, Sawhorse and Newman projections (ethane)',
-      'Mechanism of halogenation of alkanes',
-      'Alkenes: geometrical isomerism, mechanism of electrophilic addition',
-      'Addition of H₂, halogens, water, HX to alkenes (Markovnikov\'s and peroxide effect)',
-      'Ozonolysis and polymerization of alkenes',
-      'Alkynes: acidic character, addition of H₂, halogens, water, HX, polymerization',
-      'Aromatic hydrocarbons: nomenclature, benzene structure and aromaticity',
-      'Mechanism of electrophilic substitution: halogenation, nitration',
-      'Friedel-Craft\'s alkylation and acylation, directive influence of functional groups',
-    ]},
-    { id:'chem-u16', name:'Unit 16: Organic Compounds Containing Halogens', color:'chem', topics:[
-      'General methods of preparation of halogen compounds',
-      'Properties, reactions and nature of C-X bond',
-      'Mechanisms of substitution reactions',
-      'Uses and environmental effects: chloroform, iodoform, freons, DDT',
-    ]},
-    { id:'chem-u17', name:'Unit 17: Organic Compounds Containing Oxygen', color:'chem', topics:[
-      'Alcohols: identification of primary, secondary, tertiary; mechanism of dehydration',
-      'Phenols: acidic nature, electrophilic substitution (halogenation, nitration, sulphonation)',
-      'Reimer-Tiemann reaction',
-      'Ethers: structure and properties',
-      'Aldehydes and Ketones: nature of carbonyl group, nucleophilic addition to C=O',
-      'Relative reactivities of aldehydes and ketones',
-      'Important reactions: nucleophilic addition (HCN, NH₃, derivatives), Grignard reagent',
-      'Oxidation, reduction (Wolff-Kishner, Clemmensen)',
-      'Acidity of α-hydrogen, aldol condensation, Cannizzaro reaction, Haloform reaction',
+    { id:'chem-ch18', name:'12/Ch 8 — Aldehydes, Ketones and Carboxylic Acids', color:'chem', high:true, topics:[
+      'Nomenclature of aldehydes and ketones',
+      'Preparation of aldehydes and ketones',
+      'Nature of carbonyl group',
+      'Nucleophilic addition reactions (HCN, NH₃ derivatives, Grignard)',
+      'Relative reactivity of aldehydes vs ketones',
+      'Oxidation and reduction reactions',
+      'Wolf-Kishner and Clemmensen reductions',
+      'Aldol condensation',
+      'Cannizzaro reaction',
+      'Haloform reaction',
       'Chemical tests to distinguish aldehydes and ketones',
-      'Carboxylic Acids: acidic strength and factors affecting it',
+      'Carboxylic acids: nomenclature, preparation',
+      'Acidic strength and factors affecting it',
     ]},
-    { id:'chem-u18', name:'Unit 18: Organic Compounds Containing Nitrogen', color:'chem', topics:[
-      'Amines: nomenclature, classification, structure, basic character',
-      'Identification of primary, secondary, tertiary amines and their basic character',
-      'Diazonium salts: importance in synthetic organic chemistry',
+    { id:'chem-ch19', name:'12/Ch 9 — Amines', color:'chem', high:true, topics:[
+      'Classification and nomenclature of amines',
+      'Structure of amines',
+      'Basic character of amines: factors affecting basicity',
+      'Identification of 1°, 2°, 3° amines (Hinsberg\'s test)',
+      'Preparation methods of amines',
+      'Chemical properties of amines',
+      'Diazonium salts: preparation and reactions',
+      'Importance of diazonium salts in synthetic organic chemistry',
     ]},
-    { id:'chem-u19', name:'Unit 19: Biomolecules', color:'chem', topics:[
-      'General introduction and importance of biomolecules',
-      'Carbohydrates: classification, aldoses and ketoses',
-      'Monosaccharides: glucose and fructose',
-      'Constituent monosaccharides of oligosaccharides: sucrose, lactose, maltose',
-      'Proteins: elementary idea of α-amino acids, peptide bond, polypeptides',
-      'Protein structure: primary, secondary, tertiary, quaternary (qualitative)',
-      'Denaturation of proteins, enzymes',
+    { id:'chem-ch20', name:'12/Ch 10 — Biomolecules (Chemistry)', color:'chem', high:true, topics:[
+      'Carbohydrates: classification (monosaccharides, oligosaccharides, polysaccharides)',
+      'Glucose and fructose: open chain and cyclic structures',
+      'Sucrose, lactose, maltose: structure and properties',
+      'Proteins: α-amino acids, classification',
+      'Peptide bond formation, polypeptides',
+      'Protein structure: primary, secondary, tertiary, quaternary',
+      'Denaturation of proteins',
+      'Enzymes: mechanism and specificity',
       'Vitamins: classification and functions',
-      'Nucleic acids: chemical constitution of DNA and RNA, biological functions',
+      'Nucleic acids: constitution of DNA and RNA',
+      'Biological functions of DNA and RNA',
       'Hormones: general introduction',
     ]},
-    { id:'chem-u20', name:'Unit 20: Principles Related to Practical Chemistry', color:'chem', topics:[
-      'Detection of extra elements (N, S, halogens) in organic compounds',
-      'Detection of functional groups: hydroxyl, carbonyl, carboxyl, amino groups',
-      'Preparation of Mohr\'s salt and potash alum',
-      'Preparation of acetanilide, p-nitroacetanilide, aniline yellow, iodoform',
-      'Titrimetric exercises: acids, bases, indicators; oxalic acid vs KMnO₄; Mohr\'s salt vs KMnO₄',
-      'Qualitative salt analysis: cations (Pb²⁺, Cu²⁺, Al³⁺, Fe³⁺, Zn²⁺, Ni²⁺, Ca²⁺, Ba²⁺, Mg²⁺, NH₄⁺)',
-      'Qualitative salt analysis: anions (CO₃²⁻, S²⁻, SO₄²⁻, NO₃⁻, NO₂⁻, Cl⁻, Br⁻, I⁻)',
-      'Enthalpy of solution of CuSO₄, enthalpy of neutralization',
-      'Preparation of lyophilic and lyophobic sols',
-      'Kinetic study: iodide ions with hydrogen peroxide at room temperature',
+    { id:'chem-ch21', name:'12/Ch 11 — Purification & Characterisation of Organic Compounds', color:'chem', high:false, topics:[
+      'Purification: crystallisation, sublimation, distillation',
+      'Differential extraction, chromatography (TLC, column)',
+      'Qualitative analysis: detection of N, S, P, halogens',
+      'Quantitative analysis: estimation of C, H, N, halogens, S, P',
+      'Calculations of empirical and molecular formulae',
+    ]},
+    { id:'chem-ch22', name:'12/Ch 12 — Principles Related to Practical Chemistry', color:'chem', high:false, topics:[
+      'Detection of functional groups: hydroxyl, carbonyl, carboxyl, amino',
+      'Preparation: Mohr\'s salt, potash alum, acetanilide, iodoform',
+      'Titrimetric exercises: acid-base, redox titrations',
+      'Qualitative salt analysis: cation identification (Pb²⁺, Cu²⁺, Fe³⁺, etc.)',
+      'Anion identification (CO₃²⁻, SO₄²⁻, Cl⁻, Br⁻, I⁻, etc.)',
     ]},
   ],
   phy: [
-    { id:'phy-u1', name:'Unit 1: Physics and Measurement', color:'phy', topics:[
-      'Units of measurements, System of Units, SI Units',
-      'Fundamental and derived units, least count',
-      'Significant figures, errors in measurements',
-      'Dimensions of physical quantities, dimensional analysis and applications',
+    { id:'phy-ch01', name:'Ch 1 — Units and Measurements', color:'phy', high:false, topics:[
+      'Units of measurement, system of units, SI units',
+      'Fundamental and derived units',
+      'Least count and significant figures',
+      'Errors in measurement: types, propagation',
+      'Dimensions of physical quantities',
+      'Dimensional analysis and applications (checking equations, deriving relations)',
     ]},
-    { id:'phy-u2', name:'Unit 2: Kinematics', color:'phy', topics:[
-      'Frame of reference, motion in a straight line, position-time graph',
-      'Speed and velocity, uniform and non-uniform motion',
-      'Average speed and instantaneous velocity, uniformly accelerated motion',
-      'Velocity-time graph, relations for uniformly accelerated motion',
-      'Scalars and Vectors, vector addition and subtraction, scalar and vector products',
+    { id:'phy-ch02', name:'Ch 2 — Motion in a Straight Line', color:'phy', high:false, topics:[
+      'Frame of reference, position-time graph',
+      'Speed and velocity: average and instantaneous',
+      'Uniform and non-uniform motion',
+      'Uniformly accelerated motion: equations',
+      'Velocity-time and position-time graphs',
+      'Relative velocity in 1D',
+    ]},
+    { id:'phy-ch03', name:'Ch 3 — Motion in a Plane', color:'phy', high:false, topics:[
+      'Scalars and vectors, representation',
+      'Vector addition: triangle and parallelogram laws',
+      'Scalar and vector products',
       'Unit vector, resolution of a vector',
-      'Relative velocity, motion in a plane',
-      'Projectile motion, uniform circular motion',
+      'Relative velocity in 2D',
+      'Projectile motion: equations, range, height',
+      'Uniform circular motion: angular velocity, centripetal acceleration',
     ]},
-    { id:'phy-u3', name:'Unit 3: Laws of Motion', color:'phy', topics:[
-      'Force and inertia, Newton\'s First Law of Motion',
-      'Momentum, Newton\'s Second Law, impulses',
-      'Newton\'s Third Law, law of conservation of linear momentum and applications',
+    { id:'phy-ch04', name:'Ch 4 — Laws of Motion', color:'phy', high:true, topics:[
+      'Force and inertia, Newton\'s first law',
+      'Momentum, Newton\'s second law, impulse',
+      'Newton\'s third law, action-reaction pairs',
+      'Conservation of linear momentum and applications',
       'Equilibrium of concurrent forces',
-      'Static and kinetic friction, laws of friction, rolling friction',
-      'Dynamics of uniform circular motion: centripetal force and applications',
-      'Vehicle on level circular road, vehicle on banked road',
+      'Static and kinetic friction, laws of friction',
+      'Rolling friction',
+      'Dynamics of uniform circular motion: centripetal force',
+      'Vehicle on level and banked road: conditions',
     ]},
-    { id:'phy-u4', name:'Unit 4: Work, Energy, and Power', color:'phy', topics:[
+    { id:'phy-ch05', name:'Ch 5 — Work, Energy and Power', color:'phy', high:true, topics:[
       'Work done by constant and variable force',
-      'Kinetic and potential energies, work-energy theorem, power',
-      'Potential energy of spring, conservation of mechanical energy',
+      'Kinetic and potential energies',
+      'Work-energy theorem',
+      'Power: definition and units',
+      'Potential energy of spring: Hooke\'s law',
+      'Conservation of mechanical energy',
       'Conservative and non-conservative forces',
-      'Motion in a vertical circle',
-      'Elastic and inelastic collisions in one and two dimensions',
+      'Motion in a vertical circle: conditions',
+      'Elastic and inelastic collisions in 1D and 2D',
     ]},
-    { id:'phy-u5', name:'Unit 5: Rotational Motion', color:'phy', topics:[
+    { id:'phy-ch06', name:'Ch 6 — System of Particles and Rotational Motion', color:'phy', high:false, topics:[
       'Centre of mass of two-particle system and rigid body',
-      'Basic concepts of rotational motion, moment of a force, torque',
-      'Angular momentum, conservation of angular momentum and applications',
-      'Moment of inertia, radius of gyration',
-      'Values of moments of inertia for simple geometrical objects',
-      'Parallel and perpendicular axes theorems and applications',
-      'Equilibrium of rigid bodies, rigid body rotation, equations of rotational motion',
+      'Basic concepts of rotational motion',
+      'Moment of a force, torque, angular momentum',
+      'Conservation of angular momentum and applications',
+      'Moment of inertia and radius of gyration',
+      'Values of MI for simple geometrical objects',
+      'Parallel and perpendicular axes theorems',
+      'Equilibrium of rigid bodies',
+      'Rigid body rotation and equations of rotational motion',
       'Comparison of linear and rotational motions',
     ]},
-    { id:'phy-u6', name:'Unit 6: Gravitation', color:'phy', topics:[
+    { id:'phy-ch07', name:'Ch 7 — Gravitation', color:'phy', high:false, topics:[
       'Universal law of gravitation',
-      'Acceleration due to gravity and its variation with altitude and depth',
-      'Kepler\'s law of planetary motion',
-      'Gravitational potential energy and gravitational potential',
-      'Escape velocity',
-      'Motion of a satellite: orbital velocity, time period and energy',
+      'Acceleration due to gravity: variation with altitude and depth',
+      'Kepler\'s laws of planetary motion',
+      'Gravitational potential energy and potential',
+      'Escape velocity derivation',
+      'Orbital velocity of satellite',
+      'Time period and energy of satellite',
+      'Geostationary and polar satellites',
     ]},
-    { id:'phy-u7', name:'Unit 7: Properties of Solids and Liquids', color:'phy', topics:[
-      'Elastic behaviour, stress-strain relationship, Hooke\'s Law',
+    { id:'phy-ch08', name:'Ch 8 — Mechanical Properties of Solids', color:'phy', high:false, topics:[
+      'Elastic behaviour of solids',
+      'Stress-strain relationship and curve',
+      'Hooke\'s law',
       'Young\'s modulus, bulk modulus, modulus of rigidity',
-      'Pressure due to fluid column, Pascal\'s law and applications',
+      'Applications of elastic behaviour',
+    ]},
+    { id:'phy-ch09', name:'Ch 9 — Mechanical Properties of Fluids', color:'phy', high:false, topics:[
+      'Pressure due to fluid column, Pascal\'s law',
+      'Applications: hydraulic machines',
       'Effect of gravity on fluid pressure',
       'Viscosity, Stokes\' law, terminal velocity',
-      'Streamline and turbulent flow, critical velocity',
+      'Streamline and turbulent flow, Reynolds number',
       'Bernoulli\'s principle and applications',
-      'Surface energy and surface tension, angle of contact',
-      'Excess pressure across curved surface, surface tension applications (drops, bubbles, capillary rise)',
-      'Heat, temperature, thermal expansion, specific heat capacity, calorimetry',
-      'Change of state, latent heat',
+      'Surface energy and surface tension',
+      'Angle of contact, excess pressure in drops and bubbles',
+      'Capillary rise and applications',
+    ]},
+    { id:'phy-ch10', name:'Ch 10 — Thermal Properties of Matter', color:'phy', high:false, topics:[
+      'Heat and temperature: distinction',
+      'Thermal expansion: linear, area, volume',
+      'Specific heat capacity, heat capacity',
+      'Calorimetry: method of mixtures',
+      'Change of state: melting, boiling, sublimation',
+      'Latent heat: fusion and vaporisation',
       'Heat transfer: conduction, convection, radiation',
+      'Newton\'s law of cooling',
     ]},
-    { id:'phy-u8', name:'Unit 8: Thermodynamics', color:'phy', topics:[
-      'Thermal equilibrium, zeroth law of thermodynamics, concept of temperature',
-      'Heat, work, and internal energy',
-      'First law of thermodynamics, isothermal and adiabatic processes',
-      'Second law of thermodynamics, reversible and irreversible processes',
+    { id:'phy-ch11', name:'Ch 11 — Thermodynamics', color:'phy', high:true, topics:[
+      'Thermal equilibrium and zeroth law of thermodynamics',
+      'Concept of temperature',
+      'Heat, work and internal energy',
+      'First law of thermodynamics: ΔU = Q - W',
+      'Isothermal process: PV work',
+      'Adiabatic process: no heat exchange',
+      'Second law of thermodynamics: heat engine, refrigerator',
+      'Reversible and irreversible processes, Carnot engine',
     ]},
-    { id:'phy-u9', name:'Unit 9: Kinetic Theory of Gases', color:'phy', topics:[
-      'Equation of state of a perfect gas, work done on compressing a gas',
-      'Kinetic theory: assumptions, concept of pressure',
-      'Kinetic interpretation of temperature, RMS speed of gas molecules',
-      'Degrees of freedom, law of equipartition of energy',
+    { id:'phy-ch12', name:'Ch 12 — Kinetic Theory of Gases', color:'phy', high:false, topics:[
+      'Equation of state of perfect gas',
+      'Work done on compressing a gas',
+      'Assumptions of kinetic theory',
+      'Concept of pressure from kinetic theory',
+      'Kinetic interpretation of temperature',
+      'RMS speed of gas molecules',
+      'Degrees of freedom and law of equipartition of energy',
       'Applications to specific heat capacities of gases',
       'Mean free path, Avogadro\'s number',
     ]},
-    { id:'phy-u10', name:'Unit 10: Oscillations and Waves', color:'phy', topics:[
-      'Oscillations: time period, frequency, displacement as function of time',
-      'Periodic functions, Simple Harmonic Motion (SHM) and its equation, phase',
-      'Oscillations of a spring: restoring force and force constant',
-      'Energy in SHM: kinetic and potential energies',
-      'Simple pendulum: derivation of expression for time period',
-      'Wave motion: longitudinal and transverse waves, speed of travelling wave',
-      'Displacement relation for a progressive wave',
-      'Superposition of waves, reflection of waves',
-      'Standing waves in strings and organ pipes, fundamental mode and harmonics',
-      'Beats',
+    { id:'phy-ch13', name:'Ch 13 — Oscillations', color:'phy', high:false, topics:[
+      'Periodic motion: time period, frequency',
+      'Displacement as a function of time, periodic functions',
+      'Simple Harmonic Motion: definition and equation',
+      'Phase, initial phase',
+      'Spring oscillations: restoring force, force constant',
+      'Energy in SHM: KE and PE, total energy',
+      'Simple pendulum: derivation of time period',
     ]},
-    { id:'phy-u11', name:'Unit 11: Electrostatics', color:'phy', topics:[
-      'Electric charges, conservation of charge',
-      'Coulomb\'s law: forces between point charges, superposition principle',
-      'Electric field: due to point charge, electric field lines',
-      'Electric dipole, field due to dipole, torque on dipole in uniform field',
-      'Electric flux, Gauss\'s law and applications (infinite wire, infinite plane, thin spherical shell)',
-      'Electric potential: for point charge, dipole, system of charges',
-      'Potential difference, equipotential surfaces, electrical potential energy',
-      'Conductors and insulators, dielectrics and electric polarization',
-      'Capacitors: combination in series and parallel',
-      'Capacitance of parallel plate capacitor with and without dielectric medium',
+    { id:'phy-ch14', name:'Ch 14 — Waves', color:'phy', high:false, topics:[
+      'Wave motion: longitudinal and transverse',
+      'Speed of travelling wave',
+      'Displacement relation for a progressive wave',
+      'Principle of superposition of waves',
+      'Reflection of waves',
+      'Standing waves in strings: nodes and antinodes',
+      'Standing waves in organ pipes: open and closed',
+      'Fundamental mode and harmonics',
+      'Beats: formation and applications',
+    ]},
+    { id:'phy-ch15', name:'12/Ch 1 — Electric Charges and Fields', color:'phy', high:true, topics:[
+      'Electric charges and conservation of charge',
+      'Coulomb\'s law, superposition principle',
+      'Continuous charge distribution',
+      'Electric field due to a point charge',
+      'Electric field lines: properties',
+      'Electric dipole: dipole moment',
+      'Field due to dipole: axial and equatorial',
+      'Torque on dipole in uniform field',
+      'Electric flux, Gauss\'s law statement',
+      'Applications of Gauss\'s law: infinite wire, infinite plane, thin spherical shell',
+    ]},
+    { id:'phy-ch16', name:'12/Ch 2 — Electrostatic Potential and Capacitance', color:'phy', high:true, topics:[
+      'Electric potential: definition and units',
+      'Potential for point charge, dipole, system of charges',
+      'Potential difference, equipotential surfaces',
+      'Electrical PE of system of two point charges',
+      'Conductors and insulators in electric field',
+      'Dielectrics and electric polarisation',
+      'Capacitors: definition and capacitance',
+      'Parallel plate capacitor (with and without dielectric)',
+      'Series and parallel combinations of capacitors',
       'Energy stored in a capacitor',
     ]},
-    { id:'phy-u12', name:'Unit 12: Current Electricity', color:'phy', topics:[
-      'Electric current, drift velocity, mobility and relation with electric current',
-      'Ohm\'s law, electrical resistance, V-I characteristics (ohmic and non-ohmic)',
-      'Electrical energy and power, electrical resistivity and conductivity',
-      'Series and parallel combinations of resistors, temperature dependence of resistance',
-      'Internal resistance, potential difference, EMF of a cell',
-      'Combination of cells in series and parallel',
-      'Kirchhoff\'s laws and applications, Wheatstone bridge, Metre bridge',
+    { id:'phy-ch17', name:'12/Ch 3 — Current Electricity', color:'phy', high:true, topics:[
+      'Electric current, drift velocity, mobility',
+      'Ohm\'s law, electrical resistance',
+      'V-I characteristics of ohmic and non-ohmic conductors',
+      'Electrical energy and power',
+      'Electrical resistivity and conductivity',
+      'Series and parallel combinations of resistors',
+      'Temperature dependence of resistance',
+      'Internal resistance, potential difference, EMF',
+      'Cells in series and parallel',
+      'Kirchhoff\'s laws and applications',
+      'Wheatstone bridge, metre bridge',
     ]},
-    { id:'phy-u13', name:'Unit 13: Magnetic Effects of Current and Magnetism', color:'phy', topics:[
-      'Biot-Savart law and application to current-carrying circular loop',
-      'Ampere\'s law and applications (infinitely long wire, solenoid)',
+    { id:'phy-ch18', name:'12/Ch 4 — Moving Charges and Magnetism', color:'phy', high:true, topics:[
+      'Biot-Savart law and application to circular loop',
+      'Ampere\'s law: applications to infinite wire and solenoid',
       'Force on moving charge in uniform magnetic and electric fields',
-      'Force on current-carrying conductor in uniform magnetic field',
+      'Force on current-carrying conductor in magnetic field',
       'Force between two parallel current-carrying conductors, definition of Ampere',
       'Torque on current loop in uniform magnetic field',
-      'Moving coil galvanometer: sensitivity, conversion to ammeter and voltmeter',
-      'Current loop as magnetic dipole, bar magnet as equivalent solenoid',
-      'Magnetic field due to magnetic dipole (along axis and perpendicular)',
+      'Moving coil galvanometer: sensitivity',
+      'Conversion to ammeter and voltmeter',
+    ]},
+    { id:'phy-ch19', name:'12/Ch 5 — Magnetism and Matter', color:'phy', high:false, topics:[
+      'Current loop as magnetic dipole',
+      'Magnetic dipole moment',
+      'Bar magnet as equivalent solenoid',
+      'Magnetic field lines',
+      'Magnetic field due to magnetic dipole: axial and equatorial',
       'Torque on magnetic dipole in uniform field',
-      'Para-, dia- and ferromagnetic substances with examples, effect of temperature',
+      'Para-, dia- and ferromagnetic substances: examples',
+      'Effect of temperature on magnetic properties',
     ]},
-    { id:'phy-u14', name:'Unit 14: Electromagnetic Induction and Alternating Currents', color:'phy', topics:[
-      'Electromagnetic induction: Faraday\'s law, induced EMF and current, Lenz\'s law',
-      'Eddy currents, self and mutual inductance',
-      'Alternating currents: peak and RMS values of AC voltage',
-      'Reactance and impedance, LCR series circuit, resonance',
-      'Power in AC circuits, wattless current',
-      'AC generator and transformer',
+    { id:'phy-ch20', name:'12/Ch 6 — Electromagnetic Induction', color:'phy', high:false, topics:[
+      'Faraday\'s law of electromagnetic induction',
+      'Induced EMF and current',
+      'Lenz\'s law',
+      'Eddy currents: effects and applications',
+      'Self-inductance: definition, unit',
+      'Mutual inductance: definition, unit',
     ]},
-    { id:'phy-u15', name:'Unit 15: Electromagnetic Waves', color:'phy', topics:[
-      'Displacement current',
-      'Electromagnetic waves and their characteristics, transverse nature',
-      'Electromagnetic spectrum: radio waves, microwaves, infrared, visible, UV, X-rays, gamma rays',
-      'Applications of electromagnetic waves',
+    { id:'phy-ch21', name:'12/Ch 7 — Alternating Current', color:'phy', high:true, topics:[
+      'Alternating current: generation',
+      'Peak and RMS values of AC voltage and current',
+      'AC through resistor, inductor, capacitor',
+      'Reactance and impedance',
+      'LCR series circuit: phasor diagrams',
+      'Resonance in LCR circuit',
+      'Power in AC circuits: true, apparent, reactive',
+      'Wattless current (power factor)',
+      'AC generator: principle and working',
+      'Transformer: step-up and step-down, efficiency',
     ]},
-    { id:'phy-u16', name:'Unit 16: Optics', color:'phy', topics:[
+    { id:'phy-ch22', name:'12/Ch 8 — Electromagnetic Waves', color:'phy', high:false, topics:[
+      'Displacement current: need and definition',
+      'EM waves: characteristics and transverse nature',
+      'EM spectrum: radio waves to gamma rays',
+      'Applications of each type of EM wave',
+    ]},
+    { id:'phy-ch23', name:'12/Ch 9 — Ray Optics and Optical Instruments', color:'phy', high:true, topics:[
       'Reflection of light, spherical mirrors, mirror formula',
-      'Refraction at plane and spherical surfaces, thin lens formula, lens maker\'s formula',
-      'Total internal reflection and applications',
-      'Magnification, power of a lens, combination of thin lenses in contact',
-      'Refraction through a prism',
-      'Microscope and Astronomical Telescope (reflecting and refracting) and magnifying powers',
-      'Wave optics: wavefront and Huygens\' principle',
-      'Laws of reflection and refraction using Huygens\' principle',
-      'Interference: Young\'s double-slit experiment, fringe width, coherent sources',
-      'Diffraction due to single slit, width of central maximum',
-      'Polarization, plane-polarized light, Brewster\'s law, uses of Polaroid',
+      'Refraction at plane and spherical surfaces',
+      'Thin lens formula and lens maker\'s formula',
+      'Total internal reflection and applications (optical fibre, diamonds)',
+      'Magnification, power of a lens',
+      'Combination of thin lenses in contact',
+      'Refraction through a prism, deviation',
+      'Dispersion and formation of spectrum',
+      'Microscope: compound — magnifying power',
+      'Astronomical telescope (reflecting and refracting): magnifying powers',
     ]},
-    { id:'phy-u17', name:'Unit 17: Dual Nature of Matter and Radiation', color:'phy', topics:[
-      'Dual nature of radiation, photoelectric effect',
-      'Hertz and Lenard\'s observations, Einstein\'s photoelectric equation',
-      'Particle nature of light, matter waves, de Broglie relation',
+    { id:'phy-ch24', name:'12/Ch 10 — Wave Optics', color:'phy', high:true, topics:[
+      'Wavefront and Huygens\' principle',
+      'Laws of reflection using Huygens\' principle',
+      'Laws of refraction using Huygens\' principle',
+      'Interference: constructive and destructive',
+      'Young\'s double-slit experiment: fringe width formula',
+      'Coherent sources',
+      'Diffraction due to single slit: central maximum width',
+      'Polarisation: plane-polarised light',
+      'Brewster\'s law',
+      'Uses of Polaroid',
     ]},
-    { id:'phy-u18', name:'Unit 18: Atoms and Nuclei', color:'phy', topics:[
-      'Alpha-particle scattering experiment, Rutherford\'s model of atom',
-      'Bohr model, energy levels, hydrogen spectrum',
-      'Composition and size of nucleus, atomic masses',
-      'Mass-energy relation, mass defect, binding energy per nucleon and variation with mass number',
-      'Nuclear fission and fusion',
+    { id:'phy-ch25', name:'12/Ch 11 — Dual Nature of Radiation and Matter', color:'phy', high:false, topics:[
+      'Dual nature of radiation',
+      'Photoelectric effect: Hertz and Lenard\'s observations',
+      'Einstein\'s photoelectric equation: work function, threshold frequency',
+      'Particle nature of light: photon',
+      'Matter waves: wave nature of particle',
+      'de Broglie relation',
     ]},
-    { id:'phy-u19', name:'Unit 19: Electronic Devices', color:'phy', topics:[
-      'Semiconductors, semiconductor diode: I-V characteristics in forward and reverse bias',
-      'Diode as rectifier, I-V characteristics of LED, photodiode, solar cell',
+    { id:'phy-ch26', name:'12/Ch 12 — Atoms', color:'phy', high:false, topics:[
+      'Alpha-particle scattering experiment: Geiger-Marsden',
+      'Rutherford\'s model of atom: nuclear model',
+      'Bohr model: postulates',
+      'Energy levels and transitions in hydrogen atom',
+      'Hydrogen spectrum: Balmer, Lyman series',
+      'Composition and size of nucleus',
+    ]},
+    { id:'phy-ch27', name:'12/Ch 13 — Nuclei', color:'phy', high:true, topics:[
+      'Atomic masses: mass number, mass defect',
+      'Mass-energy relation: E = mc²',
+      'Binding energy per nucleon and variation with mass number',
+      'Nuclear forces: characteristics',
+      'Radioactivity: alpha, beta, gamma decay',
+      'Nuclear fission: chain reaction, criticality',
+      'Nuclear fusion: conditions and examples',
+    ]},
+    { id:'phy-ch28', name:'12/Ch 14 — Semiconductor Electronics', color:'phy', high:true, topics:[
+      'Energy bands in conductors, insulators, semiconductors',
+      'Intrinsic and extrinsic semiconductors',
+      'p-n junction: formation, I-V characteristics (forward and reverse bias)',
+      'p-n junction diode as rectifier',
+      'I-V characteristics of LED, photodiode, solar cell',
       'Zener diode: characteristics, as voltage regulator',
-      'Logic gates: OR, AND, NOT, NAND, NOR',
+      'Logic gates: OR, AND, NOT, NAND, NOR — truth tables',
     ]},
-    { id:'phy-u20', name:'Unit 20: Experimental Skills', color:'phy', topics:[
+    { id:'phy-ch29', name:'Unit 20 — Experimental Skills', color:'phy', high:false, topics:[
       'Vernier calipers: internal/external diameter and depth measurement',
       'Screw gauge: thickness/diameter of thin sheet/wire',
-      'Simple Pendulum: dissipation of energy graph',
+      'Simple Pendulum: dissipation of energy graph, time period',
       'Metre Scale: mass by principle of moments',
       'Young\'s modulus of elasticity of metallic wire',
-      'Surface tension by capillary rise and effect of detergents',
-      'Coefficient of viscosity by terminal velocity of spherical body',
+      'Surface tension by capillary rise',
+      'Coefficient of viscosity by terminal velocity',
       'Speed of sound in air using resonance tube',
-      'Specific heat capacity of solid and liquid by method of mixtures',
+      'Specific heat capacity by method of mixtures',
       'Resistivity of material using metre bridge',
-      'Resistance of wire using Ohm\'s law',
-      'Resistance and figure of merit of galvanometer by half deflection',
-      'Focal length of convex mirror, concave mirror, convex lens using parallax method',
-      'Angle of deviation vs angle of incidence for triangular prism',
-      'Refractive index of glass slab using travelling microscope',
-      'Characteristic curves of p-n junction in forward and reverse bias',
-      'Characteristic curves of Zener diode, finding reverse breakdown voltage',
-      'Identification of Diode, LED, Resistor, Capacitor from mixed collection',
+      'Resistance using Ohm\'s law',
+      'Resistance and figure of merit of galvanometer',
+      'Focal length of mirrors and convex lens (parallax method)',
+      'Angle of deviation vs angle of incidence (prism)',
+      'Refractive index of glass slab',
+      'p-n junction diode characteristics',
+      'Zener diode: reverse breakdown voltage',
+      'Identification of Diode, LED, Resistor, Capacitor',
     ]},
   ]
-};
-
 // ─── BUILD SYLLABUS HTML ───
 function buildSyllabus() {
   ['bio','chem','phy'].forEach(subj => {
@@ -2710,7 +3189,7 @@ function buildSyllabus() {
             data-chapter="${ch.id}"
             onclick="event.stopPropagation()" />
           <div class="chapter-info">
-            <div class="chapter-name">${ch.name}</div>
+            <div class="chapter-name">${ch.high ? '<span style="color:var(--danger);font-size:.7rem;font-weight:700;border:1px solid rgba(255,95,95,.3);background:rgba(255,95,95,.08);padding:1px 6px;border-radius:4px;margin-right:6px;">🔥 HIGH</span>' : ''}${ch.name}</div>
             <div class="chapter-meta">
               <span class="chapter-progress-text" id="cprog-${ch.id}">${done}/${total} topics</span>
               <div class="progress-bar-mini">
