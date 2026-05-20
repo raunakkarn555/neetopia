@@ -66,7 +66,7 @@
 .snav-btn.active { background: var(--accent); color: var(--bg); }
 
 /* ── TRACKER LAYOUT ── */
-.tracker-page { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+.tracker-page { max-width: 1200px; margin: 0 auto; padding: 16px 20px 80px; }
 
 /* ── LOCAL STORAGE NOTICE ── */
 .storage-notice {
@@ -81,6 +81,8 @@
   overflow: visible;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 .storage-notice .notice-icon {
   width: 36px;
@@ -1327,6 +1329,39 @@
 
 /* ── SECTION DIVIDER ── */
 .sec-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+/* ── CLASS 11/12 DIVIDER ── */
+.class-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 12px;
+}
+.class-divider-line {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+}
+.class11-divider .class-divider-line { background: linear-gradient(90deg, transparent, rgba(61,232,160,.4), transparent); }
+.class12-divider .class-divider-line { background: linear-gradient(90deg, transparent, rgba(61,191,255,.4), transparent); }
+.class-divider-badge {
+  white-space: nowrap;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(61,232,160,.5);
+  color: var(--bio);
+  background: rgba(61,232,160,.07);
+}
+.class12-badge {
+  border-color: rgba(61,191,255,.5);
+  color: var(--phy);
+  background: rgba(61,191,255,.07);
+}
 </style>
 </head>
 <body>
@@ -3165,13 +3200,33 @@ const SYLLABUS = {
       'Identification of Diode, LED, Resistor, Capacitor',
     ]},
   ]
+}; // end SYLLABUS
+
 // ─── BUILD SYLLABUS HTML ───
+// First chapter IDs of Class 12 for each subject
+const CLASS12_START = { bio: 'bio-ch23', chem: 'chem-ch11', phy: 'phy-ch15' };
+
 function buildSyllabus() {
   ['bio','chem','phy'].forEach(subj => {
     const container = document.getElementById(subj + '-chapters');
     if (!container) return;
     const d = getData();
+
+    // Insert Class 11 label at the very top
+    const lbl11 = document.createElement('div');
+    lbl11.className = 'class-divider class11-divider';
+    lbl11.innerHTML = '<span class="class-divider-line"></span><span class="class-divider-badge">📗 Class 11th</span><span class="class-divider-line"></span>';
+    container.appendChild(lbl11);
+
     SYLLABUS[subj].forEach(ch => {
+      // Insert Class 12 label before the first Class 12 chapter
+      if (ch.id === CLASS12_START[subj]) {
+        const lbl12 = document.createElement('div');
+        lbl12.className = 'class-divider class12-divider';
+        lbl12.innerHTML = '<span class="class-divider-line"></span><span class="class-divider-badge class12-badge">📘 Class 12th</span><span class="class-divider-line"></span>';
+        container.appendChild(lbl12);
+      }
+
       const div = document.createElement('div');
       div.className = 'chapter-card';
       div.id = 'ch-' + ch.id;
@@ -4063,13 +4118,35 @@ document.addEventListener('DOMContentLoaded', () => {
   updateAnalytics();
   updateStorageInfo();
 
-  // Watch backup section tab for storage info update
+  // ── SECTION SWITCHING ──
+  function switchSection(sectionName) {
+    // Hide all sections
+    document.querySelectorAll('.tracker-section').forEach(s => s.classList.remove('active'));
+    // Remove active from all nav buttons
+    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+    // Show target section
+    const target = document.getElementById('section-' + sectionName);
+    if (target) target.classList.add('active');
+    // Activate clicked button
+    const btn = document.querySelector('.snav-btn[data-section="' + sectionName + '"]');
+    if (btn) btn.classList.add('active');
+    // Section-specific refresh
+    if (sectionName === 'backup') updateStorageInfo();
+    if (sectionName === 'analytics') updateAnalytics();
+    if (sectionName === 'dashboard') updateStats();
+    // Scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Attach click handler to every nav button
   document.querySelectorAll('.snav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (btn.dataset.section === 'backup') updateStorageInfo();
-      if (btn.dataset.section === 'analytics') updateAnalytics();
+      switchSection(btn.dataset.section);
     });
   });
+
+  // Expose globally so any inline onclick can also call it
+  window.switchSection = switchSection;
 });
 </script>
 </body>
