@@ -38,6 +38,10 @@
   overflow-x: auto;
   scrollbar-width: none;
 }
+/* Push main content below both sticky bars */
+.tracker-page {
+  scroll-margin-top: 120px;
+}
 .tracker-subnav::-webkit-scrollbar { display: none; }
 .tracker-subnav-inner {
   display: flex;
@@ -65,8 +69,16 @@
 .snav-btn:hover { background: var(--bg3); color: var(--fg); }
 .snav-btn.active { background: var(--accent); color: var(--bg); }
 
+/* ── STORAGE NOTICE WRAPPER ── */
+.storage-notice-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+}
+
 /* ── TRACKER LAYOUT ── */
-.tracker-page { max-width: 1200px; margin: 0 auto; padding: 16px 20px 80px; }
+.tracker-page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 80px; }
 
 /* ── LOCAL STORAGE NOTICE ── */
 .storage-notice {
@@ -1438,10 +1450,8 @@
   </div>
 </nav>
 
-<!-- ══════════════════════════════ MAIN CONTENT ══════════════════════════════ -->
-<main class="tracker-page">
-
-  <!-- LOCAL STORAGE NOTICE -->
+<!-- ══════════════════════════════ STORAGE NOTICE BANNER ══════════════════════════════ -->
+<div class="storage-notice-wrapper">
   <div class="storage-notice">
     <div class="notice-icon">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1450,6 +1460,10 @@
       <strong>🔒 Your data is 100% private.</strong> All progress, notes, and tracking data is stored only in <strong>your browser's local storage</strong>. We do not store anything on any server. If you clear browser data or switch devices, your data may be lost. <strong>Please export a backup regularly.</strong>
     </p>
   </div>
+</div>
+
+<!-- ══════════════════════════════ MAIN CONTENT ══════════════════════════════ -->
+<main class="tracker-page">
 
   <!-- ═══════════════ SECTION: DASHBOARD ═══════════════ -->
   <section class="tracker-section active" id="section-dashboard">
@@ -3793,6 +3807,128 @@ function saveBookRev(id, checked) {
 }
 
 // ─── ANALYTICS ───
+
+// ─── OVERVIEW TAB ───
+function updateOverview() {
+  const d = getData();
+  const subjects = [
+    { key: 'bio', label: 'Biology', color: 'bio', cssColor: 'var(--bio)', emoji: '🌿' },
+    { key: 'chem', label: 'Chemistry', color: 'chem', cssColor: 'var(--chem)', emoji: '⚗️' },
+    { key: 'phy', label: 'Physics', color: 'phy', cssColor: 'var(--phy)', emoji: '⚡' }
+  ];
+
+  // ── Summary cards ──
+  let totalTopics = 0, totalDone = 0, totalChapters = 0, totalChDone = 0, highDone = 0, highTotal = 0;
+  subjects.forEach(({ key }) => {
+    SYLLABUS[key].forEach(ch => {
+      const tot = ch.topics.length;
+      const done = ch.topics.filter((_, i) => d['t-' + ch.id + '-' + i]).length;
+      totalTopics += tot; totalDone += done;
+      totalChapters++; if (done === tot && tot > 0) totalChDone++;
+      if (ch.high) { highTotal += tot; highDone += done; }
+    });
+  });
+  const overallPct = totalTopics ? Math.round(totalDone / totalTopics * 100) : 0;
+  const highPct = highTotal ? Math.round(highDone / highTotal * 100) : 0;
+
+  const cards = document.getElementById('overviewSummaryCards');
+  if (cards) cards.innerHTML = [
+    { label: 'Overall Progress', val: overallPct + '%', sub: totalDone + ' / ' + totalTopics + ' topics', color: 'var(--accent)' },
+    { label: 'Chapters Complete', val: totalChDone + ' / ' + totalChapters, sub: Math.round(totalChDone/totalChapters*100) + '% chapters done', color: 'var(--bio)' },
+    { label: '🔥 High-Priority Topics', val: highDone + ' / ' + highTotal, sub: highPct + '% high-priority done', color: 'var(--danger)' },
+    { label: 'Remaining Topics', val: (totalTopics - totalDone), sub: 'topics left to complete', color: 'var(--warn)' }
+  ].map(c => `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:${c.color};line-height:1;margin-bottom:6px;">${c.val}</div>
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px;">${c.label}</div>
+      <div style="font-size:.75rem;color:var(--muted);">${c.sub}</div>
+    </div>`).join('');
+
+  // ── Subject-wise detailed breakdown ──
+  const content = document.getElementById('overviewContent');
+  if (!content) return;
+  let html = '';
+
+  subjects.forEach(({ key, label, color, cssColor, emoji }) => {
+    const chapters = SYLLABUS[key];
+    let subjDone = 0, subjTotal = 0;
+    chapters.forEach(ch => {
+      subjTotal += ch.topics.length;
+      subjDone += ch.topics.filter((_, i) => d['t-' + ch.id + '-' + i]).length;
+    });
+    const subjPct = subjTotal ? Math.round(subjDone / subjTotal * 100) : 0;
+
+    html += `
+    <div style="margin-bottom:32px;">
+      <!-- Subject header -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid rgba(255,255,255,.06);">
+        <span style="font-size:1.4rem;">${emoji}</span>
+        <div style="flex:1;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:800;">${label}</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:2px;">${subjDone} / ${subjTotal} topics complete</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:${cssColor};">${subjPct}%</div>
+      </div>
+      <!-- Subject progress bar -->
+      <div style="height:8px;background:var(--bg3);border-radius:4px;margin-bottom:20px;overflow:hidden;">
+        <div style="height:100%;width:${subjPct}%;background:${cssColor};border-radius:4px;transition:width .5s ease;"></div>
+      </div>
+      <!-- Chapter table -->
+      <div style="display:flex;flex-direction:column;gap:8px;">`;
+
+    // Class dividers
+    const class12StartIds = { bio: 'bio-ch23', chem: 'chem-ch11', phy: 'phy-ch15' };
+    let class12Inserted = false;
+
+    // Class 11 label at top
+    html += `<div style="display:flex;align-items:center;gap:10px;margin:0 0 6px;">
+      <div style="flex:1;height:1px;background:rgba(61,232,160,.25);"></div>
+      <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--bio);border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.07);padding:3px 10px;border-radius:12px;">📗 Class 11th</span>
+      <div style="flex:1;height:1px;background:rgba(61,232,160,.25);"></div>
+    </div>`;
+
+    chapters.forEach(ch => {
+      if (ch.id === class12StartIds[key] && !class12Inserted) {
+        class12Inserted = true;
+        html += `<div style="display:flex;align-items:center;gap:10px;margin:8px 0 4px;">
+          <div style="flex:1;height:1px;background:rgba(61,191,255,.25);"></div>
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--phy);border:1px solid rgba(61,191,255,.3);background:rgba(61,191,255,.07);padding:3px 10px;border-radius:12px;">📘 Class 12th</span>
+          <div style="flex:1;height:1px;background:rgba(61,191,255,.25);"></div>
+        </div>`;
+      }
+
+      const tot = ch.topics.length;
+      const done = ch.topics.filter((_, i) => d['t-' + ch.id + '-' + i]).length;
+      const pct = tot ? Math.round(done / tot * 100) : 0;
+      const isComplete = done === tot && tot > 0;
+      const revised = d['rev-' + ch.id];
+
+      html += `
+        <div style="background:var(--bg2);border:1px solid ${isComplete ? cssColor : 'var(--border)'};border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;${isComplete ? 'opacity:.75;' : ''}">
+          <div style="min-width:0;">
+            <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap;">
+              ${isComplete ? '<span style="color:var(--bio);font-size:.75rem;">✓</span>' : ''}
+              ${ch.high ? '<span style="font-size:.65rem;font-weight:700;color:var(--danger);border:1px solid rgba(255,95,95,.3);background:rgba(255,95,95,.08);padding:1px 6px;border-radius:4px;">🔥 HIGH</span>' : ''}
+              <span style="font-size:.85rem;font-weight:600;font-family:'Bricolage Grotesque',sans-serif;${isComplete ? 'text-decoration:line-through;color:var(--muted);' : ''}">${ch.name}</span>
+              ${revised ? '<span style="font-size:.65rem;font-weight:700;color:var(--bio);border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.08);padding:1px 6px;border-radius:4px;">✓ Revised</span>' : ''}
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="flex:1;max-width:200px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+                <div style="height:100%;width:${pct}%;background:${cssColor};border-radius:2px;"></div>
+              </div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);">${done}/${tot}</span>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${pct===100 ? cssColor : pct>0 ? 'var(--fg)' : 'var(--muted)'};">${pct}%</div>
+        </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  content.innerHTML = html;
+}
+
 function updateAnalytics() {
   const d = getData();
   let totalTopics = 0, doneTotals = 0;
@@ -4116,6 +4252,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGoals();
   updateStats();
   updateAnalytics();
+  updateOverview();
   updateStorageInfo();
 
   // ── SECTION SWITCHING ──
@@ -4133,6 +4270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Section-specific refresh
     if (sectionName === 'backup') updateStorageInfo();
     if (sectionName === 'analytics') updateAnalytics();
+    if (sectionName === 'overview') updateOverview();
     if (sectionName === 'dashboard') updateStats();
     // Scroll to top of content
     window.scrollTo({ top: 0, behavior: 'smooth' });
