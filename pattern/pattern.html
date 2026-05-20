@@ -446,6 +446,14 @@
   </ul>
 
   <div class="nav-right">
+    <a href="../index.html" class="btn-home">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"/>
@@ -510,6 +518,22 @@
     </div>
   </div>
 </section>
+
+<!-- ══════════════════════════════
+     DONATE BANNER
+══════════════════════════════ -->
+<div style="max-width:1200px;margin:28px auto 0;padding:0 clamp(20px,5%,80px)">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;background:linear-gradient(135deg,rgba(168,124,245,0.08) 0%,rgba(61,191,255,0.06) 100%);border:1px solid rgba(168,124,245,0.22);border-radius:12px;padding:16px 24px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:38px;height:38px;background:rgba(168,124,245,0.12);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">💜</div>
+      <p style="font-size:.875rem;color:var(--text2);font-weight:300;"><strong style="color:var(--text);font-weight:500;">NEETopia is 100% free.</strong> Agar helpful laga toh ek chai ki kimat donate karo — server costs help karta hai.</p>
+    </div>
+    <a href="../donate.html" class="btn-donate">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Support NEETopia
+    </a>
+  </div>
+</div>
 
 <!-- ══════════════════════════════
      BODY SECTIONS
@@ -911,7 +935,7 @@
         <div class="tc-phase">Phase 02</div>
         <div class="tc-time-range p2">20 – 80 min</div>
         <div><span class="tc-subject bio">Biology — Complete</span></div>
-        <div class="tc-tip">Marked easy questions pehle attempt karo. Phir medium difficulty. Very tough ones pe 2 min se zyada mat lago — move on karo. Section B mein best 10 carefully choose karo.</div>
+        <div class="tc-tip">Marked easy questions pehle attempt karo. Phir medium difficulty. Very tough ones pe 2 min se zyada mat lago — move on karo. Sab 45 questions attempt karne ki strategy banao, skipping carefully.</div>
         <div class="tc-mins">⏱ 60 minutes · Full Biology</div>
       </div>
 
@@ -957,23 +981,23 @@
       <div class="mistake-list">
         <div class="mistake-item">
           <span class="mistake-num">01</span>
-          <span class="mistake-text"><strong>Section B mein 10 se zyada attempt karna</strong> — Agar 12 questions mark karte ho, sirf pehle 10 count honge. 2 questions waste, aur agar 11th ya 12th galat tha toh bhi wo count nahi hoga — par confusion zaroor hoga.</span>
+          <span class="mistake-text"><strong>Negative marking ignore karna</strong> — Ek galat answer = −1 mark. 4 galat answers = ek sahi answer ka poora fayda zero. Agar 2 options tak eliminate kar sako toh attempt karo, warna chhod do. Random guessing kabhi mat karo — expected value strictly negative hai.</span>
         </div>
         <div class="mistake-item">
           <span class="mistake-num">02</span>
-          <span class="mistake-text"><strong>Negative marking ignore karna</strong> — Ek galat answer = ek sahi answer cancel. 4 galat = ek extra sahi questionka fayda zero. Doubt hai toh chhodna better hai — unless elimination se 2 options tak aa sako.</span>
+          <span class="mistake-text"><strong>Physics mein pehle jaana aur wahan ghanta lagana</strong> — Biology se 360 marks aate hain, Physics se sirf 180. Physics mein 30 min waste karna = double loss. Hamesha Biology pehle attempt karo — max marks wahan hain, aur questions typically faster hote hain.</span>
         </div>
         <div class="mistake-item">
           <span class="mistake-num">03</span>
-          <span class="mistake-text"><strong>Physics mein time zyada lagana aur Biology neglect karna</strong> — Biology se 360 marks aate hain, Physics se 180. Physics mein stuck rehne se double loss hota hai — time bhi, marks bhi. Biology pehle karo.</span>
+          <span class="mistake-text"><strong>Unattempted questions mein randomly guess karna</strong> — 4 options mein random guess karne ka expected value = (1×4 + 3×−1) ÷ 4 = +0.25. Yeh bhi tabhi jab truly random ho. Agar thoda bhi clueless ho toh chhodna numerically better hai — marks protect karo.</span>
         </div>
         <div class="mistake-item">
           <span class="mistake-num">04</span>
-          <span class="mistake-text"><strong>Unattempted questions mein randomly guess karna</strong> — Random guess mein chance of being correct is 25%, chance of losing 1 mark is 75%. Expected value negative hai. Don't guess randomly.</span>
+          <span class="mistake-text"><strong>Last 10 minutes mein naye questions attempt karna</strong> — Last 10–15 min sirf revision ke liye hain. Naya question attempt karna = rushed answer = higher chance of negative marking. Jo already marked hai usse carefully check karo — wahan zyada marks milenge.</span>
         </div>
         <div class="mistake-item">
           <span class="mistake-num">05</span>
-          <span class="mistake-text"><strong>Last 10 minutes mein naye questions attempt karna</strong> — Last 10-15 min sirf revision ke liye hain. Naaya question attempt karna = rushed answer = higher chance of negative marking. Jo already marked hai usse check karo.</span>
+          <span class="mistake-text"><strong>OMR sheet mein galat bubble bharna</strong> — NEET mein OMR correction allowed nahi hai. Rough cutting ya overwriting = cancelled. Har question ke baad OMR carefully fill karo — last mein bulk mein mat bharo. Ek careless OMR mistake = 4 marks direct loss.</span>
         </div>
       </div>
     </div>
@@ -1017,13 +1041,13 @@
         </a>
         <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
         <div class="footer-social">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
           <a href="#" class="social-btn">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             GitHub
-          </a>
-          <a href="#" class="social-btn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-            Twitter
           </a>
         </div>
       </div>
@@ -1061,6 +1085,10 @@
         <a href="../roadmap/roadmap.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           Study Roadmap
+        </a>
+        <a href="../donate.html" style="color:#a87cf5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Donate / Support
         </a>
       </div>
 
@@ -1112,6 +1140,7 @@
         <a href="#">Terms</a>
         <a href="#">Privacy</a>
         <a href="#">Sitemap</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
       </div>
     </div>
   </div>
