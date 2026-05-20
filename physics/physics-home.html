@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>NEET Physics — Complete Roadmap, Chapters & Notes | NEETopia</title>
+  <meta name="description" content="Master NEET Physics with NEETopia's complete chapter-wise roadmap. Class 11 & 12 Physics notes, NCERT analysis, high-weightage chapters, PYQ strategy, and progress tracker. Score 160+/180 in Physics — free." />
+  <meta name="keywords" content="NEET Physics Notes, NEET Physics Chapters, NEET Physics Preparation, Physics for NEET, NCERT Physics NEET, NEET Physics Strategy, Class 11 Physics NEET, Class 12 Physics NEET, NEET 2025 Physics" />
+  <link rel="canonical" href="https://neetopia.in/physics/physics-home.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NEET Physics Complete Roadmap | NEETopia" />
+  <meta property="og:description" content="India's most detailed NEET Physics preparation guide. 180 marks, 29 chapters, complete strategy — absolutely free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://neetopia.in/physics/physics-home.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NEET Physics Complete Roadmap | NEETopia" />
+  <meta name="twitter:description" content="Score 160+/180 in NEET Physics. Complete chapter-wise guide, PYQ strategy & progress tracker." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* ══════════════════════════════
+       PHYSICS PAGE — Extra Styles
+    ══════════════════════════════ */
+
+    /* Physics-specific CSS variables */
+    :root {
+      --phy-glow:    rgba(61,191,255,0.15);
+      --phy-glow2:   rgba(61,191,255,0.06);
+      --phy-border:  rgba(61,191,255,0.25);
+      --phy-border2: rgba(61,191,255,0.12);
+      --phy-color:   #3dbfff;
+    }
+
+    /* ── HERO ── */
+    .phy-hero {
+      min-height: 100vh;
+      padding-top: calc(var(--nav-h) + 80px);
+      padding-bottom: 100px;
+      padding-left: clamp(20px,5%,80px);
+      padding-right: clamp(20px,5%,80px);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .phy-hero-bg {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    }
+
+    /* Atom/orbit SVG canvas */
+    .phy-atom-canvas {
+      position: absolute; right: -60px; top: 50%;
+      transform: translateY(-50%);
+      width: 420px; height: 700px;
+      opacity: 0.07;
+    }
+
+    /* Orbs */
+    .phy-orb1 {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(61,191,255,0.12) 0%, transparent 70%);
+      top: -100px; right: -100px; border-radius: 50%;
+      animation: orbPulse 8s ease-in-out infinite;
+    }
+    .phy-orb2 {
+      position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(168,124,245,0.07) 0%, transparent 70%);
+      bottom: -80px; left: -80px; border-radius: 50%;
+      animation: orbPulse 10s ease-in-out infinite reverse;
+    }
+
+    /* Grid background */
+    .phy-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(61,191,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,191,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Floating particles */
+    .phy-particles {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+    .phy-particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--phy-color);
+      opacity: 0;
+      animation: particleFloat 12s ease-in-out infinite;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.7; }
+    }
+    @keyframes particleFloat {
+      0% { opacity: 0; transform: translateY(0) scale(1); }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-120px) scale(0.5); }
+    }
+
+    .phy-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+
+    .phy-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(61,191,255,0.08); border: 1px solid var(--phy-border);
+      border-radius: 100px; padding: 6px 16px;
+      font-family: var(--font-mono); font-size: .72rem; color: var(--phy-color);
+      letter-spacing: .5px; margin-bottom: 28px;
+    }
+    .phy-badge .pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--phy-color);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(61,191,255,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(61,191,255,0); }
+    }
+
+    .phy-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800; letter-spacing: -2px; line-height: 1.08;
+      margin-bottom: 20px; max-width: 780px;
+    }
+    .phy-hl {
+      background: linear-gradient(135deg, var(--phy-color) 0%, #7fd8ff 50%, #a87cf5 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .phy-hero-sub {
+      font-size: clamp(.9rem, 1.5vw, 1.1rem);
+      color: var(--text2); max-width: 600px;
+      line-height: 1.75; margin-bottom: 36px; font-weight: 300;
+    }
+
+    .phy-hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 60px;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--phy-color); color: #07090f;
+      padding: 12px 26px; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: .9rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: #7fd8ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(61,191,255,0.3);
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--text2); padding: 12px 22px; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: .88rem; font-weight: 400;
+      text-decoration: none; cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s, transform .15s;
+    }
+    .btn-ghost:hover {
+      background: var(--bg3); border-color: var(--phy-border);
+      color: var(--phy-color); transform: translateY(-1px);
+    }
+
+    /* Hero stat cards */
+    .phy-stat-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 900px) { .phy-stat-cards { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .phy-stat-cards { grid-template-columns: 1fr 1fr; } }
+
+    .phy-stat-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px 20px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .phy-stat-card:hover {
+      border-color: var(--phy-border);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--phy-glow2);
+    }
+    .phy-stat-num {
+      font-family: var(--font-head);
+      font-size: 2rem; font-weight: 800;
+      letter-spacing: -1px; color: var(--phy-color); line-height: 1;
+      margin-bottom: 5px;
+    }
+    .phy-stat-label { font-size: .75rem; color: var(--text3); line-height: 1.4; }
+
+    /* ── STICKY SECTION NAV ── */
+    .section-nav {
+      position: sticky; top: var(--nav-h); z-index: 100;
+      background: rgba(7,9,15,0.95);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(20px,5%,80px);
+      overflow-x: auto;
+    }
+    [data-theme="light"] .section-nav {
+      background: rgba(240,244,250,0.97);
+    }
+    .section-nav-inner {
+      display: flex; gap: 0; max-width: 1200px; margin: 0 auto;
+      white-space: nowrap;
+    }
+    .section-nav a {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 14px 16px; font-size: .78rem; color: var(--text3);
+      text-decoration: none; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s; font-family: var(--font-mono);
+      letter-spacing: .3px;
+    }
+    .section-nav a:hover { color: var(--phy-color); border-bottom-color: var(--phy-color); }
+    .section-nav a.sn-active { color: var(--phy-color); border-bottom-color: var(--phy-color); }
+
+    /* ── COMMON SECTION STRUCTURE ── */
+    .phy-section {
+      padding: 96px clamp(20px,5%,80px);
+    }
+    .phy-section-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* Section header */
+    .phy-eyebrow {
+      font-family: var(--font-mono); font-size: .7rem; color: var(--phy-color);
+      text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .phy-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 1px; background: currentColor;
+    }
+    .phy-section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700; letter-spacing: -1px; line-height: 1.12;
+      margin-bottom: 14px;
+    }
+    .phy-section-sub {
+      color: var(--text2); font-size: .95rem; line-height: 1.75;
+      font-weight: 300; max-width: 680px; margin-bottom: 52px;
+    }
+
+    /* ── WHY PHYSICS CARDS ── */
+    .phy-why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 16px;
+    }
+    .phy-why-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 24px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .phy-why-card:hover {
+      border-color: var(--phy-border);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px var(--phy-glow2);
+    }
+    .pwc-icon {
+      width: 46px; height: 46px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(61,191,255,0.08); color: var(--phy-color);
+      margin-bottom: 18px; font-size: 1.2rem;
+    }
+    .pwc-title {
+      font-family: var(--font-head); font-size: 1rem;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .pwc-desc {
+      font-size: .85rem; color: var(--text2);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── STRATEGY SECTION ── */
+    .strategy-alt { background: var(--bg2); }
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 16px;
+    }
+    .strategy-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      display: flex; gap: 16px;
+      transition: border-color .2s;
+    }
+    .strategy-card:hover { border-color: var(--phy-border2); }
+    .strategy-num {
+      font-family: var(--font-head); font-size: 2.5rem;
+      font-weight: 800; color: var(--phy-border); line-height: 1;
+      flex-shrink: 0; width: 44px;
+    }
+    .strategy-content {}
+    .strategy-title {
+      font-family: var(--font-head); font-size: .95rem;
+      font-weight: 600; margin-bottom: 7px;
+    }
+    .strategy-desc {
+      font-size: .82rem; color: var(--text2); line-height: 1.65; font-weight: 300;
+    }
+
+    /* ── PROGRESS TRACKER ── */
+    .progress-section { background: var(--bg); }
+    .progress-overview {
+      background: var(--bg2); border: 1px solid var(--phy-border);
+      border-radius: var(--radius-lg); padding: 32px 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 0 60px rgba(61,191,255,0.04);
+    }
+    .progress-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-bottom: 28px;
+    }
+    .progress-title {
+      font-family: var(--font-head); font-size: 1.2rem; font-weight: 700;
+    }
+    .progress-reset-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text3); font-family: var(--font-mono); font-size: .7rem;
+      padding: 7px 14px; border-radius: var(--radius-sm); cursor: pointer;
+      transition: color .2s, border-color .2s; letter-spacing: .5px;
+    }
+    .progress-reset-btn:hover { color: var(--red); border-color: rgba(245,101,101,.3); }
+
+    .progress-bars { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    @media (max-width: 680px) { .progress-bars { grid-template-columns: 1fr; } }
+
+    .prog-bar-group {}
+    .prog-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: .78rem; color: var(--text2); margin-bottom: 8px;
+    }
+    .prog-bar-label strong { font-family: var(--font-mono); color: var(--phy-color); }
+    .prog-bar-track {
+      height: 6px; background: var(--bg3); border-radius: 4px; overflow: hidden;
+    }
+    .prog-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--phy-color), #7fd8ff);
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .prog-bar-fill.purple {
+      background: linear-gradient(90deg, #a87cf5, #c9a8ff);
+    }
+
+    .progress-stats-row {
+      display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .prog-stat {
+      font-size: .78rem; color: var(--text3);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .prog-stat strong { color: var(--text2); font-family: var(--font-mono); }
+
+    /* ── HIGH PRIORITY SECTION ── */
+    .priority-section { background: var(--bg2); }
+    .priority-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 16px;
+    }
+    .priority-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .priority-card:hover {
+      border-color: var(--phy-border);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--phy-glow2);
+    }
+    .priority-badges { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
+    .badge {
+      font-family: var(--font-mono); font-size: .64rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 100px; letter-spacing: .3px;
+    }
+    .badge-fire { background: rgba(245,101,101,.1); color: var(--red); border: 1px solid rgba(245,101,101,.2); }
+    .badge-star { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+    .badge-target { background: rgba(61,191,255,0.08); color: var(--phy-color); border: 1px solid var(--phy-border); }
+    .badge-warn { background: rgba(168,124,245,.1); color: var(--purple); border: 1px solid rgba(168,124,245,.2); }
+
+    .priority-name {
+      font-family: var(--font-head); font-size: 1.15rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .priority-desc { font-size: .83rem; color: var(--text2); line-height: 1.65; font-weight: 300; margin-bottom: 16px; }
+    .priority-meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; border-top: 1px solid var(--border); padding-top: 16px;
+    }
+    .priority-meta-item { font-size: .74rem; color: var(--text3); }
+    .priority-meta-item strong { display: block; color: var(--text2); font-size: .82rem; font-family: var(--font-mono); }
+
+    /* ── CHAPTER CARDS ── */
+    .chapter-section { background: var(--bg); }
+    .chapter-section.alt { background: var(--bg2); }
+
+    .chapter-class-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+    }
+    .chapter-class-title {
+      font-family: var(--font-head); font-size: 1.5rem; font-weight: 700;
+      letter-spacing: -.5px;
+    }
+    .chapter-class-badge {
+      background: rgba(61,191,255,0.08); border: 1px solid var(--phy-border);
+      color: var(--phy-color); font-family: var(--font-mono); font-size: .7rem;
+      padding: 6px 14px; border-radius: var(--radius-sm);
+    }
+
+    .chapter-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+      gap: 16px;
+    }
+
+    .ch-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 0; overflow: hidden;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      display: flex; flex-direction: column;
+    }
+    .chapter-section.alt .ch-card { background: var(--bg3); }
+    .ch-card:hover {
+      border-color: var(--phy-border);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px var(--phy-glow2);
+    }
+
+    .ch-top {
+      padding: 20px 20px 0;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .ch-num {
+      font-family: var(--font-mono); font-size: .65rem; color: var(--phy-color);
+      background: rgba(61,191,255,0.08); border: 1px solid var(--phy-border2);
+      padding: 4px 10px; border-radius: 6px; flex-shrink: 0; letter-spacing: .5px;
+    }
+    .ch-difficulty { font-family: var(--font-mono); font-size: .65rem; padding: 4px 10px; border-radius: 6px; }
+    .ch-difficulty.easy  { background: rgba(61,232,160,.08); color: var(--green); border: 1px solid rgba(61,232,160,.15); }
+    .ch-difficulty.medium{ background: rgba(244,185,66,.08); color: var(--amber); border: 1px solid rgba(244,185,66,.15); }
+    .ch-difficulty.hard  { background: rgba(245,101,101,.08); color: var(--red); border: 1px solid rgba(245,101,101,.15); }
+
+    .ch-body { padding: 14px 20px 0; flex: 1; }
+    .ch-name {
+      font-family: var(--font-head); font-size: 1.02rem;
+      font-weight: 700; margin-bottom: 7px; line-height: 1.25;
+    }
+    .ch-desc { font-size: .81rem; color: var(--text2); line-height: 1.65; font-weight: 300; margin-bottom: 12px; }
+
+    .ch-topics { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .ch-topic {
+      font-size: .68rem; color: var(--text3); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px;
+    }
+
+    .ch-meta {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px; border-top: 1px solid var(--border); padding: 14px 0;
+    }
+    .ch-meta-item { font-size: .7rem; color: var(--text3); text-align: center; }
+    .ch-meta-item strong { display: block; font-family: var(--font-mono); color: var(--text2); font-size: .75rem; }
+
+    .ch-approach {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 20px; font-size: .78rem; color: var(--text2);
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .ch-approach-icon { color: var(--phy-color); flex-shrink: 0; margin-top: 1px; }
+
+    .ch-footer {
+      padding: 14px 20px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ch-checkbox-group {
+      display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--text3);
+    }
+    .ch-checkbox-group input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--phy-color); cursor: pointer;
+    }
+
+    .ch-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .78rem; color: var(--phy-color); font-weight: 500;
+      text-decoration: none; border: 1px solid var(--phy-border);
+      padding: 7px 14px; border-radius: var(--radius-sm);
+      background: rgba(61,191,255,0.08); transition: background .2s, transform .15s;
+    }
+    .ch-link:hover { background: rgba(61,191,255,0.15); transform: translateX(2px); }
+
+    /* ── HOW TO STUDY SECTION ── */
+    .how-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px;
+    }
+    .how-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px;
+      transition: border-color .2s, transform .2s;
+    }
+    .how-card:hover { border-color: var(--phy-border2); transform: translateY(-2px); }
+    .how-step {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: rgba(61,191,255,0.08); border: 1px solid var(--phy-border);
+      color: var(--phy-color); font-family: var(--font-head);
+      font-weight: 800; font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .how-title {
+      font-family: var(--font-head); font-size: .98rem;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .how-desc { font-size: .83rem; color: var(--text2); line-height: 1.7; font-weight: 300; }
+
+    /* ── REVISION & MISTAKES ── */
+    .two-col-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    @media (max-width: 780px) { .two-col-grid { grid-template-columns: 1fr; } }
+
+    .list-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .list-card h3 {
+      font-family: var(--font-head); font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .list-card ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .list-card li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .84rem; color: var(--text2); line-height: 1.65; font-weight: 300;
+    }
+    .list-card li::before {
+      content: '→'; color: var(--phy-color); flex-shrink: 0;
+      font-family: var(--font-mono); font-size: .8rem; margin-top: 2px;
+    }
+    .list-card.mistakes li::before { content: '✗'; color: var(--red); }
+
+    /* ── DAILY ROUTINE ── */
+    .routine-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 12px;
+    }
+    .routine-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      text-align: center; transition: border-color .2s;
+    }
+    .routine-card:hover { border-color: var(--phy-border2); }
+    .routine-time {
+      font-family: var(--font-head); font-size: 1.3rem; font-weight: 800;
+      color: var(--phy-color); margin-bottom: 6px;
+    }
+    .routine-label { font-size: .8rem; color: var(--text2); line-height: 1.5; }
+
+    /* ── PYQ STRATEGY ── */
+    .pyq-strategy-section { background: var(--bg2); }
+    .pyq-info-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px;
+    }
+    @media (max-width: 780px) { .pyq-info-grid { grid-template-columns: 1fr; } }
+
+    .pyq-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 820px; }
+    .faq-item {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: var(--phy-border2); }
+    .faq-q {
+      padding: 18px 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-family: var(--font-head); font-size: .96rem; font-weight: 600;
+      user-select: none;
+    }
+    .faq-icon {
+      flex-shrink: 0; width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(61,191,255,0.08); border-radius: 6px; color: var(--phy-color);
+      transition: transform .25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .25s;
+      font-size: .86rem; color: var(--text2); line-height: 1.75;
+      font-weight: 300; padding: 0 22px;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
+
+    /* ── FINAL CTA ── */
+    .phy-final-cta {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 100px clamp(20px,5%,80px);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .phy-cta-orb {
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(61,191,255,0.08) 0%, transparent 70%);
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .phy-final-cta h2 {
+      font-family: var(--font-head); font-size: clamp(2rem,4vw,3rem);
+      font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px;
+      position: relative;
+    }
+    .phy-final-cta p {
+      color: var(--text2); font-size: .95rem; line-height: 1.75;
+      font-weight: 300; max-width: 560px; margin: 0 auto 36px;
+      position: relative;
+    }
+    .cta-buttons {
+      display: flex; gap: 14px; justify-content: center;
+      flex-wrap: wrap; position: relative;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 820px) {
+      .chapter-grid { grid-template-columns: 1fr; }
+      .phy-stat-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .phy-hero h1 { letter-spacing: -1px; }
+      .phy-hero-ctas { flex-direction: column; }
+      .section-nav a { padding: 12px 12px; font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="../pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="physics-home.html" class="active-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <a href="#class11" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     1. HERO SECTION
+══════════════════════════════ -->
+<section class="phy-hero" id="hero" aria-label="Physics Hero">
+  <div class="phy-hero-bg">
+    <div class="phy-grid"></div>
+    <div class="phy-orb1"></div>
+    <div class="phy-orb2"></div>
+
+    <!-- Floating particles -->
+    <div class="phy-particles" aria-hidden="true" id="phyParticles"></div>
+
+    <!-- Atom / orbital SVG -->
+    <svg class="phy-atom-canvas" aria-hidden="true" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#3dbfff" fill="none">
+        <!-- Nucleus -->
+        <circle cx="100" cy="250" r="12" fill="#3dbfff" opacity=".6"/>
+        <!-- Orbit 1 — horizontal -->
+        <ellipse cx="100" cy="250" rx="80" ry="20" stroke-width="1.2" opacity=".8"/>
+        <!-- Orbit 2 — tilted 60deg -->
+        <ellipse cx="100" cy="250" rx="80" ry="20" stroke-width="1.2" opacity=".6" transform="rotate(60 100 250)"/>
+        <!-- Orbit 3 — tilted 120deg -->
+        <ellipse cx="100" cy="250" rx="80" ry="20" stroke-width="1.2" opacity=".6" transform="rotate(120 100 250)"/>
+        <!-- Electrons -->
+        <circle cx="180" cy="250" r="5" fill="#3dbfff" opacity=".8"/>
+        <circle cx="60" cy="182" r="5" fill="#7fd8ff" opacity=".8"/>
+        <circle cx="60" cy="318" r="5" fill="#a87cf5" opacity=".8"/>
+        <!-- Field lines vertical -->
+        <line x1="100" y1="20"  x2="100" y2="80"  stroke-width="1" opacity=".3"/>
+        <line x1="100" y1="420" x2="100" y2="480" stroke-width="1" opacity=".3"/>
+        <line x1="20"  y1="250" x2="40"  y2="250" stroke-width="1" opacity=".3"/>
+        <line x1="160" y1="250" x2="180" y2="250" stroke-width="1" opacity=".3"/>
+        <!-- Wave at bottom -->
+        <path d="M20 430 Q40 410 60 430 Q80 450 100 430 Q120 410 140 430 Q160 450 180 430" stroke-width="1.5" opacity=".5"/>
+        <path d="M20 460 Q40 440 60 460 Q80 480 100 460 Q120 440 140 460 Q160 480 180 460" stroke-width="1.5" opacity=".3"/>
+        <!-- Wave at top -->
+        <path d="M20 70 Q40 50 60 70 Q80 90 100 70 Q120 50 140 70 Q160 90 180 70" stroke-width="1.5" opacity=".5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="phy-hero-inner">
+    <div class="phy-badge">
+      <span class="pulse"></span>
+      Physics · 180 Marks · 25% of NEET Paper
+    </div>
+
+    <h1>
+      Score <span class="phy-hl">160+ in Physics.</span><br />
+      One roadmap. Zero paywalls.
+    </h1>
+
+    <p class="phy-hero-sub">
+      Physics is NEET's toughest scoring challenge — aur sabse bada differentiator. 45 questions, 180 marks — formula aur concept dono chahiye. Ek clear strategy, chapter-by-chapter guidance, aur progress tracker ke saath Physics possible hai.
+    </p>
+
+    <div class="phy-hero-ctas">
+      <a href="#class11" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+        Start Class 11
+      </a>
+      <a href="#class12" class="btn-ghost">
+        Start Class 12
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="../syllabus/syllabus.html" class="btn-ghost">Open Syllabus</a>
+      <a href="#progress" class="btn-ghost">Track Progress</a>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="phy-stat-cards reveal">
+      <div class="phy-stat-card">
+        <div class="phy-stat-num">180</div>
+        <div class="phy-stat-label">Total Marks<br/>in NEET Physics</div>
+      </div>
+      <div class="phy-stat-card">
+        <div class="phy-stat-num">45</div>
+        <div class="phy-stat-label">Questions<br/>in the paper</div>
+      </div>
+      <div class="phy-stat-card">
+        <div class="phy-stat-num">29</div>
+        <div class="phy-stat-label">Total Chapters<br/>Class 11 + 12</div>
+      </div>
+      <div class="phy-stat-card">
+        <div class="phy-stat-num">25%</div>
+        <div class="phy-stat-label">NEET Weightage<br/>Key differentiator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     STICKY SECTION NAVIGATION
+══════════════════════════════ -->
+<nav class="section-nav" aria-label="Page sections">
+  <div class="section-nav-inner">
+    <a href="#why-physics">Why Physics</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#progress">Progress</a>
+    <a href="#high-priority">High Priority</a>
+    <a href="#class11">Class 11</a>
+    <a href="#class12">Class 12</a>
+    <a href="#how-to-study">How to Study</a>
+    <a href="#revision">Revision</a>
+    <a href="#daily-routine">Daily Routine</a>
+    <a href="#pyq-strategy">PYQ Strategy</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     2. WHY PHYSICS MATTERS
+══════════════════════════════ -->
+<section class="phy-section" id="why-physics" aria-labelledby="why-phy-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Why it matters</div>
+    <h2 class="phy-section-title" id="why-phy-title">Physics separates good scores from great ranks.</h2>
+    <p class="phy-section-sub">180 marks — ek chauthai NEET paper — lekin sabse zyada students yahan marks chhod dete hain. Jo Physics master karta hai, uska rank 1000s jump karta hai.</p>
+
+    <div class="phy-why-grid">
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="pwc-title">Biggest rank differentiator</div>
+        <div class="pwc-desc">Most NEET aspirants score 130-150 in Biology. The difference between AIR 500 and AIR 5000 is often Physics — where 15-20 extra marks can jump your rank by thousands.</div>
+      </article>
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="pwc-title">NCERT + problem solving</div>
+        <div class="pwc-desc">Unlike Biology, Physics needs both NCERT conceptual clarity and daily numerical practice. Students who skip problem-solving and only read theory consistently score below 100.</div>
+      </article>
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="pwc-title">Predictable question patterns</div>
+        <div class="pwc-desc">NEET Physics has clear patterns — Electrostatics, Optics, Modern Physics, and Mechanics give 30-35 questions combined. Mastering these clusters alone covers 70%+ of Physics marks.</div>
+      </article>
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="pwc-title">Concept-first, formula second</div>
+        <div class="pwc-desc">NEET Physics rarely asks derivations. It tests conceptual understanding and formula application. Students who understand the "why" behind formulas perform 20-30% better than formula-memorizers.</div>
+      </article>
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div class="pwc-title">Class 11 + 12 equal balance</div>
+        <div class="pwc-desc">NEET Physics draws roughly equally from Class 11 (Mechanics, Thermodynamics) and Class 12 (Electrostatics, Optics, Modern Physics). Ignoring either class is a fatal mistake.</div>
+      </article>
+      <article class="phy-why-card reveal">
+        <div class="pwc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="pwc-title">Diagrams & graphs matter</div>
+        <div class="pwc-desc">NEET Physics has 10-15 graph-based and diagram-based questions every year — V-I graphs, ray diagrams, p-V diagrams, waveforms. These are easy marks if practiced; wasted marks if ignored.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     3. NEET PHYSICS STRATEGY
+══════════════════════════════ -->
+<section class="phy-section strategy-alt" id="strategy" aria-labelledby="strategy-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">The Strategy</div>
+    <h2 class="phy-section-title" id="strategy-title">How toppers prepare Physics.</h2>
+    <p class="phy-section-sub">Strategy matters more than hours. These 8 steps — consistently followed — will take you from struggling to 160+ in Physics.</p>
+
+    <div class="strategy-grid">
+      <div class="strategy-card reveal">
+        <div class="strategy-num">01</div>
+        <div class="strategy-content">
+          <div class="strategy-title">NCERT First, Always</div>
+          <div class="strategy-desc">Read NCERT Physics completely before any reference book. NCERT gives you the conceptual foundation and many NEET questions are NCERT example/exercise based. Mark every definition and law.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">02</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Build a formula sheet chapter-by-chapter</div>
+          <div class="strategy-desc">After each chapter, write every formula on a single page. Don't memorize blindly — derive each formula once. Understanding the derivation means you can reconstruct the formula even under exam pressure.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">03</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Solve 20-30 numericals per chapter</div>
+          <div class="strategy-desc">Theory without practice is zero in Physics. After reading NCERT, solve NCERT exercises, then DC Pandey or HC Verma. At least 20-30 problems per chapter — more for Mechanics and Electrostatics.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">04</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Master graphs and diagrams</div>
+          <div class="strategy-desc">Draw every NEET-relevant graph from memory — V-I characteristics, p-V diagrams, SHM displacement-time graphs, ray diagrams, photoelectric effect graphs. These appear every single year.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">05</div>
+        <div class="strategy-content">
+          <div class="strategy-title">PYQ analysis before each chapter</div>
+          <div class="strategy-desc">Before studying a chapter, see what NEET has asked from it in the last 10 years. This shows you which concepts are NEET gold and which to spend less time on. High-yield topics revealed instantly.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">06</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Mechanics is non-negotiable</div>
+          <div class="strategy-desc">Class 11 Mechanics (Kinematics, Laws of Motion, Work-Energy, Rotation, Gravitation) alone gives 10-14 questions. It's the foundation for everything. Don't rush Mechanics — spend 6-8 weeks on it.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">07</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Modern Physics is easy marks</div>
+          <div class="strategy-desc">Dual Nature, Atoms, and Nuclei (Class 12) together give 5-8 questions with relatively short chapters. These are among the highest ROI chapters in NEET Physics — don't neglect them for Mechanics.</div>
+        </div>
+      </div>
+      <div class="strategy-card reveal">
+        <div class="strategy-num">08</div>
+        <div class="strategy-content">
+          <div class="strategy-title">Take weekly Physics-only mocks</div>
+          <div class="strategy-desc">Time-pressure reveals weak topics that study sessions don't. Take 45-question Physics mocks every 2 weeks. Analyze every wrong answer — was it a concept gap, formula error, or calculation mistake?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     4. PROGRESS TRACKER
+══════════════════════════════ -->
+<section class="phy-section progress-section" id="progress" aria-labelledby="progress-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Progress Tracker</div>
+    <h2 class="phy-section-title" id="progress-title">Track every chapter. Stay consistent.</h2>
+    <p class="phy-section-sub">Progress tracking is the most underrated NEET preparation tool. Mark chapters done as you complete them — your browser saves everything automatically.</p>
+
+    <div class="progress-overview reveal">
+      <div class="progress-header">
+        <div class="progress-title">Physics Completion Dashboard</div>
+        <button class="progress-reset-btn" id="resetProgress">Reset Progress</button>
+      </div>
+      <div class="progress-bars">
+        <div class="prog-bar-group">
+          <div class="prog-bar-label">
+            <span>Overall Physics</span>
+            <strong id="totalPct">0%</strong>
+          </div>
+          <div class="prog-bar-track">
+            <div class="prog-bar-fill" id="totalBar" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="prog-bar-group">
+          <div class="prog-bar-label">
+            <span>Class 11</span>
+            <strong id="c11Pct">0%</strong>
+          </div>
+          <div class="prog-bar-track">
+            <div class="prog-bar-fill" id="c11Bar" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="prog-bar-group">
+          <div class="prog-bar-label">
+            <span>Class 12</span>
+            <strong id="c12Pct">0%</strong>
+          </div>
+          <div class="prog-bar-track">
+            <div class="prog-bar-fill purple" id="c12Bar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="progress-stats-row">
+        <div class="prog-stat"><strong id="doneCount">0</strong> / 29 chapters completed</div>
+        <div class="prog-stat">Saved automatically in your browser</div>
+      </div>
+    </div>
+
+    <!-- Why track progress cards -->
+    <div class="phy-why-grid">
+      <div class="phy-why-card reveal">
+        <div class="pwc-icon">📊</div>
+        <div class="pwc-title">Syllabus visibility</div>
+        <div class="pwc-desc">When you can visually see your completion percentage, you know exactly where you stand. No more "I think I've covered most chapters" uncertainty.</div>
+      </div>
+      <div class="phy-why-card reveal">
+        <div class="pwc-icon">🧠</div>
+        <div class="pwc-title">Dopamine motivation</div>
+        <div class="pwc-desc">Every checkbox you tick gives a small dopamine hit. This builds a positive studying habit loop — the same mechanism used in top gaming apps, applied to NEET prep.</div>
+      </div>
+      <div class="phy-why-card reveal">
+        <div class="pwc-icon">🔄</div>
+        <div class="pwc-title">Revision control</div>
+        <div class="pwc-desc">Knowing which chapters are done helps you plan systematic revision. You won't accidentally skip chapters or over-revise ones you already know.</div>
+      </div>
+      <div class="phy-why-card reveal">
+        <div class="pwc-icon">🎯</div>
+        <div class="pwc-title">Weak topic identification</div>
+        <div class="pwc-desc">Chapters you keep unchecking after marking done — those are your weak spots. The tracker reveals patterns in your preparation you wouldn't notice otherwise.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     5. HIGH PRIORITY CHAPTERS
+══════════════════════════════ -->
+<section class="phy-section priority-section" id="high-priority" aria-labelledby="priority-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">High Weightage</div>
+    <h2 class="phy-section-title" id="priority-title">Focus here first. Maximum impact.</h2>
+    <p class="phy-section-sub">These 5 chapter clusters decide 65-70% of your Physics score. Master these before anything else — every hour spent here is worth 3 hours elsewhere.</p>
+
+    <div class="priority-grid">
+      <article class="priority-card reveal">
+        <div class="priority-badges">
+          <span class="badge badge-fire">🔥 HIGH WEIGHTAGE</span>
+          <span class="badge badge-warn">⚠️ CONCEPT HEAVY</span>
+        </div>
+        <div class="priority-name">Electrostatics &amp; Current Electricity</div>
+        <div class="priority-desc">Electric Charges &amp; Fields, Electrostatic Potential, and Current Electricity (Class 12 Ch 1-3) give 8-12 questions annually. Gauss's law, Kirchhoff's laws, Wheatstone bridge, capacitors — all conceptual and numerical. The highest-returning cluster in NEET Physics.</div>
+        <div class="priority-meta">
+          <div class="priority-meta-item"><strong>8-12 Qs</strong>Expected per year</div>
+          <div class="priority-meta-item"><strong>32-48 marks</strong>Potential score</div>
+          <div class="priority-meta-item"><strong>4-5 weeks</strong>Preparation time</div>
+          <div class="priority-meta-item"><strong>⭐ Must master</strong>Revision: weekly</div>
+        </div>
+      </article>
+      <article class="priority-card reveal">
+        <div class="priority-badges">
+          <span class="badge badge-fire">🔥 HIGH WEIGHTAGE</span>
+          <span class="badge badge-warn">⚠️ CONCEPT + NUMERICAL</span>
+        </div>
+        <div class="priority-name">Mechanics (Kinematics + Laws of Motion + Work-Energy)</div>
+        <div class="priority-desc">Class 11 Mechanics — Kinematics (Ch 2, 3), Laws of Motion (Ch 4), Work-Energy-Power (Ch 5) — gives 8-11 questions combined. Projectile motion, friction, collisions, and Newton's laws are perennial NEET topics. Foundation for all of Physics.</div>
+        <div class="priority-meta">
+          <div class="priority-meta-item"><strong>8-11 Qs</strong>Expected per year</div>
+          <div class="priority-meta-item"><strong>32-44 marks</strong>Potential score</div>
+          <div class="priority-meta-item"><strong>5-6 weeks</strong>Preparation time</div>
+          <div class="priority-meta-item"><strong>⭐ Foundation</strong>Revision: fortnightly</div>
+        </div>
+      </article>
+      <article class="priority-card reveal">
+        <div class="priority-badges">
+          <span class="badge badge-star">⭐ MUST MASTER</span>
+          <span class="badge badge-target">🎯 EASY MARKS</span>
+        </div>
+        <div class="priority-name">Optics (Ray + Wave)</div>
+        <div class="priority-desc">Ray Optics and Wave Optics (Class 12 Ch 9-10) give 5-8 questions annually. Mirror formula, lens formula, Young's double-slit, diffraction, polarization — all formulaic and predictable. Once concepts and graphs are clear, these are reliable marks.</div>
+        <div class="priority-meta">
+          <div class="priority-meta-item"><strong>5-8 Qs</strong>Expected per year</div>
+          <div class="priority-meta-item"><strong>20-32 marks</strong>Potential score</div>
+          <div class="priority-meta-item"><strong>3-4 weeks</strong>Preparation time</div>
+          <div class="priority-meta-item"><strong>🎯 Predictable</strong>Revision: fortnightly</div>
+        </div>
+      </article>
+      <article class="priority-card reveal">
+        <div class="priority-badges">
+          <span class="badge badge-fire">🔥 HIGH WEIGHTAGE</span>
+          <span class="badge badge-target">🎯 FORMULAIC</span>
+        </div>
+        <div class="priority-name">Magnetism &amp; EMI &amp; AC Circuits</div>
+        <div class="priority-desc">Moving Charges, Magnetism &amp; Matter, EMI, and Alternating Current (Class 12 Ch 4-7) give 6-9 questions. Biot-Savart law, Faraday's law, LCR resonance, transformers — these are high-yield formula-application topics with clear question patterns.</div>
+        <div class="priority-meta">
+          <div class="priority-meta-item"><strong>6-9 Qs</strong>Expected per year</div>
+          <div class="priority-meta-item"><strong>24-36 marks</strong>Potential score</div>
+          <div class="priority-meta-item"><strong>3-4 weeks</strong>Preparation time</div>
+          <div class="priority-meta-item"><strong>⭐ Graph heavy</strong>Revision: weekly</div>
+        </div>
+      </article>
+      <article class="priority-card reveal">
+        <div class="priority-badges">
+          <span class="badge badge-target">🎯 EASY SCORING</span>
+          <span class="badge badge-star">⭐ MUST MASTER</span>
+        </div>
+        <div class="priority-name">Modern Physics (Dual Nature + Atoms + Nuclei + Semiconductors)</div>
+        <div class="priority-desc">Class 12 Ch 11-14 gives 5-8 questions. Photoelectric effect, Bohr model, radioactivity, binding energy, and semiconductor logic gates are concise chapters with direct formula-based NEET questions. Highest ROI per hour in Physics.</div>
+        <div class="priority-meta">
+          <div class="priority-meta-item"><strong>5-8 Qs</strong>Expected per year</div>
+          <div class="priority-meta-item"><strong>20-32 marks</strong>Potential score</div>
+          <div class="priority-meta-item"><strong>2-3 weeks</strong>Preparation time</div>
+          <div class="priority-meta-item"><strong>🎯 Short chapters</strong>Revision: fortnightly</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     6. CLASS 11 CHAPTERS
+══════════════════════════════ -->
+<section class="phy-section chapter-section" id="class11" aria-labelledby="c11-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Class 11 Physics</div>
+    <div class="chapter-class-header">
+      <h2 class="phy-section-title" id="c11-title" style="margin-bottom:0">Class 11 — 14 Chapters</h2>
+      <span class="chapter-class-badge">Mechanics · Thermodynamics · Waves · Foundation Layer</span>
+    </div>
+
+    <div class="chapter-grid" id="c11-grid">
+
+      <!-- CH 01 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 01</span>
+          <span class="ch-difficulty easy">Easy</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Units and Measurements</h3>
+          <p class="ch-desc">SI units, fundamental and derived units, dimensional analysis, significant figures, errors in measurement. Sets the language of physics — every numerical answer you write depends on this chapter.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">SI Units</span><span class="ch-topic">Dimensional Analysis</span><span class="ch-topic">Errors</span><span class="ch-topic">Significant Figures</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-2 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>5 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Dimensional analysis chapter.</strong> Learn to derive units of physical quantities from first principles. Dimensional consistency checks and error propagation rules are direct NEET question sources. Light chapter — don't over-invest.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch01"> Done
+          </label>
+          <a href="class11/ch01-units-measurements.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 02 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 02</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Motion in a Straight Line</h3>
+          <p class="ch-desc">Frame of reference, displacement, velocity, acceleration. Equations of uniform acceleration. Position-time and velocity-time graphs. Relative motion in 1D. Foundation of kinematics.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Kinematics Equations</span><span class="ch-topic">v-t Graphs</span><span class="ch-topic">Free Fall</span><span class="ch-topic">Relative Motion</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>7 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Graph + equations chapter.</strong> Master interpreting velocity-time graphs — slope = acceleration, area = displacement. Memorize all three equations of motion and know when to apply each. Relative velocity problems appear frequently.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch02"> Done
+          </label>
+          <a href="class11/ch02-motion-straight-line.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 03 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 03</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Motion in a Plane</h3>
+          <p class="ch-desc">Scalars and vectors, vector addition, dot and cross products. Projectile motion — equations, range, maximum height, time of flight. Uniform circular motion, centripetal acceleration.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Projectile Motion</span><span class="ch-topic">Vectors</span><span class="ch-topic">Circular Motion</span><span class="ch-topic">Range Formula</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>10 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Projectile mastery chapter.</strong> Derive all projectile formulas and practice 15+ problems — angles, ranges, heights. Vector resolution is the key skill. NEET asks 2-4 questions combining projectile, relative velocity, and circular motion.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch03"> Done
+          </label>
+          <a href="class11/ch03-motion-plane.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 04 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 04</span>
+          <span class="ch-difficulty hard">Hard</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Laws of Motion</h3>
+          <p class="ch-desc">Newton's three laws, momentum, impulse, friction (static, kinetic, rolling). Free body diagrams. Equilibrium of concurrent forces. Dynamics of circular motion — banking, vehicle on curve.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Newton's Laws</span><span class="ch-topic">Friction</span><span class="ch-topic">FBD</span><span class="ch-topic">Impulse</span><span class="ch-topic">Banking</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>3-5 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>12 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Free body diagram chapter.</strong> Every problem requires a correct FBD before applying equations. Practice drawing FBDs for Atwood's machine, inclined plane, and connected body problems. Friction problems — static vs kinetic — are perennial NEET questions.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch04"> Done
+          </label>
+          <a href="class11/ch04-laws-of-motion.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 05 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 05</span>
+          <span class="ch-difficulty hard">Hard</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Work, Energy and Power</h3>
+          <p class="ch-desc">Work done by constant and variable forces, work-energy theorem, kinetic and potential energy, power. Conservation of mechanical energy. Elastic and inelastic collisions in 1D and 2D.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Work-Energy Theorem</span><span class="ch-topic">Collisions</span><span class="ch-topic">Conservation</span><span class="ch-topic">Spring PE</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>10 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Energy conservation chapter.</strong> The work-energy theorem is the most-used tool in NEET Physics problems. Elastic collision (both momentum and KE conserved) vs inelastic (only momentum) — this distinction gives direct questions every alternate year.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch05"> Done
+          </label>
+          <a href="class11/ch05-work-energy-power.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 06 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 06</span>
+          <span class="ch-difficulty hard">Hard</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">System of Particles and Rotational Motion</h3>
+          <p class="ch-desc">Centre of mass, torque, angular momentum, moment of inertia, radius of gyration. Parallel and perpendicular axes theorems. Equations of rotational motion. Rolling motion.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Moment of Inertia</span><span class="ch-topic">Torque</span><span class="ch-topic">Angular Momentum</span><span class="ch-topic">Rolling</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>3-5 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>14 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Moment of inertia table chapter.</strong> Memorize MI for all standard shapes (disk, ring, rod, sphere, hollow sphere). Parallel and perpendicular axes theorems are direct formula-application questions. Conservation of angular momentum (spinning skater) appears yearly.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch06"> Done
+          </label>
+          <a href="class11/ch06-system-of-particles.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 07 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 07</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Gravitation</h3>
+          <p class="ch-desc">Universal law of gravitation, acceleration due to gravity and its variation with altitude and depth. Kepler's laws. Gravitational potential energy, escape velocity, orbital velocity, satellites.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Kepler's Laws</span><span class="ch-topic">Escape Velocity</span><span class="ch-topic">Orbital Velocity</span><span class="ch-topic">g variation</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>8 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Formula-based chapter.</strong> Memorize escape velocity, orbital velocity, and time period formulae. Kepler's third law (T² ∝ r³) and the relationship between escape and orbital velocity are direct question sources. Variation of g with depth vs altitude — know the graphs.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch07"> Done
+          </label>
+          <a href="class11/ch07-gravitation.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 08 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 08</span>
+          <span class="ch-difficulty easy">Easy</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Mechanical Properties of Solids</h3>
+          <p class="ch-desc">Elastic behaviour, stress-strain relationship, Hooke's law, Young's modulus, bulk modulus, modulus of rigidity, Poisson's ratio, elastic potential energy.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Young's Modulus</span><span class="ch-topic">Stress-Strain</span><span class="ch-topic">Hooke's Law</span><span class="ch-topic">Elasticity</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-2 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>5 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Stress-strain graph chapter.</strong> Understand the stress-strain curve — proportional limit, elastic limit, yield point, breaking point. Differences between elastic, plastic, and brittle materials. Young's modulus numerical problems are straightforward formula applications.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch08"> Done
+          </label>
+          <a href="class11/ch08-mechanical-properties-solids.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 09 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 09</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Mechanical Properties of Fluids</h3>
+          <p class="ch-desc">Pressure, Pascal's law, viscosity, Stokes' law, terminal velocity, Bernoulli's principle, streamline flow. Surface tension, angle of contact, capillary rise.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Pascal's Law</span><span class="ch-topic">Bernoulli's Principle</span><span class="ch-topic">Surface Tension</span><span class="ch-topic">Viscosity</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>7 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Application-based chapter.</strong> Bernoulli's equation applications — Venturimeter, airplane lift, Magnus effect — are favorite NEET topics. Terminal velocity formula and its derivation using Stokes' law. Capillary rise formula and excess pressure in spherical drops/bubbles.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch09"> Done
+          </label>
+          <a href="class11/ch09-mechanical-properties-fluids.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 10 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 10</span>
+          <span class="ch-difficulty easy">Easy</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Thermal Properties of Matter</h3>
+          <p class="ch-desc">Temperature, thermal expansion of solids/liquids/gases, specific heat, calorimetry, change of state, latent heat. Modes of heat transfer — conduction, convection, radiation, Newton's cooling law.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Thermal Expansion</span><span class="ch-topic">Calorimetry</span><span class="ch-topic">Latent Heat</span><span class="ch-topic">Radiation</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-2 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>6 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Formula memorization chapter.</strong> Thermal expansion coefficients (linear, area, volume) and their relationships. Calorimetry problems — heat gained = heat lost. Stefan's law and Wien's displacement law for blackbody radiation are direct question sources.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch10"> Done
+          </label>
+          <a href="class11/ch10-thermal-properties-matter.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 11 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 11</span>
+          <span class="ch-difficulty hard">Hard</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Thermodynamics</h3>
+          <p class="ch-desc">Zeroth law, first law (heat, work, internal energy). Thermodynamic processes — isothermal, adiabatic, isochoric, isobaric. Second law of thermodynamics. Carnot engine and efficiency.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">First Law</span><span class="ch-topic">Carnot Engine</span><span class="ch-topic">p-V Diagrams</span><span class="ch-topic">Adiabatic</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>10 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>p-V diagram chapter.</strong> Draw and understand p-V diagrams for all four processes. Carnot efficiency formula (1 - T₂/T₁) is a guaranteed question every year. First law (ΔU = Q - W) with sign convention — get this right and many problems become straightforward.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch11"> Done
+          </label>
+          <a href="class11/ch11-thermodynamics.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 12 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 12</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Kinetic Theory of Gases</h3>
+          <p class="ch-desc">Ideal gas equation, assumptions of kinetic theory, pressure and temperature at molecular level, RMS speed, degrees of freedom, law of equipartition of energy, mean free path.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">RMS Speed</span><span class="ch-topic">Degrees of Freedom</span><span class="ch-topic">Equipartition</span><span class="ch-topic">Ideal Gas</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>7 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Derivation + formula chapter.</strong> RMS, average, and most probable speeds — their ratios are asked directly (√3 : √8/π : √2). Degrees of freedom for monoatomic (3), diatomic (5), triatomic (6) and corresponding Cv, Cp, γ values must be memorized.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch12"> Done
+          </label>
+          <a href="class11/ch12-kinetic-theory.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 13 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 13</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Oscillations</h3>
+          <p class="ch-desc">Periodic motion, simple harmonic motion (SHM), amplitude, frequency, phase. Energy in SHM — kinetic and potential. Simple pendulum. Spring-mass system. Damped and forced oscillations.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">SHM Equations</span><span class="ch-topic">Simple Pendulum</span><span class="ch-topic">Spring-Mass</span><span class="ch-topic">Energy in SHM</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>8 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>SHM graph chapter.</strong> Displacement, velocity, and acceleration as functions of time — know their phase relationships. Energy graph in SHM (KE + PE = constant). Time period of spring (T = 2π√m/k) and pendulum (T = 2π√L/g) are guaranteed questions.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch13"> Done
+          </label>
+          <a href="class11/ch13-oscillations.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- CH 14 -->
+      <article class="ch-card reveal">
+        <div class="ch-top">
+          <span class="ch-num">CH 14</span>
+          <span class="ch-difficulty medium">Medium</span>
+        </div>
+        <div class="ch-body">
+          <h3 class="ch-name">Waves</h3>
+          <p class="ch-desc">Transverse and longitudinal waves, wave speed, principle of superposition. Standing waves in strings and organ pipes. Beats, Doppler effect. Fundamental mode and harmonics.</p>
+          <div class="ch-topics">
+            <span class="ch-topic">Standing Waves</span><span class="ch-topic">Beats</span><span class="ch-topic">Doppler Effect</span><span class="ch-topic">Organ Pipes</span>
+          </div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>9 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach">
+          <span class="ch-approach-icon">→</span>
+          <span><strong>Harmonics + Doppler chapter.</strong> Open and closed organ pipe harmonics — memorize the frequency formulas and the fact that closed pipes have only odd harmonics. Doppler effect formula with correct sign convention. Beat frequency = |f₁ - f₂| is a direct question.</span>
+        </div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group">
+            <input type="checkbox" data-chapter="phy-c11-ch14"> Done
+          </label>
+          <a href="class11/ch14-waves.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+    </div><!-- end c11-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     7. CLASS 12 CHAPTERS
+══════════════════════════════ -->
+<section class="phy-section chapter-section alt" id="class12" aria-labelledby="c12-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Class 12 Physics</div>
+    <div class="chapter-class-header">
+      <h2 class="phy-section-title" id="c12-title" style="margin-bottom:0">Class 12 — 15 Chapters</h2>
+      <span class="chapter-class-badge">Electrostatics · Magnetism · Optics · Modern Physics</span>
+    </div>
+
+    <div class="chapter-grid" id="c12-grid">
+
+      <!-- C12 CH 01 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 01</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Electric Charges and Fields</h3>
+          <p class="ch-desc">Electric charge, Coulomb's law, superposition. Electric field, field lines, electric dipole. Electric flux, Gauss's law and its applications to infinite wire, infinite plane sheet, thin spherical shell.</p>
+          <div class="ch-topics"><span class="ch-topic">Coulomb's Law</span><span class="ch-topic">Gauss's Law</span><span class="ch-topic">Electric Dipole</span><span class="ch-topic">Field Lines</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>12 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Gauss's law chapter.</strong> Derive electric field for each standard charge distribution using Gauss's law. Torque on dipole (τ = pE sinθ) and potential energy of dipole (U = -pE cosθ) are direct questions. Electric field line properties — all must be memorized.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch01"> Done</label>
+          <a href="class12/ch01-electric-charges-fields.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 02 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 02</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Electrostatic Potential and Capacitance</h3>
+          <p class="ch-desc">Electric potential, equipotential surfaces, relation between E and V. Capacitors — parallel plate, spherical, cylindrical. Series/parallel combinations. Energy stored. Dielectrics and polarization.</p>
+          <div class="ch-topics"><span class="ch-topic">Capacitors</span><span class="ch-topic">Equipotential</span><span class="ch-topic">Energy Stored</span><span class="ch-topic">Dielectrics</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>12 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Capacitor combination chapter.</strong> Series vs parallel capacitor combinations — derive equivalent capacitance and practice 10+ problems. Energy stored (½CV² = ½QV = Q²/2C) — know all three forms. Effect of dielectric on capacitance, energy, and E-field when battery connected vs disconnected.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch02"> Done</label>
+          <a href="class12/ch02-electrostatic-potential.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 03 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 03</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Current Electricity</h3>
+          <p class="ch-desc">Drift velocity, Ohm's law, resistance, resistivity, temperature dependence. Cells, EMF, internal resistance. Kirchhoff's laws. Wheatstone bridge, metre bridge, potentiometer.</p>
+          <div class="ch-topics"><span class="ch-topic">Kirchhoff's Laws</span><span class="ch-topic">Wheatstone Bridge</span><span class="ch-topic">Drift Velocity</span><span class="ch-topic">Potentiometer</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>3-5 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>14 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Circuit analysis chapter.</strong> Kirchhoff's laws problems — practice at least 15 circuit problems. Drift velocity relation (I = neAvd) is a direct question source. Cells in series vs parallel — terminal voltage when charging vs discharging. Wheatstone bridge condition (P/Q = R/S).</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch03"> Done</label>
+          <a href="class12/ch03-current-electricity.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 04 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 04</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Moving Charges and Magnetism</h3>
+          <p class="ch-desc">Biot-Savart law, Ampere's law. Force on moving charge and current-carrying conductor. Parallel conductors — definition of ampere. Torque on current loop. Galvanometer, ammeter, voltmeter.</p>
+          <div class="ch-topics"><span class="ch-topic">Biot-Savart Law</span><span class="ch-topic">Ampere's Law</span><span class="ch-topic">Cyclotron</span><span class="ch-topic">Galvanometer</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>12 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Force and field chapter.</strong> Magnetic force on a moving charge (F = qvB sinθ) and its direction using Fleming's left-hand rule. Cyclotron frequency formula and its independence from velocity. Conversion of galvanometer to ammeter (shunt) and voltmeter (high resistance) — direct numerical questions.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch04"> Done</label>
+          <a href="class12/ch04-moving-charges-magnetism.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 05 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 05</span><span class="ch-difficulty easy">Easy</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Magnetism and Matter</h3>
+          <p class="ch-desc">Bar magnet, magnetic dipole, magnetic field lines. Para-, dia-, and ferromagnetic substances. Hysteresis. Earth's magnetism — magnetic declination and dip.</p>
+          <div class="ch-topics"><span class="ch-topic">Ferromagnetism</span><span class="ch-topic">Hysteresis</span><span class="ch-topic">Earth's Magnetism</span><span class="ch-topic">Magnetic Dipole</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-2 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>5 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Classification + properties chapter.</strong> Para vs dia vs ferromagnetic substances — properties, susceptibility, Curie temperature. Hysteresis loop — retentivity and coercivity and their applications (permanent magnet vs electromagnet). Short chapter; cover thoroughly in 5 days.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch05"> Done</label>
+          <a href="class12/ch05-magnetism-matter.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 06 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 06</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Electromagnetic Induction</h3>
+          <p class="ch-desc">Magnetic flux, Faraday's law, Lenz's law, eddy currents, motional EMF. Self-inductance, mutual inductance, inductors. Energy stored in inductor.</p>
+          <div class="ch-topics"><span class="ch-topic">Faraday's Law</span><span class="ch-topic">Lenz's Law</span><span class="ch-topic">Self-Inductance</span><span class="ch-topic">Eddy Currents</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>10 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Lenz's law application chapter.</strong> Every EMI problem starts with Lenz's law — determine the direction of induced current before writing formulas. Motional EMF (ε = Bvl) and its derivation. Self-inductance of solenoid formula — direct question every alternate year.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch06"> Done</label>
+          <a href="class12/ch06-electromagnetic-induction.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 07 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 07</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Alternating Current</h3>
+          <p class="ch-desc">AC voltage and current, peak and RMS values. Phasors, reactance, impedance. LCR series circuit. Resonance. Power in AC circuits, power factor. Transformer. AC generator.</p>
+          <div class="ch-topics"><span class="ch-topic">LCR Circuit</span><span class="ch-topic">Resonance</span><span class="ch-topic">Impedance</span><span class="ch-topic">Transformer</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>12 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Phasor diagram chapter.</strong> Draw phasor diagrams for LCR circuits — understand why voltage and current have phase differences. Resonance condition (XL = XC), resonant frequency formula, and power factor — all direct questions. Transformer EMF ratio (V₁/V₂ = N₁/N₂) with efficiency numericals.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch07"> Done</label>
+          <a href="class12/ch07-alternating-current.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 08 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 08</span><span class="ch-difficulty easy">Easy</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Electromagnetic Waves</h3>
+          <p class="ch-desc">Displacement current, characteristics of EM waves. EM spectrum — radio waves, microwaves, infrared, visible, UV, X-rays, gamma rays. Speed of EM waves, properties, and applications.</p>
+          <div class="ch-topics"><span class="ch-topic">EM Spectrum</span><span class="ch-topic">Displacement Current</span><span class="ch-topic">Transverse Nature</span><span class="ch-topic">Applications</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-2 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>4 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>EM spectrum memorization chapter.</strong> Memorize the EM spectrum from low to high frequency with wavelength ranges and applications. Displacement current concept and Ampere-Maxwell law. All EM waves travel at speed of light in vacuum. Short chapter — cover in 4 days, don't over-invest.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch08"> Done</label>
+          <a href="class12/ch08-electromagnetic-waves.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 09 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 09</span><span class="ch-difficulty hard">Hard</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Ray Optics and Optical Instruments</h3>
+          <p class="ch-desc">Reflection, mirror formula, magnification. Refraction, Snell's law, total internal reflection. Thin lens formula, lens maker's equation. Prism. Microscope, telescope magnifying powers.</p>
+          <div class="ch-topics"><span class="ch-topic">Mirror Formula</span><span class="ch-topic">Lens Formula</span><span class="ch-topic">TIR</span><span class="ch-topic">Telescope</span><span class="ch-topic">Prism</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>3-5 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>14 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Ray diagram + formula chapter.</strong> Draw ray diagrams for all mirror and lens cases — object positions and corresponding image positions. Sign convention errors are the #1 mistake students make here. Lens maker's equation, power of combination (P = P₁ + P₂), and telescope magnification are direct NEET questions.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch09"> Done</label>
+          <a href="class12/ch09-ray-optics.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 10 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 10</span><span class="ch-difficulty medium">Medium</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Wave Optics</h3>
+          <p class="ch-desc">Huygens' principle, interference, Young's double-slit experiment, fringe width. Single-slit diffraction. Polarization, Brewster's law, Malus's law. Coherent sources.</p>
+          <div class="ch-topics"><span class="ch-topic">Young's Experiment</span><span class="ch-topic">Fringe Width</span><span class="ch-topic">Diffraction</span><span class="ch-topic">Polarization</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>10 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>YDSE formula chapter.</strong> Fringe width (β = λD/d) — practice 10+ numerical problems with this formula. Condition for bright and dark fringes. Single slit diffraction — width of central maximum. Brewster's law (tan θ_B = μ) and Malus's law (I = I₀cos²θ) — both direct question sources.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch10"> Done</label>
+          <a href="class12/ch10-wave-optics.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 11 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 11</span><span class="ch-difficulty medium">Medium</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Dual Nature of Radiation and Matter</h3>
+          <p class="ch-desc">Photoelectric effect, Einstein's photoelectric equation, work function, threshold frequency and wavelength. Matter waves, de Broglie wavelength, Heisenberg uncertainty principle.</p>
+          <div class="ch-topics"><span class="ch-topic">Photoelectric Effect</span><span class="ch-topic">Work Function</span><span class="ch-topic">de Broglie</span><span class="ch-topic">Photon Energy</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>7 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Einstein's equation chapter.</strong> KE_max = hν - φ — derive it once, then practice 10+ numerical problems. Stopping potential and its relation to frequency. de Broglie wavelength (λ = h/p) for electrons, protons, and photons. Short chapter with high PYQ repetition — very reliable marks.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch11"> Done</label>
+          <a href="class12/ch11-dual-nature-radiation.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 12 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 12</span><span class="ch-difficulty medium">Medium</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Atoms</h3>
+          <p class="ch-desc">Alpha-particle scattering and Rutherford's nuclear model. Bohr model of hydrogen atom — energy levels, radii, velocity, wavelengths. Hydrogen spectrum — Lyman, Balmer, Paschen series.</p>
+          <div class="ch-topics"><span class="ch-topic">Bohr Model</span><span class="ch-topic">Energy Levels</span><span class="ch-topic">Hydrogen Spectrum</span><span class="ch-topic">Rydberg Formula</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>7 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Energy level chapter.</strong> Memorize the hydrogen energy levels (−13.6/n² eV). Rydberg formula for spectral lines. Bohr's postulates and what each implies. Spectral series — which series falls in which region (Lyman = UV, Balmer = visible, Paschen = IR). Transition energy numericals are frequent.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch12"> Done</label>
+          <a href="class12/ch12-atoms.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 13 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 13</span><span class="ch-difficulty medium">Medium</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Nuclei</h3>
+          <p class="ch-desc">Atomic mass, nuclear size. Mass-energy equivalence, mass defect, binding energy per nucleon. Nuclear forces. Radioactivity — alpha, beta, gamma. Half-life, decay law. Nuclear fission and fusion.</p>
+          <div class="ch-topics"><span class="ch-topic">Binding Energy</span><span class="ch-topic">Radioactivity</span><span class="ch-topic">Half-Life</span><span class="ch-topic">Fission/Fusion</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT + Problems</strong>Required</div>
+            <div class="ch-meta-item"><strong>9 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Radioactive decay chapter.</strong> Half-life problems — N = N₀(½)ⁿ where n = number of half-lives. Q-value calculation and mass defect → binding energy. Alpha, beta, gamma properties (charge, mass, penetrating power) — table memorization, direct questions every year. Fission vs fusion — which releases more energy per nucleon?</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch13"> Done</label>
+          <a href="class12/ch13-nuclei.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 14 -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">CH 14</span><span class="ch-difficulty medium">Medium</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Semiconductor Electronics</h3>
+          <p class="ch-desc">Semiconductors, p-n junction, diode characteristics, rectifiers. Zener diode — voltage regulation. LED, photodiode, solar cell. Logic gates — AND, OR, NOT, NAND, NOR, truth tables.</p>
+          <div class="ch-topics"><span class="ch-topic">p-n Junction</span><span class="ch-topic">Zener Diode</span><span class="ch-topic">Logic Gates</span><span class="ch-topic">Rectifier</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>2-4 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>8 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Logic gates + diode chapter.</strong> Memorize all 5 basic gate truth tables — NEET asks them directly. p-n junction I-V characteristics in forward and reverse bias. Zener diode as voltage regulator — working principle. Half-wave vs full-wave rectifier output waveforms. Short chapter with predictable questions.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch14"> Done</label>
+          <a href="class12/ch14-semiconductor-electronics.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+      <!-- C12 CH 15 — Experimental Skills -->
+      <article class="ch-card reveal">
+        <div class="ch-top"><span class="ch-num">Unit 20</span><span class="ch-difficulty easy">Easy</span></div>
+        <div class="ch-body">
+          <h3 class="ch-name">Experimental Skills</h3>
+          <p class="ch-desc">Vernier calipers, screw gauge, simple pendulum, metre scale, Young's modulus experiment, resonance tube, metre bridge, Ohm's law, focal lengths, p-n junction characteristics. Lab-based conceptual questions.</p>
+          <div class="ch-topics"><span class="ch-topic">Vernier Calipers</span><span class="ch-topic">Screw Gauge</span><span class="ch-topic">Metre Bridge</span><span class="ch-topic">Resonance Tube</span></div>
+          <div class="ch-meta">
+            <div class="ch-meta-item"><strong>1-3 Qs</strong>NEET Weightage</div>
+            <div class="ch-meta-item"><strong>NCERT</strong>100% sufficient</div>
+            <div class="ch-meta-item"><strong>5 days</strong>Prep time</div>
+          </div>
+        </div>
+        <div class="ch-approach"><span class="ch-approach-icon">→</span><span><strong>Lab instrument chapter.</strong> Vernier caliper least count = 1 MSD - 1 VSD. Screw gauge least count = pitch / number of divisions. Practice reading Vernier and screw gauge from diagrams — NEET sometimes gives an instrument diagram and asks for the reading. Metre bridge balance condition same as Wheatstone bridge.</span></div>
+        <div class="ch-footer">
+          <label class="ch-checkbox-group"><input type="checkbox" data-chapter="phy-c12-ch15"> Done</label>
+          <a href="class12/ch15-experimental-skills.html" class="ch-link">Study →</a>
+        </div>
+      </article>
+
+    </div><!-- end c12-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     8. HOW TO STUDY PHYSICS
+══════════════════════════════ -->
+<section class="phy-section" id="how-to-study" aria-labelledby="how-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Study Method</div>
+    <h2 class="phy-section-title" id="how-title">How to actually study Physics.</h2>
+    <p class="phy-section-sub">Most students read Physics. Toppers solve Physics. Here's the difference in 8 practical steps you can start today.</p>
+
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-step">1</div>
+        <div class="how-title">Read NCERT first — understand, don't memorize</div>
+        <div class="how-desc">Physics is about understanding physical situations. Read NCERT like a storybook — understand why each law exists, not just what it states. Derive every result once from scratch.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">2</div>
+        <div class="how-title">Build formula sheets after each chapter</div>
+        <div class="how-desc">Immediately after reading a chapter, write all formulas on one page with the physical quantity each represents. These chapter formula sheets become your revision backbone in the last 2 months.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">3</div>
+        <div class="how-title">Solve problems starting from NCERT exercises</div>
+        <div class="how-desc">NCERT exercises are often underestimated — solve all of them first. Then move to DC Pandey or HC Verma for additional practice. Don't jump to advanced problems before mastering NCERT-level ones.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">4</div>
+        <div class="how-title">Practice drawing graphs and diagrams</div>
+        <div class="how-desc">After reading each chapter, draw every graph and diagram from memory. Ray diagrams, p-V diagrams, V-I graphs, SHM waveforms — these are 10-15 marks in NEET and often the easiest to score.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">5</div>
+        <div class="how-step">5</div>
+        <div class="how-title">Analyze PYQs chapter-wise</div>
+        <div class="how-desc">After finishing a chapter, solve all its PYQs from 2013-2024. Note which formula or concept was used in each question. This builds a mental map of what NEET actually tests vs what's "in the chapter."</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">6</div>
+        <div class="how-title">Learn sign conventions immediately</div>
+        <div class="how-desc">Wrong sign convention = wrong answer even with perfect physics. Optics, electrostatics, and thermodynamics all have sign conventions. Learn them chapter by chapter and practice applying them consistently.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">7</div>
+        <div class="how-title">Revise Mechanics daily for 10 minutes</div>
+        <div class="how-desc">Mechanics formulas (kinematics, Newton's laws, energy) are used in almost every Physics problem. Keep them sharp by doing 2-3 Mechanics problems daily even while studying other chapters.</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">8</div>
+        <div class="how-title">Take timed practice sections weekly</div>
+        <div class="how-desc">Speed in Physics comes only from timed practice. Solve 15-question timed Physics sections weekly. Track time per question — NEET allows ~2 minutes per Physics question. Inefficient approach = low score even with perfect knowledge.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     9-10. REVISION + MISTAKES
+══════════════════════════════ -->
+<section class="phy-section strategy-alt" id="revision" aria-labelledby="revision-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Revision &amp; Mistakes</div>
+    <h2 class="phy-section-title" id="revision-title">Revise smart. Avoid costly mistakes.</h2>
+    <p class="phy-section-sub">The student who revises formulas daily beats the student who crammed once. Here's a proven revision plan and the mistakes that cost marks.</p>
+
+    <div class="two-col-grid">
+      <div class="list-card reveal">
+        <h3>
+          <span style="color:var(--phy-color)">📋</span>
+          Revision Strategy
+        </h3>
+        <ul>
+          <li>Review formula sheet of each chapter within 24 hours of studying it</li>
+          <li>Weekly revision of current week's chapter formula sheets — 20 min/chapter</li>
+          <li>Solve 5 PYQs from each completed chapter every weekend without notes</li>
+          <li>In the last 2 months, revise all chapter formula sheets at least 3 more times</li>
+          <li>Redraw all graphs and diagrams in the final month from memory</li>
+          <li>Practice sign conventions for optics and electrostatics in every revision</li>
+          <li>Use spaced repetition: revise weak chapters (Rotational, EMI) more frequently</li>
+          <li>Maintain an error log — same calculation mistakes in mocks must be fixed immediately</li>
+        </ul>
+      </div>
+      <div class="list-card mistakes reveal">
+        <h3>
+          <span style="color:var(--red)">⚠️</span>
+          Common Mistakes Students Make
+        </h3>
+        <ul>
+          <li>Reading NCERT without solving any problems — Physics without practice is theory, not Physics</li>
+          <li>Wrong sign conventions in optics and electrostatics — memorize one convention and stick to it</li>
+          <li>Skipping Rotational Motion — this chapter alone gives 3-5 questions and most students avoid it</li>
+          <li>Not drawing Free Body Diagrams — attempting Newton's law problems without FBD leads to errors</li>
+          <li>Ignoring Experimental Skills — 1-3 easy marks wasted because "it's just lab stuff"</li>
+          <li>Only reading Modern Physics without solving — it looks conceptual but has numerical questions</li>
+          <li>Skipping units and dimensional analysis in answers — NEET MCQs check unit awareness</li>
+          <li>Attempting calculation-heavy problems first in exam — always attempt conceptual questions first</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     11. DAILY PHYSICS ROUTINE
+══════════════════════════════ -->
+<section class="phy-section" id="daily-routine" aria-labelledby="routine-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Daily Routine</div>
+    <h2 class="phy-section-title" id="routine-title">A day in Physics preparation.</h2>
+    <p class="phy-section-sub">This is a sample daily routine for a serious NEET Physics aspirant with 3-4 hours dedicated to Physics per day.</p>
+
+    <div class="routine-grid">
+      <div class="routine-card reveal">
+        <div class="routine-time">6:30 AM</div>
+        <div class="routine-label">Formula revision — go through yesterday's chapter formula sheet (20 min)</div>
+      </div>
+      <div class="routine-card reveal">
+        <div class="routine-time">7:00 AM</div>
+        <div class="routine-label">NCERT reading — new chapter with active understanding and derivations (60 min)</div>
+      </div>
+      <div class="routine-card reveal">
+        <div class="routine-time">9:00 AM</div>
+        <div class="routine-label">Problem solving — 20-30 numericals from NCERT exercises and DC Pandey (90 min)</div>
+      </div>
+      <div class="routine-card reveal">
+        <div class="routine-time">4:00 PM</div>
+        <div class="routine-label">Graph and diagram drawing — reproduce all chapter graphs from memory (30 min)</div>
+      </div>
+      <div class="routine-card reveal">
+        <div class="routine-time">6:00 PM</div>
+        <div class="routine-label">PYQ solving — chapter-wise previous year questions timed (30 min)</div>
+      </div>
+      <div class="routine-card reveal">
+        <div class="routine-time">9:00 PM</div>
+        <div class="routine-label">Night recall — write all formulas from today's chapter from memory. Fix gaps. (15 min)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     12. PYQ STRATEGY
+══════════════════════════════ -->
+<section class="phy-section pyq-strategy-section" id="pyq-strategy" aria-labelledby="pyq-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">PYQ Strategy</div>
+    <h2 class="phy-section-title" id="pyq-title">Previous Year Questions are your compass.</h2>
+    <p class="phy-section-sub">10 years of NEET Physics PYQs contain the exact formula for your preparation. Here's how to use them strategically.</p>
+
+    <div class="pyq-info-grid">
+      <div class="pyq-card reveal">
+        <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:18px;color:var(--phy-color)">PYQ Strategy — Step by Step</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:13px">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text2);line-height:1.65">
+            <span style="color:var(--phy-color);font-family:var(--font-mono);flex-shrink:0">01.</span>
+            Before studying a chapter, look at all PYQs from it. This creates a mental map of what's important.
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text2);line-height:1.65">
+            <span style="color:var(--phy-color);font-family:var(--font-mono);flex-shrink:0">02.</span>
+            After studying, solve chapter PYQs without notes. A wrong answer means a conceptual gap — go back and fix it.
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text2);line-height:1.65">
+            <span style="color:var(--phy-color);font-family:var(--font-mono);flex-shrink:0">03.</span>
+            For every wrong PYQ answer, find the exact formula or NCERT concept it came from. Add it to your formula sheet.
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text2);line-height:1.65">
+            <span style="color:var(--phy-color);font-family:var(--font-mono);flex-shrink:0">04.</span>
+            Identify question types repeated in 3+ years — these are the most predictable NEET questions. Master them completely.
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text2);line-height:1.65">
+            <span style="color:var(--phy-color);font-family:var(--font-mono);flex-shrink:0">05.</span>
+            In the last 3 months, do full-length PYQ papers (45 Physics questions, 45 minutes). Train speed and accuracy.
+          </li>
+        </ul>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="pyq-card reveal">
+          <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--phy-color);letter-spacing:1.5px;margin-bottom:10px">HIGHEST REPEATED TOPICS</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.82rem">
+              <span style="color:var(--text2)">Electrostatics &amp; Current Electricity</span>
+              <span style="font-family:var(--font-mono);color:var(--phy-color);font-size:.75rem">Every year</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.82rem">
+              <span style="color:var(--text2)">Laws of Motion &amp; Work-Energy</span>
+              <span style="font-family:var(--font-mono);color:var(--phy-color);font-size:.75rem">Every year</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.82rem">
+              <span style="color:var(--text2)">Optics (Ray + Wave)</span>
+              <span style="font-family:var(--font-mono);color:var(--phy-color);font-size:.75rem">Every year</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.82rem">
+              <span style="color:var(--text2)">Modern Physics (Atoms + Nuclei)</span>
+              <span style="font-family:var(--font-mono);color:var(--amber);font-size:.75rem">2-3 yrs cycle</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.82rem">
+              <span style="color:var(--text2)">Rotational Motion</span>
+              <span style="font-family:var(--font-mono);color:var(--amber);font-size:.75rem">2-3 yrs cycle</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pyq-card reveal">
+          <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--phy-color);letter-spacing:1.5px;margin-bottom:10px">PYQ RESOURCE</div>
+          <p style="font-size:.83rem;color:var(--text2);line-height:1.65;font-weight:300;margin-bottom:16px">Solve 10-year chapter-wise PYQs sorted by topic, with full solutions and formula references — right here on NEETopia.</p>
+          <a href="../pyq/pyq-home.html" class="btn-ghost" style="font-size:.82rem;padding:9px 18px">
+            Open PYQ Section →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     13. FAQ SECTION
+══════════════════════════════ -->
+<section class="phy-section" id="faq" aria-labelledby="faq-title">
+  <div class="phy-section-inner">
+    <div class="phy-eyebrow">Frequently Asked</div>
+    <h2 class="phy-section-title" id="faq-title">Questions every NEET Physics aspirant asks.</h2>
+    <p class="phy-section-sub" style="margin-bottom:40px">Honest, direct answers — no fluff, no paid course promotion.</p>
+
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          Is NCERT enough for NEET Physics?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          NCERT is necessary but not sufficient for Physics. The concepts, theory, and many direct questions come from NCERT. However, Physics also requires extensive problem-solving practice — NCERT exercises alone are not enough. After NCERT, solve DC Pandey (Objective) or HC Verma exercises for numericals. Students who score 160+ typically spend 60% of time on NCERT concepts + 40% on additional problem practice.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          How to score 160+ in NEET Physics?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          160+/180 requires: (1) Strong NCERT conceptual clarity. (2) Formula sheet mastery — all chapters. (3) 20-30 problems per chapter minimum. (4) All PYQs 2013-2024 solved. (5) Graph and diagram practice. (6) Zero weak chapters — even "small" chapters like EM Waves and Experimental Skills. (7) Timed mock practice — speed matters in Physics. Most students lose marks not because they don't know physics, but because they run out of time.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          Which Physics chapters are most important for NEET?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          The highest-weightage chapters are: Electrostatics (Ch 1-2, Class 12), Current Electricity (Ch 3, Class 12), Laws of Motion (Ch 4, Class 11), Work-Energy-Power (Ch 5, Class 11), Ray Optics (Ch 9, Class 12), and Rotational Motion (Ch 6, Class 11). Together these give ~25-30 questions. However, all chapters contribute — skipping even "small" chapters like Experimental Skills or EM Waves is risky.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          How many hours per day should I study Physics?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          For a serious NEET aspirant: 2-3 hours/day dedicated to Physics during preparation. In the last 3 months: 3-4 hours/day including mock practice. Unlike Biology, Physics requires daily consistency — even 30 minutes of problem-solving daily beats 4-hour weekend sessions. Make formula revision a 15-minute daily habit, regardless of which chapter you're currently studying.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          Is Physics the hardest subject in NEET?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          Physics is widely considered the most difficult subject in NEET — but "difficult" means it requires both understanding and practice, unlike Biology (memory-heavy) or Chemistry (formula + memory mix). However, this difficulty also means most aspirants score lower in Physics — which is exactly why scoring well in Physics dramatically improves your rank. A student who scores 150+ in Physics while others score 100 gains a massive rank advantage.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" role="button" aria-expanded="false">
+          How to prepare Physics in 3 months for NEET?
+          <span class="faq-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </div>
+        <div class="faq-a">
+          Month 1: Complete all 29 chapters — NCERT reading + formula sheet + NCERT exercises. Prioritize Electrostatics, Mechanics, and Optics. Month 2: Full revision cycle — formula sheets, PYQs chapter-wise, additional problem practice for hard chapters. Month 3: Mock tests (45 Physics, timed), topic-wise revision of weak chapters, final formula sheet review. Focus disproportionately on the 5 high-priority clusters — they give 65-70% of marks.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     14. FINAL MOTIVATION CTA
+══════════════════════════════ -->
+<section class="phy-final-cta" id="cta" aria-labelledby="cta-title">
+  <div class="phy-cta-orb" aria-hidden="true"></div>
+  <h2 id="cta-title">
+    Physics mein <span class="phy-hl">160+</span> possible hai.<br />
+    Teri preparation shuru ho gayi.
+  </h2>
+  <p>
+    NCERT padhna hai. Formulas likhne hain. Problems solve karne hain. Graphs banana hain. PYQs karne hain. Aur progress track karna hai. Ek chapter at a time. Medical college reality hai — dream nahi.
+  </p>
+  <div class="cta-buttons">
+    <a href="#class11" class="btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Start Class 11 Now
+    </a>
+    <a href="#class12" class="btn-ghost">
+      Jump to Class 12
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <a href="../biology/biology-home.html" class="btn-ghost">Biology →</a>
+    <a href="../chemistry/chemistry-home.html" class="btn-ghost">Chemistry →</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     15. FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Physics</h4>
+        <a href="#class11">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Class 11 Chapters
+        </a>
+        <a href="#class12">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Class 12 Chapters
+        </a>
+        <a href="#high-priority">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          High Priority
+        </a>
+        <a href="#progress">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Progress Tracker
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="../chemistry/chemistry-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="physics-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../syllabus/syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="../pattern/pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="../pyq/pyq-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../index.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Home
+        </a>
+        <a href="../roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+        <a href="mailto:hello@neetopia.in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global JS -->
+<script src="../assets/js/main.js"></script>
+
+<script>
+/* ══════════════════════════════
+   PHYSICS PAGE — Extra JS
+══════════════════════════════ */
+
+// ── FLOATING PHYSICS PARTICLES ──
+(function () {
+  const container = document.getElementById('phyParticles');
+  if (!container) return;
+  const colors = ['#3dbfff','#7fd8ff','#a87cf5'];
+  for (let i = 0; i < 24; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'phy-particle';
+    dot.style.cssText = `
+      left: ${Math.random() * 90}%;
+      top: ${30 + Math.random() * 60}%;
+      animation-delay: ${Math.random() * 12}s;
+      animation-duration: ${8 + Math.random() * 8}s;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      width: ${2 + Math.random() * 3}px;
+      height: ${2 + Math.random() * 3}px;
+    `;
+    container.appendChild(dot);
+  }
+})();
+
+// ── PROGRESS TRACKER ──
+(function () {
+  const C11_CHAPTERS = 14;
+  const C12_CHAPTERS = 15;
+  const TOTAL = C11_CHAPTERS + C12_CHAPTERS;
+
+  function countDone(prefix, count) {
+    const prog = JSON.parse(localStorage.getItem('neetopia-progress') || '{}');
+    let done = 0;
+    for (let i = 1; i <= count; i++) {
+      const key = `${prefix}${String(i).padStart(2, '0')}`;
+      if (prog[key]) done++;
+    }
+    return done;
+  }
+
+  function updateProgressUI() {
+    const c11Done = countDone('phy-c11-ch', C11_CHAPTERS);
+    const c12Done = countDone('phy-c12-ch', C12_CHAPTERS);
+    const totalDone = c11Done + c12Done;
+
+    const totalPct = Math.round((totalDone / TOTAL) * 100);
+    const c11Pct   = Math.round((c11Done / C11_CHAPTERS) * 100);
+    const c12Pct   = Math.round((c12Done / C12_CHAPTERS) * 100);
+
+    document.getElementById('totalPct').textContent = totalPct + '%';
+    document.getElementById('c11Pct').textContent   = c11Pct + '%';
+    document.getElementById('c12Pct').textContent   = c12Pct + '%';
+    document.getElementById('doneCount').textContent = totalDone;
+
+    document.getElementById('totalBar').style.width = totalPct + '%';
+    document.getElementById('c11Bar').style.width   = c11Pct + '%';
+    document.getElementById('c12Bar').style.width   = c12Pct + '%';
+  }
+
+  // Init checkboxes from global NEETopia tracker
+  document.querySelectorAll('[data-chapter]').forEach(el => {
+    if (el.tagName === 'INPUT' && el.type === 'checkbox') {
+      el.addEventListener('change', updateProgressUI);
+    }
+  });
+
+  // Reset button
+  const resetBtn = document.getElementById('resetProgress');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (!confirm('Sab progress reset karna chahte ho? This cannot be undone.')) return;
+      const prog = JSON.parse(localStorage.getItem('neetopia-progress') || '{}');
+      for (let i = 1; i <= C11_CHAPTERS; i++) {
+        const key = `phy-c11-ch${String(i).padStart(2,'0')}`;
+        delete prog[key];
+        const cb = document.querySelector(`[data-chapter="${key}"]`);
+        if (cb) cb.checked = false;
+      }
+      for (let i = 1; i <= C12_CHAPTERS; i++) {
+        const key = `phy-c12-ch${String(i).padStart(2,'0')}`;
+        delete prog[key];
+        const cb = document.querySelector(`[data-chapter="${key}"]`);
+        if (cb) cb.checked = false;
+      }
+      localStorage.setItem('neetopia-progress', JSON.stringify(prog));
+      updateProgressUI();
+    });
+  }
+
+  updateProgressUI();
+})();
+
+// ── FAQ ACCORDION ──
+(function () {
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      // Toggle current
+      if (!isOpen) {
+        item.classList.add('open');
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+// ── STICKY SECTION NAV ACTIVE HIGHLIGHT ──
+(function () {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.section-nav a');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('sn-active'));
+        const active = document.querySelector(`.section-nav a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('sn-active');
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-80px 0px -40% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
+
+</body>
+</html>
