@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | NEETopia</title>
+  <meta name="description" content="Yeh page nahi mila. NEETopia par wapas jao aur apni NEET preparation continue karo." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    /* ── 404 PAGE SPECIFIC ── */
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 60px) clamp(20px,5%,80px) 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background orbs — same as hero */
+    .error-orb1 {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,191,255,0.07) 0%, transparent 70%);
+      top: 10%; left: -120px;
+      pointer-events: none;
+    }
+    .error-orb2 {
+      position: absolute;
+      width: 440px; height: 440px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,124,245,0.06) 0%, transparent 70%);
+      bottom: 10%; right: -100px;
+      pointer-events: none;
+    }
+
+    /* Grid bg — same as hero */
+    .error-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* The big 404 */
+    .error-code {
+      font-family: var(--font-head);
+      font-size: clamp(6rem, 18vw, 13rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -6px;
+      color: transparent;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 60%, var(--green) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
+
+    /* Terminal-style label */
+    .error-label {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .error-label::before,
+    .error-label::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      opacity: .5;
+    }
+
+    .error-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .error-desc {
+      font-size: .95rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Mini terminal block */
+    .error-terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      text-align: left;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .error-terminal .t-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .error-terminal .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .error-terminal .t-dot.r { background: #ff5f57; }
+    .error-terminal .t-dot.y { background: #febc2e; }
+    .error-terminal .t-dot.g { background: #28c840; }
+    .error-terminal .t-title {
+      font-size: .68rem;
+      color: var(--text3);
+      margin-left: 4px;
+    }
+    .et-line { display: flex; gap: 8px; margin-bottom: 4px; }
+    .et-prompt { color: var(--accent); }
+    .et-cmd { color: var(--text2); }
+    .et-out { color: var(--text3); margin-bottom: 4px; padding-left: 16px; }
+    .et-err { color: #f56565; margin-bottom: 4px; padding-left: 16px; }
+    .et-sug { color: var(--green); margin-bottom: 2px; padding-left: 16px; }
+    .t-cursor {
+      display: inline-block;
+      width: 7px; height: 14px;
+      background: var(--accent);
+      border-radius: 1px;
+      animation: blink 1.1s step-end infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* CTA buttons */
+    .error-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Quick links */
+    .error-links {
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .error-links-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .error-links-grid {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .error-quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: .82rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .error-quick-link:hover { color: var(--accent); border-color: var(--border-glow); background: var(--accent-dim); }
+    .error-quick-link.bio:hover  { color: var(--green);  border-color: rgba(61,232,160,.4);  background: var(--green-bg); }
+    .error-quick-link.chem:hover { color: var(--amber); border-color: rgba(244,185,66,.4);  background: var(--amber-bg); }
+    .error-quick-link.phy:hover  { color: var(--accent); border-color: rgba(61,191,255,.4);  background: var(--accent-dim); }
+    .error-quick-link.tracker:hover { color: var(--purple); border-color: rgba(168,124,245,.4); background: rgba(168,124,245,.08); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="biology/biology-home.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     404 MAIN CONTENT
+══════════════════════════════ -->
+<main class="error-page">
+  <div class="error-grid"></div>
+  <div class="error-orb1"></div>
+  <div class="error-orb2"></div>
+
+  <div class="error-code">404</div>
+
+  <div class="error-label">Page Not Found</div>
+
+  <h1 class="error-title">
+    Yeh page <span class="hl">nahi mila</span> yaar 😅
+  </h1>
+
+  <p class="error-desc">
+    Jo page tum dhundh rahe ho woh exist nahi karta, move ho gaya hai,
+    ya URL mein koi typo hai. Koi baat nahi — preparation wapas shuru karo!
+  </p>
+
+  <!-- Mini terminal -->
+  <div class="error-terminal">
+    <div class="t-bar">
+      <div class="t-dot r"></div>
+      <div class="t-dot y"></div>
+      <div class="t-dot g"></div>
+      <span class="t-title">neet-404.sh</span>
+    </div>
+    <div class="et-line">
+      <span class="et-prompt">$</span>
+      <span class="et-cmd">neetopia <span style="color:var(--accent)">find</span> --page="<span id="errorPath" style="color:var(--amber)"></span>"</span>
+    </div>
+    <div class="et-err">✗ Error 404: Resource not found</div>
+    <div class="et-out"># Suggested valid routes:</div>
+    <div class="et-sug">→ /syllabus/syllabus.html</div>
+    <div class="et-sug">→ /biology/biology-home.html</div>
+    <div class="et-sug">→ /tracker/progress-tracker.html</div>
+    <div class="et-line" style="margin-top:6px">
+      <span class="et-prompt">$</span>
+      <span class="t-cursor"></span>
+    </div>
+  </div>
+
+  <!-- CTAs -->
+  <div class="error-ctas">
+    <a href="index.html" class="btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home Page Par Jao
+    </a>
+    <a href="syllabus/syllabus.html" class="btn-ghost">
+      Syllabus Dekho
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <!-- Quick links -->
+  <div class="error-links">
+    <div class="error-links-label">Ya seedha yahan jao</div>
+    <div class="error-links-grid">
+      <a href="biology/biology-home.html" class="error-quick-link bio">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Biology
+      </a>
+      <a href="chemistry/chemistry-home.html" class="error-quick-link chem">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+        Chemistry
+      </a>
+      <a href="physics/physics-home.html" class="error-quick-link phy">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+        Physics
+      </a>
+      <a href="pyq/pyq-home.html" class="error-quick-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        PYQs
+      </a>
+      <a href="tracker/progress-tracker.html" class="error-quick-link tracker">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Progress Tracker
+      </a>
+      <a href="roadmap/roadmap.html" class="error-quick-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        Study Roadmap
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="biology/biology-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="chemistry/chemistry-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="physics/physics-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="pattern/pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="pyq/pyq-home.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+        <!-- ── Progress Tracker link added ── -->
+        <a href="tracker/progress-tracker.html" style="color:#a87cf5;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Progress Tracker
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="biology/class11/ch01-living-world.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Living World
+        </a>
+        <a href="biology/class12/ch01-reproduction.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Reproduction
+        </a>
+        <a href="chemistry/class11/ch01-basic-concepts.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Basic Chemistry
+        </a>
+        <a href="physics/class11/ch02-motion.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Kinematics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          1 Year Plan
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          2 Year Plan
+        </a>
+        <a href="mailto:hello@neetopia.in">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Global JS -->
+<script src="assets/js/main.js"></script>
+
+<script>
+  // Show current broken URL path in terminal
+  const pathEl = document.getElementById('errorPath');
+  if (pathEl) {
+    const path = window.location.pathname || '/unknown-page';
+    pathEl.textContent = path.length > 36 ? path.slice(0, 36) + '…' : path;
+  }
+
+  // Auto-redirect countdown (optional — commented out, uncomment if needed)
+  // let secs = 10;
+  // const interval = setInterval(() => {
+  //   secs--;
+  //   if (secs <= 0) { clearInterval(interval); window.location.href = 'index.html'; }
+  // }, 1000);
+</script>
+</body>
+</html>
