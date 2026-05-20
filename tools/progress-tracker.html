@@ -1,0 +1,3597 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET Progress Tracker Dashboard 2026 | Track Chapters, Topics & Mock Tests – NEETopia</title>
+  <meta name="description" content="Track every NEET chapter, topic, mock test and revision. Complete NEET 2026 Progress Tracker Dashboard — Biology, Chemistry, Physics. Free, private, local storage only." />
+  <meta property="og:title" content="NEET Progress Tracker Dashboard 2026 – NEETopia" />
+  <meta property="og:description" content="India's most complete NEET Progress Tracker. Track every chapter, topic, mock test, daily consistency — all private, stored only in your browser." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+<style>
+/* ─── TRACKER-SPECIFIC STYLES ─── */
+:root {
+  --bio: #3de8a0;
+  --chem: #f4b942;
+  --phy: #3dbfff;
+  --danger: #ff5f5f;
+  --success: #3de8a0;
+  --warn: #f4b942;
+  --purple: #a87cf5;
+  --card-radius: 14px;
+}
+
+/* ── STICKY TRACKER NAV ── */
+.tracker-subnav {
+  position: sticky;
+  top: 64px;
+  z-index: 180;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tracker-subnav::-webkit-scrollbar { display: none; }
+.tracker-subnav-inner {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 20px;
+  min-width: max-content;
+}
+.snav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.snav-btn:hover { background: var(--bg3); color: var(--fg); }
+.snav-btn.active { background: var(--accent); color: var(--bg); }
+
+/* ── TRACKER LAYOUT ── */
+.tracker-page { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ── LOCAL STORAGE NOTICE ── */
+.storage-notice {
+  background: linear-gradient(135deg, rgba(168,124,245,.1), rgba(61,191,255,.08));
+  border: 1px solid rgba(168,124,245,.3);
+  border-radius: var(--card-radius);
+  padding: 16px 20px;
+  margin: 24px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.storage-notice .notice-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(168,124,245,.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--purple);
+}
+.storage-notice p { margin: 0; font-size: .82rem; color: var(--muted); line-height: 1.6; }
+.storage-notice strong { color: var(--fg); }
+
+/* ── SECTION PANELS ── */
+.tracker-section { display: none; }
+.tracker-section.active { display: block; }
+
+/* ── HERO DASHBOARD ── */
+.dash-hero {
+  padding: 40px 0 0;
+  text-align: center;
+}
+.dash-hero h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.dash-hero p {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-bottom: 32px;
+}
+
+/* ── STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 18px;
+  text-align: center;
+  transition: transform .2s, border-color .2s;
+  cursor: default;
+}
+.stat-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.stat-card .stat-num {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-card .stat-label {
+  font-size: .75rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.stat-card.bio .stat-num { color: var(--bio); }
+.stat-card.chem .stat-num { color: var(--chem); }
+.stat-card.phy .stat-num { color: var(--phy); }
+.stat-card.purple .stat-num { color: var(--purple); }
+.stat-card.warn .stat-num { color: var(--warn); }
+.stat-card.danger .stat-num { color: var(--danger); }
+
+/* ── PROFILE CARD ── */
+.profile-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  margin: 24px 0;
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.profile-avatar-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.profile-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--muted);
+  font-size: .65rem;
+  gap: 2px;
+}
+.profile-avatar-edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid var(--bg2);
+}
+.profile-info h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.profile-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: .8rem;
+  color: var(--muted);
+}
+.profile-badge {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: .75rem;
+  color: var(--fg);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  outline: none;
+  transition: border-color .2s;
+  box-sizing: border-box;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-group select option { background: var(--bg2); }
+
+.btn-save {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+.btn-save:hover { opacity: .85; transform: translateY(-1px); }
+
+/* ── JOURNAL / PERSONAL SPACE ── */
+.journal-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  margin: 24px 0;
+}
+.journal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.journal-header h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.journal-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.journal-entry {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+}
+.journal-entry .entry-date {
+  font-size: .72rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.journal-entry .entry-text {
+  font-size: .88rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.journal-entry .entry-mood {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.2rem;
+}
+.journal-entry .entry-delete {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: .75rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ── PHOTO UPLOAD ── */
+.photo-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.photo-item {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg3);
+  border: 1px dashed var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s;
+}
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-item .photo-delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0,0,0,.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s;
+  border: none;
+  color: #fff;
+  font-size: .7rem;
+}
+.photo-item:hover .photo-delete { opacity: 1; }
+.photo-item .photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  font-size: .65rem;
+  padding: 4px 6px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.photo-item:hover .photo-caption { opacity: 1; }
+.photo-add-btn {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px dashed var(--border);
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: .75rem;
+  transition: border-color .2s, color .2s;
+}
+.photo-add-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── SUBJECT TRACKING ── */
+.subject-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.subj-tab {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.subj-tab:hover { border-color: var(--accent); }
+.subj-tab.bio.active { border-color: var(--bio); color: var(--bio); background: rgba(61,232,160,.08); }
+.subj-tab.chem.active { border-color: var(--chem); color: var(--chem); background: rgba(244,185,66,.08); }
+.subj-tab.phy.active { border-color: var(--phy); color: var(--phy); background: rgba(61,191,255,.08); }
+
+.subject-panel { display: none; }
+.subject-panel.active { display: block; }
+
+/* ── CHAPTER CARD ── */
+.chapter-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.chapter-card:hover { border-color: rgba(168,124,245,.3); }
+.chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.chapter-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all .2s;
+  position: relative;
+}
+.chapter-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.chapter-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #000;
+  font-size: .7rem;
+  font-weight: 700;
+}
+.chapter-info { flex: 1; min-width: 0; }
+.chapter-name {
+  font-weight: 600;
+  font-size: .92rem;
+  margin-bottom: 4px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+.chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chapter-progress-text {
+  font-size: .72rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.progress-bar-mini {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  flex: 1;
+  min-width: 60px;
+  max-width: 140px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+.progress-fill.bio { background: var(--bio); }
+.progress-fill.chem { background: var(--chem); }
+.progress-fill.phy { background: var(--phy); }
+
+.chapter-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.badge {
+  font-size: .65rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border: 1px solid;
+}
+.badge.revised { color: var(--bio); border-color: rgba(61,232,160,.3); background: rgba(61,232,160,.08); }
+.badge.mocked { color: var(--phy); border-color: rgba(61,191,255,.3); background: rgba(61,191,255,.08); }
+
+.chapter-toggle {
+  color: var(--muted);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.chapter-card.open .chapter-toggle { transform: rotate(180deg); }
+
+/* ── TOPICS LIST ── */
+.chapter-topics {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 0 20px 16px;
+}
+.chapter-card.open .chapter-topics { display: block; }
+
+.topic-row {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.topic-row:last-child { border-bottom: none; }
+.topic-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  appearance: none;
+  cursor: pointer;
+  transition: all .15s;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.topic-check:checked { background: var(--accent); border-color: var(--accent); }
+.topic-check:checked::after {
+  content: '✓';
+  position: absolute;
+  color: #000;
+  font-size: .6rem;
+}
+.topic-details { flex: 1; }
+.topic-name {
+  font-size: .85rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.topic-name.done {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.topic-notes-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  outline: none;
+  margin-top: 4px;
+  transition: border-color .2s;
+  box-sizing: border-box;
+  resize: none;
+}
+.topic-notes-input:focus { border-color: var(--border); }
+.topic-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+.topic-confidence {
+  display: flex;
+  gap: 3px;
+}
+.conf-star {
+  font-size: .8rem;
+  cursor: pointer;
+  color: var(--border);
+  transition: color .15s;
+}
+.conf-star.lit { color: var(--chem); }
+.topic-flags {
+  display: flex;
+  gap: 4px;
+}
+.flag-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  font-size: .7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+}
+.flag-btn:hover { border-color: var(--accent); }
+.flag-btn.active-rev { border-color: var(--bio); background: rgba(61,232,160,.1); }
+.flag-btn.active-doubt { border-color: var(--danger); background: rgba(255,95,95,.1); }
+.flag-btn.active-priority { border-color: var(--warn); background: rgba(244,185,66,.1); }
+
+/* ── DAILY TRACKER ── */
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.daily-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 18px;
+}
+.daily-card h4 {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 12px;
+}
+.daily-card .big-input {
+  font-size: 1.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--fg);
+  background: none;
+  border: none;
+  width: 100%;
+  outline: none;
+}
+.daily-card .big-input::placeholder { color: var(--muted); }
+
+.mood-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.mood-btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  font-size: .85rem;
+  transition: all .2s;
+}
+.mood-btn.selected { border-color: var(--accent); background: rgba(168,124,245,.15); }
+
+.streak-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.streak-num {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--chem);
+  line-height: 1;
+}
+.streak-label {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ── WEEKLY HEATMAP ── */
+.heatmap-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.heat-cell {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform .15s;
+  position: relative;
+}
+.heat-cell:hover { transform: scale(1.2); }
+.heat-cell[data-level="1"] { background: rgba(168,124,245,.3); }
+.heat-cell[data-level="2"] { background: rgba(168,124,245,.55); }
+.heat-cell[data-level="3"] { background: rgba(168,124,245,.8); }
+.heat-cell[data-level="4"] { background: var(--purple); }
+
+/* ── TODO LIST ── */
+.todo-add-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.todo-add-row input {
+  flex: 1;
+  min-width: 180px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 14px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  outline: none;
+}
+.todo-add-row input:focus { border-color: var(--accent); }
+.todo-add-row select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  outline: none;
+}
+.btn-add {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  font-size: .85rem;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  transition: opacity .2s;
+}
+.todo-item.done-item { opacity: .5; }
+.todo-item.done-item .todo-text { text-decoration: line-through; }
+.todo-text { flex: 1; font-size: .88rem; }
+.todo-tag {
+  font-size: .68rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.todo-tag.bio { color: var(--bio); border-color: rgba(61,232,160,.3); }
+.todo-tag.chem { color: var(--chem); border-color: rgba(244,185,66,.3); }
+.todo-tag.phy { color: var(--phy); border-color: rgba(61,191,255,.3); }
+.todo-tag.general { color: var(--purple); border-color: rgba(168,124,245,.3); }
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.priority-dot.high { background: var(--danger); }
+.priority-dot.medium { background: var(--warn); }
+.priority-dot.low { background: var(--bio); }
+.todo-del {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: .8rem;
+  padding: 2px;
+  transition: color .2s;
+}
+.todo-del:hover { color: var(--danger); }
+
+/* ── TEST TRACKER ── */
+.test-add-form {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.test-add-form h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+.test-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.test-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.test-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: start;
+}
+.test-card h4 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.test-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.test-score-big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bio);
+  line-height: 1;
+}
+.test-score-label { font-size: .7rem; color: var(--muted); }
+
+/* ── BOOKS TRACKER ── */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.book-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 20px;
+}
+.book-card h4 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.book-progress-big {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.book-percent {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-width: 50px;
+}
+.book-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.book-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width .4s;
+}
+.book-range {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* ── ANALYTICS ── */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.analytics-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 22px;
+}
+.analytics-card h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.readiness-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+.readiness-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 6px solid var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.readiness-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.readiness-label {
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+.weakness-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.weakness-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+}
+.weakness-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.weakness-fill {
+  height: 100%;
+  background: var(--danger);
+  border-radius: 3px;
+}
+
+/* ── MOTIVATIONAL ── */
+.quote-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.quote-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  font-size: 6rem;
+  font-family: Georgia, serif;
+  color: var(--accent);
+  opacity: .08;
+  line-height: 1;
+}
+.quote-text {
+  font-size: .95rem;
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  position: relative;
+}
+.quote-attr {
+  font-size: .75rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ── REALITY CHECK TOGGLE ── */
+.reality-toggle-btn {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(255,95,95,.08), rgba(244,185,66,.06));
+  border: 1px solid rgba(255,95,95,.3);
+  border-radius: var(--card-radius);
+  padding: 18px 22px;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 16px 0;
+  transition: background .2s;
+}
+.reality-toggle-btn:hover { background: linear-gradient(135deg, rgba(255,95,95,.12), rgba(244,185,66,.1)); }
+.reality-toggle-btn .rt-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--danger);
+}
+.reality-toggle-btn .rt-sub {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.reality-content {
+  display: none;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.reality-content.open { display: block; }
+.reality-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.reality-item {
+  background: var(--bg3);
+  border-radius: 10px;
+  padding: 16px;
+  border-left: 3px solid var(--warn);
+}
+.reality-item h5 {
+  font-weight: 700;
+  font-size: .9rem;
+  margin-bottom: 6px;
+  color: var(--warn);
+}
+.reality-item p {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── CAREER CARDS ── */
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.career-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  text-align: center;
+  transition: transform .2s, border-color .2s;
+}
+.career-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.career-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.career-card h4 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.career-card p {
+  font-size: .75rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.career-coming {
+  font-size: .68rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ── BACKUP SECTION ── */
+.backup-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-export:hover { border-color: var(--bio); color: var(--bio); }
+.btn-import {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-import:hover { border-color: var(--phy); color: var(--phy); }
+.backup-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.backup-step {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 18px;
+}
+.step-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .8rem;
+  margin-bottom: 10px;
+}
+.backup-step h4 { font-size: .88rem; font-weight: 700; margin-bottom: 6px; }
+.backup-step p { font-size: .78rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 16px 20px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.faq-q span { transition: transform .2s; }
+.faq-item.open .faq-q span { transform: rotate(45deg); }
+.faq-a {
+  display: none;
+  padding: 0 20px 16px;
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── SECTION HEADINGS ── */
+.section-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title .section-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.section-icon.bio { background: rgba(61,232,160,.15); }
+.section-icon.chem { background: rgba(244,185,66,.15); }
+.section-icon.phy { background: rgba(61,191,255,.15); }
+.section-icon.purple { background: rgba(168,124,245,.15); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: .85rem;
+  font-weight: 600;
+  z-index: 9999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all .3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: var(--bio); color: var(--bio); }
+.toast.info { border-color: var(--phy); color: var(--phy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .chapter-badges { display: none; }
+  .topic-row { grid-template-columns: 20px 1fr; }
+  .topic-controls { display: none; }
+  .test-form-grid { grid-template-columns: 1fr; }
+  .photo-wall { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── SECTION DIVIDER ── */
+.sec-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ NAVBAR ══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+  <ul class="nav-links">
+    <li><a href="../syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="../pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="../physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      PYQs</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="../biology/biology-home.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════ STICKY SUBNAV ══════════════════════════════ -->
+<nav class="tracker-subnav" aria-label="Tracker sections">
+  <div class="tracker-subnav-inner">
+    <button class="snav-btn active" data-section="dashboard">📊 Dashboard</button>
+    <button class="snav-btn" data-section="profile">👤 Profile</button>
+    <button class="snav-btn" data-section="syllabus">📚 Syllabus</button>
+    <button class="snav-btn" data-section="daily">🗓 Daily</button>
+    <button class="snav-btn" data-section="todo">✅ To-Do</button>
+    <button class="snav-btn" data-section="tests">🧪 Tests</button>
+    <button class="snav-btn" data-section="books">📖 Books</button>
+    <button class="snav-btn" data-section="analytics">📈 Analytics</button>
+    <button class="snav-btn" data-section="personal">🗒 My Space</button>
+    <button class="snav-btn" data-section="motivation">💡 Motivation</button>
+    <button class="snav-btn" data-section="backup">💾 Backup</button>
+    <button class="snav-btn" data-section="faq">❓ FAQ</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════ MAIN CONTENT ══════════════════════════════ -->
+<main class="tracker-page">
+
+  <!-- LOCAL STORAGE NOTICE -->
+  <div class="storage-notice">
+    <div class="notice-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <p>
+      <strong>🔒 Your data is 100% private.</strong> All progress, notes, and tracking data is stored only in <strong>your browser's local storage</strong>. We do not store anything on any server. If you clear browser data or switch devices, your data may be lost. <strong>Please export a backup regularly.</strong>
+    </p>
+  </div>
+
+  <!-- ═══════════════ SECTION: DASHBOARD ═══════════════ -->
+  <section class="tracker-section active" id="section-dashboard">
+    <div class="dash-hero">
+      <h1>NEET <span class="hl">Progress Tracker</span> Dashboard</h1>
+      <p>Track every chapter, topic, test and revision journey. Your complete NEET operating system.</p>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card bio">
+        <div class="stat-num" id="stat-chapters">0</div>
+        <div class="stat-label">Chapters Done</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-num" id="stat-topics">0</div>
+        <div class="stat-label">Topics Done</div>
+      </div>
+      <div class="stat-card phy">
+        <div class="stat-num" id="stat-tests">0</div>
+        <div class="stat-label">Tests Given</div>
+      </div>
+      <div class="stat-card chem">
+        <div class="stat-num" id="stat-streak">0</div>
+        <div class="stat-label">Day Streak 🔥</div>
+      </div>
+      <div class="stat-card warn">
+        <div class="stat-num" id="stat-score">—</div>
+        <div class="stat-label">Best Mock Score</div>
+      </div>
+      <div class="stat-card danger">
+        <div class="stat-num" id="stat-consistency">0%</div>
+        <div class="stat-label">Consistency</div>
+      </div>
+    </div>
+
+    <!-- Subject Progress Summary -->
+    <h2 class="section-title">
+      <span class="section-icon purple">📊</span>
+      Subject Progress Overview
+    </h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:24px;">
+      <div class="stat-card" style="text-align:left;padding:22px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <span style="color:var(--bio);font-size:1.1rem;">🌿</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Biology</span>
+          <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.85rem;" id="bio-pct">0%</span>
+        </div>
+        <div class="progress-bar-mini" style="max-width:100%;height:8px;">
+          <div class="progress-fill bio" id="bio-bar" style="width:0%"></div>
+        </div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="bio-detail">0 / 10 units complete</div>
+      </div>
+      <div class="stat-card" style="text-align:left;padding:22px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <span style="color:var(--chem);font-size:1.1rem;">⚗️</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Chemistry</span>
+          <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.85rem;" id="chem-pct">0%</span>
+        </div>
+        <div class="progress-bar-mini" style="max-width:100%;height:8px;">
+          <div class="progress-fill chem" id="chem-bar" style="width:0%"></div>
+        </div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="chem-detail">0 / 20 units complete</div>
+      </div>
+      <div class="stat-card" style="text-align:left;padding:22px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <span style="color:var(--phy);font-size:1.1rem;">⚡</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Physics</span>
+          <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.85rem;" id="phy-pct">0%</span>
+        </div>
+        <div class="progress-bar-mini" style="max-width:100%;height:8px;">
+          <div class="progress-fill phy" id="phy-bar" style="width:0%"></div>
+        </div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="phy-detail">0 / 20 units complete</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: PROFILE ═══════════════ -->
+  <section class="tracker-section" id="section-profile">
+    <h2 class="section-title"><span class="section-icon purple">👤</span> Student Profile</h2>
+    <div class="profile-section">
+      <div class="profile-header">
+        <div class="profile-avatar-wrapper">
+          <div class="profile-avatar" id="avatarDisplay" onclick="document.getElementById('avatarInput').click()">
+            <img id="avatarImg" src="" alt="Profile" />
+            <div class="profile-avatar-placeholder" id="avatarPlaceholder">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Upload</span>
+            </div>
+          </div>
+          <div class="profile-avatar-edit" onclick="document.getElementById('avatarInput').click()">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          </div>
+          <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)" />
+        </div>
+        <div class="profile-info">
+          <h2 id="profileName">Your Name</h2>
+          <div class="profile-meta">
+            <span class="profile-badge" id="profileClass">Class: —</span>
+            <span class="profile-badge" id="profileYear">Target: —</span>
+            <span class="profile-badge" id="profileGoal">Score: —</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-grid">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="inp-name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Class / Category</label>
+          <select id="inp-class">
+            <option value="">Select...</option>
+            <option value="11th">Class 11th</option>
+            <option value="12th">Class 12th</option>
+            <option value="Dropper">Dropper</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Year</label>
+          <select id="inp-year">
+            <option value="2026">NEET 2026</option>
+            <option value="2027">NEET 2027</option>
+            <option value="2028">NEET 2028</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Score (out of 720)</label>
+          <input type="number" id="inp-score" min="300" max="720" placeholder="e.g. 650" />
+        </div>
+        <div class="form-group">
+          <label>Daily Study Goal (hours)</label>
+          <input type="number" id="inp-daily" min="1" max="16" placeholder="e.g. 8" />
+        </div>
+        <div class="form-group">
+          <label>Weak Subject</label>
+          <select id="inp-weak">
+            <option value="">Select...</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
+            <option value="None">None — All fine!</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>Personal Goals / Motivation Note</label>
+        <textarea id="inp-motivation" placeholder="Why do you want to become a doctor? Write it here..."></textarea>
+      </div>
+      <button class="btn-save" onclick="saveProfile()">💾 Save Profile</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: SYLLABUS TRACKER ═══════════════ -->
+  <section class="tracker-section" id="section-syllabus">
+    <h2 class="section-title"><span class="section-icon purple">📚</span> Complete Syllabus Tracker — NEET 2026</h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Track every chapter and topic. Check off topics as you complete them. Each subject is tracked separately.</p>
+
+    <div class="subject-tabs">
+      <button class="subj-tab bio active" data-subj="bio">🌿 Biology (10 Units)</button>
+      <button class="subj-tab chem" data-subj="chem">⚗️ Chemistry (20 Units)</button>
+      <button class="subj-tab phy" data-subj="phy">⚡ Physics (20 Units)</button>
+    </div>
+
+    <!-- BIOLOGY PANEL -->
+    <div class="subject-panel active" id="panel-bio">
+      <div id="bio-chapters"></div>
+    </div>
+
+    <!-- CHEMISTRY PANEL -->
+    <div class="subject-panel" id="panel-chem">
+      <div id="chem-chapters"></div>
+    </div>
+
+    <!-- PHYSICS PANEL -->
+    <div class="subject-panel" id="panel-phy">
+      <div id="phy-chapters"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: DAILY TRACKER ═══════════════ -->
+  <section class="tracker-section" id="section-daily">
+    <h2 class="section-title"><span class="section-icon chem">🗓</span> Daily Tracker</h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:4px;">Today: <strong id="todayDate"></strong></p>
+
+    <div class="daily-grid">
+      <div class="daily-card">
+        <h4>⏱ Study Hours Today</h4>
+        <input class="big-input" type="number" id="daily-hours" min="0" max="24" placeholder="0" oninput="saveDailyData()" />
+        <div style="font-size:.75rem;color:var(--muted);margin-top:4px;">Goal: <span id="daily-goal-show">—</span> hours</div>
+      </div>
+      <div class="daily-card">
+        <h4>🔥 Day Streak</h4>
+        <div class="streak-display">
+          <div class="streak-num" id="streak-display">0</div>
+          <div>
+            <div class="streak-label">consecutive</div>
+            <div class="streak-label">study days</div>
+          </div>
+        </div>
+      </div>
+      <div class="daily-card">
+        <h4>💧 Water Intake (glasses)</h4>
+        <input class="big-input" type="number" id="daily-water" min="0" max="20" placeholder="0" oninput="saveDailyData()" />
+        <div style="font-size:.75rem;color:var(--muted);margin-top:4px;">Target: 8 glasses</div>
+      </div>
+      <div class="daily-card">
+        <h4>😴 Sleep Last Night (hrs)</h4>
+        <input class="big-input" type="number" id="daily-sleep" min="0" max="12" placeholder="0" oninput="saveDailyData()" />
+        <div style="font-size:.75rem;color:var(--muted);margin-top:4px;">Target: 7–8 hours</div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">😊 Mood Today</h4>
+      <div class="mood-grid" id="moodGrid">
+        <button class="mood-btn" data-mood="🔥 Focused">🔥 Focused</button>
+        <button class="mood-btn" data-mood="😊 Good">😊 Good</button>
+        <button class="mood-btn" data-mood="😐 Okay">😐 Okay</button>
+        <button class="mood-btn" data-mood="😩 Tired">😩 Tired</button>
+        <button class="mood-btn" data-mood="😰 Anxious">😰 Anxious</button>
+        <button class="mood-btn" data-mood="💪 Motivated">💪 Motivated</button>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+        <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">📅 Study Heatmap (Last 84 Days)</h4>
+        <div style="display:flex;gap:6px;align-items:center;font-size:.72rem;color:var(--muted);">
+          <span>Less</span>
+          <div style="width:12px;height:12px;border-radius:3px;background:var(--bg3);border:1px solid var(--border)"></div>
+          <div style="width:12px;height:12px;border-radius:3px;background:rgba(168,124,245,.3)"></div>
+          <div style="width:12px;height:12px;border-radius:3px;background:rgba(168,124,245,.6)"></div>
+          <div style="width:12px;height:12px;border-radius:3px;background:var(--purple)"></div>
+          <span>More</span>
+        </div>
+      </div>
+      <div class="heatmap-row" id="heatmapRow"></div>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:12px;">Click a day to log study hours. Your consistency is your superpower.</p>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📝 Daily Notes / Reflection</h4>
+      <textarea class="form-group" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;resize:vertical;min-height:80px;box-sizing:border-box;" id="daily-notes" placeholder="What did you study today? Any doubts? Tomorrow's plan?" oninput="saveDailyData()"></textarea>
+      <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;align-items:center;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;">
+          <input type="checkbox" id="daily-mock" onchange="saveDailyData()" style="width:16px;height:16px;accent-color:var(--accent);" />
+          Mock test done today
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;">
+          <input type="checkbox" id="daily-revision" onchange="saveDailyData()" style="width:16px;height:16px;accent-color:var(--accent);" />
+          Revision done today
+        </label>
+        <button class="btn-save" onclick="markStudyDayDone()" style="margin-left:auto;">✅ Log Today's Progress</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
+  <section class="tracker-section" id="section-todo">
+    <h2 class="section-title"><span class="section-icon purple">✅</span> Daily To-Do List</h2>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+      <div class="todo-add-row">
+        <input type="text" id="todoInput" placeholder="Add a task... (e.g. Revise Chapter 5 Biology)" onkeydown="if(event.key==='Enter')addTodo()" />
+        <select id="todoSubject">
+          <option value="general">General</option>
+          <option value="bio">Biology</option>
+          <option value="chem">Chemistry</option>
+          <option value="phy">Physics</option>
+        </select>
+        <select id="todoPriority">
+          <option value="high">🔴 High</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="low">🟢 Low</option>
+        </select>
+        <button class="btn-add" onclick="addTodo()">+ Add</button>
+      </div>
+      <div id="todoList" class="todo-list"></div>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-export" onclick="clearCompletedTodos()" style="border-color:var(--danger);color:var(--danger);">🗑 Clear Completed</button>
+        <span style="margin-left:auto;font-size:.8rem;color:var(--muted);align-self:center;" id="todo-count">0 tasks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: TESTS ═══════════════ -->
+  <section class="tracker-section" id="section-tests">
+    <h2 class="section-title"><span class="section-icon phy">🧪</span> Test & Mock Test Tracker</h2>
+
+    <div class="test-add-form">
+      <h3>+ Log a Test</h3>
+      <div class="test-form-grid">
+        <div class="form-group">
+          <label>Test Name</label>
+          <input type="text" id="test-name" placeholder="e.g. Allen Minor Test 3" />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="test-date" />
+        </div>
+        <div class="form-group">
+          <label>Score (out of 720)</label>
+          <input type="number" id="test-score" min="0" max="720" placeholder="e.g. 540" />
+        </div>
+        <div class="form-group">
+          <label>Accuracy (%)</label>
+          <input type="number" id="test-accuracy" min="0" max="100" placeholder="e.g. 78" />
+        </div>
+        <div class="form-group">
+          <label>Time Taken (mins)</label>
+          <input type="number" id="test-time" min="0" max="200" placeholder="e.g. 180" />
+        </div>
+        <div class="form-group">
+          <label>Weak Area</label>
+          <input type="text" id="test-weak" placeholder="e.g. Physics Optics" />
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Mistake Analysis / Notes</label>
+        <textarea id="test-notes" placeholder="What went wrong? What to revise?"></textarea>
+      </div>
+      <button class="btn-save" onclick="addTest()">📝 Log Test</button>
+    </div>
+
+    <h3 class="section-title" style="font-size:1rem;">Test History</h3>
+    <div class="test-cards" id="testList"></div>
+  </section>
+
+  <!-- ═══════════════ SECTION: BOOKS ═══════════════ -->
+  <section class="tracker-section" id="section-books">
+    <h2 class="section-title"><span class="section-icon bio">📖</span> Books & Notes Tracker</h2>
+    <div class="books-grid" id="booksGrid"></div>
+  </section>
+
+  <!-- ═══════════════ SECTION: ANALYTICS ═══════════════ -->
+  <section class="tracker-section" id="section-analytics">
+    <h2 class="section-title"><span class="section-icon phy">📈</span> Performance Analytics</h2>
+
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h3>🎯 Readiness Level</h3>
+        <div class="readiness-level">
+          <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);">
+            <div class="readiness-pct" id="readinessPct">0%</div>
+          </div>
+          <div class="readiness-label" id="readinessLabel">Beginner</div>
+          <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;" id="readinessMsg">Start completing topics to build momentum.</p>
+        </div>
+      </div>
+      <div class="analytics-card">
+        <h3>⚠️ Weak Areas</h3>
+        <div class="weakness-list" id="weaknessList">
+          <div style="font-size:.85rem;color:var(--muted);">Complete more topics to see weak area analysis.</div>
+        </div>
+      </div>
+      <div class="analytics-card">
+        <h3>📊 Suggestions</h3>
+        <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
+          <p>📌 Start tracking your topics to get personalized suggestions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
+      <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
+  <section class="tracker-section" id="section-personal">
+    <h2 class="section-title"><span class="section-icon purple">🗒</span> My Personal Space</h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Your private corner. Journal, memories, motivational photos — all saved locally on your device only.</p>
+
+    <!-- JOURNAL -->
+    <div class="journal-section">
+      <div class="journal-header">
+        <h3>📓 My Journal</h3>
+        <div style="display:flex;gap:8px;">
+          <select id="journalMood" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:7px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;">
+            <option value="🔥">🔥 Motivated</option>
+            <option value="😊">😊 Happy</option>
+            <option value="😐">😐 Neutral</option>
+            <option value="😩">😩 Tired</option>
+            <option value="💪">💪 Determined</option>
+            <option value="😰">😰 Stressed</option>
+          </select>
+          <button class="btn-save" onclick="addJournalEntry()">+ Entry</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <textarea id="journalInput" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;resize:vertical;min-height:100px;box-sizing:border-box;" placeholder="Write your thoughts, struggles, victories... This is YOUR space. No one else sees this."></textarea>
+      </div>
+      <div class="journal-entries" id="journalEntries"></div>
+    </div>
+
+    <!-- PHOTO WALL -->
+    <div class="journal-section" style="margin-top:20px;">
+      <div class="journal-header">
+        <h3>📸 Memory Wall</h3>
+        <p style="font-size:.8rem;color:var(--muted);margin:0;">Upload photos: study notes, whiteboards, motivational quotes, achievements. Compressed & stored locally.</p>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)" />
+      <div class="photo-wall" id="photoWall">
+        <button class="photo-add-btn" onclick="document.getElementById('photoInput').click()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Photo
+        </button>
+      </div>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:10px;">⚠️ Images are compressed to ~100KB and stored in localStorage. Max ~20 photos.</p>
+    </div>
+
+    <!-- GOALS WALL -->
+    <div class="journal-section" style="margin-top:20px;">
+      <div class="journal-header">
+        <h3>🎯 My Goals Wall</h3>
+        <button class="btn-save" onclick="addGoal()">+ Goal</button>
+      </div>
+      <div id="goalsWall" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: MOTIVATION ═══════════════ -->
+  <section class="tracker-section" id="section-motivation">
+    <h2 class="section-title"><span class="section-icon chem">💡</span> Motivation & Reality Check</h2>
+
+    <div class="quote-cards">
+      <div class="quote-card">
+        <div class="quote-text">Consistency doesn't care about your mood. Show up even when you don't feel like it. That's where real growth happens.</div>
+        <div class="quote-attr">— The NEET grind truth</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Comparing yourself to toppers on YouTube is not studying. Close the tab. Open NCERT. Small progress today compounds into big results.</div>
+        <div class="quote-attr">— Focus over FOMO</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">The process is boring. The exam is one day. Your career is a lifetime. Fall in love with the boring work.</div>
+        <div class="quote-attr">— Discipline over motivation</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Everyone has the same 24 hours. The difference is what you do in those hours when no one is watching.</div>
+        <div class="quote-attr">— The silent preparation</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Doubts are normal. Giving up is a choice. Stay curious, stay patient. Biology is beautiful — once you understand it.</div>
+        <div class="quote-attr">— Student-first perspective</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Your brain needs rest too. 7 hours of sleep isn't wasted time — it's memory consolidation. Sleep is part of preparation.</div>
+        <div class="quote-attr">— Science-backed advice</div>
+      </div>
+    </div>
+
+    <button class="reality-toggle-btn" onclick="toggleReality()">
+      <div>
+        <div class="rt-title">🚨 Reality & Awareness — Read This</div>
+        <div class="rt-sub">Do not become a blind follower. Open your eyes. (Click to expand)</div>
+      </div>
+      <svg id="realityArrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+
+    <div class="reality-content" id="realityContent">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;margin-bottom:6px;">The Truth About NEET Preparation Culture</h3>
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;">This is written with care and respect — not to discourage anyone, but to help you see clearly and think independently.</p>
+
+      <div class="reality-items">
+        <div class="reality-item">
+          <h5>⚠️ Fake Motivation Culture</h5>
+          <p>Watching 10 motivation videos doesn't prepare one Biology chapter. Real motivation is sitting down and doing the boring work — not feeling pumped from a YouTube video that forgets you in 2 hours.</p>
+        </div>
+        <div class="reality-item">
+          <h5>⚠️ YouTuber Didi/Bhaiya Hype</h5>
+          <p>Many educators genuinely help — but many also create parasocial attachment to grow audiences, sell courses, and get views. Their success isn't your plan. Make your own. Follow content, not personalities.</p>
+        </div>
+        <div class="reality-item">
+          <h5>⚠️ Overconsumption of Strategy Videos</h5>
+          <p>"How I cracked NEET with 4 hours of study" — these titles are designed for clicks. Everyone's preparation is different. Stop collecting strategies. Start implementing one consistently.</p>
+        </div>
+        <div class="reality-item">
+          <h5>⚠️ Course Selling Traps</h5>
+          <p>You do not need 5 different courses. NCERT + one good reference book + PYQs + consistent revision is the actual formula. Premium courses can help — but they're not magic, and free resources work too.</p>
+        </div>
+        <div class="reality-item">
+          <h5>⚠️ Topper Marketing</h5>
+          <p>Toppers often have unique circumstances — coaching, family support, prior coaching experience, or repeated attempts. Comparing your Day 1 to their Day 1000 is unfair to yourself. Stay on your path.</p>
+        </div>
+        <div class="reality-item">
+          <h5>⚠️ Fear-Based Coaching Systems</h5>
+          <p>Some coaching institutes thrive on student anxiety. "If you don't join us, you'll fail" is a manipulation tactic, not reality. Hundreds of self-studied students crack NEET every year. Confidence beats fear.</p>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(61,232,160,.08),rgba(168,124,245,.06));border:1px solid rgba(61,232,160,.2);border-radius:12px;padding:20px;margin-top:20px;">
+        <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:10px;color:var(--bio);">✅ What Actually Works</h4>
+        <ul style="color:var(--muted);font-size:.85rem;line-height:1.9;padding-left:16px;margin:0;">
+          <li>NCERT read multiple times — all three subjects</li>
+          <li>Topic-wise PYQ practice (last 15+ years)</li>
+          <li>Daily consistency — even 1 hour on bad days</li>
+          <li>Regular revision cycles — spaced repetition</li>
+          <li>Mock tests + honest mistake analysis</li>
+          <li>Sleep, exercise, mental health — not optional</li>
+          <li>One trusted teacher/source per subject — not ten</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- REALITY CHECK -->
+    <hr class="sec-divider" />
+    <h2 class="section-title"><span class="section-icon danger">🌏</span> Reality Check — You Are More Than One Exam</h2>
+    <div style="background:linear-gradient(135deg,rgba(168,124,245,.08),rgba(61,191,255,.06));border:1px solid var(--border);border-radius:var(--card-radius);padding:28px;margin:16px 0;text-align:center;">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px;">Give 100%. But Know This.</h3>
+      <p style="color:var(--muted);font-size:.92rem;line-height:1.8;max-width:600px;margin:0 auto;">Selection in NEET sometimes involves factors beyond just preparation — luck, exam day performance, normalization, seat availability. <strong>This does not reduce your worth.</strong> Your intelligence, curiosity, and hard work have value far beyond one exam result. There are many paths to a fulfilling career in healthcare, biology, and science.</p>
+    </div>
+
+    <h3 class="section-title" style="font-size:1rem;margin-top:24px;">🌟 Career Paths Beyond MBBS</h3>
+    <div class="career-grid">
+      <div class="career-card"><div class="career-icon">🧬</div><h4>Biotechnology</h4><p>Research, genetics, biotech industry</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🔬</div><h4>Research & Science</h4><p>CSIR, ICMR, DST, academia</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">💊</div><h4>Pharmacy</h4><p>B.Pharm, M.Pharm, clinical research</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🧠</div><h4>Psychology</h4><p>Clinical, counselling, neuropsychology</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🥗</div><h4>Nutrition & Dietetics</h4><p>Clinical nutrition, sports nutrition</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🎓</div><h4>BSc Careers</h4><p>Zoology, Botany, Biochemistry, Microbiology</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🤖</div><h4>AI in Biology</h4><p>Bioinformatics, computational biology</p><div class="career-coming">Guide Coming Soon</div></div>
+      <div class="career-card"><div class="career-icon">🏥</div><h4>Allied Health</h4><p>Physiotherapy, Occupational therapy, Radiology</p><div class="career-coming">Guide Coming Soon</div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:.82rem;margin-top:8px;">More career guides being developed. <strong>Your options are wider than you think.</strong></p>
+  </section>
+
+  <!-- ═══════════════ SECTION: BACKUP ═══════════════ -->
+  <section class="tracker-section" id="section-backup">
+    <h2 class="section-title"><span class="section-icon phy">💾</span> Backup & Restore</h2>
+
+    <div class="storage-notice">
+      <div class="notice-icon">⚠️</div>
+      <p><strong>Important:</strong> Your data lives only in this browser. If you clear browser data, switch devices, or use incognito mode — your progress WILL be lost. Export your backup regularly to keep your hard work safe.</p>
+    </div>
+
+    <div class="backup-actions">
+      <button class="btn-export" onclick="exportData()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export Backup (JSON)
+      </button>
+      <button class="btn-import" onclick="document.getElementById('importFile').click()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Import Backup
+      </button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+    </div>
+
+    <div class="backup-steps">
+      <div class="backup-step">
+        <div class="step-num">1</div>
+        <h4>Create Backup</h4>
+        <p>Click "Export Backup" to download a JSON file containing ALL your tracking data — topics, notes, tests, journal entries, photos, and progress.</p>
+      </div>
+      <div class="backup-step">
+        <div class="step-num">2</div>
+        <h4>Save It Safely</h4>
+        <p>Save the JSON file to Google Drive, your phone, or email it to yourself. Do this at least once a week — especially before clearing browser data.</p>
+      </div>
+      <div class="backup-step">
+        <div class="step-num">3</div>
+        <h4>Restore Progress</h4>
+        <p>On a new device or after data loss, click "Import Backup" and select your saved JSON file. All your progress will be restored instantly.</p>
+      </div>
+      <div class="backup-step">
+        <div class="step-num">4</div>
+        <h4>Why This Matters</h4>
+        <p>Browser data can be lost from: clearing cache, private/incognito mode, browser updates, or new devices. Your JSON backup is the only copy of your progress.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:20px;">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:12px;">🗃 Storage Info</h3>
+      <div id="storageInfo" style="font-size:.85rem;color:var(--muted);line-height:1.8;"></div>
+      <button class="btn-export" onclick="clearAllData()" style="margin-top:14px;border-color:var(--danger);color:var(--danger);">
+        🗑 Clear ALL Data (cannot be undone)
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION: FAQ ═══════════════ -->
+  <section class="tracker-section" id="section-faq">
+    <h2 class="section-title"><span class="section-icon purple">❓</span> FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my data stored online anywhere? <span>+</span></button>
+        <div class="faq-a">No. Absolutely not. Every piece of data — topics checked, notes written, test scores, journal entries, photos — is stored only in your browser's localStorage. NEETopia has zero access to your data. We don't even have a backend database for user data.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens if browser data gets deleted? <span>+</span></button>
+        <div class="faq-a">Your tracking data will be lost. This is why we strongly recommend exporting a JSON backup file regularly. If you export your backup and import it on another browser, your progress is restored completely.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How does the backup/restore system work? <span>+</span></button>
+        <div class="faq-a">Clicking "Export Backup" downloads a JSON file with all your data. To restore, click "Import Backup" and upload that JSON file. All your progress, notes, test records, journal entries, and topic checkboxes are restored instantly. Keep backups in Google Drive or email for safety.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I track every single topic from the NEET syllabus? <span>+</span></button>
+        <div class="faq-a">Yes! The syllabus tracker contains every unit from the official NEET UG 2026 syllabus — Biology (10 units), Chemistry (20 units), Physics (20 units) — with all topics and subtopics. Every topic has its own checkbox, notes field, revision toggle, confidence rating, and doubt marker.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I use this across multiple devices? <span>+</span></button>
+        <div class="faq-a">Not automatically. Since data is stored in your browser, it won't sync across devices. To use on multiple devices: export your backup on one device, then import it on the other. Then export regularly from whichever device you use most.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is this free forever? <span>+</span></button>
+        <div class="faq-a">Yes. NEETopia is completely free — no paywalls, no premium tiers, no subscriptions. The Progress Tracker is free forever. If you find it valuable, please consider supporting via the Donate button — it helps keep this platform alive.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What is the difference between chapter tracking and topic tracking? <span>+</span></button>
+        <div class="faq-a">Chapter tracking shows overall chapter completion based on how many topics within it are done. Topic tracking is individual — each subtopic has its own checkbox, notes, revision toggle, and confidence rating. These are completely separate systems. Marking a chapter as "done" doesn't auto-check topics, and vice versa.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Why are images stored in the browser and not on a server? <span>+</span></button>
+        <div class="faq-a">Privacy first. We believe your personal study space — notes, journal entries, memory wall photos — should be completely private. Storing on a server would require accounts, authentication, and infrastructure. Keeping everything local means your data belongs to you entirely.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="mailto:raunakkarn777@gmail.com" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            raunakkarn777@gmail.com
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg> Biology</a>
+        <a href="../chemistry/chemistry-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg> Chemistry</a>
+        <a href="../physics/physics-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg> Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../syllabus/syllabus.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Full Syllabus</a>
+        <a href="../pattern/pattern.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg> Exam Pattern</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Study Roadmap</a>
+        <a href="progress-tracker.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Progress Tracker</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> 1 Year Plan</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> 2 Year Plan</a>
+        <a href="mailto:raunakkarn777@gmail.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Contact</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════ JAVASCRIPT ══════════════════════════════ -->
+<script src="../assets/js/main.js"></script>
+<script>
+'use strict';
+
+// ─── DATA STORE ───
+const STORE_KEY = 'neetopia-tracker-v2';
+function getData() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch { return {}; } }
+function setData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+
+// ─── TOAST ───
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = (type === 'success' ? '✅ ' : 'ℹ️ ') + msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+// ─── SUBNAV ───
+document.querySelectorAll('.snav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tracker-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    const sec = document.getElementById('section-' + btn.dataset.section);
+    if (sec) sec.classList.add('active');
+    updateAnalytics();
+    updateStats();
+  });
+});
+
+// ─── FULL NEET 2026 SYLLABUS ───
+const SYLLABUS = {
+  bio: [
+    { id:'bio-u1', name:'Unit 1: Diversity in Living World', color:'bio', topics:[
+      'What is living? Biodiversity, Need for classification',
+      'Taxonomy & Systematics, Concept of species, Taxonomical hierarchy, Binomial nomenclature',
+      'Five kingdom classification — salient features',
+      'Monera: classification into major groups',
+      'Protista: classification into major groups',
+      'Fungi: classification into major groups, Lichens',
+      'Viruses and Viroids',
+      'Algae: salient features and classification',
+      'Bryophytes: salient features and classification',
+      'Pteridophytes: salient features and classification',
+      'Gymnosperms: salient features and classification (3-5 features, 2 examples each)',
+      'Animals: Non-chordates up to phyla level (3-5 salient features)',
+      'Animals: Chordates up to classes level (3-5 salient features)',
+    ]},
+    { id:'bio-u2', name:'Unit 2: Structural Organisation in Animals and Plants', color:'bio', topics:[
+      'Morphology and modifications of plants',
+      'Tissues in plants',
+      'Anatomy and functions: Root, stem, leaf',
+      'Inflorescence — cymose and racemose',
+      'Flower, fruit and seed structure',
+      'Plant families: Malvaceae, Cruciferae, Leguminosae, Compositae, Graminae',
+      'Animal tissues: types and characteristics',
+      'Frog: Morphology, anatomy and functions of digestive system',
+      'Frog: Circulatory, respiratory, nervous systems',
+      'Frog: Reproductive system (brief account)',
+    ]},
+    { id:'bio-u3', name:'Unit 3: Cell Structure and Function', color:'bio', topics:[
+      'Cell theory and cell as basic unit of life',
+      'Structure of prokaryotic cell',
+      'Structure of eukaryotic cell — plant and animal cell',
+      'Cell envelope, cell membrane, cell wall',
+      'Endomembrane system: ER, Golgi bodies, lysosomes, vacuoles',
+      'Mitochondria, ribosomes, plastids, microbodies',
+      'Cytoskeleton, cilia, flagella, centrioles — ultrastructure and function',
+      'Nucleus: nuclear membrane, chromatin, nucleolus',
+      'Biomolecules: structure and function of proteins',
+      'Biomolecules: carbohydrates, lipids, nucleic acids',
+      'Enzymes: types, properties, enzyme action, classification and nomenclature',
+      'Cell division: Cell cycle, mitosis and its significance',
+      'Meiosis and its significance',
+    ]},
+    { id:'bio-u4', name:'Unit 4: Plant Physiology', color:'bio', topics:[
+      'Photosynthesis: autotrophic nutrition, site of photosynthesis',
+      'Photosynthesis: pigments involved (elementary idea)',
+      'Photochemical and biosynthetic phases',
+      'Cyclic and non-cyclic photophosphorylation',
+      'Chemiosmotic hypothesis',
+      'Photorespiration, C3 and C4 pathways',
+      'Factors affecting photosynthesis',
+      'Respiration: exchange of gases, cellular respiration',
+      'Glycolysis, fermentation (anaerobic)',
+      'TCA cycle and electron transport system (aerobic)',
+      'Energy relations: ATP molecules generated, amphibolic pathways, respiratory quotient',
+      'Plant growth: seed germination, phases of growth, growth rate',
+      'Differentiation, dedifferentiation and redifferentiation',
+      'Growth regulators: auxin, gibberellin, cytokinin, ethylene, ABA',
+    ]},
+    { id:'bio-u5', name:'Unit 5: Human Physiology', color:'bio', topics:[
+      'Breathing and Respiration: respiratory organs overview',
+      'Respiratory system in humans: mechanism of breathing and regulation',
+      'Exchange of gases, transport of gases',
+      'Respiratory volumes and capacities',
+      'Respiratory disorders: Asthma, Emphysema, Occupational respiratory disorders',
+      'Body fluids: composition of blood, blood groups, coagulation',
+      'Composition of lymph and its function',
+      'Human circulatory system: structure of heart and blood vessels',
+      'Cardiac cycle, cardiac output, ECG, double circulation',
+      'Regulation of cardiac activity, circulatory disorders',
+      'Excretory products: modes of excretion (ammonotelism, ureotelism, uricotelism)',
+      'Human excretory system: structure and function',
+      'Urine formation and osmoregulation',
+      'Regulation of kidney function (Renin-angiotensin, ADH, ANF)',
+      'Kidney disorders: Uraemia, Renal failure, Renal calculi, Nephritis, Dialysis',
+      'Locomotion and Movement: types of movement',
+      'Skeletal muscle, contractile proteins, muscle contraction',
+      'Skeletal system and its functions, joints',
+      'Disorders: Myasthenia gravis, Tetany, Muscular dystrophy, Arthritis, Osteoporosis, Gout',
+      'Neural control: Neuron and nerves, Nervous system in humans (CNS, PNS, ANS)',
+      'Generation and conduction of nerve impulse',
+      'Chemical coordination: Endocrine glands and hormones',
+      'Human endocrine system: Hypothalamus, Pituitary, Pineal, Thyroid, Parathyroid, Adrenal, Pancreas, Gonads',
+      'Mechanism of hormone action, role of hormones',
+      'Hypo- and hyperactivity disorders: Dwarfism, Acromegaly, Cretinism, Goiter, Diabetes, Addison\'s disease',
+    ]},
+    { id:'bio-u6', name:'Unit 6: Reproduction', color:'bio', topics:[
+      'Sexual reproduction in flowering plants: flower structure',
+      'Development of male and female gametophytes',
+      'Pollination: types, agencies and examples',
+      'Outbreeding devices, pollen-pistil interaction',
+      'Double fertilization',
+      'Post-fertilization: endosperm, embryo, seed, fruit development',
+      'Special modes: apomixis, parthenocarpy, polyembryony',
+      'Significance of seed and fruit formation',
+      'Human Reproduction: male and female reproductive systems',
+      'Microscopic anatomy of testis and ovary',
+      'Gametogenesis: spermatogenesis and oogenesis',
+      'Menstrual cycle',
+      'Fertilisation and embryo development up to blastocyst formation, implantation',
+      'Pregnancy, placenta formation, parturition, lactation (elementary)',
+      'Reproductive health: STD prevention, birth control methods',
+      'Contraception, MTP, amniocentesis',
+      'Infertility and ART: IVF, ZIFT, GIFT (elementary)',
+    ]},
+    { id:'bio-u7', name:'Unit 7: Genetics and Evolution', color:'bio', topics:[
+      'Mendelian Inheritance: Mendel\'s laws',
+      'Deviations: Incomplete dominance, Co-dominance',
+      'Multiple alleles, inheritance of blood groups, Pleiotropy',
+      'Polygenic inheritance (elementary), chromosome theory of inheritance',
+      'Chromosomes and genes, sex determination in humans, birds, honeybee',
+      'Linkage and crossing over',
+      'Sex-linked inheritance: Haemophilia, Colour blindness',
+      'Mendelian disorders: Thalassemia',
+      'Chromosomal disorders: Down\'s syndrome, Turner\'s, Klinefelter\'s syndromes',
+      'Molecular basis of Inheritance: DNA as genetic material',
+      'Structure of DNA and RNA',
+      'DNA packaging, DNA replication',
+      'Central dogma, transcription, genetic code, translation',
+      'Gene expression and regulation: Lac Operon',
+      'Genome and Human Genome Project, DNA fingerprinting',
+      'Evolution: origin of life',
+      'Biological evolution and evidences (paleontology, comparative anatomy, embryology, molecular)',
+      'Darwin\'s contribution, Modern Synthetic theory',
+      'Mechanism of evolution: Variation (mutation and recombination), Natural selection',
+      'Types of natural selection, gene flow and genetic drift',
+      'Hardy-Weinberg\'s principle, Adaptive Radiation, Human evolution',
+    ]},
+    { id:'bio-u8', name:'Unit 8: Biology and Human Welfare', color:'bio', topics:[
+      'Health and Disease: pathogens overview',
+      'Parasites causing human diseases: Malaria, Filariasis, Ascariasis',
+      'Typhoid, Pneumonia, Common cold, Amoebiasis, Ringworm',
+      'Dengue, Chikungunya',
+      'Basic concepts of immunology, vaccines',
+      'Cancer, HIV and AIDS',
+      'Adolescence, drug and alcohol abuse, tobacco abuse',
+      'Microbes in food processing (household)',
+      'Industrial production using microbes',
+      'Sewage treatment, energy generation using microbes',
+      'Biocontrol agents and biofertilizers',
+    ]},
+    { id:'bio-u9', name:'Unit 9: Biotechnology and Its Applications', color:'bio', topics:[
+      'Principles of biotechnology: genetic engineering (recombinant DNA technology)',
+      'Process of biotechnology: tools and techniques',
+      'Application in health: human insulin and vaccine production',
+      'Gene therapy',
+      'Genetically modified organisms: Bt crops',
+      'Transgenic animals',
+      'Biosafety issues, biopiracy and patents',
+    ]},
+    { id:'bio-u10', name:'Unit 10: Ecology and Environment', color:'bio', topics:[
+      'Organisms and environment: population interactions',
+      'Mutualism, competition, predation, parasitism',
+      'Population attributes: growth, birth rate, death rate, age distribution',
+      'Ecosystem: patterns and components',
+      'Productivity and decomposition, energy flow',
+      'Ecological pyramids: number, biomass, energy',
+      'Biodiversity: concept and patterns',
+      'Importance and loss of biodiversity',
+      'Biodiversity conservation: hotspots, endangered organisms, extinction',
+      'Red Data Book, biosphere reserves, national parks, sanctuaries, sacred groves',
+    ]},
+  ],
+  chem: [
+    { id:'chem-u1', name:'Unit 1: Some Basic Concepts in Chemistry', color:'chem', topics:[
+      'Matter and its nature, Dalton\'s atomic theory',
+      'Concept of atom, molecule, element, compound',
+      'Laws of chemical combination',
+      'Atomic and molecular masses, mole concept, molar mass',
+      'Percentage composition, empirical and molecular formulae',
+      'Chemical equations and stoichiometry',
+    ]},
+    { id:'chem-u2', name:'Unit 2: Atomic Structure', color:'chem', topics:[
+      'Nature of electromagnetic radiation, photoelectric effect',
+      'Spectrum of hydrogen atom',
+      'Bohr model of hydrogen atom: postulates, energy and radii relations, limitations',
+      'Dual nature of matter, de Broglie\'s relationship',
+      'Heisenberg uncertainty principle',
+      'Elementary ideas of quantum mechanics, quantum mechanical model of atom',
+      'Concept of atomic orbitals as one-electron wave functions',
+      'Variation of ψ and ψ² with r for 1s and 2s orbitals',
+      'Quantum numbers: principal, angular momentum, magnetic, spin',
+      'Shapes of s, p, d orbitals',
+      'Rules for filling electrons: Aufbau, Pauli\'s exclusion, Hund\'s rule',
+      'Electronic configuration, extra stability of half-filled and fully-filled orbitals',
+    ]},
+    { id:'chem-u3', name:'Unit 3: Chemical Bonding and Molecular Structure', color:'chem', topics:[
+      'Kossel-Lewis approach to chemical bond formation',
+      'Ionic bonding: formation, factors, lattice enthalpy calculation',
+      'Covalent bonding: electronegativity, Fajan\'s rule, dipole moment',
+      'VSEPR theory and shapes of simple molecules',
+      'Valence bond theory: hybridization (s, p, d orbitals), resonance',
+      'Molecular Orbital Theory: LCAOs, types of MOs, sigma and pi bonds',
+      'MO electronic configurations of homonuclear diatomic molecules',
+      'Bond order, bond length, bond energy',
+      'Elementary idea of metallic bonding',
+      'Hydrogen bonding and its applications',
+    ]},
+    { id:'chem-u4', name:'Unit 4: Chemical Thermodynamics', color:'chem', topics:[
+      'Fundamentals: system, surroundings, extensive/intensive properties, state functions, types of processes',
+      'First law of thermodynamics: work, heat, internal energy, enthalpy',
+      'Heat capacity, molar heat capacity, Hess\'s law',
+      'Enthalpies: bond dissociation, combustion, formation, atomization, sublimation',
+      'Phase transition, hydration, ionization, solution enthalpies',
+      'Second law of thermodynamics: spontaneity, entropy of universe',
+      'Gibbs energy: ΔG as criterion for spontaneity, ΔG° and equilibrium constant',
+    ]},
+    { id:'chem-u5', name:'Unit 5: Solutions', color:'chem', topics:[
+      'Methods for expressing concentration: molality, molarity, mole fraction, percentage',
+      'Vapour pressure of solutions and Raoult\'s law',
+      'Ideal and non-ideal solutions, vapour pressure-composition plots',
+      'Colligative properties: relative lowering of vapour pressure',
+      'Depression of freezing point, elevation of boiling point',
+      'Osmotic pressure, determination of molecular mass using colligative properties',
+      'Abnormal molar mass, van\'t Hoff factor and significance',
+    ]},
+    { id:'chem-u6', name:'Unit 6: Equilibrium', color:'chem', topics:[
+      'Meaning of equilibrium, dynamic equilibrium concept',
+      'Physical process equilibria: solid-liquid, liquid-gas, solid-gas, Henry\'s law',
+      'Chemical equilibrium: law, equilibrium constants (Kp and Kc)',
+      'Significance of ΔG and ΔG° in chemical equilibrium',
+      'Factors affecting equilibrium: concentration, pressure, temperature, catalyst',
+      'Le Chatelier\'s principle',
+      'Ionic equilibrium: weak and strong electrolytes, ionization',
+      'Concepts of acids and bases: Arrhenius, Bronsted-Lowry, Lewis',
+      'Acid-base equilibria, ionization constants, ionization of water, pH scale',
+      'Common ion effect, hydrolysis of salts and pH of their solutions',
+      'Solubility of sparingly soluble salts, solubility products, buffer solutions',
+    ]},
+    { id:'chem-u7', name:'Unit 7: Redox Reactions and Electrochemistry', color:'chem', topics:[
+      'Electronic concepts of oxidation and reduction, redox reactions, oxidation number',
+      'Rules for assigning oxidation number, balancing redox reactions',
+      'Electrolytic and metallic conduction, molar conductivities and variation with concentration',
+      'Kohlrausch\'s law and applications',
+      'Electrochemical cells: electrolytic and galvanic cells, types of electrodes',
+      'Electrode potentials, standard electrode potential, half-cell and cell reactions',
+      'EMF of galvanic cell, Nernst equation and applications',
+      'Relationship between cell potential and Gibbs energy',
+      'Dry cell, lead accumulator, fuel cells',
+    ]},
+    { id:'chem-u8', name:'Unit 8: Chemical Kinetics', color:'chem', topics:[
+      'Rate of chemical reaction, factors affecting rate: concentration, temperature, pressure, catalyst',
+      'Elementary and complex reactions, order and molecularity',
+      'Rate law, rate constant and its units',
+      'Differential and integral forms of zero and first-order reactions',
+      'Half-lives, effect of temperature on rate of reactions',
+      'Arrhenius theory, activation energy and its calculation',
+      'Collision theory of bimolecular gaseous reactions',
+    ]},
+    { id:'chem-u9', name:'Unit 9: Classification of Elements and Periodicity', color:'chem', topics:[
+      'Modern periodic law and present form of the periodic table',
+      's, p, d and f block elements',
+      'Periodic trends: atomic and ionic radii',
+      'Ionization enthalpy, electron gain enthalpy',
+      'Valence, oxidation states, chemical reactivity across periods and down groups',
+    ]},
+    { id:'chem-u10', name:'Unit 10: P-Block Elements (Group 13-18)', color:'chem', topics:[
+      'Electronic configuration and general trends in physical and chemical properties',
+      'Unique behaviour of first element in each group',
+      'Group 13 elements: general properties and compounds',
+      'Group 14 elements: general properties and compounds',
+      'Group 15 elements: general properties and compounds',
+      'Group 16 elements: general properties and compounds',
+      'Group 17 elements: general properties and compounds',
+      'Group 18 elements: general properties',
+    ]},
+    { id:'chem-u11', name:'Unit 11: d- and f-Block Elements', color:'chem', topics:[
+      'Transition elements: general intro, electronic configuration, occurrence, characteristics',
+      'General trends: physical properties, ionization enthalpy, oxidation states, atomic radii',
+      'Colour, catalytic behaviour, magnetic properties, complex formation',
+      'Interstitial compounds, alloy formation',
+      'Preparation, properties and uses of K₂Cr₂O₇ and KMnO₄',
+      'Lanthanoids: electronic configuration, oxidation states, lanthanoid contraction',
+      'Actinoids: electronic configuration and oxidation states',
+    ]},
+    { id:'chem-u12', name:'Unit 12: Co-ordination Compounds', color:'chem', topics:[
+      'Introduction to coordination compounds, Werner\'s theory',
+      'Ligands, coordination number, denticity, chelation',
+      'IUPAC nomenclature of mononuclear coordination compounds',
+      'Isomerism in coordination compounds',
+      'Bonding: Valence bond approach, basic ideas of Crystal Field Theory',
+      'Colour and magnetic properties in coordination compounds',
+      'Importance in qualitative analysis, metal extraction, biological systems',
+    ]},
+    { id:'chem-u13', name:'Unit 13: Purification and Characterisation of Organic Compounds', color:'chem', topics:[
+      'Purification: crystallization, sublimation, distillation, differential extraction',
+      'Chromatography: principles and applications',
+      'Qualitative analysis: detection of N, S, P, halogens',
+      'Quantitative analysis (basic principles): estimation of C, H, N, halogens, S, P',
+      'Calculations of empirical and molecular formulae',
+      'Numerical problems in organic quantitative analysis',
+    ]},
+    { id:'chem-u14', name:'Unit 14: Some Basic Principles of Organic Chemistry', color:'chem', topics:[
+      'Tetravalency of carbon, shapes and hybridization (s and p)',
+      'Classification of organic compounds based on functional groups',
+      'Homologous series, structural and stereoisomerism',
+      'Nomenclature: Trivial and IUPAC',
+      'Covalent bond fission: homolytic and heterolytic, free radicals, carbocations, carbanions',
+      'Stability of carbocations and free radicals, electrophiles and nucleophiles',
+      'Electronic displacement: inductive effect, electromeric effect, resonance, hyperconjugation',
+      'Common types of organic reactions: substitution, addition, elimination, rearrangement',
+    ]},
+    { id:'chem-u15', name:'Unit 15: Hydrocarbons', color:'chem', topics:[
+      'Classification, isomerism, IUPAC nomenclature of hydrocarbons',
+      'Alkanes: conformations, Sawhorse and Newman projections (ethane)',
+      'Mechanism of halogenation of alkanes',
+      'Alkenes: geometrical isomerism, mechanism of electrophilic addition',
+      'Addition of H₂, halogens, water, HX to alkenes (Markovnikov\'s and peroxide effect)',
+      'Ozonolysis and polymerization of alkenes',
+      'Alkynes: acidic character, addition of H₂, halogens, water, HX, polymerization',
+      'Aromatic hydrocarbons: nomenclature, benzene structure and aromaticity',
+      'Mechanism of electrophilic substitution: halogenation, nitration',
+      'Friedel-Craft\'s alkylation and acylation, directive influence of functional groups',
+    ]},
+    { id:'chem-u16', name:'Unit 16: Organic Compounds Containing Halogens', color:'chem', topics:[
+      'General methods of preparation of halogen compounds',
+      'Properties, reactions and nature of C-X bond',
+      'Mechanisms of substitution reactions',
+      'Uses and environmental effects: chloroform, iodoform, freons, DDT',
+    ]},
+    { id:'chem-u17', name:'Unit 17: Organic Compounds Containing Oxygen', color:'chem', topics:[
+      'Alcohols: identification of primary, secondary, tertiary; mechanism of dehydration',
+      'Phenols: acidic nature, electrophilic substitution (halogenation, nitration, sulphonation)',
+      'Reimer-Tiemann reaction',
+      'Ethers: structure and properties',
+      'Aldehydes and Ketones: nature of carbonyl group, nucleophilic addition to C=O',
+      'Relative reactivities of aldehydes and ketones',
+      'Important reactions: nucleophilic addition (HCN, NH₃, derivatives), Grignard reagent',
+      'Oxidation, reduction (Wolff-Kishner, Clemmensen)',
+      'Acidity of α-hydrogen, aldol condensation, Cannizzaro reaction, Haloform reaction',
+      'Chemical tests to distinguish aldehydes and ketones',
+      'Carboxylic Acids: acidic strength and factors affecting it',
+    ]},
+    { id:'chem-u18', name:'Unit 18: Organic Compounds Containing Nitrogen', color:'chem', topics:[
+      'Amines: nomenclature, classification, structure, basic character',
+      'Identification of primary, secondary, tertiary amines and their basic character',
+      'Diazonium salts: importance in synthetic organic chemistry',
+    ]},
+    { id:'chem-u19', name:'Unit 19: Biomolecules', color:'chem', topics:[
+      'General introduction and importance of biomolecules',
+      'Carbohydrates: classification, aldoses and ketoses',
+      'Monosaccharides: glucose and fructose',
+      'Constituent monosaccharides of oligosaccharides: sucrose, lactose, maltose',
+      'Proteins: elementary idea of α-amino acids, peptide bond, polypeptides',
+      'Protein structure: primary, secondary, tertiary, quaternary (qualitative)',
+      'Denaturation of proteins, enzymes',
+      'Vitamins: classification and functions',
+      'Nucleic acids: chemical constitution of DNA and RNA, biological functions',
+      'Hormones: general introduction',
+    ]},
+    { id:'chem-u20', name:'Unit 20: Principles Related to Practical Chemistry', color:'chem', topics:[
+      'Detection of extra elements (N, S, halogens) in organic compounds',
+      'Detection of functional groups: hydroxyl, carbonyl, carboxyl, amino groups',
+      'Preparation of Mohr\'s salt and potash alum',
+      'Preparation of acetanilide, p-nitroacetanilide, aniline yellow, iodoform',
+      'Titrimetric exercises: acids, bases, indicators; oxalic acid vs KMnO₄; Mohr\'s salt vs KMnO₄',
+      'Qualitative salt analysis: cations (Pb²⁺, Cu²⁺, Al³⁺, Fe³⁺, Zn²⁺, Ni²⁺, Ca²⁺, Ba²⁺, Mg²⁺, NH₄⁺)',
+      'Qualitative salt analysis: anions (CO₃²⁻, S²⁻, SO₄²⁻, NO₃⁻, NO₂⁻, Cl⁻, Br⁻, I⁻)',
+      'Enthalpy of solution of CuSO₄, enthalpy of neutralization',
+      'Preparation of lyophilic and lyophobic sols',
+      'Kinetic study: iodide ions with hydrogen peroxide at room temperature',
+    ]},
+  ],
+  phy: [
+    { id:'phy-u1', name:'Unit 1: Physics and Measurement', color:'phy', topics:[
+      'Units of measurements, System of Units, SI Units',
+      'Fundamental and derived units, least count',
+      'Significant figures, errors in measurements',
+      'Dimensions of physical quantities, dimensional analysis and applications',
+    ]},
+    { id:'phy-u2', name:'Unit 2: Kinematics', color:'phy', topics:[
+      'Frame of reference, motion in a straight line, position-time graph',
+      'Speed and velocity, uniform and non-uniform motion',
+      'Average speed and instantaneous velocity, uniformly accelerated motion',
+      'Velocity-time graph, relations for uniformly accelerated motion',
+      'Scalars and Vectors, vector addition and subtraction, scalar and vector products',
+      'Unit vector, resolution of a vector',
+      'Relative velocity, motion in a plane',
+      'Projectile motion, uniform circular motion',
+    ]},
+    { id:'phy-u3', name:'Unit 3: Laws of Motion', color:'phy', topics:[
+      'Force and inertia, Newton\'s First Law of Motion',
+      'Momentum, Newton\'s Second Law, impulses',
+      'Newton\'s Third Law, law of conservation of linear momentum and applications',
+      'Equilibrium of concurrent forces',
+      'Static and kinetic friction, laws of friction, rolling friction',
+      'Dynamics of uniform circular motion: centripetal force and applications',
+      'Vehicle on level circular road, vehicle on banked road',
+    ]},
+    { id:'phy-u4', name:'Unit 4: Work, Energy, and Power', color:'phy', topics:[
+      'Work done by constant and variable force',
+      'Kinetic and potential energies, work-energy theorem, power',
+      'Potential energy of spring, conservation of mechanical energy',
+      'Conservative and non-conservative forces',
+      'Motion in a vertical circle',
+      'Elastic and inelastic collisions in one and two dimensions',
+    ]},
+    { id:'phy-u5', name:'Unit 5: Rotational Motion', color:'phy', topics:[
+      'Centre of mass of two-particle system and rigid body',
+      'Basic concepts of rotational motion, moment of a force, torque',
+      'Angular momentum, conservation of angular momentum and applications',
+      'Moment of inertia, radius of gyration',
+      'Values of moments of inertia for simple geometrical objects',
+      'Parallel and perpendicular axes theorems and applications',
+      'Equilibrium of rigid bodies, rigid body rotation, equations of rotational motion',
+      'Comparison of linear and rotational motions',
+    ]},
+    { id:'phy-u6', name:'Unit 6: Gravitation', color:'phy', topics:[
+      'Universal law of gravitation',
+      'Acceleration due to gravity and its variation with altitude and depth',
+      'Kepler\'s law of planetary motion',
+      'Gravitational potential energy and gravitational potential',
+      'Escape velocity',
+      'Motion of a satellite: orbital velocity, time period and energy',
+    ]},
+    { id:'phy-u7', name:'Unit 7: Properties of Solids and Liquids', color:'phy', topics:[
+      'Elastic behaviour, stress-strain relationship, Hooke\'s Law',
+      'Young\'s modulus, bulk modulus, modulus of rigidity',
+      'Pressure due to fluid column, Pascal\'s law and applications',
+      'Effect of gravity on fluid pressure',
+      'Viscosity, Stokes\' law, terminal velocity',
+      'Streamline and turbulent flow, critical velocity',
+      'Bernoulli\'s principle and applications',
+      'Surface energy and surface tension, angle of contact',
+      'Excess pressure across curved surface, surface tension applications (drops, bubbles, capillary rise)',
+      'Heat, temperature, thermal expansion, specific heat capacity, calorimetry',
+      'Change of state, latent heat',
+      'Heat transfer: conduction, convection, radiation',
+    ]},
+    { id:'phy-u8', name:'Unit 8: Thermodynamics', color:'phy', topics:[
+      'Thermal equilibrium, zeroth law of thermodynamics, concept of temperature',
+      'Heat, work, and internal energy',
+      'First law of thermodynamics, isothermal and adiabatic processes',
+      'Second law of thermodynamics, reversible and irreversible processes',
+    ]},
+    { id:'phy-u9', name:'Unit 9: Kinetic Theory of Gases', color:'phy', topics:[
+      'Equation of state of a perfect gas, work done on compressing a gas',
+      'Kinetic theory: assumptions, concept of pressure',
+      'Kinetic interpretation of temperature, RMS speed of gas molecules',
+      'Degrees of freedom, law of equipartition of energy',
+      'Applications to specific heat capacities of gases',
+      'Mean free path, Avogadro\'s number',
+    ]},
+    { id:'phy-u10', name:'Unit 10: Oscillations and Waves', color:'phy', topics:[
+      'Oscillations: time period, frequency, displacement as function of time',
+      'Periodic functions, Simple Harmonic Motion (SHM) and its equation, phase',
+      'Oscillations of a spring: restoring force and force constant',
+      'Energy in SHM: kinetic and potential energies',
+      'Simple pendulum: derivation of expression for time period',
+      'Wave motion: longitudinal and transverse waves, speed of travelling wave',
+      'Displacement relation for a progressive wave',
+      'Superposition of waves, reflection of waves',
+      'Standing waves in strings and organ pipes, fundamental mode and harmonics',
+      'Beats',
+    ]},
+    { id:'phy-u11', name:'Unit 11: Electrostatics', color:'phy', topics:[
+      'Electric charges, conservation of charge',
+      'Coulomb\'s law: forces between point charges, superposition principle',
+      'Electric field: due to point charge, electric field lines',
+      'Electric dipole, field due to dipole, torque on dipole in uniform field',
+      'Electric flux, Gauss\'s law and applications (infinite wire, infinite plane, thin spherical shell)',
+      'Electric potential: for point charge, dipole, system of charges',
+      'Potential difference, equipotential surfaces, electrical potential energy',
+      'Conductors and insulators, dielectrics and electric polarization',
+      'Capacitors: combination in series and parallel',
+      'Capacitance of parallel plate capacitor with and without dielectric medium',
+      'Energy stored in a capacitor',
+    ]},
+    { id:'phy-u12', name:'Unit 12: Current Electricity', color:'phy', topics:[
+      'Electric current, drift velocity, mobility and relation with electric current',
+      'Ohm\'s law, electrical resistance, V-I characteristics (ohmic and non-ohmic)',
+      'Electrical energy and power, electrical resistivity and conductivity',
+      'Series and parallel combinations of resistors, temperature dependence of resistance',
+      'Internal resistance, potential difference, EMF of a cell',
+      'Combination of cells in series and parallel',
+      'Kirchhoff\'s laws and applications, Wheatstone bridge, Metre bridge',
+    ]},
+    { id:'phy-u13', name:'Unit 13: Magnetic Effects of Current and Magnetism', color:'phy', topics:[
+      'Biot-Savart law and application to current-carrying circular loop',
+      'Ampere\'s law and applications (infinitely long wire, solenoid)',
+      'Force on moving charge in uniform magnetic and electric fields',
+      'Force on current-carrying conductor in uniform magnetic field',
+      'Force between two parallel current-carrying conductors, definition of Ampere',
+      'Torque on current loop in uniform magnetic field',
+      'Moving coil galvanometer: sensitivity, conversion to ammeter and voltmeter',
+      'Current loop as magnetic dipole, bar magnet as equivalent solenoid',
+      'Magnetic field due to magnetic dipole (along axis and perpendicular)',
+      'Torque on magnetic dipole in uniform field',
+      'Para-, dia- and ferromagnetic substances with examples, effect of temperature',
+    ]},
+    { id:'phy-u14', name:'Unit 14: Electromagnetic Induction and Alternating Currents', color:'phy', topics:[
+      'Electromagnetic induction: Faraday\'s law, induced EMF and current, Lenz\'s law',
+      'Eddy currents, self and mutual inductance',
+      'Alternating currents: peak and RMS values of AC voltage',
+      'Reactance and impedance, LCR series circuit, resonance',
+      'Power in AC circuits, wattless current',
+      'AC generator and transformer',
+    ]},
+    { id:'phy-u15', name:'Unit 15: Electromagnetic Waves', color:'phy', topics:[
+      'Displacement current',
+      'Electromagnetic waves and their characteristics, transverse nature',
+      'Electromagnetic spectrum: radio waves, microwaves, infrared, visible, UV, X-rays, gamma rays',
+      'Applications of electromagnetic waves',
+    ]},
+    { id:'phy-u16', name:'Unit 16: Optics', color:'phy', topics:[
+      'Reflection of light, spherical mirrors, mirror formula',
+      'Refraction at plane and spherical surfaces, thin lens formula, lens maker\'s formula',
+      'Total internal reflection and applications',
+      'Magnification, power of a lens, combination of thin lenses in contact',
+      'Refraction through a prism',
+      'Microscope and Astronomical Telescope (reflecting and refracting) and magnifying powers',
+      'Wave optics: wavefront and Huygens\' principle',
+      'Laws of reflection and refraction using Huygens\' principle',
+      'Interference: Young\'s double-slit experiment, fringe width, coherent sources',
+      'Diffraction due to single slit, width of central maximum',
+      'Polarization, plane-polarized light, Brewster\'s law, uses of Polaroid',
+    ]},
+    { id:'phy-u17', name:'Unit 17: Dual Nature of Matter and Radiation', color:'phy', topics:[
+      'Dual nature of radiation, photoelectric effect',
+      'Hertz and Lenard\'s observations, Einstein\'s photoelectric equation',
+      'Particle nature of light, matter waves, de Broglie relation',
+    ]},
+    { id:'phy-u18', name:'Unit 18: Atoms and Nuclei', color:'phy', topics:[
+      'Alpha-particle scattering experiment, Rutherford\'s model of atom',
+      'Bohr model, energy levels, hydrogen spectrum',
+      'Composition and size of nucleus, atomic masses',
+      'Mass-energy relation, mass defect, binding energy per nucleon and variation with mass number',
+      'Nuclear fission and fusion',
+    ]},
+    { id:'phy-u19', name:'Unit 19: Electronic Devices', color:'phy', topics:[
+      'Semiconductors, semiconductor diode: I-V characteristics in forward and reverse bias',
+      'Diode as rectifier, I-V characteristics of LED, photodiode, solar cell',
+      'Zener diode: characteristics, as voltage regulator',
+      'Logic gates: OR, AND, NOT, NAND, NOR',
+    ]},
+    { id:'phy-u20', name:'Unit 20: Experimental Skills', color:'phy', topics:[
+      'Vernier calipers: internal/external diameter and depth measurement',
+      'Screw gauge: thickness/diameter of thin sheet/wire',
+      'Simple Pendulum: dissipation of energy graph',
+      'Metre Scale: mass by principle of moments',
+      'Young\'s modulus of elasticity of metallic wire',
+      'Surface tension by capillary rise and effect of detergents',
+      'Coefficient of viscosity by terminal velocity of spherical body',
+      'Speed of sound in air using resonance tube',
+      'Specific heat capacity of solid and liquid by method of mixtures',
+      'Resistivity of material using metre bridge',
+      'Resistance of wire using Ohm\'s law',
+      'Resistance and figure of merit of galvanometer by half deflection',
+      'Focal length of convex mirror, concave mirror, convex lens using parallax method',
+      'Angle of deviation vs angle of incidence for triangular prism',
+      'Refractive index of glass slab using travelling microscope',
+      'Characteristic curves of p-n junction in forward and reverse bias',
+      'Characteristic curves of Zener diode, finding reverse breakdown voltage',
+      'Identification of Diode, LED, Resistor, Capacitor from mixed collection',
+    ]},
+  ]
+};
+
+// ─── BUILD SYLLABUS HTML ───
+function buildSyllabus() {
+  ['bio','chem','phy'].forEach(subj => {
+    const container = document.getElementById(subj + '-chapters');
+    if (!container) return;
+    const d = getData();
+    SYLLABUS[subj].forEach(ch => {
+      const div = document.createElement('div');
+      div.className = 'chapter-card';
+      div.id = 'ch-' + ch.id;
+
+      const total = ch.topics.length;
+      const done = ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length;
+      const pct = total ? Math.round(done/total*100) : 0;
+      const revised = d['rev-'+ch.id] ? true : false;
+      const mocked = d['mock-'+ch.id] ? true : false;
+
+      div.innerHTML = `
+        <div class="chapter-header" onclick="toggleChapter('${ch.id}')">
+          <input type="checkbox" class="chapter-checkbox" id="chk-${ch.id}"
+            ${done===total && total>0 ? 'checked' : ''}
+            data-chapter="${ch.id}"
+            onclick="event.stopPropagation()" />
+          <div class="chapter-info">
+            <div class="chapter-name">${ch.name}</div>
+            <div class="chapter-meta">
+              <span class="chapter-progress-text" id="cprog-${ch.id}">${done}/${total} topics</span>
+              <div class="progress-bar-mini">
+                <div class="progress-fill ${ch.color}" id="cbar-${ch.id}" style="width:${pct}%"></div>
+              </div>
+              <span class="chapter-progress-text">${pct}%</span>
+            </div>
+          </div>
+          <div class="chapter-badges">
+            ${revised ? '<span class="badge revised">✓ Revised</span>' : ''}
+            ${mocked ? '<span class="badge mocked">✓ Mocked</span>' : ''}
+          </div>
+          <svg class="chapter-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="chapter-topics">
+          ${ch.topics.map((topic, i) => buildTopicHTML(ch.id, i, topic, ch.color, d)).join('')}
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer;">
+              <input type="checkbox" id="rev-${ch.id}" ${revised?'checked':''} onchange="toggleChapterFlag('${ch.id}','rev')" style="accent-color:var(--bio);width:14px;height:14px;" />
+              Revision Done
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer;">
+              <input type="checkbox" id="mock-${ch.id}" ${mocked?'checked':''} onchange="toggleChapterFlag('${ch.id}','mock')" style="accent-color:var(--phy);width:14px;height:14px;" />
+              Mock Attempted
+            </label>
+          </div>
+        </div>`;
+      container.appendChild(div);
+    });
+  });
+}
+
+function buildTopicHTML(chId, i, topic, color, d) {
+  const key = 't-' + chId + '-' + i;
+  const notesKey = 'tn-' + chId + '-' + i;
+  const confKey = 'tc-' + chId + '-' + i;
+  const revKey = 'tr-' + chId + '-' + i;
+  const doubtKey = 'td-' + chId + '-' + i;
+  const priorKey = 'tp-' + chId + '-' + i;
+  const done = d[key];
+  const notes = d[notesKey] || '';
+  const conf = d[confKey] || 0;
+  const rev = d[revKey];
+  const doubt = d[doubtKey];
+  const prior = d[priorKey];
+
+  return `<div class="topic-row" id="trow-${key}">
+    <input type="checkbox" class="topic-check" id="${key}" ${done?'checked':''}
+      onchange="toggleTopic('${chId}','${i}','${color}',this)" />
+    <div class="topic-details">
+      <div class="topic-name ${done?'done':''}" id="tname-${key}">${topic}</div>
+      <textarea class="topic-notes-input" rows="1"
+        placeholder="Notes / weak points..."
+        onchange="saveTopicData('${notesKey}',this.value)"
+        >${notes}</textarea>
+    </div>
+    <div class="topic-controls">
+      <div class="topic-confidence" title="Confidence level (1-5 stars)">
+        ${[1,2,3,4,5].map(s => `<span class="conf-star ${conf>=s?'lit':''}" onclick="setConf('${confKey}','${key}',${s})">★</span>`).join('')}
+      </div>
+      <div class="topic-flags">
+        <button class="flag-btn ${rev?'active-rev':''}" title="Revision done"
+          onclick="toggleFlag('${revKey}','${key}','rev',this)">📗</button>
+        <button class="flag-btn ${doubt?'active-doubt':''}" title="Mark as doubt"
+          onclick="toggleFlag('${doubtKey}','${key}','doubt',this)">❓</button>
+        <button class="flag-btn ${prior?'active-priority':''}" title="High priority"
+          onclick="toggleFlag('${priorKey}','${key}','priority',this)">⭐</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleChapter(id) {
+  const card = document.getElementById('ch-' + id);
+  if (card) card.classList.toggle('open');
+}
+
+function toggleTopic(chId, idx, color, el) {
+  const key = 't-' + chId + '-' + idx;
+  const d = getData();
+  if (el.checked) d[key] = 1; else delete d[key];
+  setData(d);
+  const nameEl = document.getElementById('tname-' + key);
+  if (nameEl) nameEl.className = 'topic-name' + (el.checked ? ' done' : '');
+  updateChapterProgress(chId, color);
+  updateStats();
+}
+
+function updateChapterProgress(chId, color) {
+  const subj = chId.split('-')[0];
+  const ch = SYLLABUS[subj].find(c => c.id === chId);
+  if (!ch) return;
+  const d = getData();
+  const total = ch.topics.length;
+  const done = ch.topics.filter((_,i) => d['t-'+chId+'-'+i]).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  const bar = document.getElementById('cbar-' + chId);
+  const prog = document.getElementById('cprog-' + chId);
+  if (bar) bar.style.width = pct + '%';
+  if (prog) prog.textContent = done + '/' + total + ' topics';
+  const chkEl = document.getElementById('chk-' + chId);
+  if (chkEl && total > 0) chkEl.checked = done === total;
+}
+
+function saveTopicData(key, val) {
+  const d = getData(); d[key] = val; setData(d);
+}
+
+function setConf(confKey, topicKey, stars) {
+  const d = getData(); d[confKey] = stars; setData(d);
+  const row = document.getElementById('trow-' + topicKey);
+  if (row) row.querySelectorAll('.conf-star').forEach((s,i) => {
+    s.classList.toggle('lit', i < stars);
+  });
+}
+
+function toggleFlag(flagKey, topicKey, type, btn) {
+  const d = getData();
+  if (d[flagKey]) delete d[flagKey]; else d[flagKey] = 1;
+  setData(d);
+  const classMap = {rev:'active-rev', doubt:'active-doubt', priority:'active-priority'};
+  btn.classList.toggle(classMap[type], !!d[flagKey]);
+}
+
+function toggleChapterFlag(chId, type) {
+  const key = type + '-' + chId;
+  const d = getData();
+  if (d[key]) delete d[key]; else d[key] = 1;
+  setData(d);
+  updateStats();
+}
+
+// SUBJECT TABS
+document.querySelectorAll('.subj-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.subj-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.subj).classList.add('active');
+  });
+});
+
+// ─── STATS UPDATE ───
+function updateStats() {
+  const d = getData();
+  let topicsDone = 0, chaptersDone = 0;
+  let bioDone = 0, bioTotal = 0, chemDone = 0, chemTotal = 0, phyDone = 0, phyTotal = 0;
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      const tot = ch.topics.length;
+      const done = ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length;
+      topicsDone += done;
+      if (done === tot && tot > 0) chaptersDone++;
+      if (subj==='bio') { bioDone += done; bioTotal += tot; }
+      if (subj==='chem') { chemDone += done; chemTotal += tot; }
+      if (subj==='phy') { phyDone += done; phyTotal += tot; }
+    });
+  });
+
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  const streak = d['streak'] || 0;
+  const bestScore = tests.length ? Math.max(...tests.map(t => t.score || 0)) : null;
+
+  // Consistency: days studied in last 30
+  let studyDays = 0;
+  for (let i = 0; i < 30; i++) {
+    const dd = new Date(); dd.setDate(dd.getDate()-i);
+    const dk = 'day-' + dd.toISOString().slice(0,10);
+    if (d[dk]) studyDays++;
+  }
+  const consistency = Math.round(studyDays / 30 * 100);
+
+  safeSet('stat-chapters', chaptersDone);
+  safeSet('stat-topics', topicsDone);
+  safeSet('stat-tests', tests.length);
+  safeSet('stat-streak', streak + ' 🔥');
+  safeSet('stat-score', bestScore !== null ? bestScore : '—');
+  safeSet('stat-consistency', consistency + '%');
+
+  // Subject bars
+  const bioPct = bioTotal ? Math.round(bioDone/bioTotal*100) : 0;
+  const chemPct = chemTotal ? Math.round(chemDone/chemTotal*100) : 0;
+  const phyPct = phyTotal ? Math.round(phyDone/phyTotal*100) : 0;
+  setBar('bio', bioDone, bioTotal, bioPct, 10);
+  setBar('chem', chemDone, chemTotal, chemPct, 20);
+  setBar('phy', phyDone, phyTotal, phyPct, 20);
+}
+
+function setBar(subj, done, total, pct, units) {
+  safeSet(subj+'-pct', pct + '%');
+  const bar = document.getElementById(subj+'-bar');
+  if (bar) bar.style.width = pct + '%';
+  safeSet(subj+'-detail', done + ' / ' + total + ' topics complete');
+}
+
+function safeSet(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+// ─── PROFILE ───
+function saveProfile() {
+  const d = getData();
+  d['profile-name'] = document.getElementById('inp-name').value;
+  d['profile-class'] = document.getElementById('inp-class').value;
+  d['profile-year'] = document.getElementById('inp-year').value;
+  d['profile-score'] = document.getElementById('inp-score').value;
+  d['profile-daily'] = document.getElementById('inp-daily').value;
+  d['profile-weak'] = document.getElementById('inp-weak').value;
+  d['profile-motivation'] = document.getElementById('inp-motivation').value;
+  setData(d);
+  loadProfile();
+  showToast('Profile saved!');
+}
+
+function loadProfile() {
+  const d = getData();
+  const name = d['profile-name'] || 'Your Name';
+  const cls = d['profile-class'] || '—';
+  const yr = d['profile-year'] || '—';
+  const sc = d['profile-score'] || '—';
+  safeSet('profileName', name);
+  safeSet('profileClass', 'Class: ' + cls);
+  safeSet('profileYear', 'Target: ' + yr);
+  safeSet('profileGoal', 'Score: ' + sc);
+  const fields = ['name','class','year','score','daily','weak','motivation'];
+  fields.forEach(f => {
+    const el = document.getElementById('inp-'+f);
+    if (el && d['profile-'+f]) el.value = d['profile-'+f];
+  });
+  const dailyGoal = d['profile-daily'];
+  safeSet('daily-goal-show', dailyGoal || '—');
+}
+
+// ─── AVATAR ───
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 160; canvas.height = 160;
+    const img = new Image();
+    img.onload = function() {
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, 160, 160);
+      const compressed = canvas.toDataURL('image/jpeg', 0.7);
+      const d = getData(); d['profile-avatar'] = compressed; setData(d);
+      showAvatarImg(compressed);
+      showToast('Profile photo updated!');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showAvatarImg(src) {
+  const img = document.getElementById('avatarImg');
+  const ph = document.getElementById('avatarPlaceholder');
+  if (img) { img.src = src; img.style.display = 'block'; }
+  if (ph) ph.style.display = 'none';
+}
+
+function loadAvatar() {
+  const d = getData();
+  if (d['profile-avatar']) showAvatarImg(d['profile-avatar']);
+}
+
+// ─── DAILY TRACKER ───
+function initDaily() {
+  const today = new Date();
+  safeSet('todayDate', today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+  const d = getData();
+  const key = 'day-data-' + today.toISOString().slice(0,10);
+  const dayData = d[key] || {};
+  const hoursEl = document.getElementById('daily-hours');
+  const waterEl = document.getElementById('daily-water');
+  const sleepEl = document.getElementById('daily-sleep');
+  const notesEl = document.getElementById('daily-notes');
+  const mockEl = document.getElementById('daily-mock');
+  const revEl = document.getElementById('daily-revision');
+  if (hoursEl) hoursEl.value = dayData.hours || '';
+  if (waterEl) waterEl.value = dayData.water || '';
+  if (sleepEl) sleepEl.value = dayData.sleep || '';
+  if (notesEl) notesEl.value = dayData.notes || '';
+  if (mockEl) mockEl.checked = !!dayData.mock;
+  if (revEl) revEl.checked = !!dayData.revision;
+  const streak = d['streak'] || 0;
+  safeSet('streak-display', streak);
+
+  // Mood
+  const savedMood = dayData.mood;
+  document.querySelectorAll('.mood-btn').forEach(btn => {
+    if (savedMood === btn.dataset.mood) btn.classList.add('selected');
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      saveDailyData();
+    });
+  });
+
+  buildHeatmap();
+}
+
+function saveDailyData() {
+  const today = new Date().toISOString().slice(0,10);
+  const d = getData();
+  const key = 'day-data-' + today;
+  const mood = document.querySelector('.mood-btn.selected');
+  d[key] = {
+    hours: document.getElementById('daily-hours')?.value || 0,
+    water: document.getElementById('daily-water')?.value || 0,
+    sleep: document.getElementById('daily-sleep')?.value || 0,
+    notes: document.getElementById('daily-notes')?.value || '',
+    mock: document.getElementById('daily-mock')?.checked || false,
+    revision: document.getElementById('daily-revision')?.checked || false,
+    mood: mood ? mood.dataset.mood : ''
+  };
+  setData(d);
+}
+
+function markStudyDayDone() {
+  saveDailyData();
+  const today = new Date().toISOString().slice(0,10);
+  const d = getData();
+  d['day-' + today] = (parseFloat(document.getElementById('daily-hours')?.value) || 1);
+  // Update streak
+  let streak = 0;
+  for (let i = 0; i < 365; i++) {
+    const dd = new Date(); dd.setDate(dd.getDate()-i);
+    const dk = 'day-' + dd.toISOString().slice(0,10);
+    if (d[dk]) streak++; else break;
+  }
+  d['streak'] = streak;
+  setData(d);
+  safeSet('streak-display', streak);
+  showToast('Day logged! Streak: ' + streak + ' days 🔥');
+  buildHeatmap();
+  updateStats();
+}
+
+function buildHeatmap() {
+  const container = document.getElementById('heatmapRow');
+  if (!container) return;
+  container.innerHTML = '';
+  const d = getData();
+  for (let i = 83; i >= 0; i--) {
+    const dd = new Date(); dd.setDate(dd.getDate()-i);
+    const dk = 'day-' + dd.toISOString().slice(0,10);
+    const hours = parseFloat(d[dk]) || 0;
+    let level = 0;
+    if (hours > 0) level = 1;
+    if (hours >= 4) level = 2;
+    if (hours >= 6) level = 3;
+    if (hours >= 8) level = 4;
+    const cell = document.createElement('div');
+    cell.className = 'heat-cell';
+    cell.dataset.level = level;
+    cell.title = dd.toLocaleDateString('en-IN') + ': ' + (hours ? hours + 'h' : 'No data');
+    container.appendChild(cell);
+  }
+}
+
+// ─── TODO LIST ───
+function loadTodos() {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  renderTodos(todos);
+}
+
+function addTodo() {
+  const input = document.getElementById('todoInput');
+  const subj = document.getElementById('todoSubject').value;
+  const priority = document.getElementById('todoPriority').value;
+  const text = input.value.trim();
+  if (!text) return;
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  todos.unshift({ id: Date.now(), text, subj, priority, done: false });
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  input.value = '';
+  renderTodos(todos);
+  showToast('Task added!');
+}
+
+function renderTodos(todos) {
+  const list = document.getElementById('todoList');
+  if (!list) return;
+  list.innerHTML = '';
+  safeSet('todo-count', todos.length + ' task' + (todos.length !== 1 ? 's' : ''));
+  todos.forEach(todo => {
+    const item = document.createElement('div');
+    item.className = 'todo-item' + (todo.done ? ' done-item' : '');
+    item.innerHTML = `
+      <div class="priority-dot ${todo.priority}"></div>
+      <input type="checkbox" ${todo.done?'checked':''} style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;"
+        onchange="toggleTodo(${todo.id})" />
+      <span class="todo-text">${todo.text}</span>
+      <span class="todo-tag ${todo.subj}">${todo.subj.charAt(0).toUpperCase()+todo.subj.slice(1)}</span>
+      <button class="todo-del" onclick="deleteTodo(${todo.id})">✕</button>`;
+    list.appendChild(item);
+  });
+}
+
+function toggleTodo(id) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.done = !t.done;
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
+}
+
+function deleteTodo(id) {
+  const d = getData();
+  let todos = JSON.parse(d['todos'] || '[]');
+  todos = todos.filter(t => t.id !== id);
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
+}
+
+function clearCompletedTodos() {
+  const d = getData();
+  let todos = JSON.parse(d['todos'] || '[]');
+  todos = todos.filter(t => !t.done);
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
+  showToast('Completed tasks cleared!');
+}
+
+// ─── TESTS ───
+function addTest() {
+  const name = document.getElementById('test-name')?.value?.trim();
+  const date = document.getElementById('test-date')?.value;
+  const score = parseFloat(document.getElementById('test-score')?.value) || 0;
+  const accuracy = parseFloat(document.getElementById('test-accuracy')?.value) || 0;
+  const time = parseFloat(document.getElementById('test-time')?.value) || 0;
+  const weak = document.getElementById('test-weak')?.value?.trim();
+  const notes = document.getElementById('test-notes')?.value?.trim();
+  if (!name) { showToast('Enter test name', 'info'); return; }
+  const d = getData();
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  tests.unshift({ id: Date.now(), name, date, score, accuracy, time, weak, notes });
+  d['tests-list'] = JSON.stringify(tests);
+  setData(d);
+  renderTests(tests);
+  updateStats();
+  showToast('Test logged!');
+  ['test-name','test-date','test-score','test-accuracy','test-time','test-weak','test-notes'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+
+function renderTests(tests) {
+  const list = document.getElementById('testList');
+  if (!list) return;
+  if (!tests.length) { list.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:20px;">No tests logged yet. Start tracking your mocks!</div>'; return; }
+  list.innerHTML = tests.map(t => `
+    <div class="test-card">
+      <div>
+        <h4>${t.name}</h4>
+        <div class="test-meta">
+          <span>📅 ${t.date || 'No date'}</span>
+          <span>⏱ ${t.time ? t.time + ' min' : '—'}</span>
+          <span>🎯 ${t.accuracy ? t.accuracy + '% accuracy' : '—'}</span>
+          ${t.weak ? `<span>⚠️ Weak: ${t.weak}</span>` : ''}
+        </div>
+        ${t.notes ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px;background:var(--bg3);padding:8px 10px;border-radius:6px;">${t.notes}</div>` : ''}
+      </div>
+      <div style="text-align:right;">
+        <div class="test-score-big">${t.score}</div>
+        <div class="test-score-label">/ 720</div>
+        <button onclick="deleteTest(${t.id})" style="margin-top:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:.75rem;">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteTest(id) {
+  const d = getData();
+  let tests = JSON.parse(d['tests-list'] || '[]');
+  tests = tests.filter(t => t.id !== id);
+  d['tests-list'] = JSON.stringify(tests);
+  setData(d);
+  renderTests(tests);
+  updateStats();
+}
+
+function loadTests() {
+  const d = getData();
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  renderTests(tests);
+}
+
+// ─── BOOKS TRACKER ───
+const BOOKS = [
+  { id:'ncert-bio', name:'NCERT Biology', emoji:'🌿', color:'var(--bio)' },
+  { id:'ncert-chem', name:'NCERT Chemistry', emoji:'⚗️', color:'var(--chem)' },
+  { id:'ncert-phy', name:'NCERT Physics', emoji:'⚡', color:'var(--phy)' },
+  { id:'module-bio', name:'Bio Module / Reference', emoji:'📗', color:'var(--bio)' },
+  { id:'module-chem', name:'Chem Module / Reference', emoji:'📘', color:'var(--chem)' },
+  { id:'module-phy', name:'Phy Module / Reference', emoji:'📙', color:'var(--phy)' },
+  { id:'pyq-book', name:'PYQ Book (All Subjects)', emoji:'📂', color:'var(--purple)' },
+  { id:'mock-papers', name:'Mock Test Papers', emoji:'📝', color:'var(--warn)' },
+  { id:'notes-bio', name:'My Biology Notes', emoji:'🗒', color:'var(--bio)' },
+  { id:'notes-chem', name:'My Chemistry Notes', emoji:'🗒', color:'var(--chem)' },
+  { id:'notes-phy', name:'My Physics Notes', emoji:'🗒', color:'var(--phy)' },
+  { id:'formula-sheet', name:'Formula Sheets', emoji:'📋', color:'var(--purple)' },
+];
+
+function buildBooks() {
+  const grid = document.getElementById('booksGrid');
+  if (!grid) return;
+  const d = getData();
+  grid.innerHTML = BOOKS.map(book => {
+    const pct = d['book-' + book.id] || 0;
+    const revised = d['bookrev-' + book.id] || false;
+    return `<div class="book-card">
+      <h4>${book.emoji} ${book.name}</h4>
+      <div class="book-progress-big">
+        <div class="book-percent" style="color:${book.color}" id="bpct-${book.id}">${pct}%</div>
+        <div class="book-bar"><div class="book-bar-fill" id="bbar-${book.id}" style="width:${pct}%;background:${book.color}"></div></div>
+      </div>
+      <input type="range" class="book-range" min="0" max="100" value="${pct}"
+        oninput="updateBook('${book.id}','${book.color}',this.value)" />
+      <label style="display:flex;align-items:center;gap:6px;font-size:.78rem;margin-top:10px;cursor:pointer;">
+        <input type="checkbox" ${revised?'checked':''} onchange="saveBookRev('${book.id}',this.checked)"
+          style="accent-color:var(--bio);width:14px;height:14px;" />
+        Revision completed
+      </label>
+    </div>`;
+  }).join('');
+}
+
+function updateBook(id, color, val) {
+  const d = getData(); d['book-' + id] = parseInt(val); setData(d);
+  safeSet('bpct-' + id, val + '%');
+  const bar = document.getElementById('bbar-' + id);
+  if (bar) bar.style.width = val + '%';
+}
+
+function saveBookRev(id, checked) {
+  const d = getData(); d['bookrev-' + id] = checked; setData(d);
+}
+
+// ─── ANALYTICS ───
+function updateAnalytics() {
+  const d = getData();
+  let totalTopics = 0, doneTotals = 0;
+  const subjectStats = {};
+  ['bio','chem','phy'].forEach(subj => {
+    let done = 0, total = 0;
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((_,i) => {
+        total++;
+        if (d['t-'+ch.id+'-'+i]) done++;
+      });
+    });
+    doneTotals += done; totalTopics += total;
+    subjectStats[subj] = { done, total, pct: total ? Math.round(done/total*100) : 0 };
+  });
+
+  const overallPct = totalTopics ? Math.round(doneTotals/totalTopics*100) : 0;
+  safeSet('readinessPct', overallPct + '%');
+
+  let level = 'Beginner';
+  let msg = 'Start completing topics to build momentum. Begin with NCERT Biology.';
+  let ringColor = 'var(--bg3)';
+  if (overallPct >= 80) { level = 'NEET Ready 🎯'; msg = 'Excellent! Focus on mock tests and revision now.'; ringColor = 'var(--bio)'; }
+  else if (overallPct >= 55) { level = 'Competitive 💪'; msg = 'Great progress! Identify and fix weak areas consistently.'; ringColor = 'var(--phy)'; }
+  else if (overallPct >= 30) { level = 'Improving 📈'; msg = 'Good momentum. Increase daily targets and add mock tests.'; ringColor = 'var(--chem)'; }
+  else if (overallPct >= 10) { level = 'Building 🌱'; msg = 'Keep going. Consistency now will pay dividends later.'; ringColor = 'var(--purple)'; }
+
+  safeSet('readinessLabel', level);
+  safeSet('readinessMsg', msg);
+  const ring = document.getElementById('readinessRing');
+  if (ring) ring.style.borderColor = ringColor;
+
+  // Weakness
+  const wList = document.getElementById('weaknessList');
+  if (wList) {
+    const items = Object.entries(subjectStats).map(([subj, s]) => {
+      const weakness = 100 - s.pct;
+      return { subj, s, weakness };
+    }).sort((a,b) => b.weakness - a.weakness);
+    wList.innerHTML = items.map(({subj, s, weakness}) => `
+      <div class="weakness-item">
+        <span style="min-width:60px;font-size:.8rem;">${subj.charAt(0).toUpperCase()+subj.slice(1)}</span>
+        <div class="weakness-bar"><div class="weakness-fill" style="width:${weakness}%;background:${subj==='bio'?'var(--bio)':subj==='chem'?'var(--chem)':'var(--phy)'}"></div></div>
+        <span style="font-size:.75rem;font-family:'JetBrains Mono',monospace;min-width:35px;text-align:right;">${s.pct}%</span>
+      </div>`).join('');
+  }
+
+  // Suggestions
+  const sugEl = document.getElementById('suggestionsList');
+  if (sugEl) {
+    const suggestions = [];
+    if (overallPct < 20) suggestions.push('📌 Start with NCERT Biology Unit 1 — build a strong foundation first.');
+    if (subjectStats.phy.pct < subjectStats.bio.pct - 20) suggestions.push('⚡ Physics is lagging. Give it 2 extra hours this week.');
+    if (subjectStats.chem.pct < 30) suggestions.push('⚗️ Chemistry needs attention. Try Physical Chemistry first.');
+    const tests = JSON.parse(d['tests-list'] || '[]');
+    if (tests.length === 0) suggestions.push('🧪 Log your first mock test to track performance trends.');
+    if (overallPct > 50 && tests.length < 5) suggestions.push('📝 Your topic coverage is good — now give more mock tests!');
+    if (overallPct > 70) suggestions.push('✅ Start revision cycles — go back to early chapters you completed months ago.');
+    if (!suggestions.length) suggestions.push('🌟 You\'re doing great! Keep the consistency going.');
+    sugEl.innerHTML = suggestions.map(s => `<p style="background:var(--bg3);padding:10px 14px;border-radius:8px;border-left:3px solid var(--accent);">${s}</p>`).join('');
+  }
+
+  // Test trend
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  const trendEl = document.getElementById('testTrend');
+  if (trendEl) {
+    if (!tests.length) { trendEl.innerHTML = '<div style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>'; }
+    else {
+      const sorted = [...tests].reverse().slice(-8);
+      trendEl.innerHTML = `<div style="display:flex;align-items:flex-end;gap:8px;height:80px;">` +
+        sorted.map(t => {
+          const h = Math.round(t.score / 720 * 70);
+          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:100%;height:${h}px;background:var(--accent);border-radius:4px 4px 0 0;min-height:4px;"></div>
+            <div style="font-size:.6rem;color:var(--muted);text-align:center;max-width:50px;overflow:hidden;white-space:nowrap;">${t.name.slice(0,8)}</div>
+            <div style="font-size:.65rem;font-family:'JetBrains Mono',monospace;">${t.score}</div>
+          </div>`;
+        }).join('') + '</div>';
+    }
+  }
+}
+
+// ─── JOURNAL ───
+function addJournalEntry() {
+  const text = document.getElementById('journalInput')?.value?.trim();
+  if (!text) return;
+  const mood = document.getElementById('journalMood')?.value || '😊';
+  const d = getData();
+  const entries = JSON.parse(d['journal'] || '[]');
+  entries.unshift({ id: Date.now(), text, mood, date: new Date().toLocaleString('en-IN') });
+  d['journal'] = JSON.stringify(entries);
+  setData(d);
+  document.getElementById('journalInput').value = '';
+  renderJournal(entries);
+  showToast('Journal entry saved!');
+}
+
+function renderJournal(entries) {
+  const el = document.getElementById('journalEntries');
+  if (!el) return;
+  if (!entries.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No journal entries yet. Start writing...</div>'; return; }
+  el.innerHTML = entries.map(e => `
+    <div class="journal-entry">
+      <div class="entry-mood">${e.mood}</div>
+      <div class="entry-date">${e.date}</div>
+      <div class="entry-text">${e.text}</div>
+      <button class="entry-delete" onclick="deleteJournalEntry(${e.id})">Delete</button>
+    </div>`).join('');
+}
+
+function deleteJournalEntry(id) {
+  const d = getData();
+  let entries = JSON.parse(d['journal'] || '[]');
+  entries = entries.filter(e => e.id !== id);
+  d['journal'] = JSON.stringify(entries);
+  setData(d);
+  renderJournal(entries);
+}
+
+function loadJournal() {
+  const d = getData();
+  const entries = JSON.parse(d['journal'] || '[]');
+  renderJournal(entries);
+}
+
+// ─── PHOTO UPLOAD (compressed) ───
+function handlePhotoUpload(event) {
+  const files = Array.from(event.target.files);
+  const d = getData();
+  const photos = JSON.parse(d['photos'] || '[]');
+  if (photos.length + files.length > 20) { showToast('Max 20 photos allowed', 'info'); return; }
+  let processed = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      img.onload = function() {
+        const maxDim = 300;
+        let w = img.width, h = img.height;
+        if (w > h) { if (w > maxDim) { h = h * maxDim / w; w = maxDim; } }
+        else { if (h > maxDim) { w = w * maxDim / h; h = maxDim; } }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const compressed = canvas.toDataURL('image/jpeg', 0.6);
+        photos.push({ id: Date.now() + Math.random(), src: compressed, name: file.name, date: new Date().toLocaleDateString('en-IN') });
+        processed++;
+        if (processed === files.length) {
+          d['photos'] = JSON.stringify(photos);
+          setData(d);
+          renderPhotoWall(photos);
+          showToast(files.length + ' photo(s) added!');
+        }
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+  event.target.value = '';
+}
+
+function renderPhotoWall(photos) {
+  const wall = document.getElementById('photoWall');
+  if (!wall) return;
+  wall.innerHTML = `<button class="photo-add-btn" onclick="document.getElementById('photoInput').click()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add Photo</button>` +
+    photos.map(p => `<div class="photo-item">
+      <img src="${p.src}" alt="${p.name}" loading="lazy" />
+      <button class="photo-delete" onclick="deletePhoto(${p.id})">✕</button>
+      <div class="photo-caption">${p.date}</div>
+    </div>`).join('');
+}
+
+function deletePhoto(id) {
+  const d = getData();
+  let photos = JSON.parse(d['photos'] || '[]');
+  photos = photos.filter(p => p.id !== id);
+  d['photos'] = JSON.stringify(photos);
+  setData(d);
+  renderPhotoWall(photos);
+}
+
+function loadPhotos() {
+  const d = getData();
+  const photos = JSON.parse(d['photos'] || '[]');
+  renderPhotoWall(photos);
+}
+
+// ─── GOALS WALL ───
+function addGoal() {
+  const text = prompt('Enter your goal (e.g. "Score 650+ in NEET 2026"):');
+  if (!text?.trim()) return;
+  const d = getData();
+  const goals = JSON.parse(d['goals'] || '[]');
+  goals.push({ id: Date.now(), text: text.trim() });
+  d['goals'] = JSON.stringify(goals);
+  setData(d);
+  renderGoals(goals);
+}
+
+function renderGoals(goals) {
+  const el = document.getElementById('goalsWall');
+  if (!el) return;
+  el.innerHTML = goals.map(g => `
+    <div style="background:linear-gradient(135deg,rgba(168,124,245,.1),rgba(61,232,160,.06));border:1px solid rgba(168,124,245,.3);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:600;">
+      🎯 ${g.text}
+      <button onclick="deleteGoal(${g.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;margin-left:auto;">✕</button>
+    </div>`).join('') || '<div style="color:var(--muted);font-size:.85rem;">No goals yet. Add your first goal!</div>';
+}
+
+function deleteGoal(id) {
+  const d = getData();
+  let goals = JSON.parse(d['goals'] || '[]');
+  goals = goals.filter(g => g.id !== id);
+  d['goals'] = JSON.stringify(goals);
+  setData(d);
+  renderGoals(goals);
+}
+
+function loadGoals() {
+  const d = getData();
+  renderGoals(JSON.parse(d['goals'] || '[]'));
+}
+
+// ─── EXPORT / IMPORT ───
+function exportData() {
+  const d = getData();
+  const json = JSON.stringify(d, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'neetopia-progress-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Progress exported!');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (typeof imported !== 'object') throw new Error('Invalid');
+      if (!confirm('This will REPLACE all your current data with the imported backup. Continue?')) return;
+      localStorage.setItem(STORE_KEY, JSON.stringify(imported));
+      showToast('Progress restored!');
+      setTimeout(() => location.reload(), 1000);
+    } catch {
+      showToast('Invalid backup file', 'info');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAllData() {
+  if (!confirm('Are you sure? This will permanently delete ALL your tracking data. This cannot be undone.')) return;
+  if (!confirm('Final confirmation: Delete ALL NEETopia data?')) return;
+  localStorage.removeItem(STORE_KEY);
+  showToast('All data cleared', 'info');
+  setTimeout(() => location.reload(), 1000);
+}
+
+function updateStorageInfo() {
+  const el = document.getElementById('storageInfo');
+  if (!el) return;
+  const d = getData();
+  const json = JSON.stringify(d);
+  const sizeKB = (new Blob([json]).size / 1024).toFixed(1);
+  const topics = Object.keys(d).filter(k => k.startsWith('t-')).length;
+  const tests = JSON.parse(d['tests-list'] || '[]').length;
+  const journal = JSON.parse(d['journal'] || '[]').length;
+  const photos = JSON.parse(d['photos'] || '[]').length;
+  el.innerHTML = `
+    <div>📦 Total data size: <strong>${sizeKB} KB</strong> (localStorage limit ~5MB)</div>
+    <div>✅ Topics tracked: <strong>${topics}</strong></div>
+    <div>🧪 Tests logged: <strong>${tests}</strong></div>
+    <div>📓 Journal entries: <strong>${journal}</strong></div>
+    <div>📸 Photos stored: <strong>${photos}</strong></div>
+    <div style="margin-top:8px;color:var(--warn);">⚠️ Last backup recommended: export before clearing browser data!</div>`;
+}
+
+// ─── REALITY TOGGLE ───
+function toggleReality() {
+  const content = document.getElementById('realityContent');
+  const arrow = document.getElementById('realityArrow');
+  if (content) content.classList.toggle('open');
+  if (arrow) arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+// ─── FAQ ───
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+// ─── TODAY DATE ───
+document.getElementById('todayDate') && (() => {
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+})();
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  buildSyllabus();
+  loadProfile();
+  loadAvatar();
+  initDaily();
+  loadTodos();
+  loadTests();
+  buildBooks();
+  loadJournal();
+  loadPhotos();
+  loadGoals();
+  updateStats();
+  updateAnalytics();
+  updateStorageInfo();
+
+  // Watch backup section tab for storage info update
+  document.querySelectorAll('.snav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.section === 'backup') updateStorageInfo();
+      if (btn.dataset.section === 'analytics') updateAnalytics();
+    });
+  });
+});
+</script>
+</body>
+</html>
