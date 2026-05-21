@@ -896,7 +896,7 @@
     <div class="subjects-grid">
 
       <!-- ── Biology ── -->
-      <div class="subject-card bio reveal" onclick="window.location='biology/biology-home.html'" style="cursor:pointer">
+      <a href="biology/biology-home.html" class="subject-card bio reveal">
         <div class="subject-card-top">
           <div class="subject-icon-wrap bio">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -926,7 +926,7 @@
 
         <div class="subject-card-footer">
           <span class="subject-chapter-count">38 chapters · Class 11 + 12</span>
-          <div class="subject-card-actions">
+          <div class="subject-card-actions" onclick="event.stopPropagation()">
             <a href="pyq/pyq-home.html" class="sc-btn sc-btn-pyq bio-pyq" onclick="event.stopPropagation()">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
               PYQs
@@ -939,13 +939,13 @@
         </div>
 
         <div class="subject-cta">
-          <a href="biology/biology-home.html" class="subject-cta-label bio-txt" onclick="event.stopPropagation()" style="text-decoration:none;display:flex;align-items:center;gap:5px;font-weight:500;font-size:.82rem;">Start Biology</a>
+          <span class="subject-cta-label bio-txt">Start Biology</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
-      </div>
+      </a>
 
       <!-- ── Chemistry ── -->
-      <div class="subject-card chem reveal" onclick="window.location='chemistry/chemistry-home.html'" style="cursor:pointer">
+      <a href="chemistry/chemistry-home.html" class="subject-card chem reveal">
         <div class="subject-card-top">
           <div class="subject-icon-wrap chem">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -976,7 +976,7 @@
 
         <div class="subject-card-footer">
           <span class="subject-chapter-count">30 chapters · Class 11 + 12</span>
-          <div class="subject-card-actions">
+          <div class="subject-card-actions" onclick="event.stopPropagation()">
             <a href="pyq/pyq-home.html" class="sc-btn sc-btn-pyq chem-pyq" onclick="event.stopPropagation()">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
               PYQs
@@ -989,13 +989,13 @@
         </div>
 
         <div class="subject-cta">
-          <a href="chemistry/chemistry-home.html" class="subject-cta-label chem-txt" onclick="event.stopPropagation()" style="text-decoration:none;display:flex;align-items:center;gap:5px;font-weight:500;font-size:.82rem;">Start Chemistry</a>
+          <span class="subject-cta-label chem-txt">Start Chemistry</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
-      </div>
+      </a>
 
       <!-- ── Physics ── -->
-      <div class="subject-card phy reveal" onclick="window.location='physics/physics-home.html'" style="cursor:pointer">
+      <a href="physics/physics-home.html" class="subject-card phy reveal">
         <div class="subject-card-top">
           <div class="subject-icon-wrap phy">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1026,7 +1026,7 @@
 
         <div class="subject-card-footer">
           <span class="subject-chapter-count">29 chapters · Class 11 + 12</span>
-          <div class="subject-card-actions">
+          <div class="subject-card-actions" onclick="event.stopPropagation()">
             <a href="pyq/pyq-home.html" class="sc-btn sc-btn-pyq phy-pyq" onclick="event.stopPropagation()">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
               PYQs
@@ -1039,10 +1039,10 @@
         </div>
 
         <div class="subject-cta">
-          <a href="physics/physics-home.html" class="subject-cta-label phy-txt" onclick="event.stopPropagation()" style="text-decoration:none;display:flex;align-items:center;gap:5px;font-weight:500;font-size:.82rem;">Start Physics</a>
+          <span class="subject-cta-label phy-txt">Start Physics</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </div>
-      </div>
+      </a>
 
     </div><!-- /.subjects-grid -->
 
