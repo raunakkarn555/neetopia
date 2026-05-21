@@ -6,7 +6,20 @@
   <title>404 — Page Not Found | NEETopia</title>
   <meta name="description" content="Yeh page nahi mila. NEETopia par wapas jao aur apni NEET preparation continue karo." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  
+  <!-- SEO Meta -->
+  <meta name="robots" content="noindex, follow" />
+  <meta name="author" content="NEETopia" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="404 — Page Not Found | NEETopia" />
+  <meta property="og:description" content="Yeh page nahi mila. NEETopia par wapas jao aur apni NEET preparation continue karo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NEETopia" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="404 — Page Not Found | NEETopia" />
+  <meta name="twitter:description" content="Yeh page nahi mila. NEETopia par wapas jao aur apni NEET preparation continue karo." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
@@ -219,6 +232,16 @@
     .error-quick-link.phy:hover  { color: var(--accent); border-color: rgba(61,191,255,.4);  background: var(--accent-dim); }
     .error-quick-link.tracker:hover { color: var(--purple); border-color: rgba(168,124,245,.4); background: rgba(168,124,245,.08); }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "404 Page Not Found | NEETopia",
+    "url": "https://neetopia.in/404.html",
+    "publisher": {"@type": "Organization", "name": "NEETopia", "url": "https://neetopia.in"}
+  }
+  </script>
 </head>
 <body>
 
@@ -226,7 +249,7 @@
      NAVBAR
 ══════════════════════════════ -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="../index.html" class="nav-logo">
     <div class="logo-mark">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
     </div>
@@ -234,28 +257,28 @@
   </a>
 
   <ul class="nav-links">
-    <li><a href="syllabus/syllabus.html">
+    <li><a href="../syllabus/syllabus.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       Syllabus</a></li>
-    <li><a href="pattern/pattern.html">
+    <li><a href="../pattern/pattern.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       Exam Pattern</a></li>
-    <li><a href="biology/biology-home.html">
+    <li><a href="../biology/biology-home.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
       Biology</a></li>
-    <li><a href="chemistry/chemistry-home.html">
+    <li><a href="../chemistry/chemistry-home.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
       Chemistry</a></li>
-    <li><a href="physics/physics-home.html">
+    <li><a href="../physics/physics-home.html">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
       Physics</a></li>
-    <li><a href="pyq/pyq-home.html" class="pyq-link">
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       PYQs</a></li>
   </ul>
 
   <div class="nav-right">
-    <a href="donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       Donate
     </a>
@@ -268,15 +291,62 @@
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
       </svg>
     </button>
-    <a href="biology/biology-home.html" class="btn-nav">
+    <a href="../biology/biology-home.html" class="btn-nav">
       Start Preparing
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileOverlay"></div>
+
+<!-- Mobile Nav Menu -->
+<nav class="nav-mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+  <a href="../syllabus/syllabus.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    Syllabus
+  </a>
+  <a href="../pattern/pattern.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    Exam Pattern
+  </a>
+  <a href="../biology/biology-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    Biology
+  </a>
+  <a href="../chemistry/chemistry-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+    Chemistry
+  </a>
+  <a href="../physics/physics-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+    Physics
+  </a>
+  <a href="../pyq/pyq-home.html" class="pyq-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    PYQs
+  </a>
+  <a href="../roadmap/roadmap.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    Study Roadmap
+  </a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="../donate.html" class="btn-donate" style="font-size:.82rem;padding:8px 16px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <a href="../biology/biology-home.html" class="btn-nav" style="display:inline-flex;">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</nav>
+
 
 <!-- ══════════════════════════════
      404 MAIN CONTENT
@@ -373,7 +443,7 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
           <div class="logo-mark" style="width:28px;height:28px">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
@@ -381,7 +451,7 @@
         </a>
         <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
         <div class="footer-social">
-          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             Support / Donate
           </a>
@@ -394,15 +464,15 @@
 
       <div class="footer-col">
         <h4>Subjects</h4>
-        <a href="biology/biology-home.html">
+        <a href="../biology/biology-home.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           Biology
         </a>
-        <a href="chemistry/chemistry-home.html">
+        <a href="../chemistry/chemistry-home.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
           Chemistry
         </a>
-        <a href="physics/physics-home.html">
+        <a href="../physics/physics-home.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
           Physics
         </a>
@@ -410,24 +480,23 @@
 
       <div class="footer-col">
         <h4>Resources</h4>
-        <a href="syllabus/syllabus.html">
+        <a href="../syllabus/syllabus.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           Full Syllabus
         </a>
-        <a href="pattern/pattern.html">
+        <a href="../pattern/pattern.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
           Exam Pattern
         </a>
-        <a href="pyq/pyq-home.html">
+        <a href="../pyq/pyq-home.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
           PYQs 2013–2024
         </a>
-        <a href="roadmap/roadmap.html">
+        <a href="../roadmap/roadmap.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           Study Roadmap
         </a>
-        <!-- ── Progress Tracker link added ── -->
-        <a href="tools/progress-tracker.html" style="color:#a87cf5;">
+        <a href="../tools/progress-tracker.html" style="color:#a87cf5;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Progress Tracker
         </a>
@@ -435,19 +504,19 @@
 
       <div class="footer-col">
         <h4>Quick Access</h4>
-        <a href="biology/class11/ch01-living-world.html">
+        <a href="../biology/class11/ch01-living-world.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           Living World
         </a>
-        <a href="biology/class12/ch01-reproduction.html">
+        <a href="../biology/class12/ch01-reproduction.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           Reproduction
         </a>
-        <a href="chemistry/class11/ch01-basic-concepts.html">
+        <a href="../chemistry/class11/ch01-basic-concepts.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           Basic Chemistry
         </a>
-        <a href="physics/class11/ch02-motion.html">
+        <a href="../physics/class11/ch02-motion.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           Kinematics
         </a>
@@ -455,11 +524,11 @@
 
       <div class="footer-col">
         <h4>Platform</h4>
-        <a href="roadmap/roadmap.html">
+        <a href="../roadmap/roadmap.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           1 Year Plan
         </a>
-        <a href="roadmap/roadmap.html">
+        <a href="../roadmap/roadmap.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           2 Year Plan
         </a>
@@ -481,7 +550,7 @@
         <a href="#">Terms</a>
         <a href="#">Privacy</a>
         <a href="#">Sitemap</a>
-        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
       </div>
     </div>
   </div>
