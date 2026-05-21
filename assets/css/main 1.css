@@ -463,14 +463,8 @@ mark { background: rgba(61,191,255,.13); color: var(--accent); padding: 1px 5px;
 .subject-icon.phy  { background: var(--phy-bg); }
 
 .subject-card-meta { font-family: var(--font-mono); font-size: .68rem; color: var(--text3); }
-.subject-card-meta-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.subject-card-body { display: flex; flex-direction: column; gap: 6px; }
-.subject-name { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; letter-spacing: -.5px; }
-.subject-desc { font-size: .86rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
-/* colour helpers */
-.bio-txt  { color: var(--green); }
-.chem-txt { color: var(--amber); }
-.phy-txt  { color: var(--accent); }
+.subject-card h3 { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; letter-spacing: -.5px; }
+.subject-card p { font-size: .86rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
 .subject-chapters { display: flex; gap: 6px; flex-wrap: wrap; }
 .subject-cta {
   display: flex; align-items: center; justify-content: space-between;
@@ -478,101 +472,6 @@ mark { background: rgba(61,191,255,.13); color: var(--accent); padding: 1px 5px;
   font-size: .82rem; color: var(--text2);
 }
 .subject-cta span { color: var(--accent); font-weight: 500; display: flex; align-items: center; gap: 5px; }
-
-/* ── Subject card footer: chapter count + action buttons ── */
-.subject-card-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 10px;
-  padding: 12px 0 0;
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-}
-.subject-chapter-count {
-  font-family: var(--font-mono); font-size: .68rem; color: var(--text3);
-  display: flex; align-items: center; gap: 5px;
-}
-.subject-card-actions {
-  display: flex; align-items: center; gap: 7px;
-}
-/* ── Subject card action buttons — base ── */
-.sc-btn {
-  position: relative; overflow: hidden;
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-body); font-size: .76rem; font-weight: 600;
-  padding: 7px 14px; border-radius: 8px; border: 1px solid;
-  text-decoration: none; cursor: pointer; white-space: nowrap;
-  letter-spacing: .2px;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-}
-.sc-btn:hover { transform: translateY(-2px); }
-/* shimmer sweep on hover */
-.sc-btn::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
-  transform: translateX(-100%);
-  transition: transform .4s ease;
-  pointer-events: none;
-}
-.sc-btn:hover::after { transform: translateX(100%); }
-
-/* ── PYQ button — outlined, analytical ── */
-.sc-btn-pyq {
-  font-family: var(--font-mono);
-  font-size: .68rem; letter-spacing: .6px; text-transform: uppercase;
-  padding: 6px 13px; border-radius: 7px;
-}
-.sc-btn-pyq.bio-pyq {
-  color: var(--green);
-  background: rgba(61,232,160,0.07);
-  border-color: rgba(61,232,160,0.4);
-  box-shadow: inset 0 1px 0 rgba(61,232,160,0.1);
-}
-.sc-btn-pyq.chem-pyq {
-  color: var(--amber);
-  background: rgba(244,185,66,0.07);
-  border-color: rgba(244,185,66,0.4);
-  box-shadow: inset 0 1px 0 rgba(244,185,66,0.1);
-}
-.sc-btn-pyq.phy-pyq {
-  color: var(--accent);
-  background: rgba(61,191,255,0.07);
-  border-color: rgba(61,191,255,0.4);
-  box-shadow: inset 0 1px 0 rgba(61,191,255,0.1);
-}
-.sc-btn-pyq.bio-pyq:hover  { background: rgba(61,232,160,0.15); border-color: rgba(61,232,160,0.75); box-shadow: 0 0 14px rgba(61,232,160,0.25), inset 0 1px 0 rgba(61,232,160,0.2); }
-.sc-btn-pyq.chem-pyq:hover { background: rgba(244,185,66,0.14); border-color: rgba(244,185,66,0.75); box-shadow: 0 0 14px rgba(244,185,66,0.25), inset 0 1px 0 rgba(244,185,66,0.2); }
-.sc-btn-pyq.phy-pyq:hover  { background: rgba(61,191,255,0.14); border-color: rgba(61,191,255,0.75); box-shadow: 0 0 14px rgba(61,191,255,0.25), inset 0 1px 0 rgba(61,191,255,0.2); }
-
-/* ── Practice button — solid glowing pill ── */
-.sc-btn-practice {
-  border-color: transparent;
-  border-radius: 8px;
-  color: #07090f;
-  font-weight: 700;
-}
-.sc-btn-practice.bio-prac  {
-  background: linear-gradient(135deg, #3de8a0 0%, #1fcf82 100%);
-  box-shadow: 0 3px 12px rgba(61,232,160,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
-}
-.sc-btn-practice.chem-prac {
-  background: linear-gradient(135deg, #f4b942 0%, #e09820 100%);
-  box-shadow: 0 3px 12px rgba(244,185,66,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
-}
-.sc-btn-practice.phy-prac  {
-  background: linear-gradient(135deg, #3dbfff 0%, #09a5f0 100%);
-  box-shadow: 0 3px 12px rgba(61,191,255,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
-}
-.sc-btn-practice.bio-prac:hover  { box-shadow: 0 6px 22px rgba(61,232,160,0.5),  inset 0 1px 0 rgba(255,255,255,0.3); filter: brightness(1.06); }
-.sc-btn-practice.chem-prac:hover { box-shadow: 0 6px 22px rgba(244,185,66,0.5),  inset 0 1px 0 rgba(255,255,255,0.3); filter: brightness(1.06); }
-.sc-btn-practice.phy-prac:hover  { box-shadow: 0 6px 22px rgba(61,191,255,0.5),  inset 0 1px 0 rgba(255,255,255,0.3); filter: brightness(1.06); }
-
-/* Mobile adjustment for sc-btn */
-@media (max-width: 600px) {
-  .subject-card-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .subject-card-actions { width: 100%; }
-  .sc-btn { flex: 1; justify-content: center; font-size: .7rem; padding: 7px 10px; }
-}
 
 /* ══════════════════════════════
    STATS BAR
