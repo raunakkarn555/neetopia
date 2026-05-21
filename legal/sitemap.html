@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sitemap — NEETopia</title>
+  <meta name="description" content="NEETopia ka complete sitemap. Sabhi pages, subjects, chapters aur resources ek jagah — aasaani se navigate karo." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="NEETopia" />
+  <link rel="canonical" href="https://raunakkarn555.github.io/neetopia/legal/sitemap.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* ── Legal Page Hero ── */
+    .legal-hero {
+      padding-top: calc(var(--nav-h) + 56px);
+      padding-bottom: 56px;
+      padding-left: clamp(20px,5%,80px);
+      padding-right: clamp(20px,5%,80px);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .legal-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 10% 50%, rgba(168,124,245,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .legal-hero-inner { max-width: 860px; margin: 0 auto; }
+
+    .legal-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--purple, #a87cf5);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 18px;
+    }
+    .legal-eyebrow::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: currentColor;
+    }
+    .legal-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .legal-hero .sub {
+      font-size: clamp(.9rem,1.4vw,1rem);
+      color: var(--text2);
+      max-width: 580px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 22px;
+    }
+    .legal-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .legal-meta-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .8rem; color: var(--text3);
+      font-family: var(--font-mono);
+    }
+    .legal-meta-item svg { color: var(--purple, #a87cf5); }
+
+    /* ── Sitemap Layout ── */
+    .sitemap-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px clamp(20px,5%,80px);
+    }
+
+    /* ── Sitemap Section heading ── */
+    .sm-section {
+      margin-bottom: 56px;
+    }
+    .sm-section:last-child { margin-bottom: 0; }
+
+    .sm-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sm-section-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid;
+    }
+    .sm-section-icon.purple {
+      background: rgba(168,124,245,0.1);
+      border-color: rgba(168,124,245,0.25);
+      color: #a87cf5;
+    }
+    .sm-section-icon.green {
+      background: rgba(61,232,160,0.08);
+      border-color: rgba(61,232,160,0.2);
+      color: #3de8a0;
+    }
+    .sm-section-icon.amber {
+      background: rgba(244,185,66,0.08);
+      border-color: rgba(244,185,66,0.2);
+      color: #f4b942;
+    }
+    .sm-section-icon.blue {
+      background: rgba(61,191,255,0.08);
+      border-color: rgba(61,191,255,0.2);
+      color: #3dbfff;
+    }
+    .sm-section-title {
+      flex: 1;
+    }
+    .sm-section-title h2 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .sm-section-title p {
+      font-size: .8rem;
+      color: var(--text3);
+      font-weight: 300;
+    }
+    .sm-count {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--text3);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 3px 10px;
+    }
+
+    /* ── Grid of links ── */
+    .sm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+    }
+    .sm-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 9px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: background .15s, border-color .15s, transform .15s;
+      color: var(--text2);
+    }
+    .sm-link:hover {
+      background: var(--surface);
+      border-color: rgba(168,124,245,0.3);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .sm-link-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 6px;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sm-link-text {
+      flex: 1; min-width: 0;
+    }
+    .sm-link-name {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sm-link-desc {
+      font-size: .72rem;
+      color: var(--text3);
+      font-weight: 300;
+      margin-top: 1px;
+    }
+    .sm-link-arrow {
+      flex-shrink: 0;
+      color: var(--border);
+      transition: color .15s;
+    }
+    .sm-link:hover .sm-link-arrow { color: var(--purple, #a87cf5); }
+
+    /* ── Chapters grid (denser) ── */
+    .sm-chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 6px;
+    }
+    .sm-ch-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: background .15s, border-color .15s;
+      color: var(--text2);
+      font-size: .83rem;
+      font-weight: 300;
+    }
+    .sm-ch-link:hover {
+      background: var(--surface);
+      border-color: rgba(168,124,245,0.2);
+      color: var(--text);
+    }
+    .sm-ch-num {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--text3);
+      flex-shrink: 0;
+      min-width: 22px;
+    }
+
+    /* ── Sub-sections within a subject ── */
+    .sm-subject-group {
+      margin-bottom: 32px;
+    }
+    .sm-subject-group:last-child { margin-bottom: 0; }
+    .sm-sub-label {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text3);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sm-sub-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Footer tracker styles ── */
+    .footer-tracker-link {
+      display: flex !important; align-items: center !important; gap: 7px !important;
+      color: var(--purple) !important; font-weight: 500 !important;
+      background: rgba(168,124,245,0.08) !important; border: 1px solid rgba(168,124,245,0.25) !important;
+      border-radius: 7px !important; padding: 7px 10px !important; margin-top: 4px !important;
+      transition: background .2s, border-color .2s !important;
+    }
+    .footer-tracker-link:hover {
+      background: rgba(168,124,245,0.16) !important; border-color: rgba(168,124,245,0.45) !important;
+      color: var(--purple) !important;
+    }
+    .footer-tracker-badge {
+      margin-left: auto; font-family: var(--font-mono); font-size: .58rem;
+      text-transform: uppercase; letter-spacing: 1px; color: var(--purple);
+      background: rgba(168,124,245,0.15); border: 1px solid rgba(168,124,245,0.3);
+      padding: 2px 7px; border-radius: 99px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .sm-grid { grid-template-columns: 1fr 1fr; }
+      .sm-chapters-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .sm-grid { grid-template-columns: 1fr; }
+      .sm-chapters-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="../pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="../physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+      <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </button>
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+<!-- Mobile Nav Menu -->
+<div class="nav-mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+  <a href="../syllabus/syllabus.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    Syllabus
+  </a>
+  <a href="../pattern/pattern.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    Exam Pattern
+  </a>
+  <a href="../biology/biology-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    Biology
+  </a>
+  <a href="../chemistry/chemistry-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+    Chemistry
+  </a>
+  <a href="../physics/physics-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+    Physics
+  </a>
+  <a href="../pyq/pyq-home.html" class="pyq-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+    PYQs
+  </a>
+  <a href="../roadmap/roadmap.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    Study Roadmap
+  </a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="../donate.html" class="btn-donate" style="font-size:.82rem;padding:8px 16px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <a href="../biology/biology-home.html" class="btn-nav" style="display:inline-flex;">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">Navigation</div>
+    <h1>Sitemap</h1>
+    <p class="sub">
+      NEETopia ka poora structure ek jagah. Koi bhi page dhundho, kisi bhi subject ka chapter directly access karo — bina kisi confusion ke.
+    </p>
+    <div class="legal-meta">
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Updated: May 2026
+      </span>
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        100+ Pages
+      </span>
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        3 Subjects
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SITEMAP CONTENT
+══════════════════════════════ -->
+<div class="sitemap-layout">
+
+  <!-- ── MAIN PAGES ── -->
+  <div class="sm-section reveal">
+    <div class="sm-section-header">
+      <div class="sm-section-icon purple">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="sm-section-title">
+        <h2>Main Pages</h2>
+        <p>Platform ke core pages</p>
+      </div>
+      <span class="sm-count">6 pages</span>
+    </div>
+    <div class="sm-grid">
+      <a href="../index.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Home</div>
+          <div class="sm-link-desc">Platform overview</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="../syllabus/syllabus.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Full Syllabus</div>
+          <div class="sm-link-desc">NEET 2026 syllabus</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="../pattern/pattern.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Exam Pattern</div>
+          <div class="sm-link-desc">Marks, sections, timing</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="../roadmap/roadmap.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Study Roadmap</div>
+          <div class="sm-link-desc">1-year &amp; 2-year plans</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="../pyq/pyq-home.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">PYQs</div>
+          <div class="sm-link-desc">2013–2024 questions</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="../donate.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Donate / Support</div>
+          <div class="sm-link-desc">Support NEETopia</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── BIOLOGY ── -->
+  <div class="sm-section reveal">
+    <div class="sm-section-header">
+      <div class="sm-section-icon green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </div>
+      <div class="sm-section-title">
+        <h2>Biology</h2>
+        <p>Class 11 &amp; 12 — complete chapter notes</p>
+      </div>
+      <span class="sm-count">38 chapters</span>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Overview</div>
+      <div class="sm-grid" style="margin-bottom:16px;">
+        <a href="../biology/biology-home.html" class="sm-link">
+          <div class="sm-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
+          <div class="sm-link-text"><div class="sm-link-name">Biology Home</div><div class="sm-link-desc">Subject overview</div></div>
+          <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Class 11 — 16 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../biology/class11/ch01-living-world.html" class="sm-ch-link"><span class="sm-ch-num">01</span>The Living World</a>
+        <a href="../biology/class11/ch02-biological-classification.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Biological Classification</a>
+        <a href="../biology/class11/ch03-plant-kingdom.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Plant Kingdom</a>
+        <a href="../biology/class11/ch04-animal-kingdom.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Animal Kingdom</a>
+        <a href="../biology/class11/ch05-morphology.html" class="sm-ch-link"><span class="sm-ch-num">05</span>Morphology of Flowering Plants</a>
+        <a href="../biology/class11/ch06-anatomy.html" class="sm-ch-link"><span class="sm-ch-num">06</span>Anatomy of Flowering Plants</a>
+        <a href="../biology/class11/ch07-cell.html" class="sm-ch-link"><span class="sm-ch-num">07</span>Structural Organisation in Animals</a>
+        <a href="../biology/class11/ch08-cell-structure.html" class="sm-ch-link"><span class="sm-ch-num">08</span>Cell: The Unit of Life</a>
+        <a href="../biology/class11/ch09-biomolecules.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Biomolecules</a>
+        <a href="../biology/class11/ch10-cell-cycle.html" class="sm-ch-link"><span class="sm-ch-num">10</span>Cell Cycle and Cell Division</a>
+        <a href="../biology/class11/ch11-transport.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Transport in Plants</a>
+        <a href="../biology/class11/ch12-mineral-nutrition.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Mineral Nutrition</a>
+        <a href="../biology/class11/ch13-photosynthesis.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Photosynthesis in Higher Plants</a>
+        <a href="../biology/class11/ch14-respiration.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Respiration in Plants</a>
+        <a href="../biology/class11/ch15-growth.html" class="sm-ch-link"><span class="sm-ch-num">15</span>Plant Growth and Development</a>
+        <a href="../biology/class11/ch16-digestion.html" class="sm-ch-link"><span class="sm-ch-num">16</span>Digestion and Absorption</a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group" style="margin-top:20px;">
+      <div class="sm-sub-label">Class 12 — 16 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../biology/class12/ch01-reproduction.html" class="sm-ch-link"><span class="sm-ch-num">01</span>Reproduction in Organisms</a>
+        <a href="../biology/class12/ch02-sexual-reproduction.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Sexual Reproduction in Flowering Plants</a>
+        <a href="../biology/class12/ch03-human-reproduction.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Human Reproduction</a>
+        <a href="../biology/class12/ch04-reproductive-health.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Reproductive Health</a>
+        <a href="../biology/class12/ch05-principles-inheritance.html" class="sm-ch-link"><span class="sm-ch-num">05</span>Principles of Inheritance</a>
+        <a href="../biology/class12/ch06-molecular-basis.html" class="sm-ch-link"><span class="sm-ch-num">06</span>Molecular Basis of Inheritance</a>
+        <a href="../biology/class12/ch07-evolution.html" class="sm-ch-link"><span class="sm-ch-num">07</span>Evolution</a>
+        <a href="../biology/class12/ch08-human-health.html" class="sm-ch-link"><span class="sm-ch-num">08</span>Human Health and Disease</a>
+        <a href="../biology/class12/ch09-strategies-food.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Strategies for Enhancement in Food Production</a>
+        <a href="../biology/class12/ch10-microbes.html" class="sm-ch-link"><span class="sm-ch-num">10</span>Microbes in Human Welfare</a>
+        <a href="../biology/class12/ch11-biotechnology.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Biotechnology: Principles and Processes</a>
+        <a href="../biology/class12/ch12-biotechnology-applications.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Biotechnology and its Applications</a>
+        <a href="../biology/class12/ch13-organisms-populations.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Organisms and Populations</a>
+        <a href="../biology/class12/ch14-ecosystem.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Ecosystem</a>
+        <a href="../biology/class12/ch15-biodiversity.html" class="sm-ch-link"><span class="sm-ch-num">15</span>Biodiversity and Conservation</a>
+        <a href="../biology/class12/ch16-environmental-issues.html" class="sm-ch-link"><span class="sm-ch-num">16</span>Environmental Issues</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CHEMISTRY ── -->
+  <div class="sm-section reveal">
+    <div class="sm-section-header">
+      <div class="sm-section-icon amber">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      </div>
+      <div class="sm-section-title">
+        <h2>Chemistry</h2>
+        <p>Class 11 &amp; 12 — Physical, Organic, Inorganic</p>
+      </div>
+      <span class="sm-count">30 chapters</span>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Overview</div>
+      <div class="sm-grid" style="margin-bottom:16px;">
+        <a href="../chemistry/chemistry-home.html" class="sm-link">
+          <div class="sm-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg></div>
+          <div class="sm-link-text"><div class="sm-link-name">Chemistry Home</div><div class="sm-link-desc">Subject overview</div></div>
+          <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Class 11 — 14 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../chemistry/class11/ch01-basic-concepts.html" class="sm-ch-link"><span class="sm-ch-num">01</span>Some Basic Concepts of Chemistry</a>
+        <a href="../chemistry/class11/ch02-structure-atom.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Structure of Atom</a>
+        <a href="../chemistry/class11/ch03-classification.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Classification of Elements</a>
+        <a href="../chemistry/class11/ch04-chemical-bonding.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Chemical Bonding and Molecular Structure</a>
+        <a href="../chemistry/class11/ch05-states-of-matter.html" class="sm-ch-link"><span class="sm-ch-num">05</span>States of Matter</a>
+        <a href="../chemistry/class11/ch06-thermodynamics.html" class="sm-ch-link"><span class="sm-ch-num">06</span>Thermodynamics</a>
+        <a href="../chemistry/class11/ch07-equilibrium.html" class="sm-ch-link"><span class="sm-ch-num">07</span>Equilibrium</a>
+        <a href="../chemistry/class11/ch08-redox.html" class="sm-ch-link"><span class="sm-ch-num">08</span>Redox Reactions</a>
+        <a href="../chemistry/class11/ch09-hydrogen.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Hydrogen</a>
+        <a href="../chemistry/class11/ch10-s-block.html" class="sm-ch-link"><span class="sm-ch-num">10</span>The s-Block Elements</a>
+        <a href="../chemistry/class11/ch11-p-block.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Some p-Block Elements</a>
+        <a href="../chemistry/class11/ch12-organic-chemistry.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Organic Chemistry: Basic Principles</a>
+        <a href="../chemistry/class11/ch13-hydrocarbons.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Hydrocarbons</a>
+        <a href="../chemistry/class11/ch14-environmental.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Environmental Chemistry</a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group" style="margin-top:20px;">
+      <div class="sm-sub-label">Class 12 — 16 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../chemistry/class12/ch01-solid-state.html" class="sm-ch-link"><span class="sm-ch-num">01</span>The Solid State</a>
+        <a href="../chemistry/class12/ch02-solutions.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Solutions</a>
+        <a href="../chemistry/class12/ch03-electrochemistry.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Electrochemistry</a>
+        <a href="../chemistry/class12/ch04-chemical-kinetics.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Chemical Kinetics</a>
+        <a href="../chemistry/class12/ch05-surface-chemistry.html" class="sm-ch-link"><span class="sm-ch-num">05</span>Surface Chemistry</a>
+        <a href="../chemistry/class12/ch06-general-principles.html" class="sm-ch-link"><span class="sm-ch-num">06</span>General Principles and Processes of Isolation of Elements</a>
+        <a href="../chemistry/class12/ch07-p-block-2.html" class="sm-ch-link"><span class="sm-ch-num">07</span>The p-Block Elements</a>
+        <a href="../chemistry/class12/ch08-d-f-block.html" class="sm-ch-link"><span class="sm-ch-num">08</span>The d- and f-Block Elements</a>
+        <a href="../chemistry/class12/ch09-coordination.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Coordination Compounds</a>
+        <a href="../chemistry/class12/ch10-haloalkanes.html" class="sm-ch-link"><span class="sm-ch-num">10</span>Haloalkanes and Haloarenes</a>
+        <a href="../chemistry/class12/ch11-alcohols.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Alcohols, Phenols and Ethers</a>
+        <a href="../chemistry/class12/ch12-aldehydes.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Aldehydes, Ketones and Carboxylic Acids</a>
+        <a href="../chemistry/class12/ch13-amines.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Amines</a>
+        <a href="../chemistry/class12/ch14-biomolecules.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Biomolecules</a>
+        <a href="../chemistry/class12/ch15-polymers.html" class="sm-ch-link"><span class="sm-ch-num">15</span>Polymers</a>
+        <a href="../chemistry/class12/ch16-chemistry-everyday.html" class="sm-ch-link"><span class="sm-ch-num">16</span>Chemistry in Everyday Life</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PHYSICS ── -->
+  <div class="sm-section reveal">
+    <div class="sm-section-header">
+      <div class="sm-section-icon blue">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      </div>
+      <div class="sm-section-title">
+        <h2>Physics</h2>
+        <p>Class 11 &amp; 12 — mechanics se modern physics</p>
+      </div>
+      <span class="sm-count">30 chapters</span>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Overview</div>
+      <div class="sm-grid" style="margin-bottom:16px;">
+        <a href="../physics/physics-home.html" class="sm-link">
+          <div class="sm-link-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <div class="sm-link-text"><div class="sm-link-name">Physics Home</div><div class="sm-link-desc">Subject overview</div></div>
+          <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group">
+      <div class="sm-sub-label">Class 11 — 15 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../physics/class11/ch01-units.html" class="sm-ch-link"><span class="sm-ch-num">01</span>Physical World &amp; Units</a>
+        <a href="../physics/class11/ch02-motion.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Motion in a Straight Line</a>
+        <a href="../physics/class11/ch03-motion-plane.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Motion in a Plane</a>
+        <a href="../physics/class11/ch04-laws-motion.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Laws of Motion</a>
+        <a href="../physics/class11/ch05-work-energy.html" class="sm-ch-link"><span class="sm-ch-num">05</span>Work, Energy and Power</a>
+        <a href="../physics/class11/ch06-system-particles.html" class="sm-ch-link"><span class="sm-ch-num">06</span>System of Particles and Rotational Motion</a>
+        <a href="../physics/class11/ch07-gravitation.html" class="sm-ch-link"><span class="sm-ch-num">07</span>Gravitation</a>
+        <a href="../physics/class11/ch08-mechanical-properties.html" class="sm-ch-link"><span class="sm-ch-num">08</span>Mechanical Properties of Solids</a>
+        <a href="../physics/class11/ch09-mechanical-fluids.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Mechanical Properties of Fluids</a>
+        <a href="../physics/class11/ch10-thermal.html" class="sm-ch-link"><span class="sm-ch-num">10</span>Thermal Properties of Matter</a>
+        <a href="../physics/class11/ch11-thermodynamics.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Thermodynamics</a>
+        <a href="../physics/class11/ch12-kinetic-theory.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Kinetic Theory</a>
+        <a href="../physics/class11/ch13-oscillations.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Oscillations</a>
+        <a href="../physics/class11/ch14-waves.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Waves</a>
+        <a href="../physics/class11/ch15-ray-optics.html" class="sm-ch-link"><span class="sm-ch-num">15</span>Ray Optics and Optical Instruments</a>
+      </div>
+    </div>
+
+    <div class="sm-subject-group" style="margin-top:20px;">
+      <div class="sm-sub-label">Class 12 — 15 Chapters</div>
+      <div class="sm-chapters-grid">
+        <a href="../physics/class12/ch01-electric-charges.html" class="sm-ch-link"><span class="sm-ch-num">01</span>Electric Charges and Fields</a>
+        <a href="../physics/class12/ch02-electrostatic-potential.html" class="sm-ch-link"><span class="sm-ch-num">02</span>Electrostatic Potential and Capacitance</a>
+        <a href="../physics/class12/ch03-current-electricity.html" class="sm-ch-link"><span class="sm-ch-num">03</span>Current Electricity</a>
+        <a href="../physics/class12/ch04-moving-charges.html" class="sm-ch-link"><span class="sm-ch-num">04</span>Moving Charges and Magnetism</a>
+        <a href="../physics/class12/ch05-magnetism.html" class="sm-ch-link"><span class="sm-ch-num">05</span>Magnetism and Matter</a>
+        <a href="../physics/class12/ch06-electromagnetic-induction.html" class="sm-ch-link"><span class="sm-ch-num">06</span>Electromagnetic Induction</a>
+        <a href="../physics/class12/ch07-alternating-current.html" class="sm-ch-link"><span class="sm-ch-num">07</span>Alternating Current</a>
+        <a href="../physics/class12/ch08-electromagnetic-waves.html" class="sm-ch-link"><span class="sm-ch-num">08</span>Electromagnetic Waves</a>
+        <a href="../physics/class12/ch09-wave-optics.html" class="sm-ch-link"><span class="sm-ch-num">09</span>Wave Optics</a>
+        <a href="../physics/class12/ch10-dual-nature.html" class="sm-ch-link"><span class="sm-ch-num">10</span>Dual Nature of Radiation and Matter</a>
+        <a href="../physics/class12/ch11-atoms.html" class="sm-ch-link"><span class="sm-ch-num">11</span>Atoms</a>
+        <a href="../physics/class12/ch12-nuclei.html" class="sm-ch-link"><span class="sm-ch-num">12</span>Nuclei</a>
+        <a href="../physics/class12/ch13-semiconductor.html" class="sm-ch-link"><span class="sm-ch-num">13</span>Semiconductor Electronics</a>
+        <a href="../physics/class12/ch14-communication.html" class="sm-ch-link"><span class="sm-ch-num">14</span>Communication Systems</a>
+        <a href="../physics/class12/ch15-experimental.html" class="sm-ch-link"><span class="sm-ch-num">15</span>Experimental Skills</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOOLS & LEGAL ── -->
+  <div class="sm-section reveal">
+    <div class="sm-section-header">
+      <div class="sm-section-icon purple">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="sm-section-title">
+        <h2>Tools &amp; Legal</h2>
+        <p>Free tools aur platform legal pages</p>
+      </div>
+      <span class="sm-count">4 pages</span>
+    </div>
+    <div class="sm-grid">
+      <a href="../tools/progress-tracker.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Progress Tracker</div>
+          <div class="sm-link-desc">Track completed chapters</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="terms.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Terms of Use</div>
+          <div class="sm-link-desc">Platform use rules</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="privacy.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Privacy Policy</div>
+          <div class="sm-link-desc">Data &amp; privacy info</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="sitemap.html" class="sm-link">
+        <div class="sm-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="sm-link-text">
+          <div class="sm-link-name">Sitemap</div>
+          <div class="sm-link-desc">You are here</div>
+        </div>
+        <svg class="sm-link-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>Biology</a>
+        <a href="../chemistry/chemistry-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>Chemistry</a>
+        <a href="../physics/physics-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../syllabus/syllabus.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Full Syllabus</a>
+        <a href="../pattern/pattern.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Exam Pattern</a>
+        <a href="../pyq/pyq-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>PYQs 2013–2024</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Study Roadmap</a>
+        <a href="../tools/progress-tracker.html" class="footer-tracker-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Progress Tracker<span class="footer-tracker-badge">Free Tool</span>
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="../biology/class11/ch01-living-world.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Living World</a>
+        <a href="../biology/class12/ch01-reproduction.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Reproduction</a>
+        <a href="../chemistry/class11/ch01-basic-concepts.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Basic Chemistry</a>
+        <a href="../physics/class11/ch02-motion.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Kinematics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>1 Year Plan</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>2 Year Plan</a>
+        <a href="mailto:raunakkarn777@gmail.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="sitemap.html" style="color:var(--accent)">Sitemap</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var btn = document.getElementById('hamburger');
+  if (!menu) return;
+  var isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    overlay && overlay.classList.remove('open');
+    btn && btn.classList.remove('is-open');
+    btn && btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    overlay && overlay.classList.add('open');
+    btn && btn.classList.add('is-open');
+    btn && btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var m = document.getElementById('mobileMenu');
+  if (m) m.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (document.getElementById('mobileMenu').classList.contains('open')) toggleMobileMenu();
+    });
+  });
+  window.addEventListener('resize', function () {
+    var mm = document.getElementById('mobileMenu');
+    if (window.innerWidth > 820 && mm && mm.classList.contains('open')) toggleMobileMenu();
+  });
+  // Scroll reveal
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+});
+</script>
+</body>
+</html>

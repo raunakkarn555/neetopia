@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — NEETopia</title>
+  <meta name="description" content="NEETopia ki Privacy Policy. Jaano ki hum kaunsa data collect karte hain, kaise use karte hain, aur tumhare rights kya hain — simple Hindi-English mein." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="NEETopia" />
+  <link rel="canonical" href="https://raunakkarn555.github.io/neetopia/legal/privacy.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <style>
+    /* ── Legal Page Hero ── */
+    .legal-hero {
+      padding-top: calc(var(--nav-h) + 56px);
+      padding-bottom: 56px;
+      padding-left: clamp(20px,5%,80px);
+      padding-right: clamp(20px,5%,80px);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .legal-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 10% 50%, rgba(168,124,245,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .legal-hero-inner { max-width: 860px; margin: 0 auto; }
+
+    .legal-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--purple, #a87cf5);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 18px;
+    }
+    .legal-eyebrow::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: currentColor;
+    }
+    .legal-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .legal-hero .sub {
+      font-size: clamp(.9rem,1.4vw,1rem);
+      color: var(--text2);
+      max-width: 580px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 22px;
+    }
+    .legal-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .legal-meta-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .8rem; color: var(--text3);
+      font-family: var(--font-mono);
+    }
+    .legal-meta-item svg { color: var(--purple, #a87cf5); }
+
+    /* ── Layout ── */
+    .legal-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px clamp(20px,5%,80px);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── Sidebar TOC ── */
+    .legal-toc {
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+    }
+    .toc-label {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text3);
+      margin-bottom: 14px;
+    }
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .toc-list a {
+      display: block;
+      font-size: .82rem;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 7px;
+      border-left: 2px solid transparent;
+      transition: color .15s, background .15s, border-color .15s;
+      line-height: 1.5;
+    }
+    .toc-list a:hover {
+      color: var(--text);
+      background: var(--surface);
+      border-left-color: var(--purple, #a87cf5);
+    }
+
+    /* ── Main Content ── */
+    .legal-content {
+      min-width: 0;
+    }
+    .legal-section {
+      margin-bottom: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--purple, #a87cf5);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .section-num::before {
+      content: '';
+      width: 14px; height: 1px;
+      background: currentColor;
+    }
+    .legal-section h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .legal-section p {
+      font-size: .92rem;
+      color: var(--text2);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section strong { color: var(--text); font-weight: 500; }
+
+    .legal-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .legal-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: .92rem;
+      color: var(--text2);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .legal-list li::before {
+      content: '→';
+      color: var(--purple, #a87cf5);
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── Callout boxes ── */
+    .legal-callout {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 10px;
+      margin: 22px 0;
+    }
+    .legal-callout.green {
+      background: rgba(61,232,160,0.06);
+      border: 1px solid rgba(61,232,160,0.2);
+    }
+    .legal-callout.amber {
+      background: rgba(244,185,66,0.06);
+      border: 1px solid rgba(244,185,66,0.2);
+    }
+    .legal-callout.blue {
+      background: rgba(61,191,255,0.06);
+      border: 1px solid rgba(61,191,255,0.2);
+    }
+    .legal-callout svg { flex-shrink: 0; margin-top: 2px; }
+    .legal-callout p {
+      font-size: .875rem !important;
+      margin-bottom: 0 !important;
+    }
+    .legal-callout.green svg { color: var(--green); }
+    .legal-callout.amber svg { color: var(--amber); }
+    .legal-callout.blue  svg { color: var(--accent); }
+
+    /* ── Data table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: .875rem;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 12px 14px;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .data-table tr:hover td { background: var(--surface); }
+
+    /* ── Contact box ── */
+    .contact-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .contact-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(168,124,245,0.12);
+      border: 1px solid rgba(168,124,245,0.25);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--purple, #a87cf5);
+    }
+    .contact-box p { font-size: .875rem; color: var(--text2); margin: 0; }
+    .contact-box a { color: var(--purple, #a87cf5); text-decoration: none; font-weight: 500; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Footer tracker styles ── */
+    .footer-tracker-link {
+      display: flex !important; align-items: center !important; gap: 7px !important;
+      color: var(--purple) !important; font-weight: 500 !important;
+      background: rgba(168,124,245,0.08) !important; border: 1px solid rgba(168,124,245,0.25) !important;
+      border-radius: 7px !important; padding: 7px 10px !important; margin-top: 4px !important;
+      transition: background .2s, border-color .2s !important;
+    }
+    .footer-tracker-link:hover {
+      background: rgba(168,124,245,0.16) !important; border-color: rgba(168,124,245,0.45) !important;
+      color: var(--purple) !important;
+    }
+    .footer-tracker-badge {
+      margin-left: auto; font-family: var(--font-mono); font-size: .58rem;
+      text-transform: uppercase; letter-spacing: 1px; color: var(--purple);
+      background: rgba(168,124,245,0.15); border: 1px solid rgba(168,124,245,0.3);
+      padding: 2px 7px; border-radius: 99px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 820px) {
+      .legal-layout { grid-template-columns: 1fr; gap: 40px; }
+      .legal-toc { position: static; display: none; }
+      .data-table { font-size: .8rem; }
+      .data-table td:first-child { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="../pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="../biology/biology-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="../chemistry/chemistry-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="../physics/physics-home.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="../pyq/pyq-home.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="../donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+      <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </button>
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+<!-- Mobile Nav Menu -->
+<div class="nav-mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+  <a href="../syllabus/syllabus.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    Syllabus
+  </a>
+  <a href="../pattern/pattern.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    Exam Pattern
+  </a>
+  <a href="../biology/biology-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    Biology
+  </a>
+  <a href="../chemistry/chemistry-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+    Chemistry
+  </a>
+  <a href="../physics/physics-home.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+    Physics
+  </a>
+  <a href="../pyq/pyq-home.html" class="pyq-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+    PYQs
+  </a>
+  <a href="../roadmap/roadmap.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    Study Roadmap
+  </a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="../donate.html" class="btn-donate" style="font-size:.82rem;padding:8px 16px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <a href="../biology/biology-home.html" class="btn-nav" style="display:inline-flex;">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="sub">
+      NEETopia tumhari privacy ko seriously leta hai. Yahan clearly bataya gaya hai ki hum kaunsa data collect karte hain, kyun collect karte hain, aur tumhare rights kya hain.
+    </p>
+    <div class="legal-meta">
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Last updated: May 2026
+      </span>
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4 min read
+      </span>
+      <span class="legal-meta-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        India
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CONTENT
+══════════════════════════════ -->
+<div class="legal-layout">
+
+  <!-- Sidebar TOC -->
+  <aside class="legal-toc">
+    <div class="toc-label">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#data-collect">Data We Collect</a></li>
+      <li><a href="#local-storage">Local Storage</a></li>
+      <li><a href="#third-party">Third-Party Services</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#data-sharing">Data Sharing</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#changes">Policy Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="legal-content">
+
+    <div class="legal-section reveal" id="overview">
+      <div class="section-num">01 · Overview</div>
+      <h2>Short mein — Hum Kya Karte Hain</h2>
+      <p>NEETopia ek <strong>free, ad-free educational platform</strong> hai. Hum koi personal data sell nahi karte, koi targeted ads nahi dikhate, aur koi unnecessary tracking nahi karte.</p>
+      <div class="legal-callout green">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p><strong>Simple rule:</strong> Jo data tumhara platform experience better banane ke liye zaroori nahi, woh hum collect hi nahi karte. Koi account, koi sign-up, koi email required nahi.</p>
+      </div>
+      <p>Yeh policy explain karti hai ki GitHub Pages pe hosted NEETopia platform (raunakkarn555.github.io/neetopia) ke saath tumhara interaction kaise handle hota hai.</p>
+    </div>
+
+    <div class="legal-section reveal" id="data-collect">
+      <div class="section-num">02 · Data We Collect</div>
+      <h2>Kaunsa Data Collect Hota Hai</h2>
+      <p>NEETopia directly koi personally identifiable information (PII) collect nahi karta — koi naam, email, phone number, ya address nahi.</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Source</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Page views &amp; navigation</td>
+            <td>GitHub Pages server logs</td>
+            <td>Platform uptime; automatically collected by GitHub</td>
+          </tr>
+          <tr>
+            <td>Browser &amp; device type</td>
+            <td>GitHub Pages server logs</td>
+            <td>Anonymised; used for compatibility understanding</td>
+          </tr>
+          <tr>
+            <td>Study progress</td>
+            <td>Your own browser (localStorage)</td>
+            <td>Progress tracker functionality — stored only on your device</td>
+          </tr>
+          <tr>
+            <td>Theme preference</td>
+            <td>Your own browser (localStorage)</td>
+            <td>Remember dark/light mode choice — stored only on your device</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Hum koi analytics tool (Google Analytics, Mixpanel, etc.) currently use nahi karte. Server logs GitHub ke infrastructure se hain aur unka control humare paas nahi.</p>
+    </div>
+
+    <div class="legal-section reveal" id="local-storage">
+      <div class="section-num">03 · Local Storage</div>
+      <h2>Browser Storage — Sirf Tumhara Device</h2>
+      <p>NEETopia ka progress tracker aur theme toggle <strong>browser localStorage</strong> use karta hai. Yeh data:</p>
+      <ul class="legal-list">
+        <li>Sirf tumhare device pe stored hota hai — hamari servers pe nahi</li>
+        <li>Hum kabhi yeh data access nahi kar sakte, transmit nahi kar sakte, ya sell nahi kar sakte</li>
+        <li>Browser settings mein jaake tum kabhi bhi manually delete kar sakte ho</li>
+        <li>Incognito/private mode mein automatically clear ho jata hai</li>
+      </ul>
+      <div class="legal-callout blue">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>localStorage keys used: <code style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">neetopia-progress</code> (chapter completion) aur <code style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">neetopia-theme</code> (dark/light preference).</p>
+      </div>
+    </div>
+
+    <div class="legal-section reveal" id="third-party">
+      <div class="section-num">04 · Third-Party Services</div>
+      <h2>Third-Party Services Jo Hum Use Karte Hain</h2>
+      <p>NEETopia kuch external services pe depend karta hai. In services ki apni privacy policies hain:</p>
+      <ul class="legal-list">
+        <li><strong>GitHub Pages</strong> — Platform hosting. GitHub ki privacy policy apply hoti hai (github.com/privacy). Server logs automatically GitHub collect karta hai.</li>
+        <li><strong>Google Fonts</strong> — Typography (Bricolage Grotesque, DM Sans, JetBrains Mono). Font load hone pe Google ke servers se request jati hai — Google ki privacy policy apply hoti hai.</li>
+        <li><strong>YouTube (embedded videos)</strong> — Kuch pages pe educational videos embed hain. Agar tum video play karte ho, YouTube/Google ki privacy policy apply hoti hai aur unke cookies set ho sakte hain.</li>
+      </ul>
+      <div class="legal-callout amber">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p>In third-party services ke baare mein zyada jaanna ho toh unki respective privacy policies check karo. NEETopia in services ka data usage control nahi karta.</p>
+      </div>
+    </div>
+
+    <div class="legal-section reveal" id="cookies">
+      <div class="section-num">05 · Cookies</div>
+      <h2>Cookies Ka Use</h2>
+      <p>NEETopia khud koi tracking cookies set nahi karta. Jo cookies tumhare browser mein ho sakti hain:</p>
+      <ul class="legal-list">
+        <li><strong>Google Fonts cookies</strong> — Font delivery ke liye; Google ki infrastructure se aati hain</li>
+        <li><strong>YouTube cookies</strong> — Sirf tab jab tum embedded video play karo; YouTube ke servers se aati hain</li>
+        <li><strong>GitHub cookies</strong> — Hosting infrastructure se; platform functionality ke liye</li>
+      </ul>
+      <p>Tum apne browser settings mein cookies disable ya delete kar sakte ho. Isse kuch third-party embedded content (jaise YouTube videos) properly load nahi hogi, lekin NEETopia ke core content pe koi effect nahi hoga.</p>
+    </div>
+
+    <div class="legal-section reveal" id="data-sharing">
+      <div class="section-num">06 · Data Sharing</div>
+      <h2>Data Sharing — Hum Kisi Ko Nahi Bechte</h2>
+      <p>NEETopia kisi bhi third party ko tumhara personal data sell, trade, ya rent nahi karta. Period.</p>
+      <ul class="legal-list">
+        <li>Koi advertisers ko data nahi</li>
+        <li>Koi data brokers ko nahi</li>
+        <li>Koi marketing companies ko nahi</li>
+        <li>Koi partnerships for data monetisation nahi</li>
+      </ul>
+      <p>Agar kabhi legal requirement ho (court order, etc.) toh hum GitHub ke infrastructure logs ke baare mein apni knowledge share karne ke liye bound ho sakte hain — lekin humhare paas khud personally identifiable data hai hi nahi.</p>
+    </div>
+
+    <div class="legal-section reveal" id="your-rights">
+      <div class="section-num">07 · Your Rights</div>
+      <h2>Tumhare Rights</h2>
+      <p>Kyunki NEETopia koi account system ya personal data collection nahi karta, most traditional "data rights" (access, rectification, deletion) automatically satisfied hain. Tab bhi:</p>
+      <ul class="legal-list">
+        <li><strong>Progress data delete karna</strong> — Browser localStorage clear karo: Settings → Privacy → Clear browsing data → Cookies and site data</li>
+        <li><strong>Fonts block karna</strong> — Browser extensions (uBlock Origin, etc.) se Google Fonts requests block kar sakte ho</li>
+        <li><strong>YouTube tracking avoid karna</strong> — Videos sirf directly YouTube pe jake watch karo; embedded player use mat karo</li>
+        <li><strong>Koi concern ho</strong> — Direct email karo: raunakkarn777@gmail.com</li>
+      </ul>
+    </div>
+
+    <div class="legal-section reveal" id="children">
+      <div class="section-num">08 · Children's Privacy</div>
+      <h2>Students Ki Privacy</h2>
+      <p>NEETopia primarily <strong>15–25 saal ke NEET aspirants</strong> ke liye banaya gaya hai. Platform specifically koi personal data collect nahi karta, isliye age verification ki zaroorat nahi hai.</p>
+      <p>Agar tum 13 saal se kam ke ho aur koi concern hai, please apne parents ya guardian se baat karo ya humein email karo. Hum younger users ki safety seriously lete hain.</p>
+      <div class="legal-callout green">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>Kyunki hum koi personal data collect nahi karte, students safely platform use kar sakte hain bina registration ke. Progress sirf unke apne device pe rehta hai.</p>
+      </div>
+    </div>
+
+    <div class="legal-section reveal" id="changes">
+      <div class="section-num">09 · Policy Changes</div>
+      <h2>Policy Update Hogi Toh Kya Hoga</h2>
+      <p>Agar hum koi significant change karte hain jo data collection ya sharing affect kare, toh yeh page update karenge aur "Last updated" date change karenge.</p>
+      <p>Platform ka continued use updated policy se agreement maana jayega. Major changes ke liye page ka top section check karte raho.</p>
+    </div>
+
+    <div class="legal-section reveal" id="contact">
+      <div class="section-num">10 · Contact</div>
+      <h2>Privacy Concern Hai?</h2>
+      <p>Koi bhi privacy-related sawaal, concern, ya request ke liye directly email karo:</p>
+      <div class="contact-box">
+        <div class="contact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <p><strong style="color:var(--text)">NEETopia — Privacy</strong></p>
+          <p><a href="mailto:raunakkarn777@gmail.com">raunakkarn777@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="../biology/biology-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>Biology</a>
+        <a href="../chemistry/chemistry-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>Chemistry</a>
+        <a href="../physics/physics-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="../syllabus/syllabus.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Full Syllabus</a>
+        <a href="../pattern/pattern.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Exam Pattern</a>
+        <a href="../pyq/pyq-home.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>PYQs 2013–2024</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Study Roadmap</a>
+        <a href="../tools/progress-tracker.html" class="footer-tracker-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Progress Tracker<span class="footer-tracker-badge">Free Tool</span>
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="../biology/class11/ch01-living-world.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Living World</a>
+        <a href="../biology/class12/ch01-reproduction.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Reproduction</a>
+        <a href="../chemistry/class11/ch01-basic-concepts.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Basic Chemistry</a>
+        <a href="../physics/class11/ch02-motion.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Kinematics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>1 Year Plan</a>
+        <a href="../roadmap/roadmap.html"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>2 Year Plan</a>
+        <a href="mailto:raunakkarn777@gmail.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html" style="color:var(--accent)">Privacy</a>
+        <a href="sitemap.html">Sitemap</a>
+        <a href="../donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var btn = document.getElementById('hamburger');
+  if (!menu) return;
+  var isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    overlay && overlay.classList.remove('open');
+    btn && btn.classList.remove('is-open');
+    btn && btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    overlay && overlay.classList.add('open');
+    btn && btn.classList.add('is-open');
+    btn && btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var m = document.getElementById('mobileMenu');
+  if (m) m.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (document.getElementById('mobileMenu').classList.contains('open')) toggleMobileMenu();
+    });
+  });
+  window.addEventListener('resize', function () {
+    var mm = document.getElementById('mobileMenu');
+    if (window.innerWidth > 820 && mm && mm.classList.contains('open')) toggleMobileMenu();
+  });
+  // Scroll reveal
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+});
+</script>
+</body>
+</html>
