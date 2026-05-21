@@ -529,8 +529,11 @@
 .nav-links .qp-link:hover { background: rgba(168,124,245,0.15); }
 .nav-mobile-menu .qp-link { color: var(--purple); background: rgba(168,124,245,0.08); }
 
-/* ── About & Contact nav link styles ── */
-.nav-links .about-link:hover, .nav-links .contact-link:hover { color: var(--text); background: var(--surface); }
+/* ── About & Contact nav link styles — REMOVED from nav ── */
+
+/* ── NAV BREATHING SPACE ── */
+.nav-links { gap: 4px; }
+.nav-links li a { padding: 6px 10px; }
 
 /* ======================================
    END: Question Practice Enhancements
@@ -574,14 +577,6 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Question Practice</a></li>
     <!-- END: Question Practice Update -->
-    <!-- START: About & Contact Update -->
-    <li><a href="about.html" class="about-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      About</a></li>
-    <li><a href="contact.html" class="contact-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Contact</a></li>
-    <!-- END: About & Contact Update -->
   </ul>
 
   <div class="nav-right">
@@ -643,16 +638,6 @@
     Question Practice
   </a>
   <!-- END: Question Practice Update -->
-  <!-- START: About & Contact Update -->
-  <a href="about.html">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    About Us
-  </a>
-  <a href="contact.html">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    Contact Us
-  </a>
-  <!-- END: About & Contact Update -->
   <a href="roadmap/roadmap.html">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
     Study Roadmap
@@ -812,12 +797,69 @@
       <p class="section-sub">Har subject ke andar har chapter ka detailed explanation, NCERT-based notes, free video lectures aur PYQs. Sab kuch structured sequence mein.</p>
     </div>
 
+    <!-- START: Question Practice Update — Question Practice Feature Card -->
+    <div style="margin-top: 28px; margin-bottom: 28px;" class="reveal">
+      <div class="qp-feature-card">
+        <div class="qp-card-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="qp-card-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </div>
+            <div>
+              <p style="font-family:var(--font-mono);font-size:.62rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:1px;background:currentColor;"></span>New Feature</p>
+              <div class="qp-card-title">Question Practice</div>
+            </div>
+          </div>
+          <div class="qp-card-badges">
+            <span class="badge badge-purple">Topic-wise MCQs</span>
+            <span class="badge badge-blue">PYQs 2013–2024</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+        </div>
+        <p class="qp-card-desc">Topic-wise NEET MCQs, chapter tests, assertion-reason questions, PYQs, and smart practice system designed for deep exam preparation. Sirf padhna kaafi nahi — practice karo, analyze karo, improve karo.</p>
+        <div class="qp-feature-pills">
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Topic-wise MCQs
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            PYQs 2013–2024
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Timed Quizzes
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+            Revision Practice
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Progress Tracking
+          </span>
+        </div>
+        <div class="qp-card-ctas">
+          <a href="#" class="btn-qp-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Start Practicing
+          </a>
+          <a href="#" class="btn-qp-outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Explore PYQs
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- END: Question Practice Update — Question Practice Feature Card -->
+
     <div class="subjects-grid">
 
       <!-- Biology -->
       <a href="biology/biology-home.html" class="subject-card bio reveal">
-        <div class="subject-card-top">
-          <!-- START: Question Practice Update — Biology Icon Fix -->
           <div class="subject-icon-wrap bio">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3C8 3 5 6 5 9c0 2.4 1.3 4.4 3.2 5.6C9.4 15.5 9 17 9 18h6c0-1 -.4-2.5.8-3.4C17.7 13.4 19 11.4 19 9c0-3-3-6-7-6z"/>
@@ -856,6 +898,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Subject CTA Links — Biology -->
+        <div class="subject-cta-links" onclick="event.stopPropagation()" style="display:flex;gap:8px;flex-wrap:wrap;padding-top:10px;">
+          <a href="pyq/pyq-home.html" class="subject-pyq-link bio-pyq" onclick="event.stopPropagation()" style="font-size:.75rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Biology PYQs
+          </a>
+          <a href="#" class="subject-pyq-link" onclick="event.stopPropagation()" style="font-size:.75rem;color:var(--purple);background:rgba(168,124,245,0.08);border-color:rgba(168,124,245,0.3);">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Subject CTA Links — Biology -->
         <!-- START: Question Practice Update — Biology New Buttons -->
         <div class="subject-action-btns" onclick="event.stopPropagation()">
           <a href="#" class="btn-subject-pyq bio-btn" onclick="event.stopPropagation()">
@@ -919,6 +973,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Subject CTA Links — Chemistry -->
+        <div class="subject-cta-links" onclick="event.stopPropagation()" style="display:flex;gap:8px;flex-wrap:wrap;padding-top:10px;">
+          <a href="pyq/pyq-home.html" class="subject-pyq-link chem-pyq" onclick="event.stopPropagation()" style="font-size:.75rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Chemistry PYQs
+          </a>
+          <a href="#" class="subject-pyq-link" onclick="event.stopPropagation()" style="font-size:.75rem;color:var(--purple);background:rgba(168,124,245,0.08);border-color:rgba(168,124,245,0.3);">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Subject CTA Links — Chemistry -->
         <!-- START: Question Practice Update — Chemistry New Buttons -->
         <div class="subject-action-btns" onclick="event.stopPropagation()">
           <a href="#" class="btn-subject-pyq chem-btn" onclick="event.stopPropagation()">
@@ -982,6 +1048,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Subject CTA Links — Physics -->
+        <div class="subject-cta-links" onclick="event.stopPropagation()" style="display:flex;gap:8px;flex-wrap:wrap;padding-top:10px;">
+          <a href="pyq/pyq-home.html" class="subject-pyq-link phy-pyq" onclick="event.stopPropagation()" style="font-size:.75rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Physics PYQs
+          </a>
+          <a href="#" class="subject-pyq-link" onclick="event.stopPropagation()" style="font-size:.75rem;color:var(--purple);background:rgba(168,124,245,0.08);border-color:rgba(168,124,245,0.3);">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Subject CTA Links — Physics -->
         <!-- START: Question Practice Update — Physics New Buttons -->
         <div class="subject-action-btns" onclick="event.stopPropagation()">
           <a href="#" class="btn-subject-pyq phy-btn" onclick="event.stopPropagation()">
@@ -1004,65 +1082,6 @@
       </a>
 
     </div>
-
-    <!-- START: Question Practice Update — Question Practice Feature Card -->
-    <div style="margin-top: 28px;" class="reveal">
-      <div class="qp-feature-card">
-        <div class="qp-card-header">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div class="qp-card-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11l3 3L22 4"/>
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-              </svg>
-            </div>
-            <div>
-              <p style="font-family:var(--font-mono);font-size:.62rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:1px;background:currentColor;"></span>New Feature</p>
-              <div class="qp-card-title">Question Practice</div>
-            </div>
-          </div>
-          <div class="qp-card-badges">
-            <span class="badge badge-purple">Topic-wise MCQs</span>
-            <span class="badge badge-blue">PYQs 2013–2024</span>
-            <span class="badge badge-green">Free</span>
-          </div>
-        </div>
-        <p class="qp-card-desc">Topic-wise NEET MCQs, chapter tests, assertion-reason questions, PYQs, and smart practice system designed for deep exam preparation. Sirf padhna kaafi nahi — practice karo, analyze karo, improve karo.</p>
-        <div class="qp-feature-pills">
-          <span class="qp-pill">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
-            Topic-wise MCQs
-          </span>
-          <span class="qp-pill">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            PYQs 2013–2024
-          </span>
-          <span class="qp-pill">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Timed Quizzes
-          </span>
-          <span class="qp-pill">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
-            Revision Practice
-          </span>
-          <span class="qp-pill">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Progress Tracking
-          </span>
-        </div>
-        <div class="qp-card-ctas">
-          <a href="#" class="btn-qp-primary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Start Practicing
-          </a>
-          <a href="#" class="btn-qp-outline">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
-            Explore PYQs
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- END: Question Practice Update — Question Practice Feature Card -->
 
   </div>
 </section>
