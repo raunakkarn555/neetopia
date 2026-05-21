@@ -8,7 +8,7 @@
 
   
   <!-- SEO Meta -->
-  <meta name="keywords" content="NEET 2026, NEET preparation, NEET biology, NEET chemistry, NEET physics, NEET PYQ, NEET syllabus, NEET free, medical entrance India" />
+  <meta name="keywords" content="NEET 2026, NEET preparation, NEET biology, NEET chemistry, NEET physics, NEET PYQ, NEET syllabus, NEET free, medical entrance India, NEET practice questions, NEET MCQ, NEET question bank" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="NEETopia" />
   <link rel="canonical" href="https://neetopia.in/" />
@@ -72,6 +72,469 @@
   padding: 2px 7px;
   border-radius: 99px;
 }
+
+/* ── SUBJECT CARD PYQ ROW ── */
+.subject-pyq-row {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 8px; padding: 10px 0 0;
+  border-top: 1px solid var(--border); margin-top: 4px;
+}
+.subject-pyq-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .78rem; font-weight: 500; text-decoration: none;
+  padding: 5px 12px; border-radius: 6px; border: 1px solid;
+  transition: opacity .2s, transform .15s;
+}
+.subject-pyq-link:hover { opacity: .85; transform: translateY(-1px); }
+.bio-pyq  { color: var(--green); background: var(--green-bg); border-color: var(--green-border); }
+.chem-pyq { color: var(--amber); background: var(--amber-bg); border-color: var(--amber-border); }
+.phy-pyq  { color: var(--accent); background: var(--accent-dim); border-color: rgba(61,191,255,0.3); }
+.subject-pyq-note { font-size: .7rem; color: var(--text3); font-family: var(--font-mono); }
+
+/* ── SUBJECT CARDS MOBILE FIX ── */
+@media (max-width: 600px) {
+  .subjects-grid { grid-template-columns: 1fr; gap: 14px; }
+  .subject-card { padding: 18px 16px; gap: 12px; }
+  .subject-card-top { gap: 10px; }
+  .subject-icon { width: 44px; height: 44px; font-size: 1.25rem; border-radius: 12px; }
+  .subject-card h3 { font-size: 1.1rem; }
+  .subject-card p { font-size: .83rem; }
+  .subject-chapters { gap: 5px; }
+  .topic-pill { font-size: .68rem; padding: 3px 9px; }
+  .subject-cta { padding-top: 12px; flex-wrap: wrap; gap: 6px; }
+  .subject-pyq-row { flex-direction: column; align-items: flex-start; }
+  .subject-pyq-note { display: none; }
+}
+
+/* ── FORK NOTE CARD — MOBILE LANDSCAPE ── */
+@media (max-width: 700px) {
+  .fork-note {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+  .fork-note > svg {
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+  }
+  .fork-note > div {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+  .fork-note > div > div:first-child {
+    font-size: .88rem !important;
+  }
+  .fork-note > div > div:nth-child(2) {
+    font-size: .8rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* ══════════════════════════════════════
+   PROGRESS TRACKER PROMO CARD — FIXED
+   ══════════════════════════════════════ */
+.tracker-promo-card {
+  background: var(--bg2, #1a1a2e);
+  border: 1px solid rgba(168,124,245,0.35);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  position: relative;
+}
+.tracker-promo-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(168,124,245,0.04) 0%, rgba(61,191,255,0.03) 100%);
+  pointer-events: none;
+}
+.tracker-promo-card:hover {
+  border-color: rgba(168,124,245,0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(168,124,245,0.12);
+}
+.tracker-promo-inner {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 0;
+  position: relative;
+}
+.tracker-promo-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px 28px;
+  border-right: 1px solid rgba(168,124,245,0.15);
+}
+.tracker-promo-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: rgba(168,124,245,0.15);
+  border: 1px solid rgba(168,124,245,0.3);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--purple, #a87cf5);
+}
+.tracker-promo-eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: .63rem;
+  color: var(--purple, #a87cf5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.tracker-promo-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 1px;
+  background: currentColor;
+}
+.tracker-promo-title {
+  font-family: var(--font-head, sans-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -.4px;
+  margin-bottom: 10px;
+  color: var(--text, #fff);
+  line-height: 1.3;
+}
+.tracker-promo-desc {
+  font-size: .875rem;
+  color: var(--text2, rgba(255,255,255,0.65));
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+.tracker-promo-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.tracker-feat {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: .83rem;
+  color: var(--text2, rgba(255,255,255,0.65));
+}
+.tracker-feat svg {
+  color: var(--green, #3de8a0);
+  flex-shrink: 0;
+}
+.tracker-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168,124,245,0.18);
+  border: 1px solid rgba(168,124,245,0.45);
+  color: var(--purple, #a87cf5);
+  font-weight: 600;
+  font-size: .875rem;
+  padding: 11px 22px;
+  border-radius: 8px;
+  transition: background .2s, border-color .2s;
+}
+.tracker-promo-card:hover .tracker-promo-cta {
+  background: rgba(168,124,245,0.28);
+  border-color: rgba(168,124,245,0.65);
+}
+
+/* ── Mini dashboard visual ── */
+.tracker-promo-visual {
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.15);
+}
+.tracker-mini-dashboard {
+  width: 100%;
+  max-width: 300px;
+  background: var(--bg, #0d0d1a);
+  border: 1px solid rgba(168,124,245,0.2);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.tmd-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.tmd-title {
+  font-family: var(--font-head, sans-serif);
+  font-size: .9rem; font-weight: 600;
+  color: var(--text, #fff);
+}
+.tmd-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: .58rem;
+  color: var(--green, #3de8a0);
+  background: rgba(61,232,160,0.12);
+  border: 1px solid rgba(61,232,160,0.3);
+  padding: 2px 9px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.tmd-bars { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+.tmd-bar-row { display: flex; align-items: center; gap: 10px; }
+.tmd-label { font-size: .73rem; font-weight: 500; width: 62px; flex-shrink: 0; }
+.tmd-bar-track {
+  flex: 1; height: 7px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 99px; overflow: hidden;
+}
+.tmd-bar-fill { height: 100%; border-radius: 99px; }
+.bio-fill  { background: var(--green, #3de8a0); }
+.chem-fill { background: var(--amber, #f4b942); }
+.phy-fill  { background: var(--accent, #3dbfff); }
+.tmd-pct {
+  font-family: var(--font-mono, monospace);
+  font-size: .7rem; width: 34px; text-align: right; flex-shrink: 0;
+}
+.bio-txt  { color: var(--green, #3de8a0); }
+.chem-txt { color: var(--amber, #f4b942); }
+.phy-txt  { color: var(--accent, #3dbfff); }
+.tmd-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 15px;
+}
+.tmd-stat { flex: 1; text-align: center; }
+.tmd-stat-num {
+  display: block;
+  font-family: var(--font-head, sans-serif);
+  font-size: 1.4rem; font-weight: 700;
+  line-height: 1; margin-bottom: 4px;
+}
+.tmd-stat-lbl {
+  font-size: .62rem;
+  color: var(--text3, rgba(255,255,255,0.35));
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 960px) {
+  .tracker-promo-inner { grid-template-columns: 1fr 300px; }
+}
+@media (max-width: 840px) {
+  .tracker-promo-inner { grid-template-columns: 1fr; }
+  .tracker-promo-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(168,124,245,0.15);
+    padding: 24px 20px;
+    gap: 16px;
+  }
+  .tracker-promo-visual { padding: 20px; }
+  .tracker-mini-dashboard { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .tracker-promo-left { flex-direction: column; gap: 14px; padding: 20px 18px; }
+  .tracker-promo-icon { width: 46px; height: 46px; }
+  .tracker-promo-title { font-size: 1.15rem; }
+  .tracker-promo-features { gap: 6px; }
+  .tracker-feat { font-size: .8rem; }
+  .tracker-promo-cta { font-size: .82rem; padding: 10px 18px; }
+}
+
+/* ======================================
+   START: Question Practice Enhancements
+====================================== */
+
+/* ── Enhanced Subject Card Icons ── */
+.subject-icon-wrap {
+  position: relative;
+  width: 56px; height: 56px; flex-shrink: 0;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.subject-card:hover .subject-icon-wrap { transform: scale(1.05); }
+.subject-icon-wrap.bio  {
+  background: linear-gradient(135deg, rgba(61,232,160,0.18) 0%, rgba(61,232,160,0.06) 100%);
+  border: 1px solid rgba(61,232,160,0.3);
+  box-shadow: 0 0 0 0 rgba(61,232,160,0);
+}
+.subject-card.bio:hover .subject-icon-wrap.bio { box-shadow: 0 0 16px rgba(61,232,160,0.25); }
+.subject-icon-wrap.chem {
+  background: linear-gradient(135deg, rgba(244,185,66,0.18) 0%, rgba(244,185,66,0.06) 100%);
+  border: 1px solid rgba(244,185,66,0.3);
+}
+.subject-card.chem:hover .subject-icon-wrap.chem { box-shadow: 0 0 16px rgba(244,185,66,0.2); }
+.subject-icon-wrap.phy  {
+  background: linear-gradient(135deg, rgba(61,191,255,0.18) 0%, rgba(61,191,255,0.06) 100%);
+  border: 1px solid rgba(61,191,255,0.3);
+}
+.subject-card.phy:hover .subject-icon-wrap.phy  { box-shadow: 0 0 16px rgba(61,191,255,0.2); }
+
+/* ── PYQ badge chip in subject card ── */
+.subject-pyq-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono);
+  font-size: .62rem; font-weight: 500;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 40px;
+  border: 1px solid; margin-top: 2px;
+}
+.subject-pyq-chip.bio-chip   { color: var(--green); background: rgba(61,232,160,0.1);  border-color: rgba(61,232,160,0.3); }
+.subject-pyq-chip.chem-chip  { color: var(--amber); background: rgba(244,185,66,0.1);  border-color: rgba(244,185,66,0.3); }
+.subject-pyq-chip.phy-chip   { color: var(--accent); background: rgba(61,191,255,0.1); border-color: rgba(61,191,255,0.3); }
+.subject-pyq-chip svg { opacity: .8; }
+
+/* ── New action buttons inside subject cards ── */
+.subject-action-btns {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  padding-top: 12px;
+}
+/* PYQs button — exam oriented, sharp, analytical */
+.btn-subject-pyq {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-body); font-size: .78rem; font-weight: 600;
+  padding: 7px 14px; border-radius: 7px;
+  text-decoration: none; cursor: pointer; border: 1px solid;
+  transition: all .2s; letter-spacing: .2px;
+  flex: 1; justify-content: center; white-space: nowrap;
+}
+.btn-subject-pyq.bio-btn  {
+  color: var(--green); background: rgba(61,232,160,0.08); border-color: rgba(61,232,160,0.35);
+}
+.btn-subject-pyq.bio-btn:hover  { background: rgba(61,232,160,0.16); border-color: rgba(61,232,160,0.6); box-shadow: 0 4px 16px rgba(61,232,160,0.15); transform: translateY(-1px); }
+.btn-subject-pyq.chem-btn {
+  color: var(--amber); background: rgba(244,185,66,0.08); border-color: rgba(244,185,66,0.35);
+}
+.btn-subject-pyq.chem-btn:hover { background: rgba(244,185,66,0.15); border-color: rgba(244,185,66,0.6); box-shadow: 0 4px 16px rgba(244,185,66,0.15); transform: translateY(-1px); }
+.btn-subject-pyq.phy-btn  {
+  color: var(--accent); background: rgba(61,191,255,0.08); border-color: rgba(61,191,255,0.35);
+}
+.btn-subject-pyq.phy-btn:hover  { background: rgba(61,191,255,0.15); border-color: rgba(61,191,255,0.6); box-shadow: 0 4px 16px rgba(61,191,255,0.15); transform: translateY(-1px); }
+
+/* Practice Questions button — interactive, engaging */
+.btn-subject-practice {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-body); font-size: .78rem; font-weight: 600;
+  padding: 7px 14px; border-radius: 7px;
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: all .2s; letter-spacing: .2px;
+  flex: 1; justify-content: center; white-space: nowrap;
+}
+.btn-subject-practice.bio-prac {
+  color: #07090f;
+  background: linear-gradient(135deg, #3de8a0 0%, #26c97e 100%);
+}
+.btn-subject-practice.bio-prac:hover { box-shadow: 0 6px 20px rgba(61,232,160,0.35); transform: translateY(-2px); filter: brightness(1.07); }
+.btn-subject-practice.chem-prac {
+  color: #07090f;
+  background: linear-gradient(135deg, #f4b942 0%, #e0a023 100%);
+}
+.btn-subject-practice.chem-prac:hover { box-shadow: 0 6px 20px rgba(244,185,66,0.35); transform: translateY(-2px); filter: brightness(1.07); }
+.btn-subject-practice.phy-prac {
+  color: #07090f;
+  background: linear-gradient(135deg, #3dbfff 0%, #0aa8f0 100%);
+}
+.btn-subject-practice.phy-prac:hover { box-shadow: 0 6px 20px rgba(61,191,255,0.35); transform: translateY(-2px); filter: brightness(1.07); }
+
+/* ── Question Practice Feature Card ── */
+.qp-feature-card {
+  background: var(--bg2);
+  border: 1px solid rgba(168,124,245,0.3);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  position: relative; overflow: hidden;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.qp-feature-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(168,124,245,0.05) 0%, rgba(61,191,255,0.03) 60%, transparent 100%);
+  pointer-events: none;
+}
+.qp-feature-card:hover {
+  border-color: rgba(168,124,245,0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(168,124,245,0.12);
+}
+.qp-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.qp-card-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: rgba(168,124,245,0.15);
+  border: 1px solid rgba(168,124,245,0.35);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--purple);
+}
+.qp-card-badges { display: flex; gap: 7px; flex-wrap: wrap; }
+.qp-card-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: -.5px; margin-bottom: 10px;
+  color: var(--text);
+}
+.qp-card-desc {
+  font-size: .875rem; color: var(--text2);
+  line-height: 1.75; font-weight: 300; margin-bottom: 20px;
+}
+.qp-feature-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;
+}
+.qp-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .74rem; font-weight: 500;
+  padding: 5px 12px; border-radius: 40px;
+  background: rgba(168,124,245,0.1);
+  border: 1px solid rgba(168,124,245,0.25);
+  color: var(--purple);
+}
+.qp-card-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+/* Start Practicing button */
+.btn-qp-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: .875rem; font-weight: 600;
+  padding: 11px 22px; border-radius: 8px;
+  text-decoration: none; cursor: pointer; border: none;
+  background: linear-gradient(135deg, #a87cf5 0%, #8b5cf6 100%);
+  color: #fff;
+  transition: all .2s; box-shadow: 0 4px 16px rgba(168,124,245,0.2);
+}
+.btn-qp-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(168,124,245,0.35); filter: brightness(1.08); }
+/* Explore PYQs button */
+.btn-qp-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: .875rem; font-weight: 500;
+  padding: 11px 22px; border-radius: 8px;
+  text-decoration: none; cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(168,124,245,0.4);
+  color: var(--purple);
+  transition: all .2s;
+}
+.btn-qp-outline:hover { background: rgba(168,124,245,0.1); border-color: rgba(168,124,245,0.65); transform: translateY(-1px); }
+
+/* ── Subject action btns mobile ── */
+@media (max-width: 600px) {
+  .subject-action-btns { gap: 6px; }
+  .btn-subject-pyq, .btn-subject-practice { font-size: .74rem; padding: 7px 10px; }
+  .qp-feature-card { padding: 22px 18px; }
+  .qp-card-title { font-size: 1.1rem; }
+  .qp-card-ctas { flex-direction: column; }
+  .btn-qp-primary, .btn-qp-outline { justify-content: center; text-align: center; }
+  .subject-pyq-chip { font-size: .6rem; }
+}
+
+/* ── Navbar Question Practice link style ── */
+.nav-links .qp-link {
+  color: var(--purple);
+  background: rgba(168,124,245,0.08);
+}
+.nav-links .qp-link:hover { background: rgba(168,124,245,0.15); }
+.nav-mobile-menu .qp-link { color: var(--purple); background: rgba(168,124,245,0.08); }
+
+/* ── About & Contact nav link styles ── */
+.nav-links .about-link:hover, .nav-links .contact-link:hover { color: var(--text); background: var(--surface); }
+
+/* ======================================
+   END: Question Practice Enhancements
+====================================== */
 </style>
 </head>
 <body>
@@ -106,6 +569,19 @@
     <li><a href="pyq/pyq-home.html" class="pyq-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
       PYQs</a></li>
+    <!-- START: Question Practice Update -->
+    <li><a href="#" class="qp-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Question Practice</a></li>
+    <!-- END: Question Practice Update -->
+    <!-- START: About & Contact Update -->
+    <li><a href="about.html" class="about-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      About</a></li>
+    <li><a href="contact.html" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contact</a></li>
+    <!-- END: About & Contact Update -->
   </ul>
 
   <div class="nav-right">
@@ -161,6 +637,22 @@
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
     PYQs
   </a>
+  <!-- START: Question Practice Update -->
+  <a href="#" class="qp-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    Question Practice
+  </a>
+  <!-- END: Question Practice Update -->
+  <!-- START: About & Contact Update -->
+  <a href="about.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    About Us
+  </a>
+  <a href="contact.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Contact Us
+  </a>
+  <!-- END: About & Contact Update -->
   <a href="roadmap/roadmap.html">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
     Study Roadmap
@@ -325,10 +817,24 @@
       <!-- Biology -->
       <a href="biology/biology-home.html" class="subject-card bio reveal">
         <div class="subject-card-top">
-          <div class="subject-icon bio">🌿</div>
+          <!-- START: Question Practice Update — Biology Icon Fix -->
+          <div class="subject-icon-wrap bio">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3C8 3 5 6 5 9c0 2.4 1.3 4.4 3.2 5.6C9.4 15.5 9 17 9 18h6c0-1 -.4-2.5.8-3.4C17.7 13.4 19 11.4 19 9c0-3-3-6-7-6z"/>
+              <path d="M9 18h6"/><path d="M10 21h4"/>
+              <path d="M12 3v2"/><path d="M7.5 5.5l1.5 1.5"/><path d="M16.5 5.5l-1.5 1.5"/>
+            </svg>
+          </div>
+          <!-- END: Question Practice Update — Biology Icon Fix -->
           <div>
             <span class="badge badge-green">Highest Weightage</span>
             <span class="subject-card-meta" style="margin-top:4px;display:block">360 marks · 50%</span>
+            <!-- START: Question Practice Update — PYQ Chip -->
+            <span class="subject-pyq-chip bio-chip" style="margin-top:5px">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+              2013–2024 • chapter-wise PYQs
+            </span>
+            <!-- END: Question Practice Update — PYQ Chip -->
           </div>
         </div>
         <div>
@@ -350,6 +856,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Question Practice Update — Biology New Buttons -->
+        <div class="subject-action-btns" onclick="event.stopPropagation()">
+          <a href="#" class="btn-subject-pyq bio-btn" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            PYQs
+          </a>
+          <a href="#" class="btn-subject-practice bio-prac" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Question Practice Update — Biology New Buttons -->
         <div class="subject-pyq-row">
           <a href="pyq/pyq-home.html" class="subject-pyq-link bio-pyq" onclick="event.stopPropagation()">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
@@ -362,10 +880,24 @@
       <!-- Chemistry -->
       <a href="chemistry/chemistry-home.html" class="subject-card chem reveal">
         <div class="subject-card-top">
-          <div class="subject-icon chem">⚗️</div>
+          <!-- START: Question Practice Update — Chemistry Icon Fix -->
+          <div class="subject-icon-wrap chem">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/>
+              <path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>
+              <circle cx="9" cy="15" r=".8" fill="#f4b942"/><circle cx="13" cy="17" r=".8" fill="#f4b942"/><circle cx="11" cy="13" r=".8" fill="#f4b942"/>
+            </svg>
+          </div>
+          <!-- END: Question Practice Update — Chemistry Icon Fix -->
           <div>
             <span class="badge badge-amber">High Weightage</span>
             <span class="subject-card-meta" style="margin-top:4px;display:block">180 marks · 25%</span>
+            <!-- START: Question Practice Update — PYQ Chip -->
+            <span class="subject-pyq-chip chem-chip" style="margin-top:5px">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+              2013–2024 • chapter-wise PYQs
+            </span>
+            <!-- END: Question Practice Update — PYQ Chip -->
           </div>
         </div>
         <div>
@@ -387,6 +919,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Question Practice Update — Chemistry New Buttons -->
+        <div class="subject-action-btns" onclick="event.stopPropagation()">
+          <a href="#" class="btn-subject-pyq chem-btn" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            PYQs
+          </a>
+          <a href="#" class="btn-subject-practice chem-prac" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Question Practice Update — Chemistry New Buttons -->
         <div class="subject-pyq-row">
           <a href="pyq/pyq-home.html" class="subject-pyq-link chem-pyq" onclick="event.stopPropagation()">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
@@ -399,10 +943,24 @@
       <!-- Physics -->
       <a href="physics/physics-home.html" class="subject-card phy reveal">
         <div class="subject-card-top">
-          <div class="subject-icon phy">⚛️</div>
+          <!-- START: Question Practice Update — Physics Icon Fix -->
+          <div class="subject-icon-wrap phy">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="2" fill="rgba(61,191,255,0.3)"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+          </div>
+          <!-- END: Question Practice Update — Physics Icon Fix -->
           <div>
             <span class="badge badge-blue">180 Marks</span>
             <span class="subject-card-meta" style="margin-top:4px;display:block">180 marks · 25%</span>
+            <!-- START: Question Practice Update — PYQ Chip -->
+            <span class="subject-pyq-chip phy-chip" style="margin-top:5px">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+              2013–2024 • chapter-wise PYQs
+            </span>
+            <!-- END: Question Practice Update — PYQ Chip -->
           </div>
         </div>
         <div>
@@ -424,6 +982,18 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
+        <!-- START: Question Practice Update — Physics New Buttons -->
+        <div class="subject-action-btns" onclick="event.stopPropagation()">
+          <a href="#" class="btn-subject-pyq phy-btn" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            PYQs
+          </a>
+          <a href="#" class="btn-subject-practice phy-prac" onclick="event.stopPropagation()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </a>
+        </div>
+        <!-- END: Question Practice Update — Physics New Buttons -->
         <div class="subject-pyq-row">
           <a href="pyq/pyq-home.html" class="subject-pyq-link phy-pyq" onclick="event.stopPropagation()">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
@@ -434,6 +1004,66 @@
       </a>
 
     </div>
+
+    <!-- START: Question Practice Update — Question Practice Feature Card -->
+    <div style="margin-top: 28px;" class="reveal">
+      <div class="qp-feature-card">
+        <div class="qp-card-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="qp-card-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </div>
+            <div>
+              <p style="font-family:var(--font-mono);font-size:.62rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:1px;background:currentColor;"></span>New Feature</p>
+              <div class="qp-card-title">Question Practice</div>
+            </div>
+          </div>
+          <div class="qp-card-badges">
+            <span class="badge badge-purple">Topic-wise MCQs</span>
+            <span class="badge badge-blue">PYQs 2013–2024</span>
+            <span class="badge badge-green">Free</span>
+          </div>
+        </div>
+        <p class="qp-card-desc">Topic-wise NEET MCQs, chapter tests, assertion-reason questions, PYQs, and smart practice system designed for deep exam preparation. Sirf padhna kaafi nahi — practice karo, analyze karo, improve karo.</p>
+        <div class="qp-feature-pills">
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Topic-wise MCQs
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            PYQs 2013–2024
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Timed Quizzes
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+            Revision Practice
+          </span>
+          <span class="qp-pill">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Progress Tracking
+          </span>
+        </div>
+        <div class="qp-card-ctas">
+          <a href="#" class="btn-qp-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Start Practicing
+          </a>
+          <a href="#" class="btn-qp-outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+            Explore PYQs
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- END: Question Practice Update — Question Practice Feature Card -->
+
   </div>
 </section>
 
@@ -908,6 +1538,12 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
           PYQs 2013–2024
         </a>
+        <!-- START: Question Practice Update -->
+        <a href="#">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span style="color:var(--purple)">Question Practice</span>
+        </a>
+        <!-- END: Question Practice Update -->
         <a href="roadmap/roadmap.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           Study Roadmap
@@ -949,9 +1585,19 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           2 Year Plan
         </a>
+        <!-- START: About & Contact Update -->
+        <a href="about.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          About Us
+        </a>
+        <a href="contact.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Us
+        </a>
+        <!-- END: About & Contact Update -->
         <a href="mailto:raunakkarn777@gmail.com">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contact
+          Email Us
         </a>
       </div>
     </div>
@@ -967,6 +1613,10 @@
         <a href="legal/terms.html">Terms</a>
         <a href="legal/privacy.html">Privacy</a>
         <a href="legal/sitemap.html">Sitemap</a>
+        <!-- START: About & Contact Update -->
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- END: About & Contact Update -->
         <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
       </div>
     </div>
@@ -1010,272 +1660,5 @@ window.addEventListener('resize', function() {
   }
 });
 </script>
-
-<style>
-/* ── SUBJECT CARD PYQ ROW ── */
-.subject-pyq-row {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-  gap: 8px; padding: 10px 0 0;
-  border-top: 1px solid var(--border); margin-top: 4px;
-}
-.subject-pyq-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: .78rem; font-weight: 500; text-decoration: none;
-  padding: 5px 12px; border-radius: 6px; border: 1px solid;
-  transition: opacity .2s, transform .15s;
-}
-.subject-pyq-link:hover { opacity: .85; transform: translateY(-1px); }
-.bio-pyq  { color: var(--green); background: var(--green-bg); border-color: var(--green-border); }
-.chem-pyq { color: var(--amber); background: var(--amber-bg); border-color: var(--amber-border); }
-.phy-pyq  { color: var(--accent); background: var(--accent-dim); border-color: rgba(61,191,255,0.3); }
-.subject-pyq-note { font-size: .7rem; color: var(--text3); font-family: var(--font-mono); }
-
-/* ── SUBJECT CARDS MOBILE FIX ── */
-@media (max-width: 600px) {
-  .subjects-grid { grid-template-columns: 1fr; gap: 14px; }
-  .subject-card { padding: 18px 16px; gap: 12px; }
-  .subject-card-top { gap: 10px; }
-  .subject-icon { width: 44px; height: 44px; font-size: 1.25rem; border-radius: 12px; }
-  .subject-card h3 { font-size: 1.1rem; }
-  .subject-card p { font-size: .83rem; }
-  .subject-chapters { gap: 5px; }
-  .topic-pill { font-size: .68rem; padding: 3px 9px; }
-  .subject-cta { padding-top: 12px; flex-wrap: wrap; gap: 6px; }
-  .subject-pyq-row { flex-direction: column; align-items: flex-start; }
-  .subject-pyq-note { display: none; }
-}
-
-/* ── FORK NOTE CARD — MOBILE LANDSCAPE ── */
-@media (max-width: 700px) {
-  .fork-note {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 14px !important;
-  }
-  .fork-note > svg {
-    flex-shrink: 0 !important;
-    margin-top: 2px !important;
-  }
-  .fork-note > div {
-    flex: 1 !important;
-    min-width: 0 !important;
-  }
-  .fork-note > div > div:first-child {
-    font-size: .88rem !important;
-  }
-  .fork-note > div > div:nth-child(2) {
-    font-size: .8rem !important;
-    line-height: 1.6 !important;
-  }
-}
-
-/* ══════════════════════════════════════
-   PROGRESS TRACKER PROMO CARD — FIXED
-   ══════════════════════════════════════ */
-.tracker-promo-card {
-  background: var(--bg2, #1a1a2e);
-  border: 1px solid rgba(168,124,245,0.35);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: border-color .2s, transform .2s, box-shadow .2s;
-  position: relative;
-}
-.tracker-promo-card::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(168,124,245,0.04) 0%, rgba(61,191,255,0.03) 100%);
-  pointer-events: none;
-}
-.tracker-promo-card:hover {
-  border-color: rgba(168,124,245,0.6);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 60px rgba(168,124,245,0.12);
-}
-.tracker-promo-inner {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 0;
-  position: relative;
-}
-.tracker-promo-left {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 32px 28px;
-  border-right: 1px solid rgba(168,124,245,0.15);
-}
-.tracker-promo-icon {
-  width: 52px; height: 52px; flex-shrink: 0;
-  background: rgba(168,124,245,0.15);
-  border: 1px solid rgba(168,124,245,0.3);
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--purple, #a87cf5);
-}
-.tracker-promo-eyebrow {
-  font-family: var(--font-mono, monospace);
-  font-size: .63rem;
-  color: var(--purple, #a87cf5);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
-}
-.tracker-promo-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 14px; height: 1px;
-  background: currentColor;
-}
-.tracker-promo-title {
-  font-family: var(--font-head, sans-serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: -.4px;
-  margin-bottom: 10px;
-  color: var(--text, #fff);
-  line-height: 1.3;
-}
-.tracker-promo-desc {
-  font-size: .875rem;
-  color: var(--text2, rgba(255,255,255,0.65));
-  line-height: 1.7;
-  font-weight: 300;
-  margin-bottom: 18px;
-}
-.tracker-promo-features {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 22px;
-}
-.tracker-feat {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: .83rem;
-  color: var(--text2, rgba(255,255,255,0.65));
-}
-.tracker-feat svg {
-  color: var(--green, #3de8a0);
-  flex-shrink: 0;
-}
-.tracker-promo-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(168,124,245,0.18);
-  border: 1px solid rgba(168,124,245,0.45);
-  color: var(--purple, #a87cf5);
-  font-weight: 600;
-  font-size: .875rem;
-  padding: 11px 22px;
-  border-radius: 8px;
-  transition: background .2s, border-color .2s;
-}
-.tracker-promo-card:hover .tracker-promo-cta {
-  background: rgba(168,124,245,0.28);
-  border-color: rgba(168,124,245,0.65);
-}
-
-/* ── Mini dashboard visual ── */
-.tracker-promo-visual {
-  padding: 28px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.15);
-}
-.tracker-mini-dashboard {
-  width: 100%;
-  max-width: 300px;
-  background: var(--bg, #0d0d1a);
-  border: 1px solid rgba(168,124,245,0.2);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-.tmd-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 18px;
-}
-.tmd-title {
-  font-family: var(--font-head, sans-serif);
-  font-size: .9rem; font-weight: 600;
-  color: var(--text, #fff);
-}
-.tmd-badge {
-  font-family: var(--font-mono, monospace);
-  font-size: .58rem;
-  color: var(--green, #3de8a0);
-  background: rgba(61,232,160,0.12);
-  border: 1px solid rgba(61,232,160,0.3);
-  padding: 2px 9px;
-  border-radius: 99px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.tmd-bars { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
-.tmd-bar-row { display: flex; align-items: center; gap: 10px; }
-.tmd-label { font-size: .73rem; font-weight: 500; width: 62px; flex-shrink: 0; }
-.tmd-bar-track {
-  flex: 1; height: 7px;
-  background: rgba(255,255,255,0.07);
-  border-radius: 99px; overflow: hidden;
-}
-.tmd-bar-fill { height: 100%; border-radius: 99px; }
-.bio-fill  { background: var(--green, #3de8a0); }
-.chem-fill { background: var(--amber, #f4b942); }
-.phy-fill  { background: var(--accent, #3dbfff); }
-.tmd-pct {
-  font-family: var(--font-mono, monospace);
-  font-size: .7rem; width: 34px; text-align: right; flex-shrink: 0;
-}
-.bio-txt  { color: var(--green, #3de8a0); }
-.chem-txt { color: var(--amber, #f4b942); }
-.phy-txt  { color: var(--accent, #3dbfff); }
-.tmd-stats {
-  display: flex; gap: 0;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  padding-top: 15px;
-}
-.tmd-stat { flex: 1; text-align: center; }
-.tmd-stat-num {
-  display: block;
-  font-family: var(--font-head, sans-serif);
-  font-size: 1.4rem; font-weight: 700;
-  line-height: 1; margin-bottom: 4px;
-}
-.tmd-stat-lbl {
-  font-size: .62rem;
-  color: var(--text3, rgba(255,255,255,0.35));
-  text-transform: uppercase; letter-spacing: 1px;
-}
-
-/* ── Responsive breakpoints ── */
-@media (max-width: 960px) {
-  .tracker-promo-inner { grid-template-columns: 1fr 300px; }
-}
-@media (max-width: 840px) {
-  .tracker-promo-inner { grid-template-columns: 1fr; }
-  .tracker-promo-left {
-    border-right: none;
-    border-bottom: 1px solid rgba(168,124,245,0.15);
-    padding: 24px 20px;
-    gap: 16px;
-  }
-  .tracker-promo-visual { padding: 20px; }
-  .tracker-mini-dashboard { max-width: 100%; }
-}
-@media (max-width: 600px) {
-  .tracker-promo-left { flex-direction: column; gap: 14px; padding: 20px 18px; }
-  .tracker-promo-icon { width: 46px; height: 46px; }
-  .tracker-promo-title { font-size: 1.15rem; }
-  .tracker-promo-features { gap: 6px; }
-  .tracker-feat { font-size: .8rem; }
-  .tracker-promo-cta { font-size: .82rem; padding: 10px 18px; }
-}
-</style>
 </body>
 </html>

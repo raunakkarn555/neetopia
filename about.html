@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — NEETopia | India's Free NEET Preparation Platform</title>
+  <meta name="description" content="NEETopia ke baare mein jaano — kaun banaya, kyun banaya, aur iska mission kya hai. India ka sabse honest NEET platform — bilkul free, koi paywall nahi." />
+  <meta name="keywords" content="NEETopia about, NEET free platform India, NEET preparation website about" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://neetopia.in/about.html" />
+  <meta property="og:title" content="About NEETopia — India's Free NEET Preparation Platform" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: calc(var(--nav-h) + 72px) clamp(20px,5%,80px) 64px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+.page-hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(61,191,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,191,255,.015) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+.page-hero-orb {
+  position: absolute; width: 600px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,124,245,.06) 0%, transparent 65%);
+  top: -100px; left: 50%; transform: translateX(-50%);
+  filter: blur(50px); pointer-events: none;
+}
+
+/* ── ABOUT CONTENT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 56px;
+  align-items: start;
+}
+@media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.about-mission-card {
+  background: var(--bg2);
+  border: 1px solid rgba(168,124,245,0.25);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  position: relative; overflow: hidden;
+}
+.about-mission-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(168,124,245,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.about-values-list {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.about-value-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
+  transition: border-color .2s, transform .2s;
+}
+.about-value-item:hover { border-color: var(--border2); transform: translateX(4px); }
+.about-value-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-value-title { font-family: var(--font-head); font-size: .95rem; font-weight: 600; margin-bottom: 4px; }
+.about-value-desc { font-size: .83rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
+
+/* ── STORY SECTION ── */
+.story-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.story-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 36px 32px;
+  font-size: .925rem; color: var(--text2); line-height: 1.85; font-weight: 300;
+  max-width: 760px; margin: 0 auto; position: relative;
+}
+.story-card::before {
+  content: '"';
+  position: absolute; top: -16px; left: 24px;
+  font-family: var(--font-head); font-size: 5rem;
+  color: rgba(168,124,245,0.2); line-height: 1;
+  pointer-events: none;
+}
+.story-card p { margin-bottom: 16px; }
+.story-card p:last-child { margin-bottom: 0; }
+.story-card strong { color: var(--text); font-weight: 500; }
+
+/* ── STATS ── */
+.about-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin-top: 48px;
+}
+@media (max-width: 600px) { .about-stats { grid-template-columns: 1fr 1fr; } }
+.about-stat { background: var(--bg2); padding: 28px 20px; text-align: center; }
+.about-stat-num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+.about-stat-lbl { font-size: .75rem; color: var(--text3); }
+
+/* ── FOOTER TRACKER HIGHLIGHT ── */
+.footer-tracker-link {
+  display: flex !important; align-items: center !important; gap: 7px !important;
+  color: var(--purple) !important; font-weight: 500 !important;
+  background: rgba(168,124,245,0.08) !important; border: 1px solid rgba(168,124,245,0.25) !important;
+  border-radius: 7px !important; padding: 7px 10px !important; margin-top: 4px !important;
+  transition: background .2s, border-color .2s !important;
+}
+.footer-tracker-link:hover { background: rgba(168,124,245,0.16) !important; border-color: rgba(168,124,245,0.45) !important; }
+.footer-tracker-badge {
+  margin-left: auto; font-family: var(--font-mono); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--purple);
+  background: rgba(168,124,245,0.15); border: 1px solid rgba(168,124,245,0.3);
+  padding: 2px 7px; border-radius: 99px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+  <ul class="nav-links">
+    <li><a href="syllabus/syllabus.html">Syllabus</a></li>
+    <li><a href="pattern/pattern.html">Exam Pattern</a></li>
+    <li><a href="biology/biology-home.html">Biology</a></li>
+    <li><a href="chemistry/chemistry-home.html">Chemistry</a></li>
+    <li><a href="physics/physics-home.html">Physics</a></li>
+    <li><a href="pyq/pyq-home.html" class="pyq-link">PYQs</a></li>
+    <!-- START: Question Practice Update -->
+    <li><a href="#" style="color:var(--purple);background:rgba(168,124,245,0.08)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Question Practice</a></li>
+    <!-- END: Question Practice Update -->
+    <!-- START: About & Contact Update -->
+    <li><a href="about.html" class="active-link">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <!-- END: About & Contact Update -->
+  </ul>
+  <div class="nav-right">
+    <a href="donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="index.html" class="btn-home">← Home</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMobileMenu()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="biology/biology-home.html">Biology</a>
+  <a href="chemistry/chemistry-home.html">Chemistry</a>
+  <a href="physics/physics-home.html">Physics</a>
+  <a href="pyq/pyq-home.html" class="pyq-link">PYQs</a>
+  <a href="#" style="color:var(--purple)">Question Practice</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact Us</a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="donate.html" class="btn-donate" style="font-size:.82rem;padding:8px 16px;">💜 Donate</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-orb"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="reveal">
+      <p class="section-eyebrow" style="color:var(--purple)">About NEETopia</p>
+      <h1 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem);">India ka sabse honest<br /><span style="color:var(--accent)">NEET platform.</span></h1>
+      <p class="section-sub" style="max-width:580px">Koi paid course nahi. Koi fake guarantee nahi. Koi coaching ka advertisement nahi. Sirf real preparation resources — bilkul free, hamesha.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="about-stats reveal">
+      <div class="about-stat">
+        <div class="about-stat-num" style="color:var(--green)">97+</div>
+        <div class="about-stat-lbl">Chapters Covered</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num" style="color:var(--amber)">3</div>
+        <div class="about-stat-lbl">Complete Subjects</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num" style="color:var(--accent)">12</div>
+        <div class="about-stat-lbl">Years of PYQs</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num" style="color:var(--purple)">0₹</div>
+        <div class="about-stat-lbl">Forever Free</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:36px">
+      <p class="section-eyebrow">Our Story</p>
+      <h2 class="section-title">Kyun banaya NEETopia?</h2>
+    </div>
+    <div class="story-card reveal">
+      <p>NEET prepare karna India mein already bahut mushkil hai — lekin isse aur mushkil bana dete hain woh platforms jo <strong>har cheez ke paise maangte hain.</strong> Notes ke paise. PYQs ke paise. Ek chapter padhhne ke liye subscription.</p>
+      <p>NEETopia isi frustration se paida hua. Mission simple hai: <strong>jo student NEET crack karna chahta hai — usse kisi cheez ke liye paise nahi dene chahiye.</strong> NCERT-based notes, PYQs, video lectures, study plans — sab kuch ek jagah, bilkul free.</p>
+      <p>Hum koi big startup nahi hain. Koi VC funding nahi hai. Yeh platform <strong>pure passion se</strong> banaya gaya hai — medical aspirants ke liye, medical aspirants ki taraf se. Agar yeh platform helpful laga, toh server costs ke liye ek chai ki kimat donate kar sakte ho — warna bilkul zaroorat nahi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section>
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="reveal" style="margin-bottom:28px">
+          <p class="section-eyebrow amber">What We Stand For</p>
+          <h2 class="section-title">Hamare principles</h2>
+        </div>
+        <div class="about-values-list">
+          <div class="about-value-item reveal">
+            <div class="about-value-icon" style="background:rgba(61,232,160,0.1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="about-value-title">100% Free — Always</div>
+              <div class="about-value-desc">Koi bhi content kabhi paywall ke peeche nahi jaayega. Notes, PYQs, study plans — sab free. Hamesha.</div>
+            </div>
+          </div>
+          <div class="about-value-item reveal">
+            <div class="about-value-icon" style="background:rgba(61,191,255,0.1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div>
+              <div class="about-value-title">NCERT-First, Always</div>
+              <div class="about-value-desc">NEET 90% NCERT se aata hai. Isiliye har ek chapter NCERT ke basis pe banaya gaya hai — line-by-line accuracy ke saath.</div>
+            </div>
+          </div>
+          <div class="about-value-item reveal">
+            <div class="about-value-icon" style="background:rgba(244,185,66,0.1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="about-value-title">No Fake Promises</div>
+              <div class="about-value-desc">"Guarantee se 650+ lao" — yeh hum nahi bolte. NEET mein success mehnat maangti hai. Hum sirf best resources dete hain — baaki aapka kaam hai.</div>
+            </div>
+          </div>
+          <div class="about-value-item reveal">
+            <div class="about-value-icon" style="background:rgba(168,124,245,0.1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <div class="about-value-title">Privacy First</div>
+              <div class="about-value-desc">Koi account nahi, koi login nahi, koi data nahi becha jaata. Progress tracker sirf aapke browser mein — sirf aapka data.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="reveal" style="margin-bottom:28px">
+          <p class="section-eyebrow green">Mission</p>
+          <h2 class="section-title">Ek clear goal</h2>
+        </div>
+        <div class="about-mission-card reveal">
+          <p style="font-family:var(--font-head);font-size:1.35rem;font-weight:700;letter-spacing:-.4px;margin-bottom:16px;line-height:1.3;">
+            Har Indian student ko world-class NEET preparation — <span style="color:var(--purple)">bilkul free.</span>
+          </p>
+          <p style="font-size:.9rem;color:var(--text2);line-height:1.8;font-weight:300;margin-bottom:20px;">
+            NEETopia ka goal hai ki koi bhi student sirf paise ki wajah se NEET preparation mein peeche na rahe. Chahe woh Tier-1 city mein ho ya Tier-3 gaon mein — platform same hoga, content same hoga, quality same hogi.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text2)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              NCERT-based content — exam-accurate
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text2)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              PYQs 2013–2024 — chapter-wise organized
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text2)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Free YouTube lectures embedded
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text2)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Question practice — topic-wise MCQs
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--text2)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Progress tracker — no login required
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="biology/biology-home.html" class="btn-primary" style="font-size:.85rem;padding:10px 20px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Preparation Shuru Karo
+            </a>
+            <a href="contact.html" class="btn-ghost" style="font-size:.85rem;padding:10px 18px">
+              Contact Karo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <p class="section-eyebrow" style="justify-content:center;color:var(--purple)">Start Today</p>
+      <h2 class="section-title">Aaj se shuru karo.</h2>
+      <p>NEETopia free hai, hamesha rahega. Koi account banane ki zaroorat nahi. Seedha kisi bhi subject ka chapter kholo aur padhna shuru karo.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">
+        <a href="biology/biology-home.html" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology Se Shuru Karo
+        </a>
+        <a href="contact.html" class="btn-ghost">
+          Feedback Do
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">💜 Support / Donate</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="biology/biology-home.html">Biology</a>
+        <a href="chemistry/chemistry-home.html">Chemistry</a>
+        <a href="physics/physics-home.html">Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/syllabus.html">Full Syllabus</a>
+        <a href="pattern/pattern.html">Exam Pattern</a>
+        <a href="pyq/pyq-home.html">PYQs 2013–2024</a>
+        <a href="#">Question Practice</a>
+        <a href="roadmap/roadmap.html">Study Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="about.html" style="color:var(--accent)">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="donate.html">Donate</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="about.html" style="color:var(--accent)">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+function toggleMobileMenu() {
+  var menu=document.getElementById('mobileMenu'),overlay=document.getElementById('mobileOverlay'),btn=document.getElementById('hamburger');
+  if(!menu)return;
+  var isOpen=menu.classList.contains('open');
+  if(isOpen){menu.classList.remove('open');overlay&&overlay.classList.remove('open');btn&&btn.classList.remove('is-open');btn&&btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  else{menu.classList.add('open');overlay&&overlay.classList.add('open');btn&&btn.classList.add('is-open');btn&&btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+}
+document.querySelectorAll('#mobileMenu a').forEach(function(a){a.addEventListener('click',function(){toggleMobileMenu();});});
+window.addEventListener('resize',function(){if(window.innerWidth>820){var m=document.getElementById('mobileMenu');if(m&&m.classList.contains('open'))toggleMobileMenu();}});
+</script>
+</body>
+</html>
