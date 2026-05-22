@@ -105,7 +105,7 @@
   /* ── HERO BIO ── */
   .bio-hero {
     position: relative;
-    padding: 120px clamp(20px,5%,80px) 88px;
+    padding: calc(var(--nav-h) + 16px) clamp(16px,4%,60px) 48px;
     overflow: hidden;
     background: var(--bg);
     text-align: center;
@@ -124,12 +124,10 @@
     pointer-events: none;
   }
   .bio-hero-orb1 {
-    width: 600px; height: 320px;
     background: radial-gradient(ellipse, rgba(61,232,160,0.12), transparent 70%);
     top: 0; left: 50%; transform: translateX(-50%);
   }
   .bio-hero-orb2 {
-    width: 300px; height: 300px;
     background: radial-gradient(circle, rgba(168,124,245,0.08), transparent 70%);
     bottom: -60px; right: 10%;
   }
@@ -393,6 +391,25 @@
     border: 1px solid var(--amber-border); text-decoration: none;
     cursor: pointer; transition: background .2s;
   }
+  .btn-ch-done {
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    background: transparent; color: var(--text3);
+    font-family: var(--font-body); font-size: .75rem; font-weight: 500;
+    padding: 7px 12px; border-radius: 7px;
+    border: 1px solid var(--border); text-decoration: none;
+    cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .btn-ch-done:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
+  .btn-ch-done.done-active {
+    background: rgba(61,232,160,0.12);
+    color: var(--bio-primary);
+    border-color: var(--bio-border-md);
+  }
+  .ch-card.ch-done {
+    border-color: var(--bio-border);
+    background: linear-gradient(135deg, rgba(61,232,160,0.04) 0%, var(--bg2) 100%);
+  }
   .btn-ch-pyq:hover { background: var(--amber-bg); }
 
   /* ── Class badges ── */
@@ -611,28 +628,115 @@
     padding: 2px 7px; border-radius: 99px;
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    .bio-hero { padding: 100px 20px 60px; }
-    .bio-stat-item { min-width: 100px; padding: 14px 12px; }
-    .bio-stat-num { font-size: 1.3rem; }
-    .chapter-grid { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
-    .guide-grid { grid-template-columns: 1fr; }
-    .dps-grid { grid-template-columns: repeat(2, 1fr); }
-    .quicklinks-grid { grid-template-columns: repeat(2, 1fr); }
-    .ch-actions { gap: 6px; }
-    .btn-ch-practice, .btn-ch-notes, .btn-ch-pyq { font-size: .72rem; padding: 6px 10px; }
+  /* ── Class Section Dividers ── */
+  .class-section-divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 32px 0 20px;
   }
+  .class-section-divider::before, .class-section-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .class-section-label {
+    font-family: var(--font-mono); font-size: .68rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
+    padding: 5px 16px; border-radius: 99px; white-space: nowrap;
+  }
+  .class-section-label.lbl-11 {
+    color: #3dbfff; background: rgba(61,191,255,0.1);
+    border: 1px solid rgba(61,191,255,0.25);
+  }
+  .class-section-label.lbl-12 {
+    color: var(--bio-primary); background: var(--bio-glow-soft);
+    border: 1px solid var(--bio-border);
+  }
+
+  /* ── Class badges on cards ── */
+  .badge-11 {
+    font-family: var(--font-mono); font-size: .6rem; font-weight: 500;
+    padding: 2px 8px; border-radius: 5px; flex-shrink: 0;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: #3dbfff; background: rgba(61,191,255,0.1);
+    border: 1px solid rgba(61,191,255,0.25);
+  }
+  .badge-12 {
+    font-family: var(--font-mono); font-size: .6rem; font-weight: 500;
+    padding: 2px 8px; border-radius: 5px; flex-shrink: 0;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--bio-primary); background: var(--bio-glow-soft);
+    border: 1px solid var(--bio-border);
+  }
+
+  /* ── Responsive — Laptop (≤1024px) ── */
+  @media (max-width: 1024px) {
+    .bio-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    .chapter-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .page-section { padding: 60px clamp(16px,4%,48px); }
+    .bio-hero { padding: calc(var(--nav-h) + 14px) clamp(16px,4%,48px) 40px; }
+  }
+
+  /* ── Responsive — Tablet (≤768px) ── */
+  @media (max-width: 768px) {
+    .bio-hero {
+      padding: calc(var(--nav-h) + 12px) 16px 36px;
+    }
+    .bio-hero h1 { font-size: clamp(1.7rem, 5.5vw, 2.4rem); letter-spacing: -1px; }
+    .bio-hero-sub { font-size: .9rem; }
+    .bio-stat-item { min-width: 90px; padding: 14px 10px; }
+    .bio-stat-num { font-size: 1.25rem; }
+    .bio-stats-strip { max-width: 100%; }
+    .chapter-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .feature-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+    .guide-grid { grid-template-columns: 1fr; }
+    .dps-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .quicklinks-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .ch-actions { gap: 6px; flex-wrap: wrap; }
+    .btn-ch-practice, .btn-ch-notes, .btn-ch-pyq { font-size: .72rem; padding: 6px 10px; }
+    .page-section { padding: 48px 16px; }
+    .breadcrumb { padding: calc(var(--nav-h) + 12px) 16px 0; }
+  }
+
+  /* ── Responsive — Mobile (≤480px) ── */
   @media (max-width: 480px) {
-    .bio-hero h1 { font-size: 1.9rem; }
-    .bio-hero-ctas { flex-direction: column; align-items: stretch; }
+    .bio-hero {
+      padding: calc(var(--nav-h) + 10px) 14px 28px;
+    }
+    .bio-hero h1 { font-size: 1.75rem; letter-spacing: -.8px; line-height: 1.15; }
+    .bio-hero-sub { font-size: .875rem; margin-bottom: 20px; }
+    .bio-hero-ctas { flex-direction: column; align-items: stretch; gap: 8px; }
     .btn-bio-primary, .btn-bio-outline, .btn-ghost-white { justify-content: center; }
-    .bio-stats-strip { border-radius: 10px; }
-    .bio-stat-item { min-width: 80px; padding: 12px 8px; }
-    .bio-stat-num { font-size: 1.1rem; }
-    .dps-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .quicklinks-grid { grid-template-columns: 1fr 1fr; }
+    .bio-stats-strip { border-radius: 10px; flex-wrap: nowrap; overflow-x: auto; }
+    .bio-stat-item { min-width: 72px; padding: 10px 6px; flex-shrink: 0; }
+    .bio-stat-num { font-size: 1rem; }
+    .bio-stat-lbl { font-size: .6rem; }
+    .chapter-grid { grid-template-columns: 1fr; gap: 10px; }
+    .feature-grid { grid-template-columns: 1fr; gap: 10px; }
+    .dps-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .quicklinks-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .chapter-filter-bar { gap: 6px; }
+    .filter-btn { font-size: .62rem; padding: 5px 10px; }
+    .ch-card { padding: 16px 14px; }
+    .ch-name { font-size: .95rem; }
+    .ch-desc { font-size: .78rem; }
+    .ch-actions { gap: 5px; }
+    .btn-ch-practice, .btn-ch-notes, .btn-ch-pyq, .btn-ch-done { font-size: .68rem; padding: 5px 8px; }
+    .page-section { padding: 36px 14px; }
+    .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+    .feat-card { padding: 18px 16px; }
+    .alert-banner { padding: 10px 14px; }
+    .faq-q { font-size: .85rem; padding: 14px 16px; }
+    .ql-card { padding: 12px 14px; }
+    .bio-hero-eyebrow { font-size: .62rem; padding: 4px 12px; }
+    .class-section-label { font-size: .62rem; padding: 4px 12px; }
+  }
+
+  /* ── Responsive — Very Small (≤360px) ── */
+  @media (max-width: 360px) {
+    .bio-hero h1 { font-size: 1.5rem; }
+    .bio-stat-item { min-width: 60px; }
+    .bio-stat-num { font-size: .9rem; }
+    .chapter-grid { grid-template-columns: 1fr; }
+    .dps-grid { grid-template-columns: 1fr; }
   }
   </style>
 </head>
@@ -972,6 +1076,7 @@ s</button>
             Notes
           </a>
           <a href="../../neet-pyq/neet-previous-year-questions.html" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -992,6 +1097,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1012,6 +1118,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1032,6 +1139,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1052,6 +1160,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1072,6 +1181,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1093,6 +1203,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1113,6 +1224,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1133,6 +1245,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1153,6 +1266,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1173,6 +1287,7 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1193,6 +1308,532 @@ s</button>
           <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
           <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
           <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+
+    
+      <!-- ── ADDITIONAL CLASS 11 CHAPTERS ── -->
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 03</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Plant Kingdom</div>
+        <div class="ch-desc">Classification of plants — Algae, Bryophytes, Pteridophytes, Gymnosperms, Angiosperms. High diagram and match-the-following frequency.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 160 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~55 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 04</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Animal Kingdom</div>
+        <div class="ch-desc">Basis of classification, all non-chordate and chordate phyla. Very fact-heavy — names, characteristics, examples. Direct NCERT questions.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 190 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~70 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 06</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Anatomy of Flowering Plants</div>
+        <div class="ch-desc">Internal structure of root, stem, leaf, secondary growth. Diagram-labelling questions common. Vascular bundle patterns important.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 140 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~50 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 07</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Structural Organisation in Animals</div>
+        <div class="ch-desc">Tissues: epithelial, connective, muscular, neural. Cockroach, frog, earthworm anatomy. Diagram and match-the-following heavy.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 160 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~55 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 09</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Biomolecules</div>
+        <div class="ch-desc">Carbohydrates, proteins, lipids, nucleic acids, enzymes. Enzyme kinetics, inhibition types — conceptual and formula-based MCQs.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 200 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~75 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 10</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Cell Cycle and Cell Division</div>
+        <div class="ch-desc">Mitosis and meiosis stages in detail — diagrams are critical. Crossing over, synapsis, chiasmata. Regular NEET questions.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 180 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~65 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 11</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Transport in Plants</div>
+        <div class="ch-desc">Water potential, osmosis, plasmolysis, transpiration, phloem loading. Mostly conceptual — assertion-reason friendly chapter.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 130 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~45 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 12</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Mineral Nutrition</div>
+        <div class="ch-desc">Essential minerals, macro vs micronutrients, deficiency symptoms, nitrogen fixation. Direct NCERT fact-based questions.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 120 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~40 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 14</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Respiration in Plants</div>
+        <div class="ch-desc">Glycolysis, Krebs cycle, ETC, fermentation — ATP count, RQ values. Calculation and concept-based MCQs.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 180 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~65 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 15</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Plant Growth and Development</div>
+        <div class="ch-desc">Auxins, gibberellins, cytokinins, ABA, ethylene — roles and interactions. Photoperiodism, vernalisation.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 140 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~50 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 16</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Digestion and Absorption</div>
+        <div class="ch-desc">GI tract anatomy, digestive enzymes, absorption mechanisms. Diagram and enzyme-substrate questions high frequency.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 180 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~65 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 17</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Breathing and Exchange of Gases</div>
+        <div class="ch-desc">Mechanism of breathing, lung volumes, haemoglobin, oxygen dissociation curve. Numericals and graph-based MCQs.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 160 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~60 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 18</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Body Fluids and Circulation</div>
+        <div class="ch-desc">Blood composition, cardiac cycle, ECG, blood pressure, blood groups — assertion-reason and diagram heavy.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 200 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~70 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 19</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Excretory Products and their Elimination</div>
+        <div class="ch-desc">Nephron structure, urine formation, osmoregulation, dialysis. Diagram-based and process MCQs at high frequency.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 220 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~75 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 21</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Neural Control and Coordination</div>
+        <div class="ch-desc">Neuron structure, impulse conduction, synapse, reflex arc, sensory receptors — eye and ear. Diagram labelling.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 170 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~60 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="11" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 22</span>
+          <span class="badge-11 class-badge">Class 11</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Chemical Coordination and Integration</div>
+        <div class="ch-desc">Endocrine glands, hormones and their functions, feedback mechanisms. Fact-based and match-the-following.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 160 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~55 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+
+      <!-- ── ADDITIONAL CLASS 12 CHAPTERS ── -->
+      <div class="ch-card reveal" data-class="12" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 02</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Sexual Reproduction in Flowering Plants</div>
+        <div class="ch-desc">Flower structure, pollination, fertilisation, endosperm, fruit/seed development. Diagram and process-based MCQs.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 200 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~70 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 03</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Human Reproduction</div>
+        <div class="ch-desc">Male/female reproductive system, gametogenesis, fertilisation, embryonic development — diagram and assertion-reason rich.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 220 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~75 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 08</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Microbes in Human Welfare</div>
+        <div class="ch-desc">Biogas, sewage treatment, antibiotics, biocontrol. Mostly factual direct NCERT questions — easy marks.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 140 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~45 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 09</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Biotechnology: Principles and Processes</div>
+        <div class="ch-desc">Recombinant DNA technology, restriction enzymes, PCR, gel electrophoresis, cloning vectors.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 200 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~70 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 10</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Biotechnology and its Applications</div>
+        <div class="ch-desc">Bt crops, golden rice, GEAC, insulin production, gene therapy, GMOs — high assertion-reason frequency.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 190 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~65 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 11</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Strategies for Enhancement in Food Production</div>
+        <div class="ch-desc">Plant breeding, hybridisation, biofortification, SCP, tissue culture — factual and direct NCERT questions.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 150 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~50 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="hard">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 12</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-hard">High Yield</span>
+        </div>
+        <div class="ch-name">Ecosystem</div>
+        <div class="ch-desc">Energy flow, food chains, ecological pyramids, nutrient cycles, carbon/phosphorus cycles, productivity.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 220 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~75 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="medium">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 14</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-medium">Medium</span>
+        </div>
+        <div class="ch-name">Biodiversity and Conservation</div>
+        <div class="ch-desc">Biodiversity types, hotspots, threatened species, conservation strategies, in-situ vs ex-situ.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 160 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~55 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 15</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Environmental Issues</div>
+        <div class="ch-desc">Pollution types, ozone depletion, greenhouse effect, biomagnification, waste management.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 140 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~45 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
+        </div>
+      </div>
+      <div class="ch-card reveal" data-class="12" data-diff="easy">
+        <div class="ch-card-top">
+          <span class="ch-num">Ch. 16</span>
+          <span class="badge-12 class-badge">Class 12</span>
+          <span class="ch-difficulty diff-easy">Easy</span>
+        </div>
+        <div class="ch-name">Reproductive Health</div>
+        <div class="ch-desc">Population control, contraception, STDs, IVF, MTP, amniocentesis — mostly factual NCERT lines.</div>
+        <div class="ch-meta">
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 130 MCQs</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> PYQ ✓</span>
+          <span class="ch-meta-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ~40 min</span>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-ch-practice"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Practice</a>
+          <a href="#" class="btn-ch-notes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Notes</a>
+          <a href="#" class="btn-ch-pyq">PYQs</a>
+          <button class="btn-ch-done" onclick="toggleChDone(this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done</button>
         </div>
       </div>
 
@@ -1694,6 +2335,42 @@ function filterChapters(filter, btn) {
     card.style.display = show ? '' : 'none';
   });
 }
+
+/* ── CHAPTER DONE TOGGLE (localStorage) ── */
+function getChKey(btn) {
+  var card = btn.closest('.ch-card');
+  var num = card.querySelector('.ch-num') ? card.querySelector('.ch-num').textContent.trim() : '';
+  var cls = card.querySelector('.class-badge') ? card.querySelector('.class-badge').textContent.trim() : '';
+  return 'neetopia-ch-done-' + cls.replace(/\s/g,'-') + '-' + num.replace(/\s/g,'-');
+}
+function toggleChDone(btn) {
+  var card = btn.closest('.ch-card');
+  var key = getChKey(btn);
+  var done = JSON.parse(localStorage.getItem('neetopia-ch-progress') || '{}');
+  if (btn.classList.contains('done-active')) {
+    btn.classList.remove('done-active');
+    btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done';
+    card.classList.remove('ch-done');
+    delete done[key];
+  } else {
+    btn.classList.add('done-active');
+    btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done ✓';
+    card.classList.add('ch-done');
+    done[key] = true;
+  }
+  localStorage.setItem('neetopia-ch-progress', JSON.stringify(done));
+}
+(function initChDone() {
+  var done = JSON.parse(localStorage.getItem('neetopia-ch-progress') || '{}');
+  document.querySelectorAll('.btn-ch-done').forEach(function(btn) {
+    var key = getChKey(btn);
+    if (done[key]) {
+      btn.classList.add('done-active');
+      btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Done ✓';
+      btn.closest('.ch-card').classList.add('ch-done');
+    }
+  });
+})();
 
 /* ── STREAK BAR BUILD ── */
 (function() {
