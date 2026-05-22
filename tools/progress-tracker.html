@@ -1404,6 +1404,171 @@
 /* ── SECTION DIVIDER ── */
 .sec-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
 
+/* ══════════════════════════════════════════════════
+   RESPONSIVE — MOBILE & LAPTOP
+   Only adds layout fixes. Does NOT override colors,
+   fonts, logic or any existing design decisions.
+══════════════════════════════════════════════════ */
+
+/* ── Laptop / small desktop (≤1100px) ── */
+@media (max-width: 1100px) {
+  .tracker-page { padding: 12px 16px 80px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .analytics-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile-grid { grid-template-columns: repeat(2, 1fr); }
+  .books-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Tablet (≤820px) ── */
+@media (max-width: 820px) {
+  .tracker-page { padding: 10px 12px 80px; }
+  .storage-notice-wrapper { padding: 60px 12px 0; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .dash-hero h1 { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .profile-header { gap: 14px; }
+  .profile-grid { grid-template-columns: 1fr 1fr; }
+  .books-grid { grid-template-columns: 1fr 1fr; }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .daily-grid { grid-template-columns: 1fr 1fr; }
+  .quote-cards { grid-template-columns: 1fr; }
+  .career-grid { grid-template-columns: repeat(2, 1fr); }
+  .reality-items { grid-template-columns: 1fr; }
+  .backup-steps { grid-template-columns: 1fr 1fr; }
+  .test-timer-box { flex-wrap: wrap; gap: 8px; }
+  .section-title { font-size: 1.1rem; margin: 24px 0 12px; }
+}
+
+/* ── Mobile (≤600px) ── */
+@media (max-width: 600px) {
+  /* Layout */
+  .tracker-page { padding: 8px 10px 80px; }
+  .storage-notice-wrapper { padding: 54px 10px 0; }
+  .storage-notice { padding: 12px 14px; gap: 10px; }
+  .storage-notice p { font-size: .78rem; }
+
+  /* Subnav */
+  .tracker-subnav-inner { padding: 6px 10px; gap: 2px; }
+  .snav-btn { padding: 5px 10px; font-size: .75rem; gap: 4px; }
+
+  /* Hero */
+  .dash-hero { padding: 10px 0 0; }
+  .dash-hero h1 { font-size: 1.5rem; margin-bottom: 8px; }
+  .dash-hero p { font-size: .82rem; margin-bottom: 20px; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 16px 0; }
+  .stat-card { padding: 14px 10px; }
+  .stat-card .stat-num { font-size: 1.5rem; }
+  .stat-card .stat-label { font-size: .68rem; }
+
+  /* Section title */
+  .section-title { font-size: 1rem; margin: 20px 0 10px; gap: 8px; }
+  .section-title .section-icon { width: 28px; height: 28px; font-size: .85rem; }
+
+  /* Profile */
+  .profile-section { padding: 18px 14px; }
+  .profile-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .profile-grid { grid-template-columns: 1fr; }
+  .profile-meta { gap: 8px; }
+
+  /* Daily */
+  .daily-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .daily-card { padding: 14px 12px; }
+  .daily-card .big-input { font-size: 1.4rem; }
+  .streak-num { font-size: 2.2rem; }
+
+  /* Mood */
+  .mood-grid { gap: 6px; }
+  .mood-btn { padding: 5px 10px; font-size: .8rem; }
+
+  /* Heatmap */
+  .heat-cell { width: 18px; height: 18px; }
+
+  /* Chapter / Syllabus */
+  .subject-tabs { gap: 6px; }
+  .subj-tab { padding: 6px 12px; font-size: .78rem; }
+  .chapter-header { padding: 12px 14px; gap: 10px; }
+  .chapter-name { font-size: .85rem; }
+  .chapter-badges { display: none; }
+  .topic-row { grid-template-columns: 18px 1fr; gap: 8px; padding: 8px 0; }
+  .topic-controls { display: none; }
+  .topic-name { font-size: .82rem; }
+
+  /* Todo */
+  .todo-add-row { flex-direction: column; gap: 8px; }
+  .todo-add-row input, .todo-add-row select { width: 100%; box-sizing: border-box; }
+  .todo-item { padding: 10px 12px; gap: 8px; }
+  .todo-text { font-size: .82rem; }
+
+  /* Tests */
+  .test-add-form { padding: 14px 12px; }
+  .test-form-grid { grid-template-columns: 1fr; gap: 10px; }
+  .test-card { padding: 14px 12px; grid-template-columns: 1fr auto; gap: 8px; }
+  .test-card h4 { font-size: .88rem; }
+  .test-meta { gap: 6px; font-size: .72rem; }
+  .test-score-big { font-size: 1.5rem; }
+  .test-timer-box { padding: 10px 12px; gap: 8px; flex-wrap: wrap; }
+  .test-timer-display { font-size: 1.2rem; }
+  .test-timer-label { font-size: .65rem; }
+  .timer-btn { padding: 5px 10px; font-size: .72rem; }
+
+  /* Books */
+  .books-grid { grid-template-columns: 1fr; }
+  .book-card { padding: 16px 14px; }
+
+  /* Analytics */
+  .analytics-grid { grid-template-columns: 1fr; }
+  .analytics-card { padding: 16px 14px; }
+
+  /* Journal */
+  .journal-section { padding: 16px 14px; }
+  .journal-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .journal-entries { max-height: 300px; }
+
+  /* Photo wall */
+  .photo-wall { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+  /* Motivation */
+  .quote-cards { grid-template-columns: 1fr; }
+  .quote-card { padding: 18px 16px; }
+  .quote-text { font-size: .88rem; }
+
+  /* Reality */
+  .reality-toggle-btn { padding: 14px 16px; }
+  .reality-items { grid-template-columns: 1fr; }
+  .reality-content { padding: 16px 14px; }
+
+  /* Career */
+  .career-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .career-card { padding: 14px 12px; }
+
+  /* Backup */
+  .backup-actions { flex-direction: column; gap: 8px; }
+  .backup-steps { grid-template-columns: 1fr; }
+  .btn-export, .btn-import { width: 100%; justify-content: center; box-sizing: border-box; }
+
+  /* FAQ */
+  .faq-q { font-size: .85rem; padding: 14px 16px; }
+  .faq-a { font-size: .8rem; padding: 0 16px 14px; }
+
+  /* Toast */
+  .toast { bottom: 12px; right: 12px; left: 12px; font-size: .82rem; }
+
+  /* Overview subject cards */
+  #overviewSummaryCards { grid-template-columns: 1fr !important; }
+}
+
+/* ── Very small mobile (≤380px) ── */
+@media (max-width: 380px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .daily-grid { grid-template-columns: 1fr; }
+  .career-grid { grid-template-columns: 1fr; }
+  .snav-btn { padding: 4px 8px; font-size: .7rem; }
+  .dash-hero h1 { font-size: 1.3rem; }
+  .photo-wall { grid-template-columns: repeat(2, 1fr); }
+  .test-timer-display { font-size: 1.05rem; }
+}
+
 /* ── CLASS 11/12 DIVIDER ── */
 .class-divider {
   display: flex;
@@ -4039,33 +4204,31 @@ function renderTests(tests) {
   if (!list) return;
   if (!tests.length) { list.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:20px;">No tests logged yet. Start tracking your mocks!</div>'; return; }
   list.innerHTML = tests.map(t => `
-    <div class="test-card" style="display:block;">
-      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;">
-        <div>
-          <h4>${t.name}</h4>
-          <div class="test-meta">
-            <span>📅 ${t.date || 'No date'}</span>
-            <span>⏱ ${t.time ? t.time + ' min' : '—'}</span>
-            <span>🎯 ${t.accuracy ? t.accuracy + '% accuracy' : '—'}</span>
-            ${t.weak ? `<span>⚠️ Weak: ${t.weak}</span>` : ''}
-          </div>
-          ${t.notes ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px;background:var(--bg3);padding:8px 10px;border-radius:6px;">${t.notes}</div>` : ''}
+    <div class="test-card">
+      <div>
+        <h4>${t.name}</h4>
+        <div class="test-meta">
+          <span>📅 ${t.date || 'No date'}</span>
+          <span>⏱ ${t.time ? t.time + ' min' : '—'}</span>
+          <span>🎯 ${t.accuracy ? t.accuracy + '% accuracy' : '—'}</span>
+          ${t.weak ? `<span>⚠️ Weak: ${t.weak}</span>` : ''}
         </div>
-        <div style="text-align:right;">
-          <div class="test-score-big">${t.score}</div>
-          <div class="test-score-label">/ 720</div>
-          <button onclick="deleteTest(${t.id})" style="margin-top:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:.75rem;">Delete</button>
+        ${t.notes ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px;background:var(--bg3);padding:8px 10px;border-radius:6px;">${t.notes}</div>` : ''}
+        <div class="test-timer-box">
+          <div>
+            <div class="test-timer-display" id="timer-display-${t.id}">3:20:00</div>
+            <div class="test-timer-label">Practice Timer
+              <span>NEET duration: 3 hrs 20 min</span>
+            </div>
+          </div>
+          <button class="timer-btn" id="timer-btn-${t.id}" onclick="toggleTestTimer(${t.id})">▶ Start</button>
+          <button class="timer-btn reset-btn" onclick="resetTestTimer(${t.id})">↺ Reset</button>
         </div>
       </div>
-      <div class="test-timer-box">
-        <div>
-          <div class="test-timer-display" id="timer-display-${t.id}">3:20:00</div>
-          <div class="test-timer-label">Practice Timer
-            <span>NEET duration: 3 hrs 20 min</span>
-          </div>
-        </div>
-        <button class="timer-btn" id="timer-btn-${t.id}" onclick="toggleTestTimer(${t.id})">▶ Start</button>
-        <button class="timer-btn reset-btn" onclick="resetTestTimer(${t.id})">↺ Reset</button>
+      <div style="text-align:right;">
+        <div class="test-score-big">${t.score}</div>
+        <div class="test-score-label">/ 720</div>
+        <button onclick="deleteTest(${t.id})" style="margin-top:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:.75rem;">Delete</button>
       </div>
     </div>`).join('');
 }
