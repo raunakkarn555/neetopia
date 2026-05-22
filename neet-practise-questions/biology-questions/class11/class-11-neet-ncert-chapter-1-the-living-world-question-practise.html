@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../assets/css/main.css" />
 
   <script type="application/ld+json">
   {
@@ -786,12 +787,71 @@ footer {
   .btn-submit-test { padding: 10px 16px; font-size: .85rem; }
   .btn-nav-q { padding: 9px 14px; font-size: .8rem; }
 }
+
+
+///
+
+
+/* Donate banner */
+.donate-banner-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; background: linear-gradient(135deg, rgba(168,124,245,0.08) 0%, rgba(61,191,255,0.06) 100%); border: 1px solid rgba(168,124,245,0.22); border-radius: var(--radius); padding: 16px 24px; margin: 28px 0; }
+
+  
+/* ── Navbar Question Practice link style ── */
+.nav-links .qp-link {
+  color: var(--purple);
+  background: rgba(168,124,245,0.08);
+}
+.nav-links .qp-link:hover { background: rgba(168,124,245,0.15); }
+.nav-mobile-menu .qp-link { color: var(--purple); background: rgba(168,124,245,0.08); }
+
+/* ── About & Contact nav link styles — REMOVED from nav ── */
+
+/* ── NAV BREATHING SPACE ── */
+.nav-links { gap: 4px; }
+.nav-links li a { padding: 6px 10px; }
+
+
+/* ── Footer css ── */
+
+/* ── Footer Progress Tracker Highlight ── */
+.footer-tracker-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  color: var(--purple) !important;
+  font-weight: 500 !important;
+  background: rgba(168,124,245,0.08) !important;
+  border: 1px solid rgba(168,124,245,0.25) !important;
+  border-radius: 7px !important;
+  padding: 7px 10px !important;
+  margin-top: 4px !important;
+  transition: background .2s, border-color .2s !important;
+}
+.footer-tracker-link:hover {
+  background: rgba(168,124,245,0.16) !important;
+  border-color: rgba(168,124,245,0.45) !important;
+  color: var(--purple) !important;
+}
+.footer-tracker-badge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--purple);
+  background: rgba(168,124,245,0.15);
+  border: 1px solid rgba(168,124,245,0.3);
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+
 </style>
 </head>
 <body>
-!-- ══════════════════════════════
-     NAVBAR
-══════════════════════════════ -->
+
+ <!-- <-- ════════    NAVBAR
+  ══════════════════════ -->
+
 <nav>
   <a href="../../../index.html" class="nav-logo">
     <div class="logo-mark">
@@ -3272,5 +3332,7 @@ window.addEventListener('resize', function() {
   }
 });
 </script>
+
+<script src="../../../assets/js/main.js"></script>
 </body>
 </html>
