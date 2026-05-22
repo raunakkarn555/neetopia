@@ -503,6 +503,254 @@ footer .container { max-width: 1200px; margin: 0 auto; }
 }
 
 </style>
+
+<!-- ═══════════════════════════════════════════════════════════
+     RESPONSIVE SYSTEM — mirrors roadmap.html architecture
+     + Premium horizontal scroll for overflow tables/grids
+     Zero original code touched.
+═══════════════════════════════════════════════════════════ -->
+<style>
+
+/* ══ BASE ══ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+
+/* ══════════════════════════════════════════
+   PREMIUM SCROLL WRAPPER
+   Same system as pattern.html — reused here
+══════════════════════════════════════════ */
+.pscroll-wrap {
+  position: relative;
+}
+.pscroll-btn {
+  display: none;
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--text2);
+  cursor: pointer;
+  align-items: center; justify-content: center;
+  transition: background .18s, border-color .18s, color .18s, transform .18s;
+  box-shadow: 0 2px 10px rgba(0,0,0,.28);
+  padding: 0;
+}
+.pscroll-btn:hover {
+  background: var(--surface);
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-50%) scale(1.1);
+}
+.pscroll-btn.disabled { opacity: .22; pointer-events: none; }
+.pscroll-btn.ps-prev { left: -14px; }
+.pscroll-btn.ps-next { right: -14px; }
+.pscroll-fade-l, .pscroll-fade-r {
+  display: none;
+  position: absolute; top: 0; bottom: 0; width: 28px;
+  pointer-events: none; z-index: 5;
+  transition: opacity .2s;
+}
+.pscroll-fade-l { left: 0;  background: linear-gradient(90deg, var(--bg2), transparent); }
+.pscroll-fade-r { right: 0; background: linear-gradient(270deg, var(--bg2), transparent); }
+.pscroll-inner {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+.pscroll-inner::-webkit-scrollbar { display: none; }
+
+/* Border wrapper for table scroll on mobile */
+.pscroll-wrap--table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pscroll-wrap--table .pscroll-inner { border-radius: 0; }
+
+/* ══════════════════════════════════════════
+   LAPTOP / TABLET  ≤ 1100px
+   Sidebar already hides via existing rule.
+   Fine-tune content area.
+══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .ch-content { padding: 40px clamp(20px,4%,48px); }
+  .ch-hero {
+    padding-left: clamp(20px,5%,80px);
+    padding-right: clamp(20px,5%,80px);
+  }
+}
+
+/* ══════════════════════════════════════════
+   TABLET  ≤ 780px
+   Mirrors roadmap.html .two-col breakpoint
+══════════════════════════════════════════ */
+@media (max-width: 780px) {
+  /* Hero tighten */
+  .ch-hero {
+    padding-top: calc(var(--nav-h) + 48px + 44px);
+    padding-bottom: 48px;
+  }
+  .ch-hero h1 { font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -1.5px; }
+  .ch-hero-sub { font-size: .92rem; }
+
+  /* Stats — 2×2 grid (already exists at 700px but be explicit) */
+  .ch-stats { grid-template-columns: repeat(2,1fr); }
+
+  /* Section title tighten */
+  .section-title { font-size: clamp(1.5rem, 4vw, 2rem); }
+
+  /* three-col → 2 col */
+  .three-col { grid-template-columns: 1fr 1fr; }
+
+  /* Tax hierarchy indents shrink */
+  .tax-level[style*="margin-left:80px"]  { margin-left: 50px !important; }
+  .tax-level[style*="margin-left:100px"] { margin-left: 62px !important; }
+  .tax-level[style*="margin-left:120px"] { margin-left: 74px !important; }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE  ≤ 600px
+   Single breakpoint, mirrors roadmap.html
+══════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* ── Hero ── */
+  .ch-hero {
+    padding-top: calc(var(--nav-h) + 44px + 36px);
+    padding-bottom: 32px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .ch-hero h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); letter-spacing: -1px; line-height: 1.08; }
+  .ch-hero-sub { font-size: .88rem; margin-bottom: 24px; }
+  .ch-breadcrumb { font-size: .62rem; flex-wrap: wrap; gap: 4px; }
+  .ch-badge { font-size: .62rem; padding: 4px 12px; }
+
+  /* Hero CTA — already stacks via existing rule, just ensure full-width */
+  .ch-hero-ctas { gap: 8px; }
+  .ch-hero-ctas a,
+  .ch-hero-ctas button { width: 100%; justify-content: center; }
+
+  /* Stats bar — 2×2 */
+  .ch-stats { grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .ch-stat { padding: 14px 12px; }
+  .ch-stat-num { font-size: 1.4rem; }
+  .ch-stat-label { font-size: .66rem; }
+
+  /* Content area */
+  .ch-content { padding: 28px 18px; }
+  .ch-section { margin-bottom: 52px; }
+  .section-title { font-size: clamp(1.3rem, 5.5vw, 1.7rem); }
+  .section-sub { font-size: .88rem; }
+
+  /* Theory blocks */
+  .theory-block { padding: 20px 16px; }
+  .theory-block h3 { font-size: 1rem; }
+  .theory-block p,
+  .theory-block li { font-size: .86rem; }
+
+  /* two-col → 1 col */
+  .two-col { grid-template-columns: 1fr; }
+
+  /* three-col → 1 col */
+  .three-col { grid-template-columns: 1fr; }
+
+  /* MCQ options */
+  .mcq-opt { font-size: .83rem; padding: 9px 12px; }
+  .mcq-q { font-size: .88rem; }
+  .mcq-card { padding: 18px 16px; }
+
+  /* PYQ cards */
+  .pyq-card { padding: 18px 16px; }
+  .pyq-meta { gap: 6px; }
+
+  /* Callouts */
+  .callout { padding: 14px 14px; gap: 10px; }
+  .callout-text { font-size: .82rem; }
+
+  /* NCERT quote */
+  .ncert-quote { padding: 14px 16px; }
+
+  /* Mnemonic card */
+  .mnemonic-card { padding: 18px 16px; }
+  .mnemonic-phrase { font-size: 1rem; }
+  .mnemonic-breakdown { gap: 5px; }
+  .mnemonic-word { font-size: .75rem; padding: 3px 8px; }
+
+  /* Exam alert */
+  .exam-alert { padding: 12px 14px; gap: 8px; }
+
+  /* Guide steps */
+  .guide-step { gap: 12px; }
+
+  /* NCERT resource card */
+  .ncert-resource-card { padding: 22px 16px; }
+  .ncert-btns { flex-direction: column; }
+  .btn-ncert, .btn-ncert-outline { width: 100%; justify-content: center; }
+
+  /* Donate banner */
+  .donate-banner-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .donate-banner-inner .btn-donate { width: 100%; justify-content: center; }
+
+  /* Taxonomy indents collapse on very small screen */
+  .tax-level[style*="margin-left:20px"]  { margin-left: 10px !important; }
+  .tax-level[style*="margin-left:40px"]  { margin-left: 18px !important; }
+  .tax-level[style*="margin-left:60px"]  { margin-left: 26px !important; }
+  .tax-level[style*="margin-left:80px"]  { margin-left: 34px !important; }
+  .tax-level[style*="margin-left:100px"] { margin-left: 42px !important; }
+  .tax-level[style*="margin-left:120px"] { margin-left: 50px !important; }
+  .tax-rank { min-width: 54px; font-size: .58rem; }
+  .tax-name { font-size: .82rem; }
+  .tax-example { font-size: .7rem; }
+  .tax-pill { padding: 8px 12px; gap: 7px; }
+
+  /* ── Premium scroll: compare-table ── */
+  /* Already has overflow-x:auto wrapper in HTML,
+     now add scroll buttons via JS-ready wrapper — done by wrapping below */
+  .pscroll-btn { display: flex; }
+  .pscroll-fade-l, .pscroll-fade-r { display: block; }
+  .pscroll-inner table { min-width: 520px; }
+  .pscroll-inner table.compare-table th,
+  .pscroll-inner table.compare-table td { padding: 8px 12px; font-size: .8rem; white-space: nowrap; }
+
+  /* ── Inline style 2-col grid (nomenclature examples) ── */
+  div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr !important; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-legal { flex-wrap: wrap; gap: 8px; }
+
+  /* Disable hover transforms on touch */
+  .ch-stat:hover,
+  .tax-level:hover,
+  .mcq-opt:hover { transform: none !important; }
+
+  /* chapter nav scrollable hint — ensure it's always scrollable */
+  .chapter-nav { padding: 0 12px; }
+  .cn-link { padding: 11px 11px; font-size: .7rem; }
+}
+
+/* ══════════════════════════════════════════
+   VERY SMALL MOBILE  ≤ 400px
+══════════════════════════════════════════ */
+@media (max-width: 400px) {
+  .ch-hero h1 { font-size: 1.65rem; }
+  .ch-stats { grid-template-columns: repeat(2,1fr); }
+  .ch-stat-num { font-size: 1.25rem; }
+  .section-title { font-size: 1.2rem; }
+  .mnemonic-phrase { font-size: .92rem; }
+}
+
+</style>
 </head>
 <body>
 <!-- ══════════════════════════════
@@ -1663,7 +1911,7 @@ footer .container { max-width: 1200px; margin: 0 auto; }
         </div>
       </div>
 
-             <button class="btn-primary" style="margin-top:32px" href="../biology/class11/class-11-neet-ncert-chapter-1-the-living-world-question-practise.html">Practice More Questions</button>
+             <button class="btn-primary" style="margin-top:32px" href="../../../neet-practise-questions/biology-questions/class11/class-11-neet-ncert-chapter-1-the-living-world-question-practise.html">Practice More Questions</button>
       <!-- Chapter complete button (also in sidebar) -->
       <div style="margin-top:32px" class="reveal">
         <button class="chapter-complete-btn" id="chCompleteBtn2" onclick="toggleChapterComplete()" style="max-width:400px">
