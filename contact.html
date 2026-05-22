@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — NEETopia | Feedback, Suggestions & Support</title>
+  <meta name="description" content="NEETopia se contact karo — feedback do, content suggest karo, ya koi bhi issue report karo. Hum students ke liye hain — tumhari baat sunna chahte hain." />
+  <meta name="keywords" content="NEETopia contact, NEET platform feedback, NEET study help contact" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://neetopia.in/contact.html" />
+  <meta property="og:title" content="Contact NEETopia — Feedback, Suggestions & Support" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+<style>
+/* ════════════════════════════════
+   CONTACT PAGE — LOCAL STYLES
+   (Extends main.css, mirrors about.html pattern)
+════════════════════════════════ */
+
+/* ── PAGE HERO (same pattern as about.html) ── */
+.page-hero {
+  padding: calc(var(--nav-h) + 72px) clamp(20px,5%,80px) 64px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+.page-hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(61,191,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,191,255,.015) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+.page-hero-orb {
+  position: absolute; width: 600px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(61,191,255,.06) 0%, transparent 65%);
+  top: -100px; left: 50%; transform: translateX(-50%);
+  filter: blur(50px); pointer-events: none;
+}
+
+/* ── CONTACT LAYOUT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  margin-top: 56px;
+  max-width: 720px;
+}
+
+/* ── CONTACT INFO CARDS ── */
+.contact-info-list {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.contact-info-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 22px;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.contact-info-item:hover {
+  border-color: var(--border2);
+  transform: translateX(4px);
+  box-shadow: -4px 0 20px rgba(61,191,255,.05);
+}
+.contact-info-item.email:hover  { border-color: rgba(61,191,255,.4);  box-shadow: -4px 0 20px rgba(61,191,255,.08); }
+.contact-info-item.donate:hover { border-color: rgba(168,124,245,.4); box-shadow: -4px 0 20px rgba(168,124,245,.08); }
+
+.ci-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ci-title { font-family: var(--font-head); font-size: .95rem; font-weight: 600; margin-bottom: 3px; }
+.ci-desc  { font-size: .82rem; color: var(--text2); line-height: 1.55; font-weight: 300; }
+.ci-value {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 6px;
+  font-family: var(--font-mono); font-size: .75rem; color: var(--accent);
+}
+
+/* ── WHAT WE RESPOND TO ── */
+.respond-list {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 28px;
+}
+.respond-item {
+  display: flex; align-items: center; gap: 11px;
+  font-size: .855rem; color: var(--text2);
+}
+.respond-item svg { flex-shrink: 0; }
+
+/* ── NOTE BOX ── */
+.note-box {
+  background: var(--amber-bg); border: 1px solid var(--amber-border);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius-sm); padding: 14px 18px;
+  display: flex; align-items: flex-start; gap: 11px;
+  font-size: .83rem; color: var(--text2); line-height: 1.65;
+  margin-top: 28px;
+}
+.note-box svg { flex-shrink: 0; margin-top: 1px; }
+.note-box strong { color: var(--amber); }
+
+/* ── FAQ QUICK SECTION ── */
+.faq-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 40px; max-width: 780px; }
+.faq-item {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: border-color .2s;
+}
+.faq-item.open { border-color: var(--border-glow); }
+.faq-q {
+  padding: 18px 22px; font-weight: 600; font-size: .9rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  cursor: pointer; user-select: none;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-chevron { min-width: 18px; transition: transform .3s; color: var(--text3); }
+.faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+.faq-a {
+  padding: 0 22px; max-height: 0; overflow: hidden;
+  font-size: .875rem; color: var(--text2); line-height: 1.75; font-weight: 300;
+  transition: max-height .4s ease, padding .4s ease;
+}
+.faq-item.open .faq-a { max-height: 200px; padding: 0 22px 20px; }
+
+/* ── FOOTER HELPERS (same as about.html) ── */
+.footer-tracker-link {
+  display: flex !important; align-items: center !important; gap: 7px !important;
+  color: var(--purple) !important; font-weight: 500 !important;
+  background: rgba(168,124,245,0.08) !important; border: 1px solid rgba(168,124,245,0.25) !important;
+  border-radius: 7px !important; padding: 7px 10px !important; margin-top: 4px !important;
+  transition: background .2s, border-color .2s !important;
+}
+.footer-tracker-link:hover {
+  background: rgba(168,124,245,0.16) !important;
+  border-color: rgba(168,124,245,0.45) !important;
+  color: var(--purple) !important;
+}
+.footer-tracker-badge {
+  margin-left: auto; font-family: var(--font-mono); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--purple);
+  background: rgba(168,124,245,0.15); border: 1px solid rgba(168,124,245,0.3);
+  padding: 2px 7px; border-radius: 99px;
+}
+
+/* ── Nav helpers ── */
+.nav-links .qp-link { color: var(--purple); background: rgba(168,124,245,0.08); }
+.nav-links .qp-link:hover { background: rgba(168,124,245,0.15); }
+.nav-mobile-menu .qp-link { color: var(--purple); background: rgba(168,124,245,0.08); }
+.nav-links { gap: 4px; }
+.nav-links li a { padding: 6px 10px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAVBAR — exact copy from about.html
+══════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="syllabus/syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="pattern/pattern.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Exam Pattern</a></li>
+    <li><a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="subjects/chemistry/neet-chemistry-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="subjects/physics/neet-physics-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="pyq/neet-all-previous-year-questions-for-practise-year-wise-subject-wise.html" class="pyq-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+      PYQs</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="donate.html" class="btn-donate" style="padding:7px 14px;font-size:.78rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html" class="btn-nav">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
+      <svg id="hamburgerIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+<!-- Mobile Nav Menu -->
+<div class="nav-mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+  <a href="syllabus/syllabus.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    Syllabus
+  </a>
+  <a href="pattern/pattern.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    Exam Pattern
+  </a>
+  <a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    Biology
+  </a>
+  <a href="subjects/chemistry/neet-chemistry-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+    Chemistry
+  </a>
+  <a href="subjects/physics/neet-physics-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+    Physics
+  </a>
+  <a href="pyq/neet-all-previous-year-questions-for-practise-year-wise-subject-wise.html" class="pyq-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>
+    PYQs
+  </a>
+  <a href="neet-practise-questions/neet-all-chapter-mcq-question-practice-and-pyq-preparation.html" class="qp-link">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    Question Practice
+  </a>
+  <a href="roadmap/roadmap.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    Study Roadmap
+  </a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="donate.html" class="btn-donate" style="font-size:.82rem;padding:8px 16px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html" class="btn-nav" style="display:inline-flex;">
+      Start Preparing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE HERO
+══════════════════════════════ -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-orb"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="reveal">
+      <p class="section-eyebrow" style="color:var(--accent)">Contact NEETopia</p>
+      <h1 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem);">
+        Tumhari baat<br /><span style="color:var(--accent)">sunna chahte hain.</span>
+      </h1>
+      <p class="section-sub" style="max-width:560px">
+        Content mein koi mistake mili? Koi chapter suggest karna hai? Koi feedback deni hai? Seedha reach out karo — hum real students ke liye banaya hai yeh platform.
+      </p>
+    </div>
+
+    <!-- ══ CONTACT GRID ══ -->
+    <div class="contact-grid">
+
+      <!-- LEFT: Info + reach-out options -->
+      <div>
+        <div class="reveal" style="margin-bottom:20px">
+          <p class="section-eyebrow amber">Reach Out</p>
+          <h2 class="section-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">Kaise contact karein?</h2>
+        </div>
+
+        <div class="contact-info-list">
+
+          <!-- Email -->
+          <a href="mailto:raunakkarn777@gmail.com" class="contact-info-item email reveal">
+            <div class="ci-icon" style="background:var(--accent-dim)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ci-title">Email Karo</div>
+              <div class="ci-desc">Direct email ke liye — content corrections, serious suggestions, collaboration.</div>
+              <div class="ci-value">
+                raunakkarn777@gmail.com
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Donate -->
+          <a href="donate.html" class="contact-info-item donate reveal">
+            <div class="ci-icon" style="background:rgba(168,124,245,.1)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ci-title">Support NEETopia 💜</div>
+              <div class="ci-desc">Platform free hai aur rahega — lekin server costs hoti hain. Ek chai ki kimat donate karo.</div>
+              <div class="ci-value" style="color:var(--purple)">
+                donate.html
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </div>
+            </div>
+          </a>
+
+        </div><!-- /.contact-info-list -->
+
+        <!-- What we respond to -->
+        <div class="reveal" style="margin-top:32px">
+          <p style="font-family:var(--font-mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+            <span style="display:inline-block;width:16px;height:1px;background:currentColor;"></span>
+            Hum in topics pe respond karte hain
+          </p>
+          <div class="respond-list">
+            <div class="respond-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Content mein factual mistakes ya NCERT errors
+            </div>
+            <div class="respond-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Missing chapters ya topics suggest karna
+            </div>
+            <div class="respond-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Website bugs ya UI issues report karna
+            </div>
+            <div class="respond-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              General feedback ya improvement suggestions
+            </div>
+            <div class="respond-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Platform se related koi bhi question
+            </div>
+          </div>
+        </div>
+
+        <!-- Note box -->
+        <div class="note-box reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>
+            <strong>Note:</strong> Hum ek small independent team hain. Har message read karte hain lekin reply mein 2–5 days lag sakte hain. Patience rakhna — response zaroor milega.
+          </span>
+        </div>
+
+      </div><!-- /LEFT -->
+
+    </div><!-- /.contact-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FAQ SECTION
+══════════════════════════════ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-eyebrow">Quick Answers</p>
+      <h2 class="section-title">Common Questions</h2>
+      <p class="section-sub">Jo sawaal aksar pooche jaate hain — unke answers yahan hain.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" aria-expanded="false">
+          Kya NEETopia pe contact karna zaruri hai doubt clear karne ke liye?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          NEET subject doubts ke liye seedha chapter pages pe jaao — wahan NCERT-based explanations hain. Contact sirf platform ke baare mein hai — content errors, suggestions, bugs. Subject doubts ke liye hum individual tutoring nahi dete.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" aria-expanded="false">
+          Kya koi chapter request kar sakte hain jo abhi available nahi hai?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          Bilkul! Email karo aur subject line mein "Chapter Request" likho. Hum requests note karte hain aur priority ke hisaab se add karte hain. Jitne zyaada log ek chapter request karenge — utna pehle add hoga.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" aria-expanded="false">
+          Maine ek content error dhundha — kaise report karein?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          Email karo — subject line mein "Content Error" likho aur body mein exact chapter, topic aur correction clearly likho. NCERT reference bhi do agar possible ho. Hum 48 hours mein verify karke fix karte hain.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" aria-expanded="false">
+          Kya NEETopia volunteer ya contributor ban sakte hain?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          Haan! Agar tum content likhna chahte ho, notes banana chahte ho, ya koi aur tarike se help karna chahte ho — seedha email karo. Subject line mein "Contribute" likho. Hum hamesha passionate contributors ka swagat karte hain.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" aria-expanded="false">
+          Mera data safe hai — form fill karne ke baad kahan jaata hai?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          Form ka data sirf contact ke liye use hota hai — sell, share, ya store nahi kiya jaata. Email optional hai — reply chahiye toh do, nahi chahiye toh chhod do. NEETopia ki privacy policy mein full details hain.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CTA
+══════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <p class="section-eyebrow" style="justify-content:center;color:var(--accent)">Back to Prep</p>
+      <h2 class="section-title">Aur kuch chahiye?</h2>
+      <p>NEETopia pe har cheez free hai — PYQs, notes, study plans, tracker. Seedha shuru karo — koi delay mat karo.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">
+        <a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology Se Shuru Karo
+        </a>
+        <a href="about.html" class="btn-ghost">
+          About NEETopia
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════
+     FOOTER — exact copy from about.html
+══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="subjects/biology/neet-biology-class-11-class12-complete-chapter-notes-and-practise-questions.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Biology
+        </a>
+        <a href="subjects/chemistry/neet-chemistry-class-11-class12-complete-chapter-notes-and-practise-questions.html.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          Chemistry
+        </a>
+        <a href="subjects/physics/neet-physics-class-11-class12-complete-chapter-notes-and-practise-questions.html.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="10"/></svg>
+          Physics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/syllabus.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Full Syllabus
+        </a>
+        <a href="pattern/pattern.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Exam Pattern
+        </a>
+        <a href="pyq/neet-all-previous-year-questions-for-practise-year-wise-subject-wise.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+          PYQs 2013–2024
+        </a>
+        <a href="neet-practise-questions/neet-all-chapter-mcq-question-practice-and-pyq-preparation.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span style="color:var(--purple)">Question Practice</span>
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Study Roadmap
+        </a>
+        <a href="tools/progress-tracker.html" class="footer-tracker-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Progress Tracker
+          <span class="footer-tracker-badge">Free Tool</span>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <a href="subjects/biology/class11/class-11-neet-biology-the-living-world-notes.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Living World
+        </a>
+        <a href="biology/class12/ch01-reproduction.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Reproduction
+        </a>
+        <a href="chemistry/class11/ch01-basic-concepts.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Basic Chemistry
+        </a>
+        <a href="physics/class11/ch02-motion.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Kinematics
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          1 Year Plan
+        </a>
+        <a href="roadmap/roadmap.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          2 Year Plan
+        </a>
+        <a href="about.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          About Us
+        </a>
+        <a href="contact.html" style="color:var(--accent)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Us
+        </a>
+        <a href="mailto:raunakkarn777@gmail.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Us
+        </a>
+      </div>
+    </div>
+
+    <hr class="footer-divider" />
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+        <p style="margin-top:3px;font-size:.72rem">Koi ad nahi. Koi data nahi bechte. Koi fake guarantee nahi. Sirf preparation.</p>
+      </div>
+      <div class="footer-legal">
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/sitemap.html">Sitemap</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" style="color:var(--accent)">Contact</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════
+     SCRIPTS — exact from about.html
+══════════════════════════════ -->
+<script src="assets/js/main.js"></script>
+<script>
+/* ── MOBILE MENU TOGGLE ── */
+function toggleMobileMenu() {
+  var menu    = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var btn     = document.getElementById('hamburger');
+  if (!menu) return;
+  var isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    overlay && overlay.classList.remove('open');
+    btn && btn.classList.remove('is-open');
+    btn && btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    overlay && overlay.classList.add('open');
+    btn && btn.classList.add('is-open');
+    btn && btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+document.querySelectorAll('#mobileMenu a').forEach(function(a) {
+  a.addEventListener('click', function() { toggleMobileMenu(); });
+});
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 820) {
+    var menu = document.getElementById('mobileMenu');
+    if (menu && menu.classList.contains('open')) toggleMobileMenu();
+  }
+});
+</script>
+
+<script>
+/* ── THEME TOGGLE ── */
+(function () {
+  const toggleBtn = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const htmlEl    = document.documentElement;
+  const SUN_SVG  = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+  const MOON_SVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+  function setTheme(theme) {
+    htmlEl.setAttribute('data-theme', theme);
+    if (themeIcon) themeIcon.innerHTML = theme === 'dark' ? SUN_SVG : MOON_SVG;
+    localStorage.setItem('neetopia-theme', theme);
+  }
+  const saved = localStorage.getItem('neetopia-theme') || 'dark';
+  setTheme(saved);
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+})();
+
+/* ── PROGRESS TRACKER ── */
+window.NEETopia = window.NEETopia || {};
+NEETopia.markDone = function(key) { const p = JSON.parse(localStorage.getItem('neetopia-progress') || '{}'); p[key] = true; localStorage.setItem('neetopia-progress', JSON.stringify(p)); };
+NEETopia.markUndone = function(key) { const p = JSON.parse(localStorage.getItem('neetopia-progress') || '{}'); delete p[key]; localStorage.setItem('neetopia-progress', JSON.stringify(p)); };
+NEETopia.isDone = function(key) { return !!(JSON.parse(localStorage.getItem('neetopia-progress') || '{}')[key]); };
+NEETopia.getAll = function() { return JSON.parse(localStorage.getItem('neetopia-progress') || '{}'); };
+NEETopia.countDone = function() { return Object.keys(NEETopia.getAll()).length; };
+(function () {
+  document.querySelectorAll('[data-chapter]').forEach(el => {
+    const key = el.getAttribute('data-chapter');
+    if (el.tagName === 'INPUT' && el.type === 'checkbox') {
+      el.checked = NEETopia.isDone(key);
+      el.addEventListener('change', () => { if (el.checked) NEETopia.markDone(key); else NEETopia.markUndone(key); });
+    }
+  });
+})();
+
+/* ── FAQ ACCORDION ── */
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = q.closest('.faq-item');
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i) {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
+  });
+  q.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); q.click(); }
+  });
+});
+
+
+</script>
+</body>
+</html>
