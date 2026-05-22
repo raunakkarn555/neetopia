@@ -917,62 +917,6 @@
 }
 .test-score-label { font-size: .7rem; color: var(--muted); }
 
-/* ── TEST PRACTICE TIMER ── */
-.test-timer-box {
-  margin-top: 14px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.test-timer-display {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--phy);
-  letter-spacing: .04em;
-  min-width: 90px;
-}
-.test-timer-display.timer-warn { color: var(--warn); }
-.test-timer-display.timer-danger { color: var(--danger); }
-.test-timer-label {
-  font-size: .7rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  flex: 1;
-  min-width: 80px;
-}
-.test-timer-label span {
-  display: block;
-  font-size: .65rem;
-  margin-top: 2px;
-  color: var(--muted);
-  opacity: .7;
-}
-.timer-btn {
-  padding: 6px 14px;
-  border-radius: 7px;
-  border: 1px solid var(--phy);
-  background: rgba(61,191,255,.1);
-  color: var(--phy);
-  font-family: 'DM Sans', sans-serif;
-  font-size: .78rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .2s;
-  white-space: nowrap;
-}
-.timer-btn:hover { background: rgba(61,191,255,.2); }
-.timer-btn.running { border-color: var(--warn); color: var(--warn); background: rgba(244,185,66,.1); }
-.timer-btn.running:hover { background: rgba(244,185,66,.2); }
-.timer-btn.reset-btn { border-color: var(--border); color: var(--muted); background: transparent; margin-left: 4px; }
-.timer-btn.reset-btn:hover { border-color: var(--danger); color: var(--danger); }
-
 /* ── BOOKS TRACKER ── */
 .books-grid {
   display: grid;
@@ -4039,33 +3983,21 @@ function renderTests(tests) {
   if (!list) return;
   if (!tests.length) { list.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:20px;">No tests logged yet. Start tracking your mocks!</div>'; return; }
   list.innerHTML = tests.map(t => `
-    <div class="test-card" style="display:block;">
-      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;">
-        <div>
-          <h4>${t.name}</h4>
-          <div class="test-meta">
-            <span>📅 ${t.date || 'No date'}</span>
-            <span>⏱ ${t.time ? t.time + ' min' : '—'}</span>
-            <span>🎯 ${t.accuracy ? t.accuracy + '% accuracy' : '—'}</span>
-            ${t.weak ? `<span>⚠️ Weak: ${t.weak}</span>` : ''}
-          </div>
-          ${t.notes ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px;background:var(--bg3);padding:8px 10px;border-radius:6px;">${t.notes}</div>` : ''}
+    <div class="test-card">
+      <div>
+        <h4>${t.name}</h4>
+        <div class="test-meta">
+          <span>📅 ${t.date || 'No date'}</span>
+          <span>⏱ ${t.time ? t.time + ' min' : '—'}</span>
+          <span>🎯 ${t.accuracy ? t.accuracy + '% accuracy' : '—'}</span>
+          ${t.weak ? `<span>⚠️ Weak: ${t.weak}</span>` : ''}
         </div>
-        <div style="text-align:right;">
-          <div class="test-score-big">${t.score}</div>
-          <div class="test-score-label">/ 720</div>
-          <button onclick="deleteTest(${t.id})" style="margin-top:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:.75rem;">Delete</button>
-        </div>
+        ${t.notes ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px;background:var(--bg3);padding:8px 10px;border-radius:6px;">${t.notes}</div>` : ''}
       </div>
-      <div class="test-timer-box">
-        <div>
-          <div class="test-timer-display" id="timer-display-${t.id}">3:20:00</div>
-          <div class="test-timer-label">Practice Timer
-            <span>NEET duration: 3 hrs 20 min</span>
-          </div>
-        </div>
-        <button class="timer-btn" id="timer-btn-${t.id}" onclick="toggleTestTimer(${t.id})">▶ Start</button>
-        <button class="timer-btn reset-btn" onclick="resetTestTimer(${t.id})">↺ Reset</button>
+      <div style="text-align:right;">
+        <div class="test-score-big">${t.score}</div>
+        <div class="test-score-label">/ 720</div>
+        <button onclick="deleteTest(${t.id})" style="margin-top:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:.75rem;">Delete</button>
       </div>
     </div>`).join('');
 }
@@ -4084,69 +4016,6 @@ function loadTests() {
   const d = getData();
   const tests = JSON.parse(d['tests-list'] || '[]');
   renderTests(tests);
-}
-
-// ─── PRACTICE TIMER (3 hr 20 min = 12000 seconds) ───
-const _timerState = {};
-const TIMER_DURATION = 12000; // 3 * 3600 + 20 * 60
-
-function _timerFmt(sec) {
-  const h = Math.floor(sec / 3600);
-  const m = Math.floor((sec % 3600) / 60);
-  const s = sec % 60;
-  return h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-}
-
-function _timerUpdate(id) {
-  const st = _timerState[id];
-  if (!st) return;
-  const el = document.getElementById('timer-display-' + id);
-  const btn = document.getElementById('timer-btn-' + id);
-  if (!el) { clearInterval(st.iv); return; }
-  el.textContent = _timerFmt(st.remaining);
-  el.className = 'test-timer-display' + (st.remaining <= 300 ? ' timer-danger' : st.remaining <= 900 ? ' timer-warn' : '');
-  if (st.remaining <= 0) {
-    clearInterval(st.iv);
-    st.running = false;
-    el.textContent = '0:00:00';
-    el.className = 'test-timer-display timer-danger';
-    if (btn) { btn.textContent = '▶ Start'; btn.className = 'timer-btn'; }
-    if (Notification && Notification.permission === 'granted') {
-      new Notification('⏰ Time is up!', { body: 'Your 3 hr 20 min practice session has ended.' });
-    }
-    return;
-  }
-  st.remaining--;
-}
-
-function toggleTestTimer(id) {
-  if (!_timerState[id]) {
-    _timerState[id] = { remaining: TIMER_DURATION, running: false, iv: null };
-  }
-  const st = _timerState[id];
-  const btn = document.getElementById('timer-btn-' + id);
-  if (st.running) {
-    clearInterval(st.iv);
-    st.running = false;
-    if (btn) { btn.textContent = '▶ Resume'; btn.className = 'timer-btn'; }
-  } else {
-    if (Notification && Notification.permission === 'default') Notification.requestPermission();
-    st.running = true;
-    if (btn) { btn.textContent = '⏸ Pause'; btn.className = 'timer-btn running'; }
-    _timerUpdate(id);
-    st.iv = setInterval(() => _timerUpdate(id), 1000);
-  }
-}
-
-function resetTestTimer(id) {
-  if (_timerState[id]) {
-    clearInterval(_timerState[id].iv);
-  }
-  _timerState[id] = { remaining: TIMER_DURATION, running: false, iv: null };
-  const el = document.getElementById('timer-display-' + id);
-  const btn = document.getElementById('timer-btn-' + id);
-  if (el) { el.textContent = '3:20:00'; el.className = 'test-timer-display'; }
-  if (btn) { btn.textContent = '▶ Start'; btn.className = 'timer-btn'; }
 }
 
 // ─── BOOKS TRACKER ───
