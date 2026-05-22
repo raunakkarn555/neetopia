@@ -440,14 +440,7 @@
 <style>
 /* ═══════════════════════════════════════════════════════
    PATTERN PAGE — Responsive System (mirrors roadmap.html)
-   ═══════════════════════════════════════════════════════
-
-   ARCHITECTURE (same as roadmap.html):
-   • Sections use padding: [vertical] clamp(20px,5%,80px)
-   • Grids use auto-fit / minmax — shrink naturally
-   • Stats bar: flex-wrap:wrap, min-width:140px
-   • Two breakpoints only: max-width:780px, max-width:600px
-   • No JS, no complex stacking — clean minimal CSS
+   + Premium horizontal scroll for Structure & Cutoff tables
    ═══════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -463,239 +456,235 @@ body { overflow-x: hidden; }
   padding-left: clamp(20px,5%,80px);
   padding-right: clamp(20px,5%,80px);
 }
-/* Donate banner wrapper matches pattern-body width */
-.pattern-body > div[style*="max-width:1200px"] {
-  padding-left: clamp(20px,5%,80px) !important;
-  padding-right: clamp(20px,5%,80px) !important;
+
+/* ─── Grids → auto-fit like roadmap ─── */
+.marking-grid  { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+.weightage-grid{ grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+.time-strategy { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+.safe-target-grid { grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); }
+
+/* ─── Quick stats bar ─── */
+.quick-stats { display:flex; flex-wrap:wrap; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; max-width:900px; }
+.qs-item { flex:1; min-width:140px; }
+
+/* ════════════════════════════════════
+   PREMIUM SCROLL WRAPPER
+   Used by: Paper Structure + Cutoff Table
+════════════════════════════════════ */
+.pscroll-wrap {
+  position: relative;
+  margin-top: 40px;
 }
 
-/* ─── Marking + Weightage grids → auto-fit like roadmap overview-grid ─── */
-.marking-grid {
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+/* Arrow buttons — hidden on desktop */
+.pscroll-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--text2);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s, border-color .18s, color .18s, opacity .18s, transform .18s;
+  box-shadow: 0 2px 12px rgba(0,0,0,.22);
+  padding: 0;
 }
-.weightage-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+.pscroll-btn:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
 }
+.pscroll-btn.disabled { opacity: .25; pointer-events: none; }
+.pscroll-btn.ps-prev { left: -14px; }
+.pscroll-btn.ps-next { right: -14px; }
 
-/* ─── Quick stats bar — same as rm-stats-bar ─── */
-.quick-stats {
-  display: flex;
-  flex-wrap: wrap;
-  border: 1px solid var(--border);
+/* Fade edges — hidden on desktop */
+.pscroll-fade-l,
+.pscroll-fade-r {
+  display: none;
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 28px;
+  pointer-events: none;
+  z-index: 5;
+}
+.pscroll-fade-l { left: 0;  background: linear-gradient(90deg, var(--bg), transparent); }
+.pscroll-fade-r { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+
+/* Inner scroll container */
+.pscroll-inner {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  max-width: 900px;
 }
-.qs-item {
-  flex: 1;
-  min-width: 140px;
-}
+.pscroll-inner::-webkit-scrollbar { display: none; }
 
-/* ─── Time strategy 4-col → 2-col auto ─── */
-.time-strategy {
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-}
-
-/* ─── Safe target grid — same as rm-stats-bar wrapping ─── */
-.safe-target-grid {
-  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
-}
-
-/* ═══════════════════════
-   780px — mirrors .two-col breakpoint in roadmap
-   (tablet / small laptop)
-═══════════════════════ */
+/* ════════════════════════
+   780px — tablet
+════════════════════════ */
 @media(max-width:780px) {
-  /* Hero */
-  .pattern-hero {
-    padding-top: calc(var(--nav-h) + 36px);
-    padding-bottom: 40px;
-  }
-  .pattern-hero h1 {
-    font-size: clamp(1.8rem,5.5vw,2.8rem);
-    letter-spacing: -1px;
-  }
+  .pattern-hero { padding-top: calc(var(--nav-h) + 36px); padding-bottom: 40px; }
+  .pattern-hero h1 { font-size: clamp(1.8rem,5.5vw,2.8rem); letter-spacing:-1px; }
   .pattern-section { padding: 52px 0; }
-
-  /* Stats bar — 3 per row on tablet like roadmap rm-stat */
   .qs-item { min-width: 33.33%; }
+  .cta-section { padding: 64px clamp(20px,5%,80px); }
 
-  /* Cutoff table — hide last 2 columns like roadmap hides overflow */
-  .ctable-head[style], .ctable-row[style] { all: unset; }
-  .ctable-head {
-    grid-template-columns: 2fr 1fr 1fr 1fr !important;
-    padding: 11px 16px;
-    gap: 8px;
-  }
-  .ctable-row {
-    grid-template-columns: 2fr 1fr 1fr 1fr !important;
-    padding: 12px 16px;
-    gap: 8px;
-  }
+  /* Cutoff: hide last 2 cols on tablet */
+  .ctable-head { grid-template-columns: 2fr 1fr 1fr 1fr !important; padding:11px 16px; gap:8px; }
+  .ctable-row  { grid-template-columns: 2fr 1fr 1fr 1fr !important; padding:12px 16px; gap:8px; }
   .ctable-head span:nth-child(5),
   .ctable-head span:nth-child(6),
   .ctable-row > *:nth-child(5),
   .ctable-row > *:nth-child(6) { display: none; }
-
-  /* CTA buttons — wrap naturally */
-  .cta-section { padding: 64px clamp(20px,5%,80px); }
 }
 
-/* ═══════════════════════
-   600px — mirrors roadmap's single mobile breakpoint exactly
-   (mobile phones)
-═══════════════════════ */
+/* ════════════════════════
+   600px — mobile
+════════════════════════ */
 @media(max-width:600px) {
-  /* Hero — same treatment as rm-hero */
-  .pattern-hero {
-    padding-top: calc(var(--nav-h) + 24px);
-    padding-bottom: 28px;
-    text-align: left;
-  }
-  .pattern-hero h1 {
-    font-size: clamp(1.55rem,7.5vw,2rem);
-    letter-spacing: -0.5px;
-    line-height: 1.12;
-  }
+  /* ── Hero ── */
+  .pattern-hero { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 28px; text-align:left; }
+  .pattern-hero h1 { font-size: clamp(1.55rem,7.5vw,2rem); letter-spacing:-.5px; line-height:1.12; }
   .pattern-hero .sub { font-size: .9rem; }
   .pattern-section { padding: 40px 0; }
   .section-title { font-size: clamp(1.25rem,5.5vw,1.7rem) !important; }
 
-  /* Stats — 2 per row, same as rm-stat:nth-child(2n) pattern */
-  .qs-item {
-    min-width: 50%;
-    flex: 1 1 50%;
-  }
+  /* ── Stats bar — 2-per-row ── */
+  .qs-item { min-width:50%; flex:1 1 50%; }
   .quick-stats .qs-item:nth-child(2n) { border-right: none; }
   .qs-num { font-size: 1.6rem; }
   .qs-label { font-size: .68rem; }
 
-  /* ── Structure table → compact inline cards on mobile ── */
-  /* Hide header — labels go implicit via pill shape */
-  .structure-table .st-header { display: none !important; }
+  /* ════════════════════════════════════════════
+     PAPER STRUCTURE — Premium horizontal scroll
+  ════════════════════════════════════════════ */
+  /* Remove default margin-top — handled by pscroll-wrap */
+  .structure-table { margin-top: 0; }
 
-  /* Each row = a flat horizontal card */
-  .structure-table .st-row,
-  .structure-table .st-row[style] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 10px 13px !important;
-    gap: 0 !important;
-    grid-template-columns: unset !important;
+  /* Show scroll chrome */
+  .pscroll-btn { display: flex; }
+  .pscroll-fade-l, .pscroll-fade-r { display: block; }
+
+  /* Table becomes a min-width scrollable block */
+  .pscroll-inner .structure-table {
+    min-width: 480px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
 
-  /* Left: subject name */
-  .structure-table .st-subject {
-    flex: 1 1 auto;
-    min-width: 0;
-    gap: 7px;
+  /* Restore proper grid columns inside scroll */
+  .pscroll-inner .st-header,
+  .pscroll-inner .st-header[style] {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr !important;
+    padding: 11px 16px !important;
+    gap: 10px !important;
   }
-  .subj-dot { width: 7px; height: 7px; }
-  .subj-name { font-size: .82rem; }
+  .pscroll-inner .st-row,
+  .pscroll-inner .st-row[style] {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr !important;
+    padding: 13px 16px !important;
+    gap: 10px !important;
+  }
+  .pscroll-inner .st-cell.big { font-size: 1rem; }
+  .pscroll-inner .subj-name { font-size: .9rem; }
 
-  /* Right: two pill badges for Qs + Marks */
-  .structure-table .st-cell.big {
-    font-size: .78rem;
-    font-weight: 700;
-    background: var(--bg3);
+  /* ════════════════════════════════════════════
+     CUTOFF TABLE — Premium horizontal scroll
+  ════════════════════════════════════════════ */
+  .cutoff-grid { margin-top: 40px; }
+  .pscroll-inner .ctable { min-width: 580px; border-radius: 0; border-left: none; border-right: none; }
+
+  /* Restore all 6 columns inside scroll */
+  .pscroll-inner .ctable-head {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr !important;
+    padding: 11px 16px !important;
+    gap: 8px !important;
+  }
+  .pscroll-inner .ctable-row {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr !important;
+    padding: 12px 16px !important;
+    gap: 8px !important;
+    font-size: .8rem;
+  }
+  /* Unhide all columns that were hidden at tablet */
+  .pscroll-inner .ctable-head span:nth-child(5),
+  .pscroll-inner .ctable-head span:nth-child(6),
+  .pscroll-inner .ctable-row > *:nth-child(5),
+  .pscroll-inner .ctable-row > *:nth-child(6) { display: block !important; }
+  .pscroll-inner .ctable-row .college { font-size: .82rem; }
+  .pscroll-inner .score-badge { display: inline-block !important; }
+
+  /* Outer border on pscroll-wrap for the table */
+  .pscroll-wrap--table {
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 3px 9px;
-    margin-left: 5px;
-    line-height: 1.4;
-    flex-shrink: 0;
-    min-width: 40px;
-    text-align: center;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
-  /* Total row pills — slightly elevated */
-  .structure-table .st-row.total-row .st-cell.big {
-    background: var(--surface);
-    border-color: var(--border2);
-  }
-
-  /* Cutoff table — 3 col on mobile like roadmap hides overflow */
-  .ctable-head {
-    grid-template-columns: 2fr 1fr 1fr !important;
-    padding: 9px 12px;
-    gap: 6px;
-    font-size: .7rem;
-  }
-  .ctable-row {
-    grid-template-columns: 2fr 1fr 1fr !important;
-    padding: 10px 12px;
-    gap: 6px;
-    font-size: .78rem;
-  }
-  .ctable-head span:nth-child(4),
-  .ctable-head span:nth-child(5),
-  .ctable-head span:nth-child(6),
-  .ctable-row > *:nth-child(4),
-  .ctable-row > *:nth-child(5),
-  .ctable-row > *:nth-child(6) { display: none; }
-  .ctable-row .college { font-size: .8rem; }
-  .score-badge { display: none; }
-
-  /* Marking grid — 1 col, same as roadmap .mistakes-grid + .schedule-grid */
+  /* ── Marking grid → 1 col ── */
   .marking-grid { grid-template-columns: 1fr; }
 
-  /* Weightage grid — 1 col, same as roadmap .motivation-grid */
+  /* ── Weightage grid → 1 col ── */
   .weightage-grid { grid-template-columns: 1fr; }
 
-  /* Time strategy — 1 col on mobile, same as roadmap .schedule-grid */
+  /* ── Time strategy → 1 col ── */
   .time-strategy { grid-template-columns: 1fr; }
 
-  /* Safe target — 2 col, same as roadmap .revision-grid on mobile */
-  .safe-target-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  /* ── Safe target → 2 col ── */
+  .safe-target-grid { grid-template-columns: 1fr 1fr; gap:10px; }
 
-  /* Cards — tighten padding same as roadmap cards */
+  /* ── Card sizing ── */
   .mark-card { padding: 22px 18px; }
   .mark-score { font-size: 2.2rem; }
   .wt-card { padding: 22px 18px; }
-  .wt-card::before { display: none; } /* hide huge bg number */
+  .wt-card::before { display: none; }
   .wt-pct { font-size: 1.5rem; }
   .time-card { padding: 20px 16px; }
 
-  /* Mistakes box */
+  /* ── Mistakes box ── */
   .mistakes-box { padding: 22px 16px; }
-  .mistake-item { gap: 10px; padding: 12px 12px; }
+  .mistake-item { gap: 10px; padding: 12px; }
   .mistake-text { font-size: .82rem; }
 
-  /* Hero badges */
+  /* ── Hero badges ── */
   .hero-badges { gap: 6px; }
   .badge { font-size: .62rem; padding: 4px 10px; }
 
-  /* CTA section — same as roadmap .tracker-cta on mobile */
+  /* ── CTA ── */
   .cta-section { padding: 52px clamp(20px,5%,80px); }
-  .cta-inner div[style*="display:flex"] {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  .cta-inner div[style*="display:flex"] { flex-direction:column !important; align-items:stretch !important; }
+  .btn-primary, .btn-ghost { width:100%; justify-content:center; }
 
-  /* Donate banner inner */
-  .pattern-body > div > div[style*="display:flex"] {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 12px !important;
-  }
-  .btn-donate { width: 100%; justify-content: center; }
+  /* ── Donate banner ── */
+  .pattern-body > div > div[style*="display:flex"] { flex-direction:column !important; align-items:flex-start !important; gap:12px !important; }
+  .btn-donate { width:100%; justify-content:center; }
 
-  /* Footer — same as roadmap footer stacking */
-  .footer-top { flex-direction: column !important; gap: 28px; }
-  .footer-col { min-width: 100% !important; }
-  .footer-bottom { flex-direction: column !important; gap: 10px; align-items: flex-start; }
-  .footer-legal { flex-wrap: wrap; gap: 8px; }
-  .footer-bottom-left p { font-size: .77rem; }
+  /* ── Footer ── */
+  .footer-top { flex-direction:column !important; gap:28px; }
+  .footer-col { min-width:100% !important; }
+  .footer-bottom { flex-direction:column !important; gap:10px; align-items:flex-start; }
+  .footer-legal { flex-wrap:wrap; gap:8px; }
+  .footer-bottom-left p { font-size:.77rem; }
 
-  /* Disable hover transforms on touch — same philosophy as roadmap */
-  .mark-card:hover,
-  .wt-card:hover,
-  .time-card:hover,
-  .safe-card:hover,
-  .qs-item:hover,
-  .st-row:hover,
+  /* ── No hover on touch ── */
+  .mark-card:hover, .wt-card:hover, .time-card:hover,
+  .safe-card:hover, .qs-item:hover, .st-row:hover,
   .ctable-row:hover { transform: none !important; }
 }
 </style>
@@ -878,7 +867,7 @@ body { overflow-x: hidden; }
     PYQs
   </a>
   <!-- START: Question Practice Update -->
-  <a href="#" class="qp-link">
+  <a href="../neet-practise-questions/neet-all-chapter-mcq-question-practice-and-pyq-preparation.html" class="qp-link">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     Question Practice
   </a>
@@ -980,61 +969,73 @@ body { overflow-x: hidden; }
       Har subject mein sirf 45 questions hote hain — sab attempt karne compulsory hain. Koi Section A ya Section B nahi hota.
     </p>
 
-    <div class="structure-table reveal">
-      <div class="st-header" style="grid-template-columns: 2fr 1fr 1fr;">
-        <span>Subject</span>
-        <span>Total Questions</span>
-        <span>Total Marks</span>
-      </div>
+    <div class="pscroll-wrap pscroll-wrap--table reveal">
+      <button class="pscroll-btn ps-prev" aria-label="Scroll left" onclick="pscroll(this,-1)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="pscroll-btn ps-next" aria-label="Scroll right" onclick="pscroll(this,1)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="pscroll-fade-l"></div>
+      <div class="pscroll-fade-r"></div>
+      <div class="pscroll-inner" onscroll="pscrollSync(this)">
+        <div class="structure-table">
+          <div class="st-header" style="grid-template-columns: 2fr 1fr 1fr;">
+            <span>Subject</span>
+            <span>Total Questions</span>
+            <span>Total Marks</span>
+          </div>
 
-      <!-- Physics -->
-      <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
-        <div class="st-subject">
-          <div class="subj-dot phy"></div>
-          <span class="subj-name phy">Physics</span>
-        </div>
-        <div class="st-cell big">45</div>
-        <div class="st-cell big" style="color:var(--phy)">180</div>
-      </div>
+          <!-- Physics -->
+          <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="st-subject">
+              <div class="subj-dot phy"></div>
+              <span class="subj-name phy">Physics</span>
+            </div>
+            <div class="st-cell big">45</div>
+            <div class="st-cell big" style="color:var(--phy)">180</div>
+          </div>
 
-      <!-- Chemistry -->
-      <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
-        <div class="st-subject">
-          <div class="subj-dot chem"></div>
-          <span class="subj-name chem">Chemistry</span>
-        </div>
-        <div class="st-cell big">45</div>
-        <div class="st-cell big" style="color:var(--chem)">180</div>
-      </div>
+          <!-- Chemistry -->
+          <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="st-subject">
+              <div class="subj-dot chem"></div>
+              <span class="subj-name chem">Chemistry</span>
+            </div>
+            <div class="st-cell big">45</div>
+            <div class="st-cell big" style="color:var(--chem)">180</div>
+          </div>
 
-      <!-- Botany -->
-      <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
-        <div class="st-subject">
-          <div class="subj-dot bio"></div>
-          <span class="subj-name bio">Botany</span>
-        </div>
-        <div class="st-cell big">45</div>
-        <div class="st-cell big" style="color:var(--bio)">180</div>
-      </div>
+          <!-- Botany -->
+          <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="st-subject">
+              <div class="subj-dot bio"></div>
+              <span class="subj-name bio">Botany</span>
+            </div>
+            <div class="st-cell big">45</div>
+            <div class="st-cell big" style="color:var(--bio)">180</div>
+          </div>
 
-      <!-- Zoology -->
-      <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
-        <div class="st-subject">
-          <div class="subj-dot bio"></div>
-          <span class="subj-name bio">Zoology</span>
-        </div>
-        <div class="st-cell big">45</div>
-        <div class="st-cell big" style="color:var(--bio)">180</div>
-      </div>
+          <!-- Zoology -->
+          <div class="st-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="st-subject">
+              <div class="subj-dot bio"></div>
+              <span class="subj-name bio">Zoology</span>
+            </div>
+            <div class="st-cell big">45</div>
+            <div class="st-cell big" style="color:var(--bio)">180</div>
+          </div>
 
-      <!-- Total -->
-      <div class="st-row total-row" style="grid-template-columns: 2fr 1fr 1fr;">
-        <div class="st-subject">
-          <div class="subj-dot total"></div>
-          <span class="subj-name total">TOTAL</span>
+          <!-- Total -->
+          <div class="st-row total-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div class="st-subject">
+              <div class="subj-dot total"></div>
+              <span class="subj-name total">TOTAL</span>
+            </div>
+            <div class="st-cell big">180</div>
+            <div class="st-cell big" style="color:var(--accent)">720</div>
+          </div>
         </div>
-        <div class="st-cell big">180</div>
-        <div class="st-cell big" style="color:var(--accent)">720</div>
       </div>
     </div>
 
@@ -1202,77 +1203,89 @@ body { overflow-x: hidden; }
 
     <!-- General Category Table -->
     <div class="cutoff-grid reveal">
-      <div class="ctable">
-        <div class="ctable-head">
-          <span>College Type</span>
-          <span>General (UR)</span>
-          <span>OBC / EWS</span>
-          <span>SC Category</span>
-          <span>ST Category</span>
-          <span>UR-PwD</span>
-        </div>
+      <div class="pscroll-wrap pscroll-wrap--table">
+        <button class="pscroll-btn ps-prev" aria-label="Scroll left" onclick="pscroll(this,-1)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pscroll-btn ps-next" aria-label="Scroll right" onclick="pscroll(this,1)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="pscroll-fade-l"></div>
+        <div class="pscroll-fade-r"></div>
+        <div class="pscroll-inner" onscroll="pscrollSync(this)">
+          <div class="ctable">
+            <div class="ctable-head">
+              <span>College Type</span>
+              <span>General (UR)</span>
+              <span>OBC / EWS</span>
+              <span>SC Category</span>
+              <span>ST Category</span>
+              <span>UR-PwD</span>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">AIIMS Delhi <span class="score-badge elite">Elite</span></div>
-          <div class="score top">705–715+</div>
-          <div class="score top">700+</div>
-          <div class="score green">670–690</div>
-          <div class="score green">650–680</div>
-          <div class="score amber">500–620</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">AIIMS Delhi <span class="score-badge elite">Elite</span></div>
+              <div class="score top">705–715+</div>
+              <div class="score top">700+</div>
+              <div class="score green">670–690</div>
+              <div class="score green">650–680</div>
+              <div class="score amber">500–620</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">Top AIIMS Institutes</div>
-          <div class="score top">690–705</div>
-          <div class="score top">685–700</div>
-          <div class="score green">650–680</div>
-          <div class="score green">600–650</div>
-          <div class="score amber">480–580</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">Top AIIMS Institutes</div>
+              <div class="score top">690–705</div>
+              <div class="score top">685–700</div>
+              <div class="score green">650–680</div>
+              <div class="score green">600–650</div>
+              <div class="score amber">480–580</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">MAMC / VMMC Delhi</div>
-          <div class="score top">680–705</div>
-          <div class="score green">665–690</div>
-          <div class="score green">580–640</div>
-          <div class="score amber">520–600</div>
-          <div class="score amber">460–560</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">MAMC / VMMC Delhi</div>
+              <div class="score top">680–705</div>
+              <div class="score green">665–690</div>
+              <div class="score green">580–640</div>
+              <div class="score amber">520–600</div>
+              <div class="score amber">460–560</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">BHU / KGMU Level</div>
-          <div class="score top">665–680</div>
-          <div class="score green">640–665</div>
-          <div class="score green">560–610</div>
-          <div class="score amber">480–540</div>
-          <div class="score amber">440–520</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">BHU / KGMU Level</div>
+              <div class="score top">665–680</div>
+              <div class="score green">640–665</div>
+              <div class="score green">560–610</div>
+              <div class="score amber">480–540</div>
+              <div class="score amber">440–520</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">Top State Govt Colleges</div>
-          <div class="score green">650–680</div>
-          <div class="score green">610–650</div>
-          <div class="score amber">500–580</div>
-          <div class="score amber">450–520</div>
-          <div class="score red">420–480</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">Top State Govt Colleges</div>
+              <div class="score green">650–680</div>
+              <div class="score green">610–650</div>
+              <div class="score amber">500–580</div>
+              <div class="score amber">450–520</div>
+              <div class="score red">420–480</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">Average Govt MBBS</div>
-          <div class="score green">620–650</div>
-          <div class="score amber">580–620</div>
-          <div class="score amber">450–520</div>
-          <div class="score red">400–470</div>
-          <div class="score red">380–450</div>
-        </div>
+            <div class="ctable-row">
+              <div class="college">Average Govt MBBS</div>
+              <div class="score green">620–650</div>
+              <div class="score amber">580–620</div>
+              <div class="score amber">450–520</div>
+              <div class="score red">400–470</div>
+              <div class="score red">380–450</div>
+            </div>
 
-        <div class="ctable-row">
-          <div class="college">Semi-Govt / Borderline</div>
-          <div class="score amber">570–620</div>
-          <div class="score amber">550–580</div>
-          <div class="score red">420–450</div>
-          <div class="score red">350–420</div>
-          <div class="score red">300–380</div>
+            <div class="ctable-row">
+              <div class="college">Semi-Govt / Borderline</div>
+              <div class="score amber">570–620</div>
+              <div class="score amber">550–580</div>
+              <div class="score red">420–450</div>
+              <div class="score red">350–420</div>
+              <div class="score red">300–380</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1515,7 +1528,7 @@ body { overflow-x: hidden; }
           PYQs 2013–2024
         </a>
         <!-- START: Question Practice Update -->
-        <a href="#">
+        <a href="../neet-practise-questions/neet-all-chapter-mcq-question-practice-and-pyq-preparation.html">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           <span style="color:var(--purple)">Question Practice</span>
         </a>
@@ -1840,6 +1853,37 @@ window.addEventListener('resize', function() {
     var menu = document.getElementById('mobileMenu');
     if (menu && menu.classList.contains('open')) toggleMobileMenu();
   }
+});
+</script>
+<script>
+/* ── Premium Scroll Buttons ──
+   pscroll(btn, dir): scrolls the sibling .pscroll-inner left(-1) or right(1)
+   pscrollSync(el):   updates arrow disabled state + fade visibility on scroll
+*/
+function pscroll(btn, dir) {
+  var wrap  = btn.closest('.pscroll-wrap');
+  var inner = wrap.querySelector('.pscroll-inner');
+  var amount = Math.round(inner.clientWidth * 0.72);
+  inner.scrollBy({ left: dir * amount, behavior: 'smooth' });
+}
+function pscrollSync(inner) {
+  var wrap   = inner.closest('.pscroll-wrap');
+  var prev   = wrap.querySelector('.ps-prev');
+  var next   = wrap.querySelector('.ps-next');
+  var fadeL  = wrap.querySelector('.pscroll-fade-l');
+  var fadeR  = wrap.querySelector('.pscroll-fade-r');
+  var atStart = inner.scrollLeft <= 2;
+  var atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 2;
+  if (prev) prev.classList.toggle('disabled', atStart);
+  if (next) next.classList.toggle('disabled', atEnd);
+  if (fadeL) fadeL.style.opacity = atStart ? '0' : '1';
+  if (fadeR) fadeR.style.opacity = atEnd   ? '0' : '1';
+}
+/* Init all scroll wrappers on load */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.pscroll-inner').forEach(function(inner) {
+    pscrollSync(inner);
+  });
 });
 </script>
 </body>
