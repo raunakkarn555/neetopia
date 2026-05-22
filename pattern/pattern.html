@@ -437,203 +437,268 @@
   }
   </script>
 
-  <!-- ═══════════════════════════════════════
-       RESPONSIVE OVERRIDES — All Devices
-       Injected for full mobile/laptop support
-  ═══════════════════════════════════════ -->
-  <style>
-    /* ── Base box-sizing & overflow guard ── */
-    *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body { overflow-x: hidden; }
-    img, svg, video { max-width: 100%; height: auto; }
+<style>
+/* ═══════════════════════════════════════════════════════
+   PATTERN PAGE — Responsive System (mirrors roadmap.html)
+   ═══════════════════════════════════════════════════════
 
-    /* ══════════════════════════════════════
-       LAPTOP / MEDIUM SCREENS  (≤ 1280px)
-    ══════════════════════════════════════ */
-    @media (max-width: 1280px) {
-      .pattern-hero, .pattern-body { padding-left: clamp(16px,4%,60px); padding-right: clamp(16px,4%,60px); }
-      .pattern-hero-inner, .pattern-body { max-width: 100%; }
-      .quick-stats { max-width: 100%; }
-    }
+   ARCHITECTURE (same as roadmap.html):
+   • Sections use padding: [vertical] clamp(20px,5%,80px)
+   • Grids use auto-fit / minmax — shrink naturally
+   • Stats bar: flex-wrap:wrap, min-width:140px
+   • Two breakpoints only: max-width:780px, max-width:600px
+   • No JS, no complex stacking — clean minimal CSS
+   ═══════════════════════════════════════════════════════ */
 
-    /* ══════════════════════════════════════
-       TABLET  (≤ 1024px)
-    ══════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .pattern-hero { padding-top: calc(var(--nav-h, 64px) + 36px); padding-bottom: 36px; }
-      .pattern-section { padding: 52px 0; }
-      .weightage-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-      .marking-grid   { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-      .time-strategy  { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-      .safe-target-grid { grid-template-columns: repeat(4, 1fr); }
-      .ctable-head, .ctable-row { padding: 12px 16px; }
-    }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
 
-    /* ══════════════════════════════════════
-       SMALL TABLET / LARGE MOBILE  (≤ 900px)
-    ══════════════════════════════════════ */
-    @media (max-width: 900px) {
-      .pattern-hero { padding-left: 18px; padding-right: 18px; }
-      .pattern-body { padding-left: 18px; padding-right: 18px; }
-      .pattern-hero h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); letter-spacing: -1px; }
-      .pattern-section { padding: 44px 0; }
+/* ─── Section padding — same formula as rm-section ─── */
+.pattern-hero {
+  padding-left: clamp(20px,5%,80px);
+  padding-right: clamp(20px,5%,80px);
+}
+.pattern-body {
+  padding-left: clamp(20px,5%,80px);
+  padding-right: clamp(20px,5%,80px);
+}
+/* Donate banner wrapper matches pattern-body width */
+.pattern-body > div[style*="max-width:1200px"] {
+  padding-left: clamp(20px,5%,80px) !important;
+  padding-right: clamp(20px,5%,80px) !important;
+}
 
-      /* Structure table — drop inner grid to 3 cols on tablet */
-      .st-header[style], .st-row[style] {
-        grid-template-columns: 2fr 1fr 1fr !important;
-        padding: 12px 14px !important;
-        gap: 8px !important;
-      }
+/* ─── Marking + Weightage grids → auto-fit like roadmap overview-grid ─── */
+.marking-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+}
+.weightage-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+}
 
-      /* Cutoff table */
-      .ctable-head, .ctable-row {
-        grid-template-columns: 2fr 1fr 1fr 1fr !important;
-        padding: 10px 14px;
-        gap: 8px;
-        font-size: .8rem;
-      }
-      .ctable-head span:nth-child(5),
-      .ctable-head span:nth-child(6),
-      .ctable-row > *:nth-child(5),
-      .ctable-row > *:nth-child(6) { display: none; }
+/* ─── Quick stats bar — same as rm-stats-bar ─── */
+.quick-stats {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 900px;
+}
+.qs-item {
+  flex: 1;
+  min-width: 140px;
+}
 
-      /* Quick stats wrap nicely */
-      .quick-stats { flex-wrap: wrap; }
-      .qs-item { flex: 1 1 calc(33.33% - 1px); min-width: 100px; }
+/* ─── Time strategy 4-col → 2-col auto ─── */
+.time-strategy {
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+}
 
-      .marking-grid   { grid-template-columns: 1fr; }
-      .weightage-grid { grid-template-columns: 1fr; }
-      .safe-target-grid { grid-template-columns: repeat(2, 1fr); }
-      .time-strategy  { grid-template-columns: repeat(2, 1fr); }
+/* ─── Safe target grid — same as rm-stats-bar wrapping ─── */
+.safe-target-grid {
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+}
 
-      /* Donate banner */
-      .pattern-body > div[style] { padding: 0 18px; }
-    }
+/* ═══════════════════════
+   780px — mirrors .two-col breakpoint in roadmap
+   (tablet / small laptop)
+═══════════════════════ */
+@media(max-width:780px) {
+  /* Hero */
+  .pattern-hero {
+    padding-top: calc(var(--nav-h) + 36px);
+    padding-bottom: 40px;
+  }
+  .pattern-hero h1 {
+    font-size: clamp(1.8rem,5.5vw,2.8rem);
+    letter-spacing: -1px;
+  }
+  .pattern-section { padding: 52px 0; }
 
-    /* ══════════════════════════════════════
-       MOBILE  (≤ 640px)
-    ══════════════════════════════════════ */
-    @media (max-width: 640px) {
-      .pattern-hero { padding-left: 16px; padding-right: 16px; padding-top: calc(var(--nav-h, 60px) + 24px); padding-bottom: 28px; }
-      .pattern-body { padding-left: 16px; padding-right: 16px; }
-      .pattern-hero h1 { font-size: clamp(1.5rem, 7vw, 2rem); letter-spacing: -0.5px; line-height: 1.12; }
-      .pattern-hero .sub { font-size: .9rem; }
-      .pattern-section { padding: 36px 0; }
-      .section-title { font-size: clamp(1.2rem, 5vw, 1.65rem) !important; }
+  /* Stats bar — 3 per row on tablet like roadmap rm-stat */
+  .qs-item { min-width: 33.33%; }
 
-      /* Quick stats — 2 per row on mobile */
-      .qs-item { flex: 1 1 calc(50% - 1px); min-width: 90px; border-bottom: 1px solid var(--border); }
-      .qs-item:nth-last-child(-n+2) { border-bottom: none; }
-      .qs-num { font-size: 1.6rem; }
+  /* Cutoff table — hide last 2 columns like roadmap hides overflow */
+  .ctable-head[style], .ctable-row[style] { all: unset; }
+  .ctable-head {
+    grid-template-columns: 2fr 1fr 1fr 1fr !important;
+    padding: 11px 16px;
+    gap: 8px;
+  }
+  .ctable-row {
+    grid-template-columns: 2fr 1fr 1fr 1fr !important;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .ctable-head span:nth-child(5),
+  .ctable-head span:nth-child(6),
+  .ctable-row > *:nth-child(5),
+  .ctable-row > *:nth-child(6) { display: none; }
 
-      /* Structure table — simplified 3-col */
-      .st-header[style], .st-row[style] {
-        grid-template-columns: 2fr 1fr 1fr !important;
-        padding: 10px 12px !important;
-        gap: 6px !important;
-        font-size: .82rem;
-      }
-      .subj-name { font-size: .85rem; }
-      .st-cell.big { font-size: .95rem; }
+  /* CTA buttons — wrap naturally */
+  .cta-section { padding: 64px clamp(20px,5%,80px); }
+}
 
-      /* Cutoff table — 3 col */
-      .ctable-head, .ctable-row {
-        grid-template-columns: 2fr 1fr 1fr !important;
-        padding: 10px 12px;
-        gap: 6px;
-        font-size: .75rem;
-      }
-      .ctable-head span:nth-child(4),
-      .ctable-head span:nth-child(5),
-      .ctable-head span:nth-child(6),
-      .ctable-row > *:nth-child(4),
-      .ctable-row > *:nth-child(5),
-      .ctable-row > *:nth-child(6) { display: none; }
-      .ctable-row .college { font-size: .8rem; }
-      .score-badge { display: none; }
+/* ═══════════════════════
+   600px — mirrors roadmap's single mobile breakpoint exactly
+   (mobile phones)
+═══════════════════════ */
+@media(max-width:600px) {
+  /* Hero — same treatment as rm-hero */
+  .pattern-hero {
+    padding-top: calc(var(--nav-h) + 24px);
+    padding-bottom: 28px;
+    text-align: left;
+  }
+  .pattern-hero h1 {
+    font-size: clamp(1.55rem,7.5vw,2rem);
+    letter-spacing: -0.5px;
+    line-height: 1.12;
+  }
+  .pattern-hero .sub { font-size: .9rem; }
+  .pattern-section { padding: 40px 0; }
+  .section-title { font-size: clamp(1.25rem,5.5vw,1.7rem) !important; }
 
-      /* Cards */
-      .mark-card { padding: 22px 18px; }
-      .mark-score { font-size: 2.2rem; }
-      .wt-card { padding: 22px 18px; }
-      .wt-pct { font-size: 1.5rem; }
-      .time-strategy  { grid-template-columns: 1fr; }
-      .safe-target-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .safe-card .sc-score { font-size: 1.4rem; }
+  /* Stats — 2 per row, same as rm-stat:nth-child(2n) pattern */
+  .qs-item {
+    min-width: 50%;
+    flex: 1 1 50%;
+  }
+  .quick-stats .qs-item:nth-child(2n) { border-right: none; }
+  .qs-num { font-size: 1.6rem; }
+  .qs-label { font-size: .68rem; }
 
-      /* Mistakes box */
-      .mistakes-box { padding: 22px 16px; }
-      .mistake-item { gap: 10px; padding: 12px 12px; }
-      .mistake-text { font-size: .82rem; }
+  /* ── Structure table → compact inline cards on mobile ── */
+  /* Hide header — labels go implicit via pill shape */
+  .structure-table .st-header { display: none !important; }
 
-      /* CTA section */
-      .cta-section { padding: 52px 16px; }
-      .cta-inner h2 { font-size: clamp(1.4rem, 5.5vw, 1.9rem); }
-      .cta-inner div[style] { flex-direction: column; align-items: stretch !important; }
-      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+  /* Each row = a flat horizontal card */
+  .structure-table .st-row,
+  .structure-table .st-row[style] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 13px !important;
+    gap: 0 !important;
+    grid-template-columns: unset !important;
+  }
 
-      /* Donate banner */
-      div[style*="justify-content:space-between"] { flex-direction: column; align-items: flex-start !important; }
-      .btn-donate { width: 100%; justify-content: center; text-align: center; }
+  /* Left: subject name */
+  .structure-table .st-subject {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 7px;
+  }
+  .subj-dot { width: 7px; height: 7px; }
+  .subj-name { font-size: .82rem; }
 
-      /* Footer cols stack */
-      .footer-top { flex-direction: column !important; gap: 32px; }
-      .footer-col { min-width: 100% !important; }
-      .footer-bottom { flex-direction: column !important; gap: 12px; align-items: flex-start; }
-      .footer-legal { flex-wrap: wrap; gap: 8px; }
-      .footer-bottom-left p { font-size: .78rem; }
-    }
+  /* Right: two pill badges for Qs + Marks */
+  .structure-table .st-cell.big {
+    font-size: .78rem;
+    font-weight: 700;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 9px;
+    margin-left: 5px;
+    line-height: 1.4;
+    flex-shrink: 0;
+    min-width: 40px;
+    text-align: center;
+  }
 
-    /* ══════════════════════════════════════
-       SMALL MOBILE  (≤ 400px)
-    ══════════════════════════════════════ */
-    @media (max-width: 400px) {
-      .pattern-hero h1 { font-size: 1.4rem; }
-      .hero-badges { gap: 6px; }
-      .badge { font-size: .6rem; padding: 4px 10px; }
-      .qs-item { flex: 1 1 calc(50% - 1px); padding: 16px 10px; }
-      .qs-num { font-size: 1.4rem; }
-      .qs-label { font-size: .65rem; }
-      .safe-target-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .safe-card .sc-score { font-size: 1.2rem !important; }
-      .mark-score { font-size: 2rem; }
-      .wt-card::before { display: none; }
-    }
+  /* Total row pills — slightly elevated */
+  .structure-table .st-row.total-row .st-cell.big {
+    background: var(--surface);
+    border-color: var(--border2);
+  }
 
-    /* ══════════════════════════════════════
-       LANDSCAPE PHONE  (≤ 768px, landscape)
-    ══════════════════════════════════════ */
-    @media (max-width: 768px) and (orientation: landscape) {
-      .pattern-hero { padding-top: calc(var(--nav-h, 56px) + 18px); padding-bottom: 20px; }
-      .pattern-hero h1 { font-size: 1.6rem; }
-      .time-strategy { grid-template-columns: repeat(2, 1fr); }
-      .marking-grid  { grid-template-columns: repeat(3, 1fr); }
-    }
+  /* Cutoff table — 3 col on mobile like roadmap hides overflow */
+  .ctable-head {
+    grid-template-columns: 2fr 1fr 1fr !important;
+    padding: 9px 12px;
+    gap: 6px;
+    font-size: .7rem;
+  }
+  .ctable-row {
+    grid-template-columns: 2fr 1fr 1fr !important;
+    padding: 10px 12px;
+    gap: 6px;
+    font-size: .78rem;
+  }
+  .ctable-head span:nth-child(4),
+  .ctable-head span:nth-child(5),
+  .ctable-head span:nth-child(6),
+  .ctable-row > *:nth-child(4),
+  .ctable-row > *:nth-child(5),
+  .ctable-row > *:nth-child(6) { display: none; }
+  .ctable-row .college { font-size: .8rem; }
+  .score-badge { display: none; }
 
-    /* ══════════════════════════════════════
-       HOVER — disable on touch devices
-    ══════════════════════════════════════ */
-    @media (hover: none) {
-      .mark-card:hover,
-      .wt-card:hover,
-      .time-card:hover,
-      .safe-card:hover,
-      .qs-item:hover,
-      .st-row:hover,
-      .ctable-row:hover { transform: none; background: unset; }
-    }
+  /* Marking grid — 1 col, same as roadmap .mistakes-grid + .schedule-grid */
+  .marking-grid { grid-template-columns: 1fr; }
 
-    /* ══════════════════════════════════════
-       PRINT
-    ══════════════════════════════════════ */
-    @media print {
-      nav, .nav-mobile-menu, .mobile-nav-overlay, .cta-section, footer { display: none !important; }
-      .pattern-hero { padding-top: 20px; }
-      .reveal { opacity: 1 !important; transform: none !important; }
-      body { background: #fff; color: #000; }
-    }
-  </style>
+  /* Weightage grid — 1 col, same as roadmap .motivation-grid */
+  .weightage-grid { grid-template-columns: 1fr; }
+
+  /* Time strategy — 1 col on mobile, same as roadmap .schedule-grid */
+  .time-strategy { grid-template-columns: 1fr; }
+
+  /* Safe target — 2 col, same as roadmap .revision-grid on mobile */
+  .safe-target-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Cards — tighten padding same as roadmap cards */
+  .mark-card { padding: 22px 18px; }
+  .mark-score { font-size: 2.2rem; }
+  .wt-card { padding: 22px 18px; }
+  .wt-card::before { display: none; } /* hide huge bg number */
+  .wt-pct { font-size: 1.5rem; }
+  .time-card { padding: 20px 16px; }
+
+  /* Mistakes box */
+  .mistakes-box { padding: 22px 16px; }
+  .mistake-item { gap: 10px; padding: 12px 12px; }
+  .mistake-text { font-size: .82rem; }
+
+  /* Hero badges */
+  .hero-badges { gap: 6px; }
+  .badge { font-size: .62rem; padding: 4px 10px; }
+
+  /* CTA section — same as roadmap .tracker-cta on mobile */
+  .cta-section { padding: 52px clamp(20px,5%,80px); }
+  .cta-inner div[style*="display:flex"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+
+  /* Donate banner inner */
+  .pattern-body > div > div[style*="display:flex"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .btn-donate { width: 100%; justify-content: center; }
+
+  /* Footer — same as roadmap footer stacking */
+  .footer-top { flex-direction: column !important; gap: 28px; }
+  .footer-col { min-width: 100% !important; }
+  .footer-bottom { flex-direction: column !important; gap: 10px; align-items: flex-start; }
+  .footer-legal { flex-wrap: wrap; gap: 8px; }
+  .footer-bottom-left p { font-size: .77rem; }
+
+  /* Disable hover transforms on touch — same philosophy as roadmap */
+  .mark-card:hover,
+  .wt-card:hover,
+  .time-card:hover,
+  .safe-card:hover,
+  .qs-item:hover,
+  .st-row:hover,
+  .ctable-row:hover { transform: none !important; }
+}
+</style>
 
 <style>
 /* ── Footer Progress Tracker Highlight ── */
