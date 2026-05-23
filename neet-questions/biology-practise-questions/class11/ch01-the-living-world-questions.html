@@ -889,6 +889,9 @@
     <li><a href="../../../neet-pyq/neet-previous-year-questions.html" class="pyq-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
       PYQs</a></li>
+    <li><a href="../../../neet-questions/neet-mcq-practice-questions.html" class="qp-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Practice</a></li>
   </ul>
 
   <div class="nav-right">
@@ -1363,6 +1366,10 @@
           <a href="../../../donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             Support / Donate
+          </a>
+          <a href="#" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
           </a>
         </div>
       </div>
@@ -2613,6 +2620,7 @@ function downloadResultPDF() {
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
   const margin = 14;
+  const usableW = pageW - margin * 2;
   let y = 14;
   let pageNum = 1;
 
@@ -2630,61 +2638,220 @@ function downloadResultPDF() {
   const ts = finalTimeTaken % 60;
   const alphas = ['A','B','C','D'];
 
-  // Cover
-  doc.setFillColor(7, 9, 15);
-  doc.rect(0, 0, pageW, 60, 'F');
-  doc.setTextColor(61, 232, 160);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(20);
-  doc.text('NEETopia — Test Result Report', margin, 18);
-  doc.setFontSize(10);
-  doc.setTextColor(136, 153, 176);
-  doc.text('The Living World · Class 11 Biology Chapter 1', margin, 27);
-  doc.setFontSize(8);
-  doc.text(`Generated on: ${new Date().toLocaleString('en-IN')}  |  neetopia.in`, margin, 34);
-  doc.setFillColor(61, 232, 160);
-  doc.rect(margin, 40, usableW, 0.5, 'F');
-  const usableW = pageW - margin * 2;
-  // Score box
-  doc.setFillColor(12, 24, 18);
-  doc.rect(margin, 44, 55, 22, 'F');
-  doc.setTextColor(61, 232, 160);
-  doc.setFontSize(28);
-  doc.setFont('helvetica', 'bold');
-  doc.text(String(score), margin + 6, 61);
-  doc.setFontSize(8);
-  doc.setTextColor(136, 153, 176);
-  doc.text(`/ ${maxScore} marks  (${pct}%)`, margin + 6, 66);
+  // Get student name
+  const nameEl = document.getElementById('saveNameInput');
+  const startNameEl = document.getElementById('studentNameInput');
+  const studentName = (nameEl && nameEl.value.trim()) || (startNameEl && startNameEl.value.trim()) || 'Anonymous';
+  const modeLabel = selectedMode === 'full' ? 'Full Test (100 Qs)' : selectedMode === 'quick' ? 'Quick Test (50 Qs)' : 'PYQ Style (30 Qs)';
 
-  // Stats
-  const stats = [
-    ['Correct', correct, [61,232,160]],
-    ['Wrong',   wrong,   [245,101,101]],
-    ['Skipped', skipped, [244,185,66]],
-    ['Time', `${tm}m ${ts}s`, [168,124,245]],
+  // ══════════════════════════════
+  // SCORECARD PAGE (Page 1)
+  // ══════════════════════════════
+
+  // Dark header
+  doc.setFillColor(7, 9, 15);
+  doc.rect(0, 0, pageW, 46, 'F');
+
+  // NEETopia brand
+  doc.setFillColor(61, 232, 160);
+  doc.rect(margin, 10, 5, 5, 'F');
+  doc.setTextColor(61, 232, 160);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.text('NEETopia', margin + 8, 14.5);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(136, 153, 176);
+  doc.text('India\'s Free NEET Preparation Platform  |  neetopia.in', margin + 8, 20);
+
+  // Date top right
+  doc.setFontSize(7);
+  doc.setTextColor(100, 115, 130);
+  doc.text(`Generated: ${new Date().toLocaleString('en-IN')}`, pageW - margin, 14, { align: 'right' });
+
+  // Title
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(255, 255, 255);
+  doc.text('Test Result Scorecard', margin, 32);
+  doc.setFontSize(8.5);
+  doc.setTextColor(136, 153, 176);
+  doc.text('The Living World  ·  Class 11 Biology Chapter 1  ·  NEET Practice', margin, 39);
+
+  y = 54;
+
+  // ── Student Info Card ──
+  doc.setFillColor(10, 16, 28);
+  doc.setDrawColor(61, 232, 160);
+  doc.roundedRect(margin, y, usableW, 28, 2, 2, 'FD');
+
+  doc.setFillColor(61, 232, 160);
+  doc.rect(margin, y, 3, 28, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(136, 153, 176);
+  doc.text('STUDENT', margin + 8, y + 8);
+  doc.setFontSize(14);
+  doc.setTextColor(232, 237, 245);
+  doc.text(studentName, margin + 8, y + 19);
+
+  // Mode badge
+  doc.setFillColor(20, 30, 50);
+  doc.setDrawColor(61, 191, 255);
+  doc.roundedRect(pageW - margin - 50, y + 6, 46, 9, 1, 1, 'FD');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(61, 191, 255);
+  doc.text(modeLabel, pageW - margin - 27, y + 12, { align: 'center' });
+
+  y += 36;
+
+  // ── Score Big Card ──
+  const scoreCol = pct >= 70 ? [61, 232, 160] : pct >= 50 ? [244, 185, 66] : [245, 101, 101];
+  doc.setFillColor(scoreCol[0], scoreCol[1], scoreCol[2], 0.08);
+  doc.setFillColor(10, 16, 28);
+  doc.roundedRect(margin, y, 58, 40, 2, 2, 'F');
+  doc.setDrawColor(scoreCol[0], scoreCol[1], scoreCol[2]);
+  doc.roundedRect(margin, y, 58, 40, 2, 2, 'D');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(36);
+  doc.setTextColor(scoreCol[0], scoreCol[1], scoreCol[2]);
+  doc.text(String(score), margin + 29, y + 24, { align: 'center' });
+  doc.setFontSize(7.5);
+  doc.setTextColor(136, 153, 176);
+  doc.text(`out of ${maxScore} marks`, margin + 29, y + 32, { align: 'center' });
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(scoreCol[0], scoreCol[1], scoreCol[2]);
+  doc.text(`${pct}%`, margin + 29, y + 38, { align: 'center' });
+
+  // Performance label
+  const perfLabel = pct >= 70 ? 'EXCELLENT' : pct >= 50 ? 'GOOD' : pct >= 35 ? 'AVERAGE' : 'NEEDS WORK';
+  doc.setFillColor(scoreCol[0], scoreCol[1], scoreCol[2]);
+  doc.roundedRect(margin, y, 58, 7, 2, 2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(7, 9, 15);
+  doc.text(perfLabel, margin + 29, y + 5, { align: 'center' });
+
+  // Stats grid (4 boxes to the right)
+  const statCards = [
+    { label: 'CORRECT', val: String(correct), color: [61, 232, 160] },
+    { label: 'WRONG', val: String(wrong), color: [245, 101, 101] },
+    { label: 'SKIPPED', val: String(skipped), color: [244, 185, 66] },
+    { label: 'ACCURACY', val: (correct + wrong > 0 ? Math.round(correct / (correct + wrong) * 100) : 0) + '%', color: [61, 191, 255] },
   ];
-  stats.forEach(([label, val, col], i) => {
-    const sx = margin + 75 + i * 35;
-    doc.setFillColor(col[0], col[1], col[2]);
-    doc.rect(sx, 44, 30, 0.8, 'F');
-    doc.setTextColor(col[0], col[1], col[2]);
-    doc.setFontSize(16);
+  const statW = (usableW - 62) / 2;
+  statCards.forEach((sc, i) => {
+    const sx = margin + 62 + (i % 2) * (statW + 2);
+    const sy = y + (Math.floor(i / 2)) * 21;
+    doc.setFillColor(10, 16, 28);
+    doc.setDrawColor(sc.color[0], sc.color[1], sc.color[2]);
+    doc.roundedRect(sx, sy, statW, 18, 1.5, 1.5, 'FD');
     doc.setFont('helvetica', 'bold');
-    doc.text(String(val), sx, 57);
-    doc.setFontSize(7);
-    doc.setTextColor(136, 153, 176);
+    doc.setFontSize(18);
+    doc.setTextColor(sc.color[0], sc.color[1], sc.color[2]);
+    doc.text(sc.val, sx + statW / 2, sy + 12, { align: 'center' });
     doc.setFont('helvetica', 'normal');
-    doc.text(label, sx, 63);
+    doc.setFontSize(6);
+    doc.setTextColor(100, 115, 130);
+    doc.text(sc.label, sx + statW / 2, sy + 16.5, { align: 'center' });
   });
 
-  y = 74;
+  // Time taken
+  const timeStr = `${tm}m ${ts}s`;
+  doc.setFillColor(10, 16, 28);
+  doc.setDrawColor(168, 124, 245);
+  const tBox = { x: margin + 62, y: y + 43, w: usableW - 62, h: 10 };
+  doc.roundedRect(tBox.x, tBox.y, tBox.w, tBox.h, 1.5, 1.5, 'FD');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(136, 153, 176);
+  doc.text('TIME TAKEN', tBox.x + 8, tBox.y + 6.5);
+  doc.setTextColor(168, 124, 245);
+  doc.setFontSize(9);
+  doc.text(timeStr, tBox.x + tBox.w - 8, tBox.y + 6.5, { align: 'right' });
 
-  // Detailed review
-  doc.setTextColor(20, 20, 30);
+  y += 58;
+
+  // ── Topic Breakdown ──
+  const topicData = {};
+  testQuestions.forEach((q, i) => {
+    if (!topicData[q.topic]) topicData[q.topic] = { correct: 0, total: 0 };
+    topicData[q.topic].total++;
+    if (userAnswers[i] === q.ans) topicData[q.topic].correct++;
+  });
+  const topicColors2 = {
+    'Characteristics of Life': [61, 232, 160],
+    'Taxonomy & Classification': [244, 185, 66],
+    'Nomenclature': [61, 191, 255],
+    'Taxonomic Aids': [168, 124, 245],
+    'Mixed / Application': [245, 101, 101]
+  };
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(232, 237, 245);
+  doc.text('Topic-wise Performance', margin, y);
+  y += 6;
+
+  Object.entries(topicData).forEach(([topic, data]) => {
+    const tp = data.total > 0 ? Math.round(data.correct / data.total * 100) : 0;
+    const tc = topicColors2[topic] || [136, 153, 176];
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(136, 153, 176);
+    doc.text(topic, margin, y + 3.5);
+    doc.setTextColor(tc[0], tc[1], tc[2]);
+    doc.text(`${tp}%  (${data.correct}/${data.total})`, pageW - margin, y + 3.5, { align: 'right' });
+    // Bar
+    doc.setFillColor(20, 30, 50);
+    doc.roundedRect(margin + 62, y, usableW - 78, 5, 1, 1, 'F');
+    doc.setFillColor(tc[0], tc[1], tc[2]);
+    const barW = Math.max(1, (usableW - 78) * tp / 100);
+    doc.roundedRect(margin + 62, y, barW, 5, 1, 1, 'F');
+    y += 9;
+  });
+
+  y += 4;
+
+  // ── Certificate-style bottom band ──
+  doc.setFillColor(7, 9, 15);
+  doc.rect(0, y, pageW, 18, 'F');
+  doc.setFillColor(61, 232, 160);
+  doc.rect(0, y, pageW, 1.2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(61, 232, 160);
+  doc.text('NEETopia', margin, y + 11);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7);
+  doc.setTextColor(100, 115, 130);
+  doc.text('Free NEET Preparation  ·  neetopia.in  ·  © 2026 NEETopia. For personal use only.', pageW / 2, y + 11, { align: 'center' });
+  doc.text(`Page 1`, pageW - margin, y + 11, { align: 'right' });
+
+  // ══════════════════════════════
+  // DETAILED REVIEW PAGES
+  // ══════════════════════════════
+  doc.addPage();
+  pageNum = 2;
+  y = 14;
+
+  // Cover for review section
+  doc.setFillColor(7, 9, 15);
+  doc.rect(0, 0, pageW, 22, 'F');
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text('Detailed Question Review', margin, y);
-  y += 7;
+  doc.setTextColor(61, 232, 160);
+  doc.text('Detailed Question Review', margin, 13);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(136, 153, 176);
+  doc.text(`${studentName}  ·  ${modeLabel}  ·  Score: ${score}/${maxScore}  ·  neetopia.in`, margin, 19);
+
+  y = 28;
 
   testQuestions.forEach((q, idx) => {
     const ua = userAnswers[idx];
@@ -2742,27 +2909,17 @@ function downloadResultPDF() {
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 115, 130);
     doc.setFontSize(7);
-    const expLines = doc.splitTextToSize('Explanation: ' + q.exp, usableW - 8);
-    if (expLines.length > 5) {
-      const shortExp = doc.splitTextToSize('Explanation: ' + q.exp.substring(0, 200) + '...', usableW - 8);
-      if (y + shortExp.length * 3.5 > pageH - 22) {
-        addWatermarkAndFooter(doc, pageNum, '?');
-        doc.addPage();
-        pageNum++;
-        y = 14;
-      }
-      doc.text(shortExp, margin + 5, y);
-      y += shortExp.length * 3.5;
-    } else {
-      if (y + expLines.length * 3.5 > pageH - 22) {
-        addWatermarkAndFooter(doc, pageNum, '?');
-        doc.addPage();
-        pageNum++;
-        y = 14;
-      }
-      doc.text(expLines, margin + 5, y);
-      y += expLines.length * 3.5;
+    const expText = 'Explanation: ' + q.exp;
+    const expLines = doc.splitTextToSize(expText, usableW - 8);
+    const useLines = expLines.slice(0, 5);
+    if (y + useLines.length * 3.5 > pageH - 22) {
+      addWatermarkAndFooter(doc, pageNum, '?');
+      doc.addPage();
+      pageNum++;
+      y = 14;
     }
+    doc.text(useLines, margin + 5, y);
+    y += useLines.length * 3.5;
 
     // Divider
     doc.setDrawColor(220, 225, 235);
@@ -2825,7 +2982,10 @@ function downloadResultPDF() {
   doc.text('This report is for personal use only. Redistribution is strictly prohibited. Visit neetopia.in for free NEET preparation.', margin, y);
 
   addWatermarkAndFooter(doc, pageNum, pageNum);
-  doc.save('NEETopia-Living-World-Result-Report.pdf');
+
+  // Save with student name in filename
+  const safeName = studentName.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 20);
+  doc.save(`NEETopia-LivingWorld-Scorecard-${safeName}.pdf`);
 }
 
 /* ══════════════════════════════════════════
