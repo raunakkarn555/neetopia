@@ -2153,7 +2153,7 @@
         <div class="progress-bar-mini" style="max-width:100%;height:8px;">
           <div class="progress-fill bio" id="bio-bar" style="width:0%"></div>
         </div>
-        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="bio-detail">0 / 10 units complete</div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="bio-detail">0 / 273 topics complete</div>
       </div>
       <div class="stat-card" style="text-align:left;padding:22px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
@@ -2164,7 +2164,7 @@
         <div class="progress-bar-mini" style="max-width:100%;height:8px;">
           <div class="progress-fill chem" id="chem-bar" style="width:0%"></div>
         </div>
-        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="chem-detail">0 / 20 units complete</div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="chem-detail">0 / 188 topics complete</div>
       </div>
       <div class="stat-card" style="text-align:left;padding:22px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
@@ -2175,7 +2175,7 @@
         <div class="progress-bar-mini" style="max-width:100%;height:8px;">
           <div class="progress-fill phy" id="phy-bar" style="width:0%"></div>
         </div>
-        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="phy-detail">0 / 20 units complete</div>
+        <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="phy-detail">0 / 241 topics complete</div>
       </div>
     </div>
   </section>
@@ -2263,7 +2263,7 @@
     <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Track every chapter and topic. Check off topics as you complete them. Each subject is tracked separately.</p>
 
     <div class="subject-tabs">
-      <button class="subj-tab bio active" data-subj="bio">🌿 Biology (32 Chapters)</button>
+      <button class="subj-tab bio active" data-subj="bio">🌿 Biology (29 Chapters)</button>
       <button class="subj-tab chem" data-subj="chem">⚗️ Chemistry (22 Chapters)</button>
       <button class="subj-tab phy" data-subj="phy">⚡ Physics (29 Chapters)</button>
     </div>
@@ -2837,6 +2837,27 @@
         <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">My Space tab bilkul private hai — sirf tumhare liye. Apna journal likhoo (mood select karo), achievement photos upload karo, aur apne goals wall pe goals add karo. Yeh sab sirf tumhare browser mein stored hai.</p>
       </div>
 
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:36px;height:36px;background:rgba(61,232,160,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--bio)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;">Books Tab — How to Use</h4>
+        </div>
+        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;margin-bottom:10px;">Books tab mein apni <strong style="color:var(--fg);">study materials ki progress track karo</strong> — NCERT books, modules, PYQ books, mock test papers, aur apne handwritten notes sab ka percentage track kar sakte ho.</p>
+        <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+          <li><strong style="color:var(--fg);">Progress slider:</strong> Har book ke neeche slider hai — drag karke percentage set karo kitna complete hua (0% se 100% tak).</li>
+          <li><strong style="color:var(--fg);">Revision checkbox:</strong> Jab ek baar full revision ho jaaye book ki, "Revision completed" checkbox tick karo.</li>
+          <li><strong style="color:var(--fg);">NCERT pehle:</strong> NCERT Biology, Chemistry aur Physics — teeno 100% complete karo pehle. Reference books baad mein.</li>
+          <li><strong style="color:var(--fg);">PYQ book track karo:</strong> "PYQ Book" ka slider use karo — kitne years ke questions solve kar liye. Yeh bahut zaroori hai.</li>
+          <li><strong style="color:var(--fg);">My Notes tracker:</strong> Apne handwritten notes kitne complete hain — Biology, Chemistry, Physics alag-alag track hote hain.</li>
+          <li><strong style="color:var(--fg);">Formula Sheets:</strong> Physics aur Chemistry ke formulas ka ek dedicated entry hai — revision ke waqt check karte raho.</li>
+        </ul>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.82rem;color:var(--muted);border-left:3px solid var(--bio);">
+          💡 <strong style="color:var(--fg);">Pro tip:</strong> Books tab ko ek separate revision dashboard ki tarah use karo. Har subject ka NCERT 100% hone ke baad hi bol sakte ho ki chapter padha. NCERT ≠ notes dekhna — khud se padhna hai.
+        </div>
+      </div>
+
     </div>
 
     <!-- Tips Box -->
@@ -3220,23 +3241,6 @@ const SYLLABUS = {
       'Meiosis II: all stages',
       'Significance of meiosis',
     ]},
-    { id:'bio-ch11', name:'Ch 11 — Transport in Plants', color:'bio', high:false, topics:[
-      'Means of transport: diffusion, osmosis, active transport',
-      'Apoplast and symplast pathways',
-      'Osmosis, plasmolysis, water potential',
-      'Long distance transport of water: ascent of sap, cohesion-tension theory',
-      'Transpiration: types, factors affecting, significance',
-      'Phloem transport: pressure flow hypothesis',
-      'Source-sink concept',
-    ]},
-    { id:'bio-ch12', name:'Ch 12 — Mineral Nutrition', color:'bio', high:false, topics:[
-      'Essential minerals: macro and micronutrients',
-      'Role of macro and micronutrients',
-      'Deficiency symptoms and toxicity',
-      'Nitrogen metabolism: nitrogen cycle',
-      'Nitrogen fixation: biological and industrial',
-      'Nodule formation, symbiosis',
-    ]},
     { id:'bio-ch13', name:'Ch 13 — Photosynthesis in Higher Plants', color:'bio', high:true, topics:[
       'Photosynthesis as autotrophic nutrition',
       'Site of photosynthesis: chloroplast structure',
@@ -3269,15 +3273,6 @@ const SYLLABUS = {
       'Cytokinins: discovery, role, applications',
       'Ethylene: role and applications',
       'ABA (Abscisic acid): role as stress hormone',
-    ]},
-    { id:'bio-ch16', name:'Ch 16 — Digestion and Absorption', color:'bio', high:true, topics:[
-      'Alimentary canal: structure of each part',
-      'Digestive glands: salivary, gastric, pancreas, liver',
-      'Digestion of carbohydrates (oral, gastric, intestinal)',
-      'Digestion of proteins',
-      'Digestion of fats (emulsification, micelle formation)',
-      'Absorption: mechanisms, sites',
-      'Disorders: PEM, constipation, vomiting, jaundice, diarrhea',
     ]},
     { id:'bio-ch17', name:'Ch 17 — Breathing and Exchange of Gases', color:'bio', high:false, topics:[
       'Respiratory organs in different animals',
