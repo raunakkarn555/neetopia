@@ -749,6 +749,338 @@ body { overflow-x: hidden; }
   .section-title { font-size: 1.2rem; }
   .mnemonic-phrase { font-size: .92rem; }
 }
+///
+
+
+
+
+/* ═══════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS FIX — NEETopia Living World
+   
+   HOW TO USE:
+   Add this <style> block (or <link> to this file) 
+   just before </head> in your HTML file.
+   
+   This ONLY fixes responsiveness — zero content changes.
+═══════════════════════════════════════════════════ */
+
+/* 1. PREVENT ZOOM & HORIZONTAL OVERFLOW */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+* {
+  box-sizing: border-box;
+}
+img, iframe, embed, object, video {
+  max-width: 100% !important;
+}
+
+/* 2. CHAPTER NAV — always horizontally scrollable */
+.chapter-nav {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+.chapter-nav::-webkit-scrollbar { display: none; }
+.chapter-nav-inner {
+  display: inline-flex;
+  min-width: max-content;
+}
+
+/* 3. HERO — prevent bleed */
+.ch-hero {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+.ch-hero-inner { max-width: 100%; overflow: hidden; }
+.ch-hero h1 { word-break: break-word; hyphens: auto; }
+.ch-hero-sub { word-break: break-word; }
+.ch-hero-orb1, .ch-hero-orb2, .ch-hero-grid { overflow: hidden; }
+
+/* 4. BODY GRID — single column below 1100px */
+@media (max-width: 1100px) {
+  .ch-body {
+    grid-template-columns: 1fr !important;
+    display: block;
+  }
+}
+
+/* 5. COMPARISON TABLES — horizontal scroll on mobile */
+@media (max-width: 768px) {
+  .compare-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: .78rem;
+  }
+  .compare-table th,
+  .compare-table td {
+    white-space: nowrap;
+    padding: 8px 10px;
+    font-size: .78rem;
+  }
+}
+
+/* General overflow-x:auto containers */
+div[style*="overflow-x:auto"],
+div[style*="overflow-x: auto"] {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* 6. THEORY BLOCKS — word wrap */
+.theory-block {
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.theory-block p, .theory-block li, .theory-block h3,
+.theory-block ol li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 7. MCQ / PYQ CARDS */
+.mcq-card, .pyq-card { overflow: hidden; word-wrap: break-word; }
+.mcq-q, .mcq-opt, .mcq-answer { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; }
+.mcq-options { width: 100%; }
+
+/* 8. ALL TEXT ELEMENTS — prevent overflow */
+.callout-text, .callout-title,
+.ncert-quote p, .ncert-quote .ncert-simplify,
+.revision-item, .section-title, .section-sub,
+.mnemonic-phrase, .mnemonic-note,
+.exam-alert p,
+.guide-content p, .guide-content h4,
+.ncert-resource-sub, .ncert-resource-title,
+.donate-banner-inner p,
+.footer-brand p,
+.theory-block mark, .theory-block .hl-blue, .theory-block .hl-amber {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 9. TAXONOMY HIERARCHY */
+@media (max-width: 480px) {
+  .tax-hierarchy {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .tax-example { display: none; }
+  .tax-pill { min-width: 0; }
+  .tax-name { word-break: break-word; }
+}
+
+/* 10. GRID BOXES */
+.two-col, .three-col {
+  box-sizing: border-box;
+  width: 100%;
+}
+.two-col > *, .three-col > * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 11. INLINE STYLE GRIDS (nomenclature examples) */
+@media (max-width: 480px) {
+  div[style*="grid-template-columns:1fr 1fr"],
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+/* 12. FIXED MAX-WIDTHS — override on mobile */
+@media (max-width: 600px) {
+  [style*="max-width:520px"], [style*="max-width: 520px"],
+  [style*="max-width:680px"], [style*="max-width: 680px"],
+  [style*="max-width:700px"], [style*="max-width: 700px"] {
+    max-width: 100% !important;
+  }
+  [style*="max-width:400px"], [style*="max-width: 400px"] {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  /* Video section inner grid */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:12px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 13. MODAL — mobile safe */
+@media (max-width: 600px) {
+  .modal-box {
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--radius);
+    max-height: 95vh;
+  }
+  .modal-iframe { min-height: 380px; }
+  .modal-header {
+    padding: 12px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .modal-actions { flex-wrap: wrap; }
+  .modal-title { font-size: .88rem; }
+}
+
+/* 14. NCERT RESOURCE CARD */
+.ncert-resource-card {
+  overflow: hidden;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* 15. MNEMONIC CARD */
+.mnemonic-card { overflow: hidden; word-break: break-word; }
+.mnemonic-breakdown { flex-wrap: wrap; }
+
+/* 16. NAV — prevent overflow */
+nav { max-width: 100vw; }
+.nav-logo {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+@media (max-width: 400px) {
+  .nav-logo { font-size: 1rem !important; }
+  .logo-mark { width: 28px !important; height: 28px !important; }
+}
+
+/* 17. FOOTER */
+footer { overflow: hidden; word-break: break-word; }
+.footer-brand p { max-width: 100%; }
+.footer-col a { word-break: break-word; }
+
+/* 18. BREADCRUMB OVERFLOW */
+.ch-breadcrumb { flex-wrap: wrap; word-break: break-word; }
+
+/* 19. CHAPTER STATS */
+.ch-stats { box-sizing: border-box; width: 100%; }
+.ch-stat { box-sizing: border-box; min-width: 0; }
+.ch-stat-num, .ch-stat-label { word-break: break-word; }
+
+/* 20. SIDEBAR LINKS */
+.sidebar-link { word-break: break-word; white-space: normal; }
+
+/* 21. CODE / MONO elements */
+code, pre {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+}
+
+/* 22. SECTION SPACING — tighter on very small mobile */
+@media (max-width: 360px) {
+  .ch-content { padding: 20px 14px; }
+  .theory-block { padding: 16px 12px; }
+  .mcq-card, .pyq-card { padding: 14px 12px; }
+  .mnemonic-card { padding: 16px 12px; }
+  .callout { padding: 12px 12px; }
+  .ncert-quote { padding: 12px 14px; }
+  .section-title { font-size: 1.2rem !important; }
+  .ch-hero h1 { font-size: 1.5rem !important; }
+  .ch-stat-num { font-size: 1.2rem !important; }
+  .ch-stat { padding: 12px 10px !important; }
+}
+
+/* 23. HERO CTAS on tiny screens */
+@media (max-width: 360px) {
+  .ch-hero-ctas { flex-direction: column; gap: 8px; }
+  .ch-hero-ctas a, .ch-hero-ctas button { width: 100%; justify-content: center; }
+}
+
+/* 24. SCROLLABLE OVERFLOW HINT — visual fade for tables */
+@media (max-width: 600px) {
+  .compare-table-wrap {
+    position: relative;
+  }
+  .compare-table-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 24px;
+    background: linear-gradient(270deg, var(--bg2), transparent);
+    pointer-events: none;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+}
+
+/* 25. YT EMBED — already % based but ensure */
+.yt-embed-wrap {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 26. DONATE BANNER */
+.donate-banner-inner {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+@media (max-width: 520px) {
+  .donate-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .donate-banner-inner .btn-donate {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* 27. GUIDE STEPS */
+.guide-card { overflow: hidden; word-wrap: break-word; }
+.guide-step { flex-wrap: nowrap; }
+@media (max-width: 400px) {
+  .guide-step { gap: 10px; }
+  .guide-num { width: 28px; height: 28px; font-size: .72rem; flex-shrink: 0; }
+}
+
+/* 28. NCERT BADGE & BUTTONS */
+.ncert-btns { flex-wrap: wrap; }
+@media (max-width: 520px) {
+  .ncert-btns { flex-direction: column; }
+  .btn-ncert, .btn-ncert-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* 29. PREVENT LONG URLS/WORDS FROM BREAKING LAYOUT */
+a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 30. VIDEO SECTION INNER GRID */
+@media (max-width: 600px) {
+  .theory-block > div[style*="grid-template-columns:1fr 1fr"],
+  .theory-block > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
 
 </style>
 </head>
