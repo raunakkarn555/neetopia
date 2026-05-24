@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Living World — MCQ Practice | NEETopia Biology Ch.1</title>
   <meta name="description" content="140 MCQ practice questions for The Living World — Biology Class 11 Chapter 1. Topic-wise, Quick Test, Full Test modes with NEET +4/-1 scoring. Free on NEETopia." />
+
+  <!-- SEO Meta -->
+  <meta name="keywords" content="The Living World MCQ, Biology Class 11 Chapter 1 MCQ, NEET Biology MCQ, Living World practice questions, NEET 2026 biology, taxonomy MCQ, nomenclature MCQ, taxonomic aids MCQ, NEETopia" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="NEETopia" />
+  <link rel="canonical" href="https://raunakkarn555.github.io/neetopia/neet-questions/biology/the-living-world-mcq.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Living World — 140 MCQ Practice Questions | NEETopia" />
+  <meta property="og:description" content="140 MCQ practice questions for The Living World — Biology Class 11 Chapter 1. Topic-wise, Quick Test, Full Test modes with NEET +4/-1 scoring. 100% Free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://raunakkarn555.github.io/neetopia/neet-questions/biology/the-living-world-mcq.html" />
+  <meta property="og:site_name" content="NEETopia" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Living World — 140 MCQ Practice | NEETopia" />
+  <meta name="twitter:description" content="140 MCQ practice questions for The Living World — NEET Biology Ch.1. Free on NEETopia." />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "The Living World — 140 MCQ Practice Questions",
+    "description": "140 MCQ practice questions for The Living World, Biology Class 11 Chapter 1. Covers Characteristics of Life, Taxonomy, Nomenclature, and Taxonomic Aids. NEET +4/-1 marking scheme.",
+    "url": "https://raunakkarn555.github.io/neetopia/neet-questions/biology/the-living-world-mcq.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "NEETopia",
+      "url": "https://raunakkarn555.github.io/neetopia/index.html"
+    },
+    "educationalLevel": "Class 11",
+    "about": {
+      "@type": "Thing",
+      "name": "The Living World — Biology Chapter 1",
+      "description": "NEET Biology Class 11 Chapter 1 — The Living World"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -1112,13 +1154,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════
-     NAVBAR + MOBILE MENU — PASTE YOUR NAVBAR HERE
-     (Copy from index.html: <nav>...</nav> and
-      the two mobile divs that follow it)
-══════════════════════════════════════════════════════ -->
-
-
 <!-- ══════════════════════════════
      NAVBAR
 ══════════════════════════════ -->
@@ -1543,11 +1578,6 @@
 
 </div><!-- end main page -->
 
-<!-- ══════════════════════════════════════════════════════
-     FOOTER — PASTE YOUR FOOTER HERE
-     (Copy from index.html: <footer>...</footer>)
-══════════════════════════════════════════════════════ -->
-
 <!-- ══════════════════════════════
      FOOTER
 ══════════════════════════════ -->
@@ -1693,14 +1723,13 @@
 
 <script src="../../../assets/js/main.js"></script>
 
-<!-- PASTE YOUR <script src="assets/js/main.js"></script> HERE -->
-
 <script>
 // ═══════════════════════════════════════
 // NEETopia — Living World MCQ Practice
 // ═══════════════════════════════════════
 
 // ── TEST GUIDE TOGGLE ──
+// FIX 1: Single definition only — removed duplicate that appeared before ALL_QUESTIONS
 function toggleGuide() {
   document.getElementById('testGuideCard').classList.toggle('open');
 }
@@ -1717,7 +1746,7 @@ const ALL_QUESTIONS = [
   {id:6, topic:'life', text:'Which of the following is NOT a defining property of living organisms?', opts:['Cellular organization','Self-consciousness','Metabolism','Reproduction'], ans:1},
   {id:7, topic:'life', text:'Metabolic reactions are called \'living reactions\' because they:', opts:['Occur only under living conditions','Can occur in non-living conditions too','Are catalyzed by enzymes of biological origin','Both (1) and (3)'], ans:2},
   {id:8, topic:'life', text:'The response of a living organism to an external stimulus is:', opts:['Physical','Biological','Chemical','All of the above'], ans:3},
-  {id:9, topic:'life', text:'Which of the following is a universal property found in ALL living organisms?', opts:['Locomotion','Photosynthesis','Metabolism','Sexual reproduction'], ans:2},
+  {id:9, topic:'life', text:'Which is a universal property found in ALL living organisms?', opts:['Locomotion','Photosynthesis','Metabolism','Sexual reproduction'], ans:2},
   {id:10, topic:'life', text:'\'Fragmentation\' as a mode of reproduction is primarily a feature of:', opts:['Higher multicellular animals','Lower organisms like Spirogyra','All plants','Vertebrates only'], ans:1},
   {id:11, topic:'life', text:'Which characteristic distinguishes living from non-living objects most fundamentally?', opts:['Movement','Growth','Consciousness','Self-replicating metabolism'], ans:3},
   {id:12, topic:'life', text:'A mule is a sterile hybrid. Which property of life does it lack?', opts:['Growth','Metabolism','Reproduction','Response to stimuli'], ans:2},
@@ -1869,22 +1898,17 @@ let timerSecs = 0;
 let testStarted = false;
 let lastTestResult = null;
 
-// ── TEST GUIDE TOGGLE ──
-function toggleGuide() {
-  document.getElementById('testGuideCard').classList.toggle('open');
-}
-
 // ── MODE SELECTION ──
+// FIX 2: selectMode now correctly highlights the clicked tab
 function selectMode(mode) {
   currentMode = mode;
-  ['full','quick','pyq','topic'].forEach(m => {
+  ['full','quick','pyq','topic'].forEach(function(m) {
     document.getElementById('tab-'+m).classList.toggle('active', m === mode);
   });
-  const topicSel = document.getElementById('topicSelector');
+  var topicSel = document.getElementById('topicSelector');
   topicSel.classList.toggle('visible', mode === 'topic');
 
-  const counts = { full: 140, quick: 50, pyq: 30 };
-  let summary = '';
+  var summary = '';
   if (mode === 'full') summary = 'Full Test — 140 Questions (All Topics)';
   else if (mode === 'quick') summary = 'Quick Test — 50 Random Questions';
   else if (mode === 'pyq') summary = 'PYQ Style — 30 Questions (Mixed)';
@@ -1896,23 +1920,22 @@ function selectMode(mode) {
 // ── TOPIC SELECTION ──
 function selectTopic(topic) {
   currentTopic = topic;
-  ['all','life','taxonomy','nomenclature','aids'].forEach(t => {
+  ['all','life','taxonomy','nomenclature','aids'].forEach(function(t) {
     document.getElementById('tpill-'+t).classList.toggle('active', t === topic);
   });
-  const topicNames = { all:'All Topics (140 Qs)', life:'Characteristics of Life (40 Qs)', taxonomy:'Taxonomy & Classification (40 Qs)', nomenclature:'Nomenclature (35 Qs)', aids:'Taxonomic Aids (25 Qs)' };
+  var topicNames = { all:'All Topics (140 Qs)', life:'Characteristics of Life (40 Qs)', taxonomy:'Taxonomy & Classification (40 Qs)', nomenclature:'Nomenclature (35 Qs)', aids:'Taxonomic Aids (25 Qs)' };
   document.getElementById('selectionSummary').textContent = 'Topic-wise — ' + topicNames[topic];
 }
 
 // ── BUILD QUESTION SET ──
 function buildQuestions() {
-  let pool = [...ALL_QUESTIONS];
+  var pool = ALL_QUESTIONS.slice();
   if (currentMode === 'topic') {
-    if (currentTopic !== 'all') pool = pool.filter(q => q.topic === currentTopic);
+    if (currentTopic !== 'all') pool = pool.filter(function(q){ return q.topic === currentTopic; });
     return pool;
   }
   if (currentMode === 'full') return pool;
-  // Shuffle for quick/pyq
-  pool = pool.sort(() => Math.random() - 0.5);
+  pool = pool.sort(function(){ return Math.random() - 0.5; });
   if (currentMode === 'quick') return pool.slice(0, 50);
   if (currentMode === 'pyq') return pool.slice(0, 30);
   return pool;
@@ -1921,7 +1944,7 @@ function buildQuestions() {
 // ── BEGIN TEST ──
 function beginTest() {
   if (!currentMode) { alert('Pehle ek test mode choose karo!'); return; }
-  const nameVal = document.getElementById('studentNameInput');
+  var nameVal = document.getElementById('studentNameInput');
   studentName = (nameVal && nameVal.value.trim()) ? nameVal.value.trim() : 'Student';
   activeQuestions = buildQuestions();
   if (activeQuestions.length === 0) { alert('Is topic mein koi questions nahi hain!'); return; }
@@ -1930,7 +1953,7 @@ function beginTest() {
   timerSecs = 0;
   testStarted = true;
 
-  const modeLabels = { full: 'Full Test', quick: 'Quick Test', pyq: 'PYQ Style', topic: 'Topic-wise' };
+  var modeLabels = { full: 'Full Test', quick: 'Quick Test', pyq: 'PYQ Style', topic: 'Topic-wise' };
   document.getElementById('testModeLabel').textContent = modeLabels[currentMode];
   document.getElementById('testModeBadge').textContent = activeQuestions.length + ' Questions';
 
@@ -1949,36 +1972,38 @@ function beginTest() {
 
 // ── RENDER ALL QUESTION CARDS ──
 function renderQuestions() {
-  const container = document.getElementById('testQuestions');
+  var container = document.getElementById('testQuestions');
   container.innerHTML = '';
-  activeQuestions.forEach((q, idx) => {
-    const card = document.createElement('div');
+  activeQuestions.forEach(function(q, idx) {
+    var card = document.createElement('div');
     card.className = 'question-card' + (idx === 0 ? ' active' : '');
     card.id = 'qcard-' + idx;
-    card.innerHTML = `
-      <div class="q-meta">
-        <span class="q-number">Q${idx+1} of ${activeQuestions.length}</span>
-        <span class="q-topic-tag">${topicLabel(q.topic)}</span>
-      </div>
-      <div class="q-text">${q.text}</div>
-      <div class="options-grid" id="opts-${idx}">
-        ${q.opts.map((opt, oi) => `
-          <button class="option-btn" id="opt-${idx}-${oi}" onclick="selectAnswer(${idx}, ${oi})">
-            <span class="option-letter">${['A','B','C','D'][oi]}</span>
-            <span>${opt}</span>
-          </button>
-        `).join('')}
-      </div>
-      <div class="q-nav-row">
-        <button class="btn-prev" onclick="prevQuestion()" ${idx === 0 ? 'disabled style="opacity:.4;cursor:not-allowed"' : ''}>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          Previous
-        </button>
-        <span style="font-size:.75rem;color:var(--text3);font-family:var(--font-mono)">${idx+1}/${activeQuestions.length}</span>
-        <button class="btn-next ${idx < activeQuestions.length - 1 ? 'primary' : ''}" onclick="${idx < activeQuestions.length-1 ? 'nextQuestion()' : 'confirmSubmit()'}">
-          ${idx < activeQuestions.length-1 ? 'Next <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' : 'Submit Test <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/></svg>'}
-        </button>
-      </div>`;
+    card.innerHTML =
+      '<div class="q-meta">' +
+        '<span class="q-number">Q'+(idx+1)+' of '+activeQuestions.length+'</span>' +
+        '<span class="q-topic-tag">'+topicLabel(q.topic)+'</span>' +
+      '</div>' +
+      '<div class="q-text">'+q.text+'</div>' +
+      '<div class="options-grid" id="opts-'+idx+'">' +
+        q.opts.map(function(opt, oi) {
+          return '<button class="option-btn" id="opt-'+idx+'-'+oi+'" onclick="selectAnswer('+idx+', '+oi+')">' +
+            '<span class="option-letter">'+['A','B','C','D'][oi]+'</span>' +
+            '<span>'+opt+'</span>' +
+          '</button>';
+        }).join('') +
+      '</div>' +
+      '<div class="q-nav-row">' +
+        '<button class="btn-prev" onclick="prevQuestion()" '+(idx === 0 ? 'disabled style="opacity:.4;cursor:not-allowed"' : '')+'>' +
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' +
+          'Previous' +
+        '</button>' +
+        '<span style="font-size:.75rem;color:var(--text3);font-family:var(--font-mono)">'+(idx+1)+'/'+activeQuestions.length+'</span>' +
+        '<button class="btn-next '+(idx < activeQuestions.length - 1 ? 'primary' : '')+'" onclick="'+(idx < activeQuestions.length-1 ? 'nextQuestion()' : 'confirmSubmit()')+'">' +
+          (idx < activeQuestions.length-1
+            ? 'Next <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'
+            : 'Submit Test <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/></svg>') +
+        '</button>' +
+      '</div>';
     container.appendChild(card);
   });
 }
@@ -1989,13 +2014,12 @@ function topicLabel(t) {
 
 // ── SHOW QUESTION ──
 function showQuestion(idx) {
-  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
-  const card = document.getElementById('qcard-' + idx);
+  document.querySelectorAll('.question-card').forEach(function(c){ c.classList.remove('active'); });
+  var card = document.getElementById('qcard-' + idx);
   if (card) { card.classList.add('active'); card.scrollIntoView({ behavior:'smooth', block:'start' }); }
   currentQIndex = idx;
   updateProgress();
   updateQNGrid();
-  // Restore previous answer
   if (userAnswers[idx] !== undefined) {
     highlightSelected(idx, userAnswers[idx]);
   }
@@ -2010,11 +2034,11 @@ function selectAnswer(qIdx, optIdx) {
 }
 
 function highlightSelected(qIdx, optIdx) {
-  for (let i = 0; i < 4; i++) {
-    const btn = document.getElementById('opt-' + qIdx + '-' + i);
+  for (var i = 0; i < 4; i++) {
+    var btn = document.getElementById('opt-' + qIdx + '-' + i);
     if (btn) btn.classList.remove('selected');
   }
-  const sel = document.getElementById('opt-' + qIdx + '-' + optIdx);
+  var sel = document.getElementById('opt-' + qIdx + '-' + optIdx);
   if (sel) sel.classList.add('selected');
 }
 
@@ -2028,9 +2052,9 @@ function nextQuestion() {
 
 // ── PROGRESS ──
 function updateProgress() {
-  const answered = Object.keys(userAnswers).length;
-  const total = activeQuestions.length;
-  const pct = total > 0 ? (answered / total * 100) : 0;
+  var answered = Object.keys(userAnswers).length;
+  var total = activeQuestions.length;
+  var pct = total > 0 ? (answered / total * 100) : 0;
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('progressText').textContent = answered + '/' + total;
 }
@@ -2039,10 +2063,10 @@ function updateProgress() {
 function startTimer() {
   clearInterval(timerInterval);
   timerSecs = 0;
-  timerInterval = setInterval(() => {
+  timerInterval = setInterval(function() {
     timerSecs++;
-    const m = String(Math.floor(timerSecs/60)).padStart(2,'0');
-    const s = String(timerSecs % 60).padStart(2,'0');
+    var m = String(Math.floor(timerSecs/60)).padStart(2,'0');
+    var s = String(timerSecs % 60).padStart(2,'0');
     document.getElementById('timerText').textContent = m + ':' + s;
   }, 1000);
 }
@@ -2053,22 +2077,22 @@ function toggleQNPanel() {
 }
 
 function buildQNGrid() {
-  const grid = document.getElementById('qnGrid');
+  var grid = document.getElementById('qnGrid');
   grid.innerHTML = '';
-  activeQuestions.forEach((_, idx) => {
-    const btn = document.createElement('button');
+  activeQuestions.forEach(function(_, idx) {
+    var btn = document.createElement('button');
     btn.className = 'qn-btn';
     btn.id = 'qnb-' + idx;
     btn.textContent = idx + 1;
-    btn.onclick = () => { showQuestion(idx); toggleQNPanel(); };
+    btn.onclick = (function(i){ return function(){ showQuestion(i); toggleQNPanel(); }; })(idx);
     grid.appendChild(btn);
   });
   updateQNGrid();
 }
 
 function updateQNGrid() {
-  activeQuestions.forEach((_, idx) => {
-    const btn = document.getElementById('qnb-' + idx);
+  activeQuestions.forEach(function(_, idx) {
+    var btn = document.getElementById('qnb-' + idx);
     if (!btn) return;
     btn.className = 'qn-btn';
     if (idx === currentQIndex) btn.classList.add('current');
@@ -2078,109 +2102,102 @@ function updateQNGrid() {
 
 // ── SUBMIT ──
 function confirmSubmit() {
-  const answered = Object.keys(userAnswers).length;
-  const total = activeQuestions.length;
-  const unanswered = total - answered;
-  const msg = unanswered > 0
-    ? `${unanswered} question(s) abhi bhi unanswered hain. Kya aap submit karna chahte ho?\n\n+4 correct, -1 wrong, 0 skip.`
+  var answered = Object.keys(userAnswers).length;
+  var total = activeQuestions.length;
+  var unanswered = total - answered;
+  var msg = unanswered > 0
+    ? (unanswered + ' question(s) abhi bhi unanswered hain. Kya aap submit karna chahte ho?\n\n+4 correct, -1 wrong, 0 skip.')
     : 'Aap test submit karna chahte ho? Ek baar submit karne ke baad wapas nahi ja sakte.';
   if (confirm(msg)) submitTest();
 }
 
 function submitTest() {
   clearInterval(timerInterval);
-  const timeTaken = timerSecs;
+  var timeTaken = timerSecs;
 
-  let correct = 0, wrong = 0, skipped = 0;
-  activeQuestions.forEach((q, idx) => {
+  var correct = 0, wrong = 0, skipped = 0;
+  activeQuestions.forEach(function(q, idx) {
     if (userAnswers[idx] === undefined) skipped++;
     else if (userAnswers[idx] === q.ans) correct++;
     else wrong++;
   });
 
-  const score = (correct * 4) - (wrong * 1);
-  const maxScore = activeQuestions.length * 4;
-  const accuracy = activeQuestions.length > 0 ? Math.round((correct / activeQuestions.length) * 100) : 0;
+  var score = (correct * 4) - (wrong * 1);
+  var maxScore = activeQuestions.length * 4;
+  var accuracy = activeQuestions.length > 0 ? Math.round((correct / activeQuestions.length) * 100) : 0;
 
-  lastTestResult = { correct, wrong, skipped, score, maxScore, accuracy, timeTaken, total: activeQuestions.length, mode: currentMode, topic: currentTopic };
+  lastTestResult = { correct: correct, wrong: wrong, skipped: skipped, score: score, maxScore: maxScore, accuracy: accuracy, timeTaken: timeTaken, total: activeQuestions.length, mode: currentMode, topic: currentTopic };
 
-  // Save to history
-  saveHistory({ ...lastTestResult, date: new Date().toISOString(), name: studentName });
-
-  // Show results
+  saveHistory(Object.assign({}, lastTestResult, { date: new Date().toISOString(), name: studentName }));
   showResults(lastTestResult);
 }
 
 function showResults(r) {
   document.getElementById('testArea').classList.remove('active');
-  const rs = document.getElementById('resultsScreen');
+  var rs = document.getElementById('resultsScreen');
   rs.classList.add('active');
   rs.scrollIntoView({ behavior:'smooth' });
 
-  const passed = r.score >= r.maxScore * 0.4;
-  const icon = document.getElementById('resultIcon');
+  var passed = r.score >= r.maxScore * 0.4;
+  var icon = document.getElementById('resultIcon');
   icon.className = 'result-icon ' + (passed ? 'pass' : 'fail');
   icon.textContent = passed ? '🎯' : '📚';
 
   document.getElementById('resultStudentName').textContent = studentName + ' ka Result';
   document.getElementById('resultTitle').textContent = passed ? 'Bahut Badhiya! 🔥' : 'Aise Nahi Chalega — Practice Karo!';
 
-  const scoreBig = document.getElementById('resultScoreBig');
+  var scoreBig = document.getElementById('resultScoreBig');
   scoreBig.textContent = r.score;
   scoreBig.className = 'result-score-big ' + (passed ? 'pass' : 'fail');
   document.getElementById('resultMax').textContent = 'out of ' + r.maxScore + ' marks · ' + r.accuracy + '% accuracy';
 
-  const m = Math.floor(r.timeTaken/60), s = r.timeTaken % 60;
-  document.getElementById('resultStatsGrid').innerHTML = `
-    <div class="result-stat"><div class="rs-num green">${r.correct}</div><div class="rs-label">Correct</div></div>
-    <div class="result-stat"><div class="rs-num red">${r.wrong}</div><div class="rs-label">Wrong</div></div>
-    <div class="result-stat"><div class="rs-num amber">${r.skipped}</div><div class="rs-label">Skipped</div></div>
-    <div class="result-stat"><div class="rs-num blue">${r.accuracy}%</div><div class="rs-label">Accuracy</div></div>
-    <div class="result-stat"><div class="rs-num" style="color:var(--purple)">${m}m ${s}s</div><div class="rs-label">Time Taken</div></div>
-    <div class="result-stat"><div class="rs-num">${r.total}</div><div class="rs-label">Total Qs</div></div>
-  `;
+  var m = Math.floor(r.timeTaken/60), s = r.timeTaken % 60;
+  document.getElementById('resultStatsGrid').innerHTML =
+    '<div class="result-stat"><div class="rs-num green">'+r.correct+'</div><div class="rs-label">Correct</div></div>' +
+    '<div class="result-stat"><div class="rs-num red">'+r.wrong+'</div><div class="rs-label">Wrong</div></div>' +
+    '<div class="result-stat"><div class="rs-num amber">'+r.skipped+'</div><div class="rs-label">Skipped</div></div>' +
+    '<div class="result-stat"><div class="rs-num blue">'+r.accuracy+'%</div><div class="rs-label">Accuracy</div></div>' +
+    '<div class="result-stat"><div class="rs-num" style="color:var(--purple)">'+m+'m '+s+'s</div><div class="rs-label">Time Taken</div></div>' +
+    '<div class="result-stat"><div class="rs-num">'+r.total+'</div><div class="rs-label">Total Qs</div></div>';
 
-  // Review
   renderReview();
 }
 
 function renderReview() {
-  const sec = document.getElementById('reviewSection');
-  const wrongQ = activeQuestions.filter((q, i) => userAnswers[i] !== undefined && userAnswers[i] !== q.ans);
-  const skipQ = activeQuestions.filter((q, i) => userAnswers[i] === undefined);
+  var sec = document.getElementById('reviewSection');
+  var wrongQ = activeQuestions.filter(function(q, i){ return userAnswers[i] !== undefined && userAnswers[i] !== q.ans; });
+  var skipQ  = activeQuestions.filter(function(q, i){ return userAnswers[i] === undefined; });
 
-  let html = '';
+  var html = '';
   if (wrongQ.length > 0) {
-    html += `<div class="review-section-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Wrong Answers Review (${wrongQ.length})</div>`;
-    wrongQ.forEach(q => {
-      const idx = activeQuestions.indexOf(q);
-      const yourAns = q.opts[userAnswers[idx]];
-      const correctAns = q.opts[q.ans];
-      html += `<div class="review-qcard wrong">
-        <div class="review-q-meta">Q${idx+1} · ${topicLabel(q.topic)}</div>
-        <div class="review-q-text">${q.text}</div>
-        <div class="review-answers">
-          <span class="review-your-ans wrong">Your Answer: ${['A','B','C','D'][userAnswers[idx]]}. ${yourAns}</span>
-          <span class="review-correct-ans">✓ Correct: ${['A','B','C','D'][q.ans]}. ${correctAns}</span>
-        </div>
-      </div>`;
+    html += '<div class="review-section-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Wrong Answers Review ('+wrongQ.length+')</div>';
+    wrongQ.forEach(function(q) {
+      var idx = activeQuestions.indexOf(q);
+      var yourAns = q.opts[userAnswers[idx]];
+      var correctAns = q.opts[q.ans];
+      html += '<div class="review-qcard wrong">' +
+        '<div class="review-q-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
+        '<div class="review-q-text">'+q.text+'</div>' +
+        '<div class="review-answers">' +
+          '<span class="review-your-ans wrong">Your Answer: '+['A','B','C','D'][userAnswers[idx]]+'. '+yourAns+'</span>' +
+          '<span class="review-correct-ans">✓ Correct: '+['A','B','C','D'][q.ans]+'. '+correctAns+'</span>' +
+        '</div></div>';
     });
   }
 
   if (skipQ.length > 0) {
-    html += `<div class="review-section-title" style="margin-top:24px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg> Skipped Questions (${skipQ.length})</div>`;
-    skipQ.slice(0,10).forEach(q => {
-      const idx = activeQuestions.indexOf(q);
-      html += `<div class="review-qcard skipped">
-        <div class="review-q-meta">Q${idx+1} · ${topicLabel(q.topic)}</div>
-        <div class="review-q-text">${q.text}</div>
-        <div class="review-answers">
-          <span class="review-your-ans skipped">Skipped</span>
-          <span class="review-correct-ans">✓ Correct: ${['A','B','C','D'][q.ans]}. ${q.opts[q.ans]}</span>
-        </div>
-      </div>`;
+    html += '<div class="review-section-title" style="margin-top:24px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg> Skipped Questions ('+skipQ.length+')</div>';
+    skipQ.slice(0,10).forEach(function(q) {
+      var idx = activeQuestions.indexOf(q);
+      html += '<div class="review-qcard skipped">' +
+        '<div class="review-q-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
+        '<div class="review-q-text">'+q.text+'</div>' +
+        '<div class="review-answers">' +
+          '<span class="review-your-ans skipped">Skipped</span>' +
+          '<span class="review-correct-ans">✓ Correct: '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
+        '</div></div>';
     });
-    if (skipQ.length > 10) html += `<p style="text-align:center;color:var(--text3);font-size:.8rem;margin-top:8px">...aur ${skipQ.length - 10} more skipped questions</p>`;
+    if (skipQ.length > 10) html += '<p style="text-align:center;color:var(--text3);font-size:.8rem;margin-top:8px">...aur '+(skipQ.length - 10)+' more skipped questions</p>';
   }
 
   sec.innerHTML = html;
@@ -2202,54 +2219,55 @@ function retakeTest() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// FIX 3: backToSelector fixed — renderHistory() and scrollTo were OUTSIDE the function
+// (stray code after closing brace caused syntax error breaking ALL JS below it)
 function backToSelector() {
   document.getElementById('resultsScreen').classList.remove('active');
   document.getElementById('testArea').classList.remove('active');
   document.getElementById('testSelectorArea').style.display = 'block';
+  document.getElementById('testGuideCard').closest('.test-guide').style.display = 'block';
   document.getElementById('historySection').style.display = 'block';
   testStarted = false;
   currentMode = null;
-  ['full','quick','pyq','topic'].forEach(m => document.getElementById('tab-'+m).classList.remove('active'));
+  ['full','quick','pyq','topic'].forEach(function(m){ document.getElementById('tab-'+m).classList.remove('active'); });
   document.getElementById('selectionSummary').textContent = 'Select a mode above';
-}
   renderHistory();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ── HISTORY ──
 function saveHistory(entry) {
-  const hist = JSON.parse(localStorage.getItem('neetopia-living-world-history') || '[]');
+  var hist = JSON.parse(localStorage.getItem('neetopia-living-world-history') || '[]');
   hist.unshift(entry);
   if (hist.length > 20) hist.pop();
   localStorage.setItem('neetopia-living-world-history', JSON.stringify(hist));
 }
 
 function renderHistory() {
-  const hist = JSON.parse(localStorage.getItem('neetopia-living-world-history') || '[]');
-  const container = document.getElementById('historyContainer');
+  var hist = JSON.parse(localStorage.getItem('neetopia-living-world-history') || '[]');
+  var container = document.getElementById('historyContainer');
   if (hist.length === 0) {
     container.innerHTML = '<div class="history-empty">Abhi koi test history nahi hai. Pehla test do! 🎯</div>';
     return;
   }
-  const modeLabels = { full:'Full Test', quick:'Quick Test', pyq:'PYQ Style', topic:'Topic-wise' };
-  container.innerHTML = '<div class="history-grid">' + hist.map(h => {
-    const passed = h.score >= h.maxScore * 0.4;
-    const d = new Date(h.date);
-    const dateStr = d.toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'});
-    const m = Math.floor(h.timeTaken/60), s = h.timeTaken % 60;
-    return `<div class="history-card">
-      <div class="hc-top">
-        <span class="hc-mode">${modeLabels[h.mode] || h.mode}</span>
-        <span class="hc-date">${dateStr}</span>
-      </div>
-      <div class="hc-score ${passed ? 'pass' : 'fail'}">${h.score}/${h.maxScore}</div>
-      <div class="hc-meta">${h.accuracy}% accuracy · ${m}m ${s}s · ${h.name}</div>
-      <div class="hc-stats">
-        <div class="hcs"><strong style="color:var(--green)">${h.correct}</strong> correct</div>
-        <div class="hcs"><strong style="color:var(--red)">${h.wrong}</strong> wrong</div>
-        <div class="hcs"><strong style="color:var(--amber)">${h.skipped}</strong> skipped</div>
-      </div>
-    </div>`;
+  var modeLabels = { full:'Full Test', quick:'Quick Test', pyq:'PYQ Style', topic:'Topic-wise' };
+  container.innerHTML = '<div class="history-grid">' + hist.map(function(h) {
+    var passed = h.score >= h.maxScore * 0.4;
+    var d = new Date(h.date);
+    var dateStr = d.toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'});
+    var m = Math.floor(h.timeTaken/60), s = h.timeTaken % 60;
+    return '<div class="history-card">' +
+      '<div class="hc-top">' +
+        '<span class="hc-mode">'+(modeLabels[h.mode] || h.mode)+'</span>' +
+        '<span class="hc-date">'+dateStr+'</span>' +
+      '</div>' +
+      '<div class="hc-score '+(passed?'pass':'fail')+'">'+h.score+'/'+h.maxScore+'</div>' +
+      '<div class="hc-meta">'+h.accuracy+'% accuracy · '+m+'m '+s+'s · '+h.name+'</div>' +
+      '<div class="hc-stats">' +
+        '<div class="hcs"><strong style="color:var(--green)">'+h.correct+'</strong> correct</div>' +
+        '<div class="hcs"><strong style="color:var(--red)">'+h.wrong+'</strong> wrong</div>' +
+        '<div class="hcs"><strong style="color:var(--amber)">'+h.skipped+'</strong> skipped</div>' +
+      '</div></div>';
   }).join('') + '</div>';
 }
 
@@ -2263,186 +2281,205 @@ function deleteHistory() {
 // ── DOWNLOAD SCORECARD ──
 function downloadScorecard() {
   if (!lastTestResult) return;
-  const r = lastTestResult;
-  const m = Math.floor(r.timeTaken/60), s = r.timeTaken % 60;
-  const passed = r.score >= r.maxScore * 0.4;
-  const modeLabels = { full:'Full Test (140 Qs)', quick:'Quick Test (50 Qs)', pyq:'PYQ Style (30 Qs)', topic:'Topic-wise' };
-  const dateStr = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'long',year:'numeric'});
+  var r = lastTestResult;
+  var m = Math.floor(r.timeTaken/60), s = r.timeTaken % 60;
+  var passed = r.score >= r.maxScore * 0.4;
+  var modeLabels = { full:'Full Test (140 Qs)', quick:'Quick Test (50 Qs)', pyq:'PYQ Style (30 Qs)', topic:'Topic-wise' };
+  var dateStr = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'long',year:'numeric'});
 
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia Scorecard</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:#1a2332;padding:40px 24px}
-    .card{max-width:600px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);overflow:hidden}
-    .header{background:linear-gradient(135deg,#0d1520 0%,#1a2840 100%);padding:32px;text-align:center;color:#fff}
-    .logo{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
-    .sub{font-size:.8rem;color:rgba(255,255,255,.6)}
-    .score-box{padding:32px;text-align:center;border-bottom:1px solid #edf2f7}
-    .score-num{font-size:4rem;font-weight:800;letter-spacing:-2px;color:${passed?'#16a34a':'#dc2626'};line-height:1}
-    .score-max{font-size:1rem;color:#64748b;margin-top:4px}
-    .student-name{font-size:1.1rem;font-weight:600;margin-top:12px}
-    .verdict{display:inline-block;padding:6px 16px;border-radius:99px;font-size:.85rem;font-weight:600;margin-top:10px;background:${passed?'rgba(22,163,74,.1)':'rgba(220,38,38,.1)'};color:${passed?'#16a34a':'#dc2626'};border:1px solid ${passed?'rgba(22,163,74,.3)':'rgba(220,38,38,.3)'}}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid #edf2f7}
-    .stat{padding:20px 16px;text-align:center;border-right:1px solid #edf2f7}
-    .stat:last-child{border-right:none}
-    .stat-n{font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;line-height:1;margin-bottom:4px}
-    .stat-l{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#94a3b8}
-    .details{padding:20px 24px;border-bottom:1px solid #edf2f7}
-    .detail-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.85rem;border-bottom:1px solid #f1f5f9}
-    .detail-row:last-child{border-bottom:none}
-    .detail-label{color:#64748b}
-    .detail-val{font-weight:600}
-    .footer{padding:20px 24px;text-align:center;font-size:.72rem;color:#94a3b8;line-height:1.6}
-    .review-section{padding:20px 24px}
-    .rh{font-size:.9rem;font-weight:700;margin-bottom:12px;color:#1e293b}
-    .rq{padding:12px;border-radius:8px;margin-bottom:8px;border:1px solid}
-    .rq.wrong{background:#fef2f2;border-color:#fecaca}
-    .rq.skip{background:#fffbeb;border-color:#fde68a}
-    .rq-text{font-size:.82rem;color:#1e293b;margin-bottom:8px;line-height:1.5}
-    .rq-meta{font-size:.7rem;color:#94a3b8;margin-bottom:6px}
-    .ans-row{display:flex;gap:8px;flex-wrap:wrap}
-    .ans-chip{font-size:.72rem;padding:3px 10px;border-radius:5px;border:1px solid}
-    .ans-wrong{background:#fee2e2;color:#dc2626;border-color:#fca5a5}
-    .ans-correct{background:#dcfce7;color:#16a34a;border-color:#86efac}
-    @media print{body{padding:0}@page{margin:12mm}}
-  </style></head><body>
-  <div class="card">
-    <div class="header">
-      <div class="logo">NEETopia</div>
-      <div class="sub">neetopia.in · Free NEET Preparation · © 2026 NEETopia</div>
-    </div>
-    <div class="score-box">
-      <div class="score-num">${r.score}</div>
-      <div class="score-max">out of ${r.maxScore} marks</div>
-      <div class="student-name">${studentName}</div>
-      <div class="verdict">${passed ? '✅ Well Done!' : '📚 Keep Practicing'}</div>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n" style="color:#16a34a">${r.correct}</div><div class="stat-l">Correct</div></div>
-      <div class="stat"><div class="stat-n" style="color:#dc2626">${r.wrong}</div><div class="stat-l">Wrong</div></div>
-      <div class="stat"><div class="stat-n" style="color:#d97706">${r.skipped}</div><div class="stat-l">Skipped</div></div>
-    </div>
-    <div class="details">
-      <div class="detail-row"><span class="detail-label">Test Mode</span><span class="detail-val">${modeLabels[r.mode]}</span></div>
-      <div class="detail-row"><span class="detail-label">Accuracy</span><span class="detail-val">${r.accuracy}%</span></div>
-      <div class="detail-row"><span class="detail-label">Time Taken</span><span class="detail-val">${m} min ${s} sec</span></div>
-      <div class="detail-row"><span class="detail-label">Date</span><span class="detail-val">${dateStr}</span></div>
-      <div class="detail-row"><span class="detail-label">Chapter</span><span class="detail-val">The Living World — Biology Ch.1</span></div>
-      <div class="detail-row"><span class="detail-label">Marking Scheme</span><span class="detail-val">+4 correct / −1 wrong / 0 skip</span></div>
-    </div>
-    ${activeQuestions.filter((_,i) => userAnswers[i] !== undefined && userAnswers[i] !== activeQuestions[i].ans).length > 0 ? `
-    <div class="review-section">
-      <div class="rh">Wrong Answers Review</div>
-      ${activeQuestions.filter((_,i) => userAnswers[i] !== undefined && userAnswers[i] !== activeQuestions[i].ans).slice(0,15).map(q => {
-        const idx = activeQuestions.indexOf(q);
-        return `<div class="rq wrong">
-          <div class="rq-meta">Q${idx+1} · ${topicLabel(q.topic)}</div>
-          <div class="rq-text">${q.text}</div>
-          <div class="ans-row">
-            <span class="ans-chip ans-wrong">Your: ${['A','B','C','D'][userAnswers[idx]]}. ${q.opts[userAnswers[idx]]}</span>
-            <span class="ans-chip ans-correct">✓ ${['A','B','C','D'][q.ans]}. ${q.opts[q.ans]}</span>
-          </div>
-        </div>`;
-      }).join('')}
-    </div>` : ''}
-    <div class="footer">
-      <strong>NEETopia</strong> — India's Most Honest Free NEET Preparation Platform<br>
-      neetopia.in · All content free · No ads · No paywalls<br>
-      © 2026 NEETopia. All rights reserved. For personal NEET preparation only.<br>
-      Redistribution or resale strictly prohibited.
-    </div>
-  </div>
-  <script>window.onload=function(){window.print()}<\/script>
-  </body></html>`;
+  // FIX 4: Updated copyright with correct GitHub link
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia Scorecard — The Living World</title>' +
+  '<style>' +
+    '*{margin:0;padding:0;box-sizing:border-box}' +
+    'body{font-family:\'Segoe UI\',sans-serif;background:#f8fafc;color:#1a2332;padding:40px 24px}' +
+    '.card{max-width:600px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);overflow:hidden}' +
+    '.header{background:linear-gradient(135deg,#0d1520 0%,#1a2840 100%);padding:32px;text-align:center;color:#fff}' +
+    '.logo{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}' +
+    '.logo-link{color:#3de8a0;text-decoration:none;font-size:.8rem;display:block;margin-top:4px}' +
+    '.sub{font-size:.8rem;color:rgba(255,255,255,.6)}' +
+    '.score-box{padding:32px;text-align:center;border-bottom:1px solid #edf2f7}' +
+    '.score-num{font-size:4rem;font-weight:800;letter-spacing:-2px;color:'+(passed?'#16a34a':'#dc2626')+';line-height:1}' +
+    '.score-max{font-size:1rem;color:#64748b;margin-top:4px}' +
+    '.student-name{font-size:1.1rem;font-weight:600;margin-top:12px}' +
+    '.verdict{display:inline-block;padding:6px 16px;border-radius:99px;font-size:.85rem;font-weight:600;margin-top:10px;background:'+(passed?'rgba(22,163,74,.1)':'rgba(220,38,38,.1)')+';color:'+(passed?'#16a34a':'#dc2626')+';border:1px solid '+(passed?'rgba(22,163,74,.3)':'rgba(220,38,38,.3)')+'}' +
+    '.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid #edf2f7}' +
+    '.stat{padding:20px 16px;text-align:center;border-right:1px solid #edf2f7}' +
+    '.stat:last-child{border-right:none}' +
+    '.stat-n{font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;line-height:1;margin-bottom:4px}' +
+    '.stat-l{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#94a3b8}' +
+    '.details{padding:20px 24px;border-bottom:1px solid #edf2f7}' +
+    '.detail-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.85rem;border-bottom:1px solid #f1f5f9}' +
+    '.detail-row:last-child{border-bottom:none}' +
+    '.detail-label{color:#64748b}' +
+    '.detail-val{font-weight:600}' +
+    '.wm-strip{background:#f0fdf4;border-top:2px solid #86efac;border-bottom:2px solid #86efac;padding:10px 24px;text-align:center;font-size:.72rem;color:#166534;font-weight:600;letter-spacing:.5px}' +
+    '.footer{padding:20px 24px;text-align:center;font-size:.72rem;color:#94a3b8;line-height:1.8;background:#f8fafc;border-top:1px solid #e2e8f0}' +
+    '.footer a{color:#3de8a0;text-decoration:none}' +
+    '.review-section{padding:20px 24px}' +
+    '.rh{font-size:.9rem;font-weight:700;margin-bottom:12px;color:#1e293b}' +
+    '.rq{padding:12px;border-radius:8px;margin-bottom:8px;border:1px solid}' +
+    '.rq.wrong{background:#fef2f2;border-color:#fecaca}' +
+    '.rq.skip{background:#fffbeb;border-color:#fde68a}' +
+    '.rq-text{font-size:.82rem;color:#1e293b;margin-bottom:8px;line-height:1.5}' +
+    '.rq-meta{font-size:.7rem;color:#94a3b8;margin-bottom:6px}' +
+    '.ans-row{display:flex;gap:8px;flex-wrap:wrap}' +
+    '.ans-chip{font-size:.72rem;padding:3px 10px;border-radius:5px;border:1px solid}' +
+    '.ans-wrong{background:#fee2e2;color:#dc2626;border-color:#fca5a5}' +
+    '.ans-correct{background:#dcfce7;color:#16a34a;border-color:#86efac}' +
+    '@media print{body{padding:0}@page{margin:12mm}}' +
+  '</style></head><body>' +
+  '<div class="card">' +
+    '<div class="header">' +
+      '<div class="logo">NEETopia</div>' +
+      '<a class="logo-link" href="https://raunakkarn555.github.io/neetopia/index.html" target="_blank">raunakkarn555.github.io/neetopia</a>' +
+      '<div class="sub">Free NEET Preparation · India\'s Most Honest Platform · © 2026 NEETopia</div>' +
+    '</div>' +
+    '<div class="score-box">' +
+      '<div class="score-num">'+r.score+'</div>' +
+      '<div class="score-max">out of '+r.maxScore+' marks</div>' +
+      '<div class="student-name">'+studentName+'</div>' +
+      '<div class="verdict">'+(passed ? '✅ Well Done!' : '📚 Keep Practicing')+'</div>' +
+    '</div>' +
+    '<div class="stats">' +
+      '<div class="stat"><div class="stat-n" style="color:#16a34a">'+r.correct+'</div><div class="stat-l">Correct</div></div>' +
+      '<div class="stat"><div class="stat-n" style="color:#dc2626">'+r.wrong+'</div><div class="stat-l">Wrong</div></div>' +
+      '<div class="stat"><div class="stat-n" style="color:#d97706">'+r.skipped+'</div><div class="stat-l">Skipped</div></div>' +
+    '</div>' +
+    '<div class="details">' +
+      '<div class="detail-row"><span class="detail-label">Test Mode</span><span class="detail-val">'+(modeLabels[r.mode] || r.mode)+'</span></div>' +
+      '<div class="detail-row"><span class="detail-label">Accuracy</span><span class="detail-val">'+r.accuracy+'%</span></div>' +
+      '<div class="detail-row"><span class="detail-label">Time Taken</span><span class="detail-val">'+m+' min '+s+' sec</span></div>' +
+      '<div class="detail-row"><span class="detail-label">Date</span><span class="detail-val">'+dateStr+'</span></div>' +
+      '<div class="detail-row"><span class="detail-label">Chapter</span><span class="detail-val">The Living World — Biology Ch.1</span></div>' +
+      '<div class="detail-row"><span class="detail-label">Marking Scheme</span><span class="detail-val">+4 correct / −1 wrong / 0 skip</span></div>' +
+    '</div>' +
+    '<div class="wm-strip">✦ Generated by NEETopia · raunakkarn555.github.io/neetopia · Free NEET Preparation ✦</div>' +
+    (function(){
+      var wrongQs = activeQuestions.filter(function(_,i){ return userAnswers[i] !== undefined && userAnswers[i] !== activeQuestions[i].ans; });
+      if (!wrongQs.length) return '';
+      return '<div class="review-section"><div class="rh">Wrong Answers Review</div>' +
+        wrongQs.slice(0,15).map(function(q){
+          var idx = activeQuestions.indexOf(q);
+          return '<div class="rq wrong">' +
+            '<div class="rq-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
+            '<div class="rq-text">'+q.text+'</div>' +
+            '<div class="ans-row">' +
+              '<span class="ans-chip ans-wrong">Your: '+['A','B','C','D'][userAnswers[idx]]+'. '+q.opts[userAnswers[idx]]+'</span>' +
+              '<span class="ans-chip ans-correct">✓ '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
+            '</div></div>';
+        }).join('') +
+      '</div>';
+    })() +
+    '<div class="footer">' +
+      '<strong>NEETopia</strong> — India\'s Most Honest Free NEET Preparation Platform<br>' +
+      '<a href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia</a> · All content free · No ads · No paywalls<br>' +
+      '© 2026 NEETopia. All rights reserved. For personal NEET preparation only.<br>' +
+      'Redistribution or resale strictly prohibited.' +
+    '</div>' +
+  '</div>' +
+  '<script>window.onload=function(){window.print()}<\/script>' +
+  '</body></html>';
 
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  var blob = new Blob([html], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
-  a.download = `NEETopia-LivingWorld-Scorecard-${studentName.replace(/\s+/g,'_')}.html`;
+  a.download = 'NEETopia-LivingWorld-Scorecard-' + studentName.replace(/\s+/g,'_') + '.html';
   a.click();
   URL.revokeObjectURL(url);
 }
 
-// ── DOWNLOAD ALL QUESTIONS PDF ──
+// ── DOWNLOAD ALL 140 QUESTIONS ──
+// FIX 5: Fixed HTML generation — was not properly building question blocks causing blank download
 function downloadAllPDF() {
-  const topics = [
+  var topics = [
     { key:'life', label:'Characteristics of Life' },
     { key:'taxonomy', label:'Taxonomy & Classification' },
     { key:'nomenclature', label:'Nomenclature' },
     { key:'aids', label:'Taxonomic Aids' }
   ];
 
-  let qHtml = '';
-  let qNum = 1;
-  topics.forEach(t => {
-    const qs = ALL_QUESTIONS.filter(q => q.topic === t.key);
-    qHtml += `<div class="topic-section"><h2>${t.label} <span class="q-count">${qs.length} Questions</span></h2>`;
-    qs.forEach(q => {
-      qHtml += `<div class="q-block">
-        <div class="q-no">Q${qNum}.</div>
-        <div class="q-text">${q.text}</div>
-        <div class="q-opts">
-          ${q.opts.map((o,i) => `<div class="q-opt"><span class="ol">${['A','B','C','D'][i]}.</span> ${o}</div>`).join('')}
-        </div>
-        <div class="ans">Answer: ${['A','B','C','D'][q.ans]}</div>
-      </div>`;
+  var qHtml = '';
+  var qNum = 1;
+  topics.forEach(function(t) {
+    var qs = ALL_QUESTIONS.filter(function(q){ return q.topic === t.key; });
+    qHtml += '<div class="topic-section"><h2>'+t.label+' <span class="q-count">'+qs.length+' Questions</span></h2>';
+    qs.forEach(function(q) {
+      qHtml += '<div class="q-block">' +
+        '<div class="q-no">Q'+qNum+'.</div>' +
+        '<div class="q-inner">' +
+          '<div class="q-text">'+q.text+'</div>' +
+          '<div class="q-opts">' +
+            q.opts.map(function(o,i){
+              return '<div class="q-opt"><span class="ol">'+['A','B','C','D'][i]+'.</span> '+o+'</div>';
+            }).join('') +
+          '</div>' +
+          '<div class="ans">Answer: '+['A','B','C','D'][q.ans]+'</div>' +
+        '</div>' +
+      '</div>';
       qNum++;
     });
     qHtml += '</div>';
   });
 
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia — Living World 140 MCQs</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',Arial,sans-serif;font-size:12px;color:#111;padding:20px 28px;max-width:800px;margin:0 auto}
-    .doc-header{text-align:center;padding:20px 0 16px;border-bottom:2px solid #111;margin-bottom:24px}
-    .doc-logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
-    .doc-title{font-size:1rem;font-weight:600;margin-top:6px}
-    .doc-meta{font-size:.72rem;color:#555;margin-top:4px}
-    .doc-info{display:flex;gap:24px;justify-content:center;margin-top:10px;font-size:.72rem;color:#333}
-    .info-item{font-weight:600}
-    .topic-section{margin-bottom:28px;page-break-inside:avoid}
-    .topic-section h2{font-size:1rem;font-weight:700;background:#f0f4fa;padding:10px 14px;border-radius:6px;margin-bottom:14px;border-left:4px solid #0aa8f0}
-    .q-count{font-size:.72rem;font-weight:400;color:#555;margin-left:8px}
-    .q-block{padding:10px 0 10px;border-bottom:1px dashed #ddd;display:flex;gap:8px;align-items:flex-start}
-    .q-no{font-weight:700;color:#0aa8f0;min-width:28px;flex-shrink:0;font-size:.85rem;margin-top:1px}
-    .q-inner{flex:1}
-    .q-text{font-weight:500;line-height:1.5;margin-bottom:6px}
-    .q-opts{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-    .q-opt{display:flex;gap:5px;font-size:.78rem;color:#333;align-items:flex-start}
-    .ol{font-weight:600;color:#555;min-width:16px;flex-shrink:0}
-    .ans{margin-top:6px;font-size:.72rem;font-weight:600;color:#16a34a;background:#dcfce7;display:inline-block;padding:2px 10px;border-radius:4px}
-    .footer{text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid #ddd;font-size:.68rem;color:#777;line-height:1.7}
-    @media print{body{padding:12mm 16mm}@page{margin:12mm;size:A4}}
-  </style></head><body>
-  <div class="doc-header">
-    <div class="doc-logo">NEETopia</div>
-    <div class="doc-title">The Living World — 140 MCQ Practice Questions</div>
-    <div class="doc-meta">Class 11 Biology Chapter 1 · neetopia.in · Free NEET Preparation</div>
-    <div class="doc-info">
-      <span class="info-item">140 Questions</span>
-      <span>·</span>
-      <span class="info-item">+4/−1 Marking</span>
-      <span>·</span>
-      <span class="info-item">4 Topics</span>
-      <span>·</span>
-      <span class="info-item">NEET Pattern</span>
-    </div>
-  </div>
-  ${qHtml}
-  <div class="footer">
-    NEETopia — India's Most Honest, Free NEET Preparation Platform · neetopia.in<br>
-    © 2026 NEETopia. All Rights Reserved. This document is protected by copyright.<br>
-    Redistribution, resale, or reproduction in any form is strictly prohibited.<br>
-    This material is provided free of charge for personal NEET preparation only.
-  </div>
-  <script>window.onload=function(){window.print()}<\/script>
-  </body></html>`;
+  // FIX 6: Updated copyright with correct GitHub link in PDF download too
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia — Living World 140 MCQs</title>' +
+  '<style>' +
+    '*{margin:0;padding:0;box-sizing:border-box}' +
+    'body{font-family:\'Segoe UI\',Arial,sans-serif;font-size:12px;color:#111;padding:20px 28px;max-width:800px;margin:0 auto}' +
+    '.doc-header{text-align:center;padding:20px 0 16px;border-bottom:2px solid #111;margin-bottom:24px}' +
+    '.doc-logo{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}' +
+    '.doc-title{font-size:1rem;font-weight:600;margin-top:6px}' +
+    '.doc-meta{font-size:.72rem;color:#555;margin-top:4px}' +
+    '.doc-link{font-size:.72rem;color:#16a34a;text-decoration:none;display:block;margin-top:3px}' +
+    '.doc-info{display:flex;gap:24px;justify-content:center;margin-top:10px;font-size:.72rem;color:#333}' +
+    '.info-item{font-weight:600}' +
+    '.wm-bar{background:#f0fdf4;border:1px solid #86efac;padding:6px 16px;text-align:center;font-size:.68rem;color:#166534;font-weight:600;letter-spacing:.5px;border-radius:6px;margin-bottom:20px}' +
+    '.topic-section{margin-bottom:28px}' +
+    '.topic-section h2{font-size:1rem;font-weight:700;background:#f0f4fa;padding:10px 14px;border-radius:6px;margin-bottom:14px;border-left:4px solid #0aa8f0}' +
+    '.q-count{font-size:.72rem;font-weight:400;color:#555;margin-left:8px}' +
+    '.q-block{padding:10px 0 10px;border-bottom:1px dashed #ddd;display:flex;gap:8px;align-items:flex-start}' +
+    '.q-no{font-weight:700;color:#0aa8f0;min-width:28px;flex-shrink:0;font-size:.85rem;margin-top:1px}' +
+    '.q-inner{flex:1}' +
+    '.q-text{font-weight:500;line-height:1.5;margin-bottom:6px}' +
+    '.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:3px}' +
+    '.q-opt{display:flex;gap:5px;font-size:.78rem;color:#333;align-items:flex-start}' +
+    '.ol{font-weight:600;color:#555;min-width:16px;flex-shrink:0}' +
+    '.ans{margin-top:6px;font-size:.72rem;font-weight:600;color:#16a34a;background:#dcfce7;display:inline-block;padding:2px 10px;border-radius:4px}' +
+    '.footer{text-align:center;margin-top:32px;padding-top:16px;border-top:2px solid #111;font-size:.68rem;color:#555;line-height:1.8}' +
+    '.footer a{color:#16a34a;text-decoration:none}' +
+    '@media print{body{padding:12mm 16mm}@page{margin:12mm;size:A4}}' +
+  '</style></head><body>' +
+  '<div class="doc-header">' +
+    '<div class="doc-logo">NEETopia</div>' +
+    '<div class="doc-title">The Living World — 140 MCQ Practice Questions</div>' +
+    '<div class="doc-meta">Class 11 Biology Chapter 1</div>' +
+    '<a class="doc-link" href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia — Free NEET Preparation</a>' +
+    '<div class="doc-info">' +
+      '<span class="info-item">140 Questions</span>' +
+      '<span>·</span>' +
+      '<span class="info-item">+4/−1 Marking</span>' +
+      '<span>·</span>' +
+      '<span class="info-item">4 Topics</span>' +
+      '<span>·</span>' +
+      '<span class="info-item">NEET Pattern</span>' +
+    '</div>' +
+  '</div>' +
+  '<div class="wm-bar">✦ NEETopia · raunakkarn555.github.io/neetopia · All content free · No ads · No paywalls ✦</div>' +
+  qHtml +
+  '<div class="footer">' +
+    '<strong>NEETopia</strong> — India\'s Most Honest, Free NEET Preparation Platform<br>' +
+    '<a href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia</a><br>' +
+    '© 2026 NEETopia. All Rights Reserved. This document is protected by copyright.<br>' +
+    'Redistribution, resale, or reproduction in any form is strictly prohibited.<br>' +
+    'This material is provided free of charge for personal NEET preparation only.' +
+  '</div>' +
+  '<script>window.onload=function(){window.print()}<\/script>' +
+  '</body></html>';
 
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  var blob = new Blob([html], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
   a.download = 'NEETopia-LivingWorld-140MCQs.html';
   a.click();
@@ -2546,9 +2583,6 @@ renderHistory();
 })();
 
 // ── PROGRESS TRACKER (localStorage) ──
-// Usage: call NEETopia.markDone('bio-ch01') to mark a chapter complete
-// Call NEETopia.isDone('bio-ch01') to check
-
 window.NEETopia = window.NEETopia || {};
 
 NEETopia.markDone = function(key) {
@@ -2577,7 +2611,6 @@ NEETopia.countDone = function() {
 };
 
 // ── CHAPTER CHECKBOX AUTO-INIT ──
-// Add data-chapter="bio-ch01" to any <input type="checkbox"> to auto-bind progress
 (function () {
   document.querySelectorAll('[data-chapter]').forEach(el => {
     const key = el.getAttribute('data-chapter');
@@ -2595,7 +2628,7 @@ NEETopia.countDone = function() {
 
 
 <script>
-/* ── MOBILE MENU TOGGLE (inline fallback — works even if main.js hasn't loaded) ── */
+/* ── MOBILE MENU TOGGLE (inline fallback) ── */
 function toggleMobileMenu() {
   var menu    = document.getElementById('mobileMenu');
   var overlay = document.getElementById('mobileOverlay');
