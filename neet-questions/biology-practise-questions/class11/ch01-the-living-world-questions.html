@@ -615,7 +615,7 @@
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  z-index: 300;
+  z-index: 90;
   overflow-y: auto;
   box-shadow: 0 24px 60px rgba(0,0,0,0.4);
 }
@@ -950,6 +950,51 @@
 .review-your-ans.skipped { background: rgba(244,185,66,0.1); color: var(--amber); border: 1px solid rgba(244,185,66,0.2); }
 .review-correct-ans { font-size: .78rem; padding: 4px 12px; border-radius: 6px; background: rgba(61,232,160,0.08); color: var(--green); border: 1px solid rgba(61,232,160,0.2); }
 
+/* EXPLANATION BOX */
+.explanation-box {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba(61,191,255,0.06);
+  border: 1px solid rgba(61,191,255,0.18);
+  border-radius: 8px;
+  font-size: .82rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.explanation-box strong {
+  color: var(--accent);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* FULL REVIEW TOGGLE */
+.full-review-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--bg2);
+  border: 1px solid rgba(61,232,160,0.25);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-family: var(--font-head);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--green);
+  transition: all .2s;
+}
+.full-review-toggle:hover { background: rgba(61,232,160,0.06); }
+.full-review-toggle .frt-chevron { transition: transform .3s; color: var(--green); }
+.full-review-toggle.open .frt-chevron { transform: rotate(180deg); }
+.full-review-body { display: none; }
+.full-review-body.open { display: block; }
+
 /* TEST HISTORY */
 .history-section {
   max-width: 1200px;
@@ -1040,12 +1085,59 @@
 .hcs { font-size: .72rem; color: var(--text2); }
 .hcs strong { color: var(--text); }
 
-/* IMPORTANT LINKS */
+/* IMPORTANT LINKS — TOGGLE CARD */
 .important-links {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 clamp(16px,4%,80px) 40px;
 }
+.il-toggle-card {
+  background: var(--bg2);
+  border: 1px solid rgba(61,191,255,0.25);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.il-toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, background .2s;
+  user-select: none;
+  background: rgba(61,191,255,0.04);
+}
+.il-toggle-card.open .il-toggle-header { border-bottom-color: var(--border); }
+.il-toggle-header:hover { background: rgba(61,191,255,0.08); }
+.il-toggle-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.il-toggle-icon {
+  width: 36px; height: 36px;
+  background: rgba(61,191,255,0.12);
+  border: 1px solid rgba(61,191,255,0.25);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.il-toggle-title {
+  font-family: var(--font-head);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.il-toggle-subtitle { font-size: .73rem; color: var(--text3); margin-top: 1px; }
+.il-toggle-chevron { color: var(--accent); transition: transform .3s; flex-shrink: 0; }
+.il-toggle-card.open .il-toggle-chevron { transform: rotate(180deg); }
+.il-toggle-body {
+  display: none;
+  padding: 20px 22px;
+}
+.il-toggle-card.open .il-toggle-body { display: block; }
 .il-title {
   font-family: var(--font-mono);
   font-size: .65rem;
@@ -1529,50 +1621,66 @@
     <div id="historyContainer"></div>
   </div>
 
-  <!-- IMPORTANT LINKS -->
+  <!-- IMPORTANT LINKS — TOGGLE CARD -->
   <div class="important-links">
-    <div class="il-title">Important Links</div>
-    <div class="il-grid">
-      <a href="../../../subjects/biology/class11/ch01-the-living-world-notes.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        Living World Notes
-      </a>
-      <a href="../../../neet-pyq/neet-previous-year-questions.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
-        PYQs 2013–2024
-      </a>
-      <a href="../../../syllabus/neet-syllabus.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        Full NEET Syllabus
-      </a>
-      <a href="../../../subjects/biology/neet-biology.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        All Biology Chapters
-      </a>
-      <a href="../../../pattern/neet-exam-pattern-marking-scheme.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Exam Pattern
-      </a>
-      <a href="../../../tools/neet-progress-tracker.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Progress Tracker
-      </a>
-      <a href="../../../roadmap/neet-study-roadmap.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        Study Roadmap
-      </a>
-      <a href="../../../neet-questions/neet-mcq-practice-questions.html" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        All Practice Questions
-      </a>
-      <a href="mailto:raunakkarn777@gmail.com" class="il-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Contact / Email
-      </a>
-      <a href="../../../donate.html" class="il-link" style="color:var(--purple);border-color:rgba(168,124,245,0.3)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        Support NEETopia 💜
-      </a>
+    <div class="il-toggle-card" id="ilToggleCard">
+      <div class="il-toggle-header" onclick="toggleILCard()">
+        <div class="il-toggle-header-left">
+          <div class="il-toggle-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div>
+            <div class="il-toggle-title">Important Links</div>
+            <div class="il-toggle-subtitle">Notes, PYQs, Syllabus, Tools &amp; More · Click to expand</div>
+          </div>
+        </div>
+        <svg class="il-toggle-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="il-toggle-body">
+        <div class="il-title">Important Links</div>
+        <div class="il-grid">
+          <a href="../../../subjects/biology/class11/ch01-the-living-world-notes.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Living World Notes
+          </a>
+          <a href="../../../neet-pyq/neet-previous-year-questions.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+            PYQs 2013–2024
+          </a>
+          <a href="../../../syllabus/neet-syllabus.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Full NEET Syllabus
+          </a>
+          <a href="../../../subjects/biology/neet-biology.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            All Biology Chapters
+          </a>
+          <a href="../../../pattern/neet-exam-pattern-marking-scheme.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Exam Pattern
+          </a>
+          <a href="../../../tools/neet-progress-tracker.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Progress Tracker
+          </a>
+          <a href="../../../roadmap/neet-study-roadmap.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Study Roadmap
+          </a>
+          <a href="../../../neet-questions/neet-mcq-practice-questions.html" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            All Practice Questions
+          </a>
+          <a href="mailto:raunakkarn777@gmail.com" class="il-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact / Email
+          </a>
+          <a href="../../../donate.html" class="il-link" style="color:var(--purple);border-color:rgba(168,124,245,0.3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a87cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support NEETopia 💜
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1729,161 +1837,165 @@
 // ═══════════════════════════════════════
 
 // ── TEST GUIDE TOGGLE ──
-// FIX 1: Single definition only — removed duplicate that appeared before ALL_QUESTIONS
 function toggleGuide() {
   document.getElementById('testGuideCard').classList.toggle('open');
+}
+
+// ── IMPORTANT LINKS TOGGLE ──
+function toggleILCard() {
+  document.getElementById('ilToggleCard').classList.toggle('open');
 }
 
 
 // ── ALL 140 QUESTIONS DATA ──
 const ALL_QUESTIONS = [
   // ── CHARACTERISTICS OF LIFE (Q1–40) ──
-  {id:1, topic:'life', text:'Which is the CORRECT twin characteristic of growth in living organisms?', opts:['Increase in cell size only','Increase in cell number only','Both increase in cell size and cell number','Neither size nor number change'], ans:2},
-  {id:2, topic:'life', text:'In animals, growth does not occur throughout life because:', opts:['Cell division stops completely','Cell size does not increase','Rate of cell division equals rate of cell death','Metabolism stops in adult animals'], ans:2},
-  {id:3, topic:'life', text:'In which of the following organisms are growth and reproduction mutually exclusive events?', opts:['Multicellular plants','Multicellular animals','Bacteria','Both multicellular plants and animals'], ans:3},
-  {id:4, topic:'life', text:'Growth and reproduction are mutually inclusive events in:', opts:['Cyanobacteria only','Chlamydomonas only','Amoeba only','All of the above'], ans:3},
-  {id:5, topic:'life', text:'Growth in living organisms is described as:', opts:['Extrinsic — driven by external environment only','Intrinsic — from within the organism','A defining property of life only in plants','Both intrinsic and a defining property'], ans:3},
-  {id:6, topic:'life', text:'Which of the following is NOT a defining property of living organisms?', opts:['Cellular organization','Self-consciousness','Metabolism','Reproduction'], ans:1},
-  {id:7, topic:'life', text:'Metabolic reactions are called \'living reactions\' because they:', opts:['Occur only under living conditions','Can occur in non-living conditions too','Are catalyzed by enzymes of biological origin','Both (1) and (3)'], ans:2},
-  {id:8, topic:'life', text:'The response of a living organism to an external stimulus is:', opts:['Physical','Biological','Chemical','All of the above'], ans:3},
-  {id:9, topic:'life', text:'Which is a universal property found in ALL living organisms?', opts:['Locomotion','Photosynthesis','Metabolism','Sexual reproduction'], ans:2},
-  {id:10, topic:'life', text:'\'Fragmentation\' as a mode of reproduction is primarily a feature of:', opts:['Higher multicellular animals','Lower organisms like Spirogyra','All plants','Vertebrates only'], ans:1},
-  {id:11, topic:'life', text:'Which characteristic distinguishes living from non-living objects most fundamentally?', opts:['Movement','Growth','Consciousness','Self-replicating metabolism'], ans:3},
-  {id:12, topic:'life', text:'A mule is a sterile hybrid. Which property of life does it lack?', opts:['Growth','Metabolism','Reproduction','Response to stimuli'], ans:2},
-  {id:13, topic:'life', text:'The total number of species described and known to science is approximately:', opts:['1.7 to 1.8 million','20 million','1.3 to 1.4 million','500,000'], ans:0},
-  {id:14, topic:'life', text:'Which of the following statements about sexual reproduction is CORRECT?', opts:['It is present in all multicellular organisms','It is absent in some living organisms','It is the only mode of reproduction in bacteria','It requires two parents always'], ans:1},
-  {id:15, topic:'life', text:'Reproduction in Amoeba is by:', opts:['Sexual reproduction','Binary fission','Sporulation','Fragmentation'], ans:1},
-  {id:16, topic:'life', text:'An isolated metabolic reaction performed in a test tube (in vitro) is:', opts:['Not considered a living process','Considered fully equivalent to in vivo metabolism','Proof that life is unnecessary for chemistry','Both (1) and (3)'], ans:0},
-  {id:17, topic:'life', text:'Which of the following pairs shows organisms where growth is a defining property but reproduction may be absent?', opts:['Mule and working bee (sterile worker)','Bacteria and Virus','Amoeba and Paramecium','Spirogyra and Chlamydomonas'], ans:0},
-  {id:18, topic:'life', text:'Consciousness (ability to sense environment and respond) is:', opts:['A defining property of all living organisms','Present only in animals','Only a characteristic, not a defining property for NCERT classification','Absent in plants'], ans:2},
-  {id:19, topic:'life', text:'The \'open\' nature of living systems means:', opts:['Organisms have no boundaries','Living systems continuously exchange matter and energy with the environment','Living cells have open pores everywhere','Organisms grow without limit'], ans:1},
-  {id:20, topic:'life', text:'Which is the best example of growth in non-living things that RESEMBLES biological growth but is NOT the same?', opts:['Growth of crystal by addition of similar units','Growth of embryo','Growth of a seedling','Increase in cell number in yeast'], ans:0},
-  {id:21, topic:'life', text:'Reproduction is considered important because:', opts:['It increases the mass of an organism','It is linked to the continuity of species','It is found in all multicellular organisms only','It is required for individual survival'], ans:1},
-  {id:22, topic:'life', text:'Which property is shown by both living and non-living things?', opts:['Metabolism','Growth','Reproduction','Consciousness'], ans:1},
-  {id:23, topic:'life', text:'The total number of metabolic reactions occurring in the body at any given time is called:', opts:['Catabolism','Anabolism','Metabolome','Cellular total'], ans:2},
-  {id:24, topic:'life', text:'Which of the following represents asexual reproduction?', opts:['Gamete formation in humans','Budding in Hydra','Meiosis in plants','Pollination in angiosperms'], ans:1},
-  {id:25, topic:'life', text:'Biodiversity essentially refers to:', opts:['Number of individuals in a species','Variety of life forms — their number and diversity','Genetic diversity only','Species of a particular region only'], ans:1},
-  {id:26, topic:'life', text:'Which statement about viruses is CORRECT in the context of life?', opts:['Viruses are fully living as they metabolize','Viruses are fully non-living as they lack cells','Viruses can reproduce only inside living cells — making them borderline living','Viruses grow by cell division'], ans:2},
-  {id:27, topic:'life', text:'Isolated metabolic reactions in vitro:', opts:['Indicate that life is a chemical process','Are exactly equivalent to in vivo life','Cannot occur at all','Prove that all chemistry is living'], ans:0},
-  {id:28, topic:'life', text:'Regeneration of body parts in Planaria is an example of:', opts:['Sexual reproduction','Growth only','Asexual reproduction via regeneration','Budding'], ans:2},
-  {id:29, topic:'life', text:'Which of the following is NOT a characteristic of living organisms?', opts:['Metabolism','Reproduction','Crystallization','Growth'], ans:2},
-  {id:30, topic:'life', text:'Sensitivity or irritability in organisms is:', opts:['Ability to reproduce when conditions are right','Ability to sense and respond to environmental changes','Ability to grow in the dark','Ability to photosynthesize'], ans:1},
-  {id:31, topic:'life', text:'In plants, growth is:', opts:['Restricted to tips only in adult plants','Seen throughout life due to meristems','Seen only in juvenile stage','Absent in woody plants'], ans:1},
-  {id:32, topic:'life', text:'The concept that defines life most comprehensively among NCERT is:', opts:['Locomotion','Reproduction and metabolism together','Self-healing and consciousness','Photosynthesis and growth'], ans:1},
-  {id:33, topic:'life', text:'Which of the following is a correct example of anabolism?', opts:['Breakdown of glucose in respiration','Synthesis of proteins from amino acids','Digestion of starch','Decomposition of urea'], ans:1},
-  {id:34, topic:'life', text:'The sum of all chemical reactions in a living body is:', opts:['Photosynthesis','Respiration','Metabolism','Osmosis'], ans:2},
-  {id:35, topic:'life', text:'Which of the following is NOT an example of asexual reproduction?', opts:['Binary fission in Amoeba','Budding in Hydra','Spore formation in Rhizopus','Pollination in flowers'], ans:3},
-  {id:36, topic:'life', text:'Spore formation as a mode of reproduction is seen in:', opts:['Rhizopus (bread mould)','Paramecium','Hydra','Earthworm'], ans:0},
-  {id:37, topic:'life', text:'The metabolic basis of life means:', opts:['Life is only chemistry','All living organisms have a unique set of chemical reactions','Living organisms consume only organic food','Metabolism is absent in viruses'], ans:1},
-  {id:38, topic:'life', text:'Which is NOT a defining characteristic of life according to NCERT?', opts:['Growth','Metabolism','Locomotion','Reproduction'], ans:2},
-  {id:39, topic:'life', text:'A worker bee is sterile. It still has:', opts:['Reproduction','Growth and metabolism only','Photosynthesis','Sporulation'], ans:1},
-  {id:40, topic:'life', text:'Which one of the following is a property shared by crystals and living organisms?', opts:['Reproduction','Metabolism','Growth','Consciousness'], ans:2},
+  {id:1, topic:'life', text:'Which is the CORRECT twin characteristic of growth in living organisms?', opts:['Increase in cell size only','Increase in cell number only','Both increase in cell size and cell number','Neither size nor number change'], ans:2, exp:'Growth in living organisms occurs by increase in both cell size (cell enlargement) and cell number (cell division). Non-living things like crystals grow by addition of similar particles externally — not by cell division.'},
+  {id:2, topic:'life', text:'In animals, growth does not occur throughout life because:', opts:['Cell division stops completely','Cell size does not increase','Rate of cell division equals rate of cell death','Metabolism stops in adult animals'], ans:2, exp:'In adult animals, growth ceases because the rate of new cell production equals the rate of cell death, maintaining a steady state. Unlike plants that have meristems for continuous growth, animals lack this feature in most tissues.'},
+  {id:3, topic:'life', text:'In which of the following organisms are growth and reproduction mutually exclusive events?', opts:['Multicellular plants','Multicellular animals','Bacteria','Both multicellular plants and animals'], ans:3, exp:'In multicellular organisms (plants and animals), growth (increase in body mass) and reproduction (producing offspring) are separate, mutually exclusive events — they do not happen simultaneously. A plant grows first, then reproduces.'},
+  {id:4, topic:'life', text:'Growth and reproduction are mutually inclusive events in:', opts:['Cyanobacteria only','Chlamydomonas only','Amoeba only','All of the above'], ans:3, exp:'In unicellular organisms like Cyanobacteria, Chlamydomonas, and Amoeba, growth of the individual cell and reproduction (cell division creating new individuals) occur together — they are mutually inclusive. The cell grows and divides to reproduce.'},
+  {id:5, topic:'life', text:'Growth in living organisms is described as:', opts:['Extrinsic — driven by external environment only','Intrinsic — from within the organism','A defining property of life only in plants','Both intrinsic and a defining property'], ans:3, exp:'Growth in living organisms is intrinsic (from within — driven by internal metabolic processes) and is considered a defining property of life. However, non-living things can also show growth (like crystals), so alone it does not define life.'},
+  {id:6, topic:'life', text:'Which of the following is NOT a defining property of living organisms?', opts:['Cellular organization','Self-consciousness','Metabolism','Reproduction'], ans:1, exp:'Self-consciousness (awareness of oneself as an individual entity) is not listed as a defining property of life in NCERT. The defining properties are metabolism, cellular organization, growth, reproduction, and response to stimuli. Consciousness is a characteristic, but self-consciousness goes beyond what defines life biologically.'},
+  {id:7, topic:'life', text:'Metabolic reactions are called \'living reactions\' because they:', opts:['Occur only under living conditions','Can occur in non-living conditions too','Are catalyzed by enzymes of biological origin','Both (1) and (3)'], ans:2, exp:'Metabolic reactions can be performed in vitro (outside a living body, in a test tube) under controlled conditions. However, they are still called living reactions because the enzymes driving them are biological molecules. The sum total of metabolic reactions is unique to life.'},
+  {id:8, topic:'life', text:'The response of a living organism to an external stimulus is:', opts:['Physical','Biological','Chemical','All of the above'], ans:3, exp:'When living organisms respond to stimuli, the response involves physical changes (movement), biological processes (nerve impulses, hormonal signals), and chemical reactions (enzyme activation, receptor binding). Hence the response is all of the above.'},
+  {id:9, topic:'life', text:'Which is a universal property found in ALL living organisms?', opts:['Locomotion','Photosynthesis','Metabolism','Sexual reproduction'], ans:2, exp:'Metabolism — the sum of all chemical reactions in an organism — is the ONLY truly universal property of all living organisms. Locomotion is absent in plants, photosynthesis only in autotrophs, and sexual reproduction is absent in some organisms.'},
+  {id:10, topic:'life', text:'\'Fragmentation\' as a mode of reproduction is primarily a feature of:', opts:['Higher multicellular animals','Lower organisms like Spirogyra','All plants','Vertebrates only'], ans:1, exp:'Fragmentation is a mode of asexual reproduction seen in lower organisms like Spirogyra (filamentous alga). The body breaks into fragments, each growing into a new organism. Higher animals generally cannot reproduce this way.'},
+  {id:11, topic:'life', text:'Which characteristic distinguishes living from non-living objects most fundamentally?', opts:['Movement','Growth','Consciousness','Self-replicating metabolism'], ans:3, exp:'The ability to self-replicate using metabolism (i.e., using internally-driven chemical reactions to make copies of oneself) is the most fundamental distinction. Non-living things can move (wind) and grow (crystals), but they cannot carry out metabolism and use it for self-replication.'},
+  {id:12, topic:'life', text:'A mule is a sterile hybrid. Which property of life does it lack?', opts:['Growth','Metabolism','Reproduction','Response to stimuli'], ans:2, exp:'A mule (offspring of horse and donkey) is sterile — it cannot reproduce. While reproduction is not essential for an individual organism to be alive (mules do grow, metabolize, and respond), it lacks the reproductive capacity which is a key property of living organisms.'},
+  {id:13, topic:'life', text:'The total number of species described and known to science is approximately:', opts:['1.7 to 1.8 million','20 million','1.3 to 1.4 million','500,000'], ans:0, exp:'As per NCERT (Class 11, Chapter 1), approximately 1.7 to 1.8 million species have been described and named by scientists. The actual number of species on Earth is estimated to be much higher (possibly 20 million+), but documented species are about 1.7-1.8 million.'},
+  {id:14, topic:'life', text:'Which of the following statements about sexual reproduction is CORRECT?', opts:['It is present in all multicellular organisms','It is absent in some living organisms','It is the only mode of reproduction in bacteria','It requires two parents always'], ans:1, exp:'Sexual reproduction is absent in some organisms — for example, many bacteria reproduce only asexually (binary fission). Also, some plants and lower animals reproduce exclusively asexually. So reproduction (especially sexual) is NOT a universal property of all living organisms.'},
+  {id:15, topic:'life', text:'Reproduction in Amoeba is by:', opts:['Sexual reproduction','Binary fission','Sporulation','Fragmentation'], ans:1, exp:'Amoeba reproduces asexually by binary fission — the single cell divides into two daughter cells. This is the primary mode of reproduction in Amoeba. Binary fission is also seen in bacteria and other unicellular organisms.'},
+  {id:16, topic:'life', text:'An isolated metabolic reaction performed in a test tube (in vitro) is:', opts:['Not considered a living process','Considered fully equivalent to in vivo life','Proof that life is unnecessary for chemistry','Both (1) and (3)'], ans:0, exp:'An in vitro metabolic reaction is NOT considered a living process because it lacks the complete integrated system of life. Life is more than just individual reactions — it is the sum total of all reactions occurring simultaneously in an organized manner. In vitro reactions demonstrate chemistry, not life.'},
+  {id:17, topic:'life', text:'Which of the following pairs shows organisms where growth is a defining property but reproduction may be absent?', opts:['Mule and working bee (sterile worker)','Bacteria and Virus','Amoeba and Paramecium','Spirogyra and Chlamydomonas'], ans:0, exp:'Both mules and sterile worker bees grow and have metabolism, but they are sterile — incapable of reproduction. This shows that while reproduction is a property of life, it is not present in all individual organisms, unlike metabolism which is truly universal.'},
+  {id:18, topic:'life', text:'Consciousness (ability to sense environment and respond) is:', opts:['A defining property of all living organisms','Present only in animals','Only a characteristic, not a defining property for NCERT classification','Absent in plants'], ans:2, exp:'Consciousness — defined as the ability to sense the environment and respond to it — is considered a characteristic of living organisms in NCERT, but it is not listed among the definitive properties of life (like metabolism). Plants also sense and respond to stimuli, so it is not limited to animals.'},
+  {id:19, topic:'life', text:'The \'open\' nature of living systems means:', opts:['Organisms have no boundaries','Living systems continuously exchange matter and energy with the environment','Living cells have open pores everywhere','Organisms grow without limit'], ans:1, exp:'Living systems are "open systems" in thermodynamic terms — they continuously exchange matter (food, gases, water) and energy (heat, light) with their environment. This continuous exchange is essential for maintaining life and is fundamentally different from closed systems.'},
+  {id:20, topic:'life', text:'Which is the best example of growth in non-living things that RESEMBLES biological growth but is NOT the same?', opts:['Growth of crystal by addition of similar units','Growth of embryo','Growth of a seedling','Increase in cell number in yeast'], ans:0, exp:'Crystals grow by external addition of similar molecules to their surface — this is NOT intrinsic growth. Biological growth is intrinsic (from within, through cell division and metabolism). Crystal growth is used in NCERT as the classic example of non-living growth that superficially resembles life.'},
+  {id:21, topic:'life', text:'Reproduction is considered important because:', opts:['It increases the mass of an organism','It is linked to the continuity of species','It is found in all multicellular organisms only','It is required for individual survival'], ans:1, exp:'Reproduction is important because it ensures the continuity of the species across generations. Individual organisms do not need to reproduce to survive, but without reproduction, the species would go extinct. It links past and future generations.'},
+  {id:22, topic:'life', text:'Which property is shown by both living and non-living things?', opts:['Metabolism','Growth','Reproduction','Consciousness'], ans:1, exp:'Growth is seen in both living and non-living things. Non-living things like mountains grow (geological processes), crystals grow, and sand dunes grow. However, the nature of growth differs: biological growth is intrinsic and involves cell division, while non-living growth is by external addition.'},
+  {id:23, topic:'life', text:'The total number of metabolic reactions occurring in the body at any given time is called:', opts:['Catabolism','Anabolism','Metabolome','Cellular total'], ans:2, exp:'The metabolome refers to the complete set of all metabolic reactions (and their small-molecule substrates, intermediates, and products) in an organism at any given time. It represents the entire metabolic profile of an organism.'},
+  {id:24, topic:'life', text:'Which of the following represents asexual reproduction?', opts:['Gamete formation in humans','Budding in Hydra','Meiosis in plants','Pollination in angiosperms'], ans:1, exp:'Budding in Hydra is asexual reproduction — a small bud grows from the parent body and eventually detaches to form a new individual. Gamete formation, meiosis, and pollination are all related to sexual reproduction.'},
+  {id:25, topic:'life', text:'Biodiversity essentially refers to:', opts:['Number of individuals in a species','Variety of life forms — their number and diversity','Genetic diversity only','Species of a particular region only'], ans:1, exp:'Biodiversity refers to the variety of life forms on Earth — including the number of species (species diversity), the variety of genes within a species (genetic diversity), and the variety of ecosystems (ecosystem diversity). It encompasses all levels of biological variety.'},
+  {id:26, topic:'life', text:'Which statement about viruses is CORRECT in the context of life?', opts:['Viruses are fully living as they metabolize','Viruses are fully non-living as they lack cells','Viruses can reproduce only inside living cells — making them borderline living','Viruses grow by cell division'], ans:2, exp:'Viruses occupy a borderline between living and non-living. Outside a host cell, they are inert (no metabolism). Inside a host cell, they can replicate. They lack cells and independent metabolism, but can reproduce using the host machinery. NCERT places viruses outside the standard classification of life.'},
+  {id:27, topic:'life', text:'Isolated metabolic reactions in vitro:', opts:['Indicate that life is a chemical process','Are exactly equivalent to in vivo life','Cannot occur at all','Prove that all chemistry is living'], ans:0, exp:'In vitro metabolic reactions indicate that the chemical basis of life can be studied outside the organism. They show that life is fundamentally a chemical process. However, isolated reactions are not equivalent to the complex, integrated metabolic network of a living cell.'},
+  {id:28, topic:'life', text:'Regeneration of body parts in Planaria is an example of:', opts:['Sexual reproduction','Growth only','Asexual reproduction via regeneration','Budding'], ans:2, exp:'Planaria (a flatworm) can regenerate entire new individuals from body fragments — this is a form of asexual reproduction called regeneration. Each piece grows into a complete organism. This is different from simple wound healing (growth only).'},
+  {id:29, topic:'life', text:'Which of the following is NOT a characteristic of living organisms?', opts:['Metabolism','Reproduction','Crystallization','Growth'], ans:2, exp:'Crystallization is a physical/chemical process in non-living matter (like salt or mineral crystals forming). It is NOT a characteristic of living organisms. All the other options — metabolism, reproduction, and growth — are indeed characteristics of living organisms.'},
+  {id:30, topic:'life', text:'Sensitivity or irritability in organisms is:', opts:['Ability to reproduce when conditions are right','Ability to sense and respond to environmental changes','Ability to grow in the dark','Ability to photosynthesize'], ans:1, exp:'Sensitivity (or irritability) is the ability of living organisms to sense changes in the environment (stimuli) and respond to them. This is a universal characteristic of life — plants respond to light (phototropism), animals respond to touch, heat, light, etc.'},
+  {id:31, topic:'life', text:'In plants, growth is:', opts:['Restricted to tips only in adult plants','Seen throughout life due to meristems','Seen only in juvenile stage','Absent in woody plants'], ans:1, exp:'Plants show indeterminate growth throughout their life. This is possible because plants have meristems — regions of undifferentiated cells capable of continuous division. Meristems at root tips, shoot tips, and lateral regions (cambium) allow lifelong growth.'},
+  {id:32, topic:'life', text:'The concept that defines life most comprehensively among NCERT is:', opts:['Locomotion','Reproduction and metabolism together','Self-healing and consciousness','Photosynthesis and growth'], ans:1, exp:'NCERT emphasizes that metabolism is the most fundamental and universal property of life, and reproduction ensures continuity of species. Together, reproduction and metabolism form the most comprehensive definition of life. All other properties are either derived from these or not universal.'},
+  {id:33, topic:'life', text:'Which of the following is a correct example of anabolism?', opts:['Breakdown of glucose in respiration','Synthesis of proteins from amino acids','Digestion of starch','Decomposition of urea'], ans:1, exp:'Anabolism refers to constructive metabolic reactions that build larger molecules from smaller ones, requiring energy. Protein synthesis from amino acids is a classic anabolic reaction. Breakdown of glucose (respiration) and digestion are catabolic (breakdown) reactions.'},
+  {id:34, topic:'life', text:'The sum of all chemical reactions in a living body is:', opts:['Photosynthesis','Respiration','Metabolism','Osmosis'], ans:2, exp:'Metabolism is defined as the sum total of all chemical reactions occurring in a living organism. It includes both catabolism (breakdown reactions releasing energy) and anabolism (synthesis reactions requiring energy). It is a defining feature of all living organisms.'},
+  {id:35, topic:'life', text:'Which of the following is NOT an example of asexual reproduction?', opts:['Binary fission in Amoeba','Budding in Hydra','Spore formation in Rhizopus','Pollination in flowers'], ans:3, exp:'Pollination is the transfer of pollen from anther to stigma — it is part of the sexual reproduction process in flowering plants. Binary fission, budding, and spore formation are all examples of asexual reproduction where no fusion of gametes occurs.'},
+  {id:36, topic:'life', text:'Spore formation as a mode of reproduction is seen in:', opts:['Rhizopus (bread mould)','Paramecium','Hydra','Earthworm'], ans:0, exp:'Spore formation (sporulation) is an asexual reproduction method seen in fungi like Rhizopus (bread mould). Spores are produced in sporangia and dispersed to germinate into new mycelium. Paramecium reproduces by binary fission, Hydra by budding, and earthworms by sexual reproduction.'},
+  {id:37, topic:'life', text:'The metabolic basis of life means:', opts:['Life is only chemistry','All living organisms have a unique set of chemical reactions','Living organisms consume only organic food','Metabolism is absent in viruses'], ans:1, exp:'The metabolic basis of life means that every living organism has a unique, characteristic set of metabolic reactions that sustain its life. While chemistry underlies metabolism, life is not "only chemistry" — it involves the organized, integrated network of reactions unique to each organism.'},
+  {id:38, topic:'life', text:'Which is NOT a defining characteristic of life according to NCERT?', opts:['Growth','Metabolism','Locomotion','Reproduction'], ans:2, exp:'Locomotion (self-movement) is NOT a defining characteristic of life. Plants do not move from place to place, yet they are alive. NCERT lists growth, metabolism, and reproduction as the key defining characteristics of life. Locomotion is a property of some animals, not all living things.'},
+  {id:39, topic:'life', text:'A worker bee is sterile. It still has:', opts:['Reproduction','Growth and metabolism only','Photosynthesis','Sporulation'], ans:1, exp:'Worker bees are sterile (cannot reproduce) but they are fully alive — they grow, metabolize (carry out all biochemical reactions), respond to stimuli, and maintain cellular organization. They demonstrate that reproduction is not essential for an individual organism to be alive.'},
+  {id:40, topic:'life', text:'Which one of the following is a property shared by crystals and living organisms?', opts:['Reproduction','Metabolism','Growth','Consciousness'], ans:2, exp:'Growth is the one property shared by both crystals and living organisms. Crystals grow by external addition of similar molecules. Living organisms grow by cell division and enlargement. However, the mechanism and nature of growth are fundamentally different.'},
 
   // ── TAXONOMY & CLASSIFICATION (Q41–80) ──
-  {id:41, topic:'taxonomy', text:'The word \'taxonomy\' is derived from Greek words meaning:', opts:['\'Life\' and \'study\'','\'Arrangement\' and \'law/method\'','\'Naming\' and \'classification\'','\'Division\' and \'science\''], ans:1},
-  {id:42, topic:'taxonomy', text:'The three aspects of taxonomy are identification, nomenclature and:', opts:['Preservation','Classification','Ecology','Evolution'], ans:1},
-  {id:43, topic:'taxonomy', text:'Systematics is different from taxonomy in that it:', opts:['Only deals with naming organisms','Studies evolutionary relationships among organisms','Is restricted to plants only','Does not involve classification'], ans:1},
-  {id:44, topic:'taxonomy', text:'The term \'Systematics\' was first used by:', opts:['Aristotle','Carl Linnaeus','A.P. de Candolle','Ernst Haeckel'], ans:1},
-  {id:45, topic:'taxonomy', text:'Correct sequence of taxonomic hierarchy from highest to lowest is:', opts:['Kingdom > Phylum > Class > Order > Family > Genus > Species','Species > Genus > Family > Order > Class > Phylum > Kingdom','Kingdom > Division > Order > Class > Family > Genus > Species','Phylum > Kingdom > Class > Order > Family > Genus > Species'], ans:0},
-  {id:46, topic:'taxonomy', text:'The basic unit of classification is:', opts:['Genus','Family','Species','Kingdom'], ans:2},
-  {id:47, topic:'taxonomy', text:'A taxon represents:', opts:['Only a single species','A group of any rank in the taxonomic hierarchy','Only plant groups','Only animal phyla'], ans:1},
-  {id:48, topic:'taxonomy', text:'The most inclusive taxon is:', opts:['Species','Genus','Kingdom','Phylum'], ans:2},
-  {id:49, topic:'taxonomy', text:'As we move from species to kingdom in the taxonomic hierarchy:', opts:['Number of common characteristics increases','Number of organisms decreases','Number of common characteristics decreases','Both (1) and (2)'], ans:2},
-  {id:50, topic:'taxonomy', text:'In plant classification, the equivalent of \'Phylum\' in animals is:', opts:['Class','Division','Kingdom','Order'], ans:1},
-  {id:51, topic:'taxonomy', text:'The family name of mango (Mangifera indica) is:', opts:['Mangifera','Anacardiaceae','Indica','Magnoliopsida'], ans:1},
-  {id:52, topic:'taxonomy', text:'Mangifera indica, Solanum tuberosum and Panthera leo — which taxon is common to all?', opts:['Family','Order','Class','Kingdom'], ans:3},
-  {id:53, topic:'taxonomy', text:'The order Primata includes which of the following?', opts:['Felidae (cats) only','Hominidae (humans and apes)','Canidae (dogs) only','Mustelidae (weasels) only'], ans:1},
-  {id:54, topic:'taxonomy', text:'Taxonomic category \'class\' was given by:', opts:['Linnaeus','John Ray','A.P. de Candolle','Aristotle'], ans:0},
-  {id:55, topic:'taxonomy', text:'The family of housefly (Musca domestica) is:', opts:['Muscidae','Culicidae','Diptera','Insecta'], ans:0},
-  {id:56, topic:'taxonomy', text:'Which of the following is a correct family name for wheat?', opts:['Poaceae','Fabaceae','Rosaceae','Solanaceae'], ans:0},
-  {id:57, topic:'taxonomy', text:'\'Father of Taxonomy\' is:', opts:['Aristotle','Theophrastus','Carl Linnaeus','Ernst Haeckel'], ans:2},
-  {id:58, topic:'taxonomy', text:'Identify the wrong statement about a species:', opts:['Members of a species share common morphological features','Two species can interbreed but produce sterile offspring','A species can have many varieties','Members of a species can freely interbreed'], ans:1},
-  {id:59, topic:'taxonomy', text:'Taxonomic category below Order is:', opts:['Class','Genus','Family','Phylum'], ans:2},
-  {id:60, topic:'taxonomy', text:'Which category includes the most specific characteristics and the fewest organisms?', opts:['Kingdom','Phylum','Species','Genus'], ans:2},
-  {id:61, topic:'taxonomy', text:'ICBN stands for:', opts:['International Code of Biological Nomenclature','International Code of Botanical Nomenclature','Indian Council of Botany and Nomenclature','International Classification of Biotic Nomenclature'], ans:1},
-  {id:62, topic:'taxonomy', text:'Phylum Chordata is characterized by presence of:', opts:['Exoskeleton and compound eyes','Notochord, dorsal nerve cord, pharyngeal gill slits','Segmented body and jointed appendages','Mantle and radula'], ans:1},
-  {id:63, topic:'taxonomy', text:'The class Mammalia is characterized by:', opts:['Cold-blooded vertebrates','Presence of mammary glands and hair/fur','Scales and gills throughout life','Metamorphosis and moist skin'], ans:1},
-  {id:64, topic:'taxonomy', text:'Classification of organisms based on overall similarities/dissimilarities of ALL characters is called:', opts:['Phenetics','Cladistics','Chemotaxonomy','Cytotaxonomy'], ans:0},
-  {id:65, topic:'taxonomy', text:'Which of the following is the largest phylum in Kingdom Animalia?', opts:['Chordata','Mollusca','Echinodermata','Arthropoda'], ans:3},
-  {id:66, topic:'taxonomy', text:'Cladistics or phylogenetic classification is based on:', opts:['Morphology only','Chemical composition','Evolutionary history and shared derived characters','Geographic distribution'], ans:2},
-  {id:67, topic:'taxonomy', text:'The number of taxonomic categories in the standard hierarchy is:', opts:['5','7','10','12'], ans:1},
-  {id:68, topic:'taxonomy', text:'Homo sapiens belongs to which order?', opts:['Carnivora','Primata','Rodentia','Chiroptera'], ans:1},
-  {id:69, topic:'taxonomy', text:'Two organisms belonging to the same genus must belong to the same:', opts:['Species','Variety','Family','Subspecies'], ans:2},
-  {id:70, topic:'taxonomy', text:'Identify the correct sequence of taxonomic categories for humans:', opts:['Animalia > Chordata > Mammalia > Primata > Hominidae > Homo > sapiens','Animalia > Mammalia > Chordata > Primata > Hominidae > Homo > sapiens','Plantae > Chordata > Mammalia > Primata > Hominidae > Homo > sapiens','Animalia > Chordata > Reptilia > Primata > Hominidae > Homo > sapiens'], ans:0},
-  {id:71, topic:'taxonomy', text:'Which of the following is a correct family?', opts:['Hominidae for humans','Muscidae for butterflies','Felidae for dogs','Canidae for cats'], ans:0},
-  {id:72, topic:'taxonomy', text:'Class Reptilia includes:', opts:['Frogs and toads','Snakes, lizards, crocodiles, turtles','Birds and mammals','Fish and amphibians'], ans:1},
-  {id:73, topic:'taxonomy', text:'The order for domestic dog (Canis lupus familiaris) is:', opts:['Primata','Carnivora','Rodentia','Chiroptera'], ans:1},
-  {id:74, topic:'taxonomy', text:'\'Species Plantarum\' was published by:', opts:['John Ray','Aristotle','Carl Linnaeus','Theophrastus'], ans:2},
-  {id:75, topic:'taxonomy', text:'Kingdom Fungi is characterized by:', opts:['Autotrophic nutrition and chlorophyll','Heterotrophic saprophytic nutrition, chitin cell walls','Motile cells, prokaryotic','Photosynthetic, eukaryotic'], ans:1},
-  {id:76, topic:'taxonomy', text:'Which taxon is more specific — Genus or Family?', opts:['Family','Genus','Both equally specific','Cannot be determined'], ans:1},
-  {id:77, topic:'taxonomy', text:'Taxonomy involves which of the following activities?', opts:['Identification, nomenclature, classification','Only naming organisms','Only classifying extinct species','Only studying evolution'], ans:0},
-  {id:78, topic:'taxonomy', text:'Which of the following groups belongs to Kingdom Monera?', opts:['Amoeba and Paramecium','Bacteria and Cyanobacteria','Spirogyra and Chlamydomonas','Rhizopus and Agaricus'], ans:1},
-  {id:79, topic:'taxonomy', text:'Which is the correct order of increasing inclusiveness?', opts:['Genus < Family < Order < Class < Phylum < Kingdom','Kingdom < Phylum < Class < Order < Family < Genus','Genus > Family > Order > Class > Phylum','Species < Genus < Family < Order > Class > Phylum'], ans:0},
-  {id:80, topic:'taxonomy', text:'The class Aves (birds) is characterized by:', opts:['Four-chambered heart and scales','Feathers, hollow bones, warm-blooded','Cold-blooded, no feathers','Mammary glands and hair'], ans:1},
+  {id:41, topic:'taxonomy', text:'The word \'taxonomy\' is derived from Greek words meaning:', opts:['\'Life\' and \'study\'','\'Arrangement\' and \'law/method\'','\'Naming\' and \'classification\'','\'Division\' and \'science\''], ans:1, exp:'Taxonomy comes from Greek: "taxis" (arrangement/order) and "nomos" (law/method). So taxonomy literally means "the method of arrangement." It is the science of identifying, naming, and classifying organisms based on shared characteristics.'},
+  {id:42, topic:'taxonomy', text:'The three aspects of taxonomy are identification, nomenclature and:', opts:['Preservation','Classification','Ecology','Evolution'], ans:1, exp:'The three activities of taxonomy are: (1) Identification — recognizing and characterizing an organism; (2) Nomenclature — giving it a scientific name; (3) Classification — grouping it into a hierarchical system. These three together constitute the complete taxonomic process.'},
+  {id:43, topic:'taxonomy', text:'Systematics is different from taxonomy in that it:', opts:['Only deals with naming organisms','Studies evolutionary relationships among organisms','Is restricted to plants only','Does not involve classification'], ans:1, exp:'Systematics goes beyond taxonomy — it studies the diversity of organisms AND their evolutionary relationships (phylogeny). The word "systematics" comes from the Latin "systema" (systematic arrangement). It includes classification but also reconstructs evolutionary history using molecular and morphological data.'},
+  {id:44, topic:'taxonomy', text:'The term \'Systematics\' was first used by:', opts:['Aristotle','Carl Linnaeus','A.P. de Candolle','Ernst Haeckel'], ans:1, exp:'Carl Linnaeus first used the term "Systematics" in his work "Systema Naturae" (1758). He is also known as the Father of Taxonomy for his development of binomial nomenclature and the hierarchical classification system we still use today.'},
+  {id:45, topic:'taxonomy', text:'Correct sequence of taxonomic hierarchy from highest to lowest is:', opts:['Kingdom > Phylum > Class > Order > Family > Genus > Species','Species > Genus > Family > Order > Class > Phylum > Kingdom','Kingdom > Division > Order > Class > Family > Genus > Species','Phylum > Kingdom > Class > Order > Family > Genus > Species'], ans:0, exp:'The correct taxonomic hierarchy from highest (most inclusive) to lowest (most specific) is: Kingdom > Phylum > Class > Order > Family > Genus > Species. Mnemonic: "King Philip Came Over For Good Soup." In plants, Phylum is replaced by Division.'},
+  {id:46, topic:'taxonomy', text:'The basic unit of classification is:', opts:['Genus','Family','Species','Kingdom'], ans:2, exp:'Species is the basic fundamental unit of classification. A species is defined as a group of organisms that can interbreed freely and produce fertile offspring, sharing similar morphological characteristics. All other taxonomic categories are groups of related species.'},
+  {id:47, topic:'taxonomy', text:'A taxon represents:', opts:['Only a single species','A group of any rank in the taxonomic hierarchy','Only plant groups','Only animal phyla'], ans:1, exp:'A taxon (plural: taxa) is a formal group of organisms at any level of the taxonomic hierarchy. So species, genus, family, order, class, phylum, and kingdom are all taxa. A taxon can contain one or many organisms grouped by shared characteristics.'},
+  {id:48, topic:'taxonomy', text:'The most inclusive taxon is:', opts:['Species','Genus','Kingdom','Phylum'], ans:2, exp:'Kingdom is the most inclusive (highest) taxon in the standard taxonomic hierarchy. It contains all other categories (phyla, classes, orders, families, genera, species). Currently, the five kingdoms are Monera, Protista, Fungi, Plantae, and Animalia.'},
+  {id:49, topic:'taxonomy', text:'As we move from species to kingdom in the taxonomic hierarchy:', opts:['Number of common characteristics increases','Number of organisms decreases','Number of common characteristics decreases','Both (1) and (2)'], ans:2, exp:'As we move from species (most specific) to kingdom (most inclusive), the number of common characteristics shared among members decreases (fewer and fewer features are shared), while the number of organisms included increases. Species members share the most characteristics; kingdom members share the fewest.'},
+  {id:50, topic:'taxonomy', text:'In plant classification, the equivalent of \'Phylum\' in animals is:', opts:['Class','Division','Kingdom','Order'], ans:1, exp:'In plant taxonomy, "Division" is used instead of "Phylum" (which is used in animal taxonomy). Both represent the same hierarchical level — below Kingdom and above Class. For example, plants are classified into divisions like Bryophyta, Pteridophyta, Gymnospermae, Angiospermae.'},
+  {id:51, topic:'taxonomy', text:'The family name of mango (Mangifera indica) is:', opts:['Mangifera','Anacardiaceae','Indica','Magnoliopsida'], ans:1, exp:'Mango (Mangifera indica) belongs to the family Anacardiaceae (the cashew family). Family names in plants typically end in "-aceae". Mangifera is the genus name, indica is the species epithet, and Magnoliopsida is the class.'},
+  {id:52, topic:'taxonomy', text:'Mangifera indica, Solanum tuberosum and Panthera leo — which taxon is common to all?', opts:['Family','Order','Class','Kingdom'], ans:3, exp:'Mango (Mangifera indica — plant), potato (Solanum tuberosum — plant), and lion (Panthera leo — animal) all belong to Kingdom Eukarya broadly, and specifically all are placed in Kingdom (Plantae for first two, Animalia for lion) — but the ONLY common taxon for ALL three is Kingdom (all are eukaryotes). The answer here is Kingdom as it is the only inclusive taxon containing both plants and animals.'},
+  {id:53, topic:'taxonomy', text:'The order Primata includes which of the following?', opts:['Felidae (cats) only','Hominidae (humans and apes)','Canidae (dogs) only','Mustelidae (weasels) only'], ans:1, exp:'Order Primata (Primates) includes humans, apes, monkeys, and other related species. Within this order, family Hominidae includes humans (Homo sapiens) and great apes. Cats are in Order Carnivora, Family Felidae; dogs are in Order Carnivora, Family Canidae.'},
+  {id:54, topic:'taxonomy', text:'Taxonomic category \'class\' was given by:', opts:['Linnaeus','John Ray','A.P. de Candolle','Aristotle'], ans:0, exp:'The taxonomic category "Class" was formally introduced by Carl Linnaeus. While John Ray contributed to the concept of species, and Aristotle did early classification, it was Linnaeus who systematized the hierarchical categories including Class in his works like Systema Naturae.'},
+  {id:55, topic:'taxonomy', text:'The family of housefly (Musca domestica) is:', opts:['Muscidae','Culicidae','Diptera','Insecta'], ans:0, exp:'The housefly (Musca domestica) belongs to Family Muscidae. Culicidae is the family of mosquitoes. Diptera is the Order (two-winged insects) that includes both flies and mosquitoes. Insecta is the Class. So: Class Insecta > Order Diptera > Family Muscidae > Genus Musca > Species domestica.'},
+  {id:56, topic:'taxonomy', text:'Which of the following is a correct family name for wheat?', opts:['Poaceae','Fabaceae','Rosaceae','Solanaceae'], ans:0, exp:'Wheat (Triticum aestivum) belongs to Family Poaceae (the grass family, also known as Gramineae). This family includes all grasses, cereals like rice, maize, barley, and sugarcane. Fabaceae is the legume family, Rosaceae is the rose family, and Solanaceae is the nightshade family.'},
+  {id:57, topic:'taxonomy', text:'\'Father of Taxonomy\' is:', opts:['Aristotle','Theophrastus','Carl Linnaeus','Ernst Haeckel'], ans:2, exp:'Carl Linnaeus (1707-1778) is called the "Father of Taxonomy." He introduced binomial nomenclature, standardized the classification system, and published "Systema Naturae" (1758) and "Species Plantarum" (1753). Aristotle is the Father of Biology; Theophrastus is the Father of Botany.'},
+  {id:58, topic:'taxonomy', text:'Identify the wrong statement about a species:', opts:['Members of a species share common morphological features','Two species can interbreed but produce sterile offspring','A species can have many varieties','Members of a species can freely interbreed'], ans:1, exp:'Two species that interbreed and produce sterile offspring (like horse + donkey = sterile mule) are by definition separate species, not one species. A species is defined by its members being able to interbreed and produce FERTILE offspring. The key word here is fertile — sterile hybrids prove species are different.'},
+  {id:59, topic:'taxonomy', text:'Taxonomic category below Order is:', opts:['Class','Genus','Family','Phylum'], ans:2, exp:'The correct sequence is: Order > Family > Genus > Species. So Family comes directly below Order. Class is above Order; Genus and Species are below Family. Remember: King (Kingdom) Philip (Phylum) Came (Class) Over (Order) For (Family) Good (Genus) Soup (Species).'},
+  {id:60, topic:'taxonomy', text:'Which category includes the most specific characteristics and the fewest organisms?', opts:['Kingdom','Phylum','Species','Genus'], ans:2, exp:'Species is the most specific taxonomic category. It has the most shared characteristics (all members are essentially the same type of organism) and contains the fewest organisms. As you go up the hierarchy, categories become more inclusive with fewer shared characteristics.'},
+  {id:61, topic:'taxonomy', text:'ICBN stands for:', opts:['International Code of Biological Nomenclature','International Code of Botanical Nomenclature','Indian Council of Botany and Nomenclature','International Classification of Biotic Nomenclature'], ans:1, exp:'ICBN stands for International Code of Botanical Nomenclature (now updated to International Code of Nomenclature for algae, fungi, and plants — ICN). It governs the naming of plants, fungi, and algae. The animal equivalent is ICZN (International Code of Zoological Nomenclature).'},
+  {id:62, topic:'taxonomy', text:'Phylum Chordata is characterized by presence of:', opts:['Exoskeleton and compound eyes','Notochord, dorsal nerve cord, pharyngeal gill slits','Segmented body and jointed appendages','Mantle and radula'], ans:1, exp:'Phylum Chordata is defined by three key characters: (1) Notochord — a flexible rod-like structure; (2) Dorsal hollow nerve cord; (3) Pharyngeal gill slits at some stage of life. These may be present only in the embryonic stage in higher chordates. The first option describes Arthropoda, the third also Arthropoda, and the fourth Mollusca.'},
+  {id:63, topic:'taxonomy', text:'The class Mammalia is characterized by:', opts:['Cold-blooded vertebrates','Presence of mammary glands and hair/fur','Scales and gills throughout life','Metamorphosis and moist skin'], ans:1, exp:'Class Mammalia is defined by two unique features: (1) Mammary glands — used to produce milk to nourish young; (2) Hair or fur on the body. Mammals are also warm-blooded (endothermic) vertebrates. The other options describe fish/reptiles, fish, and amphibians respectively.'},
+  {id:64, topic:'taxonomy', text:'Classification of organisms based on overall similarities/dissimilarities of ALL characters is called:', opts:['Phenetics','Cladistics','Chemotaxonomy','Cytotaxonomy'], ans:0, exp:'Phenetics (or numerical taxonomy) classifies organisms based on the overall similarity of all measurable characteristics without giving special weight to any single trait. Cladistics uses shared derived characters to reconstruct evolutionary history. Chemotaxonomy uses chemical composition; Cytotaxonomy uses chromosomal data.'},
+  {id:65, topic:'taxonomy', text:'Which of the following is the largest phylum in Kingdom Animalia?', opts:['Chordata','Mollusca','Echinodermata','Arthropoda'], ans:3, exp:'Arthropoda is the largest phylum in Kingdom Animalia — it contains more species than any other group, including insects, spiders, crustaceans, and centipedes. Over 80% of all known animal species are arthropods. Key features: exoskeleton, jointed appendages, segmented body.'},
+  {id:66, topic:'taxonomy', text:'Cladistics or phylogenetic classification is based on:', opts:['Morphology only','Chemical composition','Evolutionary history and shared derived characters','Geographic distribution'], ans:2, exp:'Cladistics (phylogenetic classification) groups organisms based on shared derived characters (synapomorphies) that evolved from a common ancestor. It aims to reflect evolutionary (phylogenetic) relationships and build phylogenetic trees (cladograms). It is different from classical taxonomy that uses overall morphological similarity.'},
+  {id:67, topic:'taxonomy', text:'The number of taxonomic categories in the standard hierarchy is:', opts:['5','7','10','12'], ans:1, exp:'The standard taxonomic hierarchy has 7 main categories: Kingdom, Phylum (or Division), Class, Order, Family, Genus, Species. These 7 categories are used in both plant and animal classification. Additional intermediate categories (sub-phylum, sub-order, etc.) may be added but the standard number is 7.'},
+  {id:68, topic:'taxonomy', text:'Homo sapiens belongs to which order?', opts:['Carnivora','Primata','Rodentia','Chiroptera'], ans:1, exp:'Humans (Homo sapiens) belong to Order Primata (Primates). The complete classification is: Kingdom Animalia > Phylum Chordata > Class Mammalia > Order Primata > Family Hominidae > Genus Homo > Species sapiens. Carnivora includes lions and dogs; Rodentia includes rats and mice; Chiroptera includes bats.'},
+  {id:69, topic:'taxonomy', text:'Two organisms belonging to the same genus must belong to the same:', opts:['Species','Variety','Family','Subspecies'], ans:2, exp:'In the taxonomic hierarchy, Genus is below Family. So if two organisms belong to the same genus, they MUST also belong to the same family. For example, lions (Panthera leo) and tigers (Panthera tigris) belong to the same genus Panthera and therefore both belong to Family Felidae.'},
+  {id:70, topic:'taxonomy', text:'Identify the correct sequence of taxonomic categories for humans:', opts:['Animalia > Chordata > Mammalia > Primata > Hominidae > Homo > sapiens','Animalia > Mammalia > Chordata > Primata > Hominidae > Homo > sapiens','Plantae > Chordata > Mammalia > Primata > Hominidae > Homo > sapiens','Animalia > Chordata > Reptilia > Primata > Hominidae > Homo > sapiens'], ans:0, exp:'The correct classification of humans: Kingdom Animalia > Phylum Chordata > Class Mammalia > Order Primata > Family Hominidae > Genus Homo > Species sapiens. Humans are mammals (not reptiles), belong to Phylum Chordata (vertebrates), and are in Kingdom Animalia.'},
+  {id:71, topic:'taxonomy', text:'Which of the following is a correct family?', opts:['Hominidae for humans','Muscidae for butterflies','Felidae for dogs','Canidae for cats'], ans:0, exp:'Hominidae is the correct family for humans (Homo sapiens). Muscidae is the family for houseflies, not butterflies (butterflies are in Family Nymphalidae or Papilionidae, Order Lepidoptera). Felidae is the family for cats (not dogs). Canidae is the family for dogs (not cats).'},
+  {id:72, topic:'taxonomy', text:'Class Reptilia includes:', opts:['Frogs and toads','Snakes, lizards, crocodiles, turtles','Birds and mammals','Fish and amphibians'], ans:1, exp:'Class Reptilia (Reptiles) includes snakes, lizards, crocodiles, turtles, and tuatara. They are cold-blooded (ectothermic), have dry scaly skin, and breathe through lungs. Frogs and toads are Amphibia; birds are Aves; mammals are Mammalia; fish are Pisces.'},
+  {id:73, topic:'taxonomy', text:'The order for domestic dog (Canis lupus familiaris) is:', opts:['Primata','Carnivora','Rodentia','Chiroptera'], ans:1, exp:'The domestic dog (Canis lupus familiaris) belongs to Order Carnivora. Full classification: Kingdom Animalia > Phylum Chordata > Class Mammalia > Order Carnivora > Family Canidae > Genus Canis > Species lupus > Subspecies familiaris. Carnivora includes meat-eating mammals like dogs, cats, bears, and weasels.'},
+  {id:74, topic:'taxonomy', text:'\'Species Plantarum\' was published by:', opts:['John Ray','Aristotle','Carl Linnaeus','Theophrastus'], ans:2, exp:'Species Plantarum (1753) was published by Carl Linnaeus. In this work, he formally introduced binomial nomenclature for all known plant species. This is considered the starting point of modern botanical nomenclature. His other famous work was Systema Naturae (1758) for animals.'},
+  {id:75, topic:'taxonomy', text:'Kingdom Fungi is characterized by:', opts:['Autotrophic nutrition and chlorophyll','Heterotrophic saprophytic nutrition, chitin cell walls','Motile cells, prokaryotic','Photosynthetic, eukaryotic'], ans:1, exp:'Kingdom Fungi is characterized by: (1) Heterotrophic nutrition — they are saprophytes (feed on dead organic matter) or parasites; (2) Cell walls made of chitin (not cellulose); (3) Eukaryotic; (4) Non-motile; (5) Reproduce by spores. They do not contain chlorophyll and cannot photosynthesize.'},
+  {id:76, topic:'taxonomy', text:'Which taxon is more specific — Genus or Family?', opts:['Family','Genus','Both equally specific','Cannot be determined'], ans:1, exp:'Genus is more specific (lower/more exclusive) than Family. In the hierarchy: Family > Genus > Species. A family contains several genera (plural of genus), and each genus contains several species. So Genus represents a smaller, more closely related group than Family.'},
+  {id:77, topic:'taxonomy', text:'Taxonomy involves which of the following activities?', opts:['Identification, nomenclature, classification','Only naming organisms','Only classifying extinct species','Only studying evolution'], ans:0, exp:'Taxonomy involves three activities: (1) Identification — characterizing and recognizing an organism; (2) Nomenclature — assigning a scientific name following standard codes; (3) Classification — grouping organisms into hierarchical categories based on shared characteristics. All three together constitute the discipline of taxonomy.'},
+  {id:78, topic:'taxonomy', text:'Which of the following groups belongs to Kingdom Monera?', opts:['Amoeba and Paramecium','Bacteria and Cyanobacteria','Spirogyra and Chlamydomonas','Rhizopus and Agaricus'], ans:1, exp:'Kingdom Monera includes all prokaryotes — organisms without a true membrane-bound nucleus. Bacteria and Cyanobacteria (blue-green algae) are both prokaryotes belonging to Monera. Amoeba and Paramecium are Protists; Spirogyra and Chlamydomonas are also Protists; Rhizopus and Agaricus are Fungi.'},
+  {id:79, topic:'taxonomy', text:'Which is the correct order of increasing inclusiveness?', opts:['Genus < Family < Order < Class < Phylum < Kingdom','Kingdom < Phylum < Class < Order < Family < Genus','Genus > Family > Order > Class > Phylum','Species < Genus < Family < Order > Class > Phylum'], ans:0, exp:'Increasing inclusiveness means moving from most specific to most broad. The correct order is: Genus < Family < Order < Class < Phylum < Kingdom (Species is most specific, below Genus). Each higher category includes more organisms. Kingdom is the most inclusive.'},
+  {id:80, topic:'taxonomy', text:'The class Aves (birds) is characterized by:', opts:['Four-chambered heart and scales','Feathers, hollow bones, warm-blooded','Cold-blooded, no feathers','Mammary glands and hair'], ans:1, exp:'Class Aves (birds) is characterized by: (1) Feathers — for flight and insulation; (2) Hollow (pneumatic) bones — lightweight for flight; (3) Warm-blooded (endothermic); (4) Beak/bill without teeth; (5) Four-chambered heart. They are bipedal, have scales on legs (vestigial reptilian feature), and lay eggs.'},
 
   // ── NOMENCLATURE (Q81–115) ──
-  {id:81, topic:'nomenclature', text:'Binomial nomenclature was given by:', opts:['John Ray','Carolus Linnaeus','A.P. de Candolle','Aristotle'], ans:1},
-  {id:82, topic:'nomenclature', text:'In binomial nomenclature, the first word represents:', opts:['Species epithet','Genus name','Family name','Order name'], ans:1},
-  {id:83, topic:'nomenclature', text:'The scientific name of mango is Mangifera indica. In this name, \'indica\' represents:', opts:['Genus','Species epithet','Family','Common name'], ans:1},
-  {id:84, topic:'nomenclature', text:'According to ICBN/ICZN rules, scientific names should be in:', opts:['English','Latin or Latinized Greek','Sanskrit','French'], ans:1},
-  {id:85, topic:'nomenclature', text:'When writing a scientific name by hand, the two words should be:', opts:['Written in capitals','Underlined separately','Written with quotation marks','Written in bold'], ans:1},
-  {id:86, topic:'nomenclature', text:'What does \'typification\' mean in botanical nomenclature?', opts:['Classification of types','Attachment of a name to a specific type specimen','Typing scientific names in computers','Using typeface for names'], ans:1},
-  {id:87, topic:'nomenclature', text:'The scientific name of potato, Solanum tuberosum, written completely with author would be:', opts:['Solanum tuberosum L.','Solanum Tuberosum L.','solanum tuberosum L.','Solanum tuberosum (L.)'], ans:0},
-  {id:88, topic:'nomenclature', text:'Principle of Priority in nomenclature means:', opts:['The most recently published name is accepted','The name published first (earliest) is the valid name','Priority is given to the country of origin','The most well-known name is used'], ans:1},
-  {id:89, topic:'nomenclature', text:'The scientific name of Indian bullfrog is:', opts:['Rana tigrina','Felis domesticus','Apis mellifera','Homo sapiens'], ans:0},
-  {id:90, topic:'nomenclature', text:'The scientific name of domestic cat is:', opts:['Panthera leo','Felis domesticus','Canis lupus','Mus musculus'], ans:1},
-  {id:91, topic:'nomenclature', text:'Apis mellifera is the scientific name of:', opts:['Butterfly','Silkworm','Honeybee','Mosquito'], ans:2},
-  {id:92, topic:'nomenclature', text:'Which of the following correctly represents the writing convention for a scientific name?', opts:['Homo Sapiens','homo sapiens','Homo sapiens','HOMO SAPIENS'], ans:2},
-  {id:93, topic:'nomenclature', text:'A herbarium sheet specimen is usually:', opts:['A live plant in a pot','A dried, pressed and preserved plant specimen mounted on paper','A photograph of the plant','A 3D model of the plant'], ans:1},
-  {id:94, topic:'nomenclature', text:'Mangifera indica Linnaeus — here \'Linnaeus\' indicates:', opts:['The genus name','The species epithet','The author of the scientific name','The family name'], ans:2},
-  {id:95, topic:'nomenclature', text:'The scientific name of onion is:', opts:['Allium cepa','Allium sativum','Solanum tuberosum','Triticum aestivum'], ans:0},
-  {id:96, topic:'nomenclature', text:'Nomenclature is governed by universally accepted principles provided in the:', opts:['IUCN Red List','Codes of Nomenclature (ICBN and ICZN)','NEET syllabus','Species Plantarum'], ans:1},
-  {id:97, topic:'nomenclature', text:'The biological name of tiger is:', opts:['Panthera pardus','Panthera leo','Panthera tigris','Felis tigris'], ans:2},
-  {id:98, topic:'nomenclature', text:'Trinomial nomenclature is used for:', opts:['All organisms','Subspecies','Bacteria only','Viruses only'], ans:1},
-  {id:99, topic:'nomenclature', text:'The scientific name of rice is:', opts:['Triticum aestivum','Oryza sativa','Zea mays','Saccharum officinarum'], ans:1},
-  {id:100, topic:'nomenclature', text:'The name given to a species as per nomenclature codes must be:', opts:['Common and easy to pronounce','Unique — no two species can have the same valid name','Given only by Indian scientists','Approved by government bodies'], ans:1},
-  {id:101, topic:'nomenclature', text:'The scientific name of wheat is:', opts:['Oryza sativa','Zea mays','Triticum aestivum','Saccharum officinarum'], ans:2},
-  {id:102, topic:'nomenclature', text:'The scientific name of garlic is:', opts:['Allium cepa','Allium sativum','Solanum nigrum','Raphanus sativus'], ans:1},
-  {id:103, topic:'nomenclature', text:'ICZN stands for:', opts:['Indian Code of Zoological Nomenclature','International Code of Zoological Nomenclature','International Classification of Zoological Nomenclature','Indian Classification of Zoological Names'], ans:1},
-  {id:104, topic:'nomenclature', text:'The scientific name of lion is:', opts:['Panthera pardus','Panthera tigris','Panthera leo','Felis leo'], ans:2},
-  {id:105, topic:'nomenclature', text:'The scientific name of maize/corn is:', opts:['Triticum aestivum','Oryza sativa','Zea mays','Saccharum officinarum'], ans:2},
-  {id:106, topic:'nomenclature', text:'When printed in a book, scientific names should be:', opts:['Underlined separately','Written in italics','Written in bold capitals','Written in quotes'], ans:1},
-  {id:107, topic:'nomenclature', text:'The scientific name of leopard (Panthera pardus) tells us it belongs to the same genus as:', opts:['Domestic cat','Tiger and lion','Honeybee','Mango'], ans:1},
-  {id:108, topic:'nomenclature', text:'Binomial nomenclature system uses how many names (words) for each organism?', opts:['One','Two','Three','Four'], ans:1},
-  {id:109, topic:'nomenclature', text:'The first word in a binomial name is always written with:', opts:['Lowercase first letter','Capital first letter','All capitals','All lowercase'], ans:1},
-  {id:110, topic:'nomenclature', text:'The second word (species epithet) in a binomial name is written with:', opts:['Capital first letter','All lowercase','All uppercase','Optional capitalization'], ans:1},
-  {id:111, topic:'nomenclature', text:'The scientific name of sugarcane is:', opts:['Zea mays','Triticum aestivum','Oryza sativa','Saccharum officinarum'], ans:3},
-  {id:112, topic:'nomenclature', text:'The scientific name of dog is:', opts:['Felis domesticus','Canis lupus familiaris','Mus musculus','Bos taurus'], ans:1},
-  {id:113, topic:'nomenclature', text:'A correctly written binomial scientific name must be:', opts:['In the local language of discovery','Universally unique — each species has one valid name','Changed every 50 years','Named after the discoverer always'], ans:1},
-  {id:114, topic:'nomenclature', text:'Carolus Linnaeus introduced binomial nomenclature in his work:', opts:['Origin of Species','Species Plantarum','Systema Naturae','Historia Plantarum'], ans:1},
-  {id:115, topic:'nomenclature', text:'Which of the following is a WRONG binomial name writing format?', opts:['Homo sapiens (italicized in print)','Homo sapiens (underlined in handwriting)','homo sapiens (both words lowercase)','Homo sapiens L. (with author name)'], ans:2},
+  {id:81, topic:'nomenclature', text:'Binomial nomenclature was given by:', opts:['John Ray','Carolus Linnaeus','A.P. de Candolle','Aristotle'], ans:1, exp:'Carolus Linnaeus (Carl Linnaeus) introduced the system of binomial nomenclature — giving every organism a two-part scientific name (genus + species) — in his works Species Plantarum (1753) for plants and Systema Naturae (1758) for animals. John Ray contributed to species concepts; Aristotle did early classification.'},
+  {id:82, topic:'nomenclature', text:'In binomial nomenclature, the first word represents:', opts:['Species epithet','Genus name','Family name','Order name'], ans:1, exp:'In a binomial name, the FIRST word is always the Genus name (generic epithet) and the SECOND word is the species epithet (specific epithet). For example, in Homo sapiens: Homo = Genus; sapiens = species epithet. The genus name is always capitalized; the species epithet is in lowercase.'},
+  {id:83, topic:'nomenclature', text:'The scientific name of mango is Mangifera indica. In this name, \'indica\' represents:', opts:['Genus','Species epithet','Family','Common name'], ans:1, exp:'In Mangifera indica: Mangifera = Genus name (capitalized); indica = Species epithet (lowercase). The species epithet often describes a characteristic of the organism — here "indica" means "of India" (mango is native to India). The complete binomial name is the combination of both words.'},
+  {id:84, topic:'nomenclature', text:'According to ICBN/ICZN rules, scientific names should be in:', opts:['English','Latin or Latinized Greek','Sanskrit','French'], ans:1, exp:'Scientific names under both ICBN (for plants) and ICZN (for animals) must be in Latin or Latinized Greek. Latin was chosen because it is a "dead language" — it does not evolve or change, ensuring that names remain stable and universally understood across all languages and cultures.'},
+  {id:85, topic:'nomenclature', text:'When writing a scientific name by hand, the two words should be:', opts:['Written in capitals','Underlined separately','Written with quotation marks','Written in bold'], ans:1, exp:'When writing a scientific name by hand or typing without italics capability, each word of the binomial name should be underlined separately. This convention mimics the italic formatting used in printed/typed text. The genus name has its first letter capitalized; the species epithet is all lowercase.'},
+  {id:86, topic:'nomenclature', text:'What does \'typification\' mean in botanical nomenclature?', opts:['Classification of types','Attachment of a name to a specific type specimen','Typing scientific names in computers','Using typeface for names'], ans:1, exp:'Typification is the process of attaching a scientific name to a specific physical specimen called the "type specimen" (holotype). This specimen serves as the permanent reference for that species name. If there is ever a dispute about what a name refers to, the type specimen is the final authority.'},
+  {id:87, topic:'nomenclature', text:'The scientific name of potato, Solanum tuberosum, written completely with author would be:', opts:['Solanum tuberosum L.','Solanum Tuberosum L.','solanum tuberosum L.','Solanum tuberosum (L.)'], ans:0, exp:'The correct format is: Solanum tuberosum L. — where "L." is the abbreviation for Linnaeus (who named the species). The genus name (Solanum) is capitalized; the species epithet (tuberosum) is lowercase; both are italicized in print. The author abbreviation is written in normal (non-italic) text after the binomial name.'},
+  {id:88, topic:'nomenclature', text:'Principle of Priority in nomenclature means:', opts:['The most recently published name is accepted','The name published first (earliest) is the valid name','Priority is given to the country of origin','The most well-known name is used'], ans:1, exp:'The Principle of Priority states that the FIRST validly published name for a species is the correct/valid name. If the same organism is named by different people at different times, the earliest published name takes priority. This prevents confusion from multiple names for the same organism.'},
+  {id:89, topic:'nomenclature', text:'The scientific name of Indian bullfrog is:', opts:['Rana tigrina','Felis domesticus','Apis mellifera','Homo sapiens'], ans:0, exp:'The Indian bullfrog is Rana tigrina (also known as Hoplobatrachus tigerinus in updated taxonomy, but NCERT uses Rana tigrina). Felis domesticus is the domestic cat, Apis mellifera is the honeybee, and Homo sapiens is the human being.'},
+  {id:90, topic:'nomenclature', text:'The scientific name of domestic cat is:', opts:['Panthera leo','Felis domesticus','Canis lupus','Mus musculus'], ans:1, exp:'The domestic cat is Felis domesticus (or Felis catus in modern taxonomy). Panthera leo is lion, Canis lupus is wolf/dog, and Mus musculus is the house mouse. All belong to Class Mammalia but to different genera and families.'},
+  {id:91, topic:'nomenclature', text:'Apis mellifera is the scientific name of:', opts:['Butterfly','Silkworm','Honeybee','Mosquito'], ans:2, exp:'Apis mellifera is the scientific name of the western honeybee. "Apis" = genus (meaning "bee" in Latin); "mellifera" = species epithet (meaning "honey-bearing"). Honeybees are crucial pollinators and producers of honey and beeswax. They belong to Order Hymenoptera, Family Apidae.'},
+  {id:92, topic:'nomenclature', text:'Which of the following correctly represents the writing convention for a scientific name?', opts:['Homo Sapiens','homo sapiens','Homo sapiens','HOMO SAPIENS'], ans:2, exp:'The correct format for a scientific name in print is: first word (Genus) starts with a CAPITAL letter, second word (species epithet) is entirely lowercase, and both words are written in ITALICS. So "Homo sapiens" is correct. "Homo Sapiens" (both capitalized) and "homo sapiens" (genus lowercase) are both wrong.'},
+  {id:93, topic:'nomenclature', text:'A herbarium sheet specimen is usually:', opts:['A live plant in a pot','A dried, pressed and preserved plant specimen mounted on paper','A photograph of the plant','A 3D model of the plant'], ans:1, exp:'A herbarium specimen is a plant that has been collected, dried, pressed flat, and mounted on a thick white sheet of paper (herbarium sheet). The sheet also contains labels with the plant\'s scientific name, collection locality, date, and collector\'s name. These are stored in herbaria for taxonomic reference.'},
+  {id:94, topic:'nomenclature', text:'Mangifera indica Linnaeus — here \'Linnaeus\' indicates:', opts:['The genus name','The species epithet','The author of the scientific name','The family name'], ans:2, exp:'In the full citation "Mangifera indica Linnaeus" — Mangifera is the genus, indica is the species epithet, and Linnaeus (abbreviated L.) is the AUTHOR — the person who first formally described and named this species. Including the author citation is important for nomenclatural clarity, especially when names have been revised.'},
+  {id:95, topic:'nomenclature', text:'The scientific name of onion is:', opts:['Allium cepa','Allium sativum','Solanum tuberosum','Triticum aestivum'], ans:0, exp:'Onion is Allium cepa. The genus Allium includes many important culinary plants: Allium cepa (onion), Allium sativum (garlic), Allium porrum (leek), Allium schoenoprasum (chives). Solanum tuberosum is potato; Triticum aestivum is wheat.'},
+  {id:96, topic:'nomenclature', text:'Nomenclature is governed by universally accepted principles provided in the:', opts:['IUCN Red List','Codes of Nomenclature (ICBN and ICZN)','NEET syllabus','Species Plantarum'], ans:1, exp:'Nomenclature is governed by internationally accepted Codes: ICBN (International Code of Botanical Nomenclature) for plants, algae, and fungi; and ICZN (International Code of Zoological Nomenclature) for animals. These codes ensure that every organism has one universally accepted scientific name.'},
+  {id:97, topic:'nomenclature', text:'The biological name of tiger is:', opts:['Panthera pardus','Panthera leo','Panthera tigris','Felis tigris'], ans:2, exp:'Tiger is Panthera tigris. The genus Panthera includes the "big cats": Panthera leo (lion), Panthera tigris (tiger), Panthera pardus (leopard), Panthera onca (jaguar), and Panthera uncia (snow leopard). All share the genus Panthera because of close evolutionary relationships.'},
+  {id:98, topic:'nomenclature', text:'Trinomial nomenclature is used for:', opts:['All organisms','Subspecies','Bacteria only','Viruses only'], ans:1, exp:'Trinomial nomenclature uses three names: genus + species + subspecies. It is used when organisms within a species are further subdivided into subspecies. For example, the domestic dog is Canis lupus familiaris — where familiaris is the subspecies name. Most organisms need only a binomial name.'},
+  {id:99, topic:'nomenclature', text:'The scientific name of rice is:', opts:['Triticum aestivum','Oryza sativa','Zea mays','Saccharum officinarum'], ans:1, exp:'Rice is Oryza sativa — one of the world\'s most important food crops. Triticum aestivum is wheat, Zea mays is maize/corn, and Saccharum officinarum is sugarcane. All belong to Family Poaceae (grasses). Rice belongs to genus Oryza, which has about 20 species.'},
+  {id:100, topic:'nomenclature', text:'The name given to a species as per nomenclature codes must be:', opts:['Common and easy to pronounce','Unique — no two species can have the same valid name','Given only by Indian scientists','Approved by government bodies'], ans:1, exp:'One of the fundamental rules of nomenclature is that every valid species name must be unique — no two different species can share the same valid scientific name. This principle of uniqueness, combined with the principle of priority, ensures that every species has one and only one correct name.'},
+  {id:101, topic:'nomenclature', text:'The scientific name of wheat is:', opts:['Oryza sativa','Zea mays','Triticum aestivum','Saccharum officinarum'], ans:2, exp:'Wheat is Triticum aestivum — "aestivum" means "of summer/spring." Wheat belongs to Family Poaceae. It is one of the world\'s most widely grown cereal crops. Oryza sativa is rice, Zea mays is maize, Saccharum officinarum is sugarcane.'},
+  {id:102, topic:'nomenclature', text:'The scientific name of garlic is:', opts:['Allium cepa','Allium sativum','Solanum nigrum','Raphanus sativus'], ans:1, exp:'Garlic is Allium sativum. "Sativum" means "cultivated." Along with onion (Allium cepa), garlic is in genus Allium, Family Amaryllidaceae (or Alliaceae). Solanum nigrum is black nightshade; Raphanus sativus is radish.'},
+  {id:103, topic:'nomenclature', text:'ICZN stands for:', opts:['Indian Code of Zoological Nomenclature','International Code of Zoological Nomenclature','International Classification of Zoological Nomenclature','Indian Classification of Zoological Names'], ans:1, exp:'ICZN stands for International Code of Zoological Nomenclature. It is the code that governs the formal scientific naming of animals. The equivalent for plants and fungi is ICBN (International Code of Botanical Nomenclature, now ICN). Together these codes ensure global standardization of scientific names.'},
+  {id:104, topic:'nomenclature', text:'The scientific name of lion is:', opts:['Panthera pardus','Panthera tigris','Panthera leo','Felis leo'], ans:2, exp:'Lion is Panthera leo — "leo" means "lion" in Latin. Lions belong to genus Panthera (big cats that can roar), Family Felidae, Order Carnivora, Class Mammalia. Panthera pardus is leopard, Panthera tigris is tiger. Felis is the genus for smaller cats like domestic cat (Felis catus).'},
+  {id:105, topic:'nomenclature', text:'The scientific name of maize/corn is:', opts:['Triticum aestivum','Oryza sativa','Zea mays','Saccharum officinarum'], ans:2, exp:'Maize (corn) is Zea mays. It is a cereal grain first domesticated by indigenous peoples in Mexico. "Zea" is the genus name; "mays" is the species epithet. It belongs to Family Poaceae (grass family). It is one of the most important cereal crops worldwide.'},
+  {id:106, topic:'nomenclature', text:'When printed in a book, scientific names should be:', opts:['Underlined separately','Written in italics','Written in bold capitals','Written in quotes'], ans:1, exp:'In printed text, scientific names (both genus and species) should be written in ITALICS. This is the universal convention in published scientific literature. When writing by hand (where italics are not possible), each word is underlined separately. Neither bold nor quotes are correct conventions.'},
+  {id:107, topic:'nomenclature', text:'The scientific name of leopard (Panthera pardus) tells us it belongs to the same genus as:', opts:['Domestic cat','Tiger and lion','Honeybee','Mango'], ans:1, exp:'Panthera pardus (leopard) shares the genus Panthera with tiger (Panthera tigris) and lion (Panthera leo). The genus name "Panthera" is shared, indicating close evolutionary relationship. Domestic cat is Felis catus (different genus), honeybee is Apis mellifera (completely different class), and mango is a plant.'},
+  {id:108, topic:'nomenclature', text:'Binomial nomenclature system uses how many names (words) for each organism?', opts:['One','Two','Three','Four'], ans:1, exp:'Binomial means "two names" — "bi" = two, "nomen" = name. Each organism receives a unique two-part scientific name consisting of (1) the Genus name and (2) the species epithet. Together these form the complete species name. Trinomial nomenclature (3 names) is used for subspecies.'},
+  {id:109, topic:'nomenclature', text:'The first word in a binomial name is always written with:', opts:['Lowercase first letter','Capital first letter','All capitals','All lowercase'], ans:1, exp:'The Genus name (first word in a binomial) always begins with a CAPITAL letter. For example: Homo sapiens — "H" in Homo is capitalized. This is a universal rule of binomial nomenclature. The species epithet (second word) always begins with a lowercase letter.'},
+  {id:110, topic:'nomenclature', text:'The second word (species epithet) in a binomial name is written with:', opts:['Capital first letter','All lowercase','All uppercase','Optional capitalization'], ans:1, exp:'The species epithet (second word in a binomial) is ALWAYS written entirely in lowercase — the first letter is NOT capitalized. For example: Homo sapiens — "sapiens" is all lowercase. This rule distinguishes the species epithet from the genus name and is universally followed in biological nomenclature.'},
+  {id:111, topic:'nomenclature', text:'The scientific name of sugarcane is:', opts:['Zea mays','Triticum aestivum','Oryza sativa','Saccharum officinarum'], ans:3, exp:'Sugarcane is Saccharum officinarum. "Saccharum" relates to sugar (Latin "saccharon" = sugar). It belongs to Family Poaceae (grasses). Sugarcane is the primary source of commercial sugar. Zea mays = maize, Triticum aestivum = wheat, Oryza sativa = rice.'},
+  {id:112, topic:'nomenclature', text:'The scientific name of dog is:', opts:['Felis domesticus','Canis lupus familiaris','Mus musculus','Bos taurus'], ans:1, exp:'The domestic dog is Canis lupus familiaris — a subspecies of the grey wolf (Canis lupus). "familiaris" means "domestic/familiar." Dogs are in Family Canidae, Order Carnivora. Felis domesticus = cat, Mus musculus = house mouse, Bos taurus = domestic cattle.'},
+  {id:113, topic:'nomenclature', text:'A correctly written binomial scientific name must be:', opts:['In the local language of discovery','Universally unique — each species has one valid name','Changed every 50 years','Named after the discoverer always'], ans:1, exp:'One of the key principles of nomenclature is universality and uniqueness — each species has one and only one valid scientific name that is recognized worldwide, regardless of language or country. Names are in Latin/Latinized Greek (not local language), and they don\'t expire or get changed on schedule.'},
+  {id:114, topic:'nomenclature', text:'Carolus Linnaeus introduced binomial nomenclature in his work:', opts:['Origin of Species','Species Plantarum','Systema Naturae','Historia Plantarum'], ans:1, exp:'Linnaeus formally introduced binomial nomenclature for plants in "Species Plantarum" (1753) and for animals in "Systema Naturae" (1758). "Origin of Species" was written by Charles Darwin (1859). "Historia Plantarum" was written by Theophrastus (ancient Greek botanist).'},
+  {id:115, topic:'nomenclature', text:'Which of the following is a WRONG binomial name writing format?', opts:['Homo sapiens (italicized in print)','Homo sapiens (underlined in handwriting)','homo sapiens (both words lowercase)','Homo sapiens L. (with author name)'], ans:2, exp:'Writing "homo sapiens" with both words in lowercase is WRONG. The genus name MUST have its first letter capitalized: Homo (not homo). The species epithet is lowercase (sapiens — correct). So "Homo sapiens" is right, but "homo sapiens" violates the rule of capitalizing the genus name.'},
 
   // ── TAXONOMIC AIDS (Q116–140) ──
-  {id:116, topic:'aids', text:'A herbarium is:', opts:['A garden for growing rare plants','A store-house of collected plant specimens (dried and preserved)','A field guide for identifying plants','A museum of fossil plants'], ans:1},
-  {id:117, topic:'aids', text:'Flora provides information about:', opts:['All animals in a region','All plants of an area with their descriptions and keys for identification','Weather patterns','Chemical analysis of soils'], ans:1},
-  {id:118, topic:'aids', text:'A monograph provides information about:', opts:['All organisms in a kingdom','Complete information on one particular taxon','Only type specimens','Annual reports of botanical surveys'], ans:1},
-  {id:119, topic:'aids', text:'Taxonomic keys are based on:', opts:['Chemical composition only','Contrasting characters — paired statements (dichotomous key)','Molecular data exclusively','Geographic distribution'], ans:1},
-  {id:120, topic:'aids', text:'A museum in biological context is best defined as:', opts:['A tourist attraction','A place with preserved specimens of plants and animals for study and reference','A zoo','An art gallery with nature paintings'], ans:1},
-  {id:121, topic:'aids', text:'A botanical garden primarily serves to:', opts:['Grow ornamental plants for commercial sale','Provide living reference collections for research, conservation, and education','Grow food crops','Study underground plant parts only'], ans:1},
-  {id:122, topic:'aids', text:'The specimens preserved in museums in formalin solution are:', opts:['Dry specimens','Wet specimens','Living specimens','Fossil specimens'], ans:1},
-  {id:123, topic:'aids', text:'Zoological parks (zoos) help in:', opts:['Commercial sale of wild animals','In-situ conservation of animals','Ex-situ conservation — maintaining wild animals in captive conditions','Agricultural pest control'], ans:2},
-  {id:124, topic:'aids', text:'Catalogue in museums contains information about:', opts:['Only living specimens','Collection data, locality, date, collector\'s name of all specimens','Financial accounts of the museum','Visiting hours'], ans:1},
-  {id:125, topic:'aids', text:'The largest herbarium in the world is at:', opts:['Kew Gardens, England','Smithsonian, USA','Calcutta, India','Paris, France'], ans:0},
-  {id:126, topic:'aids', text:'Taxonomic keys are most useful for:', opts:['Classification of new species discovered','Identification of unknown organisms','Naming organisms','Studying evolution'], ans:1},
-  {id:127, topic:'aids', text:'NCERT mentions that the Royal Botanical Garden, Kew has a herbarium with approximately:', opts:['1 million specimens','5 million specimens','7 million specimens','10 million specimens'], ans:2},
-  {id:128, topic:'aids', text:'Manuals are different from flora in that manuals:', opts:['Cover animals only','Provide information for identifying all plants/organisms in a specific area, with more practical detail','Are less detailed than flora','Cover fossil organisms only'], ans:1},
-  {id:129, topic:'aids', text:'Preserved specimens in herbaria help in:', opts:['Growing new plants','Providing authentic reference for identification and nomenclature','Entertainment','Commercial purposes only'], ans:1},
-  {id:130, topic:'aids', text:'Pickled specimens of animals in museums are preserved in:', opts:['Glycerin','Formalin','Ethanol only','Both formalin and ethanol'], ans:3},
-  {id:131, topic:'aids', text:'Which of the following is NOT a taxonomic aid?', opts:['Herbarium','Flora','Monograph','Metamorphosis'], ans:3},
-  {id:132, topic:'aids', text:'A student finds an unknown insect. The most appropriate taxonomic aid to identify it would be:', opts:['A herbarium','A dichotomous key for insects','A flora of the region','A monograph on mammals'], ans:1},
-  {id:133, topic:'aids', text:'Carolus Linnaeus published \'Systema Naturae\' in:', opts:['1753','1758','1801','1867'], ans:1},
-  {id:134, topic:'aids', text:'The concept of species was first given by:', opts:['Carolus Linnaeus','John Ray','Aristotle','Darwin'], ans:1},
-  {id:135, topic:'aids', text:'Two animals that belong to the same order but different families are placed in the same:', opts:['Genus','Species','Family','Class'], ans:3},
-  {id:136, topic:'aids', text:'Which of the following places uses the largest collection of microorganisms?', opts:['Botanical Garden','Museum','Culture Collection','Herbarium'], ans:2},
-  {id:137, topic:'aids', text:'An example of ex-situ conservation is:', opts:['National Park','Wildlife Sanctuary','Biosphere Reserve','Zoological Park'], ans:3},
-  {id:138, topic:'aids', text:'Which of the following is a correct example of binomial nomenclature?', opts:['Mangifera Indica','mangifera indica','Mangifera indica','MANGIFERA INDICA'], ans:2},
-  {id:139, topic:'aids', text:'\'Panthera pardus\' is the scientific name of:', opts:['Tiger','Lion','Leopard','Cheetah'], ans:2},
-  {id:140, topic:'aids', text:'Which of the following CORRECTLY summarizes binomial nomenclature rules?', opts:['Genus name lowercase, species name capitalized, both bold','Genus name capitalized, species name lowercase, both italicized/underlined when handwritten','Both names fully capitalized when printed','Species name first, genus name second, both in local language'], ans:1},
+  {id:116, topic:'aids', text:'A herbarium is:', opts:['A garden for growing rare plants','A store-house of collected plant specimens (dried and preserved)','A field guide for identifying plants','A museum of fossil plants'], ans:1, exp:'A herbarium is a collection of dried, pressed, and preserved plant specimens mounted on herbarium sheets. These sheets are stored systematically for scientific reference and study. The specimens serve as the authenticated physical reference for plant species names and identification.'},
+  {id:117, topic:'aids', text:'Flora provides information about:', opts:['All animals in a region','All plants of an area with their descriptions and keys for identification','Weather patterns','Chemical analysis of soils'], ans:1, exp:'Flora is a published work that provides descriptions, keys for identification, distribution, and other information about all plant species in a particular geographic area or region. For example, "Flora of India" covers all plants found in India. It is an essential reference for botanists and plant taxonomists.'},
+  {id:118, topic:'aids', text:'A monograph provides information about:', opts:['All organisms in a kingdom','Complete information on one particular taxon','Only type specimens','Annual reports of botanical surveys'], ans:1, exp:'A monograph is a comprehensive, detailed scientific publication covering one particular taxon (which could be a species, genus, family, or other group). It provides all available information about that taxon — morphology, taxonomy, nomenclature, distribution, ecology, and more. It is the most detailed reference for that specific group.'},
+  {id:119, topic:'aids', text:'Taxonomic keys are based on:', opts:['Chemical composition only','Contrasting characters — paired statements (dichotomous key)','Molecular data exclusively','Geographic distribution'], ans:1, exp:'Taxonomic keys (especially dichotomous keys) work by presenting pairs of contrasting characters. At each step, you choose between two options (A or B), and each choice leads to another pair, until you arrive at the identification. They are the most practical tools for identifying unknown organisms in the field.'},
+  {id:120, topic:'aids', text:'A museum in biological context is best defined as:', opts:['A tourist attraction','A place with preserved specimens of plants and animals for study and reference','A zoo','An art gallery with nature paintings'], ans:1, exp:'In biology, a museum (natural history museum) is an institution that houses preserved specimens of plants and animals. These specimens — mounted, dried, or preserved in fluid — serve as reference collections for taxonomic study and research. They are not zoos (which have living animals) or tourist attractions per se.'},
+  {id:121, topic:'aids', text:'A botanical garden primarily serves to:', opts:['Grow ornamental plants for commercial sale','Provide living reference collections for research, conservation, and education','Grow food crops','Study underground plant parts only'], ans:1, exp:'Botanical gardens maintain living collections of plants for scientific research, conservation of rare/endangered species, and public education. Each plant is labeled with its scientific name and origin. Famous examples: Kew Gardens (UK), Howrah Botanical Garden (India). They are NOT commercial farms.'},
+  {id:122, topic:'aids', text:'The specimens preserved in museums in formalin solution are:', opts:['Dry specimens','Wet specimens','Living specimens','Fossil specimens'], ans:1, exp:'Specimens preserved in formalin (formaldehyde solution) are called "wet specimens." The formalin prevents decay by killing bacteria and fixing tissues. Wet specimens can include soft-bodied animals (worms, fish, amphibians) and organs. Dry specimens are preserved by drying and mounting.'},
+  {id:123, topic:'aids', text:'Zoological parks (zoos) help in:', opts:['Commercial sale of wild animals','In-situ conservation of animals','Ex-situ conservation — maintaining wild animals in captive conditions','Agricultural pest control'], ans:2, exp:'Zoological parks are examples of ex-situ conservation — conserving species outside their natural habitat (in captivity). In-situ conservation is in the natural habitat (national parks, sanctuaries). Zoos breed endangered species in controlled conditions and educate the public about wildlife.'},
+  {id:124, topic:'aids', text:'Catalogue in museums contains information about:', opts:['Only living specimens','Collection data, locality, date, collector\'s name of all specimens','Financial accounts of the museum','Visiting hours'], ans:1, exp:'A museum catalogue is a systematic register or database of all specimens in the museum\'s collection. For each specimen, it records: the scientific name, collection locality, date of collection, name of collector, and any other relevant data. This makes specimens searchable and usable for research.'},
+  {id:125, topic:'aids', text:'The largest herbarium in the world is at:', opts:['Kew Gardens, England','Smithsonian, USA','Calcutta, India','Paris, France'], ans:0, exp:'The Royal Botanic Gardens at Kew, England houses the world\'s largest herbarium with approximately 7 million specimens. It serves as a global center for plant taxonomy and conservation research. India\'s largest herbarium is at the Botanical Survey of India in Howrah (Calcutta).'},
+  {id:126, topic:'aids', text:'Taxonomic keys are most useful for:', opts:['Classification of new species discovered','Identification of unknown organisms','Naming organisms','Studying evolution'], ans:1, exp:'Taxonomic keys are primarily designed for identification — helping users determine the name of an unknown organism by working through a series of contrasting characteristics. They are practical field tools, not classification systems. Classification is done by taxonomists; naming follows nomenclature codes.'},
+  {id:127, topic:'aids', text:'NCERT mentions that the Royal Botanical Garden, Kew has a herbarium with approximately:', opts:['1 million specimens','5 million specimens','7 million specimens','10 million specimens'], ans:2, exp:'According to NCERT Class 11 Biology, the Royal Botanical Garden at Kew, England has a herbarium containing approximately 7 million specimens. This makes it the largest herbarium in the world and an invaluable resource for plant taxonomy and biodiversity research.'},
+  {id:128, topic:'aids', text:'Manuals are different from flora in that manuals:', opts:['Cover animals only','Provide information for identifying all plants/organisms in a specific area, with more practical detail','Are less detailed than flora','Cover fossil organisms only'], ans:1, exp:'While both manuals and flora cover organisms in a specific area, manuals are typically more practical and user-friendly identification guides, often with more detailed keys and descriptions for field use. Flora tends to be more comprehensive taxonomic compilations. Manuals may also cover animal identification, unlike flora which is specific to plants.'},
+  {id:129, topic:'aids', text:'Preserved specimens in herbaria help in:', opts:['Growing new plants','Providing authentic reference for identification and nomenclature','Entertainment','Commercial purposes only'], ans:1, exp:'Herbarium specimens serve as authentic physical references (type specimens) for plant names and identification. When there is uncertainty about the identity of a plant or the application of a name, the herbarium specimen is consulted. They are essential for nomenclatural research and biodiversity studies.'},
+  {id:130, topic:'aids', text:'Pickled specimens of animals in museums are preserved in:', opts:['Glycerin','Formalin','Ethanol only','Both formalin and ethanol'], ans:3, exp:'Pickled (wet) animal specimens in museums are typically preserved in either formalin (formaldehyde solution) or ethanol (ethyl alcohol), or both. Formalin is commonly used for initial fixation; ethanol for long-term storage. The choice depends on the specimen type and intended use.'},
+  {id:131, topic:'aids', text:'Which of the following is NOT a taxonomic aid?', opts:['Herbarium','Flora','Monograph','Metamorphosis'], ans:3, exp:'Metamorphosis is a biological process (transformation of larva into adult in insects and amphibians) — it is NOT a taxonomic aid. Taxonomic aids are tools and resources used for identification and classification: herbaria, flora, fauna, monographs, manuals, keys, museums, botanical gardens, and zoological parks.'},
+  {id:132, topic:'aids', text:'A student finds an unknown insect. The most appropriate taxonomic aid to identify it would be:', opts:['A herbarium','A dichotomous key for insects','A flora of the region','A monograph on mammals'], ans:1, exp:'To identify an unknown insect, the most appropriate tool is a dichotomous key designed for insects. A herbarium is for plants; a flora is also for plants; a monograph on mammals covers a completely different group. A dichotomous key leads the user through a series of choices based on observable characteristics to arrive at an identification.'},
+  {id:133, topic:'aids', text:'Carolus Linnaeus published \'Systema Naturae\' in:', opts:['1753','1758','1801','1867'], ans:1, exp:'Carolus Linnaeus published the first edition of Systema Naturae in 1735, but the 10th edition (1758) is considered the starting point of zoological nomenclature. His Species Plantarum was published in 1753 and is the starting point of botanical nomenclature. The year 1758 is the most important date for animal taxonomy.'},
+  {id:134, topic:'aids', text:'The concept of species was first given by:', opts:['Carolus Linnaeus','John Ray','Aristotle','Darwin'], ans:1, exp:'John Ray (1627-1705) was the first to give a clear biological concept of species, defining it as a group of morphologically similar organisms that can interbreed. Linnaeus later formalized the species concept within his classification system. Aristotle did early classification but did not formally define species.'},
+  {id:135, topic:'aids', text:'Two animals that belong to the same order but different families are placed in the same:', opts:['Genus','Species','Family','Class'], ans:3, exp:'In the taxonomic hierarchy: Kingdom > Phylum > Class > Order > Family > Genus > Species. If two animals are in the same Order but different Families, they must share all categories ABOVE Order — including Class, Phylum, and Kingdom. So they are in the same Class (among the options given, Class is the answer).'},
+  {id:136, topic:'aids', text:'Which of the following places uses the largest collection of microorganisms?', opts:['Botanical Garden','Museum','Culture Collection','Herbarium'], ans:2, exp:'Culture Collections (like ATCC — American Type Culture Collection, or MTCC in India) are repositories of living microorganism cultures (bacteria, fungi, viruses, cell lines). They are the equivalent of herbaria/museums for microorganisms, maintaining authenticated strains for research and reference.'},
+  {id:137, topic:'aids', text:'An example of ex-situ conservation is:', opts:['National Park','Wildlife Sanctuary','Biosphere Reserve','Zoological Park'], ans:3, exp:'Ex-situ conservation means conservation OUTSIDE the natural habitat. Zoological parks (zoos) keep animals in captive conditions outside their natural environment — classic ex-situ conservation. National parks, wildlife sanctuaries, and biosphere reserves are IN-SITU conservation (conservation in the natural habitat).'},
+  {id:138, topic:'aids', text:'Which of the following is a correct example of binomial nomenclature?', opts:['Mangifera Indica','mangifera indica','Mangifera indica','MANGIFERA INDICA'], ans:2, exp:'Correct binomial nomenclature: Mangifera indica — Genus (Mangifera) starts with capital M; species epithet (indica) is all lowercase; both words are italicized in print. "Mangifera Indica" (both capitalized) is wrong; "mangifera indica" (genus lowercase) is wrong; "MANGIFERA INDICA" (all caps) is wrong.'},
+  {id:139, topic:'aids', text:'\'Panthera pardus\' is the scientific name of:', opts:['Tiger','Lion','Leopard','Cheetah'], ans:2, exp:'Panthera pardus is the scientific name of the leopard. The genus Panthera includes the four "big cats" that can roar: leo (lion), tigris (tiger), pardus (leopard), onca (jaguar). Note: cheetah is NOT in genus Panthera — it is Acinonyx jubatus, and cannot roar.'},
+  {id:140, topic:'aids', text:'Which of the following CORRECTLY summarizes binomial nomenclature rules?', opts:['Genus name lowercase, species name capitalized, both bold','Genus name capitalized, species name lowercase, both italicized/underlined when handwritten','Both names fully capitalized when printed','Species name first, genus name second, both in local language'], ans:1, exp:'Correct summary: (1) Genus name — first word, first letter CAPITALIZED; (2) Species epithet — second word, all LOWERCASE; (3) Both words in ITALICS in print, or separately underlined in handwriting; (4) Language: Latin or Latinized Latin/Greek. The genus always comes first, species epithet second.'},
 ];
 
 // ── STATE ──
@@ -1899,7 +2011,6 @@ let testStarted = false;
 let lastTestResult = null;
 
 // ── MODE SELECTION ──
-// FIX 2: selectMode now correctly highlights the clicked tab
 function selectMode(mode) {
   currentMode = mode;
   ['full','quick','pyq','topic'].forEach(function(m) {
@@ -2163,12 +2274,23 @@ function showResults(r) {
   renderReview();
 }
 
+// ── FULL REVIEW TOGGLE ──
+function toggleFullReview() {
+  var btn = document.getElementById('fullReviewToggleBtn');
+  var body = document.getElementById('fullReviewBody');
+  if (!btn || !body) return;
+  btn.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
 function renderReview() {
   var sec = document.getElementById('reviewSection');
   var wrongQ = activeQuestions.filter(function(q, i){ return userAnswers[i] !== undefined && userAnswers[i] !== q.ans; });
   var skipQ  = activeQuestions.filter(function(q, i){ return userAnswers[i] === undefined; });
 
   var html = '';
+
+  // Wrong answers review
   if (wrongQ.length > 0) {
     html += '<div class="review-section-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Wrong Answers Review ('+wrongQ.length+')</div>';
     wrongQ.forEach(function(q) {
@@ -2181,10 +2303,13 @@ function renderReview() {
         '<div class="review-answers">' +
           '<span class="review-your-ans wrong">Your Answer: '+['A','B','C','D'][userAnswers[idx]]+'. '+yourAns+'</span>' +
           '<span class="review-correct-ans">✓ Correct: '+['A','B','C','D'][q.ans]+'. '+correctAns+'</span>' +
-        '</div></div>';
+        '</div>' +
+        '<div class="explanation-box"><strong>Explanation</strong>'+q.exp+'</div>' +
+        '</div>';
     });
   }
 
+  // Skipped questions review
   if (skipQ.length > 0) {
     html += '<div class="review-section-title" style="margin-top:24px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/></svg> Skipped Questions ('+skipQ.length+')</div>';
     skipQ.slice(0,10).forEach(function(q) {
@@ -2195,10 +2320,56 @@ function renderReview() {
         '<div class="review-answers">' +
           '<span class="review-your-ans skipped">Skipped</span>' +
           '<span class="review-correct-ans">✓ Correct: '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
-        '</div></div>';
+        '</div>' +
+        '<div class="explanation-box"><strong>Explanation</strong>'+q.exp+'</div>' +
+        '</div>';
     });
     if (skipQ.length > 10) html += '<p style="text-align:center;color:var(--text3);font-size:.8rem;margin-top:8px">...aur '+(skipQ.length - 10)+' more skipped questions</p>';
   }
+
+  // ── FULL ALL-QUESTIONS REVIEW (toggle) ──
+  html += '<div style="margin-top:32px">' +
+    '<button class="full-review-toggle" id="fullReviewToggleBtn" onclick="toggleFullReview()">' +
+      '<span style="display:flex;align-items:center;gap:10px">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' +
+        'Review All Questions with Explanations (' + activeQuestions.length + ' Qs)' +
+      '</span>' +
+      '<svg class="frt-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+    '</button>' +
+    '<div class="full-review-body" id="fullReviewBody">';
+
+  activeQuestions.forEach(function(q, idx) {
+    var userAns = userAnswers[idx];
+    var isCorrect = userAns !== undefined && userAns === q.ans;
+    var isWrong = userAns !== undefined && userAns !== q.ans;
+    var isSkipped = userAns === undefined;
+    var cardClass = isCorrect ? 'correct' : (isWrong ? 'wrong' : 'skipped');
+    var statusLabel = isCorrect
+      ? '<span class="review-your-ans correct">✓ Correct</span>'
+      : (isWrong
+          ? '<span class="review-your-ans wrong">✗ Wrong — Your: '+['A','B','C','D'][userAns]+'. '+q.opts[userAns]+'</span>'
+          : '<span class="review-your-ans skipped">— Skipped</span>');
+
+    html += '<div class="review-qcard ' + cardClass + '">' +
+      '<div class="review-q-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
+      '<div class="review-q-text">'+q.text+'</div>' +
+      '<div style="margin-bottom:10px">' +
+        q.opts.map(function(opt, oi) {
+          var style = '';
+          if (oi === q.ans) style = 'style="color:var(--green);font-weight:600;"';
+          else if (oi === userAns && isWrong) style = 'style="color:var(--red);text-decoration:line-through;"';
+          return '<div '+style+' style="font-size:.82rem;padding:3px 0;">'+['A','B','C','D'][oi]+'. '+opt+'</div>';
+        }).join('') +
+      '</div>' +
+      '<div class="review-answers">' +
+        statusLabel +
+        '<span class="review-correct-ans">✓ Correct: '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
+      '</div>' +
+      '<div class="explanation-box"><strong>Explanation</strong>'+q.exp+'</div>' +
+      '</div>';
+  });
+
+  html += '</div></div>'; // close full-review-body and wrapper
 
   sec.innerHTML = html;
 }
@@ -2219,8 +2390,6 @@ function retakeTest() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// FIX 3: backToSelector fixed — renderHistory() and scrollTo were OUTSIDE the function
-// (stray code after closing brace caused syntax error breaking ALL JS below it)
 function backToSelector() {
   document.getElementById('resultsScreen').classList.remove('active');
   document.getElementById('testArea').classList.remove('active');
@@ -2278,6 +2447,11 @@ function deleteHistory() {
   }
 }
 
+// ── WATERMARK STRIP HTML for PDF ──
+function wmStrip() {
+  return '<div style="background:linear-gradient(90deg,#0d1520,#1a2840,#0d1520);padding:10px 20px;text-align:center;font-size:.68rem;color:#3de8a0;font-weight:700;letter-spacing:2px;border-top:2px solid #3de8a0;border-bottom:2px solid #3de8a0;margin:18px 0;">✦ NEETopia · raunakkarn555.github.io/neetopia · Free NEET Preparation · India\'s Most Honest Platform ✦</div>';
+}
+
 // ── DOWNLOAD SCORECARD ──
 function downloadScorecard() {
   if (!lastTestResult) return;
@@ -2287,7 +2461,30 @@ function downloadScorecard() {
   var modeLabels = { full:'Full Test (140 Qs)', quick:'Quick Test (50 Qs)', pyq:'PYQ Style (30 Qs)', topic:'Topic-wise' };
   var dateStr = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'long',year:'numeric'});
 
-  // FIX 4: Updated copyright with correct GitHub link
+  var wrongQs = activeQuestions.filter(function(_,i){ return userAnswers[i] !== undefined && userAnswers[i] !== activeQuestions[i].ans; });
+  var skipQs = activeQuestions.filter(function(_,i){ return userAnswers[i] === undefined; });
+
+  var wrongReviewHtml = '';
+  if (wrongQs.length > 0) {
+    wrongReviewHtml += '<div class="review-section"><div class="rh">Wrong Answers Review</div>';
+    wrongQs.slice(0,15).map(function(q){
+      var idx = activeQuestions.indexOf(q);
+      wrongReviewHtml += '<div class="rq wrong">' +
+        '<div class="rq-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
+        '<div class="rq-text">'+q.text+'</div>' +
+        '<div class="ans-row">' +
+          '<span class="ans-chip ans-wrong">Your: '+['A','B','C','D'][userAnswers[idx]]+'. '+q.opts[userAnswers[idx]]+'</span>' +
+          '<span class="ans-chip ans-correct">✓ '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
+        '</div>' +
+        '<div class="exp-box">'+q.exp+'</div>' +
+        '</div>';
+    });
+    wrongReviewHtml += '</div>';
+  }
+
+  // Watermark every ~10 wrong questions
+  var midWm = wrongQs.length > 8 ? wmStrip() : '';
+
   var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia Scorecard — The Living World</title>' +
   '<style>' +
     '*{margin:0;padding:0;box-sizing:border-box}' +
@@ -2313,19 +2510,21 @@ function downloadScorecard() {
     '.detail-label{color:#64748b}' +
     '.detail-val{font-weight:600}' +
     '.wm-strip{background:#f0fdf4;border-top:2px solid #86efac;border-bottom:2px solid #86efac;padding:10px 24px;text-align:center;font-size:.72rem;color:#166534;font-weight:600;letter-spacing:.5px}' +
+    '.wm-mid{background:linear-gradient(90deg,#0d1520,#1a2840,#0d1520);padding:10px 20px;text-align:center;font-size:.68rem;color:#3de8a0;font-weight:700;letter-spacing:2px;border-top:2px solid #3de8a0;border-bottom:2px solid #3de8a0;margin:18px 0;}' +
     '.footer{padding:20px 24px;text-align:center;font-size:.72rem;color:#94a3b8;line-height:1.8;background:#f8fafc;border-top:1px solid #e2e8f0}' +
     '.footer a{color:#3de8a0;text-decoration:none}' +
     '.review-section{padding:20px 24px}' +
     '.rh{font-size:.9rem;font-weight:700;margin-bottom:12px;color:#1e293b}' +
-    '.rq{padding:12px;border-radius:8px;margin-bottom:8px;border:1px solid}' +
+    '.rq{padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid}' +
     '.rq.wrong{background:#fef2f2;border-color:#fecaca}' +
     '.rq.skip{background:#fffbeb;border-color:#fde68a}' +
     '.rq-text{font-size:.82rem;color:#1e293b;margin-bottom:8px;line-height:1.5}' +
     '.rq-meta{font-size:.7rem;color:#94a3b8;margin-bottom:6px}' +
-    '.ans-row{display:flex;gap:8px;flex-wrap:wrap}' +
+    '.ans-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}' +
     '.ans-chip{font-size:.72rem;padding:3px 10px;border-radius:5px;border:1px solid}' +
     '.ans-wrong{background:#fee2e2;color:#dc2626;border-color:#fca5a5}' +
     '.ans-correct{background:#dcfce7;color:#16a34a;border-color:#86efac}' +
+    '.exp-box{font-size:.75rem;color:#374151;background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:8px 12px;line-height:1.6;margin-top:4px}' +
     '@media print{body{padding:0}@page{margin:12mm}}' +
   '</style></head><body>' +
   '<div class="card">' +
@@ -2354,22 +2553,8 @@ function downloadScorecard() {
       '<div class="detail-row"><span class="detail-label">Marking Scheme</span><span class="detail-val">+4 correct / −1 wrong / 0 skip</span></div>' +
     '</div>' +
     '<div class="wm-strip">✦ Generated by NEETopia · raunakkarn555.github.io/neetopia · Free NEET Preparation ✦</div>' +
-    (function(){
-      var wrongQs = activeQuestions.filter(function(_,i){ return userAnswers[i] !== undefined && userAnswers[i] !== activeQuestions[i].ans; });
-      if (!wrongQs.length) return '';
-      return '<div class="review-section"><div class="rh">Wrong Answers Review</div>' +
-        wrongQs.slice(0,15).map(function(q){
-          var idx = activeQuestions.indexOf(q);
-          return '<div class="rq wrong">' +
-            '<div class="rq-meta">Q'+(idx+1)+' · '+topicLabel(q.topic)+'</div>' +
-            '<div class="rq-text">'+q.text+'</div>' +
-            '<div class="ans-row">' +
-              '<span class="ans-chip ans-wrong">Your: '+['A','B','C','D'][userAnswers[idx]]+'. '+q.opts[userAnswers[idx]]+'</span>' +
-              '<span class="ans-chip ans-correct">✓ '+['A','B','C','D'][q.ans]+'. '+q.opts[q.ans]+'</span>' +
-            '</div></div>';
-        }).join('') +
-      '</div>';
-    })() +
+    wrongReviewHtml +
+    '<div class="wm-mid">✦ NEETopia · raunakkarn555.github.io/neetopia · India\'s Most Honest Free NEET Platform ✦</div>' +
     '<div class="footer">' +
       '<strong>NEETopia</strong> — India\'s Most Honest Free NEET Preparation Platform<br>' +
       '<a href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia</a> · All content free · No ads · No paywalls<br>' +
@@ -2390,7 +2575,6 @@ function downloadScorecard() {
 }
 
 // ── DOWNLOAD ALL 140 QUESTIONS ──
-// FIX 5: Fixed HTML generation — was not properly building question blocks causing blank download
 function downloadAllPDF() {
   var topics = [
     { key:'life', label:'Characteristics of Life' },
@@ -2401,7 +2585,7 @@ function downloadAllPDF() {
 
   var qHtml = '';
   var qNum = 1;
-  topics.forEach(function(t) {
+  topics.forEach(function(t, tIdx) {
     var qs = ALL_QUESTIONS.filter(function(q){ return q.topic === t.key; });
     qHtml += '<div class="topic-section"><h2>'+t.label+' <span class="q-count">'+qs.length+' Questions</span></h2>';
     qs.forEach(function(q) {
@@ -2415,14 +2599,18 @@ function downloadAllPDF() {
             }).join('') +
           '</div>' +
           '<div class="ans">Answer: '+['A','B','C','D'][q.ans]+'</div>' +
+          '<div class="exp-box"><span class="exp-label">Explanation:</span> '+q.exp+'</div>' +
         '</div>' +
       '</div>';
       qNum++;
     });
     qHtml += '</div>';
+    // Add watermark strip between topics (not after the last one)
+    if (tIdx < topics.length - 1) {
+      qHtml += '<div class="wm-mid">✦ NEETopia · raunakkarn555.github.io/neetopia · Free NEET Preparation · India\'s Most Honest Platform ✦</div>';
+    }
   });
 
-  // FIX 6: Updated copyright with correct GitHub link in PDF download too
   var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>NEETopia — Living World 140 MCQs</title>' +
   '<style>' +
     '*{margin:0;padding:0;box-sizing:border-box}' +
@@ -2435,6 +2623,7 @@ function downloadAllPDF() {
     '.doc-info{display:flex;gap:24px;justify-content:center;margin-top:10px;font-size:.72rem;color:#333}' +
     '.info-item{font-weight:600}' +
     '.wm-bar{background:#f0fdf4;border:1px solid #86efac;padding:6px 16px;text-align:center;font-size:.68rem;color:#166534;font-weight:600;letter-spacing:.5px;border-radius:6px;margin-bottom:20px}' +
+    '.wm-mid{background:linear-gradient(90deg,#0d1520,#1a2840,#0d1520);padding:10px 20px;text-align:center;font-size:.68rem;color:#3de8a0;font-weight:700;letter-spacing:2px;border-radius:6px;margin:24px 0;}' +
     '.topic-section{margin-bottom:28px}' +
     '.topic-section h2{font-size:1rem;font-weight:700;background:#f0f4fa;padding:10px 14px;border-radius:6px;margin-bottom:14px;border-left:4px solid #0aa8f0}' +
     '.q-count{font-size:.72rem;font-weight:400;color:#555;margin-left:8px}' +
@@ -2442,17 +2631,19 @@ function downloadAllPDF() {
     '.q-no{font-weight:700;color:#0aa8f0;min-width:28px;flex-shrink:0;font-size:.85rem;margin-top:1px}' +
     '.q-inner{flex:1}' +
     '.q-text{font-weight:500;line-height:1.5;margin-bottom:6px}' +
-    '.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:3px}' +
+    '.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:6px}' +
     '.q-opt{display:flex;gap:5px;font-size:.78rem;color:#333;align-items:flex-start}' +
     '.ol{font-weight:600;color:#555;min-width:16px;flex-shrink:0}' +
-    '.ans{margin-top:6px;font-size:.72rem;font-weight:600;color:#16a34a;background:#dcfce7;display:inline-block;padding:2px 10px;border-radius:4px}' +
+    '.ans{margin-bottom:6px;font-size:.72rem;font-weight:600;color:#16a34a;background:#dcfce7;display:inline-block;padding:2px 10px;border-radius:4px}' +
+    '.exp-box{font-size:.72rem;color:#374151;background:#f0f9ff;border:1px solid #bae6fd;border-radius:5px;padding:7px 10px;line-height:1.6;margin-top:4px}' +
+    '.exp-label{font-weight:700;color:#0369a1;margin-right:4px}' +
     '.footer{text-align:center;margin-top:32px;padding-top:16px;border-top:2px solid #111;font-size:.68rem;color:#555;line-height:1.8}' +
     '.footer a{color:#16a34a;text-decoration:none}' +
     '@media print{body{padding:12mm 16mm}@page{margin:12mm;size:A4}}' +
   '</style></head><body>' +
   '<div class="doc-header">' +
     '<div class="doc-logo">NEETopia</div>' +
-    '<div class="doc-title">The Living World — 140 MCQ Practice Questions</div>' +
+    '<div class="doc-title">The Living World — 140 MCQ Practice Questions with Explanations</div>' +
     '<div class="doc-meta">Class 11 Biology Chapter 1</div>' +
     '<a class="doc-link" href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia — Free NEET Preparation</a>' +
     '<div class="doc-info">' +
@@ -2462,11 +2653,12 @@ function downloadAllPDF() {
       '<span>·</span>' +
       '<span class="info-item">4 Topics</span>' +
       '<span>·</span>' +
-      '<span class="info-item">NEET Pattern</span>' +
+      '<span class="info-item">With Explanations</span>' +
     '</div>' +
   '</div>' +
   '<div class="wm-bar">✦ NEETopia · raunakkarn555.github.io/neetopia · All content free · No ads · No paywalls ✦</div>' +
   qHtml +
+  '<div class="wm-mid">✦ NEETopia · raunakkarn555.github.io/neetopia · India\'s Most Honest Free NEET Platform · © 2026 ✦</div>' +
   '<div class="footer">' +
     '<strong>NEETopia</strong> — India\'s Most Honest, Free NEET Preparation Platform<br>' +
     '<a href="https://raunakkarn555.github.io/neetopia/index.html">raunakkarn555.github.io/neetopia</a><br>' +
@@ -2481,7 +2673,7 @@ function downloadAllPDF() {
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
-  a.download = 'NEETopia-LivingWorld-140MCQs.html';
+  a.download = 'NEETopia-LivingWorld-140MCQs-WithExplanations.html';
   a.click();
   URL.revokeObjectURL(url);
 }
