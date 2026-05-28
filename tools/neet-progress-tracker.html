@@ -1076,6 +1076,8 @@
   .todo-status-badge { font-size: .6rem; padding: 2px 6px; }
   .todo-tag { font-size: .62rem; padding: 2px 6px; }
   .todo-notes-panel { padding: 0 12px 10px 38px; }
+  .todo-notes-panel { padding: 0 10px 10px 10px; }
+.todo-expand-btn { font-size: .7rem; gap: 2px; }
 }
 @media (max-width: 380px) {
   .todo-meta { gap: 4px; }
@@ -4889,15 +4891,18 @@ function renderTodos(todos) {
           </span>
           <div class="todo-notes-indicator ${hasNotes ? 'has-notes' : ''}"
             title="Has notes"></div>
-          <button class="todo-expand-btn"
-            onclick="toggleTodoNotes(${todo.id})"
-            title="${hasNotes ? 'View notes' : 'Add notes'}">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
+         <button class="todo-expand-btn"
+  onclick="toggleTodoNotes(${todo.id})"
+  title="${hasNotes ? 'View notes' : 'Add notes'}">
+  <span style="font-size:.68rem;font-weight:600;color:inherit;letter-spacing:.02em;">
+    ${hasNotes ? 'Notes' : '+ Note'}
+  </span>
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2.5"
+    stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
+</button>
           <button class="todo-del" onclick="deleteTodo(${todo.id})" title="Delete task">✕</button>
         </div>
 
@@ -4954,6 +4959,14 @@ function saveTodoNotes(id, val) {
   const indicator = document.querySelector(`#todo-item-${id} .todo-notes-indicator`);
   if (indicator) indicator.classList.toggle('has-notes', val.trim().length > 0);
 }
+
+
+function toggleTodoNotes(id) {
+  const item = document.getElementById('todo-item-' + id);
+  if (!item) return;
+  item.classList.toggle('notes-open');
+}
+
 
 function deleteTodo(id) {
   const d = getData();
