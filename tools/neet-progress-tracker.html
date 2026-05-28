@@ -1078,7 +1078,11 @@
   .todo-notes-panel { padding: 0 12px 10px 38px; }
   .todo-notes-panel { padding: 0 10px 10px 10px; }
 .todo-expand-btn { font-size: .7rem; gap: 2px; }
+#dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
+
 }
+
+
 @media (max-width: 380px) {
   .todo-meta { gap: 4px; }
   .todo-status-badge { display: none; }
@@ -2340,8 +2344,8 @@
   <section class="tracker-section active" id="section-dashboard">
     <div class="dash-hero">
       <h1>NEET <span class="hl">Progress Tracker</span> Dashboard</h1>
-      <p>Track every chapter, topic, test and revision journey. Your complete NEET operating system.</p>
-    </div>
+      <p id="dashQuote" style="color:var(--muted);font-size:.95rem;margin-bottom:32px;font-style:italic;min-height:1.4em;transition:opacity .4s;"></p>
+     </div>
 
     <div class="stats-grid" id="statsGrid">
       <div class="stat-card bio">
@@ -2410,6 +2414,57 @@
         <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="phy-detail">0 / 241 topics complete</div>
       </div>
     </div>
+
+    <!-- ── ROW: Goal Ring + Week Chart ── -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow1">
+
+  <!-- Today's Goal Ring -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <div style="position:relative;width:90px;height:90px;flex-shrink:0;">
+      <svg width="90" height="90" viewBox="0 0 90 90" style="transform:rotate(-90deg)">
+        <circle cx="45" cy="45" r="38" fill="none" stroke="var(--bg3)" stroke-width="7"/>
+        <circle cx="45" cy="45" r="38" fill="none" stroke="var(--accent)" stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="238.76"
+          stroke-dashoffset="238.76"
+          id="goalRingFill"
+          style="transition:stroke-dashoffset .8s ease;"/>
+      </svg>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);" id="goalRingPct">0%</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px;">Today's Goal</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:8px;" id="goalRingLabel">0 / 0 hrs studied</div>
+      <div style="font-size:.75rem;color:var(--muted);padding:6px 10px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent);" id="goalRingMsg">Set your daily goal in Profile tab.</div>
+    </div>
+  </div>
+
+  <!-- Week Bar Chart -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">📅 This Week's Study</div>
+    <div style="display:flex;align-items:flex-end;gap:6px;height:64px;" id="weekBarChart"></div>
+    <div style="display:flex;gap:6px;margin-top:6px;" id="weekBarLabels"></div>
+  </div>
+</div>
+
+<!-- ── ROW: Next Milestone + Recent Activity ── -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow2">
+
+  <!-- Next Milestone -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">🏁 Next Milestone</div>
+    <div id="nextMilestoneContent"></div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">⚡ Recent Activity</div>
+    <div id="recentActivityFeed" style="display:flex;flex-direction:column;gap:7px;"></div>
+  </div>
+</div>
+
   </section>
 
   <!-- ═══════════════ SECTION: PROFILE ═══════════════ -->
@@ -6049,7 +6104,189 @@ function showPriorityPanel() {
 }
 
 
+// ─── DASHBOARD EXTRAS ───
 
+const DASH_QUOTES = [
+  { text: "Consistency doesn't care about your mood. Show up anyway.", attr: "The NEET grind" },
+  { text: "NCERT is not a book. It is a weapon. Sharpen it daily.", attr: "Every topper ever" },
+  { text: "One chapter a day keeps the regret away.", attr: "Study science" },
+  { text: "You don't rise to the level of your motivation. You fall to the level of your systems.", attr: "Atomic Habits" },
+  { text: "The best time to start was yesterday. The next best time is right now.", attr: "Classic wisdom" },
+  { text: "Comparison is the thief of preparation. Focus on your own race.", attr: "NEET reality" },
+  { text: "Sleep is not laziness. It's memory consolidation. Protect it.", attr: "Neuroscience" },
+  { text: "Revision is not reviewing — it's rebuilding the memory stronger.", attr: "Spaced repetition" },
+  { text: "Physics problems don't get easier. You get stronger.", attr: "Every Physics survivor" },
+  { text: "Your brain learns by struggling, not by watching others struggle.", attr: "Cognitive science" },
+  { text: "A mock test taken seriously is worth ten chapters half-read.", attr: "Test prep truth" },
+  { text: "The chapters you avoid are the chapters that will find you in the exam.", attr: "Murphy's NEET law" },
+  { text: "Small daily improvements compound into extraordinary results.", attr: "Compounding principle" },
+  { text: "Doubt your doubts, not your preparation.", attr: "Exam day mindset" },
+  { text: "Biology is not memorisation. It is understanding life itself.", attr: "The beauty of NEET" },
+  { text: "The syllabus is fixed. Your effort is the only variable.", attr: "Control what you can" },
+  { text: "Hard days build the grit that exam day demands.", attr: "Long-game thinking" },
+  { text: "Reading NCERT once is introduction. Reading it five times is mastery.", attr: "Toppers' secret" },
+  { text: "Every ❓ doubt you flag today is a ✅ mark saved for exam day.", attr: "NEETopia tracker tip" },
+  { text: "Chemistry rewards those who understand, not those who memorise.", attr: "Organic reality" },
+  { text: "Your streak is a contract with your future self. Don't break it.", attr: "Daily discipline" },
+  { text: "The exam doesn't know how tired you are. Prepare anyway.", attr: "Game day truth" },
+  { text: "Goals on paper feel abstract. Topics checked off feel real.", attr: "Track your progress" },
+  { text: "Procrastination is just fear wearing a lazy costume.", attr: "Productivity science" },
+  { text: "One focused hour beats three distracted hours every time.", attr: "Deep work principle" },
+  { text: "You are not behind. You are exactly where your current consistency has placed you.", attr: "Honest self-assessment" },
+  { text: "Mock tests are practice for failing safely before it matters.", attr: "Why mock tests exist" },
+  { text: "The Krebs cycle doesn't care that you're tired. Learn it anyway.", attr: "Biology solidarity" },
+  { text: "This is temporary discomfort for permanent capability.", attr: "Long-term thinking" },
+  { text: "Every topic completed is a vote for the doctor you're becoming.", attr: "Identity-based habits" },
+];
+
+function initDashboardExtras() {
+  // ── 1. Daily Quote ──
+  const quoteEl = document.getElementById('dashQuote');
+  if (quoteEl) {
+    const dayIndex = Math.floor(Date.now() / 86400000) % DASH_QUOTES.length;
+    const q = DASH_QUOTES[dayIndex];
+    quoteEl.innerHTML = `"${q.text}" <span style="font-style:normal;font-size:.78rem;color:var(--muted);font-weight:600;">— ${q.attr}</span>`;
+  }
+
+  // ── 2. Today's Goal Ring ──
+  const d = getData();
+  const todayKey = 'day-data-' + new Date().toISOString().slice(0,10);
+  const dayData = d[todayKey] || {};
+  const hoursStudied = parseFloat(dayData.hours) || 0;
+  const hoursGoal = parseFloat(d['profile-daily']) || 0;
+  const ringFill = document.getElementById('goalRingFill');
+  const ringPct  = document.getElementById('goalRingPct');
+  const ringLabel = document.getElementById('goalRingLabel');
+  const ringMsg   = document.getElementById('goalRingMsg');
+  const CIRC = 238.76;
+
+  if (hoursGoal > 0) {
+    const pct = Math.min(hoursStudied / hoursGoal, 1);
+    const offset = CIRC * (1 - pct);
+    const pctRounded = Math.round(pct * 100);
+    if (ringFill) ringFill.style.strokeDashoffset = offset;
+    if (ringPct)  ringPct.textContent = pctRounded + '%';
+    if (ringLabel) ringLabel.textContent = hoursStudied + ' / ' + hoursGoal + ' hrs studied';
+    if (ringMsg) {
+      if (pct >= 1)       ringMsg.textContent = '🎉 Goal crushed! Log more or rest — you earned it.';
+      else if (pct >= .7) ringMsg.textContent = '💪 Almost there! ' + (hoursGoal - hoursStudied).toFixed(1) + ' hrs to go.';
+      else if (pct >= .3) ringMsg.textContent = '📚 Keep going — ' + (hoursGoal - hoursStudied).toFixed(1) + ' more hrs to hit your goal.';
+      else                ringMsg.textContent = '⏰ Start your session and log hours in Daily tab.';
+    }
+    if (ringFill) ringFill.style.stroke = pct >= 1 ? 'var(--bio)' : pct >= .5 ? 'var(--accent)' : 'var(--chem)';
+  } else {
+    if (ringPct)  ringPct.textContent = '—';
+    if (ringLabel) ringLabel.textContent = 'No daily goal set';
+    if (ringMsg)  ringMsg.textContent = 'Set your daily goal in Profile tab.';
+  }
+
+  // ── 3. Week Bar Chart ──
+  const barContainer   = document.getElementById('weekBarChart');
+  const labelContainer = document.getElementById('weekBarLabels');
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  if (barContainer && labelContainer) {
+    barContainer.innerHTML = '';
+    labelContainer.innerHTML = '';
+    const maxHours = 10;
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const dd = new Date(today);
+      dd.setDate(today.getDate() - i);
+      const dk = 'day-data-' + dd.toISOString().slice(0,10);
+      const dayD = d[dk] || {};
+      const hrs = parseFloat(dayD.hours) || 0;
+      const heightPct = Math.min(hrs / maxHours, 1);
+      const heightPx = Math.max(Math.round(heightPct * 56), 3);
+      const isToday = i === 0;
+      const dayName = DAYS[dd.getDay()];
+
+      const bar = document.createElement('div');
+      bar.style.cssText = `flex:1;height:${heightPx}px;border-radius:4px 4px 0 0;background:${isToday ? 'var(--accent)' : hrs > 0 ? 'rgba(168,124,245,.45)' : 'var(--bg3)'};min-height:3px;transition:height .5s ease;position:relative;cursor:default;`;
+      bar.title = dayName + ': ' + (hrs || 0) + ' hrs';
+      barContainer.appendChild(bar);
+
+      const lbl = document.createElement('div');
+      lbl.style.cssText = `flex:1;text-align:center;font-size:.6rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '700' : '500'};font-family:'JetBrains Mono',monospace;`;
+      lbl.textContent = dayName.slice(0,1);
+      labelContainer.appendChild(lbl);
+    }
+  }
+
+  // ── 4. Next Milestone ──
+  const msEl = document.getElementById('nextMilestoneContent');
+  if (msEl) {
+    let totalDone = 0, totalTopics = 0;
+    ['bio','chem','phy'].forEach(subj => {
+      SYLLABUS[subj].forEach(ch => {
+        ch.topics.forEach((_,i) => {
+          totalTopics++;
+          if (d['t-'+ch.id+'-'+i]) totalDone++;
+        });
+      });
+    });
+    const pct = totalTopics ? Math.round(totalDone / totalTopics * 100) : 0;
+    const milestones = [10,25,50,75,90,100];
+    const next = milestones.find(m => m > pct) || 100;
+    const topicsForNext = Math.ceil(next / 100 * totalTopics) - totalDone;
+    const prev = milestones.filter(m => m <= pct).pop() || 0;
+
+    msEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="font-size:2rem;line-height:1;">${next===100?'🏆':next>=75?'🎯':next>=50?'💪':next>=25?'📈':'🌱'}</div>
+        <div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--accent);">${next}% Complete</div>
+          <div style="font-size:.78rem;color:var(--muted);">${topicsForNext} more topic${topicsForNext!==1?'s':''} to unlock</div>
+        </div>
+      </div>
+      <div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:8px;">
+        <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--accent),var(--bio));border-radius:3px;transition:width .6s ease;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">
+        <span>${prev}%</span><span style="color:var(--fg);font-weight:700;">${pct}% now</span><span>${next}%</span>
+      </div>
+      <div style="margin-top:10px;font-size:.75rem;color:var(--muted);padding:8px 10px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent);">
+        ${pct===0?'Start with Bio Ch 1 — The Living World. First step is hardest.':pct<25?'Great start! Keep a steady 10 topics/day rhythm.':pct<50?'Solid foundation! Start mixing in mock tests now.':pct<75?'Halfway! Double down on revision cycles.':pct<90?'Almost there! Mock test daily + weak area focus.':'🔥 Elite territory. Revision and mock tests only now.'}
+      </div>`;
+  }
+
+  // ── 5. Recent Activity Feed ──
+  const feedEl = document.getElementById('recentActivityFeed');
+  if (feedEl) {
+    const recentTopics = [];
+    ['bio','chem','phy'].forEach(subj => {
+      SYLLABUS[subj].forEach(ch => {
+        ch.topics.forEach((topic, i) => {
+          const key = 't-'+ch.id+'-'+i;
+          if (d[key]) {
+            recentTopics.push({
+              topic,
+              chapter: ch.name.replace(/Ch \d+ — /,'').replace(/12\/Ch \d+ — /,''),
+              subj,
+              key
+            });
+          }
+        });
+      });
+    });
+
+    if (!recentTopics.length) {
+      feedEl.innerHTML = '<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:12px 0;">No topics checked off yet.<br>Go to Syllabus tab to start!</div>';
+    } else {
+      const last5 = recentTopics.slice(-5).reverse();
+      const subjColor = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)' };
+      const subjEmoji = { bio:'🌿', chem:'⚗️', phy:'⚡' };
+      feedEl.innerHTML = last5.map(item => `
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--bg3);border-radius:8px;border-left:3px solid ${subjColor[item.subj]};">
+          <span style="flex-shrink:0;font-size:.9rem;">${subjEmoji[item.subj]}</span>
+          <div style="min-width:0;">
+            <div style="font-size:.8rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.topic}</div>
+            <div style="font-size:.68rem;color:var(--muted);margin-top:1px;">${item.chapter}</div>
+          </div>
+          <span style="flex-shrink:0;margin-left:auto;font-size:.65rem;color:var(--bio);font-weight:700;border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.08);padding:1px 6px;border-radius:8px;">✓</span>
+        </div>`).join('');
+    }
+  }
+}
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -6064,6 +6301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadPhotos();
   loadGoals();
   updateStats();
+  initDashboardExtras();
   updateAnalytics();
   updateOverview();
   updateStorageInfo();
@@ -6084,7 +6322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sectionName === 'backup') updateStorageInfo();
     if (sectionName === 'analytics') updateAnalytics();
     if (sectionName === 'overview') updateOverview();
-    if (sectionName === 'dashboard') updateStats();
+   if (sectionName === 'dashboard') { updateStats(); initDashboardExtras(); }
     // Scroll to top of content
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
