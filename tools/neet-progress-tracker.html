@@ -2183,7 +2183,41 @@
   border-radius: 99px;
 }
 
+/* ── DASHBOARD MOBILE FIXES ── */
+@media (max-width: 820px) {
+  #dashRow1, #dashRow2 {
+    grid-template-columns: 1fr !important;
+  }
+}
 
+@media (max-width: 600px) {
+  /* Goal ring card: stack ring and text vertically */
+  #dashRow1 > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Recent activity feed: allow wrapping long text */
+  #recentActivityFeed > div {
+    flex-wrap: wrap;
+  }
+  #recentActivityFeed > div > div {
+    min-width: 0;
+    flex: 1;
+  }
+  /* Next milestone: shrink font */
+  #nextMilestoneContent .stat-num,
+  #nextMilestoneContent [style*="font-size:2rem"] {
+    font-size: 1.4rem !important;
+  }
+  /* Week bar chart label text */
+  #weekBarLabels > div {
+    font-size: .55rem !important;
+  }
+  /* Subject progress cards on dashboard — already auto-fit but need min tweak */
+  #section-dashboard > div[style*="grid-template-columns:repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+}
 
 </style>
 </head>
@@ -2369,8 +2403,9 @@
       <span class="section-icon purple">📊</span>
       Subject Progress Overview
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:24px;">
-      <div class="stat-card" style="text-align:left;padding:22px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:24px;">
+      
+    </div> <div class="stat-card" style="text-align:left;padding:22px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
           <span style="color:var(--bio);font-size:1.1rem;">🌿</span>
           <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Biology</span>
