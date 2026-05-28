@@ -1490,9 +1490,13 @@
   .chapter-header { padding: 12px 14px; gap: 10px; }
   .chapter-name { font-size: .85rem; }
   .chapter-badges { display: none; }
-  .topic-row { grid-template-columns: 18px 1fr; gap: 8px; padding: 8px 0; }
-  .topic-controls { display: none; }
+  .topic-row { grid-template-columns: 18px 1fr; gap: 8px; padding: 8px 0; flex-wrap: wrap; }
+  .topic-controls { display: flex; flex-direction: row; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 4px; grid-column: 2; }
   .topic-name { font-size: .82rem; }
+  .topic-confidence { gap: 4px; }
+  .conf-star { font-size: .95rem; }
+  .topic-flags { gap: 5px; }
+  .flag-btn { width: 26px; height: 26px; font-size: .8rem; }
 
   /* Todo */
   .todo-add-row { flex-direction: column; gap: 8px; }
@@ -1567,6 +1571,9 @@
   .dash-hero h1 { font-size: 1.3rem; }
   .photo-wall { grid-template-columns: repeat(2, 1fr); }
   .test-timer-display { font-size: 1.05rem; }
+  .conf-star { font-size: .85rem; }
+  .flag-btn { width: 24px; height: 24px; }
+  .topic-controls { gap: 4px; }
 }
 
 /* ── CLASS 11/12 DIVIDER ── */
