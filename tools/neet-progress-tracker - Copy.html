@@ -52,6 +52,7 @@
 .tracker-subnav-inner {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 2px;
   padding: 8px 20px;
   min-width: max-content;
@@ -145,6 +146,16 @@
   gap: 14px;
   margin: 28px 0;
 }
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .stat-card { padding: 14px; }
+  .stat-card .stat-num { font-size: 1.6rem; }
+}
+
 .stat-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -154,6 +165,8 @@
   transition: transform .2s, border-color .2s;
   cursor: default;
 }
+
+
 .stat-card:hover { transform: translateY(-2px); border-color: var(--accent); }
 .stat-card .stat-num {
   font-family: 'Bricolage Grotesque', sans-serif;
@@ -191,6 +204,17 @@
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
+
+@media (max-width: 480px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .profile-section { padding: 18px; }
+  .journal-section { padding: 18px; }
+}
+
 .profile-avatar-wrapper {
   position: relative;
   width: 80px;
@@ -597,6 +621,24 @@
   padding: 10px 0;
   border-bottom: 1px solid rgba(255,255,255,.04);
 }
+
+@media (max-width: 500px) {
+  .topic-row {
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+  }
+  .topic-controls {
+    grid-column: 2;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chapter-badges { display: none; } /* hide on very small screens, saves space */
+  .chapter-header { padding: 12px 14px; gap: 10px; }
+}
+
 .topic-row:last-child { border-bottom: none; }
 .topic-check {
   width: 16px;
@@ -688,6 +730,13 @@
   gap: 14px;
   margin: 20px 0;
 }
+
+@media (max-width: 480px) {
+  .daily-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .daily-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -811,54 +860,313 @@
   cursor: pointer;
   font-size: .85rem;
 }
+
+/* ── TODO PROGRESS BAR ── */
+.todo-progress-wrap {
+  margin-bottom: 18px;
+}
+.todo-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.todo-progress-label {
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.todo-progress-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.todo-progress-bar-bg {
+  height: 7px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.todo-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--bio));
+  border-radius: 4px;
+  transition: width .5s ease;
+  min-width: 0;
+}
+
+/* ── TODO FILTER TABS ── */
+.todo-filter-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.todo-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.todo-filter-btn:hover { border-color: var(--accent); color: var(--fg); }
+.todo-filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.todo-filter-count {
+  background: rgba(255,255,255,.15);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: .68rem;
+}
+.todo-filter-btn:not(.active) .todo-filter-count {
+  background: var(--bg2);
+  color: var(--muted);
+}
+
+/* ── TODO ITEM ── */
 .todo-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .todo-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s, opacity .2s;
+}
+.todo-item:hover { border-color: rgba(168,124,245,.3); }
+.todo-item.status-done { opacity: .6; }
+.todo-item.status-done .todo-text { text-decoration: line-through; color: var(--muted); }
+.todo-item-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  transition: opacity .2s;
+  padding: 12px 14px;
+  cursor: default;
 }
-.todo-item.done-item { opacity: .5; }
-.todo-item.done-item .todo-text { text-decoration: line-through; }
-.todo-text { flex: 1; font-size: .88rem; }
+.todo-check-wrap {
+  flex-shrink: 0;
+  position: relative;
+}
+.todo-check-wrap input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  border-radius: 4px;
+}
+.todo-text {
+  flex: 1;
+  font-size: .88rem;
+  font-weight: 500;
+  line-height: 1.4;
+  min-width: 0;
+  word-break: break-word;
+}
+.todo-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 .todo-tag {
   font-size: .68rem;
   padding: 2px 8px;
   border-radius: 10px;
   font-weight: 600;
   border: 1px solid;
+  white-space: nowrap;
 }
-.todo-tag.bio { color: var(--bio); border-color: rgba(61,232,160,.3); }
-.todo-tag.chem { color: var(--chem); border-color: rgba(244,185,66,.3); }
-.todo-tag.phy { color: var(--phy); border-color: rgba(61,191,255,.3); }
-.todo-tag.general { color: var(--purple); border-color: rgba(168,124,245,.3); }
+.todo-tag.bio   { color: var(--bio);    border-color: rgba(61,232,160,.3);  background: rgba(61,232,160,.07); }
+.todo-tag.chem  { color: var(--chem);   border-color: rgba(244,185,66,.3);  background: rgba(244,185,66,.07); }
+.todo-tag.phy   { color: var(--phy);    border-color: rgba(61,191,255,.3);  background: rgba(61,191,255,.07); }
+.todo-tag.general { color: var(--purple); border-color: rgba(168,124,245,.3); background: rgba(168,124,245,.07); }
 .priority-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.priority-dot.high { background: var(--danger); }
+.priority-dot.high   { background: var(--danger); }
 .priority-dot.medium { background: var(--warn); }
-.priority-dot.low { background: var(--bio); }
+.priority-dot.low    { background: var(--bio); }
+
+/* Status badge */
+.todo-status-badge {
+  font-size: .65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  user-select: none;
+}
+.todo-status-badge.not-started {
+  color: var(--muted);
+  border-color: var(--border);
+  background: var(--bg3);
+}
+.todo-status-badge.in-progress {
+  color: var(--warn);
+  border-color: rgba(244,185,66,.35);
+  background: rgba(244,185,66,.08);
+}
+.todo-status-badge.done {
+  color: var(--bio);
+  border-color: rgba(61,232,160,.35);
+  background: rgba(61,232,160,.08);
+}
+
+/* Expand notes toggle */
+.todo-expand-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: .75rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color .15s, background .15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.todo-expand-btn:hover { color: var(--accent); background: rgba(168,124,245,.08); }
+.todo-expand-btn svg { transition: transform .2s; }
+.todo-item.notes-open .todo-expand-btn svg { transform: rotate(180deg); }
+
 .todo-del {
   background: none;
   border: none;
   color: var(--muted);
   cursor: pointer;
   font-size: .8rem;
-  padding: 2px;
+  padding: 2px 4px;
   transition: color .2s;
+  flex-shrink: 0;
 }
 .todo-del:hover { color: var(--danger); }
+
+/* Notes panel */
+.todo-notes-panel {
+  display: none;
+  padding: 0 14px 12px 42px;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.todo-item.notes-open .todo-notes-panel { display: block; }
+.todo-notes-panel textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  outline: none;
+  resize: vertical;
+  min-height: 64px;
+  box-sizing: border-box;
+  transition: border-color .2s;
+  line-height: 1.5;
+}
+.todo-notes-panel textarea:focus { border-color: var(--accent); }
+.todo-notes-panel textarea::placeholder { color: var(--muted); opacity: .7; }
+.todo-notes-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  display: none;
+}
+.todo-notes-indicator.has-notes { display: block; }
+
+/* Empty state */
+.todo-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+.todo-empty .todo-empty-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+/* ── RESPONSIVE TODOS ── */
+@media (max-width: 600px) {
+  /* TODO add row: stack vertically so nothing is cut off */
+  .todo-add-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .todo-add-row input {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+    font-size: 1rem; /* bigger tap target */
+  }
+  .todo-add-row select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  .btn-add {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  /* TODO item: wrap meta on small screens */
+  .todo-item-header {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .todo-meta {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .todo-text { font-size: .85rem; }
+  .todo-status-badge { font-size: .62rem; padding: 3px 8px; }
+  .todo-tag { font-size: .64rem; padding: 2px 7px; }
+  .todo-filter-tabs { gap: 5px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .todo-filter-btn { padding: 5px 10px; font-size: .74rem; flex-shrink: 0; }
+  .todo-notes-panel { padding: 0 10px 10px 10px; }
+  .todo-expand-btn { font-size: .7rem; gap: 2px; }
+
+  /* Dashboard rows: single column */
+  #dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
+}
+
+
+@media (max-width: 380px) {
+  .todo-meta { gap: 4px; }
+  .todo-status-badge { display: none; }
+}
+
 
 /* ── TEST TRACKER ── */
 .test-add-form {
@@ -894,6 +1202,24 @@
   gap: 10px;
   align-items: start;
 }
+
+@media (max-width: 500px) {
+  .test-card {
+    grid-template-columns: 1fr;
+  }
+  .test-score-big { font-size: 1.5rem; }
+  .test-timer-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .timer-btn { width: 100%; text-align: center; }
+  .test-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 .test-card h4 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: .95rem;
@@ -1490,9 +1816,13 @@
   .chapter-header { padding: 12px 14px; gap: 10px; }
   .chapter-name { font-size: .85rem; }
   .chapter-badges { display: none; }
-  .topic-row { grid-template-columns: 18px 1fr; gap: 8px; padding: 8px 0; }
-  .topic-controls { display: none; }
+  .topic-row { grid-template-columns: 18px 1fr; gap: 8px; padding: 8px 0; flex-wrap: wrap; }
+  .topic-controls { display: flex; flex-direction: row; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 4px; grid-column: 2; }
   .topic-name { font-size: .82rem; }
+  .topic-confidence { gap: 4px; }
+  .conf-star { font-size: .95rem; }
+  .topic-flags { gap: 5px; }
+  .flag-btn { width: 26px; height: 26px; font-size: .8rem; }
 
   /* Todo */
   .todo-add-row { flex-direction: column; gap: 8px; }
@@ -1567,6 +1897,9 @@
   .dash-hero h1 { font-size: 1.3rem; }
   .photo-wall { grid-template-columns: repeat(2, 1fr); }
   .test-timer-display { font-size: 1.05rem; }
+  .conf-star { font-size: .85rem; }
+  .flag-btn { width: 24px; height: 24px; }
+  .topic-controls { gap: 4px; }
 }
 
 /* ── CLASS 11/12 DIVIDER ── */
@@ -1843,6 +2176,24 @@
   .ptimer-input-group input { width: 60px; font-size: .9rem; padding: 8px 6px; }
   .ptimer-presets { gap: 6px; }
 }
+
+
+//*── new ── *//
+
+.reminder-preset {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.reminder-preset:hover { border-color: var(--accent); color: var(--accent); }
+.reminder-preset.active { border-color: var(--bio); background: rgba(61,232,160,.1); color: var(--bio); }
 </style>
 
   <script type="application/ld+json">
@@ -1947,9 +2298,45 @@
   border-radius: 99px;
 }
 
+/* ── DASHBOARD MOBILE FIXES ── */
+@media (max-width: 820px) {
+  #dashRow1, #dashRow2 {
+    grid-template-columns: 1fr !important;
+  }
+}
 
+@media (max-width: 600px) {
+  /* Goal ring card: stack ring and text vertically */
+  #dashRow1 > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Recent activity feed: allow wrapping long text */
+  #recentActivityFeed > div {
+    flex-wrap: wrap;
+  }
+  #recentActivityFeed > div > div {
+    min-width: 0;
+    flex: 1;
+  }
+  /* Next milestone: shrink font */
+  #nextMilestoneContent .stat-num,
+  #nextMilestoneContent [style*="font-size:2rem"] {
+    font-size: 1.4rem !important;
+  }
+  /* Week bar chart label text */
+  #weekBarLabels > div {
+    font-size: .55rem !important;
+  }
+  /* Subject progress cards on dashboard — already auto-fit but need min tweak */
+  #section-dashboard > div[style*="grid-template-columns:repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+}
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -2089,17 +2476,7 @@
   </div>
 </nav>
 
-<!-- ══════════════════════════════ STORAGE NOTICE BANNER ══════════════════════════════ -->
-<div class="storage-notice-wrapper">
-  <div class="storage-notice">
-    <div class="notice-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <p>
-      <strong>🔒 Your data is 100% private.</strong> All progress, notes, and tracking data is stored only in <strong>your browser's local storage</strong>. We do not store anything on any server. If you clear browser data or switch devices, your data may be lost. <strong>Please export a backup regularly.</strong>
-    </p>
-  </div>
-</div>
+
 
 <!-- ══════════════════════════════ MAIN CONTENT ══════════════════════════════ -->
 <main class="tracker-page">
@@ -2108,8 +2485,8 @@
   <section class="tracker-section active" id="section-dashboard">
     <div class="dash-hero">
       <h1>NEET <span class="hl">Progress Tracker</span> Dashboard</h1>
-      <p>Track every chapter, topic, test and revision journey. Your complete NEET operating system.</p>
-    </div>
+      <p id="dashQuote" style="color:var(--muted);font-size:.95rem;margin-bottom:32px;font-style:italic;min-height:1.4em;transition:opacity .4s;"></p>
+     </div>
 
     <div class="stats-grid" id="statsGrid">
       <div class="stat-card bio">
@@ -2143,8 +2520,11 @@
       <span class="section-icon purple">📊</span>
       Subject Progress Overview
     </h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:24px;">
-      <div class="stat-card" style="text-align:left;padding:22px;">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:24px;">
+
+   
+    <div class="stat-card" style="text-align:left;padding:22px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
           <span style="color:var(--bio);font-size:1.1rem;">🌿</span>
           <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Biology</span>
@@ -2178,6 +2558,57 @@
         <div style="margin-top:8px;font-size:.75rem;color:var(--muted);" id="phy-detail">0 / 241 topics complete</div>
       </div>
     </div>
+
+    <!-- ── ROW: Goal Ring + Week Chart ── -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow1"></div>
+
+  <!-- Today's Goal Ring -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <div style="position:relative;width:90px;height:90px;flex-shrink:0;">
+      <svg width="90" height="90" viewBox="0 0 90 90" style="transform:rotate(-90deg)">
+        <circle cx="45" cy="45" r="38" fill="none" stroke="var(--bg3)" stroke-width="7"/>
+        <circle cx="45" cy="45" r="38" fill="none" stroke="var(--accent)" stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="238.76"
+          stroke-dashoffset="238.76"
+          id="goalRingFill"
+          style="transition:stroke-dashoffset .8s ease;"/>
+      </svg>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);" id="goalRingPct">0%</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:120px;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px;">Today's Goal</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:8px;" id="goalRingLabel">0 / 0 hrs studied</div>
+      <div style="font-size:.75rem;color:var(--muted);padding:6px 10px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent);" id="goalRingMsg">Set your daily goal in Profile tab.</div>
+    </div>
+  </div>
+
+  <!-- Week Bar Chart -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">📅 This Week's Study</div>
+    <div style="display:flex;align-items:flex-end;gap:6px;height:64px;" id="weekBarChart"></div>
+    <div style="display:flex;gap:6px;margin-top:6px;" id="weekBarLabels"></div>
+  </div>
+</div>
+
+<!-- ── ROW: Next Milestone + Recent Activity ── -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow2">
+
+  <!-- Next Milestone -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">🏁 Next Milestone</div>
+    <div id="nextMilestoneContent"></div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">⚡ Recent Activity</div>
+    <div id="recentActivityFeed" style="display:flex;flex-direction:column;gap:7px;"></div>
+  </div>
+</div>
+
   </section>
 
   <!-- ═══════════════ SECTION: PROFILE ═══════════════ -->
@@ -2260,6 +2691,48 @@
   <!-- ═══════════════ SECTION: SYLLABUS TRACKER ═══════════════ -->
   <section class="tracker-section" id="section-syllabus">
     <h2 class="section-title"><span class="section-icon purple">📚</span> Complete Syllabus Tracker — NEET 2026</h2>
+   <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+  <input type="text" id="syllabusSearch" placeholder="🔍 Search topic... e.g. Krebs cycle, mitosis"
+    style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;box-sizing:border-box;"
+    oninput="searchSyllabus(this.value)" />
+  <button onclick="showDoubtPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(255,95,95,.4);background:rgba(255,95,95,.08);color:var(--danger);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">❓ Doubts</button>
+<button onclick="showRevisedPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(61,232,160,.4);background:rgba(61,232,160,.08);color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">✅ Revised</button>
+<button onclick="showMockedPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(61,191,255,.4);background:rgba(61,191,255,.08);color:var(--phy);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">🧪 Mocked</button>
+<button onclick="showPriorityPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(244,185,66,.4);background:rgba(244,185,66,.08);color:var(--chem);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">⭐ Priority</button>
+</div>
+<div id="searchResults" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px;max-height:320px;overflow-y:auto;"></div>
+<div id="doubtPanel" style="display:none;background:var(--bg2);border:1px solid rgba(255,95,95,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--danger);">❓ All Doubt-Flagged Topics</h3>
+    <button onclick="document.getElementById('doubtPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="doubtPanelContent"></div>
+</div>
+
+<div id="revisedPanel" style="display:none;background:var(--bg2);border:1px solid rgba(61,232,160,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--bio);">✅ Revision-Done Topics</h3>
+    <button onclick="document.getElementById('revisedPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="revisedPanelContent"></div>
+</div>
+
+<div id="mockedPanel" style="display:none;background:var(--bg2);border:1px solid rgba(61,191,255,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--phy);">🧪 Mock-Attempted Chapters</h3>
+    <button onclick="document.getElementById('mockedPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="mockedPanelContent"></div>
+</div>
+
+<div id="priorityPanel" style="display:none;background:var(--bg2);border:1px solid rgba(244,185,66,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--chem);">⭐ Priority-Flagged Topics</h3>
+    <button onclick="document.getElementById('priorityPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="priorityPanelContent"></div>
+</div>
+
     <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Track every chapter and topic. Check off topics as you complete them. Each subject is tracked separately.</p>
 
     <div class="subject-tabs">
@@ -2287,7 +2760,22 @@
   <!-- ═══════════════ SECTION: DAILY TRACKER ═══════════════ -->
   <section class="tracker-section" id="section-daily">
     <h2 class="section-title"><span class="section-icon chem">🗓</span> Daily Tracker</h2>
-    <p style="color:var(--muted);font-size:.88rem;margin-bottom:4px;">Today: <strong id="todayDate"></strong></p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+  <p style="color:var(--muted);font-size:.88rem;margin:0;">Viewing: <strong id="todayDate"></strong></p>
+  <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;align-items:center;">
+    <button onclick="navigateDay(-1)" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">← Prev</button>
+    <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;" />
+    <button onclick="navigateDay(1)" id="nextDayBtn" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">Next →</button>
+    <button onclick="goToToday()" style="padding:5px 12px;border-radius:7px;border:1px solid var(--accent);background:rgba(168,124,245,.1);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;">Today</button>
+  </div>
+</div>
+
+<!-- Weekly Summary Card -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;margin-bottom:14px;">
+  <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📊 Last 7 Days Summary</h4>
+  <div id="weeklySummaryGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
+</div>
+
 
     <div class="daily-grid">
       <div class="daily-card">
@@ -2360,34 +2848,148 @@
         <button class="btn-save" onclick="markStudyDayDone()" style="margin-left:auto;">✅ Log Today's Progress</button>
       </div>
     </div>
+    <!-- Break & Health Reminders -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
+    <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">🔔 Break & Health Reminders</h4>
+    <span style="font-size:.72rem;color:var(--muted);background:var(--bg3);padding:4px 10px;border-radius:12px;">Reminders work while this tab is open</span>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted);margin-bottom:16px;">Allow browser notifications when prompted. Reminders only fire while this tab is open.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;" id="reminderCards">
+
+    <!-- Study Break -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">💻</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Study Break</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Reminder to take a 5-min break</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="break" data-mins="25" onclick="setReminder('break',25,this)">25 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="45" onclick="setReminder('break',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="60" onclick="setReminder('break',60,this)">60 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="90" onclick="setReminder('break',90,this)">90 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="break-status">Not set</div>
+      <button onclick="cancelReminder('break')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Water -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">💧</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Water Reminder</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Drink a glass of water</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="water" data-mins="30" onclick="setReminder('water',30,this)">30 min</button>
+        <button class="reminder-preset" data-type="water" data-mins="45" onclick="setReminder('water',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="water" data-mins="60" onclick="setReminder('water',60,this)">60 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="water-status">Not set</div>
+      <button onclick="cancelReminder('water')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Eye Rest -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">👁</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Eye Rest (20-20-20)</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Every 20 min — look 20ft away for 20s</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="eye" data-mins="20" onclick="setReminder('eye',20,this)">20 min</button>
+        <button class="reminder-preset" data-type="eye" data-mins="30" onclick="setReminder('eye',30,this)">30 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="eye-status">Not set</div>
+      <button onclick="cancelReminder('eye')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Posture -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">🧘</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Posture & Stretch</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Stand up and stretch</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="posture" data-mins="45" onclick="setReminder('posture',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="posture" data-mins="60" onclick="setReminder('posture',60,this)">60 min</button>
+        <button class="reminder-preset" data-type="posture" data-mins="90" onclick="setReminder('posture',90,this)">90 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="posture-status">Not set</div>
+      <button onclick="cancelReminder('posture')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+  </div>
+</div>
   </section>
 
   <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
-  <section class="tracker-section" id="section-todo">
-    <h2 class="section-title"><span class="section-icon purple">✅</span> Daily To-Do List</h2>
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-      <div class="todo-add-row">
-        <input type="text" id="todoInput" placeholder="Add a task... (e.g. Revise Chapter 5 Biology)" onkeydown="if(event.key==='Enter')addTodo()" />
-        <select id="todoSubject">
-          <option value="general">General</option>
-          <option value="bio">Biology</option>
-          <option value="chem">Chemistry</option>
-          <option value="phy">Physics</option>
-        </select>
-        <select id="todoPriority">
-          <option value="high">🔴 High</option>
-          <option value="medium">🟡 Medium</option>
-          <option value="low">🟢 Low</option>
-        </select>
-        <button class="btn-add" onclick="addTodo()">+ Add</button>
+  <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
+<section class="tracker-section" id="section-todo">
+  <h2 class="section-title"><span class="section-icon purple">✅</span> Daily To-Do List</h2>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+
+    <!-- Add Task Row -->
+    <div class="todo-add-row">
+      <input type="text" id="todoInput"
+        placeholder="Add a task... (e.g. Revise Chapter 5 Biology)"
+        onkeydown="if(event.key==='Enter')addTodo()" />
+      <select id="todoSubject">
+        <option value="general">General</option>
+        <option value="bio">Biology</option>
+        <option value="chem">Chemistry</option>
+        <option value="phy">Physics</option>
+      </select>
+      <select id="todoPriority">
+        <option value="high">🔴 High</option>
+        <option value="medium">🟡 Medium</option>
+        <option value="low">🟢 Low</option>
+      </select>
+      <button class="btn-add" onclick="addTodo()">+ Add</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="todo-progress-wrap" id="todoProgressWrap">
+      <div class="todo-progress-header">
+        <span class="todo-progress-label">Tasks Completed</span>
+        <span class="todo-progress-pct" id="todoProgressPct">0%</span>
       </div>
-      <div id="todoList" class="todo-list"></div>
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn-export" onclick="clearCompletedTodos()" style="border-color:var(--danger);color:var(--danger);">🗑 Clear Completed</button>
-        <span style="margin-left:auto;font-size:.8rem;color:var(--muted);align-self:center;" id="todo-count">0 tasks</span>
+      <div class="todo-progress-bar-bg">
+        <div class="todo-progress-bar-fill" id="todoProgressFill" style="width:0%"></div>
       </div>
     </div>
-  </section>
+
+    <!-- Filter Tabs -->
+    <div class="todo-filter-tabs" id="todoFilterTabs">
+      <button class="todo-filter-btn active" data-filter="all" onclick="setTodoFilter('all',this)">
+        All <span class="todo-filter-count" id="fc-all">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="not-started" onclick="setTodoFilter('not-started',this)">
+        Not Started <span class="todo-filter-count" id="fc-not-started">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="in-progress" onclick="setTodoFilter('in-progress',this)">
+        🔄 In Progress <span class="todo-filter-count" id="fc-in-progress">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="done" onclick="setTodoFilter('done',this)">
+        ✅ Done <span class="todo-filter-count" id="fc-done">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="high" onclick="setTodoFilter('high',this)">
+        🔴 High Priority <span class="todo-filter-count" id="fc-high">0</span>
+      </button>
+    </div>
+
+    <!-- Todo List -->
+    <div id="todoList" class="todo-list"></div>
+
+    <!-- Bottom Actions -->
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn-export"
+        onclick="clearCompletedTodos()"
+        style="border-color:var(--danger);color:var(--danger);">
+        🗑 Clear Done
+      </button>
+      <span style="margin-left:auto;font-size:.8rem;color:var(--muted);align-self:center;"
+        id="todo-count">0 tasks</span>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- ═══════════════ SECTION: TESTS ═══════════════ -->
   <section class="tracker-section" id="section-tests">
@@ -2471,7 +3073,46 @@
       <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
       <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
     </div>
-  </section>
+
+    <!-- Charts Row -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px;">
+
+  <!-- Doughnut — Overall Progress -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🍩 Overall Coverage</h3>
+    <canvas id="chartDoughnut" height="200"></canvas>
+    <div id="chartDoughnutLegend" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.8rem;"></div>
+  </div>
+
+  <!-- Radar — Subject Balance -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🕸 Subject Balance</h3>
+    <canvas id="chartRadar" height="200"></canvas>
+  </div>
+
+  <!-- Bar — Chapter Progress -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📊 Topics Per Subject</h3>
+    <canvas id="chartBar" height="200"></canvas>
+  </div>
+
+</div>
+
+
+
+<!-- Pace Prediction -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
+  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🚀 Pace Prediction</h3>
+  <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
+</div>
+
+<!-- Test Score Trend -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
+  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
+  <canvas id="chartLine" height="100" style="display:none;"></canvas>
+  <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+</div>
+</section>
 
   <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
   <section class="tracker-section" id="section-personal">
@@ -2971,7 +3612,17 @@
     </div>
 
   </section>
-
+<!-- ══════════════════════════════ STORAGE NOTICE BANNER ══════════════════════════════ -->
+<div class="storage-notice-wrapper">
+  <div class="storage-notice">
+    <div class="notice-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <p>
+      <strong>🔒 Your data is 100% private.</strong> All progress, notes, and tracking data is stored only in <strong>your browser's local storage</strong>. We do not store anything on any server. If you clear browser data or switch devices, your data may be lost. <strong>Please export a backup regularly.</strong>
+    </p>
+  </div>
+</div>
 </main>
 
 <!-- ══════════════════════════════
@@ -4336,12 +4987,74 @@ function loadAvatar() {
   if (d['profile-avatar']) showAvatarImg(d['profile-avatar']);
 }
 
+let _viewingDate = new Date().toISOString().slice(0,10);
+
+function getViewingDate() { return _viewingDate; }
+
+// ─── REMINDERS ───
+const _reminders = {};
+
+function setReminder(type, mins, btnEl) {
+  if (!('Notification' in window)) { showToast('Browser does not support notifications', 'info'); return; }
+  Notification.requestPermission().then(perm => {
+    if (perm !== 'granted') { showToast('Please allow notifications to use reminders', 'info'); return; }
+    cancelReminder(type);
+    const ms = mins * 60 * 1000;
+    const messages = {
+      break:   { title: '☕ Study Break Time!',    body: 'Take a 5-minute break. Rest helps memory consolidation.' },
+      water:   { title: '💧 Drink Water!',          body: 'Stay hydrated — dehydration reduces focus and memory.' },
+      eye:     { title: '👁 Eye Rest (20-20-20)',   body: 'Look 20 feet away for 20 seconds. Your eyes need a break!' },
+      posture: { title: '🧘 Posture & Stretch',     body: 'Stand up, stretch your back and shoulders. 2 minutes.' }
+    };
+    const msg = messages[type];
+    function fire() {
+      new Notification(msg.title, { body: msg.body, icon: '/favicon.ico' });
+      showToast(msg.title, 'success');
+      // Re-schedule (repeating)
+      _reminders[type] = setTimeout(fire, ms);
+      updateReminderStatus(type, mins);
+    }
+    _reminders[type] = setTimeout(fire, ms);
+    updateReminderStatus(type, mins);
+    // Mark button active
+    document.querySelectorAll('.reminder-preset[data-type="' + type + '"]').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    showToast('🔔 ' + type.charAt(0).toUpperCase()+type.slice(1) + ' reminder set for ' + mins + ' min', 'success');
+  });
+}
+
+function cancelReminder(type) {
+  if (_reminders[type]) { clearTimeout(_reminders[type]); delete _reminders[type]; }
+  document.querySelectorAll('.reminder-preset[data-type="' + type + '"]').forEach(b => b.classList.remove('active'));
+  updateReminderStatus(type, null);
+}
+
+function updateReminderStatus(type, mins) {
+  const el = document.getElementById(type + '-status');
+  if (!el) return;
+  if (mins) {
+    el.textContent = '✅ Active — fires every ' + mins + ' min';
+    el.style.color = 'var(--bio)';
+  } else {
+    el.textContent = 'Not set';
+    el.style.color = 'var(--muted)';
+  }
+}
+
+
 // ─── DAILY TRACKER ───
 function initDaily() {
-  const today = new Date();
-  safeSet('todayDate', today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
-  const d = getData();
-  const key = 'day-data-' + today.toISOString().slice(0,10);
+  const today = new Date(_viewingDate + 'T00:00:00');
+const isToday = _viewingDate === new Date().toISOString().slice(0,10);
+safeSet('todayDate', (isToday ? '📅 Today — ' : '📆 ') + today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+const d = getData();
+const key = 'day-data-' + _viewingDate;
+const dayPickerEl = document.getElementById('dayPickerInput');
+if (dayPickerEl) dayPickerEl.value = _viewingDate;
+const nextBtn = document.getElementById('nextDayBtn');
+if (nextBtn) nextBtn.disabled = isToday;
+buildWeeklySummary();
+
   const dayData = d[key] || {};
   const hoursEl = document.getElementById('daily-hours');
   const waterEl = document.getElementById('daily-water');
@@ -4373,9 +5086,9 @@ function initDaily() {
 }
 
 function saveDailyData() {
-  const today = new Date().toISOString().slice(0,10);
-  const d = getData();
-  const key = 'day-data-' + today;
+  const today = _viewingDate;
+const d = getData();
+const key = 'day-data-' + today;
   const mood = document.querySelector('.mood-btn.selected');
   d[key] = {
     hours: document.getElementById('daily-hours')?.value || 0,
@@ -4391,7 +5104,7 @@ function saveDailyData() {
 
 function markStudyDayDone() {
   saveDailyData();
-  const today = new Date().toISOString().slice(0,10);
+ const today = _viewingDate;
   const d = getData();
   d['day-' + today] = (parseFloat(document.getElementById('daily-hours')?.value) || 1);
   // Update streak
@@ -4408,6 +5121,61 @@ function markStudyDayDone() {
   buildHeatmap();
   updateStats();
 }
+
+
+function navigateDay(delta) {
+  const d = new Date(_viewingDate + 'T00:00:00');
+  d.setDate(d.getDate() + delta);
+  const newDate = d.toISOString().slice(0,10);
+  const todayStr = new Date().toISOString().slice(0,10);
+  if (newDate > todayStr) return;
+  _viewingDate = newDate;
+  initDaily();
+}
+
+function jumpToDate(val) {
+  if (!val) return;
+  const todayStr = new Date().toISOString().slice(0,10);
+  if (val > todayStr) { showToast('Cannot navigate to future dates', 'info'); return; }
+  _viewingDate = val;
+  initDaily();
+}
+
+function goToToday() {
+  _viewingDate = new Date().toISOString().slice(0,10);
+  initDaily();
+}
+
+function buildWeeklySummary() {
+  const container = document.getElementById('weeklySummaryGrid');
+  if (!container) return;
+  const d = getData();
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  container.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() - i);
+    const dk = 'day-data-' + dd.toISOString().slice(0,10);
+    const dayD = d[dk] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    const mood = dayD.mood || '';
+    const isViewing = dd.toISOString().slice(0,10) === _viewingDate;
+    const isToday = i === 0;
+    const level = hrs >= 8 ? 4 : hrs >= 6 ? 3 : hrs >= 4 ? 2 : hrs >= 1 ? 1 : 0;
+    const bgMap = ['var(--bg3)','rgba(168,124,245,.25)','rgba(168,124,245,.45)','rgba(168,124,245,.65)','var(--purple)'];
+    container.innerHTML += `
+      <div onclick="jumpToDate('${dd.toISOString().slice(0,10)}')"
+        style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgMap[level]};border:1.5px solid ${isViewing ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .2s;">
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;">${days[dd.getDay()]}</div>
+        <div style="font-size:.85rem;margin:3px 0;">${mood || (hrs > 0 ? '📚' : '○')}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:${hrs>0?'var(--fg)':'var(--muted)'};">${hrs > 0 ? hrs+'h' : '—'}</div>
+        ${isToday ? '<div style="font-size:.55rem;color:var(--accent);font-weight:700;margin-top:2px;">TODAY</div>' : ''}
+      </div>`;
+  }
+}
+
+
 
 function buildHeatmap() {
   const container = document.getElementById('heatmapRow');
@@ -4432,6 +5200,9 @@ function buildHeatmap() {
 }
 
 // ─── TODO LIST ───
+// ─── TODO LIST ───
+let _todoFilter = 'all';
+
 function loadTodos() {
   const d = getData();
   const todos = JSON.parse(d['todos'] || '[]');
@@ -4446,7 +5217,15 @@ function addTodo() {
   if (!text) return;
   const d = getData();
   const todos = JSON.parse(d['todos'] || '[]');
-  todos.unshift({ id: Date.now(), text, subj, priority, done: false });
+  todos.unshift({
+    id: Date.now(),
+    text,
+    subj,
+    priority,
+    status: 'not-started',
+    notes: '',
+    done: false
+  });
   d['todos'] = JSON.stringify(todos);
   setData(d);
   input.value = '';
@@ -4454,23 +5233,157 @@ function addTodo() {
   showToast('Task added!');
 }
 
+function setTodoFilter(filter, btn) {
+  _todoFilter = filter;
+  document.querySelectorAll('.todo-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  renderTodos(todos);
+}
+
+function _filterTodos(todos) {
+  if (_todoFilter === 'all')         return todos;
+  if (_todoFilter === 'not-started') return todos.filter(t => t.status === 'not-started' || !t.status);
+  if (_todoFilter === 'in-progress') return todos.filter(t => t.status === 'in-progress');
+  if (_todoFilter === 'done')        return todos.filter(t => t.status === 'done');
+  if (_todoFilter === 'high')        return todos.filter(t => t.priority === 'high');
+  return todos;
+}
+
+function _updateTodoProgress(todos) {
+  const total = todos.length;
+  const done  = todos.filter(t => t.status === 'done').length;
+  const pct   = total ? Math.round(done / total * 100) : 0;
+  const fill  = document.getElementById('todoProgressFill');
+  const pctEl = document.getElementById('todoProgressPct');
+  if (fill)  fill.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+
+  // Update filter counts
+  const counts = {
+    all:          todos.length,
+    'not-started':todos.filter(t => t.status === 'not-started' || !t.status).length,
+    'in-progress':todos.filter(t => t.status === 'in-progress').length,
+    done:         todos.filter(t => t.status === 'done').length,
+    high:         todos.filter(t => t.priority === 'high').length,
+  };
+  Object.entries(counts).forEach(([key, count]) => {
+    const el = document.getElementById('fc-' + key);
+    if (el) el.textContent = count;
+  });
+
+  safeSet('todo-count', total + ' task' + (total !== 1 ? 's' : ''));
+}
+
+function _statusLabel(status) {
+  if (status === 'in-progress') return '🔄 In Progress';
+  if (status === 'done')        return '✅ Done';
+  return '⬜ Not Started';
+}
+
+function _statusClass(status) {
+  if (status === 'in-progress') return 'in-progress';
+  if (status === 'done')        return 'done';
+  return 'not-started';
+}
+
+function _nextStatus(status) {
+  if (!status || status === 'not-started') return 'in-progress';
+  if (status === 'in-progress')            return 'done';
+  return 'not-started';
+}
+
 function renderTodos(todos) {
   const list = document.getElementById('todoList');
   if (!list) return;
-  list.innerHTML = '';
-  safeSet('todo-count', todos.length + ' task' + (todos.length !== 1 ? 's' : ''));
-  todos.forEach(todo => {
-    const item = document.createElement('div');
-    item.className = 'todo-item' + (todo.done ? ' done-item' : '');
-    item.innerHTML = `
-      <div class="priority-dot ${todo.priority}"></div>
-      <input type="checkbox" ${todo.done?'checked':''} style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;"
-        onchange="toggleTodo(${todo.id})" />
-      <span class="todo-text">${todo.text}</span>
-      <span class="todo-tag ${todo.subj}">${todo.subj.charAt(0).toUpperCase()+todo.subj.slice(1)}</span>
-      <button class="todo-del" onclick="deleteTodo(${todo.id})">✕</button>`;
-    list.appendChild(item);
-  });
+
+  _updateTodoProgress(todos);
+
+  const visible = _filterTodos(todos);
+
+  if (!visible.length) {
+    list.innerHTML = `<div class="todo-empty">
+      <div class="todo-empty-icon">${_todoFilter === 'done' ? '🎉' : _todoFilter === 'high' ? '🔴' : '📋'}</div>
+      <div>${_todoFilter === 'all' ? 'No tasks yet. Add your first task above!' :
+            _todoFilter === 'done' ? 'No completed tasks yet. Keep going!' :
+            _todoFilter === 'high' ? 'No high-priority tasks.' :
+            'No tasks in this category.'}</div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = visible.map(todo => {
+    const status = todo.status || 'not-started';
+    const isDone = status === 'done';
+    const hasNotes = todo.notes && todo.notes.trim().length > 0;
+
+    return `<div class="todo-item ${isDone ? 'status-done' : ''}" id="todo-item-${todo.id}">
+      <div class="todo-item-header">
+
+        <div class="todo-check-wrap">
+          <input type="checkbox" ${isDone ? 'checked' : ''}
+            title="Mark as done"
+            onchange="quickDoneTodo(${todo.id}, this.checked)" />
+        </div>
+
+        <span class="todo-text">${todo.text}</span>
+
+        <div class="todo-meta">
+          <div class="priority-dot ${todo.priority}" title="${todo.priority} priority"></div>
+          <span class="todo-tag ${todo.subj}">${todo.subj.charAt(0).toUpperCase()+todo.subj.slice(1)}</span>
+          <span class="todo-status-badge ${_statusClass(status)}"
+            onclick="cycleTodoStatus(${todo.id})"
+            title="Click to change status">
+            ${_statusLabel(status)}
+          </span>
+          <div class="todo-notes-indicator ${hasNotes ? 'has-notes' : ''}"
+            title="Has notes"></div>
+         <button class="todo-expand-btn"
+  onclick="toggleTodoNotes(${todo.id})"
+  title="${hasNotes ? 'View notes' : 'Add notes'}">
+  <span style="font-size:.68rem;font-weight:600;color:inherit;letter-spacing:.02em;">
+    ${hasNotes ? 'Notes' : '+ Note'}
+  </span>
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2.5"
+    stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
+</button>
+          <button class="todo-del" onclick="deleteTodo(${todo.id})" title="Delete task">✕</button>
+        </div>
+
+      </div>
+
+      <div class="todo-notes-panel">
+        <textarea
+          placeholder="Add notes, links, subtasks, or any details for this task..."
+          onchange="saveTodoNotes(${todo.id}, this.value)"
+          >${todo.notes || ''}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function quickDoneTodo(id, checked) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.status = checked ? 'done' : 'not-started';
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
+}
+
+function cycleTodoStatus(id) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.status = _nextStatus(t.status);
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
 }
 
 function toggleTodo(id) {
@@ -4482,6 +5395,26 @@ function toggleTodo(id) {
   setData(d);
   renderTodos(todos);
 }
+
+function saveTodoNotes(id, val) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.notes = val;
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  // Update notes indicator without full re-render
+  const indicator = document.querySelector(`#todo-item-${id} .todo-notes-indicator`);
+  if (indicator) indicator.classList.toggle('has-notes', val.trim().length > 0);
+}
+
+
+function toggleTodoNotes(id) {
+  const item = document.getElementById('todo-item-' + id);
+  if (!item) return;
+  item.classList.toggle('notes-open');
+}
+
 
 function deleteTodo(id) {
   const d = getData();
@@ -4495,11 +5428,12 @@ function deleteTodo(id) {
 function clearCompletedTodos() {
   const d = getData();
   let todos = JSON.parse(d['todos'] || '[]');
-  todos = todos.filter(t => !t.done);
+  const before = todos.length;
+  todos = todos.filter(t => t.status !== 'done');
   d['todos'] = JSON.stringify(todos);
   setData(d);
   renderTodos(todos);
-  showToast('Completed tasks cleared!');
+  showToast((before - todos.length) + ' completed task(s) cleared!');
 }
 
 // ─── TESTS ───
@@ -5054,7 +5988,244 @@ function updateAnalytics() {
         }).join('') + '</div>';
     }
   }
+  // ── CHARTS ──
+  buildAnalyticsCharts(subjectStats);
+  buildPacePrediction(doneTotals, totalTopics);
 }
+
+
+const _charts = {};
+
+function buildAnalyticsCharts(subjectStats) {
+  // ── Doughnut ──
+  const dCtx = document.getElementById('chartDoughnut');
+  if (dCtx) {
+    if (_charts.doughnut) _charts.doughnut.destroy();
+    const bio = subjectStats.bio, chem = subjectStats.chem, phy = subjectStats.phy;
+    _charts.doughnut = new Chart(dCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Bio Done','Bio Left','Chem Done','Chem Left','Phy Done','Phy Left'],
+        datasets: [{
+          data: [bio.done, bio.total-bio.done, chem.done, chem.total-chem.done, phy.done, phy.total-phy.done],
+          backgroundColor: [
+            'rgba(61,232,160,.8)','rgba(61,232,160,.15)',
+            'rgba(244,185,66,.8)','rgba(244,185,66,.15)',
+            'rgba(61,191,255,.8)','rgba(61,191,255,.15)'
+          ],
+          borderWidth: 0,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        cutout: '65%',
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          label: ctx => ' ' + ctx.label + ': ' + ctx.parsed
+        }}}
+      }
+    });
+    const leg = document.getElementById('chartDoughnutLegend');
+    if (leg) leg.innerHTML = [
+      { label: 'Biology', done: bio.done, total: bio.total, color: 'var(--bio)' },
+      { label: 'Chemistry', done: chem.done, total: chem.total, color: 'var(--chem)' },
+      { label: 'Physics', done: phy.done, total: phy.total, color: 'var(--phy)' }
+    ].map(s => `<div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:${s.color};flex-shrink:0;"></div>
+      <span>${s.label}: <strong>${s.done}/${s.total}</strong> (${s.total?Math.round(s.done/s.total*100):0}%)</span>
+    </div>`).join('');
+  }
+
+  // ── Radar ──
+  const rCtx = document.getElementById('chartRadar');
+  if (rCtx) {
+    if (_charts.radar) _charts.radar.destroy();
+    const d = getData();
+    // Break each subject into rough categories
+    const bioCategories = { Diversity: 0, CellBio: 0, PlantPhys: 0, HumanPhys: 0, Genetics: 0, Ecology: 0 };
+    SYLLABUS.bio.forEach((ch, idx) => {
+      const pct = ch.topics.length ? ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length / ch.topics.length * 100 : 0;
+      if (idx < 4) bioCategories.Diversity += pct;
+      else if (idx < 7) bioCategories.CellBio += pct;
+      else if (idx < 11) bioCategories.PlantPhys += pct;
+      else if (idx < 17) bioCategories.HumanPhys += pct;
+      else if (idx < 20) bioCategories.Genetics += pct;
+      else bioCategories.Ecology += pct;
+    });
+    const vals = [
+      subjectStats.bio.pct,
+      subjectStats.chem.pct,
+      subjectStats.phy.pct,
+      Math.round(bioCategories.Genetics / 3),
+      Math.round(bioCategories.HumanPhys / 6),
+      Math.round(bioCategories.Ecology / 3)
+    ];
+    _charts.radar = new Chart(rCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Biology','Chemistry','Physics','Genetics','Human Physio','Ecology'],
+        datasets: [{
+          label: 'Coverage %',
+          data: vals,
+          backgroundColor: 'rgba(168,124,245,.15)',
+          borderColor: 'rgba(168,124,245,.8)',
+          borderWidth: 2,
+          pointBackgroundColor: 'var(--purple)',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        scales: { r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, color: 'rgba(255,255,255,.3)', font: { size: 9 } },
+          grid: { color: 'rgba(255,255,255,.07)' },
+          pointLabels: { color: 'rgba(255,255,255,.6)', font: { size: 10 } }
+        }},
+        plugins: { legend: { display: false } }
+      }
+    });
+  }
+
+  // ── Bar ──
+  const bCtx = document.getElementById('chartBar');
+  if (bCtx) {
+    if (_charts.bar) _charts.bar.destroy();
+    _charts.bar = new Chart(bCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Bio Done','Bio Left','Chem Done','Chem Left','Phy Done','Phy Left'],
+        datasets: [{
+          label: 'Topics',
+          data: [
+            subjectStats.bio.done, subjectStats.bio.total - subjectStats.bio.done,
+            subjectStats.chem.done, subjectStats.chem.total - subjectStats.chem.done,
+            subjectStats.phy.done, subjectStats.phy.total - subjectStats.phy.done
+          ],
+          backgroundColor: [
+            'rgba(61,232,160,.8)','rgba(61,232,160,.2)',
+            'rgba(244,185,66,.8)','rgba(244,185,66,.2)',
+            'rgba(61,191,255,.8)','rgba(61,191,255,.2)'
+          ],
+          borderRadius: 5,
+          borderWidth: 0
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+          y: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+        }
+      }
+    });
+  }
+
+  // ── Line — Test Scores ──
+  const d = getData();
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  const lineCtx = document.getElementById('chartLine');
+  const trendEl = document.getElementById('testTrend');
+  if (lineCtx) {
+    if (_charts.line) _charts.line.destroy();
+    if (tests.length >= 2) {
+      const sorted = [...tests].reverse();
+      lineCtx.style.display = 'block';
+      if (trendEl) trendEl.style.display = 'none';
+      _charts.line = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: sorted.map(t => t.name.slice(0,10)),
+          datasets: [{
+            label: 'Score / 720',
+            data: sorted.map(t => t.score),
+            borderColor: 'var(--accent)',
+            backgroundColor: 'rgba(168,124,245,.1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'var(--accent)',
+            pointRadius: 4,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+            y: { min: 0, max: 720, ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    } else {
+      lineCtx.style.display = 'none';
+      if (trendEl) { trendEl.style.display = 'block'; trendEl.textContent = tests.length === 1 ? 'Log 1 more test to see the trend line.' : 'No test data yet. Log some tests to see trends.'; }
+    }
+  }
+}
+
+function buildPacePrediction(done, total) {
+  const el = document.getElementById('pacePrediction');
+  if (!el) return;
+  if (done < 3) { el.innerHTML = '<span style="color:var(--muted);">Complete at least 3 topics to see pace prediction.</span>'; return; }
+
+  const d = getData();
+  // Count study days that have at least 1 hour logged
+  let studyDaysCount = 0;
+  let totalHours = 0;
+  for (let i = 0; i < 60; i++) {
+    const dd = new Date(); dd.setDate(dd.getDate() - i);
+    const dk = 'day-data-' + dd.toISOString().slice(0,10);
+    const dayD = d[dk] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    if (hrs > 0) { studyDaysCount++; totalHours += hrs; }
+  }
+
+  if (studyDaysCount < 1) { el.innerHTML = '<span style="color:var(--muted);">Log study hours in Daily tab to enable pace prediction.</span>'; return; }
+
+  const topicsPerDay = done / Math.max(studyDaysCount, 1);
+  const remaining = total - done;
+  const daysNeeded = topicsPerDay > 0 ? Math.ceil(remaining / topicsPerDay) : null;
+  const completionDate = daysNeeded ? new Date(Date.now() + daysNeeded * 86400000) : null;
+
+  const avgHoursPerDay = (totalHours / studyDaysCount).toFixed(1);
+  const pct = Math.round(done / total * 100);
+
+  let color = 'var(--bio)';
+  let message = '🟢 On track!';
+  if (daysNeeded > 300) { color = 'var(--danger)'; message = '🔴 Need to speed up significantly.'; }
+  else if (daysNeeded > 150) { color = 'var(--warn)'; message = '🟡 Manageable — increase daily target.'; }
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px;">
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:${color};">${topicsPerDay.toFixed(1)}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">topics/study day avg</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--phy);">${avgHoursPerDay}h</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">avg hours/study day</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--chem);">${remaining}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">topics remaining</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:${color};">${daysNeeded ? daysNeeded + 'd' : '—'}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">study days to finish</div>
+      </div>
+    </div>
+    ${completionDate ? `
+    <div style="background:var(--bg3);border-radius:8px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="font-size:1.5rem;">📅</div>
+      <div>
+        <div style="font-size:.88rem;font-weight:600;">Estimated Completion: <span style="color:${color};">${completionDate.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</span></div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px;">At your current pace of ${topicsPerDay.toFixed(1)} topics per study day</div>
+      </div>
+    </div>` : ''}
+    <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;border-left:3px solid ${color};font-size:.85rem;">
+      ${message} You've completed ${pct}% of the syllabus across ${studyDaysCount} study day(s) in the last 60 days.
+      ${daysNeeded && daysNeeded > 150 ? '<br><strong>To finish by NEET 2026:</strong> aim for ' + Math.ceil(remaining / 120) + ' topics/day.' : ''}
+    </div>`;
+}
+
 
 // ─── JOURNAL ───
 function addJournalEntry() {
@@ -5283,6 +6454,470 @@ document.getElementById('todayDate') && (() => {
   });
 })();
 
+
+// ─── SEARCH SYLLABUS ───
+function searchSyllabus(query) {
+  const resultsEl = document.getElementById('searchResults');
+  if (!resultsEl) return;
+  const q = query.trim().toLowerCase();
+  if (!q) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; return; }
+
+  const matches = [];
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        if (topic.toLowerCase().includes(q) || ch.name.toLowerCase().includes(q)) {
+          matches.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!matches.length) {
+    resultsEl.style.display = 'block';
+    resultsEl.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:10px;">No results found for "' + query + '"</div>';
+    return;
+  }
+
+  resultsEl.style.display = 'block';
+  resultsEl.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;font-weight:600;">' + matches.length + ' result(s) found</div>' +
+    matches.map(m => {
+      const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+      const subjLabel = m.subj === 'bio' ? '🌿 Biology' : m.subj === 'chem' ? '⚗️ Chemistry' : '⚡ Physics';
+      const highlighted = m.topic.replace(new RegExp(query, 'gi'), match => '<mark style="background:rgba(168,124,245,.3);color:var(--fg);border-radius:3px;padding:0 2px;">' + match + '</mark>');
+      return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+        style="padding:10px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;cursor:pointer;transition:border-color .2s;background:var(--bg3);"
+        onmouseover="this.style.borderColor='${subjColor}'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:.7rem;color:${subjColor};font-weight:700;margin-bottom:3px;">${subjLabel} → ${m.ch.name}</div>
+        <div style="font-size:.85rem;">${highlighted}</div>
+      </div>`;
+    }).join('');
+}
+
+// ─── JUMP TO TOPIC ───
+function jumpToTopic(chId, topicIdx, subj) {
+  // 1. Switch to syllabus section
+  window.switchSection('syllabus');
+
+  // 2. Switch to correct subject tab
+  document.querySelectorAll('.subj-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
+  const tab = document.querySelector('.subj-tab[data-subj="' + subj + '"]');
+  if (tab) tab.classList.add('active');
+  const panel = document.getElementById('panel-' + subj);
+  if (panel) panel.classList.add('active');
+
+  // 3. Open the chapter card
+  const card = document.getElementById('ch-' + chId);
+  if (card && !card.classList.contains('open')) card.classList.add('open');
+
+  // 4. Scroll to topic row
+  setTimeout(() => {
+    const topicKey = 't-' + chId + '-' + topicIdx;
+    const topicRow = document.getElementById('trow-' + topicKey);
+    if (topicRow) {
+      topicRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Flash highlight
+      topicRow.style.background = 'rgba(168,124,245,.2)';
+      topicRow.style.borderRadius = '8px';
+      topicRow.style.transition = 'background 1.5s';
+      setTimeout(() => { topicRow.style.background = ''; }, 2000);
+    }
+    // Clear search
+    const searchEl = document.getElementById('syllabusSearch');
+    const resultsEl = document.getElementById('searchResults');
+    if (searchEl) searchEl.value = '';
+    if (resultsEl) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; }
+  }, 150);
+}
+
+
+function jumpToChapter(chId, subj) {
+  window.switchSection('syllabus');
+  document.querySelectorAll('.subj-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
+  const tab = document.querySelector('.subj-tab[data-subj="' + subj + '"]');
+  if (tab) tab.classList.add('active');
+  const panel = document.getElementById('panel-' + subj);
+  if (panel) panel.classList.add('active');
+  const card = document.getElementById('ch-' + chId);
+  if (card && !card.classList.contains('open')) card.classList.add('open');
+  setTimeout(() => {
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 150);
+}
+
+
+// ─── DOUBTS PANEL ───
+function showDoubtPanel() {
+  const panel = document.getElementById('doubtPanel');
+  const content = document.getElementById('doubtPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const doubts = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        const doubtKey = 'td-' + ch.id + '-' + i;
+        if (d[doubtKey]) {
+          doubts.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!doubts.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No doubt-flagged topics yet.<br>Open any chapter → click ❓ on a topic to flag it.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + doubts.length + ' doubt(s) flagged</div>' +
+      doubts.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(255,95,95,.25);margin-bottom:6px;cursor:pointer;background:rgba(255,95,95,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--danger)'" onmouseout="this.style.borderColor='rgba(255,95,95,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px;">${m.ch.name}</div>
+            <div style="font-size:.85rem;">${m.topic}</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+  
+  document.getElementById('revisedPanel').style.display = 'none';
+document.getElementById('mockedPanel').style.display = 'none';
+document.getElementById('priorityPanel').style.display = 'none';
+
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+
+function showRevisedPanel() {
+  const panel = document.getElementById('revisedPanel');
+  const content = document.getElementById('revisedPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        const revKey = 'tr-' + ch.id + '-' + i;
+        if (d[revKey]) {
+          items.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No revision-flagged topics yet.<br>Open any chapter → click 📗 on a topic to flag it.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' topic(s) marked revised</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(61,232,160,.25);margin-bottom:6px;cursor:pointer;background:rgba(61,232,160,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--bio)'" onmouseout="this.style.borderColor='rgba(61,232,160,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px;">${m.ch.name}</div>
+            <div style="font-size:.85rem;">${m.topic}</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  // close other panels
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('mockedPanel').style.display = 'none';
+  document.getElementById('priorityPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+function showMockedPanel() {
+  const panel = document.getElementById('mockedPanel');
+  const content = document.getElementById('mockedPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      const mockKey = 'mock-' + ch.id;
+      if (d[mockKey]) {
+        const tot = ch.topics.length;
+        const done = ch.topics.filter((_, i) => d['t-' + ch.id + '-' + i]).length;
+        items.push({ subj, ch, done, tot });
+      }
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No mock-attempted chapters yet.<br>Open any chapter → check "Mock Attempted" at the bottom.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' chapter(s) mock-attempted</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        const pct = m.tot ? Math.round(m.done / m.tot * 100) : 0;
+        return `<div onclick="jumpToChapter('${m.ch.id}', '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(61,191,255,.25);margin-bottom:6px;cursor:pointer;background:rgba(61,191,255,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--phy)'" onmouseout="this.style.borderColor='rgba(61,191,255,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.85rem;font-weight:600;">${m.ch.name}</div>
+            <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">${m.done}/${m.tot} topics done (${pct}%)</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('revisedPanel').style.display = 'none';
+  document.getElementById('priorityPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+function showPriorityPanel() {
+  const panel = document.getElementById('priorityPanel');
+  const content = document.getElementById('priorityPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        const priorKey = 'tp-' + ch.id + '-' + i;
+        if (d[priorKey]) {
+          items.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No priority-flagged topics yet.<br>Open any chapter → click ⭐ on a topic to flag it as priority.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' topic(s) marked as priority</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(244,185,66,.25);margin-bottom:6px;cursor:pointer;background:rgba(244,185,66,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--chem)'" onmouseout="this.style.borderColor='rgba(244,185,66,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px;">${m.ch.name}</div>
+            <div style="font-size:.85rem;">${m.topic}</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('revisedPanel').style.display = 'none';
+  document.getElementById('mockedPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+
+// ─── DASHBOARD EXTRAS ───
+
+const DASH_QUOTES = [
+  { text: "Consistency doesn't care about your mood. Show up anyway.", attr: "The NEET grind" },
+  { text: "NCERT is not a book. It is a weapon. Sharpen it daily.", attr: "Every topper ever" },
+  { text: "One chapter a day keeps the regret away.", attr: "Study science" },
+  { text: "You don't rise to the level of your motivation. You fall to the level of your systems.", attr: "Atomic Habits" },
+  { text: "The best time to start was yesterday. The next best time is right now.", attr: "Classic wisdom" },
+  { text: "Comparison is the thief of preparation. Focus on your own race.", attr: "NEET reality" },
+  { text: "Sleep is not laziness. It's memory consolidation. Protect it.", attr: "Neuroscience" },
+  { text: "Revision is not reviewing — it's rebuilding the memory stronger.", attr: "Spaced repetition" },
+  { text: "Physics problems don't get easier. You get stronger.", attr: "Every Physics survivor" },
+  { text: "Your brain learns by struggling, not by watching others struggle.", attr: "Cognitive science" },
+  { text: "A mock test taken seriously is worth ten chapters half-read.", attr: "Test prep truth" },
+  { text: "The chapters you avoid are the chapters that will find you in the exam.", attr: "Murphy's NEET law" },
+  { text: "Small daily improvements compound into extraordinary results.", attr: "Compounding principle" },
+  { text: "Doubt your doubts, not your preparation.", attr: "Exam day mindset" },
+  { text: "Biology is not memorisation. It is understanding life itself.", attr: "The beauty of NEET" },
+  { text: "The syllabus is fixed. Your effort is the only variable.", attr: "Control what you can" },
+  { text: "Hard days build the grit that exam day demands.", attr: "Long-game thinking" },
+  { text: "Reading NCERT once is introduction. Reading it five times is mastery.", attr: "Toppers' secret" },
+  { text: "Every ❓ doubt you flag today is a ✅ mark saved for exam day.", attr: "NEETopia tracker tip" },
+  { text: "Chemistry rewards those who understand, not those who memorise.", attr: "Organic reality" },
+  { text: "Your streak is a contract with your future self. Don't break it.", attr: "Daily discipline" },
+  { text: "The exam doesn't know how tired you are. Prepare anyway.", attr: "Game day truth" },
+  { text: "Goals on paper feel abstract. Topics checked off feel real.", attr: "Track your progress" },
+  { text: "Procrastination is just fear wearing a lazy costume.", attr: "Productivity science" },
+  { text: "One focused hour beats three distracted hours every time.", attr: "Deep work principle" },
+  { text: "You are not behind. You are exactly where your current consistency has placed you.", attr: "Honest self-assessment" },
+  { text: "Mock tests are practice for failing safely before it matters.", attr: "Why mock tests exist" },
+  { text: "The Krebs cycle doesn't care that you're tired. Learn it anyway.", attr: "Biology solidarity" },
+  { text: "This is temporary discomfort for permanent capability.", attr: "Long-term thinking" },
+  { text: "Every topic completed is a vote for the doctor you're becoming.", attr: "Identity-based habits" },
+];
+
+function initDashboardExtras() {
+  // ── 1. Daily Quote ──
+  const quoteEl = document.getElementById('dashQuote');
+  if (quoteEl) {
+    const dayIndex = Math.floor(Date.now() / 86400000) % DASH_QUOTES.length;
+    const q = DASH_QUOTES[dayIndex];
+    quoteEl.innerHTML = `"${q.text}" <span style="font-style:normal;font-size:.78rem;color:var(--muted);font-weight:600;">— ${q.attr}</span>`;
+  }
+
+  // ── 2. Today's Goal Ring ──
+  const d = getData();
+  const todayKey = 'day-data-' + new Date().toISOString().slice(0,10);
+  const dayData = d[todayKey] || {};
+  const hoursStudied = parseFloat(dayData.hours) || 0;
+  const hoursGoal = parseFloat(d['profile-daily']) || 0;
+  const ringFill = document.getElementById('goalRingFill');
+  const ringPct  = document.getElementById('goalRingPct');
+  const ringLabel = document.getElementById('goalRingLabel');
+  const ringMsg   = document.getElementById('goalRingMsg');
+  const CIRC = 238.76;
+
+  if (hoursGoal > 0) {
+    const pct = Math.min(hoursStudied / hoursGoal, 1);
+    const offset = CIRC * (1 - pct);
+    const pctRounded = Math.round(pct * 100);
+    if (ringFill) ringFill.style.strokeDashoffset = offset;
+    if (ringPct)  ringPct.textContent = pctRounded + '%';
+    if (ringLabel) ringLabel.textContent = hoursStudied + ' / ' + hoursGoal + ' hrs studied';
+    if (ringMsg) {
+      if (pct >= 1)       ringMsg.textContent = '🎉 Goal crushed! Log more or rest — you earned it.';
+      else if (pct >= .7) ringMsg.textContent = '💪 Almost there! ' + (hoursGoal - hoursStudied).toFixed(1) + ' hrs to go.';
+      else if (pct >= .3) ringMsg.textContent = '📚 Keep going — ' + (hoursGoal - hoursStudied).toFixed(1) + ' more hrs to hit your goal.';
+      else                ringMsg.textContent = '⏰ Start your session and log hours in Daily tab.';
+    }
+    if (ringFill) ringFill.style.stroke = pct >= 1 ? 'var(--bio)' : pct >= .5 ? 'var(--accent)' : 'var(--chem)';
+  } else {
+    if (ringPct)  ringPct.textContent = '—';
+    if (ringLabel) ringLabel.textContent = 'No daily goal set';
+    if (ringMsg)  ringMsg.textContent = 'Set your daily goal in Profile tab.';
+  }
+
+  // ── 3. Week Bar Chart ──
+  const barContainer   = document.getElementById('weekBarChart');
+  const labelContainer = document.getElementById('weekBarLabels');
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  if (barContainer && labelContainer) {
+    barContainer.innerHTML = '';
+    labelContainer.innerHTML = '';
+    const maxHours = 10;
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const dd = new Date(today);
+      dd.setDate(today.getDate() - i);
+      const dk = 'day-data-' + dd.toISOString().slice(0,10);
+      const dayD = d[dk] || {};
+      const hrs = parseFloat(dayD.hours) || 0;
+      const heightPct = Math.min(hrs / maxHours, 1);
+      const heightPx = Math.max(Math.round(heightPct * 56), 3);
+      const isToday = i === 0;
+      const dayName = DAYS[dd.getDay()];
+
+      const bar = document.createElement('div');
+      bar.style.cssText = `flex:1;height:${heightPx}px;border-radius:4px 4px 0 0;background:${isToday ? 'var(--accent)' : hrs > 0 ? 'rgba(168,124,245,.45)' : 'var(--bg3)'};min-height:3px;transition:height .5s ease;position:relative;cursor:default;`;
+      bar.title = dayName + ': ' + (hrs || 0) + ' hrs';
+      barContainer.appendChild(bar);
+
+      const lbl = document.createElement('div');
+      lbl.style.cssText = `flex:1;text-align:center;font-size:.6rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '700' : '500'};font-family:'JetBrains Mono',monospace;`;
+      lbl.textContent = dayName.slice(0,1);
+      labelContainer.appendChild(lbl);
+    }
+  }
+
+  // ── 4. Next Milestone ──
+  const msEl = document.getElementById('nextMilestoneContent');
+  if (msEl) {
+    let totalDone = 0, totalTopics = 0;
+    ['bio','chem','phy'].forEach(subj => {
+      SYLLABUS[subj].forEach(ch => {
+        ch.topics.forEach((_,i) => {
+          totalTopics++;
+          if (d['t-'+ch.id+'-'+i]) totalDone++;
+        });
+      });
+    });
+    const pct = totalTopics ? Math.round(totalDone / totalTopics * 100) : 0;
+    const milestones = [10,25,50,75,90,100];
+    const next = milestones.find(m => m > pct) || 100;
+    const topicsForNext = Math.ceil(next / 100 * totalTopics) - totalDone;
+    const prev = milestones.filter(m => m <= pct).pop() || 0;
+
+    msEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="font-size:2rem;line-height:1;">${next===100?'🏆':next>=75?'🎯':next>=50?'💪':next>=25?'📈':'🌱'}</div>
+        <div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--accent);">${next}% Complete</div>
+          <div style="font-size:.78rem;color:var(--muted);">${topicsForNext} more topic${topicsForNext!==1?'s':''} to unlock</div>
+        </div>
+      </div>
+      <div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:8px;">
+        <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--accent),var(--bio));border-radius:3px;transition:width .6s ease;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">
+        <span>${prev}%</span><span style="color:var(--fg);font-weight:700;">${pct}% now</span><span>${next}%</span>
+      </div>
+      <div style="margin-top:10px;font-size:.75rem;color:var(--muted);padding:8px 10px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent);">
+        ${pct===0?'Start with Bio Ch 1 — The Living World. First step is hardest.':pct<25?'Great start! Keep a steady 10 topics/day rhythm.':pct<50?'Solid foundation! Start mixing in mock tests now.':pct<75?'Halfway! Double down on revision cycles.':pct<90?'Almost there! Mock test daily + weak area focus.':'🔥 Elite territory. Revision and mock tests only now.'}
+      </div>`;
+  }
+
+  // ── 5. Recent Activity Feed ──
+  const feedEl = document.getElementById('recentActivityFeed');
+  if (feedEl) {
+    const recentTopics = [];
+    ['bio','chem','phy'].forEach(subj => {
+      SYLLABUS[subj].forEach(ch => {
+        ch.topics.forEach((topic, i) => {
+          const key = 't-'+ch.id+'-'+i;
+          if (d[key]) {
+            recentTopics.push({
+              topic,
+              chapter: ch.name.replace(/Ch \d+ — /,'').replace(/12\/Ch \d+ — /,''),
+              subj,
+              key
+            });
+          }
+        });
+      });
+    });
+
+    if (!recentTopics.length) {
+      feedEl.innerHTML = '<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:12px 0;">No topics checked off yet.<br>Go to Syllabus tab to start!</div>';
+    } else {
+      const last5 = recentTopics.slice(-5).reverse();
+      const subjColor = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)' };
+      const subjEmoji = { bio:'🌿', chem:'⚗️', phy:'⚡' };
+      feedEl.innerHTML = last5.map(item => `
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--bg3);border-radius:8px;border-left:3px solid ${subjColor[item.subj]};">
+          <span style="flex-shrink:0;font-size:.9rem;">${subjEmoji[item.subj]}</span>
+          <div style="min-width:0;">
+            <div style="font-size:.8rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.topic}</div>
+            <div style="font-size:.68rem;color:var(--muted);margin-top:1px;">${item.chapter}</div>
+          </div>
+          <span style="flex-shrink:0;margin-left:auto;font-size:.65rem;color:var(--bio);font-weight:700;border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.08);padding:1px 6px;border-radius:8px;">✓</span>
+        </div>`).join('');
+    }
+  }
+}
+
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
   buildSyllabus();
@@ -5296,6 +6931,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadPhotos();
   loadGoals();
   updateStats();
+  initDashboardExtras();
   updateAnalytics();
   updateOverview();
   updateStorageInfo();
@@ -5316,7 +6952,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sectionName === 'backup') updateStorageInfo();
     if (sectionName === 'analytics') updateAnalytics();
     if (sectionName === 'overview') updateOverview();
-    if (sectionName === 'dashboard') updateStats();
+   if (sectionName === 'dashboard') { updateStats(); initDashboardExtras(); }
     // Scroll to top of content
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
