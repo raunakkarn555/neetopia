@@ -811,54 +811,277 @@
   cursor: pointer;
   font-size: .85rem;
 }
+
+/* ── TODO PROGRESS BAR ── */
+.todo-progress-wrap {
+  margin-bottom: 18px;
+}
+.todo-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.todo-progress-label {
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.todo-progress-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.todo-progress-bar-bg {
+  height: 7px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.todo-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--bio));
+  border-radius: 4px;
+  transition: width .5s ease;
+  min-width: 0;
+}
+
+/* ── TODO FILTER TABS ── */
+.todo-filter-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.todo-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.todo-filter-btn:hover { border-color: var(--accent); color: var(--fg); }
+.todo-filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.todo-filter-count {
+  background: rgba(255,255,255,.15);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: .68rem;
+}
+.todo-filter-btn:not(.active) .todo-filter-count {
+  background: var(--bg2);
+  color: var(--muted);
+}
+
+/* ── TODO ITEM ── */
 .todo-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .todo-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s, opacity .2s;
+}
+.todo-item:hover { border-color: rgba(168,124,245,.3); }
+.todo-item.status-done { opacity: .6; }
+.todo-item.status-done .todo-text { text-decoration: line-through; color: var(--muted); }
+.todo-item-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  transition: opacity .2s;
+  padding: 12px 14px;
+  cursor: default;
 }
-.todo-item.done-item { opacity: .5; }
-.todo-item.done-item .todo-text { text-decoration: line-through; }
-.todo-text { flex: 1; font-size: .88rem; }
+.todo-check-wrap {
+  flex-shrink: 0;
+  position: relative;
+}
+.todo-check-wrap input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  border-radius: 4px;
+}
+.todo-text {
+  flex: 1;
+  font-size: .88rem;
+  font-weight: 500;
+  line-height: 1.4;
+  min-width: 0;
+  word-break: break-word;
+}
+.todo-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 .todo-tag {
   font-size: .68rem;
   padding: 2px 8px;
   border-radius: 10px;
   font-weight: 600;
   border: 1px solid;
+  white-space: nowrap;
 }
-.todo-tag.bio { color: var(--bio); border-color: rgba(61,232,160,.3); }
-.todo-tag.chem { color: var(--chem); border-color: rgba(244,185,66,.3); }
-.todo-tag.phy { color: var(--phy); border-color: rgba(61,191,255,.3); }
-.todo-tag.general { color: var(--purple); border-color: rgba(168,124,245,.3); }
+.todo-tag.bio   { color: var(--bio);    border-color: rgba(61,232,160,.3);  background: rgba(61,232,160,.07); }
+.todo-tag.chem  { color: var(--chem);   border-color: rgba(244,185,66,.3);  background: rgba(244,185,66,.07); }
+.todo-tag.phy   { color: var(--phy);    border-color: rgba(61,191,255,.3);  background: rgba(61,191,255,.07); }
+.todo-tag.general { color: var(--purple); border-color: rgba(168,124,245,.3); background: rgba(168,124,245,.07); }
 .priority-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.priority-dot.high { background: var(--danger); }
+.priority-dot.high   { background: var(--danger); }
 .priority-dot.medium { background: var(--warn); }
-.priority-dot.low { background: var(--bio); }
+.priority-dot.low    { background: var(--bio); }
+
+/* Status badge */
+.todo-status-badge {
+  font-size: .65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  user-select: none;
+}
+.todo-status-badge.not-started {
+  color: var(--muted);
+  border-color: var(--border);
+  background: var(--bg3);
+}
+.todo-status-badge.in-progress {
+  color: var(--warn);
+  border-color: rgba(244,185,66,.35);
+  background: rgba(244,185,66,.08);
+}
+.todo-status-badge.done {
+  color: var(--bio);
+  border-color: rgba(61,232,160,.35);
+  background: rgba(61,232,160,.08);
+}
+
+/* Expand notes toggle */
+.todo-expand-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: .75rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color .15s, background .15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.todo-expand-btn:hover { color: var(--accent); background: rgba(168,124,245,.08); }
+.todo-expand-btn svg { transition: transform .2s; }
+.todo-item.notes-open .todo-expand-btn svg { transform: rotate(180deg); }
+
 .todo-del {
   background: none;
   border: none;
   color: var(--muted);
   cursor: pointer;
   font-size: .8rem;
-  padding: 2px;
+  padding: 2px 4px;
   transition: color .2s;
+  flex-shrink: 0;
 }
 .todo-del:hover { color: var(--danger); }
+
+/* Notes panel */
+.todo-notes-panel {
+  display: none;
+  padding: 0 14px 12px 42px;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.todo-item.notes-open .todo-notes-panel { display: block; }
+.todo-notes-panel textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  outline: none;
+  resize: vertical;
+  min-height: 64px;
+  box-sizing: border-box;
+  transition: border-color .2s;
+  line-height: 1.5;
+}
+.todo-notes-panel textarea:focus { border-color: var(--accent); }
+.todo-notes-panel textarea::placeholder { color: var(--muted); opacity: .7; }
+.todo-notes-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  display: none;
+}
+.todo-notes-indicator.has-notes { display: block; }
+
+/* Empty state */
+.todo-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+.todo-empty .todo-empty-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+/* ── RESPONSIVE TODOS ── */
+@media (max-width: 600px) {
+  .todo-add-row { flex-direction: column; gap: 8px; }
+  .todo-add-row input,
+  .todo-add-row select { width: 100%; box-sizing: border-box; }
+  .btn-add { width: 100%; text-align: center; padding: 10px; }
+  .todo-filter-tabs { gap: 5px; }
+  .todo-filter-btn { padding: 5px 10px; font-size: .72rem; }
+  .todo-item-header { padding: 10px 12px; gap: 8px; }
+  .todo-text { font-size: .83rem; }
+  .todo-status-badge { font-size: .6rem; padding: 2px 6px; }
+  .todo-tag { font-size: .62rem; padding: 2px 6px; }
+  .todo-notes-panel { padding: 0 12px 10px 38px; }
+}
+@media (max-width: 380px) {
+  .todo-meta { gap: 4px; }
+  .todo-status-badge { display: none; }
+}
+
 
 /* ── TEST TRACKER ── */
 .test-add-form {
@@ -2412,31 +2635,77 @@
   </section>
 
   <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
-  <section class="tracker-section" id="section-todo">
-    <h2 class="section-title"><span class="section-icon purple">✅</span> Daily To-Do List</h2>
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-      <div class="todo-add-row">
-        <input type="text" id="todoInput" placeholder="Add a task... (e.g. Revise Chapter 5 Biology)" onkeydown="if(event.key==='Enter')addTodo()" />
-        <select id="todoSubject">
-          <option value="general">General</option>
-          <option value="bio">Biology</option>
-          <option value="chem">Chemistry</option>
-          <option value="phy">Physics</option>
-        </select>
-        <select id="todoPriority">
-          <option value="high">🔴 High</option>
-          <option value="medium">🟡 Medium</option>
-          <option value="low">🟢 Low</option>
-        </select>
-        <button class="btn-add" onclick="addTodo()">+ Add</button>
+  <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
+<section class="tracker-section" id="section-todo">
+  <h2 class="section-title"><span class="section-icon purple">✅</span> Daily To-Do List</h2>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+
+    <!-- Add Task Row -->
+    <div class="todo-add-row">
+      <input type="text" id="todoInput"
+        placeholder="Add a task... (e.g. Revise Chapter 5 Biology)"
+        onkeydown="if(event.key==='Enter')addTodo()" />
+      <select id="todoSubject">
+        <option value="general">General</option>
+        <option value="bio">Biology</option>
+        <option value="chem">Chemistry</option>
+        <option value="phy">Physics</option>
+      </select>
+      <select id="todoPriority">
+        <option value="high">🔴 High</option>
+        <option value="medium">🟡 Medium</option>
+        <option value="low">🟢 Low</option>
+      </select>
+      <button class="btn-add" onclick="addTodo()">+ Add</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="todo-progress-wrap" id="todoProgressWrap">
+      <div class="todo-progress-header">
+        <span class="todo-progress-label">Tasks Completed</span>
+        <span class="todo-progress-pct" id="todoProgressPct">0%</span>
       </div>
-      <div id="todoList" class="todo-list"></div>
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn-export" onclick="clearCompletedTodos()" style="border-color:var(--danger);color:var(--danger);">🗑 Clear Completed</button>
-        <span style="margin-left:auto;font-size:.8rem;color:var(--muted);align-self:center;" id="todo-count">0 tasks</span>
+      <div class="todo-progress-bar-bg">
+        <div class="todo-progress-bar-fill" id="todoProgressFill" style="width:0%"></div>
       </div>
     </div>
-  </section>
+
+    <!-- Filter Tabs -->
+    <div class="todo-filter-tabs" id="todoFilterTabs">
+      <button class="todo-filter-btn active" data-filter="all" onclick="setTodoFilter('all',this)">
+        All <span class="todo-filter-count" id="fc-all">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="not-started" onclick="setTodoFilter('not-started',this)">
+        Not Started <span class="todo-filter-count" id="fc-not-started">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="in-progress" onclick="setTodoFilter('in-progress',this)">
+        🔄 In Progress <span class="todo-filter-count" id="fc-in-progress">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="done" onclick="setTodoFilter('done',this)">
+        ✅ Done <span class="todo-filter-count" id="fc-done">0</span>
+      </button>
+      <button class="todo-filter-btn" data-filter="high" onclick="setTodoFilter('high',this)">
+        🔴 High Priority <span class="todo-filter-count" id="fc-high">0</span>
+      </button>
+    </div>
+
+    <!-- Todo List -->
+    <div id="todoList" class="todo-list"></div>
+
+    <!-- Bottom Actions -->
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn-export"
+        onclick="clearCompletedTodos()"
+        style="border-color:var(--danger);color:var(--danger);">
+        🗑 Clear Done
+      </button>
+      <span style="margin-left:auto;font-size:.8rem;color:var(--muted);align-self:center;"
+        id="todo-count">0 tasks</span>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- ═══════════════ SECTION: TESTS ═══════════════ -->
   <section class="tracker-section" id="section-tests">
@@ -4481,6 +4750,9 @@ function buildHeatmap() {
 }
 
 // ─── TODO LIST ───
+// ─── TODO LIST ───
+let _todoFilter = 'all';
+
 function loadTodos() {
   const d = getData();
   const todos = JSON.parse(d['todos'] || '[]');
@@ -4495,7 +4767,15 @@ function addTodo() {
   if (!text) return;
   const d = getData();
   const todos = JSON.parse(d['todos'] || '[]');
-  todos.unshift({ id: Date.now(), text, subj, priority, done: false });
+  todos.unshift({
+    id: Date.now(),
+    text,
+    subj,
+    priority,
+    status: 'not-started',
+    notes: '',
+    done: false
+  });
   d['todos'] = JSON.stringify(todos);
   setData(d);
   input.value = '';
@@ -4503,23 +4783,154 @@ function addTodo() {
   showToast('Task added!');
 }
 
+function setTodoFilter(filter, btn) {
+  _todoFilter = filter;
+  document.querySelectorAll('.todo-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  renderTodos(todos);
+}
+
+function _filterTodos(todos) {
+  if (_todoFilter === 'all')         return todos;
+  if (_todoFilter === 'not-started') return todos.filter(t => t.status === 'not-started' || !t.status);
+  if (_todoFilter === 'in-progress') return todos.filter(t => t.status === 'in-progress');
+  if (_todoFilter === 'done')        return todos.filter(t => t.status === 'done');
+  if (_todoFilter === 'high')        return todos.filter(t => t.priority === 'high');
+  return todos;
+}
+
+function _updateTodoProgress(todos) {
+  const total = todos.length;
+  const done  = todos.filter(t => t.status === 'done').length;
+  const pct   = total ? Math.round(done / total * 100) : 0;
+  const fill  = document.getElementById('todoProgressFill');
+  const pctEl = document.getElementById('todoProgressPct');
+  if (fill)  fill.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+
+  // Update filter counts
+  const counts = {
+    all:          todos.length,
+    'not-started':todos.filter(t => t.status === 'not-started' || !t.status).length,
+    'in-progress':todos.filter(t => t.status === 'in-progress').length,
+    done:         todos.filter(t => t.status === 'done').length,
+    high:         todos.filter(t => t.priority === 'high').length,
+  };
+  Object.entries(counts).forEach(([key, count]) => {
+    const el = document.getElementById('fc-' + key);
+    if (el) el.textContent = count;
+  });
+
+  safeSet('todo-count', total + ' task' + (total !== 1 ? 's' : ''));
+}
+
+function _statusLabel(status) {
+  if (status === 'in-progress') return '🔄 In Progress';
+  if (status === 'done')        return '✅ Done';
+  return '⬜ Not Started';
+}
+
+function _statusClass(status) {
+  if (status === 'in-progress') return 'in-progress';
+  if (status === 'done')        return 'done';
+  return 'not-started';
+}
+
+function _nextStatus(status) {
+  if (!status || status === 'not-started') return 'in-progress';
+  if (status === 'in-progress')            return 'done';
+  return 'not-started';
+}
+
 function renderTodos(todos) {
   const list = document.getElementById('todoList');
   if (!list) return;
-  list.innerHTML = '';
-  safeSet('todo-count', todos.length + ' task' + (todos.length !== 1 ? 's' : ''));
-  todos.forEach(todo => {
-    const item = document.createElement('div');
-    item.className = 'todo-item' + (todo.done ? ' done-item' : '');
-    item.innerHTML = `
-      <div class="priority-dot ${todo.priority}"></div>
-      <input type="checkbox" ${todo.done?'checked':''} style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;"
-        onchange="toggleTodo(${todo.id})" />
-      <span class="todo-text">${todo.text}</span>
-      <span class="todo-tag ${todo.subj}">${todo.subj.charAt(0).toUpperCase()+todo.subj.slice(1)}</span>
-      <button class="todo-del" onclick="deleteTodo(${todo.id})">✕</button>`;
-    list.appendChild(item);
-  });
+
+  _updateTodoProgress(todos);
+
+  const visible = _filterTodos(todos);
+
+  if (!visible.length) {
+    list.innerHTML = `<div class="todo-empty">
+      <div class="todo-empty-icon">${_todoFilter === 'done' ? '🎉' : _todoFilter === 'high' ? '🔴' : '📋'}</div>
+      <div>${_todoFilter === 'all' ? 'No tasks yet. Add your first task above!' :
+            _todoFilter === 'done' ? 'No completed tasks yet. Keep going!' :
+            _todoFilter === 'high' ? 'No high-priority tasks.' :
+            'No tasks in this category.'}</div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = visible.map(todo => {
+    const status = todo.status || 'not-started';
+    const isDone = status === 'done';
+    const hasNotes = todo.notes && todo.notes.trim().length > 0;
+
+    return `<div class="todo-item ${isDone ? 'status-done' : ''}" id="todo-item-${todo.id}">
+      <div class="todo-item-header">
+
+        <div class="todo-check-wrap">
+          <input type="checkbox" ${isDone ? 'checked' : ''}
+            title="Mark as done"
+            onchange="quickDoneTodo(${todo.id}, this.checked)" />
+        </div>
+
+        <span class="todo-text">${todo.text}</span>
+
+        <div class="todo-meta">
+          <div class="priority-dot ${todo.priority}" title="${todo.priority} priority"></div>
+          <span class="todo-tag ${todo.subj}">${todo.subj.charAt(0).toUpperCase()+todo.subj.slice(1)}</span>
+          <span class="todo-status-badge ${_statusClass(status)}"
+            onclick="cycleTodoStatus(${todo.id})"
+            title="Click to change status">
+            ${_statusLabel(status)}
+          </span>
+          <div class="todo-notes-indicator ${hasNotes ? 'has-notes' : ''}"
+            title="Has notes"></div>
+          <button class="todo-expand-btn"
+            onclick="toggleTodoNotes(${todo.id})"
+            title="${hasNotes ? 'View notes' : 'Add notes'}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <button class="todo-del" onclick="deleteTodo(${todo.id})" title="Delete task">✕</button>
+        </div>
+
+      </div>
+
+      <div class="todo-notes-panel">
+        <textarea
+          placeholder="Add notes, links, subtasks, or any details for this task..."
+          onchange="saveTodoNotes(${todo.id}, this.value)"
+          >${todo.notes || ''}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function quickDoneTodo(id, checked) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.status = checked ? 'done' : 'not-started';
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
+}
+
+function cycleTodoStatus(id) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.status = _nextStatus(t.status);
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  renderTodos(todos);
 }
 
 function toggleTodo(id) {
@@ -4530,6 +4941,18 @@ function toggleTodo(id) {
   d['todos'] = JSON.stringify(todos);
   setData(d);
   renderTodos(todos);
+}
+
+function saveTodoNotes(id, val) {
+  const d = getData();
+  const todos = JSON.parse(d['todos'] || '[]');
+  const t = todos.find(t => t.id === id);
+  if (t) t.notes = val;
+  d['todos'] = JSON.stringify(todos);
+  setData(d);
+  // Update notes indicator without full re-render
+  const indicator = document.querySelector(`#todo-item-${id} .todo-notes-indicator`);
+  if (indicator) indicator.classList.toggle('has-notes', val.trim().length > 0);
 }
 
 function deleteTodo(id) {
@@ -4544,11 +4967,12 @@ function deleteTodo(id) {
 function clearCompletedTodos() {
   const d = getData();
   let todos = JSON.parse(d['todos'] || '[]');
-  todos = todos.filter(t => !t.done);
+  const before = todos.length;
+  todos = todos.filter(t => t.status !== 'done');
   d['todos'] = JSON.stringify(todos);
   setData(d);
   renderTodos(todos);
-  showToast('Completed tasks cleared!');
+  showToast((before - todos.length) + ' completed task(s) cleared!');
 }
 
 // ─── TESTS ───
