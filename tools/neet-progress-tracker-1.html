@@ -2193,7 +2193,6 @@
 }
 
 
-//*── new ── *//
 
 .reminder-preset {
   padding: 4px 10px;
@@ -3843,18 +3842,7 @@ function showToast(msg, type='success') {
   setTimeout(() => t.className = 'toast', 2500);
 }
 
-// ─── SUBNAV ───
-document.querySelectorAll('.snav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tracker-section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    const sec = document.getElementById('section-' + btn.dataset.section);
-    if (sec) sec.classList.add('active');
-    updateAnalytics();
-    updateStats();
-  });
-});
+
 
 // ─── FULL NEET 2026 SYLLABUS — CHAPTER-WISE (from NMC official syllabus) ───
 // HIGH weightage chapters marked with high:true (🔥 badge in syllabus.html)
@@ -5836,8 +5824,7 @@ function renderResources(list) {
   el.innerHTML = list.map(r => {
     const pct = r.total > 0 ? Math.min(Math.round(r.done / r.total * 100), 100) : 0;
     const col = subjColor[r.subject] || 'var(--purple)';
-    return 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;">
+    return `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
         <span style="font-size:1.2rem;">${r.type.split(' ')[0]}</span>
         <div style="flex:1;min-width:120px;">
@@ -5857,7 +5844,7 @@ function renderResources(list) {
           style="width:70px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--fg);font-family:'JetBrains Mono',monospace;font-size:.85rem;outline:none;" />
         <span style="font-size:.78rem;color:var(--muted);">/ ${r.total}</span>
       </div>
-    </div>;
+    </div>`;
   }).join('');
 }
 
@@ -6507,7 +6494,7 @@ function importData(event) {
   reader.onload = function(e) {
     try {
       const imported = JSON.parse(e.target.result);
-      if (typeof imported !== 'object') throw new Error('Invalid');
+   if (typeof imported !== 'object' || imported === null) throw new Error('Invalid');
       if (!confirm('This will REPLACE all your current data with the imported backup. Continue?')) return;
       localStorage.setItem(STORE_KEY, JSON.stringify(imported));
       showToast('Progress restored!');
