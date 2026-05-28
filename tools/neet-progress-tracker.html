@@ -2080,6 +2080,24 @@
   .ptimer-input-group input { width: 60px; font-size: .9rem; padding: 8px 6px; }
   .ptimer-presets { gap: 6px; }
 }
+
+
+//*── new ── *//
+
+.reminder-preset {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.reminder-preset:hover { border-color: var(--accent); color: var(--accent); }
+.reminder-preset.active { border-color: var(--bio); background: rgba(61,232,160,.1); color: var(--bio); }
 </style>
 
   <script type="application/ld+json">
@@ -2221,6 +2239,8 @@
 }
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -2404,9 +2424,11 @@
       <span class="section-icon purple">📊</span>
       Subject Progress Overview
     </h2>
+
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:24px;">
 
-    </div> <div class="stat-card" style="text-align:left;padding:22px;">
+   
+    <div class="stat-card" style="text-align:left;padding:22px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
           <span style="color:var(--bio);font-size:1.1rem;">🌿</span>
           <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">Biology</span>
@@ -2442,7 +2464,7 @@
     </div>
 
     <!-- ── ROW: Goal Ring + Week Chart ── -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow1">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="dashRow1"></div>
 
   <!-- Today's Goal Ring -->
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
@@ -2642,7 +2664,22 @@
   <!-- ═══════════════ SECTION: DAILY TRACKER ═══════════════ -->
   <section class="tracker-section" id="section-daily">
     <h2 class="section-title"><span class="section-icon chem">🗓</span> Daily Tracker</h2>
-    <p style="color:var(--muted);font-size:.88rem;margin-bottom:4px;">Today: <strong id="todayDate"></strong></p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+  <p style="color:var(--muted);font-size:.88rem;margin:0;">Viewing: <strong id="todayDate"></strong></p>
+  <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;align-items:center;">
+    <button onclick="navigateDay(-1)" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">← Prev</button>
+    <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;" />
+    <button onclick="navigateDay(1)" id="nextDayBtn" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">Next →</button>
+    <button onclick="goToToday()" style="padding:5px 12px;border-radius:7px;border:1px solid var(--accent);background:rgba(168,124,245,.1);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;">Today</button>
+  </div>
+</div>
+
+<!-- Weekly Summary Card -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;margin-bottom:14px;">
+  <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📊 Last 7 Days Summary</h4>
+  <div id="weeklySummaryGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
+</div>
+
 
     <div class="daily-grid">
       <div class="daily-card">
@@ -2715,6 +2752,74 @@
         <button class="btn-save" onclick="markStudyDayDone()" style="margin-left:auto;">✅ Log Today's Progress</button>
       </div>
     </div>
+    <!-- Break & Health Reminders -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
+    <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;">🔔 Break & Health Reminders</h4>
+    <span style="font-size:.72rem;color:var(--muted);background:var(--bg3);padding:4px 10px;border-radius:12px;">Reminders work while this tab is open</span>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted);margin-bottom:16px;">Allow browser notifications when prompted. Reminders only fire while this tab is open.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;" id="reminderCards">
+
+    <!-- Study Break -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">💻</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Study Break</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Reminder to take a 5-min break</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="break" data-mins="25" onclick="setReminder('break',25,this)">25 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="45" onclick="setReminder('break',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="60" onclick="setReminder('break',60,this)">60 min</button>
+        <button class="reminder-preset" data-type="break" data-mins="90" onclick="setReminder('break',90,this)">90 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="break-status">Not set</div>
+      <button onclick="cancelReminder('break')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Water -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">💧</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Water Reminder</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Drink a glass of water</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="water" data-mins="30" onclick="setReminder('water',30,this)">30 min</button>
+        <button class="reminder-preset" data-type="water" data-mins="45" onclick="setReminder('water',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="water" data-mins="60" onclick="setReminder('water',60,this)">60 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="water-status">Not set</div>
+      <button onclick="cancelReminder('water')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Eye Rest -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">👁</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Eye Rest (20-20-20)</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Every 20 min — look 20ft away for 20s</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="eye" data-mins="20" onclick="setReminder('eye',20,this)">20 min</button>
+        <button class="reminder-preset" data-type="eye" data-mins="30" onclick="setReminder('eye',30,this)">30 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="eye-status">Not set</div>
+      <button onclick="cancelReminder('eye')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+    <!-- Posture -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+      <div style="font-size:1.2rem;margin-bottom:6px;">🧘</div>
+      <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Posture & Stretch</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;">Stand up and stretch</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="reminder-preset" data-type="posture" data-mins="45" onclick="setReminder('posture',45,this)">45 min</button>
+        <button class="reminder-preset" data-type="posture" data-mins="60" onclick="setReminder('posture',60,this)">60 min</button>
+        <button class="reminder-preset" data-type="posture" data-mins="90" onclick="setReminder('posture',90,this)">90 min</button>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);" id="posture-status">Not set</div>
+      <button onclick="cancelReminder('posture')" style="margin-top:6px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.72rem;padding:3px 8px;cursor:pointer;">Cancel</button>
+    </div>
+
+  </div>
+</div>
   </section>
 
   <!-- ═══════════════ SECTION: TO-DO ═══════════════ -->
@@ -2872,7 +2977,70 @@
       <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
       <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
     </div>
-  </section>
+
+    <!-- Charts Row -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px;">
+
+  <!-- Doughnut — Overall Progress -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🍩 Overall Coverage</h3>
+    <canvas id="chartDoughnut" height="200"></canvas>
+    <div id="chartDoughnutLegend" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.8rem;"></div>
+  </div>
+
+  <!-- Radar — Subject Balance -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🕸 Subject Balance</h3>
+    <canvas id="chartRadar" height="200"></canvas>
+  </div>
+
+  <!-- Bar — Chapter Progress -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📊 Topics Per Subject</h3>
+    <canvas id="chartBar" height="200"></canvas>
+  </div>
+
+</div>
+
+<!-- Readiness + Weakness Row (existing) -->
+<div class="analytics-grid">
+  <div class="analytics-card">
+    <h3>🎯 Readiness Level</h3>
+    <div class="readiness-level">
+      <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);">
+        <div class="readiness-pct" id="readinessPct">0%</div>
+      </div>
+      <div class="readiness-label" id="readinessLabel">Beginner</div>
+      <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;" id="readinessMsg">Start completing topics to build momentum.</p>
+    </div>
+  </div>
+  <div class="analytics-card">
+    <h3>⚠️ Weak Areas</h3>
+    <div class="weakness-list" id="weaknessList">
+      <div style="font-size:.85rem;color:var(--muted);">Complete more topics to see weak area analysis.</div>
+    </div>
+  </div>
+  <div class="analytics-card">
+    <h3>📊 Suggestions</h3>
+    <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
+      <p>📌 Start tracking your topics to get personalized suggestions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Pace Prediction -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
+  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🚀 Pace Prediction</h3>
+  <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
+</div>
+
+<!-- Test Score Trend -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
+  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
+  <canvas id="chartLine" height="100" style="display:none;"></canvas>
+  <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+</div>
+</section>
 
   <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
   <section class="tracker-section" id="section-personal">
@@ -4747,12 +4915,74 @@ function loadAvatar() {
   if (d['profile-avatar']) showAvatarImg(d['profile-avatar']);
 }
 
+let _viewingDate = new Date().toISOString().slice(0,10);
+
+function getViewingDate() { return _viewingDate; }
+
+// ─── REMINDERS ───
+const _reminders = {};
+
+function setReminder(type, mins, btnEl) {
+  if (!('Notification' in window)) { showToast('Browser does not support notifications', 'info'); return; }
+  Notification.requestPermission().then(perm => {
+    if (perm !== 'granted') { showToast('Please allow notifications to use reminders', 'info'); return; }
+    cancelReminder(type);
+    const ms = mins * 60 * 1000;
+    const messages = {
+      break:   { title: '☕ Study Break Time!',    body: 'Take a 5-minute break. Rest helps memory consolidation.' },
+      water:   { title: '💧 Drink Water!',          body: 'Stay hydrated — dehydration reduces focus and memory.' },
+      eye:     { title: '👁 Eye Rest (20-20-20)',   body: 'Look 20 feet away for 20 seconds. Your eyes need a break!' },
+      posture: { title: '🧘 Posture & Stretch',     body: 'Stand up, stretch your back and shoulders. 2 minutes.' }
+    };
+    const msg = messages[type];
+    function fire() {
+      new Notification(msg.title, { body: msg.body, icon: '/favicon.ico' });
+      showToast(msg.title, 'success');
+      // Re-schedule (repeating)
+      _reminders[type] = setTimeout(fire, ms);
+      updateReminderStatus(type, mins);
+    }
+    _reminders[type] = setTimeout(fire, ms);
+    updateReminderStatus(type, mins);
+    // Mark button active
+    document.querySelectorAll('.reminder-preset[data-type="' + type + '"]').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    showToast('🔔 ' + type.charAt(0).toUpperCase()+type.slice(1) + ' reminder set for ' + mins + ' min', 'success');
+  });
+}
+
+function cancelReminder(type) {
+  if (_reminders[type]) { clearTimeout(_reminders[type]); delete _reminders[type]; }
+  document.querySelectorAll('.reminder-preset[data-type="' + type + '"]').forEach(b => b.classList.remove('active'));
+  updateReminderStatus(type, null);
+}
+
+function updateReminderStatus(type, mins) {
+  const el = document.getElementById(type + '-status');
+  if (!el) return;
+  if (mins) {
+    el.textContent = '✅ Active — fires every ' + mins + ' min';
+    el.style.color = 'var(--bio)';
+  } else {
+    el.textContent = 'Not set';
+    el.style.color = 'var(--muted)';
+  }
+}
+
+
 // ─── DAILY TRACKER ───
 function initDaily() {
-  const today = new Date();
-  safeSet('todayDate', today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
-  const d = getData();
-  const key = 'day-data-' + today.toISOString().slice(0,10);
+  const today = new Date(_viewingDate + 'T00:00:00');
+const isToday = _viewingDate === new Date().toISOString().slice(0,10);
+safeSet('todayDate', (isToday ? '📅 Today — ' : '📆 ') + today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+const d = getData();
+const key = 'day-data-' + _viewingDate;
+const dayPickerEl = document.getElementById('dayPickerInput');
+if (dayPickerEl) dayPickerEl.value = _viewingDate;
+const nextBtn = document.getElementById('nextDayBtn');
+if (nextBtn) nextBtn.disabled = isToday;
+buildWeeklySummary();
+
   const dayData = d[key] || {};
   const hoursEl = document.getElementById('daily-hours');
   const waterEl = document.getElementById('daily-water');
@@ -4784,9 +5014,9 @@ function initDaily() {
 }
 
 function saveDailyData() {
-  const today = new Date().toISOString().slice(0,10);
-  const d = getData();
-  const key = 'day-data-' + today;
+  const today = _viewingDate;
+const d = getData();
+const key = 'day-data-' + today;
   const mood = document.querySelector('.mood-btn.selected');
   d[key] = {
     hours: document.getElementById('daily-hours')?.value || 0,
@@ -4802,7 +5032,7 @@ function saveDailyData() {
 
 function markStudyDayDone() {
   saveDailyData();
-  const today = new Date().toISOString().slice(0,10);
+ const today = _viewingDate;
   const d = getData();
   d['day-' + today] = (parseFloat(document.getElementById('daily-hours')?.value) || 1);
   // Update streak
@@ -4819,6 +5049,61 @@ function markStudyDayDone() {
   buildHeatmap();
   updateStats();
 }
+
+
+function navigateDay(delta) {
+  const d = new Date(_viewingDate + 'T00:00:00');
+  d.setDate(d.getDate() + delta);
+  const newDate = d.toISOString().slice(0,10);
+  const todayStr = new Date().toISOString().slice(0,10);
+  if (newDate > todayStr) return;
+  _viewingDate = newDate;
+  initDaily();
+}
+
+function jumpToDate(val) {
+  if (!val) return;
+  const todayStr = new Date().toISOString().slice(0,10);
+  if (val > todayStr) { showToast('Cannot navigate to future dates', 'info'); return; }
+  _viewingDate = val;
+  initDaily();
+}
+
+function goToToday() {
+  _viewingDate = new Date().toISOString().slice(0,10);
+  initDaily();
+}
+
+function buildWeeklySummary() {
+  const container = document.getElementById('weeklySummaryGrid');
+  if (!container) return;
+  const d = getData();
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  container.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() - i);
+    const dk = 'day-data-' + dd.toISOString().slice(0,10);
+    const dayD = d[dk] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    const mood = dayD.mood || '';
+    const isViewing = dd.toISOString().slice(0,10) === _viewingDate;
+    const isToday = i === 0;
+    const level = hrs >= 8 ? 4 : hrs >= 6 ? 3 : hrs >= 4 ? 2 : hrs >= 1 ? 1 : 0;
+    const bgMap = ['var(--bg3)','rgba(168,124,245,.25)','rgba(168,124,245,.45)','rgba(168,124,245,.65)','var(--purple)'];
+    container.innerHTML += `
+      <div onclick="jumpToDate('${dd.toISOString().slice(0,10)}')"
+        style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgMap[level]};border:1.5px solid ${isViewing ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .2s;">
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;">${days[dd.getDay()]}</div>
+        <div style="font-size:.85rem;margin:3px 0;">${mood || (hrs > 0 ? '📚' : '○')}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:${hrs>0?'var(--fg)':'var(--muted)'};">${hrs > 0 ? hrs+'h' : '—'}</div>
+        ${isToday ? '<div style="font-size:.55rem;color:var(--accent);font-weight:700;margin-top:2px;">TODAY</div>' : ''}
+      </div>`;
+  }
+}
+
+
 
 function buildHeatmap() {
   const container = document.getElementById('heatmapRow');
@@ -5631,7 +5916,244 @@ function updateAnalytics() {
         }).join('') + '</div>';
     }
   }
+  // ── CHARTS ──
+  buildAnalyticsCharts(subjectStats);
+  buildPacePrediction(doneTotals, totalTopics);
 }
+
+
+const _charts = {};
+
+function buildAnalyticsCharts(subjectStats) {
+  // ── Doughnut ──
+  const dCtx = document.getElementById('chartDoughnut');
+  if (dCtx) {
+    if (_charts.doughnut) _charts.doughnut.destroy();
+    const bio = subjectStats.bio, chem = subjectStats.chem, phy = subjectStats.phy;
+    _charts.doughnut = new Chart(dCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Bio Done','Bio Left','Chem Done','Chem Left','Phy Done','Phy Left'],
+        datasets: [{
+          data: [bio.done, bio.total-bio.done, chem.done, chem.total-chem.done, phy.done, phy.total-phy.done],
+          backgroundColor: [
+            'rgba(61,232,160,.8)','rgba(61,232,160,.15)',
+            'rgba(244,185,66,.8)','rgba(244,185,66,.15)',
+            'rgba(61,191,255,.8)','rgba(61,191,255,.15)'
+          ],
+          borderWidth: 0,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        cutout: '65%',
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          label: ctx => ' ' + ctx.label + ': ' + ctx.parsed
+        }}}
+      }
+    });
+    const leg = document.getElementById('chartDoughnutLegend');
+    if (leg) leg.innerHTML = [
+      { label: 'Biology', done: bio.done, total: bio.total, color: 'var(--bio)' },
+      { label: 'Chemistry', done: chem.done, total: chem.total, color: 'var(--chem)' },
+      { label: 'Physics', done: phy.done, total: phy.total, color: 'var(--phy)' }
+    ].map(s => `<div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:${s.color};flex-shrink:0;"></div>
+      <span>${s.label}: <strong>${s.done}/${s.total}</strong> (${s.total?Math.round(s.done/s.total*100):0}%)</span>
+    </div>`).join('');
+  }
+
+  // ── Radar ──
+  const rCtx = document.getElementById('chartRadar');
+  if (rCtx) {
+    if (_charts.radar) _charts.radar.destroy();
+    const d = getData();
+    // Break each subject into rough categories
+    const bioCategories = { Diversity: 0, CellBio: 0, PlantPhys: 0, HumanPhys: 0, Genetics: 0, Ecology: 0 };
+    SYLLABUS.bio.forEach((ch, idx) => {
+      const pct = ch.topics.length ? ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length / ch.topics.length * 100 : 0;
+      if (idx < 4) bioCategories.Diversity += pct;
+      else if (idx < 7) bioCategories.CellBio += pct;
+      else if (idx < 11) bioCategories.PlantPhys += pct;
+      else if (idx < 17) bioCategories.HumanPhys += pct;
+      else if (idx < 20) bioCategories.Genetics += pct;
+      else bioCategories.Ecology += pct;
+    });
+    const vals = [
+      subjectStats.bio.pct,
+      subjectStats.chem.pct,
+      subjectStats.phy.pct,
+      Math.round(bioCategories.Genetics / 3),
+      Math.round(bioCategories.HumanPhys / 6),
+      Math.round(bioCategories.Ecology / 3)
+    ];
+    _charts.radar = new Chart(rCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Biology','Chemistry','Physics','Genetics','Human Physio','Ecology'],
+        datasets: [{
+          label: 'Coverage %',
+          data: vals,
+          backgroundColor: 'rgba(168,124,245,.15)',
+          borderColor: 'rgba(168,124,245,.8)',
+          borderWidth: 2,
+          pointBackgroundColor: 'var(--purple)',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        scales: { r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, color: 'rgba(255,255,255,.3)', font: { size: 9 } },
+          grid: { color: 'rgba(255,255,255,.07)' },
+          pointLabels: { color: 'rgba(255,255,255,.6)', font: { size: 10 } }
+        }},
+        plugins: { legend: { display: false } }
+      }
+    });
+  }
+
+  // ── Bar ──
+  const bCtx = document.getElementById('chartBar');
+  if (bCtx) {
+    if (_charts.bar) _charts.bar.destroy();
+    _charts.bar = new Chart(bCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Bio Done','Bio Left','Chem Done','Chem Left','Phy Done','Phy Left'],
+        datasets: [{
+          label: 'Topics',
+          data: [
+            subjectStats.bio.done, subjectStats.bio.total - subjectStats.bio.done,
+            subjectStats.chem.done, subjectStats.chem.total - subjectStats.chem.done,
+            subjectStats.phy.done, subjectStats.phy.total - subjectStats.phy.done
+          ],
+          backgroundColor: [
+            'rgba(61,232,160,.8)','rgba(61,232,160,.2)',
+            'rgba(244,185,66,.8)','rgba(244,185,66,.2)',
+            'rgba(61,191,255,.8)','rgba(61,191,255,.2)'
+          ],
+          borderRadius: 5,
+          borderWidth: 0
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+          y: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+        }
+      }
+    });
+  }
+
+  // ── Line — Test Scores ──
+  const d = getData();
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  const lineCtx = document.getElementById('chartLine');
+  const trendEl = document.getElementById('testTrend');
+  if (lineCtx) {
+    if (_charts.line) _charts.line.destroy();
+    if (tests.length >= 2) {
+      const sorted = [...tests].reverse();
+      lineCtx.style.display = 'block';
+      if (trendEl) trendEl.style.display = 'none';
+      _charts.line = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: sorted.map(t => t.name.slice(0,10)),
+          datasets: [{
+            label: 'Score / 720',
+            data: sorted.map(t => t.score),
+            borderColor: 'var(--accent)',
+            backgroundColor: 'rgba(168,124,245,.1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'var(--accent)',
+            pointRadius: 4,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+            y: { min: 0, max: 720, ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    } else {
+      lineCtx.style.display = 'none';
+      if (trendEl) { trendEl.style.display = 'block'; trendEl.textContent = tests.length === 1 ? 'Log 1 more test to see the trend line.' : 'No test data yet. Log some tests to see trends.'; }
+    }
+  }
+}
+
+function buildPacePrediction(done, total) {
+  const el = document.getElementById('pacePrediction');
+  if (!el) return;
+  if (done < 3) { el.innerHTML = '<span style="color:var(--muted);">Complete at least 3 topics to see pace prediction.</span>'; return; }
+
+  const d = getData();
+  // Count study days that have at least 1 hour logged
+  let studyDaysCount = 0;
+  let totalHours = 0;
+  for (let i = 0; i < 60; i++) {
+    const dd = new Date(); dd.setDate(dd.getDate() - i);
+    const dk = 'day-data-' + dd.toISOString().slice(0,10);
+    const dayD = d[dk] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    if (hrs > 0) { studyDaysCount++; totalHours += hrs; }
+  }
+
+  if (studyDaysCount < 1) { el.innerHTML = '<span style="color:var(--muted);">Log study hours in Daily tab to enable pace prediction.</span>'; return; }
+
+  const topicsPerDay = done / Math.max(studyDaysCount, 1);
+  const remaining = total - done;
+  const daysNeeded = topicsPerDay > 0 ? Math.ceil(remaining / topicsPerDay) : null;
+  const completionDate = daysNeeded ? new Date(Date.now() + daysNeeded * 86400000) : null;
+
+  const avgHoursPerDay = (totalHours / studyDaysCount).toFixed(1);
+  const pct = Math.round(done / total * 100);
+
+  let color = 'var(--bio)';
+  let message = '🟢 On track!';
+  if (daysNeeded > 300) { color = 'var(--danger)'; message = '🔴 Need to speed up significantly.'; }
+  else if (daysNeeded > 150) { color = 'var(--warn)'; message = '🟡 Manageable — increase daily target.'; }
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px;">
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:${color};">${topicsPerDay.toFixed(1)}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">topics/study day avg</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--phy);">${avgHoursPerDay}h</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">avg hours/study day</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--chem);">${remaining}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">topics remaining</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:${color};">${daysNeeded ? daysNeeded + 'd' : '—'}</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">study days to finish</div>
+      </div>
+    </div>
+    ${completionDate ? `
+    <div style="background:var(--bg3);border-radius:8px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="font-size:1.5rem;">📅</div>
+      <div>
+        <div style="font-size:.88rem;font-weight:600;">Estimated Completion: <span style="color:${color};">${completionDate.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</span></div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px;">At your current pace of ${topicsPerDay.toFixed(1)} topics per study day</div>
+      </div>
+    </div>` : ''}
+    <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;border-left:3px solid ${color};font-size:.85rem;">
+      ${message} You've completed ${pct}% of the syllabus across ${studyDaysCount} study day(s) in the last 60 days.
+      ${daysNeeded && daysNeeded > 150 ? '<br><strong>To finish by NEET 2026:</strong> aim for ' + Math.ceil(remaining / 120) + ' topics/day.' : ''}
+    </div>`;
+}
+
 
 // ─── JOURNAL ───
 function addJournalEntry() {
