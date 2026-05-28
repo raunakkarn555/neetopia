@@ -146,6 +146,16 @@
   gap: 14px;
   margin: 28px 0;
 }
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .stat-card { padding: 14px; }
+  .stat-card .stat-num { font-size: 1.6rem; }
+}
+
 .stat-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -155,6 +165,8 @@
   transition: transform .2s, border-color .2s;
   cursor: default;
 }
+
+
 .stat-card:hover { transform: translateY(-2px); border-color: var(--accent); }
 .stat-card .stat-num {
   font-family: 'Bricolage Grotesque', sans-serif;
@@ -192,6 +204,17 @@
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
+
+@media (max-width: 480px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .profile-section { padding: 18px; }
+  .journal-section { padding: 18px; }
+}
+
 .profile-avatar-wrapper {
   position: relative;
   width: 80px;
@@ -598,6 +621,24 @@
   padding: 10px 0;
   border-bottom: 1px solid rgba(255,255,255,.04);
 }
+
+@media (max-width: 500px) {
+  .topic-row {
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+  }
+  .topic-controls {
+    grid-column: 2;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chapter-badges { display: none; } /* hide on very small screens, saves space */
+  .chapter-header { padding: 12px 14px; gap: 10px; }
+}
+
 .topic-row:last-child { border-bottom: none; }
 .topic-check {
   width: 16px;
@@ -689,6 +730,13 @@
   gap: 14px;
   margin: 20px 0;
 }
+
+@media (max-width: 480px) {
+  .daily-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .daily-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -1066,21 +1114,51 @@
 
 /* ── RESPONSIVE TODOS ── */
 @media (max-width: 600px) {
-  .todo-add-row { flex-direction: column; gap: 8px; }
-  .todo-add-row input,
-  .todo-add-row select { width: 100%; box-sizing: border-box; }
-  .btn-add { width: 100%; text-align: center; padding: 10px; }
-  .todo-filter-tabs { gap: 5px; }
-  .todo-filter-btn { padding: 5px 10px; font-size: .72rem; }
-  .todo-item-header { padding: 10px 12px; gap: 8px; }
-  .todo-text { font-size: .83rem; }
-  .todo-status-badge { font-size: .6rem; padding: 2px 6px; }
-  .todo-tag { font-size: .62rem; padding: 2px 6px; }
-  .todo-notes-panel { padding: 0 12px 10px 38px; }
-  .todo-notes-panel { padding: 0 10px 10px 10px; }
-.todo-expand-btn { font-size: .7rem; gap: 2px; }
-#dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
+  /* TODO add row: stack vertically so nothing is cut off */
+  .todo-add-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .todo-add-row input {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+    font-size: 1rem; /* bigger tap target */
+  }
+  .todo-add-row select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  .btn-add {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
 
+  /* TODO item: wrap meta on small screens */
+  .todo-item-header {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .todo-meta {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .todo-text { font-size: .85rem; }
+  .todo-status-badge { font-size: .62rem; padding: 3px 8px; }
+  .todo-tag { font-size: .64rem; padding: 2px 7px; }
+  .todo-filter-tabs { gap: 5px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .todo-filter-btn { padding: 5px 10px; font-size: .74rem; flex-shrink: 0; }
+  .todo-notes-panel { padding: 0 10px 10px 10px; }
+  .todo-expand-btn { font-size: .7rem; gap: 2px; }
+
+  /* Dashboard rows: single column */
+  #dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
 }
 
 
@@ -1124,6 +1202,24 @@
   gap: 10px;
   align-items: start;
 }
+
+@media (max-width: 500px) {
+  .test-card {
+    grid-template-columns: 1fr;
+  }
+  .test-score-big { font-size: 1.5rem; }
+  .test-timer-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .timer-btn { width: 100%; text-align: center; }
+  .test-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 .test-card h4 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: .95rem;
