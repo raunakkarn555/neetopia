@@ -2271,7 +2271,10 @@
   <input type="text" id="syllabusSearch" placeholder="🔍 Search topic... e.g. Krebs cycle, mitosis"
     style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;box-sizing:border-box;"
     oninput="searchSyllabus(this.value)" />
-  <button onclick="showDoubtPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(255,95,95,.4);background:rgba(255,95,95,.08);color:var(--danger);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">❓ Doubts Panel</button>
+  <button onclick="showDoubtPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(255,95,95,.4);background:rgba(255,95,95,.08);color:var(--danger);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">❓ Doubts</button>
+<button onclick="showRevisedPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(61,232,160,.4);background:rgba(61,232,160,.08);color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">✅ Revised</button>
+<button onclick="showMockedPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(61,191,255,.4);background:rgba(61,191,255,.08);color:var(--phy);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">🧪 Mocked</button>
+<button onclick="showPriorityPanel()" style="padding:10px 18px;border-radius:8px;border:1px solid rgba(244,185,66,.4);background:rgba(244,185,66,.08);color:var(--chem);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;">⭐ Priority</button>
 </div>
 <div id="searchResults" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px;max-height:320px;overflow-y:auto;"></div>
 <div id="doubtPanel" style="display:none;background:var(--bg2);border:1px solid rgba(255,95,95,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
@@ -2280,6 +2283,32 @@
     <button onclick="document.getElementById('doubtPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
   </div>
   <div id="doubtPanelContent"></div>
+
+  <div id="revisedPanel" style="display:none;background:var(--bg2);border:1px solid rgba(61,232,160,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--bio);">✅ Revision-Done Topics</h3>
+    <button onclick="document.getElementById('revisedPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="revisedPanelContent"></div>
+</div>
+
+<div id="mockedPanel" style="display:none;background:var(--bg2);border:1px solid rgba(61,191,255,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--phy);">🧪 Mock-Attempted Chapters</h3>
+    <button onclick="document.getElementById('mockedPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="mockedPanelContent"></div>
+</div>
+
+<div id="priorityPanel" style="display:none;background:var(--bg2);border:1px solid rgba(244,185,66,.3);border-radius:10px;padding:18px;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--chem);">⭐ Priority-Flagged Topics</h3>
+    <button onclick="document.getElementById('priorityPanel').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">✕</button>
+  </div>
+  <div id="priorityPanelContent"></div>
+</div>
+
+
 </div>
     <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Track every chapter and topic. Check off topics as you complete them. Each subject is tracked separately.</p>
 
@@ -5381,6 +5410,23 @@ function jumpToTopic(chId, topicIdx, subj) {
   }, 150);
 }
 
+
+function jumpToChapter(chId, subj) {
+  window.switchSection('syllabus');
+  document.querySelectorAll('.subj-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.subject-panel').forEach(p => p.classList.remove('active'));
+  const tab = document.querySelector('.subj-tab[data-subj="' + subj + '"]');
+  if (tab) tab.classList.add('active');
+  const panel = document.getElementById('panel-' + subj);
+  if (panel) panel.classList.add('active');
+  const card = document.getElementById('ch-' + chId);
+  if (card && !card.classList.contains('open')) card.classList.add('open');
+  setTimeout(() => {
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 150);
+}
+
+
 // ─── DOUBTS PANEL ───
 function showDoubtPanel() {
   const panel = document.getElementById('doubtPanel');
@@ -5420,9 +5466,153 @@ function showDoubtPanel() {
         </div>`;
       }).join('');
   }
+  
+  document.getElementById('revisedPanel').style.display = 'none';
+document.getElementById('mockedPanel').style.display = 'none';
+document.getElementById('priorityPanel').style.display = 'none';
 
   panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
 }
+
+
+function showRevisedPanel() {
+  const panel = document.getElementById('revisedPanel');
+  const content = document.getElementById('revisedPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        const revKey = 'tr-' + ch.id + '-' + i;
+        if (d[revKey]) {
+          items.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No revision-flagged topics yet.<br>Open any chapter → click 📗 on a topic to flag it.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' topic(s) marked revised</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(61,232,160,.25);margin-bottom:6px;cursor:pointer;background:rgba(61,232,160,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--bio)'" onmouseout="this.style.borderColor='rgba(61,232,160,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px;">${m.ch.name}</div>
+            <div style="font-size:.85rem;">${m.topic}</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  // close other panels
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('mockedPanel').style.display = 'none';
+  document.getElementById('priorityPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+function showMockedPanel() {
+  const panel = document.getElementById('mockedPanel');
+  const content = document.getElementById('mockedPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      const mockKey = 'mock-' + ch.id;
+      if (d[mockKey]) {
+        const tot = ch.topics.length;
+        const done = ch.topics.filter((_, i) => d['t-' + ch.id + '-' + i]).length;
+        items.push({ subj, ch, done, tot });
+      }
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No mock-attempted chapters yet.<br>Open any chapter → check "Mock Attempted" at the bottom.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' chapter(s) mock-attempted</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        const pct = m.tot ? Math.round(m.done / m.tot * 100) : 0;
+        return `<div onclick="jumpToChapter('${m.ch.id}', '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(61,191,255,.25);margin-bottom:6px;cursor:pointer;background:rgba(61,191,255,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--phy)'" onmouseout="this.style.borderColor='rgba(61,191,255,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.85rem;font-weight:600;">${m.ch.name}</div>
+            <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">${m.done}/${m.tot} topics done (${pct}%)</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('revisedPanel').style.display = 'none';
+  document.getElementById('priorityPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+function showPriorityPanel() {
+  const panel = document.getElementById('priorityPanel');
+  const content = document.getElementById('priorityPanelContent');
+  if (!panel || !content) return;
+
+  const d = getData();
+  const items = [];
+
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        const priorKey = 'tp-' + ch.id + '-' + i;
+        if (d[priorKey]) {
+          items.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+
+  if (!items.length) {
+    content.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No priority-flagged topics yet.<br>Open any chapter → click ⭐ on a topic to flag it as priority.</div>';
+  } else {
+    content.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:12px;font-weight:600;">' + items.length + ' topic(s) marked as priority</div>' +
+      items.map(m => {
+        const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
+        const subjLabel = m.subj === 'bio' ? '🌿 Bio' : m.subj === 'chem' ? '⚗️ Chem' : '⚡ Phy';
+        return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
+          style="padding:10px 14px;border-radius:8px;border:1px solid rgba(244,185,66,.25);margin-bottom:6px;cursor:pointer;background:rgba(244,185,66,.05);display:flex;align-items:center;gap:10px;transition:border-color .2s;"
+          onmouseover="this.style.borderColor='var(--chem)'" onmouseout="this.style.borderColor='rgba(244,185,66,.25)'">
+          <span style="font-size:.7rem;color:${subjColor};font-weight:700;min-width:50px;">${subjLabel}</span>
+          <div style="flex:1;">
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px;">${m.ch.name}</div>
+            <div style="font-size:.85rem;">${m.topic}</div>
+          </div>
+          <span style="font-size:.75rem;color:var(--muted);">→ Jump</span>
+        </div>`;
+      }).join('');
+  }
+
+  document.getElementById('doubtPanel').style.display = 'none';
+  document.getElementById('revisedPanel').style.display = 'none';
+  document.getElementById('mockedPanel').style.display = 'none';
+  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
+}
+
+
 
 
 // ─── INIT ───
