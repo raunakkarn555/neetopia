@@ -1187,6 +1187,10 @@
 
   /* Dashboard rows: single column */
   #dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
+
+  #dayPillRow > div { min-width: 46px !important; padding: 6px 4px !important; }
+  #weeklyStatGrid { grid-template-columns: repeat(3,1fr) !important; gap: 7px !important; }
+  #weeklySummaryGrid { gap: 4px !important; }
 }
 
 
@@ -2508,31 +2512,30 @@
       <h1>NEET <span class="hl">Progress Tracker</span> Dashboard</h1>
       <p id="dashQuote" style="color:var(--muted);font-size:.95rem;margin-bottom:32px;font-style:italic;min-height:1.4em;transition:opacity .4s;"></p>
       <!-- EXAM COUNTDOWN — HERO STYLE -->
-<div id="examCountdownBadge" style="display:none;margin:0 auto 28px;width:100%;max-width:680px;box-sizing:border-box;">
-  <div style="background:linear-gradient(135deg,rgba(168,124,245,.13),rgba(61,191,255,.07));border:1.5px solid rgba(168,124,245,.4);border-radius:16px;padding:20px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:space-between;position:relative;overflow:hidden;">
-    <!-- glow blob -->
-    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(168,124,245,.15),transparent 70%);pointer-events:none;"></div>
-    <!-- left: label -->
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:44px;height:44px;border-radius:12px;background:rgba(168,124,245,.18);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🎯</div>
+<div id="examCountdownBadge" style="display:none;margin:0 auto 20px;width:100%;max-width:560px;box-sizing:border-box;">
+  <div style="background:linear-gradient(135deg,rgba(168,124,245,.1),rgba(61,191,255,.06));border:1.5px solid rgba(168,124,245,.3);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(168,124,245,.12),transparent 70%);pointer-events:none;"></div>
+    <!-- left -->
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:32px;height:32px;border-radius:8px;background:rgba(168,124,245,.15);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;">🎯</div>
       <div>
-        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;" id="cdLabel">NEET 2026</div>
-        <div style="font-size:.75rem;color:var(--muted);margin-top:2px;" id="cdDate">Set exam date in Profile →</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;font-weight:800;color:var(--fg);" id="cdLabel">NEET 2026</div>
+        <div style="font-size:.68rem;color:var(--muted);margin-top:1px;" id="cdDate">Set exam date in Profile →</div>
       </div>
     </div>
-    <!-- center: big days number -->
-    <div style="text-align:center;flex:1;min-width:120px;">
-      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:3.2rem;font-weight:800;line-height:1;color:var(--accent);" id="cdDays">—</div>
-      <div style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:2px;">Days Remaining</div>
+    <!-- center: days -->
+    <div style="display:flex;align-items:baseline;gap:5px;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;line-height:1;color:var(--accent);" id="cdDays">—</div>
+      <div style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;">days left</div>
     </div>
-    <!-- right: breakdown + urgency -->
-    <div style="text-align:right;min-width:120px;">
-      <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px;" id="cdWeeksMonths"></div>
-      <div id="cdUrgency" style="font-size:.78rem;font-weight:700;"></div>
-      <div style="height:5px;background:var(--bg3);border-radius:3px;margin-top:8px;overflow:hidden;min-width:100px;">
-        <div id="cdProgressBar" style="height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .6s ease;width:0%;"></div>
+    <!-- right -->
+    <div style="text-align:right;min-width:100px;">
+      <div style="font-size:.7rem;color:var(--muted);margin-bottom:3px;" id="cdWeeksMonths"></div>
+      <div id="cdUrgency" style="font-size:.72rem;font-weight:700;"></div>
+      <div style="height:4px;background:var(--bg3);border-radius:2px;margin-top:6px;overflow:hidden;min-width:90px;">
+        <div id="cdProgressBar" style="height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .6s ease;width:0%;"></div>
       </div>
-      <div style="font-size:.65rem;color:var(--muted);margin-top:3px;" id="cdProgressLabel"></div>
+      <div style="font-size:.6rem;color:var(--muted);margin-top:2px;" id="cdProgressLabel"></div>
     </div>
   </div>
 </div>
@@ -2880,21 +2883,31 @@
   <!-- ═══════════════ SECTION: DAILY TRACKER ═══════════════ -->
   <section class="tracker-section" id="section-daily">
     <h2 class="section-title"><span class="section-icon chem">🗓</span> Daily Tracker</h2>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-  <p style="color:var(--muted);font-size:.88rem;margin:0;">Viewing: <strong id="todayDate"></strong></p>
-  <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;align-items:center;">
-    <button onclick="navigateDay(-1)" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">← Prev</button>
-    <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;" />
-    <button onclick="navigateDay(1)" id="nextDayBtn" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">Next →</button>
-    <button onclick="goToToday()" style="padding:5px 12px;border-radius:7px;border:1px solid var(--accent);background:rgba(168,124,245,.1);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;">Today</button>
+    <!-- DAILY NAV -->
+<div style="margin-bottom:20px;">
+  <!-- Top row: label + date picker -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+    <div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;" id="todayDate">—</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:2px;" id="todayDateSub"></div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      <button onclick="goToToday()" id="goTodayBtn"
+        style="padding:6px 14px;border-radius:8px;border:1px solid var(--accent);background:rgba(168,124,245,.12);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;">
+        Today
+      </button>
+      <label style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+        📅 Pick Date
+        <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)"
+          style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" />
+      </label>
+    </div>
   </div>
+
+  <!-- 5-day pill navigator -->
+  <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;" id="dayPillRow"></div>
 </div>
 
-<!-- Weekly Summary Card -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;margin-bottom:14px;">
-  <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📊 Last 7 Days Summary</h4>
-  <div id="weeklySummaryGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
-</div>
 
 
     <div class="daily-grid">
@@ -2952,6 +2965,27 @@
       <div class="heatmap-row" id="heatmapRow"></div>
       <p style="font-size:.75rem;color:var(--muted);margin-top:12px;">Click a day to log study hours. Your consistency is your superpower.</p>
     </div>
+
+    <!-- ENHANCED WEEKLY SUMMARY -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;" id="weeklySummaryCard">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+    <div>
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:2px;">📊 Weekly Summary</h4>
+      <div style="font-size:.72rem;color:var(--muted);" id="weeklySummaryRange"></div>
+    </div>
+    <div style="font-size:.82rem;font-weight:700;" id="weeklySummaryMood"></div>
+  </div>
+
+  <!-- Stats row -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;" id="weeklyStatGrid"></div>
+
+  <!-- Day-by-day breakdown -->
+  <div style="margin-bottom:4px;">
+    <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Day-by-day</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;" id="weeklySummaryGrid"></div>
+  </div>
+</div>
 
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
       <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📝 Daily Notes / Reflection</h4>
@@ -5290,14 +5324,11 @@ function updateReminderStatus(type, mins) {
 function initDaily() {
   const today = new Date(_viewingDate + 'T00:00:00');
 const isToday = _viewingDate === new Date().toISOString().slice(0,10);
-safeSet('todayDate', (isToday ? '📅 Today — ' : '📆 ') + today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+
 const d = getData();
 const key = 'day-data-' + _viewingDate;
-const dayPickerEl = document.getElementById('dayPickerInput');
-if (dayPickerEl) dayPickerEl.value = _viewingDate;
-const nextBtn = document.getElementById('nextDayBtn');
-if (nextBtn) nextBtn.disabled = isToday;
 buildWeeklySummary();
+buildDayPills();
 
   const dayData = d[key] || {};
   const hoursEl = document.getElementById('daily-hours');
@@ -5401,33 +5432,175 @@ function goToToday() {
 
 function buildWeeklySummary() {
   const container = document.getElementById('weeklySummaryGrid');
+  const rangeEl   = document.getElementById('weeklySummaryRange');
+  const moodEl    = document.getElementById('weeklySummaryMood');
+  const statGrid  = document.getElementById('weeklyStatGrid');
   if (!container) return;
+
   const d = getData();
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const today = new Date();
-  container.innerHTML = '';
-  for (let i = 6; i >= 0; i--) {
-    const dd = new Date(today);
-    dd.setDate(today.getDate() - i);
+  // Find Monday of current week
+  const dow = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1));
+
+  // Date range label
+  const fmt = dt => dt.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+  const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+  if (rangeEl) rangeEl.textContent = fmt(monday) + ' — ' + fmt(sunday);
+
+  // Collect 7 days data
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let totalHours = 0, activeDays = 0, totalSleep = 0, sleepDays = 0;
+  let totalWater = 0, mockDays = 0, revisionDays = 0;
+  const dayData = [];
+
+  for (let i = 0; i < 7; i++) {
+    const dd = new Date(monday); dd.setDate(monday.getDate() + i);
     const dk = 'day-data-' + dd.toISOString().slice(0,10);
-    const dayD = d[dk] || {};
-    const hrs = parseFloat(dayD.hours) || 0;
-    const mood = dayD.mood || '';
-    const isViewing = dd.toISOString().slice(0,10) === _viewingDate;
-    const isToday = i === 0;
-    const level = hrs >= 8 ? 4 : hrs >= 6 ? 3 : hrs >= 4 ? 2 : hrs >= 1 ? 1 : 0;
-    const bgMap = ['var(--bg3)','rgba(168,124,245,.25)','rgba(168,124,245,.45)','rgba(168,124,245,.65)','var(--purple)'];
-    container.innerHTML += `
-      <div onclick="jumpToDate('${dd.toISOString().slice(0,10)}')"
-        style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgMap[level]};border:1.5px solid ${isViewing ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .2s;">
-        <div style="font-size:.65rem;color:var(--muted);font-weight:600;">${days[dd.getDay()]}</div>
-        <div style="font-size:.85rem;margin:3px 0;">${mood || (hrs > 0 ? '📚' : '○')}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:${hrs>0?'var(--fg)':'var(--muted)'};">${hrs > 0 ? hrs+'h' : '—'}</div>
-        ${isToday ? '<div style="font-size:.55rem;color:var(--accent);font-weight:700;margin-top:2px;">TODAY</div>' : ''}
-      </div>`;
+    const day = d[dk] || {};
+    const hrs  = parseFloat(day.hours) || 0;
+    const slp  = parseFloat(day.sleep) || 0;
+    const wtr  = parseFloat(day.water) || 0;
+    const mood = day.mood || '';
+    const isFuture = dd > today;
+
+    totalHours += hrs;
+    if (hrs > 0) activeDays++;
+    if (slp > 0) { totalSleep += slp; sleepDays++; }
+    totalWater += wtr;
+    if (day.mock)     mockDays++;
+    if (day.revision) revisionDays++;
+
+    dayData.push({ name: DAYS[i], hrs, slp, wtr, mood, isFuture, date: dd.toISOString().slice(0,10) });
   }
+
+  const avgSleep = sleepDays > 0 ? (totalSleep / sleepDays).toFixed(1) : '—';
+
+  // Motivational label
+  if (moodEl) {
+    let label = '';
+    if (activeDays >= 6)      label = '🔥 On fire this week!';
+    else if (activeDays >= 4) label = '💪 Strong week!';
+    else if (activeDays >= 2) label = '📈 Keep going';
+    else if (activeDays === 1) label = '🌱 Getting started';
+    else                       label = '😴 Start today!';
+    moodEl.innerHTML = `<span style="font-size:.8rem;font-weight:700;color:var(--accent);">${label}</span>`;
+  }
+
+  // Stats row
+  if (statGrid) {
+    const stats = [
+      { label: 'Study Time',   val: totalHours.toFixed(1) + 'h', color: 'var(--accent)' },
+      { label: 'Active Days',  val: activeDays + '/7',            color: 'var(--bio)' },
+      { label: 'Avg Sleep',    val: avgSleep !== '—' ? avgSleep + 'h' : '—', color: 'var(--phy)' },
+      { label: 'Water Total',  val: totalWater + ' 💧',           color: 'var(--phy)' },
+      { label: 'Mock Tests',   val: mockDays,                     color: 'var(--chem)' },
+      { label: 'Revision Days',val: revisionDays,                 color: 'var(--purple)' },
+    ];
+    statGrid.style.gridTemplateColumns = 'repeat(3,1fr)';
+    statGrid.innerHTML = stats.map(s => `
+      <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};line-height:1.2;">${s.val}</div>
+        <div style="font-size:.62rem;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
+      </div>`).join('');
+  }
+
+  // Day-by-day grid
+  const moodEmoji = m => {
+    if (!m) return '';
+    if (m.includes('Focused')) return '🔥';
+    if (m.includes('Good'))    return '😊';
+    if (m.includes('Okay'))    return '😐';
+    if (m.includes('Tired'))   return '😩';
+    if (m.includes('Anxious')) return '😰';
+    if (m.includes('Motivated')) return '💪';
+    return '😊';
+  };
+
+  container.innerHTML = dayData.map(day => {
+    const isToday = day.date === today.toISOString().slice(0,10);
+    const hasData = day.hrs > 0;
+    const isEmpty = day.isFuture || (!hasData && day.hrs === 0 && !day.mood);
+    const lvl = day.hrs >= 8 ? 4 : day.hrs >= 6 ? 3 : day.hrs >= 4 ? 2 : day.hrs > 0 ? 1 : 0;
+    const bgCol = ['var(--bg3)','rgba(168,124,245,.2)','rgba(168,124,245,.4)','rgba(168,124,245,.6)','var(--purple)'][lvl];
+
+    return `<div onclick="jumpToDate('${day.date}')"
+      style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgCol};border:1.5px solid ${isToday ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .15s;min-width:0;"
+      title="${day.name} — ${day.hrs}h studied">
+      <div style="font-size:.62rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '800' : '600'};margin-bottom:3px;">${day.name}</div>
+      <div style="font-size:.72rem;font-family:'JetBrains Mono',monospace;color:${hasData ? 'var(--fg)' : 'var(--muted)'};font-weight:600;margin-bottom:2px;">
+        ${day.isFuture ? '—' : day.hrs > 0 ? day.hrs + 'h' : '0h'}
+      </div>
+      <div style="font-size:.75rem;min-height:16px;">${day.isFuture ? '' : moodEmoji(day.mood)}</div>
+      ${isToday ? '<div style="font-size:.5rem;color:var(--accent);font-weight:800;margin-top:2px;">TODAY</div>' : ''}
+    </div>`;
+  }).join('');
 }
 
+function buildDayPills() {
+  const row = document.getElementById('dayPillRow');
+  if (!row) return;
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0,10);
+  row.innerHTML = '';
+
+  // Show 5 days: 3 before today + today + 1 future (disabled)
+  for (let i = -3; i <= 1; i++) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() + i);
+    const ds = dd.toISOString().slice(0,10);
+    const isToday = ds === todayStr;
+    const isViewing = ds === _viewingDate;
+    const isFuture = i > 0;
+    const dayName = dd.toLocaleDateString('en-IN', { weekday: 'short' });
+    const dayNum  = dd.getDate();
+    const d = getData();
+    const dayD = d['day-data-' + ds] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    const hasMood = !!dayD.mood;
+
+    const pill = document.createElement('div');
+    pill.style.cssText = `
+      flex-shrink:0;min-width:54px;border-radius:10px;padding:8px 6px;text-align:center;
+      background:${isViewing ? 'var(--accent)' : isToday ? 'rgba(168,124,245,.12)' : 'var(--bg2)'};
+      border:1.5px solid ${isViewing ? 'var(--accent)' : isToday ? 'rgba(168,124,245,.4)' : 'var(--border)'};
+      cursor:${isFuture ? 'not-allowed' : 'pointer'};
+      opacity:${isFuture ? '.4' : '1'};
+      transition:all .15s;
+    `;
+    pill.innerHTML = `
+      <div style="font-size:.65rem;font-weight:700;color:${isViewing ? '#000' : isToday ? 'var(--accent)' : 'var(--muted)'};text-transform:uppercase;letter-spacing:.04em;">${dayName}</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;color:${isViewing ? '#000' : 'var(--fg)'};line-height:1.2;margin:2px 0;">${dayNum}</div>
+      <div style="font-size:.6rem;color:${isViewing ? 'rgba(0,0,0,.6)' : 'var(--muted)'};">${hrs > 0 ? hrs + 'h' : isToday ? '—' : isFuture ? '' : '—'}</div>
+    `;
+    if (!isFuture) {
+      pill.addEventListener('click', () => {
+        _viewingDate = ds;
+        initDaily();
+      });
+    }
+    row.appendChild(pill);
+  }
+
+  // Update the main date display
+  const viewing = new Date(_viewingDate + 'T00:00:00');
+  const isToday = _viewingDate === todayStr;
+  const dateEl = document.getElementById('todayDate');
+  const subEl  = document.getElementById('todayDateSub');
+  if (dateEl) dateEl.textContent = (isToday ? '📅 Today — ' : '') + viewing.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long' });
+  if (subEl)  subEl.textContent  = isToday ? 'Viewing current day' : viewing.toLocaleDateString('en-IN', { year:'numeric' });
+
+  // Sync date picker
+  const picker = document.getElementById('dayPickerInput');
+  if (picker) picker.value = _viewingDate;
+
+  // Fix date picker label click
+  const pickerLabel = picker?.parentElement;
+  if (pickerLabel) {
+    pickerLabel.onclick = () => picker.showPicker?.();
+  }
+}
 
 
 function buildHeatmap() {
