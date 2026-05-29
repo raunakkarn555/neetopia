@@ -2219,6 +2219,18 @@
 }
 .reminder-preset:hover { border-color: var(--accent); color: var(--accent); }
 .reminder-preset.active { border-color: var(--bio); background: rgba(61,232,160,.1); color: var(--bio); }
+
+
+/* ── ANALYTICS PREMIUM RESPONSIVE ── */
+@media (max-width: 600px) {
+  .analytics-grid { grid-template-columns: 1fr !important; }
+  #section-analytics > div[style*="grid-template-columns:repeat(auto-fit"] { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  #section-backup > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  #storageStatsGrid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
 </style>
 
   <script type="application/ld+json">
@@ -3236,77 +3248,145 @@
 
   <!-- ═══════════════ SECTION: ANALYTICS ═══════════════ -->
   <section class="tracker-section" id="section-analytics">
-    <h2 class="section-title"><span class="section-icon phy">📈</span> Performance Analytics</h2>
 
-    <div class="analytics-grid">
-      <div class="analytics-card">
-        <h3>🎯 Readiness Level</h3>
-        <div class="readiness-level">
-          <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);">
-            <div class="readiness-pct" id="readinessPct">0%</div>
-          </div>
-          <div class="readiness-label" id="readinessLabel">Beginner</div>
-          <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;" id="readinessMsg">Start completing topics to build momentum.</p>
-        </div>
+  <!-- ── ANALYTICS HERO HEADER ── -->
+  <div style="background:linear-gradient(135deg,rgba(61,191,255,.08),rgba(168,124,245,.06));border:1px solid rgba(61,191,255,.2);border-radius:var(--card-radius);padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--phy);margin-bottom:6px;">Performance Analytics</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin:0 0 6px;">Your NEET Report Card</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin:0;">Real-time insights based on your syllabus tracking and test history.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--accent);" id="ana-overall-pct">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Overall</div>
       </div>
-      <div class="analytics-card">
-        <h3>⚠️ Weak Areas</h3>
-        <div class="weakness-list" id="weaknessList">
-          <div style="font-size:.85rem;color:var(--muted);">Complete more topics to see weak area analysis.</div>
-        </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--bio);" id="ana-bio-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Biology</div>
       </div>
-      <div class="analytics-card">
-        <h3>📊 Suggestions</h3>
-        <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
-          <p>📌 Start tracking your topics to get personalized suggestions.</p>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--chem);" id="ana-chem-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Chemistry</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--phy);" id="ana-phy-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Physics</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ROW 1: Readiness + Weak Areas + Suggestions ── -->
+  <div class="analytics-grid" style="margin-bottom:28px;">
+
+    <div class="analytics-card" style="background:linear-gradient(135deg,var(--bg2),rgba(168,124,245,.04));position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(168,124,245,.12),transparent 70%);pointer-events:none;"></div>
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(168,124,245,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🎯</span>
+        Readiness Level
+      </h3>
+      <div class="readiness-level">
+        <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);width:110px;height:110px;">
+          <div class="readiness-pct" id="readinessPct">0%</div>
         </div>
+        <div class="readiness-label" id="readinessLabel" style="font-size:1.1rem;">Beginner</div>
+        <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;line-height:1.6;" id="readinessMsg">Start completing topics to build momentum.</p>
       </div>
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
-      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
-      <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+    <div class="analytics-card">
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(255,95,95,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">⚠️</span>
+        Weak Areas
+      </h3>
+      <div class="weakness-list" id="weaknessList">
+        <div style="font-size:.85rem;color:var(--muted);padding:12px 0;">Complete more topics to see weak area analysis.</div>
+      </div>
     </div>
 
-    <!-- Charts Row -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:28px;">
+    <div class="analytics-card">
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">💡</span>
+        AI Suggestions
+      </h3>
+      <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
+        <p style="background:var(--bg3);padding:10px 14px;border-radius:8px;border-left:3px solid var(--accent);">📌 Start tracking your topics to get personalized suggestions.</p>
+      </div>
+    </div>
 
-  <!-- Doughnut — Overall Progress -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🍩 Overall Coverage</h3>
-    <canvas id="chartDoughnut" height="200"></canvas>
-    <div id="chartDoughnutLegend" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.8rem;"></div>
   </div>
 
-  <!-- Radar — Subject Balance -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🕸 Subject Balance</h3>
-    <canvas id="chartRadar" height="200"></canvas>
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">📊 Coverage Charts</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
   </div>
 
-  <!-- Bar — Chapter Progress -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📊 Topics Per Subject</h3>
-    <canvas id="chartBar" height="200"></canvas>
+  <!-- ── ROW 2: Charts ── -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:32px;">
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(168,124,245,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🍩</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Overall Coverage</h3>
+      </div>
+      <canvas id="chartDoughnut" height="200"></canvas>
+      <div id="chartDoughnutLegend" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:.82rem;"></div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🕸</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Subject Balance</h3>
+      </div>
+      <canvas id="chartRadar" height="200"></canvas>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(244,185,66,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📊</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Topics Per Subject</h3>
+      </div>
+      <canvas id="chartBar" height="200"></canvas>
+    </div>
+
   </div>
 
-</div>
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">🚀 Pace & Predictions</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
 
+  <!-- ── Pace Prediction ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:28px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🚀</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Pace Prediction</h3>
+    </div>
+    <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
+  </div>
 
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">📉 Test Score Trend</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
 
-<!-- Pace Prediction -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
-  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🚀 Pace Prediction</h3>
-  <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
-</div>
+  <!-- ── Test Score Trend ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:32px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,191,255,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📉</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Test Score Trend</h3>
+      <span style="margin-left:auto;font-size:.72rem;color:var(--muted);background:var(--bg3);padding:3px 10px;border-radius:10px;">Log tests in Tests tab →</span>
+    </div>
+    <canvas id="chartLine" height="100" style="display:none;"></canvas>
+    <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+  </div>
 
-<!-- Test Score Trend -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:28px;margin-bottom:28px;">
-  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
-
-  <canvas id="chartLine" height="100" style="display:none;"></canvas>
-  <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
-</div>
 </section>
 
   <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
@@ -3469,57 +3549,108 @@
   </section>
 
   <!-- ═══════════════ SECTION: BACKUP ═══════════════ -->
-  <section class="tracker-section" id="section-backup">
-    <h2 class="section-title"><span class="section-icon phy">💾</span> Backup & Restore</h2>
+<section class="tracker-section" id="section-backup">
 
-    <div class="storage-notice">
-      <div class="notice-icon">⚠️</div>
-      <p><strong>Important:</strong> Your data lives only in this browser. If you clear browser data, switch devices, or use incognito mode — your progress WILL be lost. Export your backup regularly to keep your hard work safe.</p>
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,rgba(255,95,95,.07),rgba(244,185,66,.05));border:1px solid rgba(255,95,95,.2);border-radius:var(--card-radius);padding:24px 28px;margin-bottom:28px;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+    <div style="width:44px;height:44px;border-radius:11px;background:rgba(255,95,95,.12);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">💾</div>
+    <div style="flex:1;min-width:200px;">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin:0 0 6px;">Backup & Restore</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin:0;line-height:1.6;">Your data lives <strong>only in this browser.</strong> Clearing cache, switching devices, or using incognito will erase everything. Export regularly.</p>
+    </div>
+  </div>
+
+  <!-- Storage Info Card (PREMIUM) -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:24px;" id="storageInfoCard">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,191,255,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🗃</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Storage Info</h3>
+      <button onclick="updateStorageInfo()" style="margin-left:auto;padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">↺ Refresh</button>
     </div>
 
-    <div class="backup-actions">
-      <button class="btn-export" onclick="exportData()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Export Backup (JSON)
-      </button>
-      <button class="btn-import" onclick="document.getElementById('importFile').click()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Import Backup
-      </button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+    <!-- Storage size bar -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:.8rem;font-weight:600;color:var(--muted);">Storage Used</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;color:var(--phy);" id="storageSizeLabel">— KB / 5 MB</span>
+      </div>
+      <div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+        <div id="storageSizeBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--phy),var(--purple));border-radius:4px;transition:width .6s ease;"></div>
+      </div>
+      <div id="storagePctLabel" style="font-size:.68rem;color:var(--muted);margin-top:5px;">0% of 5 MB used</div>
     </div>
 
-    <div class="backup-steps">
-      <div class="backup-step">
-        <div class="step-num">1</div>
-        <h4>Create Backup</h4>
-        <p>Click "Export Backup" to download a JSON file containing ALL your tracking data — topics, notes, tests, journal entries, photos, and progress.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">2</div>
-        <h4>Save It Safely</h4>
-        <p>Save the JSON file to Google Drive, your phone, or email it to yourself. Do this at least once a week — especially before clearing browser data.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">3</div>
-        <h4>Restore Progress</h4>
-        <p>On a new device or after data loss, click "Import Backup" and select your saved JSON file. All your progress will be restored instantly.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">4</div>
-        <h4>Why This Matters</h4>
-        <p>Browser data can be lost from: clearing cache, private/incognito mode, browser updates, or new devices. Your JSON backup is the only copy of your progress.</p>
-      </div>
+    <!-- Stats grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;" id="storageStatsGrid">
     </div>
+  </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:20px;">
-      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:12px;">🗃 Storage Info</h3>
-      <div id="storageInfo" style="font-size:.85rem;color:var(--muted);line-height:1.8;"></div>
-      <button class="btn-export" onclick="clearAllData()" style="margin-top:14px;border-color:var(--danger);color:var(--danger);">
-        🗑 Clear ALL Data (cannot be undone)
-      </button>
+  <!-- Action Buttons -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+
+    <button onclick="exportData()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06));border:1.5px solid rgba(61,232,160,.4);border-radius:var(--card-radius);padding:18px 20px;color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.background='linear-gradient(135deg,rgba(61,232,160,.2),rgba(61,232,160,.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06))'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <div style="text-align:left;">
+        <div>Export Backup</div>
+        <div style="font-size:.72rem;font-weight:400;opacity:.7;margin-top:2px;">Download as JSON file</div>
+      </div>
+    </button>
+
+    <button onclick="document.getElementById('importFile').click()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(61,191,255,.12),rgba(61,191,255,.06));border:1.5px solid rgba(61,191,255,.4);border-radius:var(--card-radius);padding:18px 20px;color:var(--phy);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.background='linear-gradient(135deg,rgba(61,191,255,.2),rgba(61,191,255,.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(61,191,255,.12),rgba(61,191,255,.06))'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div style="text-align:left;">
+        <div>Import Backup</div>
+        <div style="font-size:.72rem;font-weight:400;opacity:.7;margin-top:2px;">Restore from JSON file</div>
+      </div>
+    </button>
+
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+  </div>
+
+  <!-- Steps -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 20px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">How to backup safely</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
+
+  <div class="backup-steps" style="margin-bottom:28px;">
+    <div class="backup-step">
+      <div class="step-num">1</div>
+      <h4>Create Backup</h4>
+      <p>Click "Export Backup" above. A JSON file downloads instantly with ALL your data — topics, notes, tests, journal, photos, everything.</p>
     </div>
-  </section>
+    <div class="backup-step">
+      <div class="step-num">2</div>
+      <h4>Save It Safely</h4>
+      <p>Upload the JSON to Google Drive, email it to yourself, or save it on your phone. Do this at least once a week.</p>
+    </div>
+    <div class="backup-step">
+      <div class="step-num">3</div>
+      <h4>Restore Anytime</h4>
+      <p>On a new device or after data loss, click "Import Backup" and select your JSON. All progress restores instantly.</p>
+    </div>
+    <div class="backup-step">
+      <div class="step-num">4</div>
+      <h4>Why It Matters</h4>
+      <p>Browser data clears from: incognito mode, clearing cache, OS updates, or switching browsers. JSON backup is your only safety net.</p>
+    </div>
+  </div>
+
+  <!-- Danger Zone -->
+  <div style="background:linear-gradient(135deg,rgba(255,95,95,.06),transparent);border:1px solid rgba(255,95,95,.25);border-radius:var(--card-radius);padding:22px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:1.1rem;">🗑</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;color:var(--danger);">Danger Zone</h3>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin:0 0 16px;line-height:1.6;">This permanently deletes ALL your tracking data — topics, tests, journal, notes, photos, streak, everything. This action <strong style="color:var(--danger);">cannot be undone.</strong> Export a backup first.</p>
+    <button onclick="clearAllData()" style="display:flex;align-items:center;gap:8px;background:rgba(255,95,95,.08);border:1.5px solid rgba(255,95,95,.4);border-radius:8px;padding:11px 20px;color:var(--danger);font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='rgba(255,95,95,.15)'" onmouseout="this.style.background='rgba(255,95,95,.08)'">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      Clear ALL Data (cannot be undone)
+    </button>
+  </div>
+
+</section>
 
   <!-- ═══════════════ SECTION: FAQ ═══════════════ -->
   <section class="tracker-section" id="section-faq">
@@ -6408,6 +6539,10 @@ function updateAnalytics() {
 
   const overallPct = totalTopics ? Math.round(doneTotals/totalTopics*100) : 0;
   safeSet('readinessPct', overallPct + '%');
+  safeSet('ana-overall-pct', overallPct + '%');
+safeSet('ana-bio-pct2', subjectStats.bio.pct + '%');
+safeSet('ana-chem-pct2', subjectStats.chem.pct + '%');
+safeSet('ana-phy-pct2', subjectStats.phy.pct + '%');
 
   let level = 'Beginner';
   let msg = 'Start completing topics to build momentum. Begin with NCERT Biology.';
@@ -6897,84 +7032,54 @@ function clearAllData() {
 }
 
 function updateStorageInfo() {
-  const el = document.getElementById('storageInfo');
-  if (!el) return;
   const d = getData();
   const json = JSON.stringify(d);
-  const sizeKB = (new Blob([json]).size / 1024).toFixed(1);
-  const topics = Object.keys(d).filter(k => k.startsWith('t-')).length;
-  const tests = JSON.parse(d['tests-list'] || '[]').length;
-  const journal = JSON.parse(d['journal'] || '[]').length;
-  const photos = JSON.parse(d['photos'] || '[]').length;
-  el.innerHTML = `
-    <div>📦 Total data size: <strong>${sizeKB} KB</strong> (localStorage limit ~5MB)</div>
-    <div>✅ Topics tracked: <strong>${topics}</strong></div>
-    <div>🧪 Tests logged: <strong>${tests}</strong></div>
-    <div>📓 Journal entries: <strong>${journal}</strong></div>
-    <div>📸 Photos stored: <strong>${photos}</strong></div>
-    <div style="margin-top:8px;color:var(--warn);">⚠️ Last backup recommended: export before clearing browser data!</div>`;
-}
+  const sizeBytes = new Blob([json]).size;
+  const sizeKB = (sizeBytes / 1024).toFixed(1);
+  const sizeMB = (sizeBytes / (1024 * 1024));
+  const maxMB = 5;
+  const pct = Math.min((sizeMB / maxMB) * 100, 100).toFixed(1);
 
-// ─── REALITY TOGGLE ───
-function toggleReality() {
-  const content = document.getElementById('realityContent');
-  const arrow = document.getElementById('realityArrow');
-  if (content) content.classList.toggle('open');
-  if (arrow) arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
-}
+  const topics   = Object.keys(d).filter(k => k.startsWith('t-')).length;
+  const tests    = JSON.parse(d['tests-list'] || '[]').length;
+  const journal  = JSON.parse(d['journal'] || '[]').length;
+  const photos   = JSON.parse(d['photos'] || '[]').length;
+  const todos    = JSON.parse(d['todos'] || '[]').length;
+  const resources = JSON.parse(d['resources-list'] || '[]').length;
 
-// ─── FAQ ───
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  item.classList.toggle('open');
-}
+  // Size bar
+  const sizeBar = document.getElementById('storageSizeBar');
+  const sizeLbl = document.getElementById('storageSizeLabel');
+  const pctLbl  = document.getElementById('storagePctLabel');
+  if (sizeBar) sizeBar.style.width = pct + '%';
+  if (sizeBar) sizeBar.style.background = sizeMB > 4 ? 'linear-gradient(90deg,var(--danger),var(--warn))' : sizeMB > 2 ? 'linear-gradient(90deg,var(--warn),var(--chem))' : 'linear-gradient(90deg,var(--phy),var(--purple))';
+  if (sizeLbl) sizeLbl.textContent = sizeKB + ' KB / 5 MB';
+  if (pctLbl)  pctLbl.textContent  = pct + '% of 5 MB used' + (sizeMB > 4 ? ' — ⚠️ Getting full! Export & consider clearing photos.' : sizeMB > 2 ? ' — 🟡 Moderate usage' : ' — 🟢 Healthy');
 
-// ─── TODAY DATE ───
-document.getElementById('todayDate') && (() => {
-  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-})();
-
-
-// ─── SEARCH SYLLABUS ───
-function searchSyllabus(query) {
-  const resultsEl = document.getElementById('searchResults');
-  if (!resultsEl) return;
-  const q = query.trim().toLowerCase();
-  if (!q) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; return; }
-
-  const matches = [];
-  ['bio','chem','phy'].forEach(subj => {
-    SYLLABUS[subj].forEach(ch => {
-      ch.topics.forEach((topic, i) => {
-        if (topic.toLowerCase().includes(q) || ch.name.toLowerCase().includes(q)) {
-          matches.push({ subj, ch, topic, i });
-        }
-      });
-    });
-  });
-
-  if (!matches.length) {
-    resultsEl.style.display = 'block';
-    resultsEl.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:10px;">No results found for "' + query + '"</div>';
-    return;
+  // Stats grid
+  const grid = document.getElementById('storageStatsGrid');
+  if (grid) {
+    const stats = [
+      { label: 'Topics Tracked', val: topics,    icon: '✅', color: 'var(--bio)' },
+      { label: 'Tests Logged',   val: tests,     icon: '🧪', color: 'var(--phy)' },
+      { label: 'Journal Entries',val: journal,   icon: '📓', color: 'var(--purple)' },
+      { label: 'Photos Stored',  val: photos,    icon: '📸', color: 'var(--chem)' },
+      { label: 'Todos',          val: todos,     icon: '✔️', color: 'var(--accent)' },
+      { label: 'Resources',      val: resources, icon: '📚', color: 'var(--bio)' },
+    ];
+    grid.innerHTML = stats.map(s => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">${s.icon}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:${s.color};line-height:1;">${s.val}</div>
+        <div style="font-size:.62rem;color:var(--muted);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
+      </div>`).join('');
   }
 
-  resultsEl.style.display = 'block';
-  resultsEl.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;font-weight:600;">' + matches.length + ' result(s) found</div>' +
-    matches.map(m => {
-      const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
-      const subjLabel = m.subj === 'bio' ? '🌿 Biology' : m.subj === 'chem' ? '⚗️ Chemistry' : '⚡ Physics';
-      const highlighted = m.topic.replace(new RegExp(query, 'gi'), match => '<mark style="background:rgba(168,124,245,.3);color:var(--fg);border-radius:3px;padding:0 2px;">' + match + '</mark>');
-      return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
-        style="padding:10px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;cursor:pointer;transition:border-color .2s;background:var(--bg3);"
-        onmouseover="this.style.borderColor='${subjColor}'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-size:.7rem;color:${subjColor};font-weight:700;margin-bottom:3px;">${subjLabel} → ${m.ch.name}</div>
-        <div style="font-size:.85rem;">${highlighted}</div>
-      </div>`;
-    }).join('');
+  // Legacy fallback (old id still used)
+  const el = document.getElementById('storageInfo');
+  if (el) el.innerHTML = `<div style="font-size:.82rem;color:var(--muted);">Size: <strong>${sizeKB} KB</strong> · Topics: <strong>${topics}</strong> · Tests: <strong>${tests}</strong> · Journal: <strong>${journal}</strong> · Photos: <strong>${photos}</strong></div>`;
 }
+
 
 // ─── JUMP TO TOPIC ───
 function jumpToTopic(chId, topicIdx, subj) {
