@@ -7081,6 +7081,7 @@ const DASH_QUOTES = [
 function initDashboardExtras() {
   // ── 1. Daily Quote ──
   // ── Streak-aware quote ──
+  const d = getData();
   const quoteEl = document.getElementById('dashQuote');
   if (quoteEl) {
     const streak = parseInt(d['streak']) || 0;
@@ -7106,7 +7107,7 @@ function initDashboardExtras() {
   }
 
   // ── 2. Today's Goal Ring ──
-  const d = getData();
+ 
   const todayKey = 'day-data-' + new Date().toISOString().slice(0,10);
   const dayData = d[todayKey] || {};
   const hoursStudied = parseFloat(dayData.hours) || 0;
