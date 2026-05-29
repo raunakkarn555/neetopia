@@ -6945,7 +6945,53 @@ function buildAnalyticsCharts(subjectStats) {
       }
     });
 
-    function buildStudy14Chart() {
+  }
+
+  // ── Line — Test Scores ──
+  const d = getData();
+  const tests = JSON.parse(d['tests-list'] || '[]');
+  const lineCtx = document.getElementById('chartLine');
+  const trendEl = document.getElementById('testTrend');
+  if (lineCtx) {
+    if (_charts.line) _charts.line.destroy();
+    if (tests.length >= 2) {
+      const sorted = [...tests].reverse();
+      lineCtx.style.display = 'block';
+      if (trendEl) trendEl.style.display = 'none';
+      _charts.line = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: sorted.map(t => t.name.slice(0,10)),
+          datasets: [{
+            label: 'Score / 720',
+            data: sorted.map(t => t.score),
+            borderColor: 'var(--accent)',
+            backgroundColor: 'rgba(168,124,245,.1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'var(--accent)',
+            pointRadius: 4,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
+            y: { min: 0, max: 720, ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    } else {
+      lineCtx.style.display = 'none';
+      if (trendEl) { trendEl.style.display = 'block'; trendEl.textContent = tests.length === 1 ? 'Log 1 more test to see the trend line.' : 'No test data yet. Log some tests to see trends.'; }
+    }
+  }
+}
+
+
+
+function buildStudy14Chart() {
   const d = getData();
   const today = new Date();
   const labels  = [];
@@ -7131,49 +7177,7 @@ function buildAnalyticsCharts(subjectStats) {
     }).join('');
   }
 }
-  }
 
-  // ── Line — Test Scores ──
-  const d = getData();
-  const tests = JSON.parse(d['tests-list'] || '[]');
-  const lineCtx = document.getElementById('chartLine');
-  const trendEl = document.getElementById('testTrend');
-  if (lineCtx) {
-    if (_charts.line) _charts.line.destroy();
-    if (tests.length >= 2) {
-      const sorted = [...tests].reverse();
-      lineCtx.style.display = 'block';
-      if (trendEl) trendEl.style.display = 'none';
-      _charts.line = new Chart(lineCtx, {
-        type: 'line',
-        data: {
-          labels: sorted.map(t => t.name.slice(0,10)),
-          datasets: [{
-            label: 'Score / 720',
-            data: sorted.map(t => t.score),
-            borderColor: 'var(--accent)',
-            backgroundColor: 'rgba(168,124,245,.1)',
-            borderWidth: 2,
-            pointBackgroundColor: 'var(--accent)',
-            pointRadius: 4,
-            tension: 0.3,
-            fill: true
-          }]
-        },
-        options: {
-          scales: {
-            x: { ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } },
-            y: { min: 0, max: 720, ticks: { color: 'rgba(255,255,255,.5)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,.05)' } }
-          },
-          plugins: { legend: { display: false } }
-        }
-      });
-    } else {
-      lineCtx.style.display = 'none';
-      if (trendEl) { trendEl.style.display = 'block'; trendEl.textContent = tests.length === 1 ? 'Log 1 more test to see the trend line.' : 'No test data yet. Log some tests to see trends.'; }
-    }
-  }
-}
 
 function buildPacePrediction(done, total) {
   const el = document.getElementById('pacePrediction');
