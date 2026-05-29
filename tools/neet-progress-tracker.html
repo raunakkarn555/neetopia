@@ -2377,6 +2377,15 @@
   #examCountdownBadge { max-width: 100% !important; }
 }
 
+/* ── Study 14 Chart Responsive ── */
+@media (max-width: 600px) {
+  #study14StatsPills { gap: 5px !important; }
+  #study14StatsPills > div { min-width: 50px !important; padding: 5px 8px !important; }
+  #study14StatsPills > div > div:first-child { font-size: .78rem !important; }
+}
+@media (max-width: 400px) {
+  #study14StatsPills { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; }
+}
 
 /* ── PREMIUM JOURNAL ── */
 .journal-entry-card {
@@ -3434,6 +3443,27 @@
       </div>
       <canvas id="chartBar" height="200"></canvas>
     </div>
+<!-- ── Last 14 Days Study Hours Chart ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:32px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📅</span>
+        <div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0 0 2px;">Last 14 Days — Study Hours</h3>
+          <div style="font-size:.68rem;color:var(--muted);">Daily study hours logged in the Daily tab</div>
+        </div>
+      </div>
+      <!-- Live stats pills -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="study14StatsPills"></div>
+    </div>
+    <canvas id="chartStudy14" height="110"></canvas>
+    <div id="chartStudy14Empty" style="display:none;text-align:center;padding:28px 16px;color:var(--muted);font-size:.85rem;">
+      <div style="font-size:2rem;margin-bottom:8px;">📅</div>
+      No study hours logged yet. Go to Daily tab and log your sessions to see the chart here.
+    </div>
+    <!-- Day labels row -->
+    <div style="display:flex;gap:0;margin-top:8px;" id="study14Labels"></div>
+  </div>
 
   </div>
 
@@ -6787,6 +6817,7 @@ safeSet('ana-phy-pct2', subjectStats.phy.pct + '%');
   // ── CHARTS ──
   buildAnalyticsCharts(subjectStats);
   buildPacePrediction(doneTotals, totalTopics);
+  buildStudy14Chart();
 }
 
 
@@ -6913,6 +6944,193 @@ function buildAnalyticsCharts(subjectStats) {
         }
       }
     });
+
+    function buildStudy14Chart() {
+  const d = getData();
+  const today = new Date();
+  const labels  = [];
+  const data    = [];
+  const colors  = [];
+  const DAYS    = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const todayStr = today.toISOString().slice(0, 10);
+
+  let totalHrs  = 0;
+  let activeDays = 0;
+  let maxHrs    = 0;
+
+  for (let i = 13; i >= 0; i--) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() - i);
+    const dk      = 'day-data-' + dd.toISOString().slice(0, 10);
+    const dayData = d[dk] || {};
+    const hrs     = parseFloat(dayData.hours) || 0;
+    const isToday = i === 0;
+    const dayName = DAYS[dd.getDay()];
+    const dayNum  = dd.getDate();
+
+    labels.push(dayName + '\n' + dayNum);
+    data.push(hrs);
+    totalHrs  += hrs;
+    if (hrs > 0) activeDays++;
+    if (hrs > maxHrs) maxHrs = hrs;
+
+    // Color logic
+    if (isToday)     colors.push('rgba(168,124,245,.9)');   // today = accent/purple
+    else if (hrs >= 8) colors.push('rgba(61,232,160,.85)'); // great day = green
+    else if (hrs >= 6) colors.push('rgba(61,232,160,.6)');
+    else if (hrs >= 4) colors.push('rgba(61,191,255,.7)');  // decent = blue
+    else if (hrs >= 2) colors.push('rgba(61,191,255,.45)');
+    else if (hrs > 0)  colors.push('rgba(244,185,66,.55)'); // low = yellow
+    else               colors.push('rgba(255,255,255,.07)'); // zero = very faint
+  }
+
+  const avgHrs  = activeDays > 0 ? (totalHrs / activeDays).toFixed(1) : '0';
+  const goal    = parseFloat(d['profile-daily']) || 0;
+  const todayHrs = data[data.length - 1];
+
+  // Update stats pills
+  const pillsEl = document.getElementById('study14StatsPills');
+  if (pillsEl) {
+    const pills = [
+      { label: 'Total',    val: totalHrs.toFixed(1) + 'h', color: 'var(--accent)' },
+      { label: 'Avg/Day',  val: avgHrs + 'h',              color: 'var(--bio)' },
+      { label: 'Active',   val: activeDays + '/14 days',   color: 'var(--phy)' },
+      { label: 'Today',    val: todayHrs + 'h',            color: 'var(--purple)' },
+    ];
+    if (goal > 0) pills.push({ label: 'Goal', val: goal + 'h/day', color: 'var(--chem)' });
+
+    pillsEl.innerHTML = pills.map(p => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 12px;text-align:center;min-width:60px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;color:${p.color};line-height:1.2;">${p.val}</div>
+        <div style="font-size:.58rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">${p.label}</div>
+      </div>`).join('');
+  }
+
+  // Show/hide empty state
+  const canvasEl = document.getElementById('chartStudy14');
+  const emptyEl  = document.getElementById('chartStudy14Empty');
+  if (totalHrs === 0) {
+    if (canvasEl) canvasEl.style.display = 'none';
+    if (emptyEl)  emptyEl.style.display  = 'block';
+    return;
+  }
+  if (canvasEl) canvasEl.style.display = 'block';
+  if (emptyEl)  emptyEl.style.display  = 'none';
+
+  // Destroy old chart instance if exists
+  if (_charts.study14) _charts.study14.destroy();
+
+  const ctx = document.getElementById('chartStudy14');
+  if (!ctx) return;
+
+  // Goal line dataset (only if goal is set)
+  const datasets = [
+    {
+      label:           'Study Hours',
+      data:            data,
+      backgroundColor: colors,
+      borderColor:     colors.map(c => c.replace(/[\d.]+\)$/, '1)')),
+      borderWidth:     1.5,
+      borderRadius:    6,
+      borderSkipped:   false,
+    }
+  ];
+
+  if (goal > 0) {
+    datasets.push({
+      label:       'Daily Goal (' + goal + 'h)',
+      data:        Array(14).fill(goal),
+      type:        'line',
+      borderColor: 'rgba(244,185,66,.6)',
+      borderWidth: 1.5,
+      borderDash:  [5, 4],
+      pointRadius: 0,
+      fill:        false,
+      tension:     0,
+    });
+  }
+
+  _charts.study14 = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: goal > 0,
+          labels: {
+            color:    'rgba(255,255,255,.5)',
+            font:     { size: 10 },
+            boxWidth: 12,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            title:  items => {
+              const raw = items[0].label.replace('\n', ' ');
+              return raw;
+            },
+            label: ctx => {
+              if (ctx.dataset.type === 'line') return ' Goal: ' + ctx.parsed.y + 'h';
+              const hrs  = ctx.parsed.y;
+              const diff = goal > 0 ? (hrs - goal).toFixed(1) : null;
+              let line   = ' Hours: ' + hrs + 'h';
+              if (diff !== null) line += ' (' + (diff >= 0 ? '+' : '') + diff + 'h vs goal)';
+              return line;
+            }
+          },
+          backgroundColor: 'rgba(20,20,30,.95)',
+          titleColor:      'rgba(255,255,255,.9)',
+          bodyColor:       'rgba(255,255,255,.7)',
+          borderColor:     'rgba(168,124,245,.3)',
+          borderWidth:     1,
+          padding:         10,
+          cornerRadius:    8,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color:    'rgba(255,255,255,.45)',
+            font:     { size: 9 },
+            maxRotation: 0,
+            callback: function(val, idx) {
+              // Show only day name (first part before \n)
+              return this.getLabelForValue(val).split('\n')[0];
+            }
+          },
+          grid: { color: 'rgba(255,255,255,.04)' },
+        },
+        y: {
+          min:        0,
+          suggestedMax: Math.max(maxHrs + 1, goal + 1, 10),
+          ticks: {
+            color:    'rgba(255,255,255,.45)',
+            font:     { size: 9 },
+            stepSize: 2,
+            callback: v => v + 'h'
+          },
+          grid: { color: 'rgba(255,255,255,.05)' },
+        }
+      }
+    }
+  });
+
+  // Day-number labels row below chart
+  const labelsRow = document.getElementById('study14Labels');
+  if (labelsRow) {
+    labelsRow.innerHTML = labels.map((lbl, i) => {
+      const isToday = i === 13;
+      const hrs     = data[i];
+      const dayNum  = lbl.split('\n')[1] || '';
+      return `<div style="flex:1;text-align:center;font-size:.6rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '800' : '500'};font-family:'JetBrains Mono',monospace;line-height:1.3;">
+        ${dayNum}${isToday ? '<br><span style="font-size:.55rem;color:var(--accent);">today</span>' : ''}
+      </div>`;
+    }).join('');
+  }
+}
   }
 
   // ── Line — Test Scores ──
