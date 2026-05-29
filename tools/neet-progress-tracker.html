@@ -645,7 +645,7 @@
   #cdDays { font-size: 2.4rem !important; }
   #todaysFocusCard { flex-direction: column; }
 
-  
+
 .topic-row:last-child { border-bottom: none; }
 .topic-check {
   width: 16px;
@@ -2538,31 +2538,84 @@
 </div>
 
     <div class="stats-grid" id="statsGrid">
-      <div class="stat-card bio">
-        <div class="stat-num" id="stat-chapters">0</div>
-        <div class="stat-label">Chapters Done</div>
+
+  <div class="stat-card bio">
+    <div class="stat-num" id="stat-chapters">0</div>
+    <div class="stat-label">Chapters Done</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-chapters-bar" style="height:100%;background:var(--bio);border-radius:2px;width:0%;transition:width .5s;"></div>
       </div>
-      <div class="stat-card purple">
-        <div class="stat-num" id="stat-topics">0</div>
-        <div class="stat-label">Topics Done</div>
-      </div>
-      <div class="stat-card phy">
-        <div class="stat-num" id="stat-tests">0</div>
-        <div class="stat-label">Tests Given</div>
-      </div>
-      <div class="stat-card chem">
-        <div class="stat-num" id="stat-streak">0</div>
-        <div class="stat-label">Day Streak 🔥</div>
-      </div>
-      <div class="stat-card warn">
-        <div class="stat-num" id="stat-score">—</div>
-        <div class="stat-label">Best Mock Score</div>
-      </div>
-      <div class="stat-card danger">
-        <div class="stat-num" id="stat-consistency">0%</div>
-        <div class="stat-label">Consistency</div>
-      </div>
+      <div id="stat-chapters-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
     </div>
+  </div>
+
+  <div class="stat-card purple">
+    <div class="stat-num" id="stat-topics">0</div>
+    <div class="stat-label">Topics Done</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-topics-bar" style="height:100%;background:var(--purple);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-topics-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card phy">
+    <div class="stat-num" id="stat-tests">0</div>
+    <div class="stat-label">Tests Given</div>
+    <div style="margin-top:8px;">
+      <div id="stat-tests-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card chem">
+    <div class="stat-num" id="stat-streak">0</div>
+    <div class="stat-label">Day Streak 🔥</div>
+    <div style="margin-top:8px;">
+      <div id="stat-streak-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card warn">
+    <div class="stat-num" id="stat-score">—</div>
+    <div class="stat-label">Best Mock Score</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-score-bar" style="height:100%;background:var(--warn);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-score-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card danger">
+    <div class="stat-num" id="stat-consistency">0%</div>
+    <div class="stat-label">Consistency</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-consistency-bar" style="height:100%;background:var(--danger);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-consistency-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DAILY GOAL MINI TRACKER -->
+<div id="dailyGoalMini" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+  <div style="font-size:1.1rem;flex-shrink:0;">⏱</div>
+  <div style="flex:1;min-width:160px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <span style="font-size:.8rem;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;">Today's Study Goal</span>
+      <span id="dailyGoalMiniLabel" style="font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--accent);">— / — hrs</span>
+    </div>
+    <div style="height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+      <div id="dailyGoalMiniBar" style="height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .6s ease;"></div>
+    </div>
+    <div id="dailyGoalMiniMsg" style="font-size:.72rem;color:var(--muted);margin-top:5px;"></div>
+  </div>
+  <button onclick="window.switchSection('daily')" style="padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Log Hours →</button>
+</div>
 
     <!-- Subject Progress Summary -->
     <h2 class="section-title">
@@ -4991,12 +5044,105 @@ function updateStats() {
   }
   const consistency = Math.round(studyDays / 30 * 100);
 
+  // ── totals ──
+  const totalChapters = SYLLABUS.bio.length + SYLLABUS.chem.length + SYLLABUS.phy.length;
+  const totalTopicsAll = SYLLABUS.bio.reduce((a,c)=>a+c.topics.length,0)
+    + SYLLABUS.chem.reduce((a,c)=>a+c.topics.length,0)
+    + SYLLABUS.phy.reduce((a,c)=>a+c.topics.length,0);
+
+  // ── topics done today ──
+  const todayKey2 = 'day-data-' + new Date().toISOString().slice(0,10);
+  const prevKey   = 'stat-snapshot-' + new Date().toISOString().slice(0,10);
+  const snapshot  = d[prevKey] ? JSON.parse(d[prevKey]) : null;
+  const topicsToday = snapshot ? Math.max(0, topicsDone - snapshot.topics) : 0;
+
+  // ── set numbers ──
   safeSet('stat-chapters', chaptersDone);
   safeSet('stat-topics', topicsDone);
   safeSet('stat-tests', tests.length);
   safeSet('stat-streak', streak + ' 🔥');
   safeSet('stat-score', bestScore !== null ? bestScore : '—');
   safeSet('stat-consistency', consistency + '%');
+
+  // ── chapter bar + context ──
+  const chBar = document.getElementById('stat-chapters-bar');
+  const chCtx = document.getElementById('stat-chapters-ctx');
+  if (chBar) chBar.style.width = Math.round(chaptersDone / totalChapters * 100) + '%';
+  if (chCtx) chCtx.textContent = chaptersDone + ' / ' + totalChapters + ' total';
+
+  // ── topics bar + context ──
+  const tBar = document.getElementById('stat-topics-bar');
+  const tCtx = document.getElementById('stat-topics-ctx');
+  if (tBar) tBar.style.width = Math.round(topicsDone / totalTopicsAll * 100) + '%';
+  if (tCtx) tCtx.textContent = (topicsToday > 0 ? '↑ ' + topicsToday + ' today · ' : '') + Math.round(topicsDone/totalTopicsAll*100) + '% done';
+
+  // ── tests context ──
+  const testsCtx = document.getElementById('stat-tests-ctx');
+  if (testsCtx) {
+    if (tests.length === 0) testsCtx.textContent = 'No tests yet';
+    else {
+      const avg = Math.round(tests.reduce((a,t)=>a+(t.score||0),0)/tests.length);
+      testsCtx.textContent = 'Avg score: ' + avg;
+    }
+  }
+
+  // ── streak context ──
+  const streakCtx = document.getElementById('stat-streak-ctx');
+  if (streakCtx) {
+    if (streak === 0)       streakCtx.textContent = 'Start today!';
+    else if (streak < 3)    streakCtx.textContent = 'Keep going!';
+    else if (streak < 7)    streakCtx.textContent = 'Building habit 💪';
+    else if (streak < 14)   streakCtx.textContent = '1 week+ streak! 🔥';
+    else if (streak < 30)   streakCtx.textContent = '2 weeks strong! ⚡';
+    else                    streakCtx.textContent = streak + ' days — elite! 🏆';
+  }
+
+  // ── score bar + context ──
+  const sBar = document.getElementById('stat-score-bar');
+  const sCtx = document.getElementById('stat-score-ctx');
+  if (sBar) sBar.style.width = bestScore ? Math.round(bestScore/720*100)+'%' : '0%';
+  if (sCtx && bestScore) {
+    const grade = bestScore >= 600 ? '🟢 Excellent' : bestScore >= 480 ? '🟡 Good' : bestScore >= 360 ? '🟠 Average' : '🔴 Needs work';
+    sCtx.textContent = Math.round(bestScore/720*100) + '% · ' + grade;
+  } else if (sCtx) { sCtx.textContent = 'No tests logged'; }
+
+  // ── consistency bar + context ──
+  const conBar = document.getElementById('stat-consistency-bar');
+  const conCtx = document.getElementById('stat-consistency-ctx');
+  if (conBar) conBar.style.width = consistency + '%';
+  if (conCtx) {
+    const conMsg = consistency >= 80 ? '🟢 Excellent' : consistency >= 60 ? '🟡 Good' : consistency >= 40 ? '🟠 Moderate' : '🔴 Low';
+    conCtx.textContent = studyDays + ' / 30 days · ' + conMsg;
+  }
+
+  // ── daily goal mini tracker ──
+  const goalMiniBar   = document.getElementById('dailyGoalMiniBar');
+  const goalMiniLabel = document.getElementById('dailyGoalMiniLabel');
+  const goalMiniMsg   = document.getElementById('dailyGoalMiniMsg');
+  const todayDataMini = d['day-data-' + new Date().toISOString().slice(0,10)] || {};
+  const hrsStudied    = parseFloat(todayDataMini.hours) || 0;
+  const hrsGoal       = parseFloat(d['profile-daily']) || 0;
+  if (hrsGoal > 0) {
+    const pctGoal = Math.min(Math.round(hrsStudied / hrsGoal * 100), 100);
+    if (goalMiniBar)   goalMiniBar.style.width = pctGoal + '%';
+    if (goalMiniLabel) goalMiniLabel.textContent = hrsStudied + ' / ' + hrsGoal + ' hrs';
+    if (goalMiniMsg) {
+      if (pctGoal >= 100)      goalMiniMsg.textContent = '🎉 Goal complete! Well done.';
+      else if (pctGoal >= 70)  goalMiniMsg.textContent = '💪 Almost there — ' + (hrsGoal - hrsStudied).toFixed(1) + 'h more!';
+      else if (pctGoal >= 30)  goalMiniMsg.textContent = '📚 In progress — keep going!';
+      else if (hrsStudied > 0) goalMiniMsg.textContent = '⏳ Started — ' + (hrsGoal - hrsStudied).toFixed(1) + 'h remaining.';
+      else                     goalMiniMsg.textContent = '☀️ Not started yet. Open Daily tab to log!';
+      goalMiniBar.style.background = pctGoal >= 100
+        ? 'linear-gradient(90deg,var(--bio),var(--bio))'
+        : pctGoal >= 70
+        ? 'linear-gradient(90deg,var(--accent),var(--bio))'
+        : 'linear-gradient(90deg,var(--accent),var(--chem))';
+    }
+  } else {
+    if (goalMiniLabel) goalMiniLabel.textContent = 'No goal set';
+    if (goalMiniMsg)   goalMiniMsg.textContent = 'Set daily goal in Profile tab →';
+    if (goalMiniBar)   goalMiniBar.style.width = '0%';
+  }
 
   // Subject bars
   const bioPct = bioTotal ? Math.round(bioDone/bioTotal*100) : 0;
@@ -5202,6 +5348,15 @@ const key = 'day-data-' + today;
 
 function markStudyDayDone() {
   saveDailyData();
+  // Save topic snapshot for "topics done today" delta
+  const snapKey = 'stat-snapshot-' + new Date().toISOString().slice(0,10);
+  const dSnap = getData();
+  if (!dSnap[snapKey]) {
+    let snapCount = 0;
+    ['bio','chem','phy'].forEach(subj => SYLLABUS[subj].forEach(ch => ch.topics.forEach((_,i) => { if (dSnap['t-'+ch.id+'-'+i]) snapCount++; })));
+    dSnap[snapKey] = JSON.stringify({ topics: snapCount });
+    setData(dSnap);
+  }
  const today = _viewingDate;
   const d = getData();
   d['day-' + today] = (parseFloat(document.getElementById('daily-hours')?.value) || 1);
