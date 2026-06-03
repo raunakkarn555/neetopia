@@ -4026,6 +4026,147 @@
     </div>
 
     <!-- Tips Box -->
+     <!-- ══════════════════════════════════════════════════════
+   PATCH 3 — TIMER GUIDE
+   Find in progress-tracker.html:
+       <!-- Tips Box -->
+   That is the last big green box inside section-guide.
+   PASTE THIS BLOCK RIGHT BEFORE that "Tips Box" div.
+   (Search for: <div style="background:linear-gradient(135deg,rgba(61,232,160,.08)
+    and paste ABOVE that div)
+   ══════════════════════════════════════════════════════ -->
+
+<!-- ── TIMER GUIDE CARD ── -->
+<div style="background:linear-gradient(135deg,rgba(61,191,255,.07),rgba(168,124,245,.05));border:1px solid rgba(61,191,255,.25);border-radius:var(--card-radius);padding:24px;margin-top:24px;">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="width:40px;height:40px;background:rgba(61,191,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">⏱</div>
+    <div>
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;margin:0 0 3px;">Timer Tab — Complete Guide</h4>
+      <div style="font-size:.78rem;color:var(--muted);">4 timers · auto session logging · date-wise history · pomodoro</div>
+    </div>
+  </div>
+
+  <!-- 4 Timer Cards in grid -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:22px;">
+
+    <!-- NEET Standard Timer -->
+    <div style="background:var(--bg2);border:1px solid rgba(61,191,255,.3);border-radius:12px;padding:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:rgba(61,191,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">⏱</div>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--phy);">NEET Standard Timer</span>
+      </div>
+      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li>Exactly <strong style="color:var(--fg);">3 hours 20 minutes</strong> — same as real NEET exam</li>
+        <li>Click <strong style="color:var(--fg);">▶ Start</strong> to begin countdown</li>
+        <li>Click <strong style="color:var(--fg);">⏸ Pause</strong> to pause mid-session</li>
+        <li>Click <strong style="color:var(--fg);">↺ Reset</strong> to restart from 3:20:00</li>
+        <li>⚠️ <strong style="color:var(--warn);">Warning</strong> fires at 5 min left (amber color)</li>
+        <li>🔴 <strong style="color:var(--danger);">Danger</strong> pulses at last 10 seconds</li>
+        <li>✅ <strong style="color:var(--bio);">Session auto-saves</strong> when timer finishes — you can see it in Session History below</li>
+      </ul>
+    </div>
+
+    <!-- Custom Timer -->
+    <div style="background:var(--bg2);border:1px solid rgba(168,124,245,.3);border-radius:12px;padding:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:rgba(168,124,245,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🔧</div>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--purple);">Custom Timer</span>
+      </div>
+      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li>Set your own <strong style="color:var(--fg);">hours : minutes : seconds</strong></li>
+        <li>Use <strong style="color:var(--fg);">Quick Presets</strong> — 30m, 1h, 1.5h, 2h, 3h, 3h20m</li>
+        <li>Perfect for <strong style="color:var(--fg);">subject-wise sessions</strong> (e.g. 2h Physics)</li>
+        <li>Use for <strong style="color:var(--fg);">revision sprints</strong> between chapters</li>
+        <li>✅ <strong style="color:var(--bio);">Auto-logs session</strong> when it finishes</li>
+        <li>If you pause before finishing — session is NOT logged (only on complete)</li>
+      </ul>
+    </div>
+
+    <!-- Pomodoro -->
+    <div style="background:var(--bg2);border:1px solid rgba(61,232,160,.3);border-radius:12px;padding:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:rgba(61,232,160,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🍅</div>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--bio);">Pomodoro Timer</span>
+      </div>
+      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li><strong style="color:var(--fg);">🎯 Focus 25m</strong> → study deeply, no distractions</li>
+        <li><strong style="color:var(--fg);">☕ Short Break 5m</strong> → rest eyes, drink water</li>
+        <li><strong style="color:var(--fg);">🛌 Long Break 15m</strong> → after every 4 focus sessions</li>
+        <li>4 dots show progress — fills up per completed session</li>
+        <li>Enable <strong style="color:var(--fg);">Auto-start break</strong> for fully automatic cycling</li>
+        <li>✅ Each <strong style="color:var(--bio);">focus session auto-logs 25 min</strong> in history</li>
+        <li>Click <strong style="color:var(--fg);">↺ Reset Dots</strong> to start a new pomodoro set</li>
+      </ul>
+    </div>
+
+    <!-- Session Log -->
+    <div style="background:var(--bg2);border:1px solid rgba(244,185,66,.3);border-radius:12px;padding:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:rgba(244,185,66,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📋</div>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--chem);">Session History</span>
+      </div>
+      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li><strong style="color:var(--fg);">Filter buttons</strong> — Today / This Week / This Month / All Time</li>
+        <li><strong style="color:var(--fg);">Date picker</strong> — select any specific date to see that day</li>
+        <li>Sessions grouped by date with <strong style="color:var(--fg);">daily total</strong> shown</li>
+        <li>Stats row shows Today, Week, Month, All-time totals</li>
+        <li><strong style="color:var(--fg);">Weekly bar chart</strong> at bottom — 7-day visual overview</li>
+        <li><strong style="color:var(--fg);">+ Log Manually</strong> — add any session you forgot to time</li>
+        <li><strong style="color:var(--fg);">⬇ Export CSV</strong> — download full history as spreadsheet</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Step-by-step workflow -->
+  <div style="background:var(--bg2);border-radius:12px;padding:18px;margin-bottom:16px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;color:var(--fg);">📋 Recommended Daily Workflow</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Morning plan</strong> — Open To-Do tab, add today's chapters. Then come to Timer tab.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Study sessions</strong> — Use Custom Timer for each subject block (e.g. 2h Bio, 1.5h Chem). Each completes → auto-logged.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Between topics</strong> — Switch to Pomodoro mode: 25 min focus → 5 min break. Great for solving PYQs.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Mock test day</strong> — Use NEET Standard Timer (3h20m) to simulate real exam. Session auto-logs when complete.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">End of day</strong> — Check Session History → filter by Today → see total time studied. Also log hours in Daily tab.</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Weekly review</strong> — Filter by This Week to see the bar chart. Where were your gaps? Plan next week accordingly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pro tips -->
+  <div style="background:rgba(61,232,160,.06);border:1px solid rgba(61,232,160,.2);border-radius:10px;padding:14px 18px;">
+    <div style="font-size:.8rem;font-weight:700;color:var(--bio);margin-bottom:8px;">💡 Pro Tips</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;font-size:.78rem;color:var(--muted);line-height:1.6;">
+      <div>• Session data is stored locally in your browser — export CSV regularly as backup.</div>
+      <div>• Use <strong style="color:var(--fg);">Manual Log</strong> if you studied without opening the app — select the correct past date.</div>
+      <div>• Pomodoro's 4-dot counter resets every 4 sessions — this is called one "Pomodoro set".</div>
+      <div>• NEET timer only logs if you let it run to zero. Resetting early = no log.</div>
+      <div>• Filter by a specific date to see exactly how you studied on that day.</div>
+      <div>• The bar chart shows last 7 days — check it daily to spot consistency gaps early.</div>
+    </div>
+  </div>
+
+</div>
+<!-- ── END TIMER GUIDE CARD ── -->
+ 
     <div style="background:linear-gradient(135deg,rgba(61,232,160,.08),rgba(61,191,255,.06));border:1px solid rgba(61,232,160,.25);border-radius:var(--card-radius);padding:24px;margin-top:24px;">
       <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:12px;color:var(--bio);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -6966,6 +7107,7 @@ function neetTimerToggle() {
     if (btn) { btn.textContent = '▶ Resume'; btn.classList.remove('running'); }
   } else {
     if (st.remaining <= 0) return;
+    if (!st._startTime) st._startTime = Date.now();
     if (Notification && Notification.permission === 'default') Notification.requestPermission();
     st.running = true;
     if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('running'); }
@@ -6973,22 +7115,32 @@ function neetTimerToggle() {
     st.iv = setInterval(() => {
       if (st.remaining <= 0) {
         clearInterval(st.iv); st.running = false;
-         playTimerSound('complete');
+        playTimerSound('complete');
+        const elapsed = Math.round((12000 - st.remaining) / 60);
+        if (elapsed > 0 && typeof _autoLogSession === 'function') {
+          _autoLogSession(elapsed, 'neet', 'general', '⏱ NEET Standard Timer — ' + elapsed + ' min completed');
+        }
+        st._startTime = null;
         const b = document.getElementById('neet-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
         _ptSetState('neet');
         if (Notification && Notification.permission === 'granted')
-          new Notification('⏰ NEET Timer Done!', { body: '3 hr 20 min practice session complete.' });
+          new Notification('⏰ NEET Timer Done!', { body: '3 hr 20 min practice session complete. Session logged!' });
         return;
       }
       st.remaining--;
-_ptSetState('neet');
-if (st.remaining === 300) playTimerSound('warn');   // 5 min warning
-if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick'); // last 10s
+      _ptSetState('neet');
+      if (st.remaining === 300) playTimerSound('warn');
+      if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
     }, 1000);
     _ptSetState('neet');
   }
 }
+---
+
+=== END PATCH 1 ===
+
+
 
 function neetTimerReset() {
   clearInterval(_PT.neet.iv);
@@ -7029,10 +7181,10 @@ function customTimerToggle() {
     if (btn) { btn.textContent = '▶ Resume'; btn.classList.remove('running'); }
   } else {
     if (st.total <= 0 || st.remaining <= 0) {
-      // re-read inputs
       customTimerPreview();
       if (_PT.custom.total <= 0) { showToast('Set a time first!','info'); return; }
     }
+    if (!st._startTime) st._startTime = Date.now();
     if (Notification && Notification.permission === 'default') Notification.requestPermission();
     st.running = true;
     playTimerSound('start');
@@ -7040,22 +7192,30 @@ function customTimerToggle() {
     st.iv = setInterval(() => {
       if (st.remaining <= 0) {
         clearInterval(st.iv); st.running = false;
-          playTimerSound('complete');
+        playTimerSound('complete');
+        const elapsed = Math.round((st.total - st.remaining) / 60);
+        if (elapsed > 0 && typeof _autoLogSession === 'function') {
+          _autoLogSession(elapsed, 'study', 'general', '⏱ Custom Timer — ' + elapsed + ' min completed');
+        }
+        st._startTime = null;
         const b = document.getElementById('custom-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
         _ptSetState('custom');
         if (Notification && Notification.permission === 'granted')
-          new Notification('⏰ Custom Timer Done!', { body: 'Your practice session is complete!' });
+          new Notification('⏰ Custom Timer Done!', { body: 'Session complete! Logged automatically.' });
         return;
       }
       st.remaining--;
       if (st.remaining === 60) playTimerSound('warn');
-if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
+      if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
       _ptSetState('custom');
     }, 1000);
     _ptSetState('custom');
   }
 }
+---
+
+=== END PATCH 2 ===
 
 function customTimerReset() {
   clearInterval(_PT.custom.iv);
