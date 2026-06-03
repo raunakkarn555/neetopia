@@ -4166,7 +4166,7 @@
 
 </div>
 <!-- ── END TIMER GUIDE CARD ── -->
- 
+
     <div style="background:linear-gradient(135deg,rgba(61,232,160,.08),rgba(61,191,255,.06));border:1px solid rgba(61,232,160,.25);border-radius:var(--card-radius);padding:24px;margin-top:24px;">
       <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:12px;color:var(--bio);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -7136,9 +7136,8 @@ function neetTimerToggle() {
     _ptSetState('neet');
   }
 }
----
 
-=== END PATCH 1 ===
+
 
 
 
@@ -7213,9 +7212,8 @@ function customTimerToggle() {
     _ptSetState('custom');
   }
 }
----
 
-=== END PATCH 2 ===
+
 
 function customTimerReset() {
   clearInterval(_PT.custom.iv);
@@ -7255,6 +7253,44 @@ const BOOKS = [
   { id:'notes-phy', name:'My Physics Notes', emoji:'🗒', color:'var(--phy)' },
   { id:'formula-sheet', name:'Formula Sheets', emoji:'📋', color:'var(--purple)' },
 ];
+
+function searchSyllabus(query) {
+  const resultsEl = document.getElementById('searchResults');
+  if (!resultsEl) return;
+  if (!query || query.trim().length < 2) {
+    resultsEl.style.display = 'none';
+    resultsEl.innerHTML = '';
+    return;
+  }
+  const q = query.toLowerCase();
+  const results = [];
+  ['bio','chem','phy'].forEach(subj => {
+    SYLLABUS[subj].forEach(ch => {
+      ch.topics.forEach((topic, i) => {
+        if (topic.toLowerCase().includes(q) || ch.name.toLowerCase().includes(q)) {
+          results.push({ subj, ch, topic, i });
+        }
+      });
+    });
+  });
+  if (!results.length) {
+    resultsEl.innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:8px;">No topics found for "' + query + '"</div>';
+  } else {
+    const subjEmoji = { bio:'🌿', chem:'⚗️', phy:'⚡' };
+    resultsEl.innerHTML = results.slice(0,20).map(r =>
+      `<div onclick="jumpToTopic('${r.ch.id}',${r.i},'${r.subj}')"
+        style="padding:10px 14px;border-radius:8px;margin-bottom:5px;cursor:pointer;background:var(--bg3);border:1px solid var(--border);display:flex;gap:10px;align-items:center;transition:border-color .2s;"
+        onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size:.85rem;">${subjEmoji[r.subj]}</span>
+        <div>
+          <div style="font-size:.82rem;font-weight:600;">${r.topic}</div>
+          <div style="font-size:.7rem;color:var(--muted);">${r.ch.name}</div>
+        </div>
+      </div>`
+    ).join('');
+  }
+  resultsEl.style.display = 'block';
+}
 
 // ─── RESOURCES TRACKER ───
 function addResource() {
