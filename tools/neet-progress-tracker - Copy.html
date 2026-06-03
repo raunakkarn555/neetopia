@@ -639,6 +639,13 @@
   .chapter-header { padding: 12px 14px; gap: 10px; }
 }
 
+
+#dashRow2 { grid-template-columns: 1fr !important; }
+  #examCountdownBadge > div { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+  #cdDays { font-size: 2.4rem !important; }
+  #todaysFocusCard { flex-direction: column; }
+
+
 .topic-row:last-child { border-bottom: none; }
 .topic-check {
   width: 16px;
@@ -1180,6 +1187,10 @@
 
   /* Dashboard rows: single column */
   #dashRow1, #dashRow2 { grid-template-columns: 1fr !important; }
+
+  #dayPillRow > div { min-width: 46px !important; padding: 6px 4px !important; }
+  #weeklyStatGrid { grid-template-columns: repeat(3,1fr) !important; gap: 7px !important; }
+  #weeklySummaryGrid { gap: 4px !important; }
 }
 
 
@@ -2208,6 +2219,18 @@
 }
 .reminder-preset:hover { border-color: var(--accent); color: var(--accent); }
 .reminder-preset.active { border-color: var(--bio); background: rgba(61,232,160,.1); color: var(--bio); }
+
+
+/* ── ANALYTICS PREMIUM RESPONSIVE ── */
+@media (max-width: 600px) {
+  .analytics-grid { grid-template-columns: 1fr !important; }
+  #section-analytics > div[style*="grid-template-columns:repeat(auto-fit"] { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  #section-backup > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  #storageStatsGrid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
 </style>
 
   <script type="application/ld+json">
@@ -2346,6 +2369,95 @@
   #section-dashboard > div[style*="grid-template-columns:repeat(auto-fit"] {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* ── COUNTDOWN RESPONSIVE ── */
+@media (max-width: 400px) {
+  #cdDays { font-size: 1.4rem !important; }
+  #examCountdownBadge { max-width: 100% !important; }
+}
+
+/* ── Study 14 Chart Responsive ── */
+@media (max-width: 600px) {
+  #study14StatsPills { gap: 5px !important; }
+  #study14StatsPills > div { min-width: 50px !important; padding: 5px 8px !important; }
+  #study14StatsPills > div > div:first-child { font-size: .78rem !important; }
+}
+@media (max-width: 400px) {
+  #study14StatsPills { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+/* ── PREMIUM JOURNAL ── */
+.journal-entry-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+  position: relative;
+  transition: border-color .2s, transform .15s;
+}
+.journal-entry-card:hover { border-color: rgba(168,124,245,.3); transform: translateY(-1px); }
+.journal-entry-card.pinned { border-color: rgba(244,185,66,.4); background: linear-gradient(135deg, var(--bg2), rgba(244,185,66,.03)); }
+.journal-entry-card.editing { border-color: var(--accent); }
+.jentry-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.jentry-mood { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.jentry-meta { flex: 1; min-width: 0; }
+.jentry-date { font-size: .68rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
+.jentry-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+.jentry-badge {
+  font-size: .62rem; padding: 2px 8px; border-radius: 10px;
+  font-weight: 700; border: 1px solid; white-space: nowrap;
+}
+.jentry-badge.category { color: var(--purple); border-color: rgba(168,124,245,.3); background: rgba(168,124,245,.08); }
+.jentry-badge.energy-high { color: var(--bio); border-color: rgba(61,232,160,.3); background: rgba(61,232,160,.08); }
+.jentry-badge.energy-medium { color: var(--chem); border-color: rgba(244,185,66,.3); background: rgba(244,185,66,.08); }
+.jentry-badge.energy-low { color: var(--muted); border-color: var(--border); background: var(--bg3); }
+.jentry-actions { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
+.jentry-action-btn {
+  width: 28px; height: 28px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg3);
+  cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center;
+  transition: all .15s; color: var(--muted);
+}
+.jentry-action-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(168,124,245,.08); }
+.jentry-action-btn.pin-active { border-color: rgba(244,185,66,.5); color: var(--chem); background: rgba(244,185,66,.1); }
+.jentry-action-btn.del-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(255,95,95,.08); }
+.jentry-body { font-size: .87rem; line-height: 1.75; color: var(--fg); white-space: pre-wrap; word-break: break-word; margin-bottom: 10px; }
+.jentry-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.jentry-tag {
+  font-size: .65rem; padding: 2px 8px; border-radius: 10px;
+  background: rgba(61,191,255,.08); border: 1px solid rgba(61,191,255,.2);
+  color: var(--phy); font-weight: 600;
+}
+.jentry-footer { display: flex; gap: 12px; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.04); flex-wrap: wrap; }
+.jentry-footer span { font-size: .68rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.jentry-edit-area {
+  width: 100%; background: var(--bg3); border: 1px solid var(--accent);
+  border-radius: 8px; padding: 10px 12px; color: var(--fg);
+  font-family: 'DM Sans', sans-serif; font-size: .87rem; outline: none;
+  resize: vertical; min-height: 90px; box-sizing: border-box; line-height: 1.7;
+  margin-bottom: 8px;
+}
+.journal-filter-btn { transition: all .2s; }
+
+/* ── JOURNAL HEATMAP ── */
+.journal-heat-cell {
+  width: 18px; height: 18px; border-radius: 3px;
+  background: var(--bg3); border: 1px solid var(--border);
+  cursor: default; transition: transform .15s; position: relative;
+}
+.journal-heat-cell[data-level="1"] { background: rgba(168,124,245,.25); border-color: rgba(168,124,245,.3); }
+.journal-heat-cell[data-level="2"] { background: rgba(168,124,245,.5); border-color: rgba(168,124,245,.4); }
+.journal-heat-cell[data-level="3"] { background: var(--purple); border-color: var(--purple); }
+.journal-heat-cell:hover { transform: scale(1.25); }
+
+/* ── RESPONSIVE JOURNAL ── */
+@media (max-width: 600px) {
+  .jentry-header { gap: 8px; }
+  .jentry-actions { gap: 4px; }
+  .jentry-action-btn { width: 26px; height: 26px; font-size: .75rem; }
+  .jentry-body { font-size: .83rem; }
 }
 
 </style>
@@ -2500,40 +2612,134 @@
     <div class="dash-hero">
       <h1>NEET <span class="hl">Progress Tracker</span> Dashboard</h1>
       <p id="dashQuote" style="color:var(--muted);font-size:.95rem;margin-bottom:32px;font-style:italic;min-height:1.4em;transition:opacity .4s;"></p>
-     </div>
+      <!-- EXAM COUNTDOWN — HERO STYLE -->
+<div id="examCountdownBadge" style="display:none;margin:0 auto 20px;width:100%;max-width:520px;box-sizing:border-box;">
+  <div style="background:linear-gradient(135deg,rgba(168,124,245,.1),rgba(61,191,255,.06));border:1.5px solid rgba(168,124,245,.3);border-radius:12px;padding:14px 16px;position:relative;overflow:hidden;box-sizing:border-box;">
+    <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(168,124,245,.12),transparent 70%);pointer-events:none;"></div>
 
-    <div class="stats-grid" id="statsGrid">
-      <div class="stat-card bio">
-        <div class="stat-num" id="stat-chapters">0</div>
-        <div class="stat-label">Chapters Done</div>
+    <!-- Top row: icon + label + days -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+      <div style="width:32px;height:32px;border-radius:8px;background:rgba(168,124,245,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;">🎯</div>
+      <div style="flex:1;min-width:100px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;font-weight:800;color:var(--fg);" id="cdLabel">NEET 2026</div>
+        <div style="font-size:.65rem;color:var(--muted);margin-top:1px;" id="cdDate">Set exam date in Profile →</div>
       </div>
-      <div class="stat-card purple">
-        <div class="stat-num" id="stat-topics">0</div>
-        <div class="stat-label">Topics Done</div>
-      </div>
-      <div class="stat-card phy">
-        <div class="stat-num" id="stat-tests">0</div>
-        <div class="stat-label">Tests Given</div>
-      </div>
-      <div class="stat-card chem">
-        <div class="stat-num" id="stat-streak">0</div>
-        <div class="stat-label">Day Streak 🔥</div>
-      </div>
-      <div class="stat-card warn">
-        <div class="stat-num" id="stat-score">—</div>
-        <div class="stat-label">Best Mock Score</div>
-      </div>
-      <div class="stat-card danger">
-        <div class="stat-num" id="stat-consistency">0%</div>
-        <div class="stat-label">Consistency</div>
+      <div style="display:flex;align-items:baseline;gap:4px;flex-shrink:0;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.6rem,6vw,2.2rem);font-weight:800;line-height:1;color:var(--accent);" id="cdDays">—</div>
+        <div style="font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;">days</div>
       </div>
     </div>
+
+    <!-- Bottom row: weeks/months + urgency + progress bar -->
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div style="font-size:.68rem;color:var(--muted);flex-shrink:0;" id="cdWeeksMonths"></div>
+      <div id="cdUrgency" style="font-size:.7rem;font-weight:700;flex-shrink:0;"></div>
+      <div style="flex:1;min-width:80px;">
+        <div style="height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+          <div id="cdProgressBar" style="height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .6s ease;width:0%;"></div>
+        </div>
+        <div style="font-size:.58rem;color:var(--muted);margin-top:3px;text-align:right;" id="cdProgressLabel"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <div class="stats-grid" id="statsGrid">
+
+  <div class="stat-card bio">
+    <div class="stat-num" id="stat-chapters">0</div>
+    <div class="stat-label">Chapters Done</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-chapters-bar" style="height:100%;background:var(--bio);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-chapters-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card purple">
+    <div class="stat-num" id="stat-topics">0</div>
+    <div class="stat-label">Topics Done</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-topics-bar" style="height:100%;background:var(--purple);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-topics-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card phy">
+    <div class="stat-num" id="stat-tests">0</div>
+    <div class="stat-label">Tests Given</div>
+    <div style="margin-top:8px;">
+      <div id="stat-tests-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card chem">
+    <div class="stat-num" id="stat-streak">0</div>
+    <div class="stat-label">Day Streak 🔥</div>
+    <div style="margin-top:8px;">
+      <div id="stat-streak-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card warn">
+    <div class="stat-num" id="stat-score">—</div>
+    <div class="stat-label">Best Mock Score</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-score-bar" style="height:100%;background:var(--warn);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-score-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card danger">
+    <div class="stat-num" id="stat-consistency">0%</div>
+    <div class="stat-label">Consistency</div>
+    <div style="margin-top:8px;">
+      <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+        <div id="stat-consistency-bar" style="height:100%;background:var(--danger);border-radius:2px;width:0%;transition:width .5s;"></div>
+      </div>
+      <div id="stat-consistency-ctx" style="font-size:.65rem;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DAILY GOAL MINI TRACKER -->
+<div id="dailyGoalMini" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+  <div style="font-size:1.1rem;flex-shrink:0;">⏱</div>
+  <div style="flex:1;min-width:160px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <span style="font-size:.8rem;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;">Today's Study Goal</span>
+      <span id="dailyGoalMiniLabel" style="font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--accent);">— / — hrs</span>
+    </div>
+    <div style="height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+      <div id="dailyGoalMiniBar" style="height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .6s ease;"></div>
+    </div>
+    <div id="dailyGoalMiniMsg" style="font-size:.72rem;color:var(--muted);margin-top:5px;"></div>
+  </div>
+  <button onclick="window.switchSection('daily')" style="padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Log Hours →</button>
+</div>
 
     <!-- Subject Progress Summary -->
     <h2 class="section-title">
       <span class="section-icon purple">📊</span>
       Subject Progress Overview
     </h2>
+
+    <!-- TODAY'S FOCUS CARD -->
+<div id="todaysFocusCard" style="background:linear-gradient(135deg,rgba(61,232,160,.07),rgba(168,124,245,.05));border:1px solid rgba(61,232,160,.25);border-radius:var(--card-radius);padding:20px 24px;margin-bottom:20px;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+  <div style="width:40px;height:40px;border-radius:10px;background:rgba(61,232,160,.15);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📌</div>
+  <div style="flex:1;min-width:200px;">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:6px;">Today's Focus</div>
+    <div id="todaysFocusContent" style="font-size:.85rem;color:var(--muted);line-height:1.7;"></div>
+  </div>
+  <button onclick="window.switchSection('syllabus')" style="padding:8px 18px;border-radius:8px;border:1px solid rgba(61,232,160,.4);background:rgba(61,232,160,.08);color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">Start Studying →</button>
+</div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:24px;">
 
@@ -2608,9 +2814,8 @@
 </div>
 
 <!-- ── ROW: Next Milestone + Recent Activity ── -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;" id="dashRow2">
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;" id="dashRow2">
 
-</div>
   <!-- Next Milestone -->
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
     <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">🏁 Next Milestone</div>
@@ -2622,6 +2827,7 @@
     <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">⚡ Recent Activity</div>
     <div id="recentActivityFeed" style="display:flex;flex-direction:column;gap:7px;"></div>
   </div>
+
 </div>
 
   </section>
@@ -2674,8 +2880,15 @@
             <option value="2026">NEET 2026</option>
             <option value="2027">NEET 2027</option>
             <option value="2028">NEET 2028</option>
+            <option value="2029">NEET 2029</option>
           </select>
         </div>
+
+        <div class="form-group">
+  <label>Exam Date (for countdown)</label>
+  <input type="date" id="inp-examdate" placeholder="Write exam date..." />
+</div>
+
         <div class="form-group">
           <label>Target Score (out of 720)</label>
           <input type="number" id="inp-score" min="300" max="720" placeholder="e.g. 650" />
@@ -2775,21 +2988,31 @@
   <!-- ═══════════════ SECTION: DAILY TRACKER ═══════════════ -->
   <section class="tracker-section" id="section-daily">
     <h2 class="section-title"><span class="section-icon chem">🗓</span> Daily Tracker</h2>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-  <p style="color:var(--muted);font-size:.88rem;margin:0;">Viewing: <strong id="todayDate"></strong></p>
-  <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;align-items:center;">
-    <button onclick="navigateDay(-1)" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">← Prev</button>
-    <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:5px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;" />
-    <button onclick="navigateDay(1)" id="nextDayBtn" style="padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;">Next →</button>
-    <button onclick="goToToday()" style="padding:5px 12px;border-radius:7px;border:1px solid var(--accent);background:rgba(168,124,245,.1);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;">Today</button>
+    <!-- DAILY NAV -->
+<div style="margin-bottom:20px;">
+  <!-- Top row: label + date picker -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+    <div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;" id="todayDate">—</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:2px;" id="todayDateSub"></div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      <button onclick="goToToday()" id="goTodayBtn"
+        style="padding:6px 14px;border-radius:8px;border:1px solid var(--accent);background:rgba(168,124,245,.12);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;">
+        Today
+      </button>
+      <label style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+        📅 Pick Date
+        <input type="date" id="dayPickerInput" onchange="jumpToDate(this.value)"
+          style="position:absolute;opacity:0;width:0;height:0;pointer-events:none;" />
+      </label>
+    </div>
   </div>
+
+  <!-- 5-day pill navigator -->
+  <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;" id="dayPillRow"></div>
 </div>
 
-<!-- Weekly Summary Card -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:20px;margin-bottom:14px;">
-  <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📊 Last 7 Days Summary</h4>
-  <div id="weeklySummaryGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;"></div>
-</div>
 
 
     <div class="daily-grid">
@@ -2847,6 +3070,27 @@
       <div class="heatmap-row" id="heatmapRow"></div>
       <p style="font-size:.75rem;color:var(--muted);margin-top:12px;">Click a day to log study hours. Your consistency is your superpower.</p>
     </div>
+
+    <!-- ENHANCED WEEKLY SUMMARY -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;" id="weeklySummaryCard">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+    <div>
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:2px;">📊 Weekly Summary</h4>
+      <div style="font-size:.72rem;color:var(--muted);" id="weeklySummaryRange"></div>
+    </div>
+    <div style="font-size:.82rem;font-weight:700;" id="weeklySummaryMood"></div>
+  </div>
+
+  <!-- Stats row -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;" id="weeklyStatGrid"></div>
+
+  <!-- Day-by-day breakdown -->
+  <div style="margin-bottom:4px;">
+    <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Day-by-day</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;" id="weeklySummaryGrid"></div>
+  </div>
+</div>
 
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin:14px 0;">
       <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:14px;">📝 Daily Notes / Reflection</h4>
@@ -3097,131 +3341,304 @@
 
   <!-- ═══════════════ SECTION: ANALYTICS ═══════════════ -->
   <section class="tracker-section" id="section-analytics">
-    <h2 class="section-title"><span class="section-icon phy">📈</span> Performance Analytics</h2>
 
-    <div class="analytics-grid">
-      <div class="analytics-card">
-        <h3>🎯 Readiness Level</h3>
-        <div class="readiness-level">
-          <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);">
-            <div class="readiness-pct" id="readinessPct">0%</div>
-          </div>
-          <div class="readiness-label" id="readinessLabel">Beginner</div>
-          <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;" id="readinessMsg">Start completing topics to build momentum.</p>
-        </div>
+  <!-- ── ANALYTICS HERO HEADER ── -->
+  <div style="background:linear-gradient(135deg,rgba(61,191,255,.08),rgba(168,124,245,.06));border:1px solid rgba(61,191,255,.2);border-radius:var(--card-radius);padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--phy);margin-bottom:6px;">Performance Analytics</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin:0 0 6px;">Your NEET Report Card</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin:0;">Real-time insights based on your syllabus tracking and test history.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--accent);" id="ana-overall-pct">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Overall</div>
       </div>
-      <div class="analytics-card">
-        <h3>⚠️ Weak Areas</h3>
-        <div class="weakness-list" id="weaknessList">
-          <div style="font-size:.85rem;color:var(--muted);">Complete more topics to see weak area analysis.</div>
-        </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--bio);" id="ana-bio-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Biology</div>
       </div>
-      <div class="analytics-card">
-        <h3>📊 Suggestions</h3>
-        <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
-          <p>📌 Start tracking your topics to get personalized suggestions.</p>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--chem);" id="ana-chem-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Chemistry</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;text-align:center;min-width:80px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--phy);" id="ana-phy-pct2">0%</div>
+        <div style="font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;">Physics</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ROW 1: Readiness + Weak Areas + Suggestions ── -->
+  <div class="analytics-grid" style="margin-bottom:28px;">
+
+    <div class="analytics-card" style="background:linear-gradient(135deg,var(--bg2),rgba(168,124,245,.04));position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(168,124,245,.12),transparent 70%);pointer-events:none;"></div>
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(168,124,245,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🎯</span>
+        Readiness Level
+      </h3>
+      <div class="readiness-level">
+        <div class="readiness-ring" id="readinessRing" style="border-color:var(--bg3);width:110px;height:110px;">
+          <div class="readiness-pct" id="readinessPct">0%</div>
         </div>
+        <div class="readiness-label" id="readinessLabel" style="font-size:1.1rem;">Beginner</div>
+        <p style="font-size:.8rem;color:var(--muted);text-align:center;max-width:200px;line-height:1.6;" id="readinessMsg">Start completing topics to build momentum.</p>
       </div>
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
-      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
-      <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+    <div class="analytics-card">
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(255,95,95,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">⚠️</span>
+        Weak Areas
+      </h3>
+      <div class="weakness-list" id="weaknessList">
+        <div style="font-size:.85rem;color:var(--muted);padding:12px 0;">Complete more topics to see weak area analysis.</div>
+      </div>
     </div>
 
-    <!-- Charts Row -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:28px;">
+    <div class="analytics-card">
+      <h3 style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">💡</span>
+        AI Suggestions
+      </h3>
+      <div id="suggestionsList" style="display:flex;flex-direction:column;gap:8px;font-size:.85rem;line-height:1.6;color:var(--muted);">
+        <p style="background:var(--bg3);padding:10px 14px;border-radius:8px;border-left:3px solid var(--accent);">📌 Start tracking your topics to get personalized suggestions.</p>
+      </div>
+    </div>
 
-  <!-- Doughnut — Overall Progress -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🍩 Overall Coverage</h3>
-    <canvas id="chartDoughnut" height="200"></canvas>
-    <div id="chartDoughnutLegend" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.8rem;"></div>
   </div>
 
-  <!-- Radar — Subject Balance -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🕸 Subject Balance</h3>
-    <canvas id="chartRadar" height="200"></canvas>
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">📊 Coverage Charts</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
   </div>
 
-  <!-- Bar — Chapter Progress -->
-  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;">
-    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📊 Topics Per Subject</h3>
-    <canvas id="chartBar" height="200"></canvas>
+  <!-- ── ROW 2: Charts ── -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:32px;">
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(168,124,245,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🍩</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Overall Coverage</h3>
+      </div>
+      <canvas id="chartDoughnut" height="200"></canvas>
+      <div id="chartDoughnutLegend" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:.82rem;"></div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🕸</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Subject Balance</h3>
+      </div>
+      <canvas id="chartRadar" height="200"></canvas>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+        <span style="width:28px;height:28px;background:rgba(244,185,66,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📊</span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Topics Per Subject</h3>
+      </div>
+      <canvas id="chartBar" height="200"></canvas>
+    </div>
+<!-- ── Last 14 Days Study Hours Chart ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:32px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📅</span>
+        <div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0 0 2px;">Last 14 Days — Study Hours</h3>
+          <div style="font-size:.68rem;color:var(--muted);">Daily study hours logged in the Daily tab</div>
+        </div>
+      </div>
+      <!-- Live stats pills -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="study14StatsPills"></div>
+    </div>
+    <canvas id="chartStudy14" height="110"></canvas>
+    <div id="chartStudy14Empty" style="display:none;text-align:center;padding:28px 16px;color:var(--muted);font-size:.85rem;">
+      <div style="font-size:2rem;margin-bottom:8px;">📅</div>
+      No study hours logged yet. Go to Daily tab and log your sessions to see the chart here.
+    </div>
+    <!-- Day labels row -->
+    <div style="display:flex;gap:0;margin-top:8px;" id="study14Labels"></div>
   </div>
 
-</div>
+  </div>
 
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">🚀 Pace & Predictions</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
 
+  <!-- ── Pace Prediction ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:28px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,232,160,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🚀</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Pace Prediction</h3>
+    </div>
+    <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
+  </div>
 
-<!-- Pace Prediction -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:14px;">
-  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">🚀 Pace Prediction</h3>
-  <div id="pacePrediction" style="font-size:.88rem;color:var(--muted);">Complete at least 3 topics to see pace prediction.</div>
-</div>
+  <!-- ── SECTION DIVIDER ── -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 28px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">📉 Test Score Trend</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
 
-<!-- Test Score Trend -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:28px;margin-bottom:28px;">
-  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">📉 Test Score Trend</h3>
+  <!-- ── Test Score Trend ── -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:32px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,191,255,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📉</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Test Score Trend</h3>
+      <span style="margin-left:auto;font-size:.72rem;color:var(--muted);background:var(--bg3);padding:3px 10px;border-radius:10px;">Log tests in Tests tab →</span>
+    </div>
+    <canvas id="chartLine" height="100" style="display:none;"></canvas>
+    <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
+  </div>
 
-  <canvas id="chartLine" height="100" style="display:none;"></canvas>
-  <div id="testTrend" style="font-size:.85rem;color:var(--muted);">No test data yet. Log some tests to see trends.</div>
-</div>
 </section>
 
   <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
-  <section class="tracker-section" id="section-personal">
-    <h2 class="section-title"><span class="section-icon purple">🗒</span> My Personal Space</h2>
-    <p style="color:var(--muted);font-size:.88rem;margin-bottom:20px;">Your private corner. Journal, memories, motivational photos — all saved locally on your device only.</p>
+ <!-- ═══════════════ SECTION: PERSONAL SPACE ═══════════════ -->
+<section class="tracker-section" id="section-personal">
+  <h2 class="section-title"><span class="section-icon purple">🗒</span> My Personal Space</h2>
+  <p style="color:var(--muted);font-size:.88rem;margin-bottom:24px;">Your private corner — journal, memories, goals. All stored locally. No one else sees this.</p>
 
-    <!-- JOURNAL -->
-    <div class="journal-section">
-      <div class="journal-header">
-        <h3>📓 My Journal</h3>
-        <div style="display:flex;gap:8px;">
-          <select id="journalMood" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:7px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;">
+  <!-- ── JOURNAL ── -->
+  <div class="journal-section" id="journalSection">
+
+    <!-- Journal Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;margin:0 0 3px;">📓 My Journal</h3>
+        <div style="font-size:.72rem;color:var(--muted);">Private · Stored only in your browser</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="toggleJournalStats()" style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;" id="statsToggleBtn">📊 Stats</button>
+        <button onclick="exportJournalText()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(61,191,255,.3);background:rgba(61,191,255,.08);color:var(--phy);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;">⬇ Export</button>
+      </div>
+    </div>
+
+    <!-- Journal Stats Panel (hidden by default) -->
+    <div id="journalStatsPanel" style="display:none;background:var(--bg3);border-radius:10px;padding:16px;margin-bottom:18px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px;" id="journalStatsGrid"></div>
+      <!-- 30-day heatmap -->
+      <div>
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">30-Day Writing Streak</div>
+        <div style="display:flex;gap:3px;flex-wrap:wrap;" id="journalHeatmap"></div>
+      </div>
+    </div>
+
+    <!-- New Entry Form -->
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:20px;">
+
+      <!-- Row 1: Mood + Category + Energy -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:5px;">😊 Mood</label>
+          <select id="journalMood" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
             <option value="🔥">🔥 Motivated</option>
             <option value="😊">😊 Happy</option>
             <option value="😐">😐 Neutral</option>
             <option value="😩">😩 Tired</option>
             <option value="💪">💪 Determined</option>
             <option value="😰">😰 Stressed</option>
+            <option value="🤔">🤔 Confused</option>
+            <option value="😤">😤 Frustrated</option>
+            <option value="🥳">🥳 Celebrating</option>
           </select>
-          <button class="btn-save" onclick="addJournalEntry()">+ Entry</button>
+        </div>
+        <div>
+          <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:5px;">📁 Category</label>
+          <select id="journalCategory" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
+            <option value="study">📚 Study Session</option>
+            <option value="reflection">🔍 Reflection</option>
+            <option value="gratitude">🙏 Gratitude</option>
+            <option value="goals">🎯 Goals</option>
+            <option value="struggle">💔 Struggle</option>
+            <option value="victory">🏆 Victory</option>
+            <option value="general">📝 General</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:5px;">⚡ Energy</label>
+          <select id="journalEnergy" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
+            <option value="high">🔋 High Energy</option>
+            <option value="medium">🔋 Medium</option>
+            <option value="low">🪫 Low Energy</option>
+          </select>
         </div>
       </div>
-      <div class="form-group">
-        <textarea id="journalInput" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;resize:vertical;min-height:100px;box-sizing:border-box;" placeholder="Write your thoughts, struggles, victories... This is YOUR space. No one else sees this."></textarea>
+
+      <!-- Tags input -->
+      <div style="margin-bottom:12px;">
+        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:5px;">🏷 Tags (comma separated)</label>
+        <input type="text" id="journalTags" placeholder="e.g. biology, mock-test, revision, NCERT"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
       </div>
-      <div class="journal-entries" id="journalEntries"></div>
+
+      <!-- Textarea -->
+      <textarea id="journalInput"
+        style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;resize:vertical;min-height:110px;box-sizing:border-box;line-height:1.7;transition:border-color .2s;"
+        placeholder="Write your thoughts, struggles, victories... What did you study? What was hard? What are you grateful for?"
+        oninput="updateJournalWordCount(this)"
+        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+
+      <!-- Bottom bar: word count + save -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:12px;align-items:center;">
+          <span style="font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;" id="journalWordCount">0 words</span>
+          <span style="font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;" id="journalReadTime">~0 min read</span>
+        </div>
+        <button onclick="addJournalEntry()" class="btn-save">+ Save Entry</button>
+      </div>
     </div>
 
-    <!-- PHOTO WALL -->
-    <div class="journal-section" style="margin-top:20px;">
-      <div class="journal-header">
-        <h3>📸 Memory Wall</h3>
-        <p style="font-size:.8rem;color:var(--muted);margin:0;">Upload photos: study notes, whiteboards, motivational quotes, achievements. Compressed & stored locally.</p>
-      </div>
-      <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)" />
-      <div class="photo-wall" id="photoWall">
-        <button class="photo-add-btn" onclick="document.getElementById('photoInput').click()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Photo
-        </button>
-      </div>
-      <p style="font-size:.72rem;color:var(--muted);margin-top:10px;">⚠️ Images are compressed to ~100KB and stored in localStorage. Max ~20 photos.</p>
+    <!-- Filter bar -->
+    <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;flex-wrap:nowrap;" id="journalFilterBar">
+      <button class="journal-filter-btn active" data-filter="all" onclick="setJournalFilter('all',this)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">All</button>
+      <button class="journal-filter-btn" data-filter="📚 Study Session" onclick="setJournalFilter('📚 Study Session',this)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">📚 Study</button>
+      <button class="journal-filter-btn" data-filter="🔍 Reflection" onclick="setJournalFilter('🔍 Reflection',this)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">🔍 Reflect</button>
+      <button class="journal-filter-btn" data-filter="🏆 Victory" onclick="setJournalFilter('🏆 Victory',this)" style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">🏆 Victory</button>
+      <button class="journal-filter-btn" data-filter="pinned" onclick="setJournalFilter('pinned',this)" style="padding:5px 12px;border-radius:20px;border:1px solid rgba(244,185,66,.4);background:rgba(244,185,66,.08);color:var(--chem);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">📌 Pinned</button>
     </div>
 
-    <!-- GOALS WALL -->
-    <div class="journal-section" style="margin-top:20px;">
-      <div class="journal-header">
-        <h3>🎯 My Goals Wall</h3>
-        <button class="btn-save" onclick="addGoal()">+ Goal</button>
-      </div>
-      <div id="goalsWall" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"></div>
+    <!-- Entries -->
+    <div class="journal-entries" id="journalEntries" style="max-height:600px;"></div>
+  </div>
+
+  <!-- PHOTO WALL -->
+  <div class="journal-section" style="margin-top:20px;">
+    <div class="journal-header">
+      <h3>📸 Memory Wall</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin:0;">Upload photos: study notes, whiteboards, achievements. Compressed & stored locally.</p>
     </div>
-  </section>
+    <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)" />
+    <div class="photo-wall" id="photoWall">
+      <button class="photo-add-btn" onclick="document.getElementById('photoInput').click()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Photo
+      </button>
+    </div>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:10px;">⚠️ Images compressed to ~100KB. Max ~20 photos. All stored locally.</p>
+  </div>
+
+  <!-- GOALS WALL -->
+  <div class="journal-section" style="margin-top:20px;">
+    <div class="journal-header">
+      <h3>🎯 My Goals Wall</h3>
+      <button class="btn-save" onclick="addGoal()">+ Goal</button>
+    </div>
+    <div id="goalsWall" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;"></div>
+  </div>
+
+</section>
 
   <!-- ═══════════════ SECTION: MOTIVATION ═══════════════ -->
   <section class="tracker-section" id="section-motivation">
@@ -3330,57 +3747,108 @@
   </section>
 
   <!-- ═══════════════ SECTION: BACKUP ═══════════════ -->
-  <section class="tracker-section" id="section-backup">
-    <h2 class="section-title"><span class="section-icon phy">💾</span> Backup & Restore</h2>
+<section class="tracker-section" id="section-backup">
 
-    <div class="storage-notice">
-      <div class="notice-icon">⚠️</div>
-      <p><strong>Important:</strong> Your data lives only in this browser. If you clear browser data, switch devices, or use incognito mode — your progress WILL be lost. Export your backup regularly to keep your hard work safe.</p>
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,rgba(255,95,95,.07),rgba(244,185,66,.05));border:1px solid rgba(255,95,95,.2);border-radius:var(--card-radius);padding:24px 28px;margin-bottom:28px;display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+    <div style="width:44px;height:44px;border-radius:11px;background:rgba(255,95,95,.12);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">💾</div>
+    <div style="flex:1;min-width:200px;">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin:0 0 6px;">Backup & Restore</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin:0;line-height:1.6;">Your data lives <strong>only in this browser.</strong> Clearing cache, switching devices, or using incognito will erase everything. Export regularly.</p>
+    </div>
+  </div>
+
+  <!-- Storage Info Card (PREMIUM) -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-bottom:24px;" id="storageInfoCard">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+      <span style="width:28px;height:28px;background:rgba(61,191,255,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🗃</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;">Storage Info</h3>
+      <button onclick="updateStorageInfo()" style="margin-left:auto;padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">↺ Refresh</button>
     </div>
 
-    <div class="backup-actions">
-      <button class="btn-export" onclick="exportData()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Export Backup (JSON)
-      </button>
-      <button class="btn-import" onclick="document.getElementById('importFile').click()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Import Backup
-      </button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+    <!-- Storage size bar -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:.8rem;font-weight:600;color:var(--muted);">Storage Used</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;color:var(--phy);" id="storageSizeLabel">— KB / 5 MB</span>
+      </div>
+      <div style="height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;">
+        <div id="storageSizeBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--phy),var(--purple));border-radius:4px;transition:width .6s ease;"></div>
+      </div>
+      <div id="storagePctLabel" style="font-size:.68rem;color:var(--muted);margin-top:5px;">0% of 5 MB used</div>
     </div>
 
-    <div class="backup-steps">
-      <div class="backup-step">
-        <div class="step-num">1</div>
-        <h4>Create Backup</h4>
-        <p>Click "Export Backup" to download a JSON file containing ALL your tracking data — topics, notes, tests, journal entries, photos, and progress.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">2</div>
-        <h4>Save It Safely</h4>
-        <p>Save the JSON file to Google Drive, your phone, or email it to yourself. Do this at least once a week — especially before clearing browser data.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">3</div>
-        <h4>Restore Progress</h4>
-        <p>On a new device or after data loss, click "Import Backup" and select your saved JSON file. All your progress will be restored instantly.</p>
-      </div>
-      <div class="backup-step">
-        <div class="step-num">4</div>
-        <h4>Why This Matters</h4>
-        <p>Browser data can be lost from: clearing cache, private/incognito mode, browser updates, or new devices. Your JSON backup is the only copy of your progress.</p>
-      </div>
+    <!-- Stats grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;" id="storageStatsGrid">
     </div>
+  </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:22px;margin-top:20px;">
-      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:12px;">🗃 Storage Info</h3>
-      <div id="storageInfo" style="font-size:.85rem;color:var(--muted);line-height:1.8;"></div>
-      <button class="btn-export" onclick="clearAllData()" style="margin-top:14px;border-color:var(--danger);color:var(--danger);">
-        🗑 Clear ALL Data (cannot be undone)
-      </button>
+  <!-- Action Buttons -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
+
+    <button onclick="exportData()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06));border:1.5px solid rgba(61,232,160,.4);border-radius:var(--card-radius);padding:18px 20px;color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.background='linear-gradient(135deg,rgba(61,232,160,.2),rgba(61,232,160,.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06))'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <div style="text-align:left;">
+        <div>Export Backup</div>
+        <div style="font-size:.72rem;font-weight:400;opacity:.7;margin-top:2px;">Download as JSON file</div>
+      </div>
+    </button>
+
+    <button onclick="document.getElementById('importFile').click()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(61,191,255,.12),rgba(61,191,255,.06));border:1.5px solid rgba(61,191,255,.4);border-radius:var(--card-radius);padding:18px 20px;color:var(--phy);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.background='linear-gradient(135deg,rgba(61,191,255,.2),rgba(61,191,255,.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(61,191,255,.12),rgba(61,191,255,.06))'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div style="text-align:left;">
+        <div>Import Backup</div>
+        <div style="font-size:.72rem;font-weight:400;opacity:.7;margin-top:2px;">Restore from JSON file</div>
+      </div>
+    </button>
+
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+  </div>
+
+  <!-- Steps -->
+  <div style="display:flex;align-items:center;gap:16px;margin:0 0 20px;">
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+    <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap;">How to backup safely</span>
+    <div style="flex:1;height:1px;background:var(--border);"></div>
+  </div>
+
+  <div class="backup-steps" style="margin-bottom:28px;">
+    <div class="backup-step">
+      <div class="step-num">1</div>
+      <h4>Create Backup</h4>
+      <p>Click "Export Backup" above. A JSON file downloads instantly with ALL your data — topics, notes, tests, journal, photos, everything.</p>
     </div>
-  </section>
+    <div class="backup-step">
+      <div class="step-num">2</div>
+      <h4>Save It Safely</h4>
+      <p>Upload the JSON to Google Drive, email it to yourself, or save it on your phone. Do this at least once a week.</p>
+    </div>
+    <div class="backup-step">
+      <div class="step-num">3</div>
+      <h4>Restore Anytime</h4>
+      <p>On a new device or after data loss, click "Import Backup" and select your JSON. All progress restores instantly.</p>
+    </div>
+    <div class="backup-step">
+      <div class="step-num">4</div>
+      <h4>Why It Matters</h4>
+      <p>Browser data clears from: incognito mode, clearing cache, OS updates, or switching browsers. JSON backup is your only safety net.</p>
+    </div>
+  </div>
+
+  <!-- Danger Zone -->
+  <div style="background:linear-gradient(135deg,rgba(255,95,95,.06),transparent);border:1px solid rgba(255,95,95,.25);border-radius:var(--card-radius);padding:22px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:1.1rem;">🗑</span>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin:0;color:var(--danger);">Danger Zone</h3>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin:0 0 16px;line-height:1.6;">This permanently deletes ALL your tracking data — topics, tests, journal, notes, photos, streak, everything. This action <strong style="color:var(--danger);">cannot be undone.</strong> Export a backup first.</p>
+    <button onclick="clearAllData()" style="display:flex;align-items:center;gap:8px;background:rgba(255,95,95,.08);border:1.5px solid rgba(255,95,95,.4);border-radius:8px;padding:11px 20px;color:var(--danger);font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='rgba(255,95,95,.15)'" onmouseout="this.style.background='rgba(255,95,95,.08)'">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      Clear ALL Data (cannot be undone)
+    </button>
+  </div>
+
+</section>
 
   <!-- ═══════════════ SECTION: FAQ ═══════════════ -->
   <section class="tracker-section" id="section-faq">
@@ -4939,12 +5407,105 @@ function updateStats() {
   }
   const consistency = Math.round(studyDays / 30 * 100);
 
+  // ── totals ──
+  const totalChapters = SYLLABUS.bio.length + SYLLABUS.chem.length + SYLLABUS.phy.length;
+  const totalTopicsAll = SYLLABUS.bio.reduce((a,c)=>a+c.topics.length,0)
+    + SYLLABUS.chem.reduce((a,c)=>a+c.topics.length,0)
+    + SYLLABUS.phy.reduce((a,c)=>a+c.topics.length,0);
+
+  // ── topics done today ──
+  const todayKey2 = 'day-data-' + new Date().toISOString().slice(0,10);
+  const prevKey   = 'stat-snapshot-' + new Date().toISOString().slice(0,10);
+  const snapshot  = d[prevKey] ? JSON.parse(d[prevKey]) : null;
+  const topicsToday = snapshot ? Math.max(0, topicsDone - snapshot.topics) : 0;
+
+  // ── set numbers ──
   safeSet('stat-chapters', chaptersDone);
   safeSet('stat-topics', topicsDone);
   safeSet('stat-tests', tests.length);
   safeSet('stat-streak', streak + ' 🔥');
   safeSet('stat-score', bestScore !== null ? bestScore : '—');
   safeSet('stat-consistency', consistency + '%');
+
+  // ── chapter bar + context ──
+  const chBar = document.getElementById('stat-chapters-bar');
+  const chCtx = document.getElementById('stat-chapters-ctx');
+  if (chBar) chBar.style.width = Math.round(chaptersDone / totalChapters * 100) + '%';
+  if (chCtx) chCtx.textContent = chaptersDone + ' / ' + totalChapters + ' total';
+
+  // ── topics bar + context ──
+  const tBar = document.getElementById('stat-topics-bar');
+  const tCtx = document.getElementById('stat-topics-ctx');
+  if (tBar) tBar.style.width = Math.round(topicsDone / totalTopicsAll * 100) + '%';
+  if (tCtx) tCtx.textContent = (topicsToday > 0 ? '↑ ' + topicsToday + ' today · ' : '') + Math.round(topicsDone/totalTopicsAll*100) + '% done';
+
+  // ── tests context ──
+  const testsCtx = document.getElementById('stat-tests-ctx');
+  if (testsCtx) {
+    if (tests.length === 0) testsCtx.textContent = 'No tests yet';
+    else {
+      const avg = Math.round(tests.reduce((a,t)=>a+(t.score||0),0)/tests.length);
+      testsCtx.textContent = 'Avg score: ' + avg;
+    }
+  }
+
+  // ── streak context ──
+  const streakCtx = document.getElementById('stat-streak-ctx');
+  if (streakCtx) {
+    if (streak === 0)       streakCtx.textContent = 'Start today!';
+    else if (streak < 3)    streakCtx.textContent = 'Keep going!';
+    else if (streak < 7)    streakCtx.textContent = 'Building habit 💪';
+    else if (streak < 14)   streakCtx.textContent = '1 week+ streak! 🔥';
+    else if (streak < 30)   streakCtx.textContent = '2 weeks strong! ⚡';
+    else                    streakCtx.textContent = streak + ' days — elite! 🏆';
+  }
+
+  // ── score bar + context ──
+  const sBar = document.getElementById('stat-score-bar');
+  const sCtx = document.getElementById('stat-score-ctx');
+  if (sBar) sBar.style.width = bestScore ? Math.round(bestScore/720*100)+'%' : '0%';
+  if (sCtx && bestScore) {
+    const grade = bestScore >= 600 ? '🟢 Excellent' : bestScore >= 480 ? '🟡 Good' : bestScore >= 360 ? '🟠 Average' : '🔴 Needs work';
+    sCtx.textContent = Math.round(bestScore/720*100) + '% · ' + grade;
+  } else if (sCtx) { sCtx.textContent = 'No tests logged'; }
+
+  // ── consistency bar + context ──
+  const conBar = document.getElementById('stat-consistency-bar');
+  const conCtx = document.getElementById('stat-consistency-ctx');
+  if (conBar) conBar.style.width = consistency + '%';
+  if (conCtx) {
+    const conMsg = consistency >= 80 ? '🟢 Excellent' : consistency >= 60 ? '🟡 Good' : consistency >= 40 ? '🟠 Moderate' : '🔴 Low';
+    conCtx.textContent = studyDays + ' / 30 days · ' + conMsg;
+  }
+
+  // ── daily goal mini tracker ──
+  const goalMiniBar   = document.getElementById('dailyGoalMiniBar');
+  const goalMiniLabel = document.getElementById('dailyGoalMiniLabel');
+  const goalMiniMsg   = document.getElementById('dailyGoalMiniMsg');
+  const todayDataMini = d['day-data-' + new Date().toISOString().slice(0,10)] || {};
+  const hrsStudied    = parseFloat(todayDataMini.hours) || 0;
+  const hrsGoal       = parseFloat(d['profile-daily']) || 0;
+  if (hrsGoal > 0) {
+    const pctGoal = Math.min(Math.round(hrsStudied / hrsGoal * 100), 100);
+    if (goalMiniBar)   goalMiniBar.style.width = pctGoal + '%';
+    if (goalMiniLabel) goalMiniLabel.textContent = hrsStudied + ' / ' + hrsGoal + ' hrs';
+    if (goalMiniMsg) {
+      if (pctGoal >= 100)      goalMiniMsg.textContent = '🎉 Goal complete! Well done.';
+      else if (pctGoal >= 70)  goalMiniMsg.textContent = '💪 Almost there — ' + (hrsGoal - hrsStudied).toFixed(1) + 'h more!';
+      else if (pctGoal >= 30)  goalMiniMsg.textContent = '📚 In progress — keep going!';
+      else if (hrsStudied > 0) goalMiniMsg.textContent = '⏳ Started — ' + (hrsGoal - hrsStudied).toFixed(1) + 'h remaining.';
+      else                     goalMiniMsg.textContent = '☀️ Not started yet. Open Daily tab to log!';
+      goalMiniBar.style.background = pctGoal >= 100
+        ? 'linear-gradient(90deg,var(--bio),var(--bio))'
+        : pctGoal >= 70
+        ? 'linear-gradient(90deg,var(--accent),var(--bio))'
+        : 'linear-gradient(90deg,var(--accent),var(--chem))';
+    }
+  } else {
+    if (goalMiniLabel) goalMiniLabel.textContent = 'No goal set';
+    if (goalMiniMsg)   goalMiniMsg.textContent = 'Set daily goal in Profile tab →';
+    if (goalMiniBar)   goalMiniBar.style.width = '0%';
+  }
 
   // Subject bars
   const bioPct = bioTotal ? Math.round(bioDone/bioTotal*100) : 0;
@@ -4974,6 +5535,7 @@ function saveProfile() {
   d['profile-daily'] = document.getElementById('inp-daily').value;
   d['profile-weak'] = document.getElementById('inp-weak').value;
   d['profile-motivation'] = document.getElementById('inp-motivation').value;
+  d['profile-examdate'] = document.getElementById('inp-examdate')?.value || '';
   setData(d);
   loadProfile();
   showToast('Profile saved!');
@@ -4989,7 +5551,7 @@ function loadProfile() {
   safeSet('profileClass', 'Class: ' + cls);
   safeSet('profileYear', 'Target: ' + yr);
   safeSet('profileGoal', 'Score: ' + sc);
-  const fields = ['name','class','year','score','daily','weak','motivation'];
+  const fields = ['name','class','year','score','daily','weak','motivation','examdate'];
   fields.forEach(f => {
     const el = document.getElementById('inp-'+f);
     if (el && d['profile-'+f]) el.value = d['profile-'+f];
@@ -5091,14 +5653,11 @@ function updateReminderStatus(type, mins) {
 function initDaily() {
   const today = new Date(_viewingDate + 'T00:00:00');
 const isToday = _viewingDate === new Date().toISOString().slice(0,10);
-safeSet('todayDate', (isToday ? '📅 Today — ' : '📆 ') + today.toLocaleDateString('en-IN', {weekday:'long',year:'numeric',month:'long',day:'numeric'}));
+
 const d = getData();
 const key = 'day-data-' + _viewingDate;
-const dayPickerEl = document.getElementById('dayPickerInput');
-if (dayPickerEl) dayPickerEl.value = _viewingDate;
-const nextBtn = document.getElementById('nextDayBtn');
-if (nextBtn) nextBtn.disabled = isToday;
 buildWeeklySummary();
+buildDayPills();
 
   const dayData = d[key] || {};
   const hoursEl = document.getElementById('daily-hours');
@@ -5149,6 +5708,15 @@ const key = 'day-data-' + today;
 
 function markStudyDayDone() {
   saveDailyData();
+  // Save topic snapshot for "topics done today" delta
+  const snapKey = 'stat-snapshot-' + new Date().toISOString().slice(0,10);
+  const dSnap = getData();
+  if (!dSnap[snapKey]) {
+    let snapCount = 0;
+    ['bio','chem','phy'].forEach(subj => SYLLABUS[subj].forEach(ch => ch.topics.forEach((_,i) => { if (dSnap['t-'+ch.id+'-'+i]) snapCount++; })));
+    dSnap[snapKey] = JSON.stringify({ topics: snapCount });
+    setData(dSnap);
+  }
  const today = _viewingDate;
   const d = getData();
   d['day-' + today] = (parseFloat(document.getElementById('daily-hours')?.value) || 1);
@@ -5193,33 +5761,175 @@ function goToToday() {
 
 function buildWeeklySummary() {
   const container = document.getElementById('weeklySummaryGrid');
+  const rangeEl   = document.getElementById('weeklySummaryRange');
+  const moodEl    = document.getElementById('weeklySummaryMood');
+  const statGrid  = document.getElementById('weeklyStatGrid');
   if (!container) return;
+
   const d = getData();
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const today = new Date();
-  container.innerHTML = '';
-  for (let i = 6; i >= 0; i--) {
-    const dd = new Date(today);
-    dd.setDate(today.getDate() - i);
+  // Find Monday of current week
+  const dow = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1));
+
+  // Date range label
+  const fmt = dt => dt.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+  const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+  if (rangeEl) rangeEl.textContent = fmt(monday) + ' — ' + fmt(sunday);
+
+  // Collect 7 days data
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let totalHours = 0, activeDays = 0, totalSleep = 0, sleepDays = 0;
+  let totalWater = 0, mockDays = 0, revisionDays = 0;
+  const dayData = [];
+
+  for (let i = 0; i < 7; i++) {
+    const dd = new Date(monday); dd.setDate(monday.getDate() + i);
     const dk = 'day-data-' + dd.toISOString().slice(0,10);
-    const dayD = d[dk] || {};
-    const hrs = parseFloat(dayD.hours) || 0;
-    const mood = dayD.mood || '';
-    const isViewing = dd.toISOString().slice(0,10) === _viewingDate;
-    const isToday = i === 0;
-    const level = hrs >= 8 ? 4 : hrs >= 6 ? 3 : hrs >= 4 ? 2 : hrs >= 1 ? 1 : 0;
-    const bgMap = ['var(--bg3)','rgba(168,124,245,.25)','rgba(168,124,245,.45)','rgba(168,124,245,.65)','var(--purple)'];
-    container.innerHTML += `
-      <div onclick="jumpToDate('${dd.toISOString().slice(0,10)}')"
-        style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgMap[level]};border:1.5px solid ${isViewing ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .2s;">
-        <div style="font-size:.65rem;color:var(--muted);font-weight:600;">${days[dd.getDay()]}</div>
-        <div style="font-size:.85rem;margin:3px 0;">${mood || (hrs > 0 ? '📚' : '○')}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:${hrs>0?'var(--fg)':'var(--muted)'};">${hrs > 0 ? hrs+'h' : '—'}</div>
-        ${isToday ? '<div style="font-size:.55rem;color:var(--accent);font-weight:700;margin-top:2px;">TODAY</div>' : ''}
-      </div>`;
+    const day = d[dk] || {};
+    const hrs  = parseFloat(day.hours) || 0;
+    const slp  = parseFloat(day.sleep) || 0;
+    const wtr  = parseFloat(day.water) || 0;
+    const mood = day.mood || '';
+    const isFuture = dd > today;
+
+    totalHours += hrs;
+    if (hrs > 0) activeDays++;
+    if (slp > 0) { totalSleep += slp; sleepDays++; }
+    totalWater += wtr;
+    if (day.mock)     mockDays++;
+    if (day.revision) revisionDays++;
+
+    dayData.push({ name: DAYS[i], hrs, slp, wtr, mood, isFuture, date: dd.toISOString().slice(0,10) });
   }
+
+  const avgSleep = sleepDays > 0 ? (totalSleep / sleepDays).toFixed(1) : '—';
+
+  // Motivational label
+  if (moodEl) {
+    let label = '';
+    if (activeDays >= 6)      label = '🔥 On fire this week!';
+    else if (activeDays >= 4) label = '💪 Strong week!';
+    else if (activeDays >= 2) label = '📈 Keep going';
+    else if (activeDays === 1) label = '🌱 Getting started';
+    else                       label = '😴 Start today!';
+    moodEl.innerHTML = `<span style="font-size:.8rem;font-weight:700;color:var(--accent);">${label}</span>`;
+  }
+
+  // Stats row
+  if (statGrid) {
+    const stats = [
+      { label: 'Study Time',   val: totalHours.toFixed(1) + 'h', color: 'var(--accent)' },
+      { label: 'Active Days',  val: activeDays + '/7',            color: 'var(--bio)' },
+      { label: 'Avg Sleep',    val: avgSleep !== '—' ? avgSleep + 'h' : '—', color: 'var(--phy)' },
+      { label: 'Water Total',  val: totalWater + ' 💧',           color: 'var(--phy)' },
+      { label: 'Mock Tests',   val: mockDays,                     color: 'var(--chem)' },
+      { label: 'Revision Days',val: revisionDays,                 color: 'var(--purple)' },
+    ];
+    statGrid.style.gridTemplateColumns = 'repeat(3,1fr)';
+    statGrid.innerHTML = stats.map(s => `
+      <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};line-height:1.2;">${s.val}</div>
+        <div style="font-size:.62rem;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
+      </div>`).join('');
+  }
+
+  // Day-by-day grid
+  const moodEmoji = m => {
+    if (!m) return '';
+    if (m.includes('Focused')) return '🔥';
+    if (m.includes('Good'))    return '😊';
+    if (m.includes('Okay'))    return '😐';
+    if (m.includes('Tired'))   return '😩';
+    if (m.includes('Anxious')) return '😰';
+    if (m.includes('Motivated')) return '💪';
+    return '😊';
+  };
+
+  container.innerHTML = dayData.map(day => {
+    const isToday = day.date === today.toISOString().slice(0,10);
+    const hasData = day.hrs > 0;
+    const isEmpty = day.isFuture || (!hasData && day.hrs === 0 && !day.mood);
+    const lvl = day.hrs >= 8 ? 4 : day.hrs >= 6 ? 3 : day.hrs >= 4 ? 2 : day.hrs > 0 ? 1 : 0;
+    const bgCol = ['var(--bg3)','rgba(168,124,245,.2)','rgba(168,124,245,.4)','rgba(168,124,245,.6)','var(--purple)'][lvl];
+
+    return `<div onclick="jumpToDate('${day.date}')"
+      style="border-radius:8px;padding:8px 4px;text-align:center;background:${bgCol};border:1.5px solid ${isToday ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:all .15s;min-width:0;"
+      title="${day.name} — ${day.hrs}h studied">
+      <div style="font-size:.62rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '800' : '600'};margin-bottom:3px;">${day.name}</div>
+      <div style="font-size:.72rem;font-family:'JetBrains Mono',monospace;color:${hasData ? 'var(--fg)' : 'var(--muted)'};font-weight:600;margin-bottom:2px;">
+        ${day.isFuture ? '—' : day.hrs > 0 ? day.hrs + 'h' : '0h'}
+      </div>
+      <div style="font-size:.75rem;min-height:16px;">${day.isFuture ? '' : moodEmoji(day.mood)}</div>
+      ${isToday ? '<div style="font-size:.5rem;color:var(--accent);font-weight:800;margin-top:2px;">TODAY</div>' : ''}
+    </div>`;
+  }).join('');
 }
 
+function buildDayPills() {
+  const row = document.getElementById('dayPillRow');
+  if (!row) return;
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0,10);
+  row.innerHTML = '';
+
+  // Show 5 days: 3 before today + today + 1 future (disabled)
+  for (let i = -3; i <= 1; i++) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() + i);
+    const ds = dd.toISOString().slice(0,10);
+    const isToday = ds === todayStr;
+    const isViewing = ds === _viewingDate;
+    const isFuture = i > 0;
+    const dayName = dd.toLocaleDateString('en-IN', { weekday: 'short' });
+    const dayNum  = dd.getDate();
+    const d = getData();
+    const dayD = d['day-data-' + ds] || {};
+    const hrs = parseFloat(dayD.hours) || 0;
+    const hasMood = !!dayD.mood;
+
+    const pill = document.createElement('div');
+    pill.style.cssText = `
+      flex-shrink:0;min-width:54px;border-radius:10px;padding:8px 6px;text-align:center;
+      background:${isViewing ? 'var(--accent)' : isToday ? 'rgba(168,124,245,.12)' : 'var(--bg2)'};
+      border:1.5px solid ${isViewing ? 'var(--accent)' : isToday ? 'rgba(168,124,245,.4)' : 'var(--border)'};
+      cursor:${isFuture ? 'not-allowed' : 'pointer'};
+      opacity:${isFuture ? '.4' : '1'};
+      transition:all .15s;
+    `;
+    pill.innerHTML = `
+      <div style="font-size:.65rem;font-weight:700;color:${isViewing ? '#000' : isToday ? 'var(--accent)' : 'var(--muted)'};text-transform:uppercase;letter-spacing:.04em;">${dayName}</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;color:${isViewing ? '#000' : 'var(--fg)'};line-height:1.2;margin:2px 0;">${dayNum}</div>
+      <div style="font-size:.6rem;color:${isViewing ? 'rgba(0,0,0,.6)' : 'var(--muted)'};">${hrs > 0 ? hrs + 'h' : isToday ? '—' : isFuture ? '' : '—'}</div>
+    `;
+    if (!isFuture) {
+      pill.addEventListener('click', () => {
+        _viewingDate = ds;
+        initDaily();
+      });
+    }
+    row.appendChild(pill);
+  }
+
+  // Update the main date display
+  const viewing = new Date(_viewingDate + 'T00:00:00');
+  const isToday = _viewingDate === todayStr;
+  const dateEl = document.getElementById('todayDate');
+  const subEl  = document.getElementById('todayDateSub');
+  if (dateEl) dateEl.textContent = (isToday ? '📅 Today — ' : '') + viewing.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long' });
+  if (subEl)  subEl.textContent  = isToday ? 'Viewing current day' : viewing.toLocaleDateString('en-IN', { year:'numeric' });
+
+  // Sync date picker
+  const picker = document.getElementById('dayPickerInput');
+  if (picker) picker.value = _viewingDate;
+
+  // Fix date picker label click
+  const pickerLabel = picker?.parentElement;
+  if (pickerLabel) {
+    pickerLabel.onclick = () => picker.showPicker?.();
+  }
+}
 
 
 function buildHeatmap() {
@@ -5577,6 +6287,7 @@ function _timerUpdate(id) {
   if (st.remaining <= 0) {
     clearInterval(st.iv);
     st.running = false;
+    playTimerSound('complete');
     el.textContent = '0:00:00';
     el.className = 'test-timer-display timer-danger';
     if (btn) { btn.textContent = '▶ Start'; btn.className = 'timer-btn'; }
@@ -5586,6 +6297,8 @@ function _timerUpdate(id) {
     return;
   }
   st.remaining--;
+  if (st.remaining === 300) playTimerSound('warn');
+if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
 }
 
 function toggleTestTimer(id) {
@@ -5676,9 +6389,11 @@ function neetTimerToggle() {
     if (Notification && Notification.permission === 'default') Notification.requestPermission();
     st.running = true;
     if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('running'); }
+    playTimerSound('start');
     st.iv = setInterval(() => {
       if (st.remaining <= 0) {
         clearInterval(st.iv); st.running = false;
+         playTimerSound('complete');
         const b = document.getElementById('neet-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
         _ptSetState('neet');
@@ -5687,7 +6402,9 @@ function neetTimerToggle() {
         return;
       }
       st.remaining--;
-      _ptSetState('neet');
+_ptSetState('neet');
+if (st.remaining === 300) playTimerSound('warn');   // 5 min warning
+if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick'); // last 10s
     }, 1000);
     _ptSetState('neet');
   }
@@ -5738,10 +6455,12 @@ function customTimerToggle() {
     }
     if (Notification && Notification.permission === 'default') Notification.requestPermission();
     st.running = true;
+    playTimerSound('start');
     if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('running'); }
     st.iv = setInterval(() => {
       if (st.remaining <= 0) {
         clearInterval(st.iv); st.running = false;
+          playTimerSound('complete');
         const b = document.getElementById('custom-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
         _ptSetState('custom');
@@ -5750,6 +6469,8 @@ function customTimerToggle() {
         return;
       }
       st.remaining--;
+      if (st.remaining === 60) playTimerSound('warn');
+if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
       _ptSetState('custom');
     }, 1000);
     _ptSetState('custom');
@@ -6027,6 +6748,10 @@ function updateAnalytics() {
 
   const overallPct = totalTopics ? Math.round(doneTotals/totalTopics*100) : 0;
   safeSet('readinessPct', overallPct + '%');
+  safeSet('ana-overall-pct', overallPct + '%');
+safeSet('ana-bio-pct2', subjectStats.bio.pct + '%');
+safeSet('ana-chem-pct2', subjectStats.chem.pct + '%');
+safeSet('ana-phy-pct2', subjectStats.phy.pct + '%');
 
   let level = 'Beginner';
   let msg = 'Start completing topics to build momentum. Begin with NCERT Biology.';
@@ -6092,6 +6817,7 @@ function updateAnalytics() {
   // ── CHARTS ──
   buildAnalyticsCharts(subjectStats);
   buildPacePrediction(doneTotals, totalTopics);
+  buildStudy14Chart();
 }
 
 
@@ -6218,6 +6944,7 @@ function buildAnalyticsCharts(subjectStats) {
         }
       }
     });
+
   }
 
   // ── Line — Test Scores ──
@@ -6261,6 +6988,196 @@ function buildAnalyticsCharts(subjectStats) {
     }
   }
 }
+
+
+
+function buildStudy14Chart() {
+  const d = getData();
+  const today = new Date();
+  const labels  = [];
+  const data    = [];
+  const colors  = [];
+  const DAYS    = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const todayStr = today.toISOString().slice(0, 10);
+
+  let totalHrs  = 0;
+  let activeDays = 0;
+  let maxHrs    = 0;
+
+  for (let i = 13; i >= 0; i--) {
+    const dd = new Date(today);
+    dd.setDate(today.getDate() - i);
+    const dk      = 'day-data-' + dd.toISOString().slice(0, 10);
+    const dayData = d[dk] || {};
+    const hrs     = parseFloat(dayData.hours) || 0;
+    const isToday = i === 0;
+    const dayName = DAYS[dd.getDay()];
+    const dayNum  = dd.getDate();
+
+    labels.push(dayName + '\n' + dayNum);
+    data.push(hrs);
+    totalHrs  += hrs;
+    if (hrs > 0) activeDays++;
+    if (hrs > maxHrs) maxHrs = hrs;
+
+    // Color logic
+    if (isToday)     colors.push('rgba(168,124,245,.9)');   // today = accent/purple
+    else if (hrs >= 8) colors.push('rgba(61,232,160,.85)'); // great day = green
+    else if (hrs >= 6) colors.push('rgba(61,232,160,.6)');
+    else if (hrs >= 4) colors.push('rgba(61,191,255,.7)');  // decent = blue
+    else if (hrs >= 2) colors.push('rgba(61,191,255,.45)');
+    else if (hrs > 0)  colors.push('rgba(244,185,66,.55)'); // low = yellow
+    else               colors.push('rgba(255,255,255,.07)'); // zero = very faint
+  }
+
+  const avgHrs  = activeDays > 0 ? (totalHrs / activeDays).toFixed(1) : '0';
+  const goal    = parseFloat(d['profile-daily']) || 0;
+  const todayHrs = data[data.length - 1];
+
+  // Update stats pills
+  const pillsEl = document.getElementById('study14StatsPills');
+  if (pillsEl) {
+    const pills = [
+      { label: 'Total',    val: totalHrs.toFixed(1) + 'h', color: 'var(--accent)' },
+      { label: 'Avg/Day',  val: avgHrs + 'h',              color: 'var(--bio)' },
+      { label: 'Active',   val: activeDays + '/14 days',   color: 'var(--phy)' },
+      { label: 'Today',    val: todayHrs + 'h',            color: 'var(--purple)' },
+    ];
+    if (goal > 0) pills.push({ label: 'Goal', val: goal + 'h/day', color: 'var(--chem)' });
+
+    pillsEl.innerHTML = pills.map(p => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 12px;text-align:center;min-width:60px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;color:${p.color};line-height:1.2;">${p.val}</div>
+        <div style="font-size:.58rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">${p.label}</div>
+      </div>`).join('');
+  }
+
+  // Show/hide empty state
+  const canvasEl = document.getElementById('chartStudy14');
+  const emptyEl  = document.getElementById('chartStudy14Empty');
+  if (totalHrs === 0) {
+    if (canvasEl) canvasEl.style.display = 'none';
+    if (emptyEl)  emptyEl.style.display  = 'block';
+    return;
+  }
+  if (canvasEl) canvasEl.style.display = 'block';
+  if (emptyEl)  emptyEl.style.display  = 'none';
+
+  // Destroy old chart instance if exists
+  if (_charts.study14) _charts.study14.destroy();
+
+  const ctx = document.getElementById('chartStudy14');
+  if (!ctx) return;
+
+  // Goal line dataset (only if goal is set)
+  const datasets = [
+    {
+      label:           'Study Hours',
+      data:            data,
+      backgroundColor: colors,
+      borderColor:     colors.map(c => c.replace(/[\d.]+\)$/, '1)')),
+      borderWidth:     1.5,
+      borderRadius:    6,
+      borderSkipped:   false,
+    }
+  ];
+
+  if (goal > 0) {
+    datasets.push({
+      label:       'Daily Goal (' + goal + 'h)',
+      data:        Array(14).fill(goal),
+      type:        'line',
+      borderColor: 'rgba(244,185,66,.6)',
+      borderWidth: 1.5,
+      borderDash:  [5, 4],
+      pointRadius: 0,
+      fill:        false,
+      tension:     0,
+    });
+  }
+
+  _charts.study14 = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: goal > 0,
+          labels: {
+            color:    'rgba(255,255,255,.5)',
+            font:     { size: 10 },
+            boxWidth: 12,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            title:  items => {
+              const raw = items[0].label.replace('\n', ' ');
+              return raw;
+            },
+            label: ctx => {
+              if (ctx.dataset.type === 'line') return ' Goal: ' + ctx.parsed.y + 'h';
+              const hrs  = ctx.parsed.y;
+              const diff = goal > 0 ? (hrs - goal).toFixed(1) : null;
+              let line   = ' Hours: ' + hrs + 'h';
+              if (diff !== null) line += ' (' + (diff >= 0 ? '+' : '') + diff + 'h vs goal)';
+              return line;
+            }
+          },
+          backgroundColor: 'rgba(20,20,30,.95)',
+          titleColor:      'rgba(255,255,255,.9)',
+          bodyColor:       'rgba(255,255,255,.7)',
+          borderColor:     'rgba(168,124,245,.3)',
+          borderWidth:     1,
+          padding:         10,
+          cornerRadius:    8,
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color:    'rgba(255,255,255,.45)',
+            font:     { size: 9 },
+            maxRotation: 0,
+            callback: function(val, idx) {
+              // Show only day name (first part before \n)
+              return this.getLabelForValue(val).split('\n')[0];
+            }
+          },
+          grid: { color: 'rgba(255,255,255,.04)' },
+        },
+        y: {
+          min:        0,
+          suggestedMax: Math.max(maxHrs + 1, goal + 1, 10),
+          ticks: {
+            color:    'rgba(255,255,255,.45)',
+            font:     { size: 9 },
+            stepSize: 2,
+            callback: v => v + 'h'
+          },
+          grid: { color: 'rgba(255,255,255,.05)' },
+        }
+      }
+    }
+  });
+
+  // Day-number labels row below chart
+  const labelsRow = document.getElementById('study14Labels');
+  if (labelsRow) {
+    labelsRow.innerHTML = labels.map((lbl, i) => {
+      const isToday = i === 13;
+      const hrs     = data[i];
+      const dayNum  = lbl.split('\n')[1] || '';
+      return `<div style="flex:1;text-align:center;font-size:.6rem;color:${isToday ? 'var(--accent)' : 'var(--muted)'};font-weight:${isToday ? '800' : '500'};font-family:'JetBrains Mono',monospace;line-height:1.3;">
+        ${dayNum}${isToday ? '<br><span style="font-size:.55rem;color:var(--accent);">today</span>' : ''}
+      </div>`;
+    }).join('');
+  }
+}
+
 
 function buildPacePrediction(done, total) {
   const el = document.getElementById('pacePrediction');
@@ -6329,31 +7246,205 @@ function buildPacePrediction(done, total) {
 
 
 // ─── JOURNAL ───
+// ─── JOURNAL (PREMIUM) ───
+let _journalFilter = 'all';
+
+function updateJournalWordCount(el) {
+  const words = el.value.trim() ? el.value.trim().split(/\s+/).length : 0;
+  const readMins = Math.max(1, Math.ceil(words / 200));
+  safeSet('journalWordCount', words + ' word' + (words !== 1 ? 's' : ''));
+  safeSet('journalReadTime', '~' + readMins + ' min read');
+}
+
 function addJournalEntry() {
   const text = document.getElementById('journalInput')?.value?.trim();
-  if (!text) return;
-  const mood = document.getElementById('journalMood')?.value || '😊';
+  if (!text) { showToast('Write something first!', 'info'); return; }
+
+  const mood     = document.getElementById('journalMood')?.value || '😊';
+  const category = document.getElementById('journalCategory')?.value || 'general';
+  const energy   = document.getElementById('journalEnergy')?.value || 'medium';
+  const tagsRaw  = document.getElementById('journalTags')?.value || '';
+  const tags     = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+  const words    = text.split(/\s+/).length;
+  const readMins = Math.max(1, Math.ceil(words / 200));
+
   const d = getData();
   const entries = JSON.parse(d['journal'] || '[]');
-  entries.unshift({ id: Date.now(), text, mood, date: new Date().toLocaleString('en-IN') });
+  entries.unshift({
+    id:       Date.now(),
+    text,
+    mood,
+    category,
+    energy,
+    tags,
+    words,
+    readMins,
+    pinned:   false,
+    date:     new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+    dateKey:  new Date().toISOString().slice(0, 10)
+  });
   d['journal'] = JSON.stringify(entries);
   setData(d);
+
+  // Reset form
   document.getElementById('journalInput').value = '';
+  document.getElementById('journalTags').value = '';
+  safeSet('journalWordCount', '0 words');
+  safeSet('journalReadTime', '~0 min read');
+
   renderJournal(entries);
-  showToast('Journal entry saved!');
+  buildJournalStats(entries);
+  showToast('Journal entry saved! ✍️');
 }
+
+function setJournalFilter(filter, btn) {
+  _journalFilter = filter;
+  document.querySelectorAll('.journal-filter-btn').forEach(b => {
+    b.style.background    = 'var(--bg3)';
+    b.style.color         = 'var(--muted)';
+    b.style.borderColor   = 'var(--border)';
+    b.style.fontWeight    = '600';
+  });
+  if (btn) {
+    btn.style.background  = 'var(--accent)';
+    btn.style.color       = 'var(--bg)';
+    btn.style.borderColor = 'var(--accent)';
+    btn.style.fontWeight  = '700';
+  }
+  const d = getData();
+  renderJournal(JSON.parse(d['journal'] || '[]'));
+}
+
+const CATEGORY_LABELS = {
+  study:      '📚 Study Session',
+  reflection: '🔍 Reflection',
+  gratitude:  '🙏 Gratitude',
+  goals:      '🎯 Goals',
+  struggle:   '💔 Struggle',
+  victory:    '🏆 Victory',
+  general:    '📝 General'
+};
+
+const ENERGY_CLASS = { high: 'energy-high', medium: 'energy-medium', low: 'energy-low' };
+const ENERGY_LABEL = { high: '🔋 High', medium: '🔋 Mid', low: '🪫 Low' };
 
 function renderJournal(entries) {
   const el = document.getElementById('journalEntries');
   if (!el) return;
-  if (!entries.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px;">No journal entries yet. Start writing...</div>'; return; }
-  el.innerHTML = entries.map(e => `
-    <div class="journal-entry">
-      <div class="entry-mood">${e.mood}</div>
-      <div class="entry-date">${e.date}</div>
-      <div class="entry-text">${e.text}</div>
-      <button class="entry-delete" onclick="deleteJournalEntry(${e.id})">Delete</button>
-    </div>`).join('');
+
+  // Sort: pinned first
+  let sorted = [...entries].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+  // Filter
+  if (_journalFilter === 'pinned') {
+    sorted = sorted.filter(e => e.pinned);
+  } else if (_journalFilter !== 'all') {
+    sorted = sorted.filter(e => {
+      const catLabel = CATEGORY_LABELS[e.category] || e.category || '';
+      return catLabel === _journalFilter;
+    });
+  }
+
+  if (!sorted.length) {
+    el.innerHTML = `<div style="text-align:center;padding:32px 16px;color:var(--muted);font-size:.88rem;">
+      <div style="font-size:2rem;margin-bottom:10px;">${_journalFilter === 'pinned' ? '📌' : '📓'}</div>
+      <div>${_journalFilter === 'pinned' ? 'No pinned entries yet. Pin important ones!' : 'No entries in this category yet.'}</div>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = sorted.map(e => {
+    const catLabel  = CATEGORY_LABELS[e.category] || e.category || '';
+    const energyCls = ENERGY_CLASS[e.energy] || 'energy-medium';
+    const energyLbl = ENERGY_LABEL[e.energy] || '🔋 Mid';
+    const tagsHtml  = (e.tags || []).map(t => `<span class="jentry-tag">#${t}</span>`).join('');
+
+    return `<div class="journal-entry-card ${e.pinned ? 'pinned' : ''}" id="jcard-${e.id}">
+
+      <!-- Header -->
+      <div class="jentry-header">
+        <div class="jentry-mood">${e.mood}</div>
+        <div class="jentry-meta">
+          <div class="jentry-date">${e.date}</div>
+          <div class="jentry-badges">
+            <span class="jentry-badge category">${catLabel}</span>
+            <span class="jentry-badge ${energyCls}">${energyLbl}</span>
+            ${e.words ? `<span class="jentry-badge" style="color:var(--muted);border-color:var(--border);background:var(--bg3);">${e.words}w · ${e.readMins}min</span>` : ''}
+          </div>
+        </div>
+        <div class="jentry-actions">
+          <button class="jentry-action-btn ${e.pinned ? 'pin-active' : ''}" onclick="toggleJournalPin(${e.id})" title="${e.pinned ? 'Unpin' : 'Pin entry'}">📌</button>
+          <button class="jentry-action-btn" onclick="startEditJournal(${e.id})" title="Edit entry">✏️</button>
+          <button class="jentry-action-btn del-btn" onclick="deleteJournalEntry(${e.id})" title="Delete">✕</button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="jentry-body" id="jbody-${e.id}">${e.text}</div>
+
+      <!-- Edit area (hidden) -->
+      <div id="jedit-${e.id}" style="display:none;">
+        <textarea class="jentry-edit-area" id="jedit-ta-${e.id}">${e.text}</textarea>
+        <div style="display:flex;gap:8px;">
+          <button onclick="saveEditJournal(${e.id})" class="btn-save" style="font-size:.78rem;padding:6px 14px;">Save</button>
+          <button onclick="cancelEditJournal(${e.id})" style="padding:6px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;cursor:pointer;">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Tags + Footer -->
+      ${tagsHtml ? `<div class="jentry-tags">${tagsHtml}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleJournalPin(id) {
+  const d = getData();
+  const entries = JSON.parse(d['journal'] || '[]');
+  const e = entries.find(x => x.id === id);
+  if (e) e.pinned = !e.pinned;
+  d['journal'] = JSON.stringify(entries);
+  setData(d);
+  renderJournal(entries);
+  showToast(e?.pinned ? '📌 Entry pinned!' : 'Entry unpinned', 'info');
+}
+
+function startEditJournal(id) {
+  const bodyEl = document.getElementById('jbody-' + id);
+  const editEl = document.getElementById('jedit-' + id);
+  if (bodyEl) bodyEl.style.display = 'none';
+  if (editEl) editEl.style.display = 'block';
+  const card = document.getElementById('jcard-' + id);
+  if (card) card.classList.add('editing');
+}
+
+function cancelEditJournal(id) {
+  const bodyEl = document.getElementById('jbody-' + id);
+  const editEl = document.getElementById('jedit-' + id);
+  if (bodyEl) bodyEl.style.display = 'block';
+  if (editEl) editEl.style.display = 'none';
+  const card = document.getElementById('jcard-' + id);
+  if (card) card.classList.remove('editing');
+}
+
+function saveEditJournal(id) {
+  const ta = document.getElementById('jedit-ta-' + id);
+  if (!ta) return;
+  const newText = ta.value.trim();
+  if (!newText) { showToast('Entry cannot be empty', 'info'); return; }
+  const d = getData();
+  const entries = JSON.parse(d['journal'] || '[]');
+  const e = entries.find(x => x.id === id);
+  if (e) {
+    e.text   = newText;
+    e.words  = newText.split(/\s+/).length;
+    e.readMins = Math.max(1, Math.ceil(e.words / 200));
+    e.edited = true;
+  }
+  d['journal'] = JSON.stringify(entries);
+  setData(d);
+  renderJournal(entries);
+  buildJournalStats(entries);
+  showToast('Entry updated!');
 }
 
 function deleteJournalEntry(id) {
@@ -6363,6 +7454,96 @@ function deleteJournalEntry(id) {
   d['journal'] = JSON.stringify(entries);
   setData(d);
   renderJournal(entries);
+  buildJournalStats(entries);
+}
+
+function toggleJournalStats() {
+  const panel = document.getElementById('journalStatsPanel');
+  const btn   = document.getElementById('statsToggleBtn');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  if (btn) btn.textContent = isOpen ? '📊 Stats' : '📊 Hide';
+  if (!isOpen) {
+    const d = getData();
+    buildJournalStats(JSON.parse(d['journal'] || '[]'));
+  }
+}
+
+function buildJournalStats(entries) {
+  const grid     = document.getElementById('journalStatsGrid');
+  const heatmap  = document.getElementById('journalHeatmap');
+  if (!grid) return;
+
+  const total   = entries.length;
+  const pinned  = entries.filter(e => e.pinned).length;
+  const totalWords = entries.reduce((a, e) => a + (e.words || 0), 0);
+  const avgWords   = total ? Math.round(totalWords / total) : 0;
+  const moods   = entries.reduce((acc, e) => { acc[e.mood] = (acc[e.mood] || 0) + 1; return acc; }, {});
+  const topMood = Object.entries(moods).sort((a,b) => b[1]-a[1])[0];
+
+  const stats = [
+    { icon: '📓', val: total,      label: 'Total Entries', color: 'var(--accent)' },
+    { icon: '📌', val: pinned,     label: 'Pinned',        color: 'var(--chem)' },
+    { icon: '✍️', val: totalWords, label: 'Total Words',   color: 'var(--phy)' },
+    { icon: '📖', val: avgWords,   label: 'Avg Words',     color: 'var(--bio)' },
+    { icon: '😊', val: topMood ? topMood[0] : '—', label: 'Top Mood', color: 'var(--purple)' },
+  ];
+
+  grid.innerHTML = stats.map(s => `
+    <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center;">
+      <div style="font-size:1.1rem;margin-bottom:4px;">${s.icon}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};">${s.val}</div>
+      <div style="font-size:.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;">${s.label}</div>
+    </div>`).join('');
+
+  // 30-day heatmap
+  if (heatmap) {
+    const today = new Date();
+    const entriesByDate = {};
+    entries.forEach(e => {
+      if (e.dateKey) entriesByDate[e.dateKey] = (entriesByDate[e.dateKey] || 0) + 1;
+    });
+    heatmap.innerHTML = '';
+    for (let i = 29; i >= 0; i--) {
+      const dd = new Date(today); dd.setDate(today.getDate() - i);
+      const dk = dd.toISOString().slice(0, 10);
+      const count = entriesByDate[dk] || 0;
+      const level = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3;
+      const cell = document.createElement('div');
+      cell.className = 'journal-heat-cell';
+      cell.dataset.level = level;
+      cell.title = dk + ': ' + count + ' entr' + (count === 1 ? 'y' : 'ies');
+      heatmap.appendChild(cell);
+    }
+  }
+}
+
+function exportJournalText() {
+  const d = getData();
+  const entries = JSON.parse(d['journal'] || '[]');
+  if (!entries.length) { showToast('No journal entries to export', 'info'); return; }
+  let text = 'NEETopia Journal Export\n';
+  text += '========================\n\n';
+  entries.forEach((e, i) => {
+    const catLabel = CATEGORY_LABELS[e.category] || e.category || '';
+    text += `Entry ${i + 1} | ${e.date}\n`;
+    text += `Mood: ${e.mood} | Category: ${catLabel} | Energy: ${e.energy || '—'}\n`;
+    if (e.tags?.length) text += `Tags: ${e.tags.map(t => '#' + t).join(' ')}\n`;
+    text += `Words: ${e.words || 0}\n\n`;
+    text += e.text + '\n\n';
+    text += '---\n\n';
+  });
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'neetopia-journal-' + new Date().toISOString().slice(0, 10) + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Journal exported as text file!');
 }
 
 function loadJournal() {
@@ -6516,84 +7697,54 @@ function clearAllData() {
 }
 
 function updateStorageInfo() {
-  const el = document.getElementById('storageInfo');
-  if (!el) return;
   const d = getData();
   const json = JSON.stringify(d);
-  const sizeKB = (new Blob([json]).size / 1024).toFixed(1);
-  const topics = Object.keys(d).filter(k => k.startsWith('t-')).length;
-  const tests = JSON.parse(d['tests-list'] || '[]').length;
-  const journal = JSON.parse(d['journal'] || '[]').length;
-  const photos = JSON.parse(d['photos'] || '[]').length;
-  el.innerHTML = `
-    <div>📦 Total data size: <strong>${sizeKB} KB</strong> (localStorage limit ~5MB)</div>
-    <div>✅ Topics tracked: <strong>${topics}</strong></div>
-    <div>🧪 Tests logged: <strong>${tests}</strong></div>
-    <div>📓 Journal entries: <strong>${journal}</strong></div>
-    <div>📸 Photos stored: <strong>${photos}</strong></div>
-    <div style="margin-top:8px;color:var(--warn);">⚠️ Last backup recommended: export before clearing browser data!</div>`;
-}
+  const sizeBytes = new Blob([json]).size;
+  const sizeKB = (sizeBytes / 1024).toFixed(1);
+  const sizeMB = (sizeBytes / (1024 * 1024));
+  const maxMB = 5;
+  const pct = Math.min((sizeMB / maxMB) * 100, 100).toFixed(1);
 
-// ─── REALITY TOGGLE ───
-function toggleReality() {
-  const content = document.getElementById('realityContent');
-  const arrow = document.getElementById('realityArrow');
-  if (content) content.classList.toggle('open');
-  if (arrow) arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
-}
+  const topics   = Object.keys(d).filter(k => k.startsWith('t-')).length;
+  const tests    = JSON.parse(d['tests-list'] || '[]').length;
+  const journal  = JSON.parse(d['journal'] || '[]').length;
+  const photos   = JSON.parse(d['photos'] || '[]').length;
+  const todos    = JSON.parse(d['todos'] || '[]').length;
+  const resources = JSON.parse(d['resources-list'] || '[]').length;
 
-// ─── FAQ ───
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  item.classList.toggle('open');
-}
+  // Size bar
+  const sizeBar = document.getElementById('storageSizeBar');
+  const sizeLbl = document.getElementById('storageSizeLabel');
+  const pctLbl  = document.getElementById('storagePctLabel');
+  if (sizeBar) sizeBar.style.width = pct + '%';
+  if (sizeBar) sizeBar.style.background = sizeMB > 4 ? 'linear-gradient(90deg,var(--danger),var(--warn))' : sizeMB > 2 ? 'linear-gradient(90deg,var(--warn),var(--chem))' : 'linear-gradient(90deg,var(--phy),var(--purple))';
+  if (sizeLbl) sizeLbl.textContent = sizeKB + ' KB / 5 MB';
+  if (pctLbl)  pctLbl.textContent  = pct + '% of 5 MB used' + (sizeMB > 4 ? ' — ⚠️ Getting full! Export & consider clearing photos.' : sizeMB > 2 ? ' — 🟡 Moderate usage' : ' — 🟢 Healthy');
 
-// ─── TODAY DATE ───
-document.getElementById('todayDate') && (() => {
-  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-})();
-
-
-// ─── SEARCH SYLLABUS ───
-function searchSyllabus(query) {
-  const resultsEl = document.getElementById('searchResults');
-  if (!resultsEl) return;
-  const q = query.trim().toLowerCase();
-  if (!q) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; return; }
-
-  const matches = [];
-  ['bio','chem','phy'].forEach(subj => {
-    SYLLABUS[subj].forEach(ch => {
-      ch.topics.forEach((topic, i) => {
-        if (topic.toLowerCase().includes(q) || ch.name.toLowerCase().includes(q)) {
-          matches.push({ subj, ch, topic, i });
-        }
-      });
-    });
-  });
-
-  if (!matches.length) {
-    resultsEl.style.display = 'block';
-    resultsEl.innerHTML = '<div style="color:var(--muted);font-size:.85rem;text-align:center;padding:10px;">No results found for "' + query + '"</div>';
-    return;
+  // Stats grid
+  const grid = document.getElementById('storageStatsGrid');
+  if (grid) {
+    const stats = [
+      { label: 'Topics Tracked', val: topics,    icon: '✅', color: 'var(--bio)' },
+      { label: 'Tests Logged',   val: tests,     icon: '🧪', color: 'var(--phy)' },
+      { label: 'Journal Entries',val: journal,   icon: '📓', color: 'var(--purple)' },
+      { label: 'Photos Stored',  val: photos,    icon: '📸', color: 'var(--chem)' },
+      { label: 'Todos',          val: todos,     icon: '✔️', color: 'var(--accent)' },
+      { label: 'Resources',      val: resources, icon: '📚', color: 'var(--bio)' },
+    ];
+    grid.innerHTML = stats.map(s => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">${s.icon}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:${s.color};line-height:1;">${s.val}</div>
+        <div style="font-size:.62rem;color:var(--muted);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
+      </div>`).join('');
   }
 
-  resultsEl.style.display = 'block';
-  resultsEl.innerHTML = '<div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;font-weight:600;">' + matches.length + ' result(s) found</div>' +
-    matches.map(m => {
-      const subjColor = m.subj === 'bio' ? 'var(--bio)' : m.subj === 'chem' ? 'var(--chem)' : 'var(--phy)';
-      const subjLabel = m.subj === 'bio' ? '🌿 Biology' : m.subj === 'chem' ? '⚗️ Chemistry' : '⚡ Physics';
-      const highlighted = m.topic.replace(new RegExp(query, 'gi'), match => '<mark style="background:rgba(168,124,245,.3);color:var(--fg);border-radius:3px;padding:0 2px;">' + match + '</mark>');
-      return `<div onclick="jumpToTopic('${m.ch.id}', ${m.i}, '${m.subj}')"
-        style="padding:10px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;cursor:pointer;transition:border-color .2s;background:var(--bg3);"
-        onmouseover="this.style.borderColor='${subjColor}'" onmouseout="this.style.borderColor='var(--border)'">
-        <div style="font-size:.7rem;color:${subjColor};font-weight:700;margin-bottom:3px;">${subjLabel} → ${m.ch.name}</div>
-        <div style="font-size:.85rem;">${highlighted}</div>
-      </div>`;
-    }).join('');
+  // Legacy fallback (old id still used)
+  const el = document.getElementById('storageInfo');
+  if (el) el.innerHTML = `<div style="font-size:.82rem;color:var(--muted);">Size: <strong>${sizeKB} KB</strong> · Topics: <strong>${topics}</strong> · Tests: <strong>${tests}</strong> · Journal: <strong>${journal}</strong> · Photos: <strong>${photos}</strong></div>`;
 }
+
 
 // ─── JUMP TO TOPIC ───
 function jumpToTopic(chId, topicIdx, subj) {
@@ -6872,15 +8023,34 @@ const DASH_QUOTES = [
 
 function initDashboardExtras() {
   // ── 1. Daily Quote ──
+  // ── Streak-aware quote ──
+  const d = getData();
   const quoteEl = document.getElementById('dashQuote');
   if (quoteEl) {
-    const dayIndex = Math.floor(Date.now() / 86400000) % DASH_QUOTES.length;
-    const q = DASH_QUOTES[dayIndex];
+    const streak = parseInt(d['streak']) || 0;
+    const totalDoneForQuote = Object.keys(d).filter(k => k.startsWith('t-')).length;
+    let q;
+    if (streak === 0 && totalDoneForQuote === 0) {
+      q = { text: "Every expert was once a beginner. Your first chapter is waiting.", attr: "Day 1 energy" };
+    } else if (streak === 0 && totalDoneForQuote > 0) {
+      q = { text: "Streaks break. Champions restart. Open one chapter today.", attr: "Comeback mode" };
+    } else if (streak >= 30) {
+      q = { text: "30+ days of consistency. You're not just preparing — you're transforming.", attr: "Elite territory 🔥" };
+    } else if (streak >= 14) {
+      q = { text: "Two weeks strong. Your brain is literally rewiring for NEET right now.", attr: "Neuroscience of habits" };
+    } else if (streak >= 7) {
+      q = { text: "One week streak! The hardest part is behind you. Don't stop now.", attr: "7-day milestone 💪" };
+    } else if (streak >= 3) {
+      q = { text: "3 days in — momentum is building. Protect this streak like it's your rank.", attr: "Habit science" };
+    } else {
+      const dayIndex = Math.floor(Date.now() / 86400000) % DASH_QUOTES.length;
+      q = DASH_QUOTES[dayIndex];
+    }
     quoteEl.innerHTML = `"${q.text}" <span style="font-style:normal;font-size:.78rem;color:var(--muted);font-weight:600;">— ${q.attr}</span>`;
   }
 
   // ── 2. Today's Goal Ring ──
-  const d = getData();
+ 
   const todayKey = 'day-data-' + new Date().toISOString().slice(0,10);
   const dayData = d[todayKey] || {};
   const hoursStudied = parseFloat(dayData.hours) || 0;
@@ -7017,7 +8187,117 @@ function initDashboardExtras() {
         </div>`).join('');
     }
   }
+  // ── TODAY'S FOCUS ──
+  const focusEl = document.getElementById('todaysFocusContent');
+  if (focusEl) {
+    const suggestions = [];
+
+    // Find first incomplete high-priority chapter
+    let foundHigh = null;
+    outerHigh: for (const subj of ['bio','chem','phy']) {
+      for (const ch of SYLLABUS[subj]) {
+        if (!ch.high) continue;
+        const chDone = ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length;
+        if (chDone < ch.topics.length) { foundHigh = { ch, subj }; break outerHigh; }
+      }
+    }
+    if (foundHigh) {
+      const ch = foundHigh.ch; const subj = foundHigh.subj;
+      const done = ch.topics.filter((_,i) => d['t-'+ch.id+'-'+i]).length;
+      const left = ch.topics.length - done;
+      const emoji = subj==='bio'?'🌿':subj==='chem'?'⚗️':'⚡';
+      suggestions.push(`${emoji} <strong style="color:var(--fg);">${ch.name.replace(/Ch \d+ — |12\/Ch \d+ — /,'')}</strong> — ${left} topics left. This is a 🔥 high-priority chapter.`);
+    }
+
+    // Check if any doubt flags exist
+    let doubtCount = 0;
+    ['bio','chem','phy'].forEach(subj => SYLLABUS[subj].forEach(ch => ch.topics.forEach((_,i) => { if (d['td-'+ch.id+'-'+i]) doubtCount++; })));
+    if (doubtCount > 0) suggestions.push(`❓ You have <strong style="color:var(--danger);">${doubtCount} doubt-flagged topic(s)</strong> — great day to revisit them.`);
+
+    // Study hours nudge
+    const todayD = d['day-data-' + new Date().toISOString().slice(0,10)] || {};
+    const hrs = parseFloat(todayD.hours) || 0;
+    const goal = parseFloat(d['profile-daily']) || 0;
+    if (goal > 0 && hrs < goal) suggestions.push(`⏱ You've logged <strong style="color:var(--accent);">${hrs}h</strong> today — ${(goal-hrs).toFixed(1)}h more to hit your daily goal.`);
+    else if (hrs === 0) suggestions.push(`☀️ No study hours logged yet today. Open Daily tab and log your session!`);
+
+    if (!suggestions.length) suggestions.push('✅ You\'re on track! Keep up the consistency — every topic checked is progress.');
+    focusEl.innerHTML = suggestions.slice(0,3).map(s => `<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);">${s}</div>`).join('').replace(/style="padding:5px 0;border-bottom:1px solid rgba\(255,255,255,.04\);"(?=[^>]*><\/div>)/,'style="padding:5px 0;"');
+    // Clean last border
+    focusEl.innerHTML = suggestions.slice(0,3).map((s,i,arr) =>
+      `<div style="padding:5px 0;${i<arr.length-1?'border-bottom:1px solid rgba(255,255,255,.04);':''}">${s}</div>`
+    ).join('');
+  }
+
+  // Call countdown
+  updateExamCountdown();
 }
+
+
+
+// ─── EXAM COUNTDOWN ───
+function updateExamCountdown() {
+  const d = getData();
+  const examDate = d['profile-examdate'];
+  const badge = document.getElementById('examCountdownBadge');
+  if (!badge) return;
+  if (!examDate) { badge.style.display = 'none'; return; }
+
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const exam = new Date(examDate + 'T00:00:00');
+  const diff = Math.ceil((exam - now) / 86400000);
+
+  badge.style.display = 'block';
+
+  const cdDays = document.getElementById('cdDays');
+  const cdLabel = document.getElementById('cdLabel');
+  const cdDate = document.getElementById('cdDate');
+  const cdUrgency = document.getElementById('cdUrgency');
+  const cdWeeksMonths = document.getElementById('cdWeeksMonths');
+  const cdBar = document.getElementById('cdProgressBar');
+  const cdBarLabel = document.getElementById('cdProgressLabel');
+  const badgeInner = badge.querySelector('div');
+
+  if (cdDays) cdDays.textContent = diff > 0 ? diff : diff === 0 ? 'Today!' : 'Done';
+  const targetYear = d['profile-year'] || '2026';
+  if (cdLabel) cdLabel.textContent = 'NEET ' + targetYear;
+  if (cdDate) cdDate.textContent = exam.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+  // Weeks + months breakdown
+  if (cdWeeksMonths && diff > 0) {
+    const weeks = Math.floor(diff / 7);
+    const months = Math.floor(diff / 30);
+    cdWeeksMonths.textContent = months > 0 ? months + ' months · ' + weeks + ' weeks' : weeks + ' weeks · ' + diff + ' days';
+  }
+
+  // Progress bar: assume 365-day prep window
+  if (cdBar && cdBarLabel) {
+    const totalPrepDays = 365;
+    const elapsed = Math.max(0, totalPrepDays - diff);
+    const pct = Math.min(Math.round(elapsed / totalPrepDays * 100), 100);
+    cdBar.style.width = pct + '%';
+    cdBarLabel.textContent = pct + '% of prep year elapsed';
+  }
+
+  // Urgency label + border color
+  if (cdUrgency) {
+    if (diff <= 0)        { cdUrgency.innerHTML = '<span style="color:var(--bio);">🙏 Exam day — all the best!</span>'; }
+    else if (diff <= 7)   { cdUrgency.innerHTML = '<span style="color:var(--danger);">🔴 Final week — revise only!</span>'; }
+    else if (diff <= 30)  { cdUrgency.innerHTML = '<span style="color:var(--danger);">🔴 Last month — full throttle!</span>'; }
+    else if (diff <= 90)  { cdUrgency.innerHTML = '<span style="color:var(--warn);">🟡 3 months left — push hard!</span>'; }
+    else if (diff <= 180) { cdUrgency.innerHTML = '<span style="color:var(--chem);">🟠 6 months — build pace!</span>'; }
+    else                  { cdUrgency.innerHTML = '<span style="color:var(--bio);">🟢 Stay consistent daily!</span>'; }
+  }
+
+  if (badgeInner) {
+    if (diff <= 30)      badgeInner.style.borderColor = 'rgba(255,95,95,.55)';
+    else if (diff <= 90) badgeInner.style.borderColor = 'rgba(244,185,66,.5)';
+    else                 badgeInner.style.borderColor = 'rgba(168,124,245,.4)';
+  }
+}
+
+
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -7029,6 +8309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTests();
   buildBooks();
   loadJournal();
+  buildJournalStats(JSON.parse(getData()['journal'] || '[]'));
   loadPhotos();
   loadGoals();
   updateStats();
@@ -7274,6 +8555,87 @@ window.addEventListener('resize', function() {
     if (menu && menu.classList.contains('open')) toggleMobileMenu();
   }
 });
+
+// ─── TIMER SOUNDS (via Web Audio API — no CDN needed) ───
+const _AudioCtx = window.AudioContext || window.webkitAudioContext;
+let _audioCtx = null;
+
+function _getAudioCtx() {
+  if (!_audioCtx) _audioCtx = new _AudioCtx();
+  return _audioCtx;
+}
+
+function playTimerSound(type) {
+  // type: 'start' | 'complete' | 'warn' | 'tick'
+  try {
+    const ctx = _getAudioCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    const now = ctx.currentTime;
+
+    if (type === 'start') {
+      // Two ascending soft tones
+      [0, 0.15].forEach((delay, i) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type      = 'sine';
+        o.frequency.setValueAtTime(i === 0 ? 440 : 554, now + delay);
+        g.gain.setValueAtTime(0, now + delay);
+        g.gain.linearRampToValueAtTime(0.18, now + delay + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.35);
+        o.start(now + delay);
+        o.stop(now + delay + 0.4);
+      });
+    }
+
+    else if (type === 'complete') {
+      // Four ascending celebratory tones
+      [440, 554, 659, 880].forEach((freq, i) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type      = 'sine';
+        o.frequency.setValueAtTime(freq, now + i * 0.18);
+        g.gain.setValueAtTime(0, now + i * 0.18);
+        g.gain.linearRampToValueAtTime(0.22, now + i * 0.18 + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.18 + 0.5);
+        o.start(now + i * 0.18);
+        o.stop(now + i * 0.18 + 0.55);
+      });
+    }
+
+    else if (type === 'warn') {
+      // Single alert beep
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type      = 'square';
+      o.frequency.setValueAtTime(660, now);
+      g.gain.setValueAtTime(0.12, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      o.start(now);
+      o.stop(now + 0.35);
+    }
+
+    else if (type === 'tick') {
+      // Subtle click for last 10 seconds
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type      = 'sine';
+      o.frequency.setValueAtTime(800, now);
+      g.gain.setValueAtTime(0.08, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      o.start(now);
+      o.stop(now + 0.1);
+    }
+
+  } catch(e) {
+    // Silent fail if audio not supported
+  }
+}
+
+
 </script>
 </body>
 </html>

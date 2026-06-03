@@ -4135,8 +4135,588 @@
       <div class="ptimer-tip" style="border-color:rgba(168,124,245,.2);">💡 Use for subject-wise sessions, revision sprints, or short practice rounds.</div>
     </div>
 
+<!-- ══════════════════════════════════════════════
+   PASTE THIS CODE BLOCK AFTER THE CUSTOM TIMER CARD'S CLOSING </div>
+   AND BEFORE THE </section> TAG OF section-timer
+   ══════════════════════════════════════════════ -->
+
+<!-- ══ POMODORO TIMER ══ -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:28px;margin-bottom:20px;" id="pomodoroCard">
+  <div style="margin-bottom:18px;">
+    <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.1);color:var(--bio);display:inline-block;margin-bottom:8px;">POMODORO</div>
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;">Pomodoro Timer</div>
+    <div style="font-size:.82rem;color:var(--muted);">25 min focus → 5 min break → repeat. Classic technique for deep work.</div>
+  </div>
+
+  <!-- Pomodoro ring + controls -->
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;">
+    <!-- Ring -->
+    <div style="position:relative;width:130px;height:130px;flex-shrink:0;">
+      <svg width="130" height="130" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--bg3)" stroke-width="8"/>
+        <circle cx="60" cy="60" r="52" fill="none" id="pomo-ring-fill"
+          stroke="var(--bio)" stroke-width="8" stroke-linecap="round"
+          stroke-dasharray="326.7" stroke-dashoffset="0" style="transition:stroke-dashoffset .9s linear,stroke .3s;"/>
+      </svg>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--bio);line-height:1;" id="pomo-display">25:00</div>
+        <div style="font-size:.6rem;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.04em;" id="pomo-ring-label">Focus</div>
+      </div>
+    </div>
+
+    <!-- Info + controls -->
+    <div style="flex:1;min-width:180px;">
+      <!-- Session type tabs -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="ptimer-preset-btn pomo-mode-btn active-pomo" id="pomo-btn-focus" onclick="setPomoMode('focus')"
+          style="border-color:var(--bio);color:var(--bio);background:rgba(61,232,160,.1);">🎯 Focus 25m</button>
+        <button class="ptimer-preset-btn pomo-mode-btn" id="pomo-btn-short" onclick="setPomoMode('short')">☕ Short 5m</button>
+        <button class="ptimer-preset-btn pomo-mode-btn" id="pomo-btn-long" onclick="setPomoMode('long')">🛌 Long 15m</button>
+      </div>
+
+      <!-- Session counter dots -->
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+        <span style="font-size:.72rem;color:var(--muted);font-weight:600;">Sessions:</span>
+        <div id="pomo-dots" style="display:flex;gap:5px;"></div>
+        <button onclick="resetPomoDots()" style="background:none;border:none;color:var(--muted);font-size:.7rem;cursor:pointer;padding:0 4px;" title="Reset session count">↺</button>
+      </div>
+
+      <!-- Auto-break toggle -->
+      <label style="display:flex;align-items:center;gap:8px;font-size:.82rem;cursor:pointer;margin-bottom:14px;">
+        <input type="checkbox" id="pomo-autobreak" style="accent-color:var(--bio);width:14px;height:14px;" checked />
+        Auto-start break after focus session
+      </label>
+
+      <!-- Controls -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="ptimer-btn ptimer-start" id="pomo-start-btn"
+          onclick="pomoToggle()"
+          style="background:linear-gradient(135deg,rgba(61,232,160,.18),rgba(61,232,160,.08));border-color:var(--bio);color:var(--bio);">▶ Start</button>
+        <button class="ptimer-btn ptimer-reset" onclick="pomoReset()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:12px;">
+    <div id="pomo-progress-bar" style="height:100%;width:100%;background:linear-gradient(90deg,var(--bio),rgba(61,232,160,.5));border-radius:3px;transition:width .9s linear;"></div>
+  </div>
+
+  <div style="font-size:.78rem;color:var(--muted);border-left:2px solid rgba(61,232,160,.3);padding-left:10px;line-height:1.6;" id="pomo-tip">
+    💡 After 4 focus sessions, take a long 15-minute break. This is the classic Pomodoro Technique.
+  </div>
+</div>
+
+
+<!-- ══ SESSION LOGGER + HISTORY ══ -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:28px;margin-bottom:20px;">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;">
+    <div>
+      <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;border:1px solid rgba(168,124,245,.3);background:rgba(168,124,245,.1);color:var(--purple);display:inline-block;margin-bottom:8px;">SESSION LOG</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;">Session History</div>
+      <div style="font-size:.82rem;color:var(--muted);">Log every study session. See your daily, weekly, and total time.</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="exportSessionLog()"
+        style="padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;"
+        onmouseover="this.style.borderColor='var(--bio)';this.style.color='var(--bio)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">⬇ Export CSV</button>
+      <button onclick="clearAllSessions()"
+        style="padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;"
+        onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Clear All</button>
+    </div>
+  </div>
+
+  <!-- Quick Log Form -->
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:22px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;">+ Log a Session Manually</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px;">
+      <div>
+        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Date</label>
+        <input type="date" id="sess-date"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
+      </div>
+      <div>
+        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Duration (mins)</label>
+        <input type="number" id="sess-mins" min="1" max="600" placeholder="e.g. 90"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
+      </div>
+      <div>
+        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Subject</label>
+        <select id="sess-subj"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
+          <option value="general">📌 General</option>
+          <option value="bio">🌿 Biology</option>
+          <option value="chem">⚗️ Chemistry</option>
+          <option value="phy">⚡ Physics</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Type</label>
+        <select id="sess-type"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
+          <option value="study">📚 Study</option>
+          <option value="revision">🔁 Revision</option>
+          <option value="mock">🧪 Mock Test</option>
+          <option value="pomodoro">🍅 Pomodoro</option>
+          <option value="neet">⏱ NEET Timer</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Note (optional)</label>
+      <input type="text" id="sess-note" placeholder="e.g. Chapter 5 Biology, HC Verma Optics..."
+        style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
+    </div>
+    <button onclick="logSessionManual()"
+      style="background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:9px 20px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .2s;"
+      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">+ Log Session</button>
+  </div>
+
+  <!-- Stats Summary Row -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:22px;" id="sessStatsRow"></div>
+
+  <!-- Date filter pills -->
+  <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;" id="sessFilterRow">
+    <button class="ptimer-preset-btn" id="sess-filter-today" onclick="setSessFilter('today',this)"
+      style="border-color:var(--accent);color:var(--accent);background:rgba(168,124,245,.1);">Today</button>
+    <button class="ptimer-preset-btn" id="sess-filter-week" onclick="setSessFilter('week',this)">This Week</button>
+    <button class="ptimer-preset-btn" id="sess-filter-month" onclick="setSessFilter('month',this)">This Month</button>
+    <button class="ptimer-preset-btn" id="sess-filter-all" onclick="setSessFilter('all',this)">All Time</button>
+    <input type="date" id="sess-filter-date"
+      style="background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.78rem;outline:none;cursor:pointer;"
+      onchange="setSessFilter('date',null,this.value)" title="Pick specific date" />
+  </div>
+
+  <!-- Session list -->
+  <div id="sessionList" style="display:flex;flex-direction:column;gap:8px;max-height:440px;overflow-y:auto;padding-right:2px;"></div>
+
+  <!-- Empty state -->
+  <div id="sessionEmpty" style="display:none;text-align:center;padding:32px 16px;color:var(--muted);">
+    <div style="font-size:2.2rem;margin-bottom:10px;">⏱</div>
+    <div style="font-size:.88rem;">No sessions logged yet. Start a timer or log manually above.</div>
+  </div>
+</div>
+
+
+<!-- ══ TIMER STATS CARD ══ -->
+<div style="background:linear-gradient(135deg,rgba(61,191,255,.07),rgba(168,124,245,.05));border:1px solid rgba(61,191,255,.2);border-radius:var(--card-radius);padding:24px;margin-bottom:20px;">
+  <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+    <span style="width:28px;height:28px;background:rgba(61,191,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📊</span>
+    Weekly Study Time Overview
+  </div>
+  <div style="display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:8px;" id="sessWeekBars"></div>
+  <div style="display:flex;gap:5px;" id="sessWeekLabels"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px;" id="sessWeekStats"></div>
+</div>
+
+
+<!-- ══════ JAVASCRIPT FOR NEW FEATURES ══════ -->
+<script>
+'use strict';
+
+/* ══ POMODORO ══ */
+const POMO_MODES = {
+  focus: { secs: 25*60, label: 'Focus',      color: 'var(--bio)',    tip: '💡 Deep focus mode. Close all distractions. Only NCERT open.' },
+  short: { secs: 5*60,  label: 'Short Break', color: 'var(--chem)',   tip: '☕ Rest your eyes. Stretch. Drink water. Back in 5 minutes.' },
+  long:  { secs: 15*60, label: 'Long Break',  color: 'var(--phy)',    tip: '🛌 Long break earned! Walk around, eat something, breathe.' }
+};
+const _PT_POMO = { mode:'focus', remaining:25*60, total:25*60, running:false, iv:null, sessions:0 };
+
+function setPomoMode(mode) {
+  pomoReset();
+  _PT_POMO.mode = mode;
+  _PT_POMO.total = POMO_MODES[mode].secs;
+  _PT_POMO.remaining = POMO_MODES[mode].secs;
+  document.querySelectorAll('.pomo-mode-btn').forEach(b => {
+    b.style.borderColor = 'var(--border)';
+    b.style.color = 'var(--muted)';
+    b.style.background = 'var(--bg3)';
+  });
+  const activeBtn = document.getElementById('pomo-btn-' + mode);
+  if (activeBtn) {
+    const col = POMO_MODES[mode].color;
+    activeBtn.style.borderColor = col;
+    activeBtn.style.color = col;
+    activeBtn.style.background = col.replace('var(--','rgba(').replace(')',',.1)') ;
+  }
+  _pomoDraw();
+  const tip = document.getElementById('pomo-tip');
+  if (tip) tip.textContent = POMO_MODES[mode].tip;
+}
+
+function _pomoDraw() {
+  const st = _PT_POMO;
+  const m = POMO_MODES[st.mode];
+  const pct = st.total > 0 ? st.remaining / st.total : 0;
+  const CIRC = 326.7;
+  const fill  = document.getElementById('pomo-ring-fill');
+  const disp  = document.getElementById('pomo-display');
+  const lbl   = document.getElementById('pomo-ring-label');
+  const bar   = document.getElementById('pomo-progress-bar');
+  const mins  = String(Math.floor(st.remaining/60)).padStart(2,'0');
+  const secs  = String(st.remaining%60).padStart(2,'0');
+  if (fill) { fill.style.strokeDashoffset = CIRC * (1 - pct); fill.style.stroke = m.color; }
+  if (disp) { disp.textContent = mins + ':' + secs; disp.style.color = m.color; }
+  if (lbl)  lbl.textContent = m.label;
+  if (bar)  { bar.style.width = (pct*100)+'%'; bar.style.background = m.color; }
+  buildPomoDots();
+}
+
+function buildPomoDots() {
+  const el = document.getElementById('pomo-dots');
+  if (!el) return;
+  const count = Math.max(4, _PT_POMO.sessions + 1);
+  el.innerHTML = Array.from({length:4}, (_,i) =>
+    `<div style="width:10px;height:10px;border-radius:50%;background:${i < _PT_POMO.sessions % 4 ? 'var(--bio)' : 'var(--bg3)'};border:1.5px solid ${i < _PT_POMO.sessions % 4 ? 'var(--bio)' : 'var(--border)'};transition:all .2s;"></div>`
+  ).join('') + `<span style="font-size:.7rem;color:var(--muted);margin-left:4px;">${_PT_POMO.sessions} done</span>`;
+}
+
+function pomoToggle() {
+  const st = _PT_POMO;
+  const btn = document.getElementById('pomo-start-btn');
+  const m = POMO_MODES[st.mode];
+  if (st.running) {
+    clearInterval(st.iv); st.running = false;
+    if (btn) { btn.textContent = '▶ Resume'; btn.style.borderColor = m.color; btn.style.color = m.color; btn.classList.remove('running'); }
+  } else {
+    if (st.remaining <= 0) return;
+    if (Notification && Notification.permission === 'default') Notification.requestPermission();
+    st.running = true;
+    if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('running'); btn.style.borderColor = 'var(--warn)'; btn.style.color = 'var(--warn)'; }
+    playTimerSound('start');
+    st.iv = setInterval(() => {
+      if (st.remaining <= 0) {
+        clearInterval(st.iv); st.running = false;
+        if (btn) { btn.textContent = '▶ Start'; btn.classList.remove('running'); btn.style.borderColor = m.color; btn.style.color = m.color; }
+        _pomoComplete();
+        return;
+      }
+      st.remaining--;
+      _pomoDraw();
+      if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
+    }, 1000);
+  }
+}
+
+function _pomoComplete() {
+  const m = POMO_MODES[_PT_POMO.mode];
+  playTimerSound('complete');
+  if (_PT_POMO.mode === 'focus') {
+    _PT_POMO.sessions++;
+    // Auto log session
+    _autoLogSession(25, 'pomodoro', 'bio', '🍅 Pomodoro focus session');
+    if (Notification && Notification.permission === 'granted')
+      new Notification('🍅 Pomodoro Complete!', { body: 'Great focus session! Take a ' + (_PT_POMO.sessions % 4 === 0 ? 'long (15 min)' : 'short (5 min)') + ' break.' });
+    const autoBreak = document.getElementById('pomo-autobreak');
+    if (autoBreak && autoBreak.checked) {
+      setTimeout(() => { setPomoMode(_PT_POMO.sessions % 4 === 0 ? 'long' : 'short'); pomoToggle(); }, 1500);
+    } else {
+      setPomoMode(_PT_POMO.sessions % 4 === 0 ? 'long' : 'short');
+    }
+  } else {
+    if (Notification && Notification.permission === 'granted')
+      new Notification('⏰ Break Over!', { body: 'Time to get back to focused study!' });
+    setPomoMode('focus');
+  }
+}
+
+function pomoReset() {
+  clearInterval(_PT_POMO.iv);
+  _PT_POMO.running = false;
+  _PT_POMO.remaining = POMO_MODES[_PT_POMO.mode].secs;
+  _PT_POMO.total = POMO_MODES[_PT_POMO.mode].secs;
+  const btn = document.getElementById('pomo-start-btn');
+  const m = POMO_MODES[_PT_POMO.mode];
+  if (btn) { btn.textContent = '▶ Start'; btn.classList.remove('running'); btn.style.borderColor = m.color; btn.style.color = m.color; }
+  _pomoDraw();
+}
+
+function resetPomoDots() {
+  _PT_POMO.sessions = 0;
+  buildPomoDots();
+}
+
+
+/* ══ SESSION LOGGER ══ */
+const SESS_KEY = 'neetopia-sessions-v1';
+
+function getSessions() { try { return JSON.parse(localStorage.getItem(SESS_KEY) || '[]'); } catch { return []; } }
+function setSessions(a) { localStorage.setItem(SESS_KEY, JSON.stringify(a)); }
+
+// Set today's date by default in the log form
+(function initSessDate() {
+  const el = document.getElementById('sess-date');
+  if (el) el.value = new Date().toISOString().slice(0,10);
+})();
+
+function logSessionManual() {
+  const date   = document.getElementById('sess-date')?.value || new Date().toISOString().slice(0,10);
+  const mins   = parseInt(document.getElementById('sess-mins')?.value) || 0;
+  const subj   = document.getElementById('sess-subj')?.value || 'general';
+  const type   = document.getElementById('sess-type')?.value || 'study';
+  const note   = document.getElementById('sess-note')?.value?.trim() || '';
+  if (!mins || mins < 1) { showToast('Enter session duration in minutes', 'info'); return; }
+  _saveSession({ date, mins, subj, type, note });
+  document.getElementById('sess-mins').value = '';
+  document.getElementById('sess-note').value = '';
+  showToast('Session logged! ' + _fmtMins(mins));
+}
+
+function _autoLogSession(mins, type, subj, note) {
+  const date = new Date().toISOString().slice(0,10);
+  _saveSession({ date, mins, subj, type, note });
+}
+
+function _saveSession(obj) {
+  const sessions = getSessions();
+  sessions.unshift({ id: Date.now(), ...obj });
+  setSessions(sessions);
+  renderSessionLog();
+  updateSessStats();
+}
+
+function deleteSession(id) {
+  setSessions(getSessions().filter(s => s.id !== id));
+  renderSessionLog();
+  updateSessStats();
+}
+
+let _sessFilter = 'today';
+
+function setSessFilter(filter, btn, dateVal) {
+  _sessFilter = filter === 'date' ? ('date:' + dateVal) : filter;
+  document.querySelectorAll('#sessFilterRow .ptimer-preset-btn').forEach(b => {
+    b.style.borderColor = 'var(--border)'; b.style.color = 'var(--muted)'; b.style.background = 'var(--bg3)';
+  });
+  if (btn) { btn.style.borderColor = 'var(--accent)'; btn.style.color = 'var(--accent)'; btn.style.background = 'rgba(168,124,245,.1)'; }
+  renderSessionLog();
+}
+
+function _filterSessions(sessions) {
+  const today = new Date().toISOString().slice(0,10);
+  if (_sessFilter === 'today') return sessions.filter(s => s.date === today);
+  if (_sessFilter === 'week') {
+    const d = new Date(); d.setDate(d.getDate() - 6);
+    const wk = d.toISOString().slice(0,10);
+    return sessions.filter(s => s.date >= wk);
+  }
+  if (_sessFilter === 'month') {
+    const month = new Date().toISOString().slice(0,7);
+    return sessions.filter(s => s.date.startsWith(month));
+  }
+  if (_sessFilter.startsWith('date:')) {
+    const d = _sessFilter.slice(5);
+    return sessions.filter(s => s.date === d);
+  }
+  return sessions;
+}
+
+function _fmtMins(m) {
+  if (m < 60) return m + ' min';
+  const h = Math.floor(m/60), r = m%60;
+  return h + 'h' + (r ? ' ' + r + 'm' : '');
+}
+
+const SESS_SUBJ_COLOR = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)', general:'var(--purple)' };
+const SESS_SUBJ_LABEL = { bio:'🌿 Bio', chem:'⚗️ Chem', phy:'⚡ Phy', general:'📌 General' };
+const SESS_TYPE_EMOJI = { study:'📚', revision:'🔁', mock:'🧪', pomodoro:'🍅', neet:'⏱' };
+
+function renderSessionLog() {
+  const list  = document.getElementById('sessionList');
+  const empty = document.getElementById('sessionEmpty');
+  if (!list) return;
+  const all = getSessions();
+  const visible = _filterSessions(all);
+  if (!visible.length) {
+    list.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+
+  // Group by date
+  const grouped = {};
+  visible.forEach(s => {
+    if (!grouped[s.date]) grouped[s.date] = [];
+    grouped[s.date].push(s);
+  });
+
+  let html = '';
+  Object.keys(grouped).sort((a,b) => b.localeCompare(a)).forEach(date => {
+    const dayTotal = grouped[date].reduce((a,s) => a + (s.mins||0), 0);
+    const dateLabel = new Date(date + 'T12:00:00').toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long' });
+    html += `<div style="margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
+        <div style="font-size:.75rem;font-weight:700;color:var(--fg);font-family:'Bricolage Grotesque',sans-serif;">${dateLabel}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);font-weight:700;">${_fmtMins(dayTotal)} total</div>
+      </div>`;
+
+    grouped[date].forEach(s => {
+      const col = SESS_SUBJ_COLOR[s.subj] || 'var(--purple)';
+      const subjLbl = SESS_SUBJ_LABEL[s.subj] || '📌 General';
+      const typeEmoji = SESS_TYPE_EMOJI[s.type] || '📚';
+      html += `<div style="background:var(--bg3);border:1px solid var(--border);border-left:3px solid ${col};border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap;">
+        <span style="font-size:1rem;flex-shrink:0;">${typeEmoji}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:.85rem;font-weight:600;">${_fmtMins(s.mins)} <span style="font-weight:400;color:var(--muted);font-size:.75rem;">· ${subjLbl}</span></div>
+          ${s.note ? `<div style="font-size:.72rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.note}</div>` : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <span style="font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:10px;color:${col};border:1px solid ${col};background:${col.replace('var(--','rgba(').replace(')','')},.08)">${s.type}</span>
+          <button onclick="deleteSession(${s.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.75rem;padding:2px 4px;border-radius:4px;transition:color .15s;" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">✕</button>
+        </div>
+      </div>`;
+    });
+
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function updateSessStats() {
+  const all = getSessions();
+  const today = new Date().toISOString().slice(0,10);
+  const week = new Date(); week.setDate(week.getDate()-6);
+  const wkStr = week.toISOString().slice(0,10);
+  const month = new Date().toISOString().slice(0,7);
+
+  const todayMins  = all.filter(s => s.date === today).reduce((a,s) => a+(s.mins||0), 0);
+  const weekMins   = all.filter(s => s.date >= wkStr).reduce((a,s) => a+(s.mins||0), 0);
+  const monthMins  = all.filter(s => s.date.startsWith(month)).reduce((a,s) => a+(s.mins||0), 0);
+  const totalMins  = all.reduce((a,s) => a+(s.mins||0), 0);
+  const totalSess  = all.length;
+
+  const stats = [
+    { label:'Today',     val: _fmtMins(todayMins),  icon:'☀️', color:'var(--accent)' },
+    { label:'This Week', val: _fmtMins(weekMins),   icon:'📅', color:'var(--bio)' },
+    { label:'This Month',val: _fmtMins(monthMins),  icon:'📆', color:'var(--phy)' },
+    { label:'All Time',  val: _fmtMins(totalMins),  icon:'🏆', color:'var(--chem)' },
+    { label:'Sessions',  val: totalSess,             icon:'📊', color:'var(--purple)' },
+  ];
+
+  const row = document.getElementById('sessStatsRow');
+  if (row) row.innerHTML = stats.map(s => `
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+      <div style="font-size:1.1rem;margin-bottom:4px;">${s.icon}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:${s.color};line-height:1.2;">${s.val}</div>
+      <div style="font-size:.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:3px;">${s.label}</div>
+    </div>`).join('');
+
+  buildSessWeekBars(all);
+}
+
+function buildSessWeekBars(sessions) {
+  const barsEl   = document.getElementById('sessWeekBars');
+  const labelsEl = document.getElementById('sessWeekLabels');
+  const statsEl  = document.getElementById('sessWeekStats');
+  if (!barsEl) return;
+
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  let maxMins = 0;
+  const data = [];
+
+  for (let i = 6; i >= 0; i--) {
+    const dd = new Date(today); dd.setDate(today.getDate() - i);
+    const ds = dd.toISOString().slice(0,10);
+    const mins = sessions.filter(s => s.date === ds).reduce((a,s) => a+(s.mins||0), 0);
+    data.push({ name: DAYS[dd.getDay()], mins, isToday: i === 0, ds });
+    if (mins > maxMins) maxMins = mins;
+  }
+
+  barsEl.innerHTML = data.map(d => {
+    const h = maxMins > 0 ? Math.max(Math.round((d.mins/maxMins)*62), d.mins > 0 ? 4 : 0) : 0;
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;">
+      ${d.mins > 0 ? `<div style="font-size:.58rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${_fmtMins(d.mins)}</div>` : '<div style="font-size:.58rem;color:transparent;">—</div>'}
+      <div style="width:100%;height:${h}px;min-height:${d.mins>0?4:0}px;background:${d.isToday?'var(--accent)':d.mins>0?'rgba(168,124,245,.45)':'var(--bg3)'};border-radius:4px 4px 0 0;transition:height .4s ease;"></div>
+    </div>`;
+  }).join('');
+
+  labelsEl.innerHTML = data.map(d =>
+    `<div style="flex:1;text-align:center;font-size:.6rem;color:${d.isToday?'var(--accent)':'var(--muted)'};font-weight:${d.isToday?'700':'500'};font-family:'JetBrains Mono',monospace;">${d.name.slice(0,1)}</div>`
+  ).join('');
+
+  const weekTotal  = data.reduce((a,d) => a+d.mins, 0);
+  const activeDays = data.filter(d => d.mins > 0).length;
+  const avg        = activeDays > 0 ? Math.round(weekTotal/activeDays) : 0;
+
+  if (statsEl) statsEl.innerHTML = [
+    { label:'Week Total', val: _fmtMins(weekTotal), color:'var(--accent)' },
+    { label:'Active Days', val: activeDays+'/7', color:'var(--bio)' },
+    { label:'Avg/Active Day', val: _fmtMins(avg), color:'var(--phy)' },
+  ].map(s => `
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};">${s.val}</div>
+      <div style="font-size:.62rem;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
+    </div>`).join('');
+}
+
+function exportSessionLog() {
+  const sessions = getSessions();
+  if (!sessions.length) { showToast('No sessions to export', 'info'); return; }
+  let csv = 'Date,Duration (mins),Subject,Type,Note\n';
+  sessions.forEach(s => {
+    csv += `${s.date},${s.mins},"${s.subj}","${s.type}","${(s.note||'').replace(/"/g,'""')}"\n`;
+  });
+  const blob = new Blob([csv], { type:'text/csv' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'neetopia-sessions-' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Sessions exported as CSV!');
+}
+
+function clearAllSessions() {
+  if (!confirm('Delete ALL session history? This cannot be undone.')) return;
+  setSessions([]);
+  renderSessionLog();
+  updateSessStats();
+  showToast('All sessions cleared', 'info');
+}
+
+// Auto-log when NEET or Custom timer completes
+// Patch into existing timer complete logic
+const _origNeetReset = window.neetTimerReset;
+// We hook into the section switch to init sessions
+const _origSwitch = window.switchSection;
+window.switchSection = function(s) {
+  if (_origSwitch) _origSwitch(s);
+  if (s === 'timer') {
+    _pomoDraw();
+    renderSessionLog();
+    updateSessStats();
+  }
+};
+
+// Init on load
+document.addEventListener('DOMContentLoaded', function() {
+  // Small delay to ensure main tracker JS runs first
+  setTimeout(() => {
+    _pomoDraw();
+    renderSessionLog();
+    updateSessStats();
+    setSessFilter('today', document.getElementById('sess-filter-today'));
+  }, 200);
+});
+
+// Also auto-log when NEET full timer finishes (patch neetTimerToggle)
+const _origNeetToggle = window.neetTimerToggle;
+if (_origNeetToggle) {
+  // We can't easily patch mid-interval, so we expose auto-log globally
+  window._autoLogSession = _autoLogSession;
+}
+</script>
+
   </section>
+
+
 <!-- ══════════════════════════════ STORAGE NOTICE BANNER ══════════════════════════════ -->
+
 <div class="storage-notice-wrapper">
   <div class="storage-notice">
     <div class="notice-icon">
