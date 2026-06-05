@@ -4638,7 +4638,7 @@
         <li>Stats pills — Today, Week, Month, Total, Streak</li>
         <li>7-day <strong style="color:var(--fg);">bar chart</strong> at bottom for visual overview</li>
         <li><strong style="color:var(--fg);">+ Manual Log</strong> — add any session you forgot to time, with correct past date</li>
-        <li><strong style="color:var(--fg);">⬇ CSV</strong> — download full history as spreadsheet</li>
+        <li><strong style="color:var(--fg);">📄 PDF Report</strong> — generate and download a full study report for any date range</li>
         <li>All session data included in <strong style="color:var(--fg);">Backup export</strong> — fully restored on import</li>
       </ul>
     </div>
@@ -7245,9 +7245,11 @@ function neetTimerToggle() {
         clearInterval(st.iv); st.running = false;
         playTimerSound('complete');
         const elapsed = Math.round((12000 - st.remaining) / 60);
-        if (elapsed > 0 && typeof _autoLogSession === 'function') {
-          _autoLogSession(elapsed, 'neet', 'general', '⏱ NEET Standard Timer — ' + elapsed + ' min completed');
-        }
+        if (elapsed > 0) {
+  const sessArr = JSON.parse(localStorage.getItem('neetopia-sessions-v1') || '[]');
+  sessArr.unshift({ id: Date.now(), date: new Date().toISOString().slice(0,10), mins: elapsed, note: '⏱ Custom Timer — ' + elapsed + ' min completed', subj: 'general', type: 'custom' });
+  localStorage.setItem('neetopia-sessions-v1', JSON.stringify(sessArr));
+}
         st._startTime = null;
         const b = document.getElementById('neet-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
@@ -7321,9 +7323,11 @@ function customTimerToggle() {
         clearInterval(st.iv); st.running = false;
         playTimerSound('complete');
         const elapsed = Math.round((st.total - st.remaining) / 60);
-        if (elapsed > 0 && typeof _autoLogSession === 'function') {
-          _autoLogSession(elapsed, 'study', 'general', '⏱ Custom Timer — ' + elapsed + ' min completed');
-        }
+        if (elapsed > 0) {
+  const sessArr = JSON.parse(localStorage.getItem('neetopia-sessions-v1') || '[]');
+  sessArr.unshift({ id: Date.now(), date: new Date().toISOString().slice(0,10), mins: elapsed, note: '⏱ NEET Standard Timer — ' + elapsed + ' min completed', subj: 'general', type: 'neet' });
+  localStorage.setItem('neetopia-sessions-v1', JSON.stringify(sessArr));
+}
         st._startTime = null;
         const b = document.getElementById('custom-start-btn');
         if (b) { b.textContent = '▶ Start'; b.classList.remove('running'); }
@@ -9206,7 +9210,23 @@ function updateExamCountdown() {
   }
 }
 
+// ─── REALITY TOGGLE ───
+function toggleReality() {
+  const content = document.getElementById('realityContent');
+  const arrow   = document.getElementById('realityArrow');
+  if (!content) return;
+  content.classList.toggle('open');
+  if (arrow) arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+}
 
+// ─── FAQ TOGGLE ───
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -10378,7 +10398,9 @@ ${todosHTML}
   showToast('PDF report ready! Use Print → Save as PDF 📄');
 }
 
-
+window.generateNeetPDF = generateNeetPDF;
+window.setPDFRange = setPDFRange;
+window.updatePDFPreview = updatePDFPreview;
 
 /* ── init ── */
 function tmr2Init(){
@@ -10391,6 +10413,17 @@ function tmr2Init(){
   tmr2RenderLog();
   tmr2RenderStats();
   draw();
+  // init PDF date defaults
+  try {
+    const todayPDF = new Date().toISOString().slice(0,10);
+    const monPDF = new Date();
+    monPDF.setDate(monPDF.getDate() - (monPDF.getDay()===0 ? 6 : monPDF.getDay()-1));
+    const fromPDF = document.getElementById('pdf-from-date');
+    const toPDF   = document.getElementById('pdf-to-date');
+    if(fromPDF) fromPDF.value = monPDF.toISOString().slice(0,10);
+    if(toPDF)   toPDF.value   = todayPDF;
+    updatePDFPreview();
+  } catch(e){}
 }
 
 // init on section switch
@@ -10404,19 +10437,6 @@ window.switchSection=function(s){
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{ tmr2Init(); },300);
 });
-
-// init PDF date defaults
-try {
-  const todayPDF = new Date().toISOString().slice(0,10);
-  const monPDF = new Date();
-  monPDF.setDate(monPDF.getDate() - (monPDF.getDay()===0 ? 6 : monPDF.getDay()-1));
-  const fromPDF = document.getElementById('pdf-from-date');
-  const toPDF   = document.getElementById('pdf-to-date');
-  if(fromPDF) fromPDF.value = monPDF.toISOString().slice(0,10);
-  if(toPDF)   toPDF.value   = todayPDF;
-  updatePDFPreview();
-} catch(e){}
-
 
 })();
 
