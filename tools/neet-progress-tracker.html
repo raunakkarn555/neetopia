@@ -2924,6 +2924,62 @@
   .jentry-body { font-size: .83rem; }
 }
 
+
+
+
+
+/* ── PDF Export Styles ── */
+.pdf-quick-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+.pdf-quick-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: rgba(168,124,245,.08);
+}
+.pdf-quick-btn.active {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: rgba(168,124,245,.12);
+}
+.pdf-include-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  transition: all .18s;
+  user-select: none;
+}
+.pdf-include-label:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+.pdf-include-label input {
+  accent-color: var(--accent);
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -4797,7 +4853,6 @@
           <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">Auto-logged · Manual entries · Full backup</div>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button onclick="tmr2ExportCSV()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--bio)';this.style.color='var(--bio)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">⬇ CSV</button>
           <button onclick="tmr2ClearAll()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Clear</button>
         </div>
       </div>
@@ -4859,6 +4914,71 @@
       </div>
 
     </div><!-- /log card -->
+
+    <!-- ── PDF EXPORT REPORT ── -->
+<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:24px;margin-top:20px;">
+
+  <!-- Header row -->
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:14px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(168,124,245,.15),rgba(61,191,255,.12));border:1px solid rgba(168,124,245,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📄</div>
+      <div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;">Export Study Report</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">Generate a detailed PDF of your focus sessions, manual logs, stats and heatmap for any date range</div>
+      </div>
+    </div>
+    <!-- Quick range buttons -->
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button class="pdf-quick-btn" onclick="setPDFRange('today',event)">Today</button>
+      <button class="pdf-quick-btn" onclick="setPDFRange('week',event)">This Week</button>
+      <button class="pdf-quick-btn" onclick="setPDFRange('month',event)">This Month</button>
+      <button class="pdf-quick-btn" onclick="setPDFRange('all',event)">All Time</button>
+    </div>
+  </div>
+
+  <!-- Date range picker row -->
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
+    <span style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;">📅 From</span>
+    <input type="date" id="pdf-from-date"
+      style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--fg);font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;outline:none;cursor:pointer;transition:border-color .2s;"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"
+      onchange="updatePDFPreview()"/>
+    <span style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;">To</span>
+    <input type="date" id="pdf-to-date"
+      style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--fg);font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;outline:none;cursor:pointer;transition:border-color .2s;"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"
+      onchange="updatePDFPreview()"/>
+    <!-- Live preview stats -->
+    <div style="display:flex;gap:14px;margin-left:auto;flex-wrap:wrap;" id="pdf-preview-stats">
+      <span style="font-size:.72rem;color:var(--muted);">Select a range to preview</span>
+    </div>
+  </div>
+
+  <!-- Sections to include -->
+  <div style="margin-bottom:18px;">
+    <div style="font-size:.65rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;">Include in report</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-summary" checked onchange="updatePDFPreview()"/> Summary Stats</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-heatmap" checked onchange="updatePDFPreview()"/> Daily Heatmap</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-sessions" checked onchange="updatePDFPreview()"/> Timer Sessions</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-manual" checked onchange="updatePDFPreview()"/> Manual Logs</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-daily" checked onchange="updatePDFPreview()"/> Daily Notes</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-journal" onchange="updatePDFPreview()"/> Journal Entries</label>
+      <label class="pdf-include-label"><input type="checkbox" id="pdf-inc-todos" onchange="updatePDFPreview()"/> To-Do Tasks</label>
+    </div>
+  </div>
+
+  <!-- Generate button -->
+  <button onclick="generateNeetPDF()"
+    style="width:100%;background:linear-gradient(135deg,rgba(168,124,245,.2),rgba(61,191,255,.15));border:1.5px solid rgba(168,124,245,.45);border-radius:var(--card-radius);padding:14px;font-family:'Bricolage Grotesque',sans-serif;font-size:.95rem;font-weight:800;color:var(--purple);cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;"
+    onmouseover="this.style.background='linear-gradient(135deg,rgba(168,124,245,.3),rgba(61,191,255,.22))';this.style.transform='translateY(-2px)'"
+    onmouseout="this.style.background='linear-gradient(135deg,rgba(168,124,245,.2),rgba(61,191,255,.15))';this.style.transform='translateY(0)'">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+    Generate & Download PDF Report
+  </button>
+
+  <p style="font-size:.68rem;color:var(--muted);text-align:center;margin-top:10px;">Opens a print-ready page — use browser Print → Save as PDF. Works in Chrome, Edge, Firefox.</p>
+</div>
 
   </div><!-- /tmr2-wrap -->
 
@@ -9871,6 +9991,395 @@ function tmr2ClearAll(){
 }
 window.tmr2ClearAll=tmr2ClearAll;
 
+
+
+/* ── PDF EXPORT FUNCTIONS ── */
+
+function setPDFRange(preset, evt){
+  const today = new Date();
+  const fromEl = document.getElementById('pdf-from-date');
+  const toEl   = document.getElementById('pdf-to-date');
+  if(!fromEl || !toEl) return;
+
+  document.querySelectorAll('.pdf-quick-btn').forEach(b => b.classList.remove('active'));
+  if(evt?.target) evt.target.classList.add('active');
+
+  const fmt = d => d.toISOString().slice(0,10);
+
+  if(preset === 'today'){
+    fromEl.value = fmt(today);
+    toEl.value   = fmt(today);
+  } else if(preset === 'week'){
+    const mon = new Date(today);
+    mon.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
+    fromEl.value = fmt(mon);
+    toEl.value   = fmt(today);
+  } else if(preset === 'month'){
+    fromEl.value = fmt(new Date(today.getFullYear(), today.getMonth(), 1));
+    toEl.value   = fmt(today);
+  } else if(preset === 'all'){
+    const yearAgo = new Date(today);
+    yearAgo.setFullYear(today.getFullYear() - 1);
+    fromEl.value = fmt(yearAgo);
+    toEl.value   = fmt(today);
+  }
+  updatePDFPreview();
+}
+
+function updatePDFPreview(){
+  const fromVal = document.getElementById('pdf-from-date')?.value;
+  const toVal   = document.getElementById('pdf-to-date')?.value;
+  const previewEl = document.getElementById('pdf-preview-stats');
+  if(!previewEl) return;
+
+  if(!fromVal || !toVal){
+    previewEl.innerHTML = '<span style="font-size:.72rem;color:var(--muted);">Select a range to preview</span>';
+    return;
+  }
+
+  const allSess = getSess2();
+  const filtered = allSess.filter(s => s.date >= fromVal && s.date <= toVal);
+  const totalMins = filtered.reduce((a,s) => a + (s.mins||0), 0);
+  const uniqueDates = new Set(filtered.map(s => s.date));
+  const activeDays = uniqueDates.size;
+
+  // count total days in range
+  const from = new Date(fromVal+'T00:00:00');
+  const to   = new Date(toVal+'T00:00:00');
+  const totalDays = Math.round((to - from) / 86400000) + 1;
+
+  const fmtM = m => m >= 60 ? (m/60).toFixed(1)+'h' : m+'m';
+
+  const stats = [
+    { val: totalDays,          label: 'days',      color: 'var(--phy)' },
+    { val: activeDays,         label: 'active',    color: 'var(--accent)' },
+    { val: fmtM(totalMins),    label: 'focus',     color: 'var(--chem)' },
+    { val: filtered.length,    label: 'sessions',  color: 'var(--purple)' },
+  ];
+
+  previewEl.innerHTML = stats.map((s,i,arr) =>
+    `<div style="text-align:center;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};line-height:1;">${s.val}</div>
+      <div style="font-size:.58rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;">${s.label}</div>
+    </div>` + (i < arr.length-1 ? '<div style="width:1px;height:28px;background:var(--border);"></div>' : '')
+  ).join('');
+}
+
+function generateNeetPDF(){
+  const fromEl = document.getElementById('pdf-from-date');
+  const toEl   = document.getElementById('pdf-to-date');
+  if(!fromEl?.value || !toEl?.value){ showToast('Pick a date range first!', 'info'); return; }
+  if(fromEl.value > toEl.value){ showToast('From date must be before To date!', 'info'); return; }
+
+  const d = getData();
+  const profileName = d['profile-name'] || 'NEET Aspirant';
+  const fromStr = fromEl.value, toStr = toEl.value;
+
+  const incSummary  = document.getElementById('pdf-inc-summary')?.checked ?? true;
+  const incHeatmap  = document.getElementById('pdf-inc-heatmap')?.checked ?? true;
+  const incSessions = document.getElementById('pdf-inc-sessions')?.checked ?? true;
+  const incManual   = document.getElementById('pdf-inc-manual')?.checked ?? true;
+  const incDaily    = document.getElementById('pdf-inc-daily')?.checked ?? true;
+  const incJournal  = document.getElementById('pdf-inc-journal')?.checked ?? false;
+  const incTodos    = document.getElementById('pdf-inc-todos')?.checked ?? false;
+
+  // collect dates
+  const dates = [];
+  const cursor = new Date(fromStr+'T00:00:00');
+  const toDate = new Date(toStr+'T00:00:00');
+  while(cursor <= toDate){ dates.push(cursor.toISOString().slice(0,10)); cursor.setDate(cursor.getDate()+1); }
+
+  const allSess = getSess2();
+  const fmtMins = m => m >= 60 ? (m/60).toFixed(1)+'h' : m+'m';
+  const fmtDate2 = iso => new Date(iso+'T00:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+
+  // stats
+  let totalMins=0, activeDays=0, sessionCount=0, manualCount=0;
+  let bestDay={dateStr:'—',mins:0}, maxStreak=0, curStreak=0;
+  const subjectMap={};
+  const dailyRows=[];
+
+  dates.forEach(dateStr => {
+    const sess = allSess.filter(s => s.date===dateStr);
+    const dayMins = sess.reduce((a,s)=>a+(s.mins||0),0);
+    const dayDataKey = 'day-data-' + dateStr;
+    const dayData = d[dayDataKey] || {};
+    const dayHours = parseFloat(dayData.hours || d['day-'+dateStr] || 0);
+
+    totalMins += dayMins;
+    sessionCount += sess.filter(s=>s.type!=='manual').length;
+    manualCount  += sess.filter(s=>s.type==='manual').length;
+    if(dayMins>0 || dayHours>0){ activeDays++; curStreak++; maxStreak=Math.max(maxStreak,curStreak); }
+    else curStreak=0;
+    if(dayMins > bestDay.mins) bestDay = {dateStr, mins:dayMins};
+
+    sess.forEach(s => {
+      const subj = s.subj || 'general';
+      subjectMap[subj] = (subjectMap[subj]||0) + (s.mins||0);
+    });
+
+    if(dayMins>0 || dayHours>0 || dayData.notes || dayData.mood){
+      dailyRows.push({dateStr, sess, dayMins, dayHours, dayData});
+    }
+  });
+
+  const totalHrs = (totalMins/60).toFixed(1);
+  const avgMins = activeDays>0 ? Math.round(totalMins/activeDays) : 0;
+  const consistency = dates.length>0 ? Math.round(activeDays/dates.length*100) : 0;
+  const fromLabel = new Date(fromStr+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const toLabel   = new Date(toStr+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const genAt     = new Date().toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  // subject bars
+  const subjEntries = Object.entries(subjectMap).sort((a,b)=>b[1]-a[1]);
+  const maxSubjMins = subjEntries.length ? subjEntries[0][1] : 1;
+  const SUBJ_COLORS = {'bio':'#3de8a0','chem':'#f4b942','phy':'#3dbfff','general':'#a87cf5'};
+  const SUBJ_LABELS = {'bio':'🌿 Biology','chem':'⚗️ Chemistry','phy':'⚡ Physics','general':'📌 General'};
+
+  // heatmap cells
+  const heatCells = dates.map(dateStr => {
+    const sess = allSess.filter(s=>s.date===dateStr);
+    const mins = sess.reduce((a,s)=>a+(s.mins||0),0);
+    let bg='#1a2235', border='#2a3554';
+    if(mins>=180){bg='#3de8a0';border='#3de8a0';}
+    else if(mins>=90){bg='rgba(61,232,160,.65)';border='rgba(61,232,160,.7)';}
+    else if(mins>=30){bg='rgba(61,232,160,.35)';border='rgba(61,232,160,.4)';}
+    else if(mins>0){bg='rgba(61,232,160,.15)';border='rgba(61,232,160,.2)';}
+    return `<div title="${fmtDate2(dateStr)}: ${mins>0?fmtMins(mins):'No sessions'}" style="width:16px;height:16px;border-radius:3px;background:${bg};border:1px solid ${border};display:inline-block;margin:2px;flex-shrink:0;"></div>`;
+  }).join('');
+
+  // sessions table
+  let sessHTML = '';
+  if(incSessions){
+    const rows = dailyRows.flatMap(day =>
+      day.sess.filter(s=>s.type!=='manual').map(s =>
+        `<tr><td>${fmtDate2(day.dateStr)}</td><td>${s.note||'—'}</td><td>${SUBJ_LABELS[s.subj]||'General'}</td><td>${s.type||'timer'}</td><td style="color:#3de8a0;font-weight:700;">${fmtMins(s.mins)}</td></tr>`
+      )
+    );
+    if(rows.length) sessHTML = `
+    <div class="section-block">
+      <div class="section-title">⏱ Timer Sessions</div>
+      <table class="data-table" style="margin-top:10px;">
+        <thead><tr><th>Date</th><th>Focus / Note</th><th>Subject</th><th>Type</th><th>Duration</th></tr></thead>
+        <tbody>${rows.join('')}</tbody>
+      </table>
+    </div>`;
+  }
+
+  // manual logs
+  let manualHTML = '';
+  if(incManual){
+    const rows = dailyRows.flatMap(day =>
+      day.sess.filter(s=>s.type==='manual').map(s =>
+        `<tr><td>${fmtDate2(day.dateStr)}</td><td>${s.note||'—'}</td><td>${SUBJ_LABELS[s.subj]||'General'}</td><td style="color:#f4b942;font-weight:700;">${fmtMins(s.mins)}</td></tr>`
+      )
+    );
+    if(rows.length) manualHTML = `
+    <div class="section-block">
+      <div class="section-title">✍️ Manual Logs</div>
+      <table class="data-table" style="margin-top:10px;">
+        <thead><tr><th>Date</th><th>Note</th><th>Subject</th><th>Duration</th></tr></thead>
+        <tbody>${rows.join('')}</tbody>
+      </table>
+    </div>`;
+  }
+
+  // daily notes
+  let dailyHTML = '';
+  if(incDaily && dailyRows.length){
+    dailyHTML = `
+    <div class="section-block">
+      <div class="section-title">📓 Daily Log</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+        ${dailyRows.map(day => `
+        <div style="background:#0c0f1a;border:1px solid #1a2235;border-radius:10px;padding:14px 16px;border-left:3px solid #3de8a0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px;">
+            <span style="font-size:12px;font-weight:700;color:#e8edf5;font-family:monospace;">${fmtDate2(day.dateStr)}</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              ${day.dayData.mood?`<span style="font-size:12px;">${day.dayData.mood}</span>`:''}
+              ${day.dayHours>0?`<span style="font-size:11px;background:rgba(61,232,160,.12);border:1px solid rgba(61,232,160,.3);border-radius:12px;padding:2px 9px;color:#3de8a0;font-family:monospace;font-weight:700;">⏱ ${day.dayHours}h</span>`:''}
+              ${day.dayData.water?`<span style="font-size:11px;background:rgba(61,191,255,.1);border:1px solid rgba(61,191,255,.3);border-radius:12px;padding:2px 9px;color:#3dbfff;font-family:monospace;">💧 ${day.dayData.water}gl</span>`:''}
+              ${day.dayData.sleep?`<span style="font-size:11px;background:rgba(168,124,245,.1);border:1px solid rgba(168,124,245,.3);border-radius:12px;padding:2px 9px;color:#a87cf5;font-family:monospace;">😴 ${day.dayData.sleep}h</span>`:''}
+            </div>
+          </div>
+          ${day.dayData.notes?`<div style="font-size:12px;color:#8899b0;line-height:1.7;white-space:pre-wrap;">${day.dayData.notes.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`:''}
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // journal
+  let journalHTML = '';
+  if(incJournal){
+    const entries = JSON.parse(d['journal']||'[]')
+      .filter(e => { const iso = e.dateKey || ''; return iso >= fromStr && iso <= toStr; });
+    if(entries.length){
+      journalHTML = `
+      <div class="section-block">
+        <div class="section-title">📓 Journal Entries (${entries.length})</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+          ${entries.slice(0,30).map(e => `
+          <div style="background:#0c0f1a;border:1px solid #1a2235;border-radius:10px;padding:14px 16px;border-left:3px solid #a87cf5;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+              <span style="font-size:14px;">${e.mood||'😐'}</span>
+              <span style="font-size:11px;font-family:monospace;color:#8899b0;font-weight:600;">${e.date||''}</span>
+            </div>
+            <div style="font-size:12px;color:#8899b0;line-height:1.8;white-space:pre-wrap;">${(e.text||'').slice(0,500).replace(/</g,'&lt;').replace(/>/g,'&gt;')}${(e.text||'').length>500?'…':''}</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+    }
+  }
+
+  // todos
+  let todosHTML = '';
+  if(incTodos){
+    const todos = JSON.parse(d['todos']||'[]');
+    if(todos.length){
+      const done = todos.filter(t=>t.status==='done');
+      const active = todos.filter(t=>t.status!=='done');
+      todosHTML = `
+      <div class="section-block">
+        <div class="section-title">✅ To-Do Tasks (${todos.length} total · ${done.length} done)</div>
+        ${active.length?`
+        <div style="margin:10px 0 6px;font-size:11px;font-weight:700;color:#3dbfff;text-transform:uppercase;letter-spacing:.06em;">Pending (${active.length})</div>
+        ${active.map(t=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:#0c0f1a;border:1px solid #1a2235;border-radius:8px;margin-bottom:4px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:${t.priority==='high'?'#ff5f5f':t.priority==='medium'?'#f4b942':'#3de8a0'};flex-shrink:0;"></span>
+          <span style="font-size:12px;flex:1;color:#e8edf5;">${t.text.replace(/</g,'&lt;')}</span>
+          <span style="font-size:10px;padding:1px 7px;border-radius:6px;background:rgba(61,191,255,.1);color:#3dbfff;font-family:monospace;">${t.subj||'general'}</span>
+        </div>`).join('')}` : ''}
+        ${done.length?`
+        <div style="margin:12px 0 6px;font-size:11px;font-weight:700;color:#3de8a0;text-transform:uppercase;letter-spacing:.06em;">Completed (${done.length})</div>
+        ${done.map(t=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:#0c0f1a;border:1px solid #1a2235;border-radius:8px;margin-bottom:4px;opacity:.65;">
+          <span style="color:#3de8a0;font-size:.85rem;">✓</span>
+          <span style="font-size:12px;flex:1;color:#8899b0;text-decoration:line-through;">${t.text.replace(/</g,'&lt;')}</span>
+        </div>`).join('')}` : ''}
+      </div>`;
+    }
+  }
+
+  // ── BUILD FULL HTML ──
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>NEETopia Study Report · ${fromLabel} — ${toLabel}</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:#07090f}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#07090f;color:#e8edf5;font-size:13px;line-height:1.6;max-width:900px;margin:0 auto;padding:40px 32px 80px;}
+.cover{background:linear-gradient(135deg,rgba(61,232,160,.08),rgba(168,124,245,.05));border:1px solid rgba(61,232,160,.2);border-radius:20px;padding:40px;margin-bottom:32px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(61,232,160,.1),transparent 70%);pointer-events:none;}
+.cover-logo{display:inline-flex;align-items:center;gap:8px;background:rgba(61,232,160,.1);border:1px solid rgba(61,232,160,.25);border-radius:10px;padding:6px 14px;margin-bottom:20px;font-size:12px;font-weight:700;color:#3de8a0;letter-spacing:.05em;text-transform:uppercase;}
+.cover-name{font-size:34px;font-weight:800;line-height:1.1;margin-bottom:6px;letter-spacing:-.02em;}
+.cover-range{font-size:14px;color:#8899b0;margin-bottom:20px;}
+.cover-range strong{color:#e8edf5;}
+.cover-meta{font-size:11px;color:#4d5e72;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin-bottom:28px;}
+.stat-box{background:#0c0f1a;border:1px solid #1a2235;border-radius:14px;padding:16px 14px;text-align:center;}
+.stat-val{font-size:26px;font-weight:800;line-height:1;margin-bottom:5px;font-family:monospace;}
+.stat-lbl{font-size:10px;color:#4d5e72;font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+.section-block{background:#0c0f1a;border:1px solid #1a2235;border-radius:16px;padding:22px;margin-bottom:20px;}
+.section-title{font-size:15px;font-weight:800;color:#e8edf5;border-bottom:1px solid #1a2235;padding-bottom:12px;margin-bottom:14px;}
+.data-table{width:100%;border-collapse:collapse;font-size:12px;}
+.data-table th{background:#111827;color:#4d5e72;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;padding:9px 12px;text-align:left;}
+.data-table td{padding:9px 12px;border-bottom:1px solid #1a2235;color:#8899b0;}
+.data-table tr:last-child td{border-bottom:none;}
+.report-footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a2235;color:#4d5e72;font-size:11px;line-height:1.8;}
+@media print{
+  body{background:white;color:#111;padding:20px;max-width:100%;}
+  .cover{background:#f0fdf8;border-color:#6ee7b7;}
+  .cover-name,.section-title{color:#111;}
+  .stat-box,.section-block{background:#f9fafb;border-color:#e5e7eb;}
+  .data-table th{background:#f3f4f6;color:#6b7280;}
+  .data-table td{color:#374151;border-color:#e5e7eb;}
+  @page{margin:15mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">📊 NEETopia · Study Report</div>
+  <div class="cover-name">${profileName.replace(/</g,'&lt;')}'s Progress Report</div>
+  <div class="cover-range"><strong>${fromLabel}</strong> &nbsp;→&nbsp; <strong>${toLabel}</strong></div>
+  <div class="cover-meta">Generated on ${genAt} · ${dates.length} days in range</div>
+</div>
+
+${incSummary ? `
+<div class="stat-row">
+  <div class="stat-box"><div class="stat-val" style="color:#3de8a0;">${totalHrs}h</div><div class="stat-lbl">Total Focus</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#3dbfff;">${activeDays}</div><div class="stat-lbl">Active Days</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#f4b942;">${fmtMins(avgMins)}</div><div class="stat-lbl">Avg/Day</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#a87cf5;">${consistency}%</div><div class="stat-lbl">Consistency</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#3de8a0;">${maxStreak}</div><div class="stat-lbl">Max Streak</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#f4b942;">${fmtMins(bestDay.mins)}</div><div class="stat-lbl">Best Day</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#3dbfff;">${sessionCount}</div><div class="stat-lbl">Sessions</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#a87cf5;">${manualCount}</div><div class="stat-lbl">Manual Logs</div></div>
+</div>
+${subjEntries.length ? `
+<div class="section-block">
+  <div class="section-title">🎯 Subject Breakdown</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    ${subjEntries.map(([subj,mins],i) => `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:11px;min-width:130px;color:#e8edf5;font-weight:600;">${SUBJ_LABELS[subj]||subj}</span>
+      <div style="flex:1;height:8px;background:#1a2235;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:${Math.round(mins/maxSubjMins*100)}%;background:${SUBJ_COLORS[subj]||'#a87cf5'};border-radius:4px;"></div>
+      </div>
+      <span style="font-size:11px;font-family:monospace;color:${SUBJ_COLORS[subj]||'#a87cf5'};min-width:40px;text-align:right;font-weight:700;">${fmtMins(mins)}</span>
+    </div>`).join('')}
+  </div>
+</div>` : ''}
+` : ''}
+
+${incHeatmap ? `
+<div class="section-block">
+  <div class="section-title">📅 Daily Activity Heatmap</div>
+  <div style="display:flex;flex-wrap:wrap;gap:0;margin-top:8px;">${heatCells}</div>
+  <div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:#8899b0;">
+    <span>Less</span>
+    <div style="width:12px;height:12px;border-radius:2px;background:#1a2235;border:1px solid #2a3554;display:inline-block;"></div>
+    <div style="width:12px;height:12px;border-radius:2px;background:rgba(61,232,160,.2);display:inline-block;"></div>
+    <div style="width:12px;height:12px;border-radius:2px;background:rgba(61,232,160,.55);display:inline-block;"></div>
+    <div style="width:12px;height:12px;border-radius:2px;background:#3de8a0;display:inline-block;"></div>
+    <span>More</span>
+    <span style="margin-left:12px;color:#4d5e72;">Each square = 1 day</span>
+  </div>
+</div>` : ''}
+
+${sessHTML}
+${manualHTML}
+${dailyHTML}
+${journalHTML}
+${todosHTML}
+
+<div class="report-footer">
+  <div style="font-size:14px;margin-bottom:6px;">🎯 Keep going, ${profileName.replace(/</g,'&lt;')}. Every session brings you closer to your goal.</div>
+  Generated by <strong>NEETopia Progress Tracker</strong><br>
+  Report period: ${fromLabel} → ${toLabel} · ${activeDays} of ${dates.length} days active · ${totalHrs}h total focus
+</div>
+
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type:'text/html' });
+  const url  = URL.createObjectURL(blob);
+  const win  = window.open(url, '_blank');
+  if(win){
+    win.onload = () => { setTimeout(() => { win.print(); URL.revokeObjectURL(url); }, 600); };
+  } else {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'neetopia-report-' + fromStr + '-to-' + toStr + '.html';
+    a.click();
+    showToast('Downloaded as HTML. Open and Print → Save as PDF!');
+  }
+  showToast('PDF report ready! Use Print → Save as PDF 📄');
+}
+
+
+
 /* ── init ── */
 function tmr2Init(){
   // set today in manual date
@@ -9895,6 +10404,19 @@ window.switchSection=function(s){
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{ tmr2Init(); },300);
 });
+
+// init PDF date defaults
+try {
+  const todayPDF = new Date().toISOString().slice(0,10);
+  const monPDF = new Date();
+  monPDF.setDate(monPDF.getDate() - (monPDF.getDay()===0 ? 6 : monPDF.getDay()-1));
+  const fromPDF = document.getElementById('pdf-from-date');
+  const toPDF   = document.getElementById('pdf-to-date');
+  if(fromPDF) fromPDF.value = monPDF.toISOString().slice(0,10);
+  if(toPDF)   toPDF.value   = todayPDF;
+  updatePDFPreview();
+} catch(e){}
+
 
 })();
 
