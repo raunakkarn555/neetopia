@@ -1966,392 +1966,511 @@
 .snav-timer-btn:hover { background: rgba(61,191,255,.15) !important; color: var(--phy) !important; }
 .snav-timer-btn.active { background: var(--phy) !important; color: #000 !important; border-color: var(--phy) !important; }
 
-/* ══ PRACTICE TIMER SECTION ══ */
-.ptimer-card, .ptimer-custom-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--card-radius);
-  padding: 28px;
-  margin-bottom: 20px;
-}
-.ptimer-tag {
-  display: inline-block;
-  font-size: .65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(61,191,255,.3);
-  background: rgba(61,191,255,.1);
-  color: var(--phy);
-  margin-bottom: 8px;
-}
-.ptimer-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-.ptimer-subtitle {
-  font-size: .82rem;
-  color: var(--muted);
-}
-.ptimer-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-.ptimer-custom-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
 
-/* Ring */
-.ptimer-ring {
+
+/* ══════════════════════════════════════
+   PREMIUM TIMER v2
+══════════════════════════════════════ */
+.tmr2-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.tmr2-hero {
+  background: linear-gradient(135deg,rgba(61,191,255,.07) 0%,rgba(168,124,245,.05) 50%,var(--bg2) 100%);
+  border: 1px solid rgba(61,191,255,.22);
+  border-radius: 20px;
+  padding: 32px 28px 24px;
+  margin-bottom: 16px;
   position: relative;
-  width: 130px;
-  height: 130px;
+  overflow: hidden;
+}
+.tmr2-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(61,191,255,.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+.tmr2-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(168,124,245,.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.tmr2-mode-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.tmr2-mode-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.tmr2-mode-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tmr2-mode-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 16px rgba(168,124,245,.3);
+}
+.tmr2-mode-btn.pomo-active {
+  background: var(--bio);
+  border-color: var(--bio);
+  color: #000;
+  box-shadow: 0 0 16px rgba(61,232,160,.3);
+}
+.tmr2-center {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+/* Ring */
+.tmr2-ring-wrap {
+  position: relative;
+  width: 160px;
+  height: 160px;
   flex-shrink: 0;
 }
-.ptimer-ring-svg {
-  width: 130px;
-  height: 130px;
+.tmr2-ring-svg {
+  width: 160px;
+  height: 160px;
   transform: rotate(-90deg);
+  filter: drop-shadow(0 0 12px rgba(61,191,255,.25));
 }
-.ptimer-ring-bg {
+.tmr2-ring-bg {
   fill: none;
-  stroke: var(--bg3);
-  stroke-width: 8;
+  stroke: rgba(255,255,255,.06);
+  stroke-width: 9;
 }
-.ptimer-ring-fill {
+.tmr2-ring-track {
   fill: none;
-  stroke: var(--phy);
-  stroke-width: 8;
+  stroke: rgba(61,191,255,.12);
+  stroke-width: 9;
+}
+.tmr2-ring-fill {
+  fill: none;
+  stroke-width: 9;
   stroke-linecap: round;
-  transition: stroke-dashoffset .9s linear, stroke .3s;
+  transition: stroke-dashoffset 1s linear, stroke .4s;
 }
-.ptimer-ring-inner {
+.tmr2-ring-inner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   text-align: center;
+  width: 120px;
 }
-.ptimer-big-display {
+.tmr2-display {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1.15rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  color: var(--phy);
   line-height: 1;
-  white-space: nowrap;
+  letter-spacing: .04em;
+  transition: color .3s;
 }
-.ptimer-ring-label {
-  font-size: .6rem;
+.tmr2-sublabel {
+  font-size: .58rem;
   color: var(--muted);
-  margin-top: 4px;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: .08em;
+  margin-top: 5px;
 }
-
-/* Progress bar */
-.ptimer-progress-bar-wrap {
-  height: 6px;
-  background: var(--bg3);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 18px;
+.tmr2-phase-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
 }
-.ptimer-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--phy), var(--purple));
-  border-radius: 3px;
-  transition: width .9s linear;
+/* Right side */
+.tmr2-right {
+  flex: 1;
+  min-width: 200px;
 }
-
-/* Controls */
-.ptimer-controls {
+.tmr2-focus-input {
+  width: 100%;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  outline: none;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  transition: border-color .2s;
+}
+.tmr2-focus-input:focus { border-color: rgba(61,191,255,.4); }
+.tmr2-focus-input::placeholder { color: var(--muted); opacity: .6; }
+/* Presets */
+.tmr2-presets {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: wrap;
   margin-bottom: 14px;
 }
-.ptimer-btn {
-  padding: 10px 28px;
-  border-radius: 9px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .9rem;
+.tmr2-preset {
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all .2s;
-  border: 1px solid;
+  transition: all .18s;
 }
-.ptimer-start {
-  background: linear-gradient(135deg, rgba(61,191,255,.18), rgba(61,191,255,.08));
+.tmr2-preset:hover {
   border-color: var(--phy);
   color: var(--phy);
+  background: rgba(61,191,255,.07);
 }
-.ptimer-start:hover { background: linear-gradient(135deg, rgba(61,191,255,.3), rgba(61,191,255,.15)); }
-.ptimer-start.running {
-  background: linear-gradient(135deg, rgba(244,185,66,.18), rgba(244,185,66,.08));
-  border-color: var(--warn);
-  color: var(--warn);
+.tmr2-preset.neet-preset {
+  border-color: rgba(168,124,245,.4);
+  color: var(--purple);
+  background: rgba(168,124,245,.07);
 }
-.ptimer-reset {
-  background: transparent;
-  border-color: var(--border);
-  color: var(--muted);
-}
-.ptimer-reset:hover { border-color: var(--danger); color: var(--danger); }
-.ptimer-tip {
-  font-size: .78rem;
-  color: var(--muted);
-  border-left: 2px solid rgba(61,191,255,.3);
-  padding-left: 10px;
-  line-height: 1.6;
-}
-
 /* Custom inputs */
-.ptimer-inputs {
+.tmr2-inputs {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
 }
-.ptimer-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ptimer-input-group label {
-  font-size: .68rem;
-  color: var(--muted);
-  font-weight: 600;
+.tmr2-input-group label {
+  font-size: .6rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 3px;
 }
-.ptimer-input-group input {
-  width: 72px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
+.tmr2-input-group input {
+  width: 56px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 8px;
-  padding: 9px 10px;
+  padding: 8px 6px;
   color: var(--fg);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
+  font-size: .95rem;
   font-weight: 700;
   text-align: center;
   outline: none;
   transition: border-color .2s;
   box-sizing: border-box;
 }
-.ptimer-input-group input:focus { border-color: var(--purple); }
-.ptimer-input-sep {
-  font-size: 1.4rem;
-  font-weight: 700;
+.tmr2-input-group input:focus { border-color: var(--phy); }
+.tmr2-sep {
+  font-size: 1.2rem;
   color: var(--muted);
-  margin-top: 16px;
-  flex-shrink: 0;
+  font-weight: 700;
+  margin-top: 14px;
 }
-.ptimer-presets {
+/* Controls */
+.tmr2-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.tmr2-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.tmr2-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.tmr2-start-btn {
+  background: linear-gradient(135deg, rgba(61,191,255,.18), rgba(61,191,255,.08));
+  border-color: var(--phy);
+  color: var(--phy);
+  box-shadow: 0 0 20px rgba(61,191,255,.15);
+}
+.tmr2-start-btn:hover { box-shadow: 0 0 28px rgba(61,191,255,.3); transform: translateY(-1px); }
+.tmr2-start-btn.running {
+  background: linear-gradient(135deg, rgba(244,185,66,.18), rgba(244,185,66,.08));
+  border-color: var(--warn);
+  color: var(--warn);
+  box-shadow: 0 0 20px rgba(244,185,66,.2);
+  animation: tmr2-pulse 2s ease-in-out infinite;
+}
+@keyframes tmr2-pulse {
+  0%,100% { box-shadow: 0 0 16px rgba(244,185,66,.2); }
+  50%      { box-shadow: 0 0 30px rgba(244,185,66,.45); }
+}
+.tmr2-lap-btn {
+  background: rgba(168,124,245,.08);
+  border-color: rgba(168,124,245,.35);
+  color: var(--purple);
+}
+.tmr2-lap-btn:hover { background: rgba(168,124,245,.15); transform: translateY(-1px); }
+.tmr2-lap-btn:disabled { opacity: .3; cursor: not-allowed; transform: none; }
+.tmr2-reset-btn {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--muted);
+}
+.tmr2-reset-btn:hover { border-color: var(--danger); color: var(--danger); }
+/* Progress bar */
+.tmr2-bar-wrap {
+  height: 5px;
+  background: rgba(255,255,255,.05);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.tmr2-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s linear;
+  box-shadow: 0 0 8px rgba(61,191,255,.5);
+}
+/* Laps */
+.tmr2-laps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.tmr2-lap-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
+  padding: 5px 10px;
+  background: rgba(168,124,245,.06);
+  border: 1px solid rgba(168,124,245,.15);
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
 }
-.ptimer-preset-btn {
+.tmr2-lap-num {
+  color: var(--muted);
+  min-width: 30px;
+}
+.tmr2-lap-time { color: var(--purple); font-weight: 700; }
+.tmr2-lap-split { color: var(--muted); margin-left: auto; }
+/* Pomo dots */
+.tmr2-pomo-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: rgba(61,232,160,.05);
+  border: 1px solid rgba(61,232,160,.15);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.tmr2-pomo-dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(61,232,160,.4);
+  background: transparent;
+  transition: all .3s;
+}
+.tmr2-pomo-dot.filled {
+  background: var(--bio);
+  border-color: var(--bio);
+  box-shadow: 0 0 6px rgba(61,232,160,.5);
+}
+.tmr2-pomo-dot.active {
+  border-color: var(--bio);
+  animation: pomo-blink .8s ease-in-out infinite alternate;
+}
+@keyframes pomo-blink {
+  from { box-shadow: 0 0 4px rgba(61,232,160,.2); }
+  to   { box-shadow: 0 0 10px rgba(61,232,160,.6); }
+}
+/* Session log */
+.tmr2-log-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.tmr2-log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tmr2-log-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+}
+.tmr2-stat-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.tmr2-stat-pill {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  flex: 1;
+  min-width: 80px;
+  transition: transform .15s, box-shadow .2s;
+  cursor: default;
+}
+.tmr2-stat-pill:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,.2); }
+.tmr2-stat-pill .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.tmr2-stat-pill .lbl {
+  font-size: .6rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-top: 2px;
+}
+.tmr2-filter-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.tmr2-filter-btn {
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--bg3);
   color: var(--muted);
   font-family: 'DM Sans', sans-serif;
-  font-size: .78rem;
+  font-size: .74rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all .2s;
+  transition: all .18s;
 }
-.ptimer-preset-btn:hover { border-color: var(--purple); color: var(--purple); background: rgba(168,124,245,.08); }
-
-/* Timer warn/danger state */
-.ptimer-warn .ptimer-big-display { color: var(--warn) !important; }
-.ptimer-warn .ptimer-ring-fill { stroke: var(--warn) !important; }
-.ptimer-warn .ptimer-progress-bar { background: var(--warn) !important; }
-.ptimer-danger .ptimer-big-display { color: var(--danger) !important; animation: ptimer-pulse .6s ease-in-out infinite alternate; }
-.ptimer-danger .ptimer-ring-fill { stroke: var(--danger) !important; }
-.ptimer-danger .ptimer-progress-bar { background: var(--danger) !important; }
-@keyframes ptimer-pulse { from { opacity:1; } to { opacity:.4; } }
-
-
-/* ══ PREMIUM TIMER ENHANCEMENTS ══ */
-.ptimer-card, .ptimer-custom-card {
-  background: linear-gradient(135deg, rgba(61,191,255,.05) 0%, var(--bg2) 60%);
-  border: 1px solid rgba(61,191,255,.18);
-  position: relative;
+.tmr2-filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.tmr2-session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.tmr2-sess-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border-radius: 10px;
+  border-left: 3px solid;
+  transition: transform .15s;
+}
+.tmr2-sess-item:hover { transform: translateX(3px); }
+.tmr2-sess-dur {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9rem;
+  font-weight: 700;
+  min-width: 50px;
+}
+.tmr2-sess-meta { flex: 1; min-width: 0; }
+.tmr2-sess-focus {
+  font-size: .82rem;
+  font-weight: 500;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
-.ptimer-card::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(61,191,255,.07) 0%, transparent 70%);
-  pointer-events: none;
+.tmr2-sess-sub {
+  font-size: .68rem;
+  color: var(--muted);
+  margin-top: 1px;
 }
-#pomodoroCard {
-  background: linear-gradient(135deg, rgba(61,232,160,.05) 0%, var(--bg2) 60%);
-  border: 1px solid rgba(61,232,160,.18);
-  position: relative;
-  overflow: hidden;
+/* Week mini bars */
+.tmr2-week-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 48px;
+  margin-top: 14px;
 }
-#pomodoroCard::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 180px; height: 180px;
-  background: radial-gradient(circle, rgba(61,232,160,.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.ptimer-ring-svg {
-  filter: drop-shadow(0 0 8px rgba(61,191,255,.25));
-}
-.ptimer-ring-fill {
-  transition: stroke-dashoffset .9s linear, stroke .3s, filter .3s;
-}
-.ptimer-card .ptimer-ring-fill,
-.ptimer-custom-card .ptimer-ring-fill {
-  filter: drop-shadow(0 0 4px currentColor);
-}
-.ptimer-big-display {
-  text-shadow: 0 0 20px rgba(61,191,255,.35);
-  letter-spacing: .02em;
-}
-.ptimer-btn {
-  position: relative;
-  overflow: hidden;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  font-size: .8rem !important;
-}
-.ptimer-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%);
-  pointer-events: none;
-}
-.ptimer-start:not(.running) {
-  box-shadow: 0 0 18px rgba(61,191,255,.2), inset 0 1px 0 rgba(255,255,255,.08);
-}
-.ptimer-start.running {
-  box-shadow: 0 0 18px rgba(244,185,66,.25), inset 0 1px 0 rgba(255,255,255,.08);
-  animation: timer-btn-pulse 2s ease-in-out infinite;
-}
-@keyframes timer-btn-pulse {
-  0%, 100% { box-shadow: 0 0 18px rgba(244,185,66,.2); }
-  50%       { box-shadow: 0 0 28px rgba(244,185,66,.45); }
-}
-.ptimer-progress-bar-wrap {
-  background: rgba(255,255,255,.04);
-  border-radius: 4px;
-  padding: 1px;
-  border: 1px solid rgba(255,255,255,.05);
-}
-.ptimer-progress-bar {
-  background: linear-gradient(90deg, var(--phy), rgba(61,191,255,.6));
-  box-shadow: 0 0 8px rgba(61,191,255,.4);
-}
-.ptimer-tag {
-  font-size: .6rem !important;
-  letter-spacing: .1em;
-  box-shadow: 0 0 10px rgba(61,191,255,.15);
-}
-.ptimer-title {
-  background: linear-gradient(135deg, var(--fg), rgba(255,255,255,.7));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ptimer-tip {
-  background: rgba(61,191,255,.05);
-  border-radius: 8px;
-  padding: 8px 12px;
-  border-left: 2px solid rgba(61,191,255,.4) !important;
-}
-/* Session log premium */
-#sessionList > div > div {
-  transition: transform .15s, border-color .2s;
-}
-#sessionList > div > div:hover {
-  transform: translateX(3px);
-  border-left-width: 4px !important;
-}
-/* Stats row glow on hover */
-#sessStatsRow > div {
-  transition: transform .15s, box-shadow .2s;
+.tmr2-week-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  min-height: 3px;
+  transition: height .5s cubic-bezier(.34,1.56,.64,1);
   cursor: default;
+  position: relative;
 }
-#sessStatsRow > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+/* Manual log form */
+.tmr2-manual-form {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
-/* Pomodoro premium */
-#pomo-ring-fill {
-  filter: drop-shadow(0 0 5px rgba(61,232,160,.4));
-}
-#pomodoroCard .ptimer-btn {
-  letter-spacing: .04em;
-}
-/* Session log card premium header */
-#section-timer > div:last-of-type {
-  background: linear-gradient(135deg, rgba(61,191,255,.04), var(--bg2) 70%);
-}
-/* Week bar chart premium */
-#sessWeekBars > div > div:last-of-type {
-  border-radius: 5px 5px 0 0;
-  transition: height .5s cubic-bezier(.34,1.56,.64,1), opacity .3s;
-}
-/* Preset buttons glow on hover */
-.ptimer-preset-btn:hover {
-  box-shadow: 0 0 10px rgba(168,124,245,.2);
-}
-/* Custom timer card */
-.ptimer-custom-card {
-  background: linear-gradient(135deg, rgba(168,124,245,.05) 0%, var(--bg2) 60%) !important;
-  border-color: rgba(168,124,245,.18) !important;
-}
-.ptimer-custom-card::before {
-  background: radial-gradient(circle, rgba(168,124,245,.08) 0%, transparent 70%) !important;
-}
-.ptimer-custom-card .ptimer-tag {
-  box-shadow: 0 0 10px rgba(168,124,245,.15);
-}
-.ptimer-custom-card .ptimer-title {
-  background: linear-gradient(135deg, var(--fg), rgba(168,124,245,.8));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Responsive timer */
+/* Responsive */
 @media (max-width: 600px) {
-  .ptimer-card, .ptimer-custom-card { padding: 18px 14px; }
-  .ptimer-top, .ptimer-custom-header { flex-direction: column-reverse; align-items: flex-start; }
-  .ptimer-ring { width: 110px; height: 110px; }
-  .ptimer-ring-svg { width: 110px; height: 110px; }
-  .ptimer-big-display { font-size: 1rem; }
-  .ptimer-inputs { gap: 6px; }
-  .ptimer-input-group input { width: 60px; font-size: .9rem; padding: 8px 6px; }
-  .ptimer-presets { gap: 6px; }
+  .tmr2-hero { padding: 20px 16px 18px; }
+  .tmr2-ring-wrap { width: 130px; height: 130px; }
+  .tmr2-ring-svg { width: 130px; height: 130px; }
+  .tmr2-display { font-size: 1.2rem; }
+  .tmr2-center { gap: 18px; }
+  .tmr2-right { min-width: 0; width: 100%; }
+  .tmr2-btn { padding: 9px 16px; font-size: .75rem; }
+  .tmr2-inputs { gap: 4px; }
+  .tmr2-input-group input { width: 48px; font-size: .85rem; }
 }
 
 
@@ -2382,6 +2501,49 @@
   #storageStatsGrid { grid-template-columns: repeat(3, 1fr) !important; }
 }
 
+
+/* ── TIMER V2 RESPONSIVE ── */
+@media (max-width: 820px) {
+  .tmr2-center { gap: 20px; }
+  .tmr2-ring-wrap { width: 140px; height: 140px; }
+  .tmr2-ring-svg  { width: 140px; height: 140px; }
+  .tmr2-display   { font-size: 1.3rem; }
+}
+@media (max-width: 600px) {
+  .tmr2-hero      { padding: 18px 14px 16px; border-radius: 14px; }
+  .tmr2-center    { flex-direction: column; align-items: center; gap: 16px; }
+  .tmr2-ring-wrap { width: 150px; height: 150px; }
+  .tmr2-ring-svg  { width: 150px; height: 150px; }
+  .tmr2-display   { font-size: 1.4rem; }
+  .tmr2-right     { width: 100%; }
+  .tmr2-presets   { gap: 5px; }
+  .tmr2-preset    { font-size: .68rem; padding: 4px 10px; }
+  .tmr2-inputs    { gap: 4px; }
+  .tmr2-input-group input { width: 50px; font-size: .88rem; }
+  .tmr2-controls  { gap: 6px; }
+  .tmr2-btn       { padding: 9px 14px; font-size: .72rem; }
+  .tmr2-mode-row  { gap: 5px; }
+  .tmr2-mode-btn  { padding: 5px 12px; font-size: .7rem; }
+  .tmr2-stat-pill { padding: 8px 10px; }
+  .tmr2-stat-pill .val { font-size: .9rem; }
+  .tmr2-log-card  { padding: 16px 14px; border-radius: 14px; }
+  .tmr2-manual-form { padding: 12px; }
+  .tmr2-stat-pills { gap: 5px; }
+  .tmr2-filter-row { gap: 4px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .tmr2-filter-btn { flex-shrink: 0; padding: 4px 10px; font-size: .7rem; }
+  .tmr2-session-list { max-height: 300px; }
+  .tmr2-sess-item { padding: 8px 10px; gap: 7px; }
+  .tmr2-sess-focus { font-size: .78rem; }
+  .tmr2-laps { max-height: 90px; }
+  .tmr2-pomo-bar { flex-wrap: wrap; gap: 5px; padding: 8px 10px; }
+}
+@media (max-width: 380px) {
+  .tmr2-ring-wrap { width: 130px; height: 130px; }
+  .tmr2-ring-svg  { width: 130px; height: 130px; }
+  .tmr2-display   { font-size: 1.15rem; }
+  .tmr2-input-group input { width: 44px; }
+  .tmr2-btn       { padding: 8px 10px; font-size: .68rem; }
+}
 </style>
 
   <script type="application/ld+json">
@@ -4187,117 +4349,117 @@
     and paste ABOVE that div)
    ══════════════════════════════════════════════════════ -->
 
+<br/>
+
 <!-- ── TIMER GUIDE CARD ── -->
 <div style="background:linear-gradient(135deg,rgba(61,191,255,.07),rgba(168,124,245,.05));border:1px solid rgba(61,191,255,.25);border-radius:var(--card-radius);padding:24px;margin-top:24px;">
 
-  <!-- Header -->
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
     <div style="width:40px;height:40px;background:rgba(61,191,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">⏱</div>
     <div>
-      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;margin:0 0 3px;">Timer Tab — Complete Guide</h4>
-      <div style="font-size:.78rem;color:var(--muted);">4 timers · auto session logging · date-wise history · pomodoro</div>
+      <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;margin:0 0 3px;">Focus Timer — Complete Guide</h4>
+      <div style="font-size:.78rem;color:var(--muted);">Custom timer · Pomodoro · Lap splits · Session history · Auto backup</div>
     </div>
   </div>
 
-  <!-- 4 Timer Cards in grid -->
+  <!-- Two feature cards -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:22px;">
 
-    <!-- NEET Standard Timer -->
     <div style="background:var(--bg2);border:1px solid rgba(61,191,255,.3);border-radius:12px;padding:18px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
         <div style="width:28px;height:28px;background:rgba(61,191,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">⏱</div>
-        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--phy);">NEET Standard Timer</span>
-      </div>
-      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
-        <li>Exactly <strong style="color:var(--fg);">3 hours 20 minutes</strong> — same as real NEET exam</li>
-        <li>Click <strong style="color:var(--fg);">▶ Start</strong> to begin countdown</li>
-        <li>Click <strong style="color:var(--fg);">⏸ Pause</strong> to pause mid-session</li>
-        <li>Click <strong style="color:var(--fg);">↺ Reset</strong> to restart from 3:20:00</li>
-        <li>⚠️ <strong style="color:var(--warn);">Warning</strong> fires at 5 min left (amber color)</li>
-        <li>🔴 <strong style="color:var(--danger);">Danger</strong> pulses at last 10 seconds</li>
-        <li>✅ <strong style="color:var(--bio);">Session auto-saves</strong> when timer finishes — you can see it in Session History below</li>
-      </ul>
-    </div>
-
-    <!-- Custom Timer -->
-    <div style="background:var(--bg2);border:1px solid rgba(168,124,245,.3);border-radius:12px;padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-        <div style="width:28px;height:28px;background:rgba(168,124,245,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🔧</div>
-        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--purple);">Custom Timer</span>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--phy);">Custom Timer</span>
       </div>
       <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
         <li>Set your own <strong style="color:var(--fg);">hours : minutes : seconds</strong></li>
-        <li>Use <strong style="color:var(--fg);">Quick Presets</strong> — 30m, 1h, 1.5h, 2h, 3h, 3h20m</li>
-        <li>Perfect for <strong style="color:var(--fg);">subject-wise sessions</strong> (e.g. 2h Physics)</li>
-        <li>Use for <strong style="color:var(--fg);">revision sprints</strong> between chapters</li>
-        <li>✅ <strong style="color:var(--bio);">Auto-logs session</strong> when it finishes</li>
-        <li>If you pause before finishing — session is NOT logged (only on complete)</li>
+        <li>Quick presets — <strong style="color:var(--fg);">NEET 3:20</strong>, 25m, 1h, 1.5h, 2h, 3h</li>
+        <li>Click <strong style="color:var(--fg);">▶ Start</strong> → timer counts down live</li>
+        <li>Click <strong style="color:var(--fg);">⏸ Pause</strong> anytime → click again to Resume</li>
+        <li><strong style="color:var(--fg);">⚑ Lap button</strong> — records split times mid-session</li>
+        <li>Click <strong style="color:var(--fg);">↺ Reset</strong> to restart from beginning</li>
+        <li>⚠️ <strong style="color:var(--warn);">Amber</strong> at 5 min left, 🔴 <strong style="color:var(--danger);">Red pulse</strong> at 60 sec left</li>
+        <li>✅ Session <strong style="color:var(--bio);">auto-logs</strong> when timer finishes</li>
+        <li>Type what you're studying in the <strong style="color:var(--fg);">Focus label</strong> box — it saves with the session</li>
       </ul>
     </div>
 
-    <!-- Pomodoro -->
     <div style="background:var(--bg2);border:1px solid rgba(61,232,160,.3);border-radius:12px;padding:18px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
         <div style="width:28px;height:28px;background:rgba(61,232,160,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🍅</div>
-        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--bio);">Pomodoro Timer</span>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--bio);">Pomodoro Mode</span>
       </div>
       <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li>Click <strong style="color:var(--fg);">🍅 Pomodoro</strong> button at the top of the timer</li>
         <li><strong style="color:var(--fg);">🎯 Focus 25m</strong> → study deeply, no distractions</li>
-        <li><strong style="color:var(--fg);">☕ Short Break 5m</strong> → rest eyes, drink water</li>
+        <li><strong style="color:var(--fg);">☕ Short Break 5m</strong> → after each focus session</li>
         <li><strong style="color:var(--fg);">🛌 Long Break 15m</strong> → after every 4 focus sessions</li>
-        <li>4 dots show progress — fills up per completed session</li>
-        <li>Enable <strong style="color:var(--fg);">Auto-start break</strong> for fully automatic cycling</li>
-        <li>✅ Each <strong style="color:var(--bio);">focus session auto-logs 25 min</strong> in history</li>
-        <li>Click <strong style="color:var(--fg);">↺ Reset Dots</strong> to start a new pomodoro set</li>
+        <li>4 dots at bottom show session progress in current set</li>
+        <li>Enable <strong style="color:var(--fg);">Auto-start breaks</strong> for fully hands-free cycling</li>
+        <li>✅ Each focus session <strong style="color:var(--bio);">auto-logs 25 min</strong> in history</li>
+        <li>Click <strong style="color:var(--fg);">↺ Reset dots</strong> to start a fresh pomodoro set</li>
       </ul>
     </div>
 
-    <!-- Session Log -->
+    <div style="background:var(--bg2);border:1px solid rgba(168,124,245,.3);border-radius:12px;padding:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:rgba(168,124,245,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">⚑</div>
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--purple);">Lap / Split Timer</span>
+      </div>
+      <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
+        <li>Only available in <strong style="color:var(--fg);">Custom mode</strong></li>
+        <li>While timer is running, click <strong style="color:var(--fg);">⚑ Lap</strong></li>
+        <li>Records <strong style="color:var(--fg);">total elapsed</strong> + <strong style="color:var(--fg);">split time</strong> from last lap</li>
+        <li>Use it to track <strong style="color:var(--fg);">time per topic</strong> within one session</li>
+        <li>Example: Start 3hr timer → Lap after each chapter → see exactly how long each took</li>
+        <li>Laps show below the ring during the session</li>
+      </ul>
+    </div>
+
     <div style="background:var(--bg2);border:1px solid rgba(244,185,66,.3);border-radius:12px;padding:18px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
         <div style="width:28px;height:28px;background:rgba(244,185,66,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📋</div>
         <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--chem);">Session History</span>
       </div>
       <ul style="color:var(--muted);font-size:.82rem;line-height:1.9;padding-left:16px;margin:0;">
-        <li><strong style="color:var(--fg);">Filter buttons</strong> — Today / This Week / This Month / All Time</li>
-        <li><strong style="color:var(--fg);">Date picker</strong> — select any specific date to see that day</li>
-        <li>Sessions grouped by date with <strong style="color:var(--fg);">daily total</strong> shown</li>
-        <li>Stats row shows Today, Week, Month, All-time totals</li>
-        <li><strong style="color:var(--fg);">Weekly bar chart</strong> at bottom — 7-day visual overview</li>
-        <li><strong style="color:var(--fg);">+ Log Manually</strong> — add any session you forgot to time</li>
-        <li><strong style="color:var(--fg);">⬇ Export CSV</strong> — download full history as spreadsheet</li>
+        <li><strong style="color:var(--fg);">Filter</strong> — Today / This Week / This Month / All Time / Pick Date</li>
+        <li>Sessions grouped by date with <strong style="color:var(--fg);">daily total</strong></li>
+        <li>Stats pills — Today, Week, Month, Total, Streak</li>
+        <li>7-day <strong style="color:var(--fg);">bar chart</strong> at bottom for visual overview</li>
+        <li><strong style="color:var(--fg);">+ Manual Log</strong> — add any session you forgot to time, with correct past date</li>
+        <li><strong style="color:var(--fg);">⬇ CSV</strong> — download full history as spreadsheet</li>
+        <li>All session data included in <strong style="color:var(--fg);">Backup export</strong> — fully restored on import</li>
       </ul>
     </div>
 
   </div>
 
-  <!-- Step-by-step workflow -->
+  <!-- Workflow -->
   <div style="background:var(--bg2);border-radius:12px;padding:18px;margin-bottom:16px;">
-    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;color:var(--fg);">📋 Recommended Daily Workflow</div>
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;">📋 Recommended Daily Workflow</div>
     <div style="display:flex;flex-direction:column;gap:8px;">
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Morning plan</strong> — Open To-Do tab, add today's chapters. Then come to Timer tab.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Morning</strong> — Open To-Do tab, plan chapters. Come to Timer. Type today's focus in the label box.</div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Study sessions</strong> — Use Custom Timer for each subject block (e.g. 2h Bio, 1.5h Chem). Each completes → auto-logged.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Subject blocks</strong> — Use Custom Timer preset (1h Bio, 1.5h Chem etc). Session auto-logs on completion.</div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Between topics</strong> — Switch to Pomodoro mode: 25 min focus → 5 min break. Great for solving PYQs.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">PYQ / MCQ solving</strong> — Switch to Pomodoro. 25 min focus → 5 min break → repeat.</div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Mock test day</strong> — Use NEET Standard Timer (3h20m) to simulate real exam. Session auto-logs when complete.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Mock test day</strong> — Use NEET 3:20 preset. Use Lap after each section (Bio/Chem/Phy). Session logs automatically.</div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">End of day</strong> — Check Session History → filter by Today → see total time studied. Also log hours in Daily tab.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">End of day</strong> — Check Session History → Today filter → see total. Log hours in Daily tab too.</div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start;">
         <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</div>
-        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Weekly review</strong> — Filter by This Week to see the bar chart. Where were your gaps? Plan next week accordingly.</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;"><strong style="color:var(--fg);">Weekly backup</strong> — Go to Backup tab → Export. Timer sessions are included in the JSON file automatically.</div>
       </div>
     </div>
   </div>
@@ -4306,12 +4468,12 @@
   <div style="background:rgba(61,232,160,.06);border:1px solid rgba(61,232,160,.2);border-radius:10px;padding:14px 18px;">
     <div style="font-size:.8rem;font-weight:700;color:var(--bio);margin-bottom:8px;">💡 Pro Tips</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;font-size:.78rem;color:var(--muted);line-height:1.6;">
-      <div>• Session data is stored locally in your browser — export CSV regularly as backup.</div>
-      <div>• Use <strong style="color:var(--fg);">Manual Log</strong> if you studied without opening the app — select the correct past date.</div>
-      <div>• Pomodoro's 4-dot counter resets every 4 sessions — this is called one "Pomodoro set".</div>
-      <div>• NEET timer only logs if you let it run to zero. Resetting early = no log.</div>
-      <div>• Filter by a specific date to see exactly how you studied on that day.</div>
-      <div>• The bar chart shows last 7 days — check it daily to spot consistency gaps early.</div>
+      <div>• Always type in the <strong style="color:var(--fg);">Focus label</strong> before starting — it saves with your session so you know what you studied.</div>
+      <div>• <strong style="color:var(--fg);">Lap splits</strong> help you discover which chapters take the longest. Use that data to plan future sessions.</div>
+      <div>• Use <strong style="color:var(--fg);">Manual Log</strong> if you studied on paper or away from screen — pick the correct past date.</div>
+      <div>• Session data is backed up when you use the <strong style="color:var(--fg);">Backup tab → Export</strong>. Always export weekly.</div>
+      <div>• The <strong style="color:var(--fg);">7-day bar chart</strong> shows your consistency visually. Gaps are easy to spot and fix.</div>
+      <div>• Pomodoro 4-dot counter resets every 4 sessions. After reset = long break earned 🛌.</div>
     </div>
   </div>
 
@@ -4333,685 +4495,217 @@
     </div>
   </section>
   <!-- ═══════════════ SECTION: TIMER ═══════════════ -->
-  <section class="tracker-section" id="section-timer">
-   <div style="background:linear-gradient(135deg,rgba(61,191,255,.08),rgba(168,124,245,.05));border:1px solid rgba(61,191,255,.2);border-radius:var(--card-radius);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:14px;">
-  <div style="width:44px;height:44px;border-radius:11px;background:rgba(61,191,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 0 20px rgba(61,191,255,.2);">⏱</div>
-  <div>
-    <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;margin:0 0 4px;background:linear-gradient(135deg,var(--fg),rgba(61,191,255,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Practice Timer</h2>
-    <p style="color:var(--muted);font-size:.82rem;margin:0;">Simulate real NEET exam conditions. NEET standard · Custom · Pomodoro · Session log.</p>
-  </div>
-</div>
-    <p style="color:var(--muted);font-size:.88rem;margin-bottom:24px;">Simulate real NEET exam conditions. Use the 3 hr 20 min NEET timer or create a custom countdown for any session.</p>
+  <!-- ═══════════════ SECTION: TIMER ═══════════════ -->
+<section class="tracker-section" id="section-timer">
 
-    <!-- NEET STANDARD TIMER -->
-    <div class="ptimer-card">
-      <div class="ptimer-top">
-        <div>
-          <div class="ptimer-tag">NEET STANDARD</div>
-          <div class="ptimer-title">Full Mock Test Timer</div>
-          <div class="ptimer-subtitle">3 hours 20 minutes — Official NEET duration</div>
-        </div>
-        <div class="ptimer-ring" id="neet-ring">
-          <svg class="ptimer-ring-svg" viewBox="0 0 120 120">
-            <circle class="ptimer-ring-bg" cx="60" cy="60" r="52"/>
-            <circle class="ptimer-ring-fill" id="neet-ring-fill" cx="60" cy="60" r="52"
-              stroke-dasharray="326.7" stroke-dashoffset="0"/>
-          </svg>
-          <div class="ptimer-ring-inner">
-            <div class="ptimer-big-display" id="neet-display">3:20:00</div>
-            <div class="ptimer-ring-label" id="neet-ring-label">Ready</div>
-          </div>
-        </div>
-      </div>
-      <div class="ptimer-progress-bar-wrap">
-        <div class="ptimer-progress-bar" id="neet-progress-bar" style="width:100%"></div>
-      </div>
-      <div class="ptimer-controls">
-        <button class="ptimer-btn ptimer-start" id="neet-start-btn" onclick="neetTimerToggle()">▶ Start</button>
-        <button class="ptimer-btn ptimer-reset" onclick="neetTimerReset()">↺ Reset</button>
-      </div>
-      <div class="ptimer-tip">💡 Tip: Attempt 180 questions in this time — same as real NEET. Avg 1 min 6 sec per question.</div>
-    </div>
-
-    <!-- CUSTOM TIMER -->
-    <div class="ptimer-custom-card" id="custom-timer-card">
-      <div class="ptimer-custom-header">
-        <div>
-          <div class="ptimer-tag" style="background:rgba(168,124,245,.15);color:var(--purple);border-color:rgba(168,124,245,.3);">CUSTOM</div>
-          <div class="ptimer-title">Custom Timer</div>
-          <div class="ptimer-subtitle">Set your own hours, minutes and seconds</div>
-        </div>
-        <div class="ptimer-ring">
-          <svg class="ptimer-ring-svg" viewBox="0 0 120 120">
-            <circle class="ptimer-ring-bg" cx="60" cy="60" r="52"/>
-            <circle class="ptimer-ring-fill" id="custom-ring-fill" cx="60" cy="60" r="52"
-              stroke-dasharray="326.7" stroke-dashoffset="0" stroke="var(--purple)"/>
-          </svg>
-          <div class="ptimer-ring-inner">
-            <div class="ptimer-big-display" id="custom-display" style="color:var(--purple);">0:00:00</div>
-            <div class="ptimer-ring-label" id="custom-ring-label">Set time</div>
-          </div>
-        </div>
-      </div>
-      <div class="ptimer-progress-bar-wrap">
-        <div class="ptimer-progress-bar" id="custom-progress-bar" style="width:0%;background:var(--purple)"></div>
-      </div>
-
-      <!-- Custom time inputs -->
-      <div class="ptimer-inputs" id="custom-inputs">
-        <div class="ptimer-input-group">
-          <label>Hours</label>
-          <input type="number" id="custom-h" min="0" max="23" value="1" placeholder="0" oninput="customTimerPreview()" />
-        </div>
-        <div class="ptimer-input-sep">:</div>
-        <div class="ptimer-input-group">
-          <label>Minutes</label>
-          <input type="number" id="custom-m" min="0" max="59" value="30" placeholder="0" oninput="customTimerPreview()" />
-        </div>
-        <div class="ptimer-input-sep">:</div>
-        <div class="ptimer-input-group">
-          <label>Seconds</label>
-          <input type="number" id="custom-s" min="0" max="59" value="0" placeholder="0" oninput="customTimerPreview()" />
-        </div>
-      </div>
-
-      <!-- Preset quick buttons -->
-      <div class="ptimer-presets">
-        <span style="font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;">Quick Presets:</span>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(0,30,0)">30 min</button>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(1,0,0)">1 hr</button>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(1,30,0)">1.5 hr</button>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(2,0,0)">2 hr</button>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(3,0,0)">3 hr</button>
-        <button class="ptimer-preset-btn" onclick="setCustomPreset(3,20,0)">3h 20m</button>
-      </div>
-
-      <div class="ptimer-controls">
-        <button class="ptimer-btn ptimer-start" id="custom-start-btn" onclick="customTimerToggle()" style="background:linear-gradient(135deg,rgba(168,124,245,.2),rgba(168,124,245,.1));border-color:var(--purple);color:var(--purple);">▶ Start</button>
-        <button class="ptimer-btn ptimer-reset" onclick="customTimerReset()">↺ Reset</button>
-      </div>
-      <div class="ptimer-tip" style="border-color:rgba(168,124,245,.2);">💡 Use for subject-wise sessions, revision sprints, or short practice rounds.</div>
-    </div>
-
-<!-- ══════════════════════════════════════════════
-   PASTE THIS CODE BLOCK AFTER THE CUSTOM TIMER CARD'S CLOSING </div>
-   AND BEFORE THE </section> TAG OF section-timer
-   ══════════════════════════════════════════════ -->
-
-<!-- ══ POMODORO TIMER ══ -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:28px;margin-bottom:20px;" id="pomodoroCard">
-  <div style="margin-bottom:18px;">
-    <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;border:1px solid rgba(61,232,160,.3);background:rgba(61,232,160,.1);color:var(--bio);display:inline-block;margin-bottom:8px;">POMODORO</div>
-    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;">Pomodoro Timer</div>
-    <div style="font-size:.82rem;color:var(--muted);">25 min focus → 5 min break → repeat. Classic technique for deep work.</div>
-  </div>
-
-  <!-- Pomodoro ring + controls -->
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;">
-    <!-- Ring -->
-    <div style="position:relative;width:130px;height:130px;flex-shrink:0;">
-      <svg width="130" height="130" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
-        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--bg3)" stroke-width="8"/>
-        <circle cx="60" cy="60" r="52" fill="none" id="pomo-ring-fill"
-          stroke="var(--bio)" stroke-width="8" stroke-linecap="round"
-          stroke-dasharray="326.7" stroke-dashoffset="0" style="transition:stroke-dashoffset .9s linear,stroke .3s;"/>
-      </svg>
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--bio);line-height:1;" id="pomo-display">25:00</div>
-        <div style="font-size:.6rem;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.04em;" id="pomo-ring-label">Focus</div>
-      </div>
-    </div>
-
-    <!-- Info + controls -->
-    <div style="flex:1;min-width:180px;">
-      <!-- Session type tabs -->
-      <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">
-        <button class="ptimer-preset-btn pomo-mode-btn active-pomo" id="pomo-btn-focus" onclick="setPomoMode('focus')"
-          style="border-color:var(--bio);color:var(--bio);background:rgba(61,232,160,.1);">🎯 Focus 25m</button>
-        <button class="ptimer-preset-btn pomo-mode-btn" id="pomo-btn-short" onclick="setPomoMode('short')">☕ Short 5m</button>
-        <button class="ptimer-preset-btn pomo-mode-btn" id="pomo-btn-long" onclick="setPomoMode('long')">🛌 Long 15m</button>
-      </div>
-
-      <!-- Session counter dots -->
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
-        <span style="font-size:.72rem;color:var(--muted);font-weight:600;">Sessions:</span>
-        <div id="pomo-dots" style="display:flex;gap:5px;"></div>
-        <button onclick="resetPomoDots()" style="background:none;border:none;color:var(--muted);font-size:.7rem;cursor:pointer;padding:0 4px;" title="Reset session count">↺</button>
-      </div>
-
-      <!-- Auto-break toggle -->
-      <label style="display:flex;align-items:center;gap:8px;font-size:.82rem;cursor:pointer;margin-bottom:14px;">
-        <input type="checkbox" id="pomo-autobreak" style="accent-color:var(--bio);width:14px;height:14px;" checked />
-        Auto-start break after focus session
-      </label>
-
-      <!-- Controls -->
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="ptimer-btn ptimer-start" id="pomo-start-btn"
-          onclick="pomoToggle()"
-          style="background:linear-gradient(135deg,rgba(61,232,160,.18),rgba(61,232,160,.08));border-color:var(--bio);color:var(--bio);">▶ Start</button>
-        <button class="ptimer-btn ptimer-reset" onclick="pomoReset()">↺ Reset</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Progress bar -->
-  <div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:12px;">
-    <div id="pomo-progress-bar" style="height:100%;width:100%;background:linear-gradient(90deg,var(--bio),rgba(61,232,160,.5));border-radius:3px;transition:width .9s linear;"></div>
-  </div>
-
-  <div style="font-size:.78rem;color:var(--muted);border-left:2px solid rgba(61,232,160,.3);padding-left:10px;line-height:1.6;" id="pomo-tip">
-    💡 After 4 focus sessions, take a long 15-minute break. This is the classic Pomodoro Technique.
-  </div>
-</div>
-
-
-<!-- ══ SESSION LOGGER + HISTORY ══ -->
-<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--card-radius);padding:28px;margin-bottom:20px;">
-
-  <!-- Header -->
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;">
+  <!-- Premium Header -->
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+    <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,rgba(61,191,255,.2),rgba(168,124,245,.1));border:1px solid rgba(61,191,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 20px rgba(61,191,255,.15);flex-shrink:0;">⏱</div>
     <div>
-      <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:20px;border:1px solid rgba(168,124,245,.3);background:rgba(168,124,245,.1);color:var(--purple);display:inline-block;margin-bottom:8px;">SESSION LOG</div>
-      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;">Session History</div>
-      <div style="font-size:.82rem;color:var(--muted);">Log every study session. See your daily, weekly, and total time.</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:800;margin:0 0 3px;background:linear-gradient(135deg,var(--fg) 60%,rgba(61,191,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Focus Timer</h2>
+      <p style="color:var(--muted);font-size:.78rem;margin:0;">Custom countdown · Pomodoro · Lap splits · Auto session log</p>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button onclick="exportSessionLog()"
-        style="padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;"
-        onmouseover="this.style.borderColor='var(--bio)';this.style.color='var(--bio)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">⬇ Export CSV</button>
-      <button onclick="clearAllSessions()"
-        style="padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;"
-        onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Clear All</button>
+    <!-- Live clock -->
+    <div style="margin-left:auto;text-align:right;flex-shrink:0;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--muted);" id="tmr2-live-clock">--:--</div>
+      <div style="font-size:.6rem;color:var(--muted);opacity:.6;margin-top:2px;" id="tmr2-live-date"></div>
     </div>
   </div>
 
-  <!-- Quick Log Form -->
-  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:22px;">
-    <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;">+ Log a Session Manually</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px;">
-      <div>
-        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Date</label>
-        <input type="date" id="sess-date"
-          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
-      </div>
-      <div>
-        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Duration (mins)</label>
-        <input type="number" id="sess-mins" min="1" max="600" placeholder="e.g. 90"
-          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
-      </div>
-      <div>
-        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Subject</label>
-        <select id="sess-subj"
-          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
-          <option value="general">📌 General</option>
-          <option value="bio">🌿 Biology</option>
-          <option value="chem">⚗️ Chemistry</option>
-          <option value="phy">⚡ Physics</option>
-        </select>
-      </div>
-      <div>
-        <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Type</label>
-        <select id="sess-type"
-          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;">
-          <option value="study">📚 Study</option>
-          <option value="revision">🔁 Revision</option>
-          <option value="mock">🧪 Mock Test</option>
-          <option value="pomodoro">🍅 Pomodoro</option>
-          <option value="neet">⏱ NEET Timer</option>
-        </select>
-      </div>
-    </div>
-    <div style="margin-bottom:10px;">
-      <label style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px;">Note (optional)</label>
-      <input type="text" id="sess-note" placeholder="e.g. Chapter 5 Biology, HC Verma Optics..."
-        style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;box-sizing:border-box;" />
-    </div>
-    <button onclick="logSessionManual()"
-      style="background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:9px 20px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .2s;"
-      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">+ Log Session</button>
-  </div>
+  <div class="tmr2-wrap">
 
-  <!-- Stats Summary Row -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:22px;" id="sessStatsRow"></div>
+    <!-- ══ MAIN TIMER CARD ══ -->
+    <div class="tmr2-hero" id="tmr2-hero-card">
 
-  <!-- Date filter pills -->
-  <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;" id="sessFilterRow">
-    <button class="ptimer-preset-btn" id="sess-filter-today" onclick="setSessFilter('today',this)"
-      style="border-color:var(--accent);color:var(--accent);background:rgba(168,124,245,.1);">Today</button>
-    <button class="ptimer-preset-btn" id="sess-filter-week" onclick="setSessFilter('week',this)">This Week</button>
-    <button class="ptimer-preset-btn" id="sess-filter-month" onclick="setSessFilter('month',this)">This Month</button>
-    <button class="ptimer-preset-btn" id="sess-filter-all" onclick="setSessFilter('all',this)">All Time</button>
-    <input type="date" id="sess-filter-date"
-      style="background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.78rem;outline:none;cursor:pointer;"
-      onchange="setSessFilter('date',null,this.value)" title="Pick specific date" />
-  </div>
-
-  <!-- Session list -->
-  <div id="sessionList" style="display:flex;flex-direction:column;gap:8px;max-height:440px;overflow-y:auto;padding-right:2px;"></div>
-
-  <!-- Empty state -->
-  <div id="sessionEmpty" style="display:none;text-align:center;padding:32px 16px;color:var(--muted);">
-    <div style="font-size:2.2rem;margin-bottom:10px;">⏱</div>
-    <div style="font-size:.88rem;">No sessions logged yet. Start a timer or log manually above.</div>
-  </div>
-</div>
-
-
-<!-- ══ TIMER STATS CARD ══ -->
-<div style="background:linear-gradient(135deg,rgba(61,191,255,.07),rgba(168,124,245,.05));border:1px solid rgba(61,191,255,.2);border-radius:var(--card-radius);padding:24px;margin-bottom:20px;">
-  <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:18px;display:flex;align-items:center;gap:8px;">
-    <span style="width:28px;height:28px;background:rgba(61,191,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;">📊</span>
-    Weekly Study Time Overview
-  </div>
-  <div style="display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:8px;" id="sessWeekBars"></div>
-  <div style="display:flex;gap:5px;" id="sessWeekLabels"></div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px;" id="sessWeekStats"></div>
-</div>
-
-
-<!-- ══════ JAVASCRIPT FOR NEW FEATURES ══════ -->
-<script>
-'use strict';
-
-/* ══ POMODORO ══ */
-const POMO_MODES = {
-  focus: { secs: 25*60, label: 'Focus',      color: 'var(--bio)',    tip: '💡 Deep focus mode. Close all distractions. Only NCERT open.' },
-  short: { secs: 5*60,  label: 'Short Break', color: 'var(--chem)',   tip: '☕ Rest your eyes. Stretch. Drink water. Back in 5 minutes.' },
-  long:  { secs: 15*60, label: 'Long Break',  color: 'var(--phy)',    tip: '🛌 Long break earned! Walk around, eat something, breathe.' }
-};
-const _PT_POMO = { mode:'focus', remaining:25*60, total:25*60, running:false, iv:null, sessions:0 };
-
-function setPomoMode(mode) {
-  pomoReset();
-  _PT_POMO.mode = mode;
-  _PT_POMO.total = POMO_MODES[mode].secs;
-  _PT_POMO.remaining = POMO_MODES[mode].secs;
-  document.querySelectorAll('.pomo-mode-btn').forEach(b => {
-    b.style.borderColor = 'var(--border)';
-    b.style.color = 'var(--muted)';
-    b.style.background = 'var(--bg3)';
-  });
-  const activeBtn = document.getElementById('pomo-btn-' + mode);
-  if (activeBtn) {
-    const col = POMO_MODES[mode].color;
-    activeBtn.style.borderColor = col;
-    activeBtn.style.color = col;
-    activeBtn.style.background = col.replace('var(--','rgba(').replace(')',',.1)') ;
-  }
-  _pomoDraw();
-  const tip = document.getElementById('pomo-tip');
-  if (tip) tip.textContent = POMO_MODES[mode].tip;
-}
-
-function _pomoDraw() {
-  const st = _PT_POMO;
-  const m = POMO_MODES[st.mode];
-  const pct = st.total > 0 ? st.remaining / st.total : 0;
-  const CIRC = 326.7;
-  const fill  = document.getElementById('pomo-ring-fill');
-  const disp  = document.getElementById('pomo-display');
-  const lbl   = document.getElementById('pomo-ring-label');
-  const bar   = document.getElementById('pomo-progress-bar');
-  const mins  = String(Math.floor(st.remaining/60)).padStart(2,'0');
-  const secs  = String(st.remaining%60).padStart(2,'0');
-  if (fill) { fill.style.strokeDashoffset = CIRC * (1 - pct); fill.style.stroke = m.color; }
-  if (disp) { disp.textContent = mins + ':' + secs; disp.style.color = m.color; }
-  if (lbl)  lbl.textContent = m.label;
-  if (bar)  { bar.style.width = (pct*100)+'%'; bar.style.background = m.color; }
-  buildPomoDots();
-}
-
-function buildPomoDots() {
-  const el = document.getElementById('pomo-dots');
-  if (!el) return;
-  const count = Math.max(4, _PT_POMO.sessions + 1);
-  el.innerHTML = Array.from({length:4}, (_,i) =>
-    `<div style="width:10px;height:10px;border-radius:50%;background:${i < _PT_POMO.sessions % 4 ? 'var(--bio)' : 'var(--bg3)'};border:1.5px solid ${i < _PT_POMO.sessions % 4 ? 'var(--bio)' : 'var(--border)'};transition:all .2s;"></div>`
-  ).join('') + `<span style="font-size:.7rem;color:var(--muted);margin-left:4px;">${_PT_POMO.sessions} done</span>`;
-}
-
-function pomoToggle() {
-  const st = _PT_POMO;
-  const btn = document.getElementById('pomo-start-btn');
-  const m = POMO_MODES[st.mode];
-  if (st.running) {
-    clearInterval(st.iv); st.running = false;
-    if (btn) { btn.textContent = '▶ Resume'; btn.style.borderColor = m.color; btn.style.color = m.color; btn.classList.remove('running'); }
-  } else {
-    if (st.remaining <= 0) return;
-    if (Notification && Notification.permission === 'default') Notification.requestPermission();
-    st.running = true;
-    if (btn) { btn.textContent = '⏸ Pause'; btn.classList.add('running'); btn.style.borderColor = 'var(--warn)'; btn.style.color = 'var(--warn)'; }
-    playTimerSound('start');
-    st.iv = setInterval(() => {
-      if (st.remaining <= 0) {
-        clearInterval(st.iv); st.running = false;
-        if (btn) { btn.textContent = '▶ Start'; btn.classList.remove('running'); btn.style.borderColor = m.color; btn.style.color = m.color; }
-        _pomoComplete();
-        return;
-      }
-      st.remaining--;
-      _pomoDraw();
-      if (st.remaining <= 10 && st.remaining > 0) playTimerSound('tick');
-    }, 1000);
-  }
-}
-
-function _pomoComplete() {
-  const m = POMO_MODES[_PT_POMO.mode];
-  playTimerSound('complete');
-  if (_PT_POMO.mode === 'focus') {
-    _PT_POMO.sessions++;
-    // Auto log session
-    _autoLogSession(25, 'pomodoro', 'bio', '🍅 Pomodoro focus session');
-    if (Notification && Notification.permission === 'granted')
-      new Notification('🍅 Pomodoro Complete!', { body: 'Great focus session! Take a ' + (_PT_POMO.sessions % 4 === 0 ? 'long (15 min)' : 'short (5 min)') + ' break.' });
-    const autoBreak = document.getElementById('pomo-autobreak');
-    if (autoBreak && autoBreak.checked) {
-      setTimeout(() => { setPomoMode(_PT_POMO.sessions % 4 === 0 ? 'long' : 'short'); pomoToggle(); }, 1500);
-    } else {
-      setPomoMode(_PT_POMO.sessions % 4 === 0 ? 'long' : 'short');
-    }
-  } else {
-    if (Notification && Notification.permission === 'granted')
-      new Notification('⏰ Break Over!', { body: 'Time to get back to focused study!' });
-    setPomoMode('focus');
-  }
-}
-
-function pomoReset() {
-  clearInterval(_PT_POMO.iv);
-  _PT_POMO.running = false;
-  _PT_POMO.remaining = POMO_MODES[_PT_POMO.mode].secs;
-  _PT_POMO.total = POMO_MODES[_PT_POMO.mode].secs;
-  const btn = document.getElementById('pomo-start-btn');
-  const m = POMO_MODES[_PT_POMO.mode];
-  if (btn) { btn.textContent = '▶ Start'; btn.classList.remove('running'); btn.style.borderColor = m.color; btn.style.color = m.color; }
-  _pomoDraw();
-}
-
-function resetPomoDots() {
-  _PT_POMO.sessions = 0;
-  buildPomoDots();
-}
-
-
-/* ══ SESSION LOGGER ══ */
-const SESS_KEY = 'neetopia-sessions-v1';
-
-function getSessions() { try { return JSON.parse(localStorage.getItem(SESS_KEY) || '[]'); } catch { return []; } }
-function setSessions(a) { localStorage.setItem(SESS_KEY, JSON.stringify(a)); }
-
-// Set today's date by default in the log form
-(function initSessDate() {
-  const el = document.getElementById('sess-date');
-  if (el) el.value = new Date().toISOString().slice(0,10);
-})();
-
-function logSessionManual() {
-  const date   = document.getElementById('sess-date')?.value || new Date().toISOString().slice(0,10);
-  const mins   = parseInt(document.getElementById('sess-mins')?.value) || 0;
-  const subj   = document.getElementById('sess-subj')?.value || 'general';
-  const type   = document.getElementById('sess-type')?.value || 'study';
-  const note   = document.getElementById('sess-note')?.value?.trim() || '';
-  if (!mins || mins < 1) { showToast('Enter session duration in minutes', 'info'); return; }
-  _saveSession({ date, mins, subj, type, note });
-  document.getElementById('sess-mins').value = '';
-  document.getElementById('sess-note').value = '';
-  showToast('Session logged! ' + _fmtMins(mins));
-}
-
-function _autoLogSession(mins, type, subj, note) {
-  const date = new Date().toISOString().slice(0,10);
-  _saveSession({ date, mins, subj, type, note });
-}
-
-function _saveSession(obj) {
-  const sessions = getSessions();
-  sessions.unshift({ id: Date.now(), ...obj });
-  setSessions(sessions);
-  renderSessionLog();
-  updateSessStats();
-}
-
-function deleteSession(id) {
-  setSessions(getSessions().filter(s => s.id !== id));
-  renderSessionLog();
-  updateSessStats();
-}
-
-let _sessFilter = 'today';
-
-function setSessFilter(filter, btn, dateVal) {
-  _sessFilter = filter === 'date' ? ('date:' + dateVal) : filter;
-  document.querySelectorAll('#sessFilterRow .ptimer-preset-btn').forEach(b => {
-    b.style.borderColor = 'var(--border)'; b.style.color = 'var(--muted)'; b.style.background = 'var(--bg3)';
-  });
-  if (btn) { btn.style.borderColor = 'var(--accent)'; btn.style.color = 'var(--accent)'; btn.style.background = 'rgba(168,124,245,.1)'; }
-  renderSessionLog();
-}
-
-function _filterSessions(sessions) {
-  const today = new Date().toISOString().slice(0,10);
-  if (_sessFilter === 'today') return sessions.filter(s => s.date === today);
-  if (_sessFilter === 'week') {
-    const d = new Date(); d.setDate(d.getDate() - 6);
-    const wk = d.toISOString().slice(0,10);
-    return sessions.filter(s => s.date >= wk);
-  }
-  if (_sessFilter === 'month') {
-    const month = new Date().toISOString().slice(0,7);
-    return sessions.filter(s => s.date.startsWith(month));
-  }
-  if (_sessFilter.startsWith('date:')) {
-    const d = _sessFilter.slice(5);
-    return sessions.filter(s => s.date === d);
-  }
-  return sessions;
-}
-
-function _fmtMins(m) {
-  if (m < 60) return m + ' min';
-  const h = Math.floor(m/60), r = m%60;
-  return h + 'h' + (r ? ' ' + r + 'm' : '');
-}
-
-const SESS_SUBJ_COLOR = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)', general:'var(--purple)' };
-const SESS_SUBJ_LABEL = { bio:'🌿 Bio', chem:'⚗️ Chem', phy:'⚡ Phy', general:'📌 General' };
-const SESS_TYPE_EMOJI = { study:'📚', revision:'🔁', mock:'🧪', pomodoro:'🍅', neet:'⏱' };
-
-function renderSessionLog() {
-  const list  = document.getElementById('sessionList');
-  const empty = document.getElementById('sessionEmpty');
-  if (!list) return;
-  const all = getSessions();
-  const visible = _filterSessions(all);
-  if (!visible.length) {
-    list.innerHTML = '';
-    if (empty) empty.style.display = 'block';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-
-  // Group by date
-  const grouped = {};
-  visible.forEach(s => {
-    if (!grouped[s.date]) grouped[s.date] = [];
-    grouped[s.date].push(s);
-  });
-
-  let html = '';
-  Object.keys(grouped).sort((a,b) => b.localeCompare(a)).forEach(date => {
-    const dayTotal = grouped[date].reduce((a,s) => a + (s.mins||0), 0);
-    const dateLabel = new Date(date + 'T12:00:00').toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long' });
-    html += `<div style="margin-bottom:12px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
-        <div style="font-size:.75rem;font-weight:700;color:var(--fg);font-family:'Bricolage Grotesque',sans-serif;">${dateLabel}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);font-weight:700;">${_fmtMins(dayTotal)} total</div>
-      </div>`;
-
-    grouped[date].forEach(s => {
-      const col = SESS_SUBJ_COLOR[s.subj] || 'var(--purple)';
-      const subjLbl = SESS_SUBJ_LABEL[s.subj] || '📌 General';
-      const typeEmoji = SESS_TYPE_EMOJI[s.type] || '📚';
-      html += `<div style="background:var(--bg3);border:1px solid var(--border);border-left:3px solid ${col};border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap;">
-        <span style="font-size:1rem;flex-shrink:0;">${typeEmoji}</span>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:.85rem;font-weight:600;">${_fmtMins(s.mins)} <span style="font-weight:400;color:var(--muted);font-size:.75rem;">· ${subjLbl}</span></div>
-          ${s.note ? `<div style="font-size:.72rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.note}</div>` : ''}
+      <!-- Mode row -->
+      <div class="tmr2-mode-row">
+        <span style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">Mode:</span>
+        <button class="tmr2-mode-btn active" id="tmr2-mode-custom" onclick="tmr2SetMode('custom')">Custom</button>
+        <button class="tmr2-mode-btn" id="tmr2-mode-pomo" onclick="tmr2SetMode('pomo')">🍅 Pomodoro</button>
+        <div style="margin-left:auto;display:flex;gap:6px;align-items:center;">
+          <span style="font-size:.68rem;color:var(--muted);">Subject:</span>
+          <select id="tmr2-subj" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:4px 8px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;">
+            <option value="general">📌 General</option>
+            <option value="bio">🌿 Biology</option>
+            <option value="chem">⚗️ Chemistry</option>
+            <option value="phy">⚡ Physics</option>
+          </select>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-          <span style="font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:10px;color:${col};border:1px solid ${col};background:${col.replace('var(--','rgba(').replace(')','')},.08)">${s.type}</span>
-          <button onclick="deleteSession(${s.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.75rem;padding:2px 4px;border-radius:4px;transition:color .15s;" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">✕</button>
+      </div>
+
+      <!-- Center: ring + controls -->
+      <div class="tmr2-center">
+
+        <!-- Ring -->
+        <div class="tmr2-ring-wrap">
+          <svg class="tmr2-ring-svg" viewBox="0 0 160 160">
+            <circle class="tmr2-ring-bg"    cx="80" cy="80" r="68"/>
+            <circle class="tmr2-ring-track" cx="80" cy="80" r="68"/>
+            <circle class="tmr2-ring-fill" id="tmr2-ring-fill" cx="80" cy="80" r="68"
+              stroke-dasharray="427.3" stroke-dashoffset="0" stroke="var(--phy)"/>
+          </svg>
+          <div class="tmr2-ring-inner">
+            <div class="tmr2-display" id="tmr2-display" style="color:var(--phy);">0:00:00</div>
+            <div class="tmr2-sublabel" id="tmr2-sublabel">SET TIME</div>
+            <div style="margin-top:6px;font-size:.62rem;color:var(--muted);font-family:'JetBrains Mono',monospace;" id="tmr2-elapsed-label"></div>
+          </div>
         </div>
-      </div>`;
-    });
 
-    html += '</div>';
-  });
-  list.innerHTML = html;
-}
+        <!-- Right: inputs + controls -->
+        <div class="tmr2-right">
 
-function updateSessStats() {
-  const all = getSessions();
-  const today = new Date().toISOString().slice(0,10);
-  const week = new Date(); week.setDate(week.getDate()-6);
-  const wkStr = week.toISOString().slice(0,10);
-  const month = new Date().toISOString().slice(0,7);
+          <!-- Focus label input -->
+          <input class="tmr2-focus-input" id="tmr2-focus-label"
+            placeholder="📌 What are you studying? (e.g. Cell Biology Ch 8)"
+            maxlength="80" />
 
-  const todayMins  = all.filter(s => s.date === today).reduce((a,s) => a+(s.mins||0), 0);
-  const weekMins   = all.filter(s => s.date >= wkStr).reduce((a,s) => a+(s.mins||0), 0);
-  const monthMins  = all.filter(s => s.date.startsWith(month)).reduce((a,s) => a+(s.mins||0), 0);
-  const totalMins  = all.reduce((a,s) => a+(s.mins||0), 0);
-  const totalSess  = all.length;
+          <!-- Presets (custom mode) -->
+          <div class="tmr2-presets" id="tmr2-presets-row">
+            <button class="tmr2-preset neet-preset" onclick="tmr2ApplyPreset(3,20,0)">NEET 3:20</button>
+            <button class="tmr2-preset" onclick="tmr2ApplyPreset(0,25,0)">25 min</button>
+            <button class="tmr2-preset" onclick="tmr2ApplyPreset(1,0,0)">1 hr</button>
+            <button class="tmr2-preset" onclick="tmr2ApplyPreset(1,30,0)">1.5 hr</button>
+            <button class="tmr2-preset" onclick="tmr2ApplyPreset(2,0,0)">2 hr</button>
+            <button class="tmr2-preset" onclick="tmr2ApplyPreset(3,0,0)">3 hr</button>
+          </div>
 
-  const stats = [
-    { label:'Today',     val: _fmtMins(todayMins),  icon:'☀️', color:'var(--accent)' },
-    { label:'This Week', val: _fmtMins(weekMins),   icon:'📅', color:'var(--bio)' },
-    { label:'This Month',val: _fmtMins(monthMins),  icon:'📆', color:'var(--phy)' },
-    { label:'All Time',  val: _fmtMins(totalMins),  icon:'🏆', color:'var(--chem)' },
-    { label:'Sessions',  val: totalSess,             icon:'📊', color:'var(--purple)' },
-  ];
+          <!-- Custom inputs (custom mode) -->
+          <div class="tmr2-inputs" id="tmr2-custom-inputs">
+            <div class="tmr2-input-group">
+              <label>Hr</label>
+              <input type="number" id="tmr2-h" min="0" max="23" value="0" oninput="tmr2Preview()" />
+            </div>
+            <div class="tmr2-sep">:</div>
+            <div class="tmr2-input-group">
+              <label>Min</label>
+              <input type="number" id="tmr2-m" min="0" max="59" value="25" oninput="tmr2Preview()" />
+            </div>
+            <div class="tmr2-sep">:</div>
+            <div class="tmr2-input-group">
+              <label>Sec</label>
+              <input type="number" id="tmr2-s" min="0" max="59" value="0" oninput="tmr2Preview()" />
+            </div>
+          </div>
 
-  const row = document.getElementById('sessStatsRow');
-  if (row) row.innerHTML = stats.map(s => `
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
-      <div style="font-size:1.1rem;margin-bottom:4px;">${s.icon}</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:${s.color};line-height:1.2;">${s.val}</div>
-      <div style="font-size:.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:3px;">${s.label}</div>
-    </div>`).join('');
+          <!-- Pomodoro info (hidden by default) -->
+          <div id="tmr2-pomo-info" style="display:none;font-size:.78rem;color:var(--muted);margin-bottom:12px;padding:8px 12px;background:rgba(61,232,160,.05);border:1px solid rgba(61,232,160,.15);border-radius:8px;line-height:1.6;">
+            🍅 <strong style="color:var(--bio);">Focus 25m</strong> → ☕ Break 5m → repeat. After 4 sessions: 🛌 Long break 15m.<br>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:6px;cursor:pointer;font-size:.75rem;">
+              <input type="checkbox" id="tmr2-pomo-auto" checked style="accent-color:var(--bio);width:13px;height:13px;" />
+              Auto-start breaks
+            </label>
+          </div>
 
-  buildSessWeekBars(all);
-}
+          <!-- Controls -->
+          <div class="tmr2-controls">
+            <button class="tmr2-btn tmr2-start-btn" id="tmr2-start-btn" onclick="tmr2Toggle()">▶ Start</button>
+            <button class="tmr2-btn tmr2-lap-btn" id="tmr2-lap-btn" onclick="tmr2Lap()" disabled title="Record split time">⚑ Lap</button>
+            <button class="tmr2-btn tmr2-reset-btn" onclick="tmr2Reset()">↺</button>
+          </div>
 
-function buildSessWeekBars(sessions) {
-  const barsEl   = document.getElementById('sessWeekBars');
-  const labelsEl = document.getElementById('sessWeekLabels');
-  const statsEl  = document.getElementById('sessWeekStats');
-  if (!barsEl) return;
+          <!-- Progress bar -->
+          <div class="tmr2-bar-wrap">
+            <div class="tmr2-bar-fill" id="tmr2-bar" style="width:100%;background:linear-gradient(90deg,var(--phy),rgba(61,191,255,.5));"></div>
+          </div>
 
-  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const today = new Date();
-  let maxMins = 0;
-  const data = [];
+        </div>
+      </div>
 
-  for (let i = 6; i >= 0; i--) {
-    const dd = new Date(today); dd.setDate(today.getDate() - i);
-    const ds = dd.toISOString().slice(0,10);
-    const mins = sessions.filter(s => s.date === ds).reduce((a,s) => a+(s.mins||0), 0);
-    data.push({ name: DAYS[dd.getDay()], mins, isToday: i === 0, ds });
-    if (mins > maxMins) maxMins = mins;
-  }
+      <!-- Lap list -->
+      <div class="tmr2-laps" id="tmr2-laps" style="margin-top:14px;display:none;"></div>
 
-  barsEl.innerHTML = data.map(d => {
-    const h = maxMins > 0 ? Math.max(Math.round((d.mins/maxMins)*62), d.mins > 0 ? 4 : 0) : 0;
-    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;">
-      ${d.mins > 0 ? `<div style="font-size:.58rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">${_fmtMins(d.mins)}</div>` : '<div style="font-size:.58rem;color:transparent;">—</div>'}
-      <div style="width:100%;height:${h}px;min-height:${d.mins>0?4:0}px;background:${d.isToday?'var(--accent)':d.mins>0?'rgba(168,124,245,.45)':'var(--bg3)'};border-radius:4px 4px 0 0;transition:height .4s ease;"></div>
-    </div>`;
-  }).join('');
+      <!-- Pomodoro session dots -->
+      <div class="tmr2-pomo-bar" id="tmr2-pomo-bar" style="display:none;">
+        <span style="font-size:.7rem;font-weight:700;color:var(--bio);text-transform:uppercase;letter-spacing:.06em;">Sessions</span>
+        <div id="tmr2-pomo-dots" style="display:flex;gap:5px;"></div>
+        <span style="font-size:.7rem;color:var(--muted);margin-left:6px;" id="tmr2-pomo-count">0 / 4</span>
+        <button onclick="tmr2PomoReset()" style="margin-left:auto;background:none;border:none;color:var(--muted);font-size:.72rem;cursor:pointer;padding:2px 6px;border-radius:5px;transition:color .15s;" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">↺ Reset</button>
+        <label style="display:flex;align-items:center;gap:5px;font-size:.7rem;cursor:pointer;color:var(--muted);">
+          <input type="checkbox" id="tmr2-pomo-sound" checked style="accent-color:var(--bio);width:12px;height:12px;" />
+          Sound
+        </label>
+      </div>
 
-  labelsEl.innerHTML = data.map(d =>
-    `<div style="flex:1;text-align:center;font-size:.6rem;color:${d.isToday?'var(--accent)':'var(--muted)'};font-weight:${d.isToday?'700':'500'};font-family:'JetBrains Mono',monospace;">${d.name.slice(0,1)}</div>`
-  ).join('');
+    </div><!-- /tmr2-hero -->
 
-  const weekTotal  = data.reduce((a,d) => a+d.mins, 0);
-  const activeDays = data.filter(d => d.mins > 0).length;
-  const avg        = activeDays > 0 ? Math.round(weekTotal/activeDays) : 0;
+    <!-- ══ QUICK STATS ROW ══ -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:16px;" id="tmr2-stats-row"></div>
 
-  if (statsEl) statsEl.innerHTML = [
-    { label:'Week Total', val: _fmtMins(weekTotal), color:'var(--accent)' },
-    { label:'Active Days', val: activeDays+'/7', color:'var(--bio)' },
-    { label:'Avg/Active Day', val: _fmtMins(avg), color:'var(--phy)' },
-  ].map(s => `
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;text-align:center;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:${s.color};">${s.val}</div>
-      <div style="font-size:.62rem;color:var(--muted);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">${s.label}</div>
-    </div>`).join('');
-}
+    <!-- ══ SESSION LOG CARD ══ -->
+    <div class="tmr2-log-card">
 
-function exportSessionLog() {
-  const sessions = getSessions();
-  if (!sessions.length) { showToast('No sessions to export', 'info'); return; }
-  let csv = 'Date,Duration (mins),Subject,Type,Note\n';
-  sessions.forEach(s => {
-    csv += `${s.date},${s.mins},"${s.subj}","${s.type}","${(s.note||'').replace(/"/g,'""')}"\n`;
-  });
-  const blob = new Blob([csv], { type:'text/csv' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = 'neetopia-sessions-' + new Date().toISOString().slice(0,10) + '.csv';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast('Sessions exported as CSV!');
-}
+      <div class="tmr2-log-header">
+        <div>
+          <div class="tmr2-log-title">📋 Session History</div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">Auto-logged · Manual entries · Full backup</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button onclick="tmr2ExportCSV()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--bio)';this.style.color='var(--bio)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">⬇ CSV</button>
+          <button onclick="tmr2ClearAll()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Clear</button>
+        </div>
+      </div>
 
-function clearAllSessions() {
-  if (!confirm('Delete ALL session history? This cannot be undone.')) return;
-  setSessions([]);
-  renderSessionLog();
-  updateSessStats();
-  showToast('All sessions cleared', 'info');
-}
+      <!-- Stat pills -->
+      <div class="tmr2-stat-pills" id="tmr2-log-stats"></div>
 
-// Auto-log when NEET or Custom timer completes
-// Patch into existing timer complete logic
-const _origNeetReset = window.neetTimerReset;
-// We hook into the section switch to init sessions
-const _origSwitch = window.switchSection;
-window.switchSection = function(s) {
-  if (_origSwitch) _origSwitch(s);
-  if (s === 'timer') {
-    _pomoDraw();
-    renderSessionLog();
-    updateSessStats();
-  }
-};
+      <!-- Filter row -->
+      <div class="tmr2-filter-row">
+        <button class="tmr2-filter-btn active" id="tmr2-f-today"  onclick="tmr2SetFilter('today',this)">Today</button>
+        <button class="tmr2-filter-btn" id="tmr2-f-week"   onclick="tmr2SetFilter('week',this)">This Week</button>
+        <button class="tmr2-filter-btn" id="tmr2-f-month"  onclick="tmr2SetFilter('month',this)">This Month</button>
+        <button class="tmr2-filter-btn" id="tmr2-f-all"    onclick="tmr2SetFilter('all',this)">All Time</button>
+        <input type="date" id="tmr2-f-date" onchange="tmr2SetFilter('date',null,this.value)"
+          style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:4px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.72rem;outline:none;cursor:pointer;" />
+      </div>
 
-// Init on load
-document.addEventListener('DOMContentLoaded', function() {
-  // Small delay to ensure main tracker JS runs first
-  setTimeout(() => {
-    _pomoDraw();
-    renderSessionLog();
-    updateSessStats();
-    setSessFilter('today', document.getElementById('sess-filter-today'));
-  }, 200);
-});
+      <!-- Manual log -->
+      <div class="tmr2-manual-form">
+        <div style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">+ Manual Log</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:8px;">
+          <div>
+            <label style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:3px;">Date</label>
+            <input type="date" id="tmr2-manual-date" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:3px;">Duration (mins)</label>
+            <input type="number" id="tmr2-manual-mins" min="1" max="600" placeholder="e.g. 90" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;box-sizing:border-box;" />
+          </div>
+          <div>
+            <label style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:3px;">Subject</label>
+            <select id="tmr2-manual-subj" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;box-sizing:border-box;">
+              <option value="general">📌 General</option>
+              <option value="bio">🌿 Biology</option>
+              <option value="chem">⚗️ Chemistry</option>
+              <option value="phy">⚡ Physics</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:3px;">Focus / Note</label>
+            <input type="text" id="tmr2-manual-note" placeholder="What did you study?" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;box-sizing:border-box;" />
+          </div>
+        </div>
+        <button onclick="tmr2ManualLog()" style="background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;">+ Log Session</button>
+      </div>
 
-// Also auto-log when NEET full timer finishes (patch neetTimerToggle)
-const _origNeetToggle = window.neetTimerToggle;
-if (_origNeetToggle) {
-  // We can't easily patch mid-interval, so we expose auto-log globally
-  window._autoLogSession = _autoLogSession;
-}
-</script>
+      <!-- Session list -->
+      <div class="tmr2-session-list" id="tmr2-session-list"></div>
+      <div id="tmr2-empty" style="display:none;text-align:center;padding:28px;color:var(--muted);font-size:.85rem;">
+        <div style="font-size:2rem;margin-bottom:8px;">⏱</div>
+        Start a timer or log manually to build your history.
+      </div>
 
-  </section>
+      <!-- Week bar chart -->
+      <div style="margin-top:18px;">
+        <div style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Last 7 Days</div>
+        <div class="tmr2-week-bars" id="tmr2-week-bars"></div>
+        <div style="display:flex;gap:4px;margin-top:4px;" id="tmr2-week-labels"></div>
+      </div>
 
+    </div><!-- /log card -->
+
+  </div><!-- /tmr2-wrap -->
+
+</section>
 
 <!-- ══════════════════════════════ STORAGE NOTICE BANNER ══════════════════════════════ -->
 
@@ -8588,11 +8282,7 @@ function loadGoals() {
 // ─── EXPORT / IMPORT ───
 function exportData() {
   const d = getData();
-  // Also pull timer sessions (stored under separate key)
-  const sessions = localStorage.getItem('neetopia-sessions-v1');
-  if (sessions) {
-    try { d['__timer_sessions__'] = JSON.parse(sessions); } catch(e) {}
-  }
+  try { d['__timer_sessions__'] = JSON.parse(localStorage.getItem('neetopia-sessions-v1') || '[]'); } catch(e) {}
   const json = JSON.stringify(d, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -8603,7 +8293,7 @@ function exportData() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast('Progress exported!');
+  showToast('Progress + sessions exported!');
 }
 
 function importData(event) {
@@ -8613,9 +8303,8 @@ function importData(event) {
   reader.onload = function(e) {
     try {
       const imported = JSON.parse(e.target.result);
-   if (typeof imported !== 'object' || imported === null) throw new Error('Invalid');
+      if (typeof imported !== 'object' || imported === null) throw new Error('Invalid');
       if (!confirm('This will REPLACE all your current data with the imported backup. Continue?')) return;
-      // Restore timer sessions if present
       if (imported['__timer_sessions__']) {
         localStorage.setItem('neetopia-sessions-v1', JSON.stringify(imported['__timer_sessions__']));
         delete imported['__timer_sessions__'];
@@ -9507,6 +9196,552 @@ function _getAudioCtx() {
   if (!_audioCtx) _audioCtx = new _AudioCtx();
   return _audioCtx;
 }
+
+
+/* ═══════════════════════════════════════════
+   TIMER v2 — Premium Focus Timer
+   ═══════════════════════════════════════════ */
+'use strict';
+(function(){
+
+const SESS_KEY2 = 'neetopia-sessions-v1';
+const CIRC2 = 427.3; // 2π × 68
+
+/* ── helpers ── */
+function getSess2(){ try{ return JSON.parse(localStorage.getItem(SESS_KEY2)||'[]'); }catch{ return []; } }
+function setSess2(a){ localStorage.setItem(SESS_KEY2, JSON.stringify(a)); }
+function fmtSecs(s){
+  const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sc=s%60;
+  return h+':'+String(m).padStart(2,'0')+':'+String(sc).padStart(2,'0');
+}
+function fmtMins2(m){
+  if(m<60) return m+'m';
+  const h=Math.floor(m/60), r=m%60;
+  return h+'h'+(r?' '+r+'m':'');
+}
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+
+/* ── state ── */
+const S = {
+  mode: 'custom',       // 'custom' | 'pomo'
+  total: 0,
+  remaining: 0,
+  running: false,
+  iv: null,
+  lapStart: 0,          // elapsed seconds at last lap
+  laps: [],
+  elapsed: 0,
+  // pomo state
+  pomoSess: 0,          // completed focus sessions
+  pomoPhase: 'focus',   // 'focus'|'short'|'long'
+};
+
+const POMO = { focus:25*60, short:5*60, long:15*60 };
+const SUBJ_COLOR = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)', general:'var(--purple)' };
+const SUBJ_LABEL = { bio:'🌿 Bio', chem:'⚗️ Chem', phy:'⚡ Phy', general:'📌 General' };
+
+/* ── live clock ── */
+function tickClock(){
+  const n=new Date();
+  const el=document.getElementById('tmr2-live-clock');
+  const de=document.getElementById('tmr2-live-date');
+  if(el) el.textContent=n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  if(de) de.textContent=n.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+}
+setInterval(tickClock,1000); tickClock();
+
+/* ── draw ── */
+function draw(){
+  const dispEl    = document.getElementById('tmr2-display');
+  const subEl     = document.getElementById('tmr2-sublabel');
+  const fillEl    = document.getElementById('tmr2-ring-fill');
+  const barEl     = document.getElementById('tmr2-bar');
+  const elapsedEl = document.getElementById('tmr2-elapsed-label');
+  const heroEl    = document.getElementById('tmr2-hero-card');
+
+  const pct = S.total>0 ? S.remaining/S.total : (S.mode==='custom'?1:1);
+  const offset = CIRC2*(1-pct);
+
+  // colour by state
+  let col = 'var(--phy)';
+  if(S.mode==='pomo'){
+    col = S.pomoPhase==='focus' ? 'var(--bio)' : S.pomoPhase==='short' ? 'var(--chem)' : 'var(--phy)';
+  }
+  if(S.remaining<=60 && S.running) col='var(--danger)';
+  else if(S.remaining<=300 && S.running) col='var(--warn)';
+
+  if(dispEl){ dispEl.textContent=fmtSecs(S.remaining); dispEl.style.color=col; }
+  if(fillEl){ fillEl.style.strokeDashoffset=offset; fillEl.style.stroke=col; }
+  if(barEl){
+    barEl.style.width=(pct*100)+'%';
+    barEl.style.background=`linear-gradient(90deg,${col},${col.replace('var(--','rgba(').replace(')','')},.4))`;
+    barEl.style.boxShadow=`0 0 8px ${col.replace('var(--','rgba(').replace(')','')},.4)`;
+  }
+
+  // sublabel
+  if(subEl){
+    if(S.mode==='pomo'){
+      const phases={focus:'🎯 Focus',short:'☕ Short Break',long:'🛌 Long Break'};
+      subEl.textContent=phases[S.pomoPhase]||'Focus';
+    } else {
+      subEl.textContent = S.running ? 'RUNNING' : S.remaining===S.total && S.total>0 ? 'READY' : S.remaining===0 ? 'DONE' : 'PAUSED';
+    }
+  }
+
+  // elapsed
+  if(elapsedEl && S.total>0){
+    const elapsed=S.total-S.remaining;
+    elapsedEl.textContent = elapsed>0 ? 'elapsed: '+fmtSecs(elapsed) : '';
+  }
+
+  // hero card danger pulse
+  if(heroEl){
+    heroEl.style.borderColor = S.remaining<=60 && S.running
+      ? 'rgba(255,95,95,.5)'
+      : S.remaining<=300 && S.running
+      ? 'rgba(244,185,66,.4)'
+      : S.mode==='pomo' ? 'rgba(61,232,160,.22)' : 'rgba(61,191,255,.22)';
+  }
+  drawPomodoroDots();
+}
+
+/* ── preview (custom mode) ── */
+function tmr2Preview(){
+  if(S.running) return;
+  const h=parseInt(document.getElementById('tmr2-h')?.value)||0;
+  const m=parseInt(document.getElementById('tmr2-m')?.value)||0;
+  const sc=parseInt(document.getElementById('tmr2-s')?.value)||0;
+  const total=h*3600+m*60+sc;
+  S.total=total; S.remaining=total; S.elapsed=0;
+  draw();
+}
+window.tmr2Preview=tmr2Preview;
+
+/* ── apply preset ── */
+function tmr2ApplyPreset(h,m,s){
+  if(S.running) return;
+  document.getElementById('tmr2-h').value=h;
+  document.getElementById('tmr2-m').value=m;
+  document.getElementById('tmr2-s').value=s;
+  tmr2Preview();
+  showToast('Timer set: '+fmtSecs(h*3600+m*60+s),'info');
+}
+window.tmr2ApplyPreset=tmr2ApplyPreset;
+
+/* ── mode switch ── */
+function tmr2SetMode(mode){
+  if(S.running){ showToast('Stop timer before switching mode','info'); return; }
+  S.mode=mode;
+  // update buttons
+  document.getElementById('tmr2-mode-custom')?.classList.toggle('active', mode==='custom');
+  document.getElementById('tmr2-mode-pomo')?.classList.toggle('pomo-active', mode==='pomo');
+  document.getElementById('tmr2-mode-custom')?.classList.remove('pomo-active');
+  document.getElementById('tmr2-mode-pomo')?.classList.remove('active');
+  // show/hide elements
+  const customEls=['tmr2-presets-row','tmr2-custom-inputs'];
+  customEls.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display=mode==='custom'?'':'none';
+  });
+  document.getElementById('tmr2-pomo-info').style.display=mode==='pomo'?'block':'none';
+  document.getElementById('tmr2-pomo-bar').style.display=mode==='pomo'?'flex':'none';
+  document.getElementById('tmr2-lap-btn').style.display=mode==='custom'?'':'none';
+
+  if(mode==='pomo'){
+    S.pomoPhase='focus';
+    S.total=POMO.focus; S.remaining=POMO.focus;
+    S.laps=[];
+  }
+  draw();
+  clearLapDisplay();
+}
+window.tmr2SetMode=tmr2SetMode;
+
+/* ── toggle start/pause ── */
+function tmr2Toggle(){
+  const btn=document.getElementById('tmr2-start-btn');
+  if(S.running){
+    // pause
+    clearInterval(S.iv); S.running=false;
+    if(btn){ btn.textContent='▶ Resume'; btn.classList.remove('running'); }
+    draw();
+  } else {
+    if(S.mode==='custom' && S.total===0){ showToast('Set a time first!','info'); return; }
+    if(S.remaining===0){
+      // restart
+      if(S.mode==='pomo'){
+        S.total=POMO[S.pomoPhase]; S.remaining=POMO[S.pomoPhase];
+      } else {
+        tmr2Preview();
+      }
+    }
+    if(Notification && Notification.permission==='default') Notification.requestPermission();
+    S.running=true;
+    document.getElementById('tmr2-lap-btn').disabled=false;
+    if(btn){ btn.textContent='⏸ Pause'; btn.classList.add('running'); }
+    if(typeof playTimerSound==='function') playTimerSound('start');
+    S.iv=setInterval(()=>{
+      if(S.remaining<=0){
+        clearInterval(S.iv); S.running=false;
+        document.getElementById('tmr2-lap-btn').disabled=true;
+        _tmr2Complete();
+        return;
+      }
+      S.remaining--;
+      S.elapsed=S.total-S.remaining;
+      if(S.remaining===300 && typeof playTimerSound==='function') playTimerSound('warn');
+      if(S.remaining<=10 && S.remaining>0 && typeof playTimerSound==='function') playTimerSound('tick');
+      draw();
+    },1000);
+    draw();
+  }
+}
+window.tmr2Toggle=tmr2Toggle;
+
+/* ── complete ── */
+function _tmr2Complete(){
+  const btn=document.getElementById('tmr2-start-btn');
+  if(btn){ btn.textContent='▶ Start'; btn.classList.remove('running'); }
+  if(typeof playTimerSound==='function') playTimerSound('complete');
+
+  const focus=document.getElementById('tmr2-focus-label')?.value?.trim()||'';
+  const subj=document.getElementById('tmr2-subj')?.value||'general';
+  const elapsedMins=Math.round(S.elapsed/60);
+
+  if(S.mode==='pomo'){
+    _tmr2PomoComplete(elapsedMins, focus, subj);
+  } else {
+    // log session
+    if(elapsedMins>0) _tmr2SaveSess(elapsedMins, focus, subj, 'custom');
+    if(Notification && Notification.permission==='granted')
+      new Notification('⏰ Timer Done!', { body: focus||('Session complete — '+fmtMins2(elapsedMins)+' logged!') });
+    S.remaining=0; draw();
+    tmr2RenderLog(); tmr2RenderStats();
+  }
+}
+
+/* ── pomo complete ── */
+function _tmr2PomoComplete(elapsedMins, focus, subj){
+  if(S.pomoPhase==='focus'){
+    S.pomoSess++;
+    if(elapsedMins>0) _tmr2SaveSess(elapsedMins, focus||'🍅 Pomodoro', subj, 'pomodoro');
+    if(Notification && Notification.permission==='granted')
+      new Notification('🍅 Focus Done!', { body: 'Take a break. '+S.pomoSess+' session(s) done.' });
+    const autoBreak=document.getElementById('tmr2-pomo-auto')?.checked;
+    const nextPhase=S.pomoSess%4===0?'long':'short';
+    S.pomoPhase=nextPhase;
+    S.total=POMO[nextPhase]; S.remaining=POMO[nextPhase];
+    if(autoBreak){ setTimeout(()=>tmr2Toggle(),1200); }
+  } else {
+    if(Notification && Notification.permission==='granted')
+      new Notification('⏰ Break Over!', { body: 'Back to focus!' });
+    S.pomoPhase='focus';
+    S.total=POMO.focus; S.remaining=POMO.focus;
+    const autoBreak=document.getElementById('tmr2-pomo-auto')?.checked;
+    if(autoBreak){ setTimeout(()=>tmr2Toggle(),1200); }
+  }
+  draw();
+  tmr2RenderLog(); tmr2RenderStats();
+  const btn=document.getElementById('tmr2-start-btn');
+  if(btn){ btn.textContent='▶ Start'; btn.classList.remove('running'); }
+}
+
+/* ── reset ── */
+function tmr2Reset(){
+  clearInterval(S.iv); S.running=false; S.elapsed=0;
+  S.laps=[];
+  if(S.mode==='pomo'){
+    S.pomoPhase='focus'; S.total=POMO.focus; S.remaining=POMO.focus;
+  } else {
+    tmr2Preview();
+  }
+  const btn=document.getElementById('tmr2-start-btn');
+  if(btn){ btn.textContent='▶ Start'; btn.classList.remove('running'); }
+  document.getElementById('tmr2-lap-btn').disabled=true;
+  clearLapDisplay();
+  draw();
+}
+window.tmr2Reset=tmr2Reset;
+
+/* ── lap ── */
+function tmr2Lap(){
+  if(!S.running) return;
+  const elapsed=S.total-S.remaining;
+  const split=elapsed-S.lapStart;
+  S.laps.push({ n:S.laps.length+1, elapsed, split });
+  S.lapStart=elapsed;
+  renderLaps();
+}
+window.tmr2Lap=tmr2Lap;
+
+function renderLaps(){
+  const el=document.getElementById('tmr2-laps');
+  if(!el) return;
+  if(!S.laps.length){ el.style.display='none'; return; }
+  el.style.display='flex';
+  el.innerHTML=S.laps.map(l=>`
+    <div class="tmr2-lap-item">
+      <span class="tmr2-lap-num">Lap ${l.n}</span>
+      <span class="tmr2-lap-time">${fmtSecs(l.elapsed)}</span>
+      <span class="tmr2-lap-split">+${fmtSecs(l.split)}</span>
+    </div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+function clearLapDisplay(){
+  const el=document.getElementById('tmr2-laps');
+  if(el){ el.style.display='none'; el.innerHTML=''; }
+}
+
+/* ── pomodoro dots ── */
+function drawPomodoroDots(){
+  const el=document.getElementById('tmr2-pomo-dots');
+  const cnt=document.getElementById('tmr2-pomo-count');
+  if(!el) return;
+  const cyclePos=S.pomoSess%4;
+  el.innerHTML=Array.from({length:4},(_,i)=>{
+    const filled=i<cyclePos;
+    const active=i===cyclePos && S.running && S.pomoPhase==='focus';
+    return `<div class="tmr2-pomo-dot ${filled?'filled':''} ${active?'active':''}"></div>`;
+  }).join('');
+  if(cnt) cnt.textContent=(S.pomoSess%4)+' / 4';
+}
+
+function tmr2PomoReset(){
+  S.pomoSess=0; drawPomodoroDots();
+}
+window.tmr2PomoReset=tmr2PomoReset;
+
+/* ── save session ── */
+function _tmr2SaveSess(mins, note, subj, type){
+  const sess=getSess2();
+  sess.unshift({ id:Date.now(), date:todayStr(), mins, note, subj, type });
+  setSess2(sess);
+}
+
+/* ── render log ── */
+let _tmr2Filter='today';
+
+function tmr2SetFilter(f, btn, dateVal){
+  _tmr2Filter = f==='date' ? ('date:'+dateVal) : f;
+  document.querySelectorAll('.tmr2-filter-btn').forEach(b=>{
+    b.classList.remove('active');
+  });
+  if(btn) btn.classList.add('active');
+  tmr2RenderLog();
+}
+window.tmr2SetFilter=tmr2SetFilter;
+
+function _filterSess2(sess){
+  const today=todayStr();
+  if(_tmr2Filter==='today') return sess.filter(s=>s.date===today);
+  if(_tmr2Filter==='week'){
+    const d=new Date(); d.setDate(d.getDate()-6);
+    return sess.filter(s=>s.date>=d.toISOString().slice(0,10));
+  }
+  if(_tmr2Filter==='month'){
+    return sess.filter(s=>s.date.startsWith(new Date().toISOString().slice(0,7)));
+  }
+  if(_tmr2Filter.startsWith('date:')){
+    const d=_tmr2Filter.slice(5);
+    return sess.filter(s=>s.date===d);
+  }
+  return sess;
+}
+
+function tmr2RenderLog(){
+  const list=document.getElementById('tmr2-session-list');
+  const empty=document.getElementById('tmr2-empty');
+  if(!list) return;
+  const all=getSess2();
+  const visible=_filterSess2(all);
+
+  if(!visible.length){
+    list.innerHTML='';
+    if(empty) empty.style.display='block';
+    return;
+  }
+  if(empty) empty.style.display='none';
+
+  // group by date
+  const grouped={};
+  visible.forEach(s=>{ if(!grouped[s.date]) grouped[s.date]=[]; grouped[s.date].push(s); });
+
+  list.innerHTML=Object.keys(grouped).sort((a,b)=>b.localeCompare(a)).map(date=>{
+    const dayTotal=grouped[date].reduce((a,s)=>a+(s.mins||0),0);
+    const dateLabel=new Date(date+'T12:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'});
+    return `<div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+        <span style="font-size:.72rem;font-weight:700;color:var(--fg);">${dateLabel}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);">${fmtMins2(dayTotal)}</span>
+      </div>`+
+      grouped[date].map(s=>{
+        const col=SUBJ_COLOR[s.subj]||'var(--purple)';
+        const typeEmoji={custom:'⏱',pomodoro:'🍅',manual:'✍️',neet:'🎯'}[s.type]||'📚';
+        return `<div class="tmr2-sess-item" style="border-left-color:${col};">
+          <span style="font-size:.9rem;">${typeEmoji}</span>
+          <div class="tmr2-sess-meta">
+            <div class="tmr2-sess-focus">${s.note||'—'}</div>
+            <div class="tmr2-sess-sub">${SUBJ_LABEL[s.subj]||'General'} · ${s.type}</div>
+          </div>
+          <span class="tmr2-sess-dur" style="color:${col};">${fmtMins2(s.mins)}</span>
+          <button onclick="tmr2DeleteSess(${s.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.72rem;padding:2px 5px;border-radius:4px;transition:color .15s;" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">✕</button>
+        </div>`;
+      }).join('')+'</div>';
+  }).join('');
+}
+window.tmr2RenderLog=tmr2RenderLog;
+
+function tmr2DeleteSess(id){
+  setSess2(getSess2().filter(s=>s.id!==id));
+  tmr2RenderLog(); tmr2RenderStats();
+}
+window.tmr2DeleteSess=tmr2DeleteSess;
+
+/* ── stats ── */
+function tmr2RenderStats(){
+  const all=getSess2();
+  const today=todayStr();
+  const week=new Date(); week.setDate(week.getDate()-6);
+  const wkStr=week.toISOString().slice(0,10);
+  const month=new Date().toISOString().slice(0,7);
+
+  const todayM = all.filter(s=>s.date===today).reduce((a,s)=>a+(s.mins||0),0);
+  const weekM  = all.filter(s=>s.date>=wkStr).reduce((a,s)=>a+(s.mins||0),0);
+  const monthM = all.filter(s=>s.date.startsWith(month)).reduce((a,s)=>a+(s.mins||0),0);
+  const totalM = all.reduce((a,s)=>a+(s.mins||0),0);
+  const streak = _tmr2Streak(all);
+
+  const stats=[
+    {label:'Today',  val:fmtMins2(todayM),  color:'var(--accent)'},
+    {label:'Week',   val:fmtMins2(weekM),   color:'var(--bio)'},
+    {label:'Month',  val:fmtMins2(monthM),  color:'var(--phy)'},
+    {label:'Total',  val:fmtMins2(totalM),  color:'var(--chem)'},
+    {label:'Streak', val:streak+'d 🔥',     color:'var(--purple)'},
+  ];
+
+  const row=document.getElementById('tmr2-stats-row');
+  if(row) row.innerHTML=stats.map(s=>`
+    <div class="tmr2-stat-pill">
+      <div class="val" style="color:${s.color};">${s.val}</div>
+      <div class="lbl">${s.label}</div>
+    </div>`).join('');
+
+  // also the log stats row
+  const logStats=document.getElementById('tmr2-log-stats');
+  if(logStats) logStats.innerHTML=stats.map(s=>`
+    <div class="tmr2-stat-pill" style="min-width:70px;">
+      <div class="val" style="color:${s.color};font-size:.9rem;">${s.val}</div>
+      <div class="lbl">${s.label}</div>
+    </div>`).join('');
+
+  tmr2BuildWeekBars(all);
+}
+
+function _tmr2Streak(all){
+  const dates=new Set(all.map(s=>s.date));
+  let streak=0;
+  for(let i=0;i<90;i++){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    if(dates.has(d.toISOString().slice(0,10))) streak++;
+    else if(i>0) break;
+  }
+  return streak;
+}
+
+function tmr2BuildWeekBars(all){
+  const barsEl=document.getElementById('tmr2-week-bars');
+  const labelsEl=document.getElementById('tmr2-week-labels');
+  if(!barsEl) return;
+  const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today=new Date();
+  let maxMins=0;
+  const data=[];
+  for(let i=6;i>=0;i--){
+    const dd=new Date(today); dd.setDate(today.getDate()-i);
+    const ds=dd.toISOString().slice(0,10);
+    const mins=all.filter(s=>s.date===ds).reduce((a,s)=>a+(s.mins||0),0);
+    data.push({name:DAYS[dd.getDay()],mins,isToday:i===0});
+    if(mins>maxMins) maxMins=mins;
+  }
+  barsEl.innerHTML=data.map(d=>{
+    const h=maxMins>0?Math.max(Math.round(d.mins/maxMins*44),d.mins>0?4:0):0;
+    return `<div class="tmr2-week-bar" style="height:${h}px;background:${d.isToday?'var(--accent)':d.mins>0?'rgba(168,124,245,.45)':'rgba(255,255,255,.06)'};" title="${d.name}: ${fmtMins2(d.mins)}"></div>`;
+  }).join('');
+  if(labelsEl) labelsEl.innerHTML=data.map(d=>`
+    <div style="flex:1;text-align:center;font-size:.58rem;color:${d.isToday?'var(--accent)':'var(--muted)'};font-weight:${d.isToday?'700':'500'};font-family:'JetBrains Mono',monospace;">${d.name.slice(0,1)}</div>`).join('');
+}
+
+/* ── manual log ── */
+function tmr2ManualLog(){
+  const date=document.getElementById('tmr2-manual-date')?.value||todayStr();
+  const mins=parseInt(document.getElementById('tmr2-manual-mins')?.value)||0;
+  const subj=document.getElementById('tmr2-manual-subj')?.value||'general';
+  const note=document.getElementById('tmr2-manual-note')?.value?.trim()||'';
+  if(!mins||mins<1){ showToast('Enter duration in minutes','info'); return; }
+  const sess=getSess2();
+  sess.unshift({id:Date.now(),date,mins,note,subj,type:'manual'});
+  setSess2(sess);
+  document.getElementById('tmr2-manual-mins').value='';
+  document.getElementById('tmr2-manual-note').value='';
+  tmr2RenderLog(); tmr2RenderStats();
+  showToast('Session logged! '+fmtMins2(mins));
+}
+window.tmr2ManualLog=tmr2ManualLog;
+
+/* ── export CSV ── */
+function tmr2ExportCSV(){
+  const sess=getSess2();
+  if(!sess.length){ showToast('No sessions to export','info'); return; }
+  let csv='Date,Duration (mins),Subject,Type,Note\n';
+  sess.forEach(s=>{ csv+=`${s.date},${s.mins},"${s.subj}","${s.type}","${(s.note||'').replace(/"/g,'""')}"\n`; });
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='neetopia-sessions-'+todayStr()+'.csv';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('Sessions exported!');
+}
+window.tmr2ExportCSV=tmr2ExportCSV;
+
+/* ── clear all ── */
+function tmr2ClearAll(){
+  if(!confirm('Delete ALL session history? Cannot be undone.')) return;
+  setSess2([]);
+  tmr2RenderLog(); tmr2RenderStats();
+  showToast('All sessions cleared','info');
+}
+window.tmr2ClearAll=tmr2ClearAll;
+
+/* ── init ── */
+function tmr2Init(){
+  // set today in manual date
+  const md=document.getElementById('tmr2-manual-date');
+  if(md) md.value=todayStr();
+  // set default custom inputs
+  tmr2Preview();
+  tmr2SetMode('custom');
+  tmr2RenderLog();
+  tmr2RenderStats();
+  draw();
+}
+
+// init on section switch
+const _origSwitch2=window.switchSection;
+window.switchSection=function(s){
+  if(_origSwitch2) _origSwitch2(s);
+  if(s==='timer'){ tmr2Init(); }
+};
+
+// also init on DOMContentLoaded if timer section is active
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{ tmr2Init(); },300);
+});
+
+})();
+
+
 
 function playTimerSound(type) {
   // type: 'start' | 'complete' | 'warn' | 'tick'
