@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEETopia Book Reader — Read PDFs Like a Real Book</title>
+  <meta name="description" content="Free NEET PDF Book Reader. Read Biology, Chemistry, Physics PDFs in a real book-like interface with page flip, highlights, notes and bookmarks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+/* ═══════════════════════════════════════════
+   NEETOPIA DESIGN TOKENS (matches main site)
+═══════════════════════════════════════════ */
+:root {
+  --bg:      #07090f;
+  --bg2:     #0c0f1a;
+  --bg3:     #111827;
+  --fg:      #e8edf5;
+  --muted:   #6b7a99;
+  --border:  #1e2a45;
+  --accent:  #a87cf5;
+  --bio:     #3de8a0;
+  --chem:    #f4b942;
+  --phy:     #3dbfff;
+  --danger:  #ff5f5f;
+  --purple:  #a87cf5;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius:  14px;
+}
+[data-theme="light"] {
+  --bg:      #f5f7fa;
+  --bg2:     #ffffff;
+  --bg3:     #eef1f7;
+  --fg:      #111827;
+  --muted:   #6b7280;
+  --border:  #e5e7eb;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ═══════ NAVBAR (exact copy from NEETopia) ═══════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(7,9,15,.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 1.1rem;
+  color: var(--fg); text-decoration: none;
+}
+.logo-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--phy));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; flex-shrink: 0;
+}
+.nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.nav-links li a {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 10px; border-radius: 8px;
+  color: var(--muted); font-size: .82rem; font-weight: 500;
+  text-decoration: none; transition: all .2s;
+}
+.nav-links li a:hover { background: var(--bg3); color: var(--fg); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.btn-donate {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(168,124,245,.15), rgba(168,124,245,.08));
+  border: 1px solid rgba(168,124,245,.35);
+  color: var(--accent); font-weight: 600; font-size: .82rem;
+  text-decoration: none; transition: all .2s; white-space: nowrap;
+}
+.btn-donate:hover { background: rgba(168,124,245,.25); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--muted); transition: all .2s;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.btn-nav {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--accent); color: var(--bg);
+  padding: 8px 18px; border-radius: 8px;
+  font-weight: 700; font-size: .82rem;
+  text-decoration: none; transition: all .2s; white-space: nowrap;
+}
+.btn-nav:hover { opacity: .85; transform: translateY(-1px); }
+.nav-hamburger {
+  display: none; width: 36px; height: 36px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  align-items: center; justify-content: center;
+  cursor: pointer; color: var(--fg);
+}
+@media (max-width: 820px) {
+  .nav-links { display: none; }
+  .btn-nav { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ═══════ MOBILE MENU ═══════ */
+.mobile-nav-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+  z-index: 900;
+}
+.mobile-nav-overlay.open { display: block; }
+.nav-mobile-menu {
+  position: fixed; top: 64px; right: 0; bottom: 0; width: 280px;
+  background: var(--bg2); border-left: 1px solid var(--border);
+  z-index: 950; display: flex; flex-direction: column;
+  gap: 4px; padding: 16px; overflow-y: auto;
+  transform: translateX(100%); transition: transform .3s ease;
+}
+.nav-mobile-menu.open { transform: translateX(0); }
+.nav-mobile-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 10px;
+  color: var(--muted); font-size: .88rem; font-weight: 500;
+  text-decoration: none; transition: all .15s;
+}
+.nav-mobile-menu a:hover { background: var(--bg3); color: var(--fg); }
+.mobile-divider { height: 1px; background: var(--border); margin: 8px 0; }
+.mobile-actions { display: flex; flex-direction: column; gap: 8px; padding: 4px 0; }
+
+/* ═══════ MAIN PAGE LAYOUT ═══════ */
+.page-wrap { max-width: 1300px; margin: 0 auto; padding: 32px 20px 80px; }
+
+/* ═══════ SHELF / LIBRARY ═══════ */
+#shelview { display: block; }
+#readerview { display: none; }
+
+.shelf-hero {
+  text-align: center;
+  padding: 48px 20px 40px;
+  background: linear-gradient(135deg, rgba(168,124,245,.08), rgba(61,191,255,.05));
+  border: 1px solid rgba(168,124,245,.2);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.shelf-hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(168,124,245,.12), transparent 70%);
+  pointer-events: none;
+}
+.shelf-hero h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.shelf-hero p { color: var(--muted); font-size: .95rem; margin-bottom: 28px; }
+.hl { color: var(--accent); }
+
+/* Add Book Section */
+.add-book-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 32px;
+}
+.add-book-section h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px;
+}
+.add-book-section p { font-size: .82rem; color: var(--muted); margin-bottom: 20px; }
+.book-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px; margin-bottom: 16px;
+}
+.form-group label {
+  display: block; font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--muted); margin-bottom: 6px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; color: var(--fg);
+  font-family: 'DM Sans', sans-serif; font-size: .88rem;
+  outline: none; transition: border-color .2s; box-sizing: border-box;
+}
+.form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+.form-group textarea { resize: vertical; min-height: 70px; }
+.btn-primary {
+  background: var(--accent); color: var(--bg);
+  border: none; border-radius: 8px;
+  padding: 11px 24px; font-family: 'DM Sans', sans-serif;
+  font-size: .88rem; font-weight: 700; cursor: pointer;
+  transition: all .2s; display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-primary:hover { opacity: .85; transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--bg3); color: var(--fg);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 11px 20px; font-family: 'DM Sans', sans-serif;
+  font-size: .85rem; font-weight: 600; cursor: pointer;
+  transition: all .2s; display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Guide tabs inside add section */
+.guide-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.guide-tab {
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--muted); font-size: .78rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.guide-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.guide-content { display: none; }
+.guide-content.active { display: block; }
+.guide-box {
+  background: var(--bg3); border-radius: 10px;
+  padding: 16px 18px; font-size: .82rem;
+  color: var(--muted); line-height: 1.8;
+  border-left: 3px solid var(--phy);
+}
+.guide-box ol, .guide-box ul { padding-left: 16px; margin-top: 6px; }
+.guide-box li { margin-bottom: 4px; }
+.guide-box code {
+  font-family: var(--font-mono); font-size: .78rem;
+  background: var(--bg2); padding: 1px 6px; border-radius: 4px;
+  color: var(--phy);
+}
+
+/* Book Cards Grid */
+.section-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.2rem; font-weight: 800;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+.book-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+  cursor: pointer;
+  position: relative;
+}
+.book-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168,124,245,.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+.book-spine {
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--phy));
+}
+.book-spine.bio-spine { background: linear-gradient(90deg, var(--bio), rgba(61,232,160,.4)); }
+.book-spine.chem-spine { background: linear-gradient(90deg, var(--chem), rgba(244,185,66,.4)); }
+.book-spine.phy-spine { background: linear-gradient(90deg, var(--phy), rgba(61,191,255,.4)); }
+.book-spine.gen-spine { background: linear-gradient(90deg, var(--purple), rgba(168,124,245,.4)); }
+.book-cover-art {
+  height: 130px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem;
+  background: var(--bg3);
+}
+.book-info { padding: 14px 16px; }
+.book-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: .92rem;
+  margin-bottom: 4px; line-height: 1.3;
+}
+.book-author { font-size: .72rem; color: var(--muted); margin-bottom: 10px; }
+.book-progress-bar {
+  height: 4px; background: var(--bg3); border-radius: 2px;
+  overflow: hidden; margin-bottom: 6px;
+}
+.book-progress-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--bio));
+  transition: width .5s ease;
+}
+.book-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .7rem; color: var(--muted);
+}
+.book-badge {
+  font-size: .62rem; padding: 2px 8px; border-radius: 10px;
+  font-weight: 700; border: 1px solid;
+}
+.book-actions {
+  display: flex; gap: 6px; padding: 0 14px 14px;
+}
+.book-btn {
+  flex: 1; padding: 7px; border-radius: 7px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--muted); font-size: .75rem; font-weight: 600;
+  cursor: pointer; transition: all .15s; font-family: 'DM Sans', sans-serif;
+  text-align: center;
+}
+.book-btn:hover { border-color: var(--accent); color: var(--accent); }
+.book-btn.open-btn {
+  background: var(--accent); color: var(--bg); border-color: var(--accent);
+}
+.book-btn.open-btn:hover { opacity: .85; }
+
+/* ═══════ READER VIEW ═══════ */
+#readerview {
+  position: fixed; inset: 64px 0 0 0;
+  background: var(--bg);
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+}
+#readerview.open { display: flex; }
+
+/* Reader Toolbar */
+.reader-toolbar {
+  height: 52px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.reader-toolbar::-webkit-scrollbar { display: none; }
+.rtool-sep { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+.rtool-btn {
+  height: 34px; padding: 0 12px;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--muted); border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 600;
+  cursor: pointer; transition: all .15s; white-space: nowrap;
+  display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+}
+.rtool-btn:hover { border-color: var(--accent); color: var(--accent); }
+.rtool-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.rtool-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+.rtool-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: .88rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 200px; color: var(--fg);
+}
+.page-nav-group {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+.page-num-input {
+  width: 52px; text-align: center;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 6px;
+  color: var(--fg); font-family: var(--font-mono); font-size: .82rem;
+  outline: none;
+}
+.page-num-input:focus { border-color: var(--accent); }
+.page-total { font-size: .78rem; color: var(--muted); font-family: var(--font-mono); }
+
+/* Color picker for highlight */
+.color-picker-row {
+  display: flex; gap: 4px; align-items: center; flex-shrink: 0;
+}
+.color-dot {
+  width: 18px; height: 18px; border-radius: 50%; cursor: pointer;
+  border: 2px solid transparent; transition: transform .15s;
+  flex-shrink: 0;
+}
+.color-dot:hover, .color-dot.selected { transform: scale(1.3); border-color: var(--fg); }
+
+/* Reader body */
+.reader-body {
+  flex: 1; overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: #1a1a2e;
+  background-image: radial-gradient(ellipse at center, rgba(168,124,245,.03) 0%, transparent 70%);
+}
+
+/* Book container (two-page spread) */
+.book-spread {
+  display: flex;
+  gap: 0;
+  position: relative;
+  max-height: calc(100% - 40px);
+  filter: drop-shadow(0 20px 60px rgba(0,0,0,.6));
+}
+
+/* Single page canvas wrapper */
+.page-wrapper {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.page-wrapper canvas { display: block; }
+
+/* Page fold effect (CSS 3D) */
+.page-wrapper.right-page {
+  transform-origin: left center;
+}
+.page-wrapper.left-page {
+  transform-origin: right center;
+}
+
+/* Book fold shadow */
+.book-gutter {
+  width: 20px; flex-shrink: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.05) 40%, rgba(0,0,0,.05) 60%, rgba(0,0,0,.4) 100%);
+  position: relative; z-index: 2;
+}
+
+/* Page turn animation */
+@keyframes pageTurnRight {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(-90deg); }
+}
+@keyframes pageTurnLeft {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(90deg); }
+}
+.page-turning-right {
+  animation: pageTurnRight .35s ease-in-out;
+  transform-origin: right center;
+}
+.page-turning-left {
+  animation: pageTurnLeft .35s ease-in-out;
+  transform-origin: left center;
+}
+
+/* Mobile: single page */
+@media (max-width: 700px) {
+  .book-spread { gap: 0; }
+  .book-gutter { display: none; }
+  .page-wrapper.right-page { display: none; }
+  .reader-toolbar { gap: 5px; padding: 0 10px; }
+  .rtool-title { max-width: 100px; font-size: .78rem; }
+}
+
+/* Navigation arrows */
+.nav-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 80px;
+  background: rgba(168,124,245,.12);
+  border: 1px solid rgba(168,124,245,.3);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--accent); font-size: 1.2rem;
+  transition: all .2s; z-index: 10; user-select: none;
+}
+.nav-arrow:hover {
+  background: rgba(168,124,245,.25);
+  transform: translateY(-50%) scale(1.05);
+}
+.nav-arrow.left { left: 12px; }
+.nav-arrow.right { right: 12px; }
+@media (max-width: 700px) {
+  .nav-arrow { width: 36px; height: 60px; font-size: 1rem; }
+}
+
+/* Progress bar at bottom */
+.reader-progress {
+  height: 4px; flex-shrink: 0;
+  background: var(--border);
+  position: relative;
+}
+.reader-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--bio));
+  transition: width .4s ease;
+}
+
+/* Loading overlay */
+.loading-overlay {
+  position: absolute; inset: 0;
+  background: rgba(7,9,15,.9);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px; z-index: 50;
+}
+.loading-spinner {
+  width: 48px; height: 48px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: var(--font-mono); font-size: .82rem; color: var(--muted);
+}
+
+/* Highlight overlay on canvas */
+.highlight-layer {
+  position: absolute; top: 0; left: 0;
+  pointer-events: none; z-index: 5;
+}
+.highlight-active .highlight-layer { pointer-events: all; cursor: crosshair; }
+
+/* Sticky note popup */
+.note-popup {
+  position: absolute; z-index: 20;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px;
+  min-width: 220px; max-width: 300px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  display: none;
+}
+.note-popup.open { display: block; }
+.note-popup textarea {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 7px; padding: 8px 10px; color: var(--fg);
+  font-family: 'DM Sans', sans-serif; font-size: .82rem;
+  outline: none; resize: vertical; min-height: 70px; box-sizing: border-box;
+  line-height: 1.6; margin-bottom: 8px;
+}
+.note-popup textarea:focus { border-color: var(--accent); }
+
+/* Sidebar: Bookmarks + TOC */
+.reader-sidebar {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 280px; background: var(--bg2);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform .3s ease;
+  z-index: 30; display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.reader-sidebar.open { transform: translateX(0); }
+.sidebar-header {
+  padding: 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.sidebar-header h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: .92rem;
+}
+.sidebar-close {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: 1rem; padding: 4px;
+}
+.sidebar-tabs {
+  display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.stab {
+  flex: 1; padding: 10px 8px; border: none; background: none;
+  color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: .78rem; font-weight: 600; cursor: pointer; transition: all .15s;
+  border-bottom: 2px solid transparent;
+}
+.stab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.sidebar-content { flex: 1; overflow-y: auto; padding: 12px; }
+.bookmark-item, .toc-item {
+  padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--border); margin-bottom: 6px;
+  cursor: pointer; transition: all .15s; font-size: .82rem;
+}
+.bookmark-item:hover, .toc-item:hover { border-color: var(--accent); color: var(--accent); }
+.bookmark-item { display: flex; align-items: center; justify-content: space-between; }
+.bm-del {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: .75rem; padding: 2px 5px;
+  border-radius: 4px; transition: color .15s;
+}
+.bm-del:hover { color: var(--danger); }
+
+/* Thumbnail strip */
+.thumb-strip {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; padding: 8px 12px;
+  background: rgba(7,9,15,.85); backdrop-filter: blur(10px);
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow-x: auto; max-width: calc(100vw - 120px);
+  scrollbar-width: none; z-index: 15;
+  transition: opacity .3s;
+}
+.thumb-strip::-webkit-scrollbar { display: none; }
+.thumb-strip.hidden { opacity: 0; pointer-events: none; }
+.thumb-page {
+  width: 36px; height: 50px; flex-shrink: 0;
+  border-radius: 4px; overflow: hidden;
+  border: 2px solid transparent; cursor: pointer;
+  transition: all .15s; background: #eee;
+}
+.thumb-page.current { border-color: var(--accent); }
+.thumb-page img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Zoom controls */
+.zoom-group {
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+}
+.zoom-val {
+  font-family: var(--font-mono); font-size: .75rem; color: var(--muted);
+  min-width: 40px; text-align: center;
+}
+
+/* Annotation tag badge */
+.annot-badge {
+  position: absolute; z-index: 8;
+  background: rgba(168,124,245,.85);
+  color: #fff; font-size: .62rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 10px; cursor: pointer;
+  white-space: nowrap; pointer-events: all;
+}
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 20px;
+  font-size: .85rem; font-weight: 600; z-index: 9999;
+  transform: translateY(100px); opacity: 0;
+  transition: all .3s; display: flex; align-items: center; gap: 8px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: var(--bio); color: var(--bio); }
+.toast.info { border-color: var(--phy); color: var(--phy); }
+
+/* Empty state */
+.empty-shelf {
+  text-align: center; padding: 60px 20px;
+  color: var(--muted);
+}
+.empty-shelf .ei { font-size: 3rem; margin-bottom: 14px; }
+.empty-shelf h3 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: var(--fg);
+}
+
+/* Backup section */
+.backup-section {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin-bottom: 32px;
+}
+.backup-section h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1rem; font-weight: 800; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.backup-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Footer (NEETopia exact) */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 60px 24px 32px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 40px;
+}
+.footer-brand p { font-size: .82rem; color: var(--muted); margin: 8px 0 16px; line-height: 1.7; }
+.footer-social { display: flex; gap: 8px; flex-wrap: wrap; }
+.social-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg3);
+  font-size: .78rem; font-weight: 600; color: var(--muted);
+  text-decoration: none; transition: all .2s;
+}
+.social-btn:hover { border-color: var(--accent); color: var(--accent); }
+.footer-col h4 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: .82rem; font-weight: 700; margin-bottom: 14px;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+}
+.footer-col a {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 0; font-size: .82rem; color: var(--muted);
+  text-decoration: none; transition: color .15s;
+}
+.footer-col a:hover { color: var(--fg); }
+.footer-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 24px; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-bottom-left p { font-size: .78rem; color: var(--muted); }
+.footer-bottom-left span { color: var(--danger); }
+.footer-legal { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-legal a { font-size: .75rem; color: var(--muted); text-decoration: none; }
+.footer-legal a:hover { color: var(--fg); }
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .books-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+
+/* Night / sepia modes */
+.reader-body.mode-sepia { background: #2d2009; }
+.reader-body.mode-sepia canvas { filter: sepia(.6) brightness(.9); }
+.reader-body.mode-white { background: #e8e8e8; }
+
+/* Scrollable single-page mode */
+.scroll-mode .book-spread { flex-direction: column; align-items: center; overflow-y: auto; max-height: 100%; gap: 8px; padding: 20px; }
+.scroll-mode .book-gutter { display: none; }
+.scroll-mode .page-wrapper.right-page { display: block; }
+.scroll-mode .nav-arrow { display: none; }
+
+/* Responsive toolbar on mobile */
+@media (max-width: 500px) {
+  .rtool-btn span:not(.rtool-icon) { display: none; }
+  .rtool-title { max-width: 80px; }
+}
+
+/* Focus / reading mode */
+.reading-mode-focus .reader-toolbar { opacity: 0; pointer-events: none; }
+.reading-mode-focus:hover .reader-toolbar { opacity: 1; pointer-events: all; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+  <ul class="nav-links">
+    <li><a href="syllabus/neet-syllabus.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Syllabus</a></li>
+    <li><a href="subjects/biology/neet-biology.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3de8a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Biology</a></li>
+    <li><a href="subjects/chemistry/neet-chemistry.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f4b942" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      Chemistry</a></li>
+    <li><a href="subjects/physics/neet-physics.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3dbfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+      Physics</a></li>
+    <li><a href="tools/neet-progress-tracker.html" style="color:var(--purple);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Tracker</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="donate.html" class="btn-donate">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Donate
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile overlay & menu -->
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="syllabus/neet-syllabus.html">📚 Syllabus</a>
+  <a href="subjects/biology/neet-biology.html">🌿 Biology</a>
+  <a href="subjects/chemistry/neet-chemistry.html">⚗️ Chemistry</a>
+  <a href="subjects/physics/neet-physics.html">⚡ Physics</a>
+  <a href="neet-pyq/neet-previous-year-questions.html">❓ PYQs</a>
+  <a href="tools/neet-progress-tracker.html" style="color:var(--purple);">📊 Progress Tracker</a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions">
+    <a href="donate.html" class="btn-donate">💜 Donate</a>
+  </div>
+</div>
+
+<!-- ══════════════════ READER VIEW (full-screen overlay) ══════════════════ -->
+<div id="readerview">
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loadingText">Opening book...</div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="reader-toolbar" id="readerToolbar">
+    <button class="rtool-btn" onclick="closeReader()" title="Back to library">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Library</span>
+    </button>
+    <div class="rtool-sep"></div>
+    <div class="rtool-title" id="readerBookTitle">Book</div>
+    <div class="rtool-sep"></div>
+
+    <!-- Page navigation -->
+    <div class="page-nav-group">
+      <button class="rtool-btn" onclick="prevPage()" title="Previous page">◀</button>
+      <input type="number" class="page-num-input" id="pageNumInput" min="1" value="1" onchange="jumpToPage(parseInt(this.value))" />
+      <span class="page-total" id="pageTotalLabel">/ 1</span>
+      <button class="rtool-btn" onclick="nextPage()" title="Next page">▶</button>
+    </div>
+    <div class="rtool-sep"></div>
+
+    <!-- Zoom -->
+    <div class="zoom-group">
+      <button class="rtool-btn" onclick="changeZoom(-0.1)" title="Zoom out">−</button>
+      <span class="zoom-val" id="zoomVal">100%</span>
+      <button class="rtool-btn" onclick="changeZoom(0.1)" title="Zoom in">+</button>
+      <button class="rtool-btn" onclick="fitPage()" title="Fit page">Fit</button>
+    </div>
+    <div class="rtool-sep"></div>
+
+    <!-- Highlight tools -->
+    <button class="rtool-btn" id="hlBtn" onclick="toggleHighlightMode()" title="Highlight text">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <span>Highlight</span>
+    </button>
+    <!-- Highlight colors -->
+    <div class="color-picker-row" id="colorPicker" style="display:none;">
+      <div class="color-dot selected" style="background:#fde047;" data-color="#fde047" onclick="setHlColor('#fde047',this)" title="Yellow"></div>
+      <div class="color-dot" style="background:#86efac;" data-color="#86efac" onclick="setHlColor('#86efac',this)" title="Green"></div>
+      <div class="color-dot" style="background:#93c5fd;" data-color="#93c5fd" onclick="setHlColor('#93c5fd',this)" title="Blue"></div>
+      <div class="color-dot" style="background:#fca5a5;" data-color="#fca5a5" onclick="setHlColor('#fca5a5',this)" title="Red"></div>
+      <div class="color-dot" style="background:#c084fc;" data-color="#c084fc" onclick="setHlColor('#c084fc',this)" title="Purple"></div>
+    </div>
+    <button class="rtool-btn" onclick="toggleUnderlineMode()" id="ulBtn" title="Underline">
+      <span style="text-decoration:underline;">U</span> <span>Line</span>
+    </button>
+    <div class="rtool-sep"></div>
+
+    <!-- Note / Bookmark -->
+    <button class="rtool-btn" onclick="addBookmark()" title="Add bookmark">🔖 <span>Bookmark</span></button>
+    <button class="rtool-btn" onclick="toggleSidebar()" title="Bookmarks & TOC">☰ <span>Panel</span></button>
+    <div class="rtool-sep"></div>
+
+    <!-- View modes -->
+    <button class="rtool-btn" id="spreadBtn" onclick="toggleSpread()" title="Single/double page">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="10" height="18" rx="1"/><rect x="13" y="3" width="10" height="18" rx="1"/></svg>
+      <span>Spread</span>
+    </button>
+    <button class="rtool-btn" onclick="toggleScrollMode()" id="scrollBtn" title="Scroll mode">↕ <span>Scroll</span></button>
+    <button class="rtool-btn" onclick="cycleReadingMode()" id="modeBtn" title="Reading mode">🌙 <span>Mode</span></button>
+    <button class="rtool-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</button>
+    <div class="rtool-sep"></div>
+
+    <!-- Focus mode -->
+    <button class="rtool-btn" onclick="toggleFocusMode()" id="focusBtn" title="Focus mode (auto-hide toolbar)">🎯 <span>Focus</span></button>
+  </div>
+
+  <!-- Reader Body -->
+  <div class="reader-body" id="readerBody" tabindex="0">
+
+    <!-- Left Nav Arrow -->
+    <div class="nav-arrow left" onclick="prevPage()">‹</div>
+
+    <!-- Book Spread -->
+    <div class="book-spread" id="bookSpread">
+      <!-- Left page (even) -->
+      <div class="page-wrapper left-page" id="leftPage">
+        <canvas id="leftCanvas"></canvas>
+        <canvas class="highlight-layer" id="leftHL"></canvas>
+        <svg class="highlight-layer" id="leftSVG" style="position:absolute;top:0;left:0;pointer-events:none;"></svg>
+      </div>
+      <!-- Gutter -->
+      <div class="book-gutter"></div>
+      <!-- Right page (odd) -->
+      <div class="page-wrapper right-page" id="rightPage">
+        <canvas id="rightCanvas"></canvas>
+        <canvas class="highlight-layer" id="rightHL"></canvas>
+        <svg class="highlight-layer" id="rightSVG" style="position:absolute;top:0;left:0;pointer-events:none;"></svg>
+      </div>
+    </div>
+
+    <!-- Right Nav Arrow -->
+    <div class="nav-arrow right" onclick="nextPage()">›</div>
+
+    <!-- Page Thumbnail Strip -->
+    <div class="thumb-strip hidden" id="thumbStrip"></div>
+
+    <!-- Note popup -->
+    <div class="note-popup" id="notePopup">
+      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:8px;">📝 Note</div>
+      <textarea id="noteText" placeholder="Type your note here..."></textarea>
+      <div style="display:flex;gap:6px;">
+        <button onclick="saveNote()" class="btn-primary" style="flex:1;padding:7px;font-size:.78rem;justify-content:center;">Save</button>
+        <button onclick="closeNotePopup()" class="btn-secondary" style="padding:7px 12px;font-size:.78rem;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reader Progress Bar -->
+  <div class="reader-progress">
+    <div class="reader-progress-fill" id="readerProgressFill" style="width:0%"></div>
+  </div>
+
+  <!-- Sidebar (Bookmarks + TOC) -->
+  <div class="reader-sidebar" id="readerSidebar">
+    <div class="sidebar-header">
+      <h3>📑 Panel</h3>
+      <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+    </div>
+    <div class="sidebar-tabs">
+      <button class="stab active" onclick="switchSTab('bookmarks',this)">🔖 Bookmarks</button>
+      <button class="stab" onclick="switchSTab('highlights',this)">🖊 Highlights</button>
+      <button class="stab" onclick="switchSTab('notes',this)">📝 Notes</button>
+    </div>
+    <div class="sidebar-content" id="sidebarContent"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ SHELF VIEW ══════════════════ -->
+<div id="shelview">
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <div class="shelf-hero">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(168,124,245,.12);border:1px solid rgba(168,124,245,.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;">📖 Free PDF Book Reader</div>
+    <h1>Read Like a <span class="hl">Real Book</span></h1>
+    <p>Upload any NEET PDF — NCERT, modules, PYQs — and read in a beautiful book-like interface.<br>Highlights, bookmarks, notes — all saved privately in your browser.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <div style="background:rgba(61,232,160,.08);border:1px solid rgba(61,232,160,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--bio);">🔒 100% Private</div>
+      <div style="background:rgba(61,191,255,.08);border:1px solid rgba(61,191,255,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--phy);">📦 Local Storage</div>
+      <div style="background:rgba(244,185,66,.08);border:1px solid rgba(244,185,66,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--chem);">📚 Book Feel</div>
+      <div style="background:rgba(168,124,245,.08);border:1px solid rgba(168,124,245,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--purple);">✨ Free Forever</div>
+    </div>
+  </div>
+
+  <!-- Add Book -->
+  <div class="add-book-section">
+    <h2>📥 Add a Book / PDF</h2>
+    <p>You can load a PDF three ways: paste a direct URL (GitHub raw / Google Drive), upload from your device, or use a Google Drive share link. All annotations save to your browser automatically.</p>
+
+    <!-- Guide tabs -->
+    <div class="guide-tabs">
+      <button class="guide-tab active" onclick="switchGuide('github',this)">GitHub Raw URL</button>
+      <button class="guide-tab" onclick="switchGuide('drive',this)">Google Drive</button>
+      <button class="guide-tab" onclick="switchGuide('local',this)">Local Upload</button>
+    </div>
+    <div id="guide-github" class="guide-content active">
+      <div class="guide-box">
+        <strong style="color:var(--phy);">How to get a GitHub Raw PDF URL:</strong>
+        <ol>
+          <li>Upload your PDF to any GitHub repository (or use a public repo).</li>
+          <li>Open the file on GitHub — click the PDF filename.</li>
+          <li>Click the <code>Raw</code> button. Copy the URL from your browser.</li>
+          <li>It should look like: <code>https://raw.githubusercontent.com/user/repo/main/book.pdf</code></li>
+          <li>Paste that URL in the field below and click Add Book.</li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(255,95,95,.08);border-radius:6px;border-left:2px solid var(--danger);font-size:.78rem;">
+          ⚠️ <strong>CORS note:</strong> GitHub raw URLs work directly. If any URL fails due to CORS, use local upload instead.
+        </div>
+      </div>
+    </div>
+    <div id="guide-drive" class="guide-content">
+      <div class="guide-box">
+        <strong style="color:var(--chem);">How to use Google Drive PDF:</strong>
+        <ol>
+          <li>Upload your PDF to Google Drive.</li>
+          <li>Right-click the file → <code>Share</code> → set to "Anyone with the link".</li>
+          <li>Copy the share link. It looks like: <code>https://drive.google.com/file/d/FILE_ID/view?usp=sharing</code></li>
+          <li>Paste the share link below — the reader will auto-convert it to a direct download link.</li>
+          <li>Format used: <code>https://drive.google.com/uc?export=download&id=FILE_ID</code></li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(244,185,66,.08);border-radius:6px;border-left:2px solid var(--chem);font-size:.78rem;">
+          💡 Drive PDFs may ask for CORS permission in some browsers. If it fails, download and use local upload.
+        </div>
+      </div>
+    </div>
+    <div id="guide-local" class="guide-content">
+      <div class="guide-box">
+        <strong style="color:var(--bio);">Upload from your device:</strong>
+        <ol>
+          <li>Click the <strong>Upload PDF</strong> button below.</li>
+          <li>Select any PDF from your device — NCERT, modules, PYQ books, notes.</li>
+          <li>The file loads directly in the browser — nothing is uploaded to any server.</li>
+          <li>Your annotations (highlights, notes, bookmarks) are saved locally per book.</li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(61,232,160,.08);border-radius:6px;border-left:2px solid var(--bio);font-size:.78rem;">
+          ✅ Local upload is the most reliable method. No internet needed after uploading.
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="book-form-grid" style="margin-top:18px;">
+      <div class="form-group">
+        <label>Book Title *</label>
+        <input type="text" id="newTitle" placeholder="e.g. NCERT Biology Class 12" />
+      </div>
+      <div class="form-group">
+        <label>Author / Source</label>
+        <input type="text" id="newAuthor" placeholder="e.g. NCERT, HC Verma" />
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="newSubject">
+          <option value="bio">🌿 Biology</option>
+          <option value="chem">⚗️ Chemistry</option>
+          <option value="phy">⚡ Physics</option>
+          <option value="gen">📌 General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>PDF URL (GitHub Raw / Drive)</label>
+        <input type="url" id="newUrl" placeholder="https://raw.githubusercontent.com/.../book.pdf" />
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn-primary" onclick="addBook()">+ Add Book</button>
+      <button class="btn-secondary" onclick="document.getElementById('localFile').click()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload PDF from Device
+      </button>
+      <input type="file" id="localFile" accept=".pdf" style="display:none" onchange="handleLocalPDF(event)" />
+    </div>
+  </div>
+
+  <!-- Book Library -->
+  <div id="librarySection">
+    <h2 class="section-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      My Book Shelf
+      <span id="bookCount" style="font-size:.78rem;font-weight:500;color:var(--muted);"></span>
+    </h2>
+    <div class="books-grid" id="booksGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Backup -->
+  <div class="backup-section">
+    <h2>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Backup Annotations
+    </h2>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:14px;">All your highlights, bookmarks, and notes are stored in your browser only. Export them regularly so you don't lose progress.</p>
+    <div class="backup-btns">
+      <button class="btn-secondary" onclick="exportAnnotations()">
+        ⬇ Export All Annotations (JSON)
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('importAnnotFile').click()">
+        ⬆ Import Annotations
+      </button>
+      <button class="btn-secondary" style="border-color:rgba(255,95,95,.3);color:var(--danger);" onclick="clearAllAnnotations()">
+        🗑 Clear All Data
+      </button>
+    </div>
+    <input type="file" id="importAnnotFile" accept=".json" style="display:none" onchange="importAnnotations(event)" />
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Support / Donate
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="subjects/biology/neet-biology.html">🌿 Biology</a>
+        <a href="subjects/chemistry/neet-chemistry.html">⚗️ Chemistry</a>
+        <a href="subjects/physics/neet-physics.html">⚡ Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/neet-syllabus.html">Full Syllabus</a>
+        <a href="pattern/neet-exam-pattern-marking-scheme.html">Exam Pattern</a>
+        <a href="neet-pyq/neet-previous-year-questions.html">PYQs 2013–2024</a>
+        <a href="roadmap/neet-study-roadmap.html">Study Roadmap</a>
+        <a href="tools/neet-progress-tracker.html" style="color:var(--purple);">Progress Tracker</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="tools/neet-book-reader.html" style="color:var(--phy);">📖 Book Reader</a>
+        <a href="tools/neet-progress-tracker.html">📊 Progress Tracker</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>Made with <span>♥</span> for Indian medical aspirants &nbsp;·&nbsp; © 2026 NEETopia</p>
+      </div>
+      <div class="footer-legal">
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="about.html">About</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div><!-- /#shelview -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ═══ CONFIG ═══ */
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const BOOKS_KEY = 'neetopia-books-v1';
+const ANNOT_KEY = 'neetopia-annotations-v1';
+
+/* ═══ UTILS ═══ */
+function showToast(msg, type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=(type==='success'?'✅ ':'ℹ️ ')+msg;
+  t.className=`toast ${type} show`;
+  setTimeout(()=>t.className='toast',2600);
+}
+function getBooks(){ try{ return JSON.parse(localStorage.getItem(BOOKS_KEY)||'[]'); }catch{ return []; } }
+function saveBooks(b){ localStorage.setItem(BOOKS_KEY, JSON.stringify(b)); }
+function getAnnots(){ try{ return JSON.parse(localStorage.getItem(ANNOT_KEY)||'{}'); }catch{ return {}; } }
+function saveAnnots(a){ try{ localStorage.setItem(ANNOT_KEY, JSON.stringify(a)); }catch{ showToast('Storage full! Export backup.','info'); } }
+
+function getBookAnnots(bookId){
+  const all=getAnnots();
+  if(!all[bookId]) all[bookId]={ highlights:[], bookmarks:[], notes:[] };
+  return all[bookId];
+}
+function saveBookAnnots(bookId, data){
+  const all=getAnnots();
+  all[bookId]=data;
+  saveAnnots(all);
+}
+
+/* ═══ THEME TOGGLE ═══ */
+(function(){
+  const btn=document.getElementById('themeToggle');
+  const html=document.documentElement;
+  const saved=localStorage.getItem('neetopia-theme')||'dark';
+  html.setAttribute('data-theme',saved);
+  if(btn) btn.addEventListener('click',()=>{
+    const t=html.getAttribute('data-theme');
+    const next=t==='dark'?'light':'dark';
+    html.setAttribute('data-theme',next);
+    localStorage.setItem('neetopia-theme',next);
+  });
+})();
+
+/* ═══ MOBILE MENU ═══ */
+function toggleMobileMenu(){
+  const m=document.getElementById('mobileMenu');
+  const o=document.getElementById('mobileOverlay');
+  const open=m.classList.contains('open');
+  if(open){ m.classList.remove('open'); o.classList.remove('open'); document.body.style.overflow=''; }
+  else{ m.classList.add('open'); o.classList.add('open'); document.body.style.overflow='hidden'; }
+}
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',toggleMobileMenu));
+
+/* ═══ GUIDE TABS ═══ */
+function switchGuide(name, btn){
+  document.querySelectorAll('.guide-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.guide-content').forEach(c=>c.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  const el=document.getElementById('guide-'+name);
+  if(el) el.classList.add('active');
+}
+
+/* ═══ SHELF RENDER ═══ */
+const SUBJ_EMOJI={ bio:'🌿', chem:'⚗️', phy:'⚡', gen:'📚' };
+const SUBJ_SPINE={ bio:'bio-spine', chem:'chem-spine', phy:'phy-spine', gen:'gen-spine' };
+const SUBJ_COLOR={ bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)', gen:'var(--purple)' };
+
+function renderShelf(){
+  const books=getBooks();
+  const grid=document.getElementById('booksGrid');
+  const cnt=document.getElementById('bookCount');
+  if(cnt) cnt.textContent=`(${books.length} book${books.length!==1?'s':''})`;
+
+  if(!books.length){
+    grid.innerHTML=`<div class="empty-shelf" style="grid-column:1/-1;">
+      <div class="ei">📚</div>
+      <h3>Your shelf is empty</h3>
+      <p style="font-size:.85rem;">Add your first PDF — NCERT, modules, PYQs — and start reading!</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML=books.map(b=>{
+    const annots=getBookAnnots(b.id);
+    const hlCount=annots.highlights.length;
+    const bmCount=annots.bookmarks.length;
+    const pct=b.totalPages>0?Math.round((b.lastPage||1)/b.totalPages*100):0;
+    const col=SUBJ_COLOR[b.subject]||'var(--purple)';
+    return `<div class="book-card" id="bcard-${b.id}">
+      <div class="book-spine ${SUBJ_SPINE[b.subject]||'gen-spine'}"></div>
+      <div class="book-cover-art">${SUBJ_EMOJI[b.subject]||'📖'}</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author||'—'}</div>
+        <div class="book-progress-bar"><div class="book-progress-fill" style="width:${pct}%"></div></div>
+        <div class="book-meta">
+          <span style="color:${col};font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.72rem;">${pct}%</span>
+          <div style="display:flex;gap:6px;">
+            ${hlCount?`<span class="book-badge" style="color:var(--chem);border-color:rgba(244,185,66,.3);background:rgba(244,185,66,.08);">🖊 ${hlCount}</span>`:''}
+            ${bmCount?`<span class="book-badge" style="color:var(--accent);border-color:rgba(168,124,245,.3);background:rgba(168,124,245,.08);">🔖 ${bmCount}</span>`:''}
+          </div>
+        </div>
+      </div>
+      <div class="book-actions">
+        <button class="book-btn open-btn" onclick="openBook('${b.id}')">📖 Open</button>
+        <button class="book-btn" onclick="deleteBook('${b.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══ ADD BOOK ═══ */
+function addBook(){
+  const title=document.getElementById('newTitle').value.trim();
+  if(!title){ showToast('Enter book title','info'); return; }
+  const url=document.getElementById('newUrl').value.trim();
+  if(!url){ showToast('Enter PDF URL or use local upload','info'); return; }
+  _addBookEntry(title, url, document.getElementById('newAuthor').value.trim(), document.getElementById('newSubject').value);
+}
+
+function _addBookEntry(title, url, author='', subject='gen', isLocal=false, localData=null){
+  const books=getBooks();
+  const id='book-'+Date.now();
+  books.unshift({ id, title, author, subject, url: isLocal?null:_convertDriveUrl(url), isLocal, localData: isLocal?localData:null, lastPage:1, totalPages:0, addedAt:new Date().toISOString() });
+  saveBooks(books);
+  // clear form
+  ['newTitle','newAuthor','newUrl'].forEach(k=>{ const el=document.getElementById(k); if(el) el.value=''; });
+  renderShelf();
+  showToast('Book added! 📚');
+}
+
+function _convertDriveUrl(url){
+  // Convert Google Drive share link to direct download
+  const match=url.match(/\/file\/d\/([^/]+)/);
+  if(match) return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+  return url;
+}
+
+function handleLocalPDF(event){
+  const file=event.target.files[0];
+  if(!file){ return; }
+  const title=prompt('Enter book title:',file.name.replace('.pdf',''));
+  if(!title){ event.target.value=''; return; }
+  const reader=new FileReader();
+  reader.onload=function(e){
+    // Store base64 in localStorage (warning for large files)
+    const data=e.target.result;
+    const sizeMB=(data.length*3/4/1024/1024).toFixed(1);
+    if(parseFloat(sizeMB)>8){
+      if(!confirm(`This PDF is ~${sizeMB}MB. Storing large files may use significant browser storage. Continue?`)) return;
+    }
+    const subj=prompt('Subject? Type: bio / chem / phy / gen','bio')||'gen';
+    const author=prompt('Author/Source (optional):','')||'';
+    _addBookEntry(title, '', author, subj, true, data);
+    showToast(`"${title}" uploaded! (${sizeMB}MB)`);
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
+
+function deleteBook(id){
+  if(!confirm('Remove this book from your shelf?')) return;
+  let books=getBooks();
+  books=books.filter(b=>b.id!==id);
+  saveBooks(books);
+  // optionally remove annotations
+  if(confirm('Also delete all highlights, bookmarks and notes for this book?')){
+    const all=getAnnots();
+    delete all[id];
+    saveAnnots(all);
+  }
+  renderShelf();
+  showToast('Book removed','info');
+}
+
+/* ═══ READER STATE ═══ */
+let _pdf=null;
+let _currentBook=null;
+let _currentPage=1;
+let _totalPages=1;
+let _zoom=1.0;
+let _spreadMode=true; // two-page
+let _scrollMode=false;
+let _highlightMode=false;
+let _underlineMode=false;
+let _hlColor='#fde047';
+let _activeHlStart=null;
+let _sidebarTab='bookmarks';
+let _readingMode=0; // 0=dark, 1=sepia, 2=light
+let _focusMode=false;
+let _thumbsBuilt=false;
+let _pendingNote=null;
+
+/* ═══ OPEN BOOK ═══ */
+async function openBook(id){
+  const books=getBooks();
+  const book=books.find(b=>b.id===id);
+  if(!book){ showToast('Book not found','info'); return; }
+  _currentBook=book;
+
+  // Show reader
+  document.getElementById('shelview').style.display='none';
+  const rv=document.getElementById('readerview');
+  rv.style.display='flex';
+  rv.classList.add('open');
+  document.getElementById('loadingOverlay').style.display='flex';
+  document.getElementById('loadingText').textContent='Loading PDF…';
+  document.getElementById('readerBookTitle').textContent=book.title;
+
+  _highlightMode=false;
+  _underlineMode=false;
+  _thumbsBuilt=false;
+  _zoom=1.0;
+  _scrollMode=false;
+  _spreadMode=window.innerWidth>700;
+
+  // Update UI state
+  document.getElementById('hlBtn').classList.remove('active');
+  document.getElementById('ulBtn').classList.remove('active');
+  document.getElementById('colorPicker').style.display='none';
+  document.getElementById('readerBody').classList.remove('mode-sepia','mode-white');
+  document.getElementById('bookSpread').parentElement.classList.remove('scroll-mode');
+  _readingMode=0;
+
+  try {
+    let pdfSource;
+    if(book.isLocal && book.localData){
+      // base64 data URL → Uint8Array
+      const b64=book.localData.split(',')[1];
+      const bin=atob(b64);
+      const arr=new Uint8Array(bin.length);
+      for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+      pdfSource={ data: arr };
+    } else {
+      pdfSource={ url: book.url };
+    }
+
+    const loadTask=pdfjsLib.getDocument(pdfSource);
+    loadTask.onProgress=(p)=>{
+      if(p.total){
+        const pct=Math.round(p.loaded/p.total*100);
+        document.getElementById('loadingText').textContent=`Loading PDF… ${pct}%`;
+      }
+    };
+    _pdf=await loadTask.promise;
+    _totalPages=_pdf.numPages;
+
+    // Update book record
+    book.totalPages=_totalPages;
+    _currentPage=book.lastPage||1;
+    if(_currentPage>_totalPages) _currentPage=1;
+    saveBooks(books);
+
+    document.getElementById('pageTotalLabel').textContent='/ '+_totalPages;
+    document.getElementById('loadingOverlay').style.display='none';
+
+    await renderCurrentPages();
+    updateProgressBar();
+    renderSidebar();
+    buildThumbs();
+  } catch(e){
+    document.getElementById('loadingText').textContent='❌ Failed to load PDF. Check URL or CORS.';
+    console.error(e);
+    setTimeout(()=>{
+      document.getElementById('loadingOverlay').style.display='none';
+      showToast('Failed to load PDF. Try local upload.','info');
+    },2000);
+  }
+}
+
+/* ═══ RENDER PAGES ═══ */
+async function renderCurrentPages(){
+  if(!_pdf) return;
+  if(_scrollMode){ await renderScrollMode(); return; }
+
+  const leftCanvas=document.getElementById('leftCanvas');
+  const rightCanvas=document.getElementById('rightCanvas');
+  const leftPage=document.getElementById('leftPage');
+  const rightPage=document.getElementById('rightPage');
+
+  // Determine viewport size
+  const body=document.getElementById('readerBody');
+  const bodyH=body.clientHeight-40;
+  const bodyW=body.clientWidth-140; // minus arrows
+
+  const showSpread=_spreadMode && window.innerWidth>700;
+  const availW=showSpread ? Math.floor((bodyW-20)/2) : bodyW;
+
+  // Left page = even page (p-1 when on p is odd)
+  let leftNum, rightNum;
+  if(showSpread){
+    // Make current page the right page (odd), left = even
+    if(_currentPage===1){ leftNum=null; rightNum=1; }
+    else if(_currentPage%2===0){ leftNum=_currentPage; rightNum=_currentPage+1<=_totalPages?_currentPage+1:null; }
+    else { leftNum=_currentPage-1; rightNum=_currentPage; }
+  } else {
+    leftNum=_currentPage; rightNum=null;
+  }
+
+  // Render left
+  if(leftNum && leftNum<=_totalPages){
+    leftPage.style.display='block';
+    await renderPageToCanvas(leftNum, leftCanvas, availW, bodyH);
+    leftPage.style.width=leftCanvas.style.width;
+    leftPage.style.height=leftCanvas.style.height;
+    syncHLCanvas('left', leftCanvas);
+  } else {
+    if(showSpread){ leftPage.style.display='block'; leftCanvas.width=availW; leftCanvas.height=bodyH; const ctx=leftCanvas.getContext('2d'); ctx.fillStyle='#f5f5f5'; ctx.fillRect(0,0,availW,bodyH); leftPage.style.width=availW+'px'; leftPage.style.height=bodyH+'px'; syncHLCanvas('left',leftCanvas); }
+    else leftPage.style.display='none';
+  }
+
+  // Render right
+  rightPage.style.display=showSpread?'block':'none';
+  if(showSpread && rightNum && rightNum<=_totalPages){
+    await renderPageToCanvas(rightNum, rightCanvas, availW, bodyH);
+    rightPage.style.width=rightCanvas.style.width;
+    rightPage.style.height=rightCanvas.style.height;
+    syncHLCanvas('right', rightCanvas);
+  } else if(showSpread){
+    rightCanvas.width=availW; rightCanvas.height=bodyH;
+    const ctx=rightCanvas.getContext('2d'); ctx.fillStyle='#f5f5f5'; ctx.fillRect(0,0,availW,bodyH);
+    rightPage.style.width=availW+'px'; rightPage.style.height=bodyH+'px'; syncHLCanvas('right',rightCanvas);
+  }
+
+  // Sync page number display
+  document.getElementById('pageNumInput').value=_currentPage;
+  updateProgressBar();
+  renderAnnotationsOnPage();
+  saveLastPage();
+}
+
+async function renderPageToCanvas(pageNum, canvas, maxW, maxH){
+  const page=await _pdf.getPage(pageNum);
+  const vp=page.getViewport({scale:1});
+  const scaleW=maxW/vp.width;
+  const scaleH=maxH/vp.height;
+  let scale=Math.min(scaleW,scaleH)*_zoom;
+  const viewport=page.getViewport({scale});
+  canvas.width=Math.floor(viewport.width);
+  canvas.height=Math.floor(viewport.height);
+  canvas.style.width=canvas.width+'px';
+  canvas.style.height=canvas.height+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#ffffff';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  await page.render({ canvasContext:ctx, viewport }).promise;
+}
+
+function syncHLCanvas(side, mainCanvas){
+  const hlCanvas=document.getElementById(side+'HL');
+  const hlSVG=document.getElementById(side+'SVG');
+  hlCanvas.width=mainCanvas.width; hlCanvas.height=mainCanvas.height;
+  hlCanvas.style.width=mainCanvas.style.width; hlCanvas.style.height=mainCanvas.style.height;
+  hlCanvas.style.position='absolute'; hlCanvas.style.top='0'; hlCanvas.style.left='0';
+  if(hlSVG){ hlSVG.setAttribute('width',mainCanvas.width); hlSVG.setAttribute('height',mainCanvas.height); hlSVG.style.width=mainCanvas.style.width; hlSVG.style.height=mainCanvas.style.height; }
+}
+
+/* ═══ SCROLL MODE ═══ */
+async function renderScrollMode(){
+  const spread=document.getElementById('bookSpread');
+  spread.innerHTML='';
+  const body=document.getElementById('readerBody');
+  const maxW=Math.min(body.clientWidth-60, 900);
+
+  for(let p=1; p<=_totalPages; p++){
+    const wrapper=document.createElement('div');
+    wrapper.className='page-wrapper';
+    wrapper.id='scroll-page-'+p;
+    wrapper.style.marginBottom='12px';
+    const canvas=document.createElement('canvas');
+    wrapper.appendChild(canvas);
+    spread.appendChild(wrapper);
+    // Render lazily
+    const page=await _pdf.getPage(p);
+    const vp=page.getViewport({scale:1});
+    const scale=(maxW/vp.width)*_zoom;
+    const viewport=page.getViewport({scale});
+    canvas.width=Math.floor(viewport.width); canvas.height=Math.floor(viewport.height);
+    canvas.style.width=canvas.width+'px'; canvas.style.height=canvas.height+'px';
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({canvasContext:ctx,viewport}).promise;
+  }
+}
+
+/* ═══ PAGE NAVIGATION ═══ */
+function prevPage(){
+  if(!_pdf||_scrollMode) return;
+  const step=(_spreadMode&&window.innerWidth>700)?2:1;
+  if(_currentPage<=1) return;
+  _currentPage=Math.max(1,_currentPage-step);
+  // Page turn animation
+  _animatePageTurn('left');
+  renderCurrentPages();
+}
+function nextPage(){
+  if(!_pdf||_scrollMode) return;
+  const step=(_spreadMode&&window.innerWidth>700)?2:1;
+  if(_currentPage>=_totalPages) return;
+  _currentPage=Math.min(_totalPages,_currentPage+step);
+  _animatePageTurn('right');
+  renderCurrentPages();
+}
+function jumpToPage(n){
+  if(!_pdf) return;
+  n=Math.max(1,Math.min(_totalPages,n));
+  _currentPage=n;
+  renderCurrentPages();
+}
+
+function _animatePageTurn(dir){
+  const el=document.getElementById(dir==='right'?'rightPage':'leftPage');
+  if(!el) return;
+  el.classList.add(dir==='right'?'page-turning-right':'page-turning-left');
+  el.addEventListener('animationend',()=>{ el.classList.remove('page-turning-right','page-turning-left'); },{once:true});
+}
+
+/* ═══ KEYBOARD ═══ */
+document.getElementById('readerBody').addEventListener('keydown', e=>{
+  if(!_pdf) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown') nextPage();
+  if(e.key==='ArrowLeft'||e.key==='PageUp') prevPage();
+  if(e.key==='Home') jumpToPage(1);
+  if(e.key==='End') jumpToPage(_totalPages);
+  if(e.key==='+'||e.key==='=') changeZoom(0.1);
+  if(e.key==='-') changeZoom(-0.1);
+  if(e.key==='Escape'){ if(_highlightMode||_underlineMode){ _highlightMode=false;_underlineMode=false;updateAnnotBtnStates(); } else closeReader(); }
+});
+
+/* ═══ SWIPE GESTURE ═══ */
+let _touchStartX=0, _touchStartY=0;
+document.getElementById('readerBody').addEventListener('touchstart',e=>{ _touchStartX=e.touches[0].clientX; _touchStartY=e.touches[0].clientY; },{passive:true});
+document.getElementById('readerBody').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-_touchStartX;
+  const dy=e.changedTouches[0].clientY-_touchStartY;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+    if(dx<0) nextPage(); else prevPage();
+  }
+},{passive:true});
+
+/* ═══ ZOOM ═══ */
+function changeZoom(delta){
+  _zoom=Math.max(0.5,Math.min(3.0,_zoom+delta));
+  document.getElementById('zoomVal').textContent=Math.round(_zoom*100)+'%';
+  renderCurrentPages();
+}
+function fitPage(){ _zoom=1.0; document.getElementById('zoomVal').textContent='100%'; renderCurrentPages(); }
+
+/* ═══ SPREAD TOGGLE ═══ */
+function toggleSpread(){
+  _spreadMode=!_spreadMode;
+  const btn=document.getElementById('spreadBtn');
+  btn.classList.toggle('active',_spreadMode);
+  renderCurrentPages();
+}
+
+/* ═══ SCROLL MODE ═══ */
+function toggleScrollMode(){
+  _scrollMode=!_scrollMode;
+  const btn=document.getElementById('scrollBtn');
+  btn.classList.toggle('active',_scrollMode);
+  const body=document.getElementById('readerBody');
+  if(_scrollMode){
+    body.classList.add('scroll-mode');
+    document.getElementById('bookSpread').style.flexDirection='column';
+    document.getElementById('bookSpread').style.overflowY='auto';
+    document.getElementById('bookSpread').style.maxHeight='100%';
+    document.getElementById('bookSpread').style.padding='20px';
+  } else {
+    body.classList.remove('scroll-mode');
+    document.getElementById('bookSpread').style.cssText='';
+  }
+  renderCurrentPages();
+}
+
+/* ═══ READING MODES ═══ */
+function cycleReadingMode(){
+  _readingMode=(_readingMode+1)%3;
+  const body=document.getElementById('readerBody');
+  body.classList.remove('mode-sepia','mode-white');
+  const btn=document.getElementById('modeBtn');
+  if(_readingMode===1){ body.classList.add('mode-sepia'); btn.textContent='📜 Mode'; }
+  else if(_readingMode===2){ body.classList.add('mode-white'); btn.textContent='☀️ Mode'; }
+  else { btn.textContent='🌙 Mode'; }
+}
+
+/* ═══ FULLSCREEN ═══ */
+function toggleFullscreen(){
+  if(!document.fullscreenElement) document.getElementById('readerview').requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+
+/* ═══ FOCUS MODE ═══ */
+function toggleFocusMode(){
+  _focusMode=!_focusMode;
+  document.getElementById('readerview').classList.toggle('reading-mode-focus',_focusMode);
+  document.getElementById('focusBtn').classList.toggle('active',_focusMode);
+  showToast(_focusMode?'Focus mode ON — hover to show toolbar':'Focus mode OFF','info');
+}
+
+/* ═══ HIGHLIGHT MODE ═══ */
+function toggleHighlightMode(){
+  _highlightMode=!_highlightMode;
+  if(_highlightMode) _underlineMode=false;
+  updateAnnotBtnStates();
+  showToast(_highlightMode?'Select text on the page to highlight':'Highlight mode off','info');
+}
+function toggleUnderlineMode(){
+  _underlineMode=!_underlineMode;
+  if(_underlineMode) _highlightMode=false;
+  updateAnnotBtnStates();
+  showToast(_underlineMode?'Select text to underline':'Underline mode off','info');
+}
+function updateAnnotBtnStates(){
+  document.getElementById('hlBtn').classList.toggle('active',_highlightMode);
+  document.getElementById('ulBtn').classList.toggle('active',_underlineMode);
+  document.getElementById('colorPicker').style.display=_highlightMode?'flex':'none';
+}
+function setHlColor(col, dot){
+  _hlColor=col;
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));
+  dot.classList.add('selected');
+}
+
+/* ═══ TEXT SELECTION HIGHLIGHT/UNDERLINE ═══ */
+// We use mouse/touch selection on canvas — simulate by coordinate-based rectangle drawing
+let _hlDragStart=null;
+let _activeDragSide=null;
+
+['left','right'].forEach(side=>{
+  const canvas=document.getElementById(side+'Canvas');
+  canvas.addEventListener('mousedown', e=>{
+    if(!_highlightMode&&!_underlineMode) return;
+    _hlDragStart={ x:e.offsetX, y:e.offsetY };
+    _activeDragSide=side;
+    e.preventDefault();
+  });
+  canvas.addEventListener('mousemove', e=>{
+    if(!_hlDragStart||_activeDragSide!==side) return;
+    const hlCanvas=document.getElementById(side+'HL');
+    const ctx=hlCanvas.getContext('2d');
+    ctx.clearRect(0,0,hlCanvas.width,hlCanvas.height);
+    const x=Math.min(_hlDragStart.x,e.offsetX);
+    const y=Math.min(_hlDragStart.y,e.offsetY);
+    const w=Math.abs(e.offsetX-_hlDragStart.x);
+    const h=Math.abs(e.offsetY-_hlDragStart.y);
+    ctx.globalAlpha=0.35;
+    ctx.fillStyle=_hlColor;
+    ctx.fillRect(x,y,w,h);
+  });
+  canvas.addEventListener('mouseup', e=>{
+    if(!_hlDragStart||_activeDragSide!==side){ _hlDragStart=null; return; }
+    const x=Math.min(_hlDragStart.x,e.offsetX);
+    const y=Math.min(_hlDragStart.y,e.offsetY);
+    const w=Math.abs(e.offsetX-_hlDragStart.x);
+    const h=Math.abs(e.offsetY-_hlDragStart.y);
+    _hlDragStart=null;
+    if(w<5||h<3) return;
+
+    const pageNum=side==='left'?_getLeftPageNum():_getRightPageNum();
+    if(!pageNum) return;
+
+    const annots=getBookAnnots(_currentBook.id);
+    if(_highlightMode){
+      annots.highlights.push({ id:Date.now(), page:pageNum, x, y, w, h, color:_hlColor, note:'', timestamp:new Date().toISOString() });
+      showToast('Highlight saved!');
+    } else if(_underlineMode){
+      annots.highlights.push({ id:Date.now(), page:pageNum, x, y:y+h-2, w, h:3, color:_hlColor, type:'underline', note:'', timestamp:new Date().toISOString() });
+      showToast('Underline saved!');
+    }
+    saveBookAnnots(_currentBook.id, annots);
+    renderAnnotationsOnPage();
+    renderSidebar();
+  });
+});
+
+function _getLeftPageNum(){
+  if(!_spreadMode||window.innerWidth<=700) return _currentPage;
+  if(_currentPage===1) return null;
+  return _currentPage%2===0?_currentPage:_currentPage-1;
+}
+function _getRightPageNum(){
+  if(!_spreadMode||window.innerWidth<=700) return _currentPage;
+  if(_currentPage===1) return 1;
+  return _currentPage%2===0?_currentPage+1:_currentPage;
+}
+
+/* ═══ RENDER ANNOTATIONS ═══ */
+function renderAnnotationsOnPage(){
+  if(!_currentBook) return;
+  const annots=getBookAnnots(_currentBook.id);
+  ['left','right'].forEach(side=>{
+    const hlCanvas=document.getElementById(side+'HL');
+    const hlSVG=document.getElementById(side+'SVG');
+    const pageNum=side==='left'?_getLeftPageNum():_getRightPageNum();
+    if(!pageNum||!hlCanvas) return;
+    const ctx=hlCanvas.getContext('2d');
+    ctx.clearRect(0,0,hlCanvas.width,hlCanvas.height);
+    if(hlSVG) hlSVG.innerHTML='';
+    annots.highlights.filter(h=>h.page===pageNum).forEach(h=>{
+      ctx.globalAlpha=h.type==='underline'?0.9:0.35;
+      ctx.fillStyle=h.color;
+      ctx.fillRect(h.x,h.y,h.w,h.h);
+      ctx.globalAlpha=1;
+    });
+  });
+}
+
+/* ═══ BOOKMARKS ═══ */
+function addBookmark(){
+  if(!_currentBook) return;
+  const annots=getBookAnnots(_currentBook.id);
+  // Avoid duplicates
+  if(annots.bookmarks.find(b=>b.page===_currentPage)){ showToast('Already bookmarked!','info'); return; }
+  const label=prompt('Bookmark label (optional):',`Page ${_currentPage}`)||`Page ${_currentPage}`;
+  annots.bookmarks.push({ id:Date.now(), page:_currentPage, label, timestamp:new Date().toISOString() });
+  saveBookAnnots(_currentBook.id, annots);
+  renderSidebar();
+  renderShelf();
+  showToast(`Bookmarked page ${_currentPage}! 🔖`);
+}
+
+/* ═══ NOTES ═══ */
+let _noteTarget=null;
+function openNotePopup(x, y, existingText=''){
+  const popup=document.getElementById('notePopup');
+  popup.style.left=Math.min(x,window.innerWidth-320)+'px';
+  popup.style.top=Math.min(y,window.innerHeight-200)+'px';
+  popup.classList.add('open');
+  document.getElementById('noteText').value=existingText;
+  document.getElementById('noteText').focus();
+}
+function closeNotePopup(){ document.getElementById('notePopup').classList.remove('open'); _noteTarget=null; }
+function saveNote(){
+  if(!_currentBook||!_noteTarget) return;
+  const text=document.getElementById('noteText').value.trim();
+  if(!text){ closeNotePopup(); return; }
+  const annots=getBookAnnots(_currentBook.id);
+  annots.notes.push({ id:Date.now(), page:_currentPage, text, timestamp:new Date().toISOString() });
+  saveBookAnnots(_currentBook.id, annots);
+  closeNotePopup();
+  renderSidebar();
+  showToast('Note saved! 📝');
+}
+
+// Right-click to add note
+document.getElementById('readerBody').addEventListener('contextmenu', e=>{
+  if(!_currentBook) return;
+  e.preventDefault();
+  _noteTarget={ x:e.clientX, y:e.clientY };
+  openNotePopup(e.clientX, e.clientY);
+});
+
+/* ═══ SIDEBAR ═══ */
+function toggleSidebar(){
+  document.getElementById('readerSidebar').classList.toggle('open');
+  renderSidebar();
+}
+function switchSTab(tab, btn){
+  _sidebarTab=tab;
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSidebar();
+}
+function renderSidebar(){
+  if(!_currentBook) return;
+  const annots=getBookAnnots(_currentBook.id);
+  const el=document.getElementById('sidebarContent');
+  if(!el) return;
+
+  if(_sidebarTab==='bookmarks'){
+    if(!annots.bookmarks.length){
+      el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No bookmarks yet.<br>Press 🔖 Bookmark to add one.</div>';
+      return;
+    }
+    el.innerHTML=annots.bookmarks.map(b=>`
+      <div class="bookmark-item" onclick="jumpToPage(${b.page})">
+        <div>
+          <div style="font-weight:600;font-size:.85rem;">${b.label}</div>
+          <div style="font-size:.7rem;color:var(--muted);">Page ${b.page}</div>
+        </div>
+        <button class="bm-del" onclick="event.stopPropagation();deleteBookmark(${b.id})">✕</button>
+      </div>`).join('');
+  }
+  else if(_sidebarTab==='highlights'){
+    if(!annots.highlights.length){
+      el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No highlights yet.<br>Use 🖊 Highlight to mark text.</div>';
+      return;
+    }
+    el.innerHTML=annots.highlights.map(h=>`
+      <div class="bookmark-item" onclick="jumpToPage(${h.page})" style="border-left:3px solid ${h.color};">
+        <div style="flex:1;">
+          <div style="font-size:.72rem;color:var(--muted);">${h.type==='underline'?'Underline':'Highlight'} · Page ${h.page}</div>
+          ${h.note?`<div style="font-size:.8rem;margin-top:3px;">${h.note}</div>`:''}
+        </div>
+        <button class="bm-del" onclick="event.stopPropagation();deleteHighlight(${h.id})">✕</button>
+      </div>`).join('');
+  }
+  else if(_sidebarTab==='notes'){
+    if(!annots.notes.length){
+      el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No notes yet.<br>Right-click anywhere to add a note.</div>';
+      return;
+    }
+    el.innerHTML=annots.notes.map(n=>`
+      <div class="bookmark-item" onclick="jumpToPage(${n.page})">
+        <div style="flex:1;">
+          <div style="font-size:.7rem;color:var(--muted);margin-bottom:3px;">Page ${n.page}</div>
+          <div style="font-size:.82rem;line-height:1.5;">${n.text.slice(0,120)}${n.text.length>120?'…':''}</div>
+        </div>
+        <button class="bm-del" onclick="event.stopPropagation();deleteNote(${n.id})">✕</button>
+      </div>`).join('');
+  }
+}
+
+function deleteBookmark(id){
+  const annots=getBookAnnots(_currentBook.id);
+  annots.bookmarks=annots.bookmarks.filter(b=>b.id!==id);
+  saveBookAnnots(_currentBook.id,annots);
+  renderSidebar(); renderShelf();
+}
+function deleteHighlight(id){
+  const annots=getBookAnnots(_currentBook.id);
+  annots.highlights=annots.highlights.filter(h=>h.id!==id);
+  saveBookAnnots(_currentBook.id,annots);
+  renderSidebar(); renderAnnotationsOnPage();
+}
+function deleteNote(id){
+  const annots=getBookAnnots(_currentBook.id);
+  annots.notes=annots.notes.filter(n=>n.id!==id);
+  saveBookAnnots(_currentBook.id,annots);
+  renderSidebar();
+}
+
+/* ═══ THUMBNAIL STRIP ═══ */
+async function buildThumbs(){
+  if(_thumbsBuilt||!_pdf) return;
+  _thumbsBuilt=true;
+  const strip=document.getElementById('thumbStrip');
+  strip.innerHTML='';
+  strip.classList.remove('hidden');
+
+  const maxThumbs=Math.min(_totalPages, 50);
+  for(let p=1;p<=maxThumbs;p++){
+    const div=document.createElement('div');
+    div.className='thumb-page'+(p===_currentPage?' current':'');
+    div.setAttribute('data-page',p);
+    div.title='Page '+p;
+    div.onclick=()=>{ strip.querySelectorAll('.thumb-page').forEach(t=>t.classList.remove('current')); div.classList.add('current'); jumpToPage(p); };
+    const canvas=document.createElement('canvas');
+    div.appendChild(canvas);
+    strip.appendChild(div);
+
+    // Async render thumbnail
+    (async(page,cnv)=>{
+      const pg=await _pdf.getPage(page);
+      const vp=pg.getViewport({scale:0.15});
+      cnv.width=vp.width; cnv.height=vp.height;
+      const ctx=cnv.getContext('2d');
+      ctx.fillStyle='#fff'; ctx.fillRect(0,0,cnv.width,cnv.height);
+      await pg.render({canvasContext:ctx,viewport:vp}).promise;
+    })(p,canvas);
+  }
+
+  // Hide strip after 3 seconds of inactivity
+  let hideTimer=setTimeout(()=>strip.classList.add('hidden'),3000);
+  strip.addEventListener('mouseenter',()=>{ clearTimeout(hideTimer); strip.classList.remove('hidden'); });
+  strip.addEventListener('mouseleave',()=>{ hideTimer=setTimeout(()=>strip.classList.add('hidden'),2000); });
+  document.getElementById('readerBody').addEventListener('mousemove',()=>{
+    strip.classList.remove('hidden');
+    clearTimeout(hideTimer);
+    hideTimer=setTimeout(()=>strip.classList.add('hidden'),3000);
+  },{passive:true});
+}
+
+function updateThumbHighlight(){
+  document.querySelectorAll('.thumb-page').forEach(t=>{
+    t.classList.toggle('current',parseInt(t.getAttribute('data-page'))===_currentPage);
+  });
+}
+
+/* ═══ PROGRESS BAR ═══ */
+function updateProgressBar(){
+  const pct=_totalPages>0?(_currentPage/_totalPages*100):0;
+  document.getElementById('readerProgressFill').style.width=pct+'%';
+  updateThumbHighlight();
+}
+
+function saveLastPage(){
+  const books=getBooks();
+  const b=books.find(b=>b.id===_currentBook?.id);
+  if(b){ b.lastPage=_currentPage; saveBooks(books); }
+}
+
+/* ═══ CLOSE READER ═══ */
+function closeReader(){
+  saveLastPage();
+  document.getElementById('readerview').classList.remove('open');
+  document.getElementById('readerview').style.display='none';
+  document.getElementById('shelview').style.display='block';
+  _pdf=null; _currentBook=null;
+  renderShelf();
+}
+
+/* ═══ BACKUP / EXPORT ═══ */
+function exportAnnotations(){
+  const data={ books:getBooks(), annotations:getAnnots(), exportedAt:new Date().toISOString() };
+  // Don't export large local PDF data
+  data.books=data.books.map(b=>({...b, localData:b.isLocal?'[LOCAL_FILE_NOT_INCLUDED]':null}));
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='neetopia-reader-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('Annotations exported!');
+}
+
+function importAnnotations(event){
+  const file=event.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!confirm('This will MERGE imported data with your current data. Continue?')) return;
+      // Merge books
+      const existing=getBooks();
+      const imported=data.books||[];
+      imported.forEach(b=>{
+        if(!existing.find(x=>x.id===b.id) && !b.isLocal) existing.push(b);
+      });
+      saveBooks(existing);
+      // Merge annotations
+      const existAnnots=getAnnots();
+      const importAnnots=data.annotations||{};
+      Object.keys(importAnnots).forEach(k=>{
+        if(!existAnnots[k]) existAnnots[k]=importAnnots[k];
+        else {
+          // Merge arrays
+          ['highlights','bookmarks','notes'].forEach(arr=>{
+            const ids=new Set((existAnnots[k][arr]||[]).map(x=>x.id));
+            (importAnnots[k][arr]||[]).forEach(x=>{ if(!ids.has(x.id)) existAnnots[k][arr].push(x); });
+          });
+        }
+      });
+      saveAnnots(existAnnots);
+      renderShelf();
+      showToast('Backup imported!');
+    }catch(ex){ showToast('Invalid backup file','info'); }
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+function clearAllAnnotations(){
+  if(!confirm('Delete ALL annotations (highlights, bookmarks, notes) for all books?')) return;
+  if(!confirm('This cannot be undone. Are you sure?')) return;
+  localStorage.removeItem(ANNOT_KEY);
+  showToast('All annotations cleared','info');
+  renderShelf();
+}
+
+/* ═══ RESIZE HANDLER ═══ */
+let _resizeTimer=null;
+window.addEventListener('resize',()=>{
+  clearTimeout(_resizeTimer);
+  _resizeTimer=setTimeout(()=>{ if(_pdf&&!_scrollMode) renderCurrentPages(); },200);
+});
+
+/* ═══ INIT ═══ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderShelf();
+
+  // Keyboard: close note popup on Escape
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&document.getElementById('notePopup').classList.contains('open')) closeNotePopup();
+  });
+});
+</script>
+</body>
+</html>
