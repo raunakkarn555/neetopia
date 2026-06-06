@@ -4980,7 +4980,123 @@
   <p style="font-size:.68rem;color:var(--muted);text-align:center;margin-top:10px;">Opens a print-ready page — use browser Print → Save as PDF. Works in Chrome, Edge, Firefox.</p>
 </div>
 
-  </div><!-- /tmr2-wrap -->
+</div><!-- /tmr2-wrap -->
+
+  <!-- ══ COUNT-UP STOPWATCH ══ -->
+  <div style="max-width:700px;margin:28px auto 0;" id="sw-wrap">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+      <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,rgba(61,232,160,.2),rgba(244,185,66,.1));border:1px solid rgba(61,232,160,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 20px rgba(61,232,160,.15);flex-shrink:0;">⏫</div>
+      <div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:800;margin:0 0 3px;color:#ffffff;">Count-Up Stopwatch</h3>
+        <p style="color:var(--muted);font-size:.78rem;margin:0;">Measure how long you study · Laps per topic · Auto-saves session on close</p>
+      </div>
+    </div>
+
+    <!-- Main card -->
+    <div style="background:linear-gradient(135deg,rgba(61,232,160,.07) 0%,rgba(244,185,66,.04) 50%,var(--bg2) 100%);border:1px solid rgba(61,232,160,.22);border-radius:20px;padding:32px 28px 24px;margin-bottom:16px;position:relative;overflow:hidden;" id="sw-hero">
+      <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(61,232,160,.09),transparent 65%);pointer-events:none;"></div>
+
+      <!-- Mode / subject row -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+        <span style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">Subject:</span>
+        <select id="sw-subj" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:4px 8px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;">
+          <option value="general">📌 General</option>
+          <option value="bio">🌿 Biology</option>
+          <option value="chem">⚗️ Chemistry</option>
+          <option value="phy">⚡ Physics</option>
+        </select>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:.65rem;color:var(--muted);">Status:</span>
+          <span id="sw-status-badge" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:12px;background:var(--bg3);border:1px solid var(--border);color:var(--muted);">READY</span>
+        </div>
+      </div>
+
+      <!-- Center: ring + controls -->
+      <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+
+        <!-- Ring -->
+        <div style="position:relative;width:160px;height:160px;flex-shrink:0;">
+          <svg width="160" height="160" viewBox="0 0 160 160" style="transform:rotate(-90deg);filter:drop-shadow(0 0 12px rgba(61,232,160,.2));">
+            <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="9"/>
+            <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(61,232,160,.1)" stroke-width="9"/>
+            <circle id="sw-ring-fill" cx="80" cy="80" r="68" fill="none"
+              stroke="var(--bio)" stroke-width="9" stroke-linecap="round"
+              stroke-dasharray="427.3" stroke-dashoffset="427.3"
+              style="transition:stroke-dashoffset .5s linear,stroke .4s;"/>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:120px;">
+            <div id="sw-display" style="font-family:'JetBrains Mono',monospace;font-size:1.55rem;font-weight:700;line-height:1;color:var(--bio);letter-spacing:.02em;text-shadow:0 0 16px rgba(61,232,160,.3);">0:00:00</div>
+            <div id="sw-sublabel" style="font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:5px;">READY</div>
+          </div>
+        </div>
+
+        <!-- Right: note + controls -->
+        <div style="flex:1;min-width:200px;">
+
+          <!-- Focus note -->
+          <input id="sw-note" type="text" maxlength="80"
+            placeholder="📌 What are you studying? (e.g. Organic Chemistry Ch 7)"
+            style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 12px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;margin-bottom:14px;box-sizing:border-box;transition:border-color .2s;"
+            onfocus="this.style.borderColor='rgba(61,232,160,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.08)'" />
+
+          <!-- Controls -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <button id="sw-start-btn" onclick="swToggle()"
+              style="padding:10px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid var(--bio);background:linear-gradient(135deg,rgba(61,232,160,.18),rgba(61,232,160,.08));color:var(--bio);box-shadow:0 0 20px rgba(61,232,160,.15);letter-spacing:.05em;text-transform:uppercase;transition:all .2s;position:relative;overflow:hidden;">
+              ▶ Start
+            </button>
+            <button id="sw-lap-btn" onclick="swLap()" disabled
+              style="padding:10px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid rgba(244,185,66,.35);background:rgba(244,185,66,.08);color:var(--chem);letter-spacing:.05em;text-transform:uppercase;transition:all .2s;opacity:.4;">
+              ⚑ Lap
+            </button>
+            <button onclick="swSaveAndStop()" id="sw-save-btn"
+              style="padding:10px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid rgba(168,124,245,.4);background:rgba(168,124,245,.1);color:var(--purple);letter-spacing:.05em;text-transform:uppercase;transition:all .2s;">
+              💾 Save
+            </button>
+            <button onclick="swReset()"
+              style="padding:10px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;transition:all .2s;"
+              onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">↺</button>
+          </div>
+
+          <!-- Progress bar (fills based on goal) -->
+          <div style="height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;margin-bottom:8px;">
+            <div id="sw-bar" style="height:100%;width:0%;border-radius:3px;background:linear-gradient(90deg,var(--bio),rgba(61,232,160,.5));box-shadow:0 0 8px rgba(61,232,160,.4);transition:width .5s linear;"></div>
+          </div>
+          <div id="sw-goal-label" style="font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">Compared against daily goal</div>
+
+        </div>
+      </div>
+
+      <!-- Laps -->
+      <div id="sw-laps" style="display:none;margin-top:14px;display:none;flex-direction:column;gap:4px;max-height:120px;overflow-y:auto;"></div>
+
+    </div><!-- /sw-hero -->
+
+    <!-- Session log card (reuses tmr2 style) -->
+    <div class="tmr2-log-card" style="margin-bottom:0;">
+      <div class="tmr2-log-header">
+        <div>
+          <div class="tmr2-log-title">📋 Stopwatch Session History</div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">All sessions saved · Included in backup</div>
+        </div>
+        <button onclick="swClearAll()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">🗑 Clear</button>
+      </div>
+
+      <!-- Stat pills -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;" id="sw-stats-row"></div>
+
+      <!-- Session list -->
+      <div id="sw-session-list" style="display:flex;flex-direction:column;gap:6px;max-height:320px;overflow-y:auto;padding-right:2px;"></div>
+      <div id="sw-empty" style="text-align:center;padding:28px;color:var(--muted);font-size:.85rem;">
+        <div style="font-size:2rem;margin-bottom:8px;">⏫</div>
+        Start the stopwatch and hit Save to build your history.
+      </div>
+    </div>
+
+  </div><!-- /sw-wrap -->
 
 </section>
 
@@ -9502,6 +9618,7 @@ Focus Timer   TIMER v2 — Premium
 (function(){
 
 const SESS_KEY2 = 'neetopia-sessions-v1';
+const TMR2_STATE_KEY = 'neetopia-tmr2-state';
 const CIRC2 = 427.3; // 2π × 68
 
 /* ── helpers ── */
@@ -9654,12 +9771,61 @@ function tmr2SetMode(mode){
 }
 window.tmr2SetMode=tmr2SetMode;
 
+
+/* ── persist countdown state ── */
+function tmr2SaveState(){
+  localStorage.setItem(TMR2_STATE_KEY, JSON.stringify({
+    mode:        S.mode,
+    total:       S.total,
+    remaining:   S.remaining,
+    running:     S.running,
+    startEpoch:  S.startEpoch||0,
+    elapsed:     S.elapsed,
+    pomoSess:    S.pomoSess,
+    pomoPhase:   S.pomoPhase,
+    note:        document.getElementById('tmr2-focus-label')?.value||'',
+    subj:        document.getElementById('tmr2-subj')?.value||'general',
+    laps:        S.laps,
+    lapStart:    S.lapStart,
+  }));
+}
+
+function tmr2LoadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(TMR2_STATE_KEY)||'null');
+    if(!saved) return false;
+    S.mode       = saved.mode||'custom';
+    S.total      = saved.total||0;
+    S.pomoSess   = saved.pomoSess||0;
+    S.pomoPhase  = saved.pomoPhase||'focus';
+    S.laps       = saved.laps||[];
+    S.lapStart   = saved.lapStart||0;
+    S.elapsed    = saved.elapsed||0;
+    // recalculate remaining using wall clock
+    if(saved.running && saved.startEpoch){
+      const wallElapsed = Math.floor((Date.now() - saved.startEpoch)/1000);
+      S.remaining = Math.max(0, saved.remaining - wallElapsed);
+      S.running   = S.remaining > 0;
+    } else {
+      S.remaining = saved.remaining||0;
+      S.running   = false;
+    }
+    const noteEl = document.getElementById('tmr2-focus-label');
+    const subjEl = document.getElementById('tmr2-subj');
+    if(noteEl && saved.note) noteEl.value = saved.note;
+    if(subjEl && saved.subj) subjEl.value = saved.subj;
+    return true;
+  } catch(e){ return false; }
+}
+
+
 /* ── toggle start/pause ── */
 function tmr2Toggle(){
   const btn=document.getElementById('tmr2-start-btn');
   if(S.running){
     // pause
     clearInterval(S.iv); S.running=false;
+    tmr2SaveState();
     if(btn){ btn.textContent='▶ Resume'; btn.classList.remove('running'); }
     draw();
   } else {
@@ -9674,9 +9840,11 @@ function tmr2Toggle(){
     }
     if(Notification && Notification.permission==='default') Notification.requestPermission();
     S.running=true;
+    S.startEpoch = Date.now();
     document.getElementById('tmr2-lap-btn').disabled=false;
     if(btn){ btn.textContent='⏸ Pause'; btn.classList.add('running'); }
     if(typeof playTimerSound==='function') playTimerSound('start');
+    tmr2SaveState();
     S.iv=setInterval(()=>{
       if(S.remaining<=0){
         clearInterval(S.iv); S.running=false;
@@ -9697,6 +9865,7 @@ window.tmr2Toggle=tmr2Toggle;
 
 /* ── complete ── */
 function _tmr2Complete(){
+  localStorage.removeItem(TMR2_STATE_KEY);
   const btn=document.getElementById('tmr2-start-btn');
   if(btn){ btn.textContent='▶ Start'; btn.classList.remove('running'); }
   if(typeof playTimerSound==='function') playTimerSound('complete');
@@ -9746,6 +9915,7 @@ function _tmr2PomoComplete(elapsedMins, focus, subj){
 /* ── reset ── */
 function tmr2Reset(){
   clearInterval(S.iv); S.running=false; S.elapsed=0;
+  localStorage.removeItem(TMR2_STATE_KEY);
   S.laps=[];
   if(S.mode==='pomo'){
     S.pomoPhase='focus'; S.total=POMO.focus; S.remaining=POMO.focus;
@@ -10402,18 +10572,89 @@ window.generateNeetPDF = generateNeetPDF;
 window.setPDFRange = setPDFRange;
 window.updatePDFPreview = updatePDFPreview;
 
+
+
+/* ── auto-save countdown session on page close ── */
+window.addEventListener('beforeunload', ()=>{
+  if(S.running){
+    clearInterval(S.iv);
+    const elapsed = S.total - S.remaining;
+    const mins = Math.round(elapsed/60);
+    if(mins >= 1){
+      const focus = document.getElementById('tmr2-focus-label')?.value?.trim()||'';
+      const subj  = document.getElementById('tmr2-subj')?.value||'general';
+      const sess  = getSess2();
+      sess.unshift({ id:Date.now(), date:todayStr(), mins, note:(focus||'⏱ Auto-saved on close'), subj, type:'custom' });
+      setSess2(sess);
+    }
+    // save state so it resumes correctly if page is reopened
+    S.startEpoch = Date.now() - (S.total - S.remaining) * 1000;
+    tmr2SaveState();
+  }
+});
+
+/* ── handle tab switch / page hide for countdown ── */
+document.addEventListener('visibilitychange', ()=>{
+  if(!document.hidden && S.running){
+    // recalculate remaining using wall clock
+    if(S.startEpoch){
+      const wallElapsed = Math.floor((Date.now() - S.startEpoch)/1000);
+      const newRemaining = Math.max(0, S.total - wallElapsed);
+      if(newRemaining <= 0){
+        clearInterval(S.iv);
+        S.remaining = 0;
+        _tmr2Complete();
+        return;
+      }
+      S.remaining = newRemaining;
+    }
+    draw();
+  }
+  if(S.running) tmr2SaveState();
+});
+
+
 /* ── init ── */
 function tmr2Init(){
-  // set today in manual date
   const md=document.getElementById('tmr2-manual-date');
   if(md) md.value=todayStr();
-  // set default custom inputs
-  tmr2Preview();
-  tmr2SetMode('custom');
+
+  // try to restore saved state first
+  const restored = tmr2LoadState();
+
+  if(restored && S.mode){
+    tmr2SetMode(S.mode);
+    if(S.running){
+      // resume interval
+      S.startEpoch = Date.now() - (S.total - S.remaining)*1000;
+      const btn = document.getElementById('tmr2-start-btn');
+      if(btn){ btn.textContent='⏸ Pause'; btn.classList.add('running'); }
+      document.getElementById('tmr2-lap-btn').disabled=false;
+      S.iv = setInterval(()=>{
+        if(S.remaining<=0){
+          clearInterval(S.iv); S.running=false;
+          document.getElementById('tmr2-lap-btn').disabled=true;
+          _tmr2Complete(); return;
+        }
+        S.remaining--;
+        S.elapsed = S.total - S.remaining;
+        if(S.remaining===300 && typeof playTimerSound==='function') playTimerSound('warn');
+        if(S.remaining<=10 && S.remaining>0 && typeof playTimerSound==='function') playTimerSound('tick');
+        draw();
+      },1000);
+    }
+    draw();
+    renderLaps();
+  } else {
+    tmr2Preview();
+    tmr2SetMode('custom');
+  }
+
   tmr2RenderLog();
   tmr2RenderStats();
   draw();
-  // init PDF date defaults
+
+  // PDF init
   try {
     const todayPDF = new Date().toISOString().slice(0,10);
     const monPDF = new Date();
@@ -10422,23 +10663,9 @@ function tmr2Init(){
     const toPDF   = document.getElementById('pdf-to-date');
     if(fromPDF) fromPDF.value = monPDF.toISOString().slice(0,10);
     if(toPDF)   toPDF.value   = todayPDF;
-    updatePDFPreview();
+    if(typeof updatePDFPreview==='function') updatePDFPreview();
   } catch(e){}
 }
-
-// init on section switch
-const _origSwitch2=window.switchSection;
-window.switchSection=function(s){
-  if(_origSwitch2) _origSwitch2(s);
-  if(s==='timer'){ tmr2Init(); }
-};
-
-// also init on DOMContentLoaded if timer section is active
-document.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>{ tmr2Init(); },300);
-});
-
-})();
 
 
 
@@ -10513,6 +10740,366 @@ function playTimerSound(type) {
 }
 
 
+</script>
+
+<script>
+/* ═══════════════════════════════════════
+   COUNT-UP STOPWATCH
+   ═══════════════════════════════════════ */
+(function(){
+'use strict';
+
+const SW_KEY  = 'neetopia-sw-state';   // persists running state across tab switches
+const SESS_KEY = 'neetopia-sessions-v1'; // same session store as countdown timer
+
+/* ── state ── */
+const SW = {
+  running:   false,
+  startEpoch: 0,    // Date.now() when started (survives tab switch)
+  elapsed:   0,     // seconds when paused
+  laps:      [],
+  lapStart:  0,
+};
+
+const CIRC = 427.3;
+const GOAL_SECS = 3 * 3600; // 3 hours = full ring
+
+/* ── helpers ── */
+function fmtSW(s){
+  const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sc=s%60;
+  return h+':'+String(m).padStart(2,'0')+':'+String(sc).padStart(2,'0');
+}
+function fmtMSW(m){ return m>=60?(m/60).toFixed(1)+'h':m+'m'; }
+function todaySW(){ return new Date().toISOString().slice(0,10); }
+function getSessSW(){ try{ return JSON.parse(localStorage.getItem(SESS_KEY)||'[]'); }catch{ return []; } }
+function setSessSW(a){ localStorage.setItem(SESS_KEY, JSON.stringify(a)); }
+
+/* ── persist state so tab switches don't lose it ── */
+function swSaveState(){
+  localStorage.setItem(SW_KEY, JSON.stringify({
+    running:    SW.running,
+    startEpoch: SW.startEpoch,
+    elapsed:    SW.elapsed,
+    laps:       SW.laps,
+    lapStart:   SW.lapStart,
+    note:       document.getElementById('sw-note')?.value||'',
+    subj:       document.getElementById('sw-subj')?.value||'general',
+  }));
+}
+
+function swLoadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(SW_KEY)||'null');
+    if(!saved) return;
+    SW.running    = saved.running;
+    SW.startEpoch = saved.startEpoch;
+    SW.elapsed    = saved.elapsed;
+    SW.laps       = saved.laps||[];
+    SW.lapStart   = saved.lapStart||0;
+    const noteEl = document.getElementById('sw-note');
+    const subjEl = document.getElementById('sw-subj');
+    if(noteEl && saved.note) noteEl.value = saved.note;
+    if(subjEl && saved.subj) subjEl.value = saved.subj;
+  } catch(e){}
+}
+
+/* ── get current elapsed accounting for wall clock ── */
+function swGetElapsed(){
+  if(!SW.running) return SW.elapsed;
+  return SW.elapsed + Math.floor((Date.now() - SW.startEpoch) / 1000);
+}
+
+/* ── draw ── */
+function swDraw(){
+  const elapsed = swGetElapsed();
+  const dispEl  = document.getElementById('sw-display');
+  const subEl   = document.getElementById('sw-sublabel');
+  const fillEl  = document.getElementById('sw-ring-fill');
+  const barEl   = document.getElementById('sw-bar');
+  const goalEl  = document.getElementById('sw-goal-label');
+  const badge   = document.getElementById('sw-status-badge');
+  const heroEl  = document.getElementById('sw-hero');
+
+  // colour: green → yellow → red as time goes up past 2h and 4h
+  let col = 'var(--bio)';
+  if(elapsed >= 4*3600)      col = 'var(--phy)';
+  else if(elapsed >= 2*3600) col = 'var(--chem)';
+
+  if(dispEl){ dispEl.textContent = fmtSW(elapsed); dispEl.style.color = col; }
+
+  // ring fills up to GOAL_SECS then stays full
+  const pct = Math.min(elapsed / GOAL_SECS, 1);
+  const offset = CIRC * (1 - pct);
+  if(fillEl){ fillEl.style.strokeDashoffset = offset; fillEl.style.stroke = col; }
+  if(barEl){
+    barEl.style.width = (pct*100)+'%';
+    barEl.style.background = `linear-gradient(90deg,${col},${col.replace('var(--','rgba(').replace(')','')},.4))`;
+  }
+
+  // sublabel + badge
+  const statusText = SW.running ? 'RUNNING' : elapsed===0 ? 'READY' : 'PAUSED';
+  if(subEl)  subEl.textContent = statusText;
+  if(badge){
+    badge.textContent = statusText;
+    badge.style.color = SW.running ? 'var(--bio)' : elapsed>0 ? 'var(--chem)' : 'var(--muted)';
+    badge.style.borderColor = SW.running ? 'rgba(61,232,160,.4)' : elapsed>0 ? 'rgba(244,185,66,.4)' : 'var(--border)';
+    badge.style.background  = SW.running ? 'rgba(61,232,160,.1)' : 'var(--bg3)';
+  }
+
+  // goal label
+  const d = typeof getData === 'function' ? getData() : {};
+  const goalHrs = parseFloat(d['profile-daily']||0);
+  if(goalEl){
+    if(goalHrs>0){
+      const goalSecs = goalHrs*3600;
+      const pctGoal = Math.min(Math.round(elapsed/goalSecs*100),100);
+      goalEl.textContent = pctGoal+'% of '+goalHrs+'h daily goal · '+fmtSW(Math.max(0,goalSecs-elapsed))+' remaining';
+    } else {
+      goalEl.textContent = 'Set daily goal in Profile tab for goal tracking';
+    }
+  }
+
+  // hero border glow
+  if(heroEl){
+    heroEl.style.borderColor = SW.running ? 'rgba(61,232,160,.4)' : 'rgba(61,232,160,.22)';
+  }
+}
+
+/* ── tick loop ── */
+let _swRAF = null;
+
+function swTick(){
+  swDraw();
+  if(SW.running) _swRAF = requestAnimationFrame(swTick);
+}
+
+/* ── toggle start / pause ── */
+function swToggle(){
+  const btn = document.getElementById('sw-start-btn');
+  const lapBtn = document.getElementById('sw-lap-btn');
+  if(SW.running){
+    // PAUSE
+    SW.elapsed = swGetElapsed();
+    SW.running = false;
+    cancelAnimationFrame(_swRAF);
+    if(btn){ btn.textContent='▶ Resume'; btn.style.boxShadow='0 0 20px rgba(61,232,160,.15)'; btn.style.animation=''; }
+    if(lapBtn){ lapBtn.disabled=true; lapBtn.style.opacity='.4'; }
+  } else {
+    // START / RESUME
+    if(Notification && Notification.permission==='default') Notification.requestPermission();
+    SW.startEpoch = Date.now();
+    SW.running    = true;
+    if(btn){ btn.textContent='⏸ Pause'; btn.style.animation='timer-btn-pulse 2s ease-in-out infinite'; btn.style.boxShadow='0 0 18px rgba(244,185,66,.25)'; btn.style.borderColor='var(--warn)'; btn.style.color='var(--warn)'; btn.style.background='linear-gradient(135deg,rgba(244,185,66,.18),rgba(244,185,66,.08))'; }
+    if(lapBtn){ lapBtn.disabled=false; lapBtn.style.opacity='1'; }
+    _swRAF = requestAnimationFrame(swTick);
+    if(typeof playTimerSound==='function') playTimerSound('start');
+  }
+  swSaveState();
+}
+window.swToggle = swToggle;
+
+/* ── lap ── */
+function swLap(){
+  if(!SW.running) return;
+  const elapsed = swGetElapsed();
+  const split   = elapsed - SW.lapStart;
+  SW.laps.push({ n: SW.laps.length+1, elapsed, split });
+  SW.lapStart = elapsed;
+  swSaveState();
+  swRenderLaps();
+}
+window.swLap = swLap;
+
+function swRenderLaps(){
+  const el = document.getElementById('sw-laps');
+  if(!el) return;
+  if(!SW.laps.length){ el.style.display='none'; return; }
+  el.style.display = 'flex';
+  el.innerHTML = SW.laps.map(l=>`
+    <div class="tmr2-lap-item">
+      <span class="tmr2-lap-num">Lap ${l.n}</span>
+      <span class="tmr2-lap-time">${fmtSW(l.elapsed)}</span>
+      <span class="tmr2-lap-split" style="color:var(--chem);">+${fmtSW(l.split)}</span>
+    </div>`).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+/* ── save & stop ── */
+function swSaveAndStop(){
+  const elapsed = swGetElapsed();
+  const mins    = Math.round(elapsed/60);
+  if(mins < 1){ showToast('Minimum 1 minute to save a session','info'); return; }
+  _swSaveSession(mins);
+  swReset();
+  swRenderLog();
+  swRenderStats();
+  showToast('Session saved! '+fmtMSW(mins)+' logged 💾');
+}
+window.swSaveAndStop = swSaveAndStop;
+
+function _swSaveSession(mins, note, subj){
+  const n = note || document.getElementById('sw-note')?.value?.trim() || '';
+  const s = subj || document.getElementById('sw-subj')?.value || 'general';
+  const all = getSessSW();
+  all.unshift({ id: Date.now(), date: todaySW(), mins, note: n, subj: s, type: 'stopwatch' });
+  setSessSW(all);
+}
+
+/* ── reset ── */
+function swReset(){
+  cancelAnimationFrame(_swRAF);
+  SW.running = false; SW.elapsed = 0; SW.startEpoch = 0;
+  SW.laps = []; SW.lapStart = 0;
+  const btn    = document.getElementById('sw-start-btn');
+  const lapBtn = document.getElementById('sw-lap-btn');
+  if(btn){
+    btn.textContent = '▶ Start';
+    btn.style.animation = '';
+    btn.style.boxShadow = '0 0 20px rgba(61,232,160,.15)';
+    btn.style.borderColor = 'var(--bio)';
+    btn.style.color = 'var(--bio)';
+    btn.style.background = 'linear-gradient(135deg,rgba(61,232,160,.18),rgba(61,232,160,.08))';
+  }
+  if(lapBtn){ lapBtn.disabled=true; lapBtn.style.opacity='.4'; }
+  localStorage.removeItem(SW_KEY);
+  const lapsEl = document.getElementById('sw-laps');
+  if(lapsEl){ lapsEl.style.display='none'; lapsEl.innerHTML=''; }
+  swDraw();
+}
+window.swReset = swReset;
+
+/* ── clear all log ── */
+function swClearAll(){
+  if(!confirm('Delete all stopwatch session history?')) return;
+  // only remove stopwatch type
+  const all = getSessSW().filter(s => s.type !== 'stopwatch');
+  setSessSW(all);
+  swRenderLog(); swRenderStats();
+  showToast('Stopwatch history cleared','info');
+}
+window.swClearAll = swClearAll;
+
+/* ── render log ── */
+function swRenderLog(){
+  const list  = document.getElementById('sw-session-list');
+  const empty = document.getElementById('sw-empty');
+  if(!list) return;
+  const all = getSessSW().filter(s => s.type==='stopwatch');
+  if(!all.length){
+    list.innerHTML='';
+    if(empty) empty.style.display='block';
+    return;
+  }
+  if(empty) empty.style.display='none';
+
+  // group by date
+  const grouped = {};
+  all.forEach(s=>{ if(!grouped[s.date]) grouped[s.date]=[]; grouped[s.date].push(s); });
+  const SUBJ_COLOR = { bio:'var(--bio)', chem:'var(--chem)', phy:'var(--phy)', general:'var(--purple)' };
+  const SUBJ_LABEL = { bio:'🌿 Bio', chem:'⚗️ Chem', phy:'⚡ Phy', general:'📌 General' };
+
+  list.innerHTML = Object.keys(grouped).sort((a,b)=>b.localeCompare(a)).map(date => {
+    const dayTotal = grouped[date].reduce((a,s)=>a+(s.mins||0),0);
+    const dateLabel = new Date(date+'T12:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'});
+    return `<div style="margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+        <span style="font-size:.72rem;font-weight:700;color:var(--fg);">${dateLabel}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--bio);">${fmtMSW(dayTotal)}</span>
+      </div>`+
+      grouped[date].map(s => {
+        const col = SUBJ_COLOR[s.subj]||'var(--purple)';
+        return `<div class="tmr2-sess-item" style="border-left-color:${col};">
+          <span style="font-size:.9rem;">⏫</span>
+          <div class="tmr2-sess-meta">
+            <div class="tmr2-sess-focus">${s.note||'—'}</div>
+            <div class="tmr2-sess-sub">${SUBJ_LABEL[s.subj]||'General'} · stopwatch</div>
+          </div>
+          <span class="tmr2-sess-dur" style="color:${col};">${fmtMSW(s.mins)}</span>
+          <button onclick="swDeleteSess(${s.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.72rem;padding:2px 5px;border-radius:4px;" onmouseover="this.style.color='var(--danger)'" onmouseout="this.style.color='var(--muted)'">✕</button>
+        </div>`;
+      }).join('')+'</div>';
+  }).join('');
+}
+
+function swDeleteSess(id){
+  setSessSW(getSessSW().filter(s=>s.id!==id));
+  swRenderLog(); swRenderStats();
+}
+window.swDeleteSess = swDeleteSess;
+
+/* ── render stats ── */
+function swRenderStats(){
+  const row = document.getElementById('sw-stats-row');
+  if(!row) return;
+  const all  = getSessSW().filter(s=>s.type==='stopwatch');
+  const today = todaySW();
+  const todayM = all.filter(s=>s.date===today).reduce((a,s)=>a+(s.mins||0),0);
+  const totalM = all.reduce((a,s)=>a+(s.mins||0),0);
+  const stats = [
+    { label:'Today',   val: fmtMSW(todayM), color:'var(--bio)' },
+    { label:'All Time',val: fmtMSW(totalM), color:'var(--accent)' },
+    { label:'Sessions',val: all.length,     color:'var(--purple)' },
+  ];
+  row.innerHTML = stats.map(s=>`
+    <div class="tmr2-stat-pill" style="min-width:70px;">
+      <div class="val" style="color:${s.color};font-size:.9rem;">${s.val}</div>
+      <div class="lbl">${s.label}</div>
+    </div>`).join('');
+}
+
+/* ── auto-save on page close / refresh ── */
+window.addEventListener('beforeunload', ()=>{
+  if(SW.running){
+    const elapsed = swGetElapsed();
+    const mins    = Math.round(elapsed/60);
+    if(mins >= 1){
+      const n = document.getElementById('sw-note')?.value?.trim()||'';
+      const s = document.getElementById('sw-subj')?.value||'general';
+      _swSaveSession(mins, n+'  [auto-saved on close]', s);
+    }
+    swSaveState();
+  }
+});
+
+/* ── visibility change: keep time correct across tab switches ── */
+document.addEventListener('visibilitychange', ()=>{
+  if(!document.hidden && SW.running){
+    // page is visible again — just redraw, elapsed calc uses wall clock
+    swDraw();
+  }
+  if(SW.running) swSaveState();
+});
+
+/* ── init ── */
+function swInit(){
+  swLoadState();
+  if(SW.running){
+    // was running when page last closed/hidden — resume tick
+    const btn    = document.getElementById('sw-start-btn');
+    const lapBtn = document.getElementById('sw-lap-btn');
+    if(btn){ btn.textContent='⏸ Pause'; btn.style.animation='timer-btn-pulse 2s ease-in-out infinite'; btn.style.borderColor='var(--warn)'; btn.style.color='var(--warn)'; btn.style.background='linear-gradient(135deg,rgba(244,185,66,.18),rgba(244,185,66,.08))'; }
+    if(lapBtn){ lapBtn.disabled=false; lapBtn.style.opacity='1'; }
+    _swRAF = requestAnimationFrame(swTick);
+  } else {
+    swDraw();
+  }
+  swRenderLaps();
+  swRenderLog();
+  swRenderStats();
+}
+
+// init when timer section is opened
+const _origSwSwitch = window.switchSection;
+window.switchSection = function(s){
+  if(_origSwSwitch) _origSwSwitch(s);
+  if(s==='timer') swInit();
+};
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(swInit, 400);
+});
+
+})();
 </script>
 </body>
 </html>
