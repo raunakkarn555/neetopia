@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEETopia Book Reader — Read PDFs Like a Real Book</title>
+  <meta name="description" content="Free NEET PDF Book Reader. Read Biology, Chemistry, Physics PDFs in a real book-like interface with page flip, highlights, notes and bookmarks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+  <style>
+/* ═══ TOKENS ═══ */
+:root {
+  --bg:#07090f;--bg2:#0c0f1a;--bg3:#111827;--fg:#e8edf5;--muted:#6b7a99;
+  --border:#1e2a45;--accent:#a87cf5;--bio:#3de8a0;--chem:#f4b942;--phy:#3dbfff;
+  --danger:#ff5f5f;--purple:#a87cf5;--font-mono:'JetBrains Mono',monospace;--radius:14px;
+}
+[data-theme="light"]{--bg:#f5f7fa;--bg2:#fff;--bg3:#eef1f7;--fg:#111827;--muted:#6b7280;--border:#e5e7eb;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--fg);font-size:15px;line-height:1.6;overflow-x:hidden;}
+
+/* ═══ NAVBAR ═══ */
+nav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.nav-logo{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;color:var(--fg);text-decoration:none;}
+.logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--phy));display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links li a{display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px;color:var(--muted);font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;}
+.nav-links li a:hover{background:var(--bg3);color:var(--fg);}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.btn-donate{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:linear-gradient(135deg,rgba(168,124,245,.15),rgba(168,124,245,.08));border:1px solid rgba(168,124,245,.35);color:var(--accent);font-weight:600;font-size:.82rem;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-donate:hover{background:rgba(168,124,245,.25);}
+.theme-toggle{width:36px;height:36px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:all .2s;}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.btn-nav{display:flex;align-items:center;gap:6px;background:var(--accent);color:var(--bg);padding:8px 18px;border-radius:8px;font-weight:700;font-size:.82rem;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.btn-nav:hover{opacity:.85;transform:translateY(-1px);}
+.nav-hamburger{display:none;width:36px;height:36px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;color:var(--fg);}
+@media(max-width:820px){.nav-links{display:none;}.btn-nav{display:none;}.nav-hamburger{display:flex;}}
+
+/* ═══ MOBILE MENU ═══ */
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:900;}
+.mobile-nav-overlay.open{display:block;}
+.nav-mobile-menu{position:fixed;top:64px;right:0;bottom:0;width:280px;background:var(--bg2);border-left:1px solid var(--border);z-index:950;display:flex;flex-direction:column;gap:4px;padding:16px;overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;}
+.nav-mobile-menu.open{transform:translateX(0);}
+.nav-mobile-menu a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;color:var(--muted);font-size:.88rem;font-weight:500;text-decoration:none;transition:all .15s;}
+.nav-mobile-menu a:hover{background:var(--bg3);color:var(--fg);}
+.mobile-divider{height:1px;background:var(--border);margin:8px 0;}
+.mobile-actions{display:flex;flex-direction:column;gap:8px;padding:4px 0;}
+
+/* ═══ PAGE LAYOUT ═══ */
+.page-wrap{max-width:1300px;margin:0 auto;padding:32px 20px 80px;}
+
+/* ═══ SHELF HERO ═══ */
+.shelf-hero{text-align:center;padding:48px 20px 40px;background:linear-gradient(135deg,rgba(168,124,245,.08),rgba(61,191,255,.05));border:1px solid rgba(168,124,245,.2);border-radius:20px;margin-bottom:40px;position:relative;overflow:hidden;}
+.shelf-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(168,124,245,.12),transparent 70%);pointer-events:none;}
+.shelf-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:10px;}
+.shelf-hero p{color:var(--muted);font-size:.95rem;margin-bottom:28px;}
+.hl{color:var(--accent);}
+
+/* ═══ ADD BOOK CARD ═══ */
+.add-book-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:32px;}
+.add-book-section h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.add-book-section p{font-size:.82rem;color:var(--muted);margin-bottom:20px;}
+.book-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px;}
+.form-group label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;box-sizing:border-box;}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent);}
+.form-group textarea{resize:vertical;min-height:70px;}
+/* URL input overflow fix */
+.form-group input[type="url"]{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-primary{background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:11px 24px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
+.btn-primary:hover{opacity:.85;transform:translateY(-1px);}
+.btn-secondary{background:var(--bg3);color:var(--fg);border:1px solid var(--border);border-radius:8px;padding:11px 20px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+
+/* Guide tabs */
+.guide-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.guide-tab{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.guide-tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+.guide-content{display:none;}
+.guide-content.active{display:block;}
+.guide-box{background:var(--bg3);border-radius:10px;padding:16px 18px;font-size:.82rem;color:var(--muted);line-height:1.8;border-left:3px solid var(--phy);overflow-x:auto;}
+.guide-box ol,.guide-box ul{padding-left:16px;margin-top:6px;}
+.guide-box li{margin-bottom:4px;word-break:break-all;}
+.guide-box code{font-family:var(--font-mono);font-size:.78rem;background:var(--bg2);padding:1px 6px;border-radius:4px;color:var(--phy);word-break:break-all;}
+
+/* Book cards */
+.section-title{font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-bottom:40px;}
+.book-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;position:relative;}
+.book-card:hover{transform:translateY(-4px);border-color:rgba(168,124,245,.4);box-shadow:0 12px 40px rgba(0,0,0,.3);}
+.book-spine{height:6px;background:linear-gradient(90deg,var(--accent),var(--phy));}
+.book-spine.bio-spine{background:linear-gradient(90deg,var(--bio),rgba(61,232,160,.4));}
+.book-spine.chem-spine{background:linear-gradient(90deg,var(--chem),rgba(244,185,66,.4));}
+.book-spine.phy-spine{background:linear-gradient(90deg,var(--phy),rgba(61,191,255,.4));}
+.book-spine.gen-spine{background:linear-gradient(90deg,var(--purple),rgba(168,124,245,.4));}
+.book-cover-art{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--bg3);}
+.book-info{padding:14px 16px;}
+.book-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:4px;line-height:1.3;}
+.book-author{font-size:.72rem;color:var(--muted);margin-bottom:10px;}
+.book-progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:6px;}
+.book-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .5s ease;}
+.book-meta{display:flex;align-items:center;justify-content:space-between;font-size:.7rem;color:var(--muted);}
+.book-badge{font-size:.62rem;padding:2px 8px;border-radius:10px;font-weight:700;border:1px solid;}
+.book-actions{display:flex;gap:6px;padding:0 14px 14px;}
+.book-btn{flex:1;padding:7px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;text-align:center;}
+.book-btn:hover{border-color:var(--accent);color:var(--accent);}
+.book-btn.open-btn{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+.book-btn.open-btn:hover{opacity:.85;}
+
+/* ═══ GUIDE PANEL (floating help) ═══ */
+.guide-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+.guide-modal-overlay.open{display:flex;}
+.guide-modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:32px;}
+.guide-modal h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:6px;}
+.guide-modal p.sub{color:var(--muted);font-size:.85rem;margin-bottom:24px;}
+.guide-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;}
+.guide-modal-inner{position:relative;}
+.guide-steps{display:flex;flex-direction:column;gap:16px;}
+.guide-step{display:flex;gap:14px;padding:16px;background:var(--bg3);border-radius:12px;border:1px solid var(--border);}
+.guide-step-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--phy));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#fff;flex-shrink:0;}
+.guide-step-body h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:4px;font-size:.9rem;}
+.guide-step-body p{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.guide-feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:20px;}
+.guide-feature-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.guide-feature-card .icon{font-size:1.4rem;margin-bottom:6px;}
+.guide-feature-card h5{font-size:.8rem;font-weight:700;margin-bottom:3px;}
+.guide-feature-card p{font-size:.72rem;color:var(--muted);line-height:1.5;}
+
+/* ═══ READER VIEW ═══ */
+#readerview{position:fixed;inset:64px 0 0 0;background:var(--bg);z-index:100;display:none;flex-direction:column;}
+#readerview.open{display:flex;}
+
+/* ═══ READER TOOLBAR (mobile optimized) ═══ */
+.reader-toolbar{height:52px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 10px;flex-shrink:0;overflow-x:auto;scrollbar-width:none;}
+.reader-toolbar::-webkit-scrollbar{display:none;}
+.rtool-sep{width:1px;height:24px;background:var(--border);flex-shrink:0;}
+.rtool-btn{height:34px;padding:0 10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;position:relative;}
+.rtool-btn:hover{border-color:var(--accent);color:var(--accent);}
+.rtool-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+.rtool-btn.danger:hover{border-color:var(--danger);color:var(--danger);}
+/* Mobile: show icon + tooltip, hide text */
+.rtool-label{font-size:.72rem;}
+.rtool-icon{font-size:.9rem;line-height:1;}
+/* Tooltip for mobile */
+.rtool-btn[data-tip]{position:relative;}
+.rtool-btn[data-tip]:active::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 8px;font-size:.7rem;white-space:nowrap;z-index:100;color:var(--fg);}
+.rtool-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;color:var(--fg);flex-shrink:1;}
+.page-nav-group{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.page-num-input{width:48px;text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 4px;color:var(--fg);font-family:var(--font-mono);font-size:.82rem;outline:none;}
+.page-num-input:focus{border-color:var(--accent);}
+.page-total{font-size:.78rem;color:var(--muted);font-family:var(--font-mono);}
+.color-picker-row{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.color-dot{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s;flex-shrink:0;}
+.color-dot:hover,.color-dot.selected{transform:scale(1.3);border-color:var(--fg);}
+.zoom-group{display:flex;align-items:center;gap:3px;flex-shrink:0;}
+.zoom-val{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);min-width:36px;text-align:center;}
+
+/* ═══ READER BODY ═══ */
+.reader-body{flex:1;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;background:#1a1a2e;background-image:radial-gradient(ellipse at center,rgba(168,124,245,.03) 0%,transparent 70%);}
+.book-spread{display:flex;gap:0;position:relative;max-height:calc(100% - 40px);filter:drop-shadow(0 20px 60px rgba(0,0,0,.6));}
+.page-wrapper{position:relative;background:#fff;overflow:hidden;flex-shrink:0;}
+.page-wrapper canvas{display:block;}
+.page-wrapper.right-page{transform-origin:left center;}
+.page-wrapper.left-page{transform-origin:right center;}
+.book-gutter{width:16px;flex-shrink:0;background:linear-gradient(90deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,.05) 40%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.4) 100%);position:relative;z-index:2;}
+
+/* Page turn */
+@keyframes pageTurnRight{0%{transform:rotateY(0);}100%{transform:rotateY(-90deg);}}
+@keyframes pageTurnLeft{0%{transform:rotateY(0);}100%{transform:rotateY(90deg);}}
+.page-turning-right{animation:pageTurnRight .35s ease-in-out;transform-origin:right center;}
+.page-turning-left{animation:pageTurnLeft .35s ease-in-out;transform-origin:left center;}
+
+/* Nav arrows */
+.nav-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:72px;background:rgba(168,124,245,.12);border:1px solid rgba(168,124,245,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--accent);font-size:1.2rem;transition:all .2s;z-index:10;user-select:none;}
+.nav-arrow:hover{background:rgba(168,124,245,.25);transform:translateY(-50%) scale(1.05);}
+.nav-arrow.left{left:8px;}
+.nav-arrow.right{right:8px;}
+
+/* Progress */
+.reader-progress{height:4px;flex-shrink:0;background:var(--border);position:relative;}
+.reader-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--bio));transition:width .4s ease;}
+
+/* Loading overlay */
+.loading-overlay{position:absolute;inset:0;background:rgba(7,9,15,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:50;}
+.loading-spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-family:var(--font-mono);font-size:.82rem;color:var(--muted);}
+
+/* Highlight layer */
+.highlight-layer{position:absolute;top:0;left:0;pointer-events:none;z-index:5;}
+
+/* Note popup */
+.note-popup{position:absolute;z-index:20;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;min-width:220px;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
+.note-popup.open{display:block;}
+.note-popup textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--fg);font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;resize:vertical;min-height:70px;box-sizing:border-box;line-height:1.6;margin-bottom:8px;}
+.note-popup textarea:focus{border-color:var(--accent);}
+
+/* Sidebar */
+.reader-sidebar{position:absolute;right:0;top:0;bottom:0;width:280px;background:var(--bg2);border-left:1px solid var(--border);transform:translateX(100%);transition:transform .3s ease;z-index:30;display:flex;flex-direction:column;overflow:hidden;}
+.reader-sidebar.open{transform:translateX(0);}
+.sidebar-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sidebar-header h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.92rem;}
+.sidebar-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:4px;}
+.sidebar-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;}
+.stab{flex:1;padding:10px 8px;border:none;background:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent;}
+.stab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.sidebar-content{flex:1;overflow-y:auto;padding:12px;}
+.bookmark-item,.toc-item{padding:10px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:6px;cursor:pointer;transition:all .15s;font-size:.82rem;}
+.bookmark-item:hover,.toc-item:hover{border-color:var(--accent);color:var(--accent);}
+.bookmark-item{display:flex;align-items:center;justify-content:space-between;}
+.bm-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.75rem;padding:2px 5px;border-radius:4px;transition:color .15s;}
+.bm-del:hover{color:var(--danger);}
+
+/* Thumbnail strip */
+.thumb-strip{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:8px 12px;background:rgba(7,9,15,.85);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:12px;overflow-x:auto;max-width:calc(100vw - 120px);scrollbar-width:none;z-index:15;transition:opacity .3s;}
+.thumb-strip::-webkit-scrollbar{display:none;}
+.thumb-strip.hidden{opacity:0;pointer-events:none;}
+.thumb-page{width:36px;height:50px;flex-shrink:0;border-radius:4px;overflow:hidden;border:2px solid transparent;cursor:pointer;transition:all .15s;background:#eee;}
+.thumb-page.current{border-color:var(--accent);}
+.thumb-page img{width:100%;height:100%;object-fit:cover;}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;font-size:.85rem;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:8px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-color:var(--bio);color:var(--bio);}
+.toast.info{border-color:var(--phy);color:var(--phy);}
+
+/* Backup section */
+.backup-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:32px;}
+.backup-section h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.backup-btns{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* Empty shelf */
+.empty-shelf{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-shelf .ei{font-size:3rem;margin-bottom:14px;}
+.empty-shelf h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:6px;color:var(--fg);}
+
+/* Reading modes */
+.reader-body.mode-sepia{background:#2d2009;}
+.reader-body.mode-sepia canvas{filter:sepia(.6) brightness(.9);}
+.reader-body.mode-white{background:#e8e8e8;}
+
+/* Scroll mode */
+.scroll-mode .book-spread{flex-direction:column;align-items:center;overflow-y:auto;max-height:100%;gap:8px;padding:20px;}
+.scroll-mode .book-gutter{display:none;}
+.scroll-mode .page-wrapper.right-page{display:block;}
+.scroll-mode .nav-arrow{display:none;}
+
+/* Focus mode */
+.reading-mode-focus .reader-toolbar{opacity:0;pointer-events:none;}
+.reading-mode-focus:hover .reader-toolbar{opacity:1;pointer-events:all;}
+
+/* OCR overlay */
+.ocr-text-layer{position:absolute;top:0;left:0;pointer-events:all;z-index:6;user-select:text;}
+.ocr-text-layer span{position:absolute;white-space:pre;cursor:text;color:transparent;line-height:1.2;}
+.ocr-text-layer span::selection{background:rgba(168,124,245,.35);color:transparent;}
+
+/* ═══ MOBILE RESPONSIVE ═══ */
+@media(max-width:700px){
+  .book-spread{gap:0;}
+  .book-gutter{display:none;}
+  .page-wrapper.right-page{display:none;}
+  .nav-arrow{width:32px;height:56px;font-size:1rem;}
+  .nav-arrow.left{left:4px;}
+  .nav-arrow.right{right:4px;}
+  /* Hide text labels, keep icons on mobile toolbar */
+  .rtool-label{display:none;}
+  .rtool-btn{padding:0 8px;min-width:34px;justify-content:center;}
+  .rtool-title{max-width:80px;font-size:.75rem;}
+  .books-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .page-wrap{padding:16px 12px 60px;}
+  .shelf-hero{padding:28px 14px 24px;}
+  .add-book-section{padding:18px 14px;}
+  .book-form-grid{grid-template-columns:1fr;}
+  .form-actions{flex-direction:column;}
+  .form-actions .btn-primary,.form-actions .btn-secondary{width:100%;justify-content:center;}
+  .backup-btns{flex-direction:column;}
+  .backup-btns .btn-secondary{width:100%;justify-content:center;}
+  .guide-modal{padding:20px 14px;}
+  .guide-feature-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:400px){
+  .books-grid{grid-template-columns:1fr;}
+}
+
+/* Footer */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 24px 32px;}
+.container{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand p{font-size:.82rem;color:var(--muted);margin:8px 0 16px;line-height:1.7;}
+.footer-social{display:flex;gap:8px;flex-wrap:wrap;}
+.social-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);font-size:.78rem;font-weight:600;color:var(--muted);text-decoration:none;transition:all .2s;}
+.social-btn:hover{border-color:var(--accent);color:var(--accent);}
+.footer-col h4{font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+.footer-col a{display:flex;align-items:center;gap:7px;padding:5px 0;font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .15s;}
+.footer-col a:hover{color:var(--fg);}
+.footer-divider{border:none;border-top:1px solid var(--border);margin:0 0 24px;}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom-left p{font-size:.78rem;color:var(--muted);}
+.footer-bottom-left span{color:var(--danger);}
+.footer-legal{display:flex;gap:16px;flex-wrap:wrap;}
+.footer-legal a{font-size:.75rem;color:var(--muted);text-decoration:none;}
+.footer-legal a:hover{color:var(--fg);}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:24px;}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr;}}
+
+/* OCR progress indicator */
+.ocr-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(61,232,160,.1);border:1px solid rgba(61,232,160,.3);border-radius:6px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--bio);margin-left:8px;}
+.ocr-badge.processing{color:var(--chem);border-color:rgba(244,185,66,.3);background:rgba(244,185,66,.1);}
+
+/* Annot count badge on toolbar */
+.rtool-count{position:absolute;top:-5px;right:-5px;background:var(--accent);color:#fff;border-radius:50%;width:14px;height:14px;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:800;}
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    </div>
+    NEETopia
+  </a>
+  <ul class="nav-links">
+    <li><a href="syllabus/neet-syllabus.html">📖 Syllabus</a></li>
+    <li><a href="subjects/biology/neet-biology.html" style="color:var(--bio)">🌿 Biology</a></li>
+    <li><a href="subjects/chemistry/neet-chemistry.html" style="color:var(--chem)">⚗️ Chemistry</a></li>
+    <li><a href="subjects/physics/neet-physics.html" style="color:var(--phy)">⚡ Physics</a></li>
+    <li><a href="tools/neet-progress-tracker.html" style="color:var(--purple)">📊 Tracker</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="donate.html" class="btn-donate">💜 Donate</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="syllabus/neet-syllabus.html">📚 Syllabus</a>
+  <a href="subjects/biology/neet-biology.html">🌿 Biology</a>
+  <a href="subjects/chemistry/neet-chemistry.html">⚗️ Chemistry</a>
+  <a href="subjects/physics/neet-physics.html">⚡ Physics</a>
+  <a href="neet-pyq/neet-previous-year-questions.html">❓ PYQs</a>
+  <a href="tools/neet-progress-tracker.html" style="color:var(--purple)">📊 Tracker</a>
+  <div class="mobile-divider"></div>
+  <div class="mobile-actions"><a href="donate.html" class="btn-donate">💜 Donate</a></div>
+</div>
+
+<!-- ══ GUIDE MODAL ══ -->
+<div class="guide-modal-overlay" id="guideModal">
+  <div class="guide-modal-inner">
+    <div class="guide-modal">
+      <button class="guide-close" onclick="closeGuide()">✕</button>
+      <h2>📖 How to Use Book Reader</h2>
+      <p class="sub">A complete guide to every feature — from adding books to highlighting and OCR scanning.</p>
+
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="guide-step-num">1</div>
+          <div class="guide-step-body">
+            <h4>Add Your PDF Book</h4>
+            <p>Paste a <strong>GitHub Raw URL</strong> or <strong>Google Drive share link</strong>, fill in title & subject, then click <em>+ Add Book</em>. Or click <em>Upload PDF from Device</em> to load from your phone/computer — no internet needed, 100% private.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">2</div>
+          <div class="guide-step-body">
+            <h4>Navigate Pages</h4>
+            <p>Use the <strong>◀ ▶ arrows</strong> on screen, the <strong>keyboard arrow keys / Page Up / Page Down</strong>, or <strong>swipe left/right</strong> on mobile. Type a page number directly in the input box to jump instantly.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <div class="guide-step-body">
+            <h4>Highlight & Underline Text</h4>
+            <p>Click <strong>🖊 Highlight</strong> to enter highlight mode, pick a color, then <strong>click & drag</strong> over any area of the page. Click <strong>U Line</strong> for underline mode. All marks are saved automatically per book.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">4</div>
+          <div class="guide-step-body">
+            <h4>Add Bookmarks & Notes</h4>
+            <p>Press <strong>🔖 Bookmark</strong> to bookmark the current page with a label. <strong>Right-click</strong> anywhere on the page to add a sticky note. View all bookmarks, highlights and notes in the <strong>☰ Panel</strong> sidebar.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">5</div>
+          <div class="guide-step-body">
+            <h4>Scan Non-Selectable Text (OCR)</h4>
+            <p>If the PDF is a scanned image, click <strong>🔍 OCR Scan</strong> on the current page. The tool will extract all readable text and overlay it as selectable text. You can then copy-paste or search it. Requires internet (uses OCR.space API).</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">6</div>
+          <div class="guide-step-body">
+            <h4>View Modes</h4>
+            <p><strong>Spread</strong> = two pages side-by-side (book feel). <strong>↕ Scroll</strong> = all pages in one continuous scroll. <strong>🌙 Mode</strong> cycles between Dark / Sepia (eye-friendly) / White. <strong>⛶ Fullscreen</strong> hides everything. <strong>🎯 Focus</strong> auto-hides the toolbar.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">7</div>
+          <div class="guide-step-body">
+            <h4>Backup Your Annotations</h4>
+            <p>All highlights, bookmarks and notes live in your browser only. Use <strong>⬇ Export Annotations</strong> regularly to save a JSON backup. Import it back anytime. Clearing browser data will erase everything — so backup often!</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;margin:24px 0 12px;font-size:1rem;">⌨️ Keyboard Shortcuts</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>← / →</strong> — Prev / Next page</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>Page Up/Down</strong> — Navigate</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>Home / End</strong> — First / Last page</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>+ / −</strong> — Zoom in / out</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>Escape</strong> — Exit mode / Close reader</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:.78rem;"><strong>Swipe L/R</strong> — Mobile page turn</div>
+      </div>
+
+      <div style="margin-top:20px;padding:14px;background:rgba(61,232,160,.07);border:1px solid rgba(61,232,160,.2);border-radius:10px;font-size:.8rem;color:var(--bio);">
+        💡 <strong>Tip:</strong> Your reading progress (last page) is saved automatically. Next time you open a book, it picks up right where you left off!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ READER VIEW ══ -->
+<div id="readerview">
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text" id="loadingText">Opening book...</div>
+  </div>
+
+  <!-- Toolbar — mobile-friendly with icons + visible labels -->
+  <div class="reader-toolbar" id="readerToolbar">
+    <button class="rtool-btn" onclick="closeReader()" data-tip="Back to Library" title="Back to library">
+      <span class="rtool-icon">←</span><span class="rtool-label"> Library</span>
+    </button>
+    <div class="rtool-sep"></div>
+    <div class="rtool-title" id="readerBookTitle">Book</div>
+    <div class="rtool-sep"></div>
+
+    <!-- Page nav -->
+    <div class="page-nav-group">
+      <button class="rtool-btn" onclick="prevPage()" data-tip="Previous Page" title="Previous page"><span class="rtool-icon">◀</span></button>
+      <input type="number" class="page-num-input" id="pageNumInput" min="1" value="1" onchange="jumpToPage(parseInt(this.value))" />
+      <span class="page-total" id="pageTotalLabel">/ 1</span>
+      <button class="rtool-btn" onclick="nextPage()" data-tip="Next Page" title="Next page"><span class="rtool-icon">▶</span></button>
+    </div>
+    <div class="rtool-sep"></div>
+
+    <!-- Zoom -->
+    <div class="zoom-group">
+      <button class="rtool-btn" onclick="changeZoom(-0.1)" data-tip="Zoom Out" title="Zoom out"><span class="rtool-icon">−</span></button>
+      <span class="zoom-val" id="zoomVal">100%</span>
+      <button class="rtool-btn" onclick="changeZoom(0.1)" data-tip="Zoom In" title="Zoom in"><span class="rtool-icon">+</span></button>
+      <button class="rtool-btn" onclick="fitPage()" data-tip="Fit to Screen" title="Fit page"><span class="rtool-icon">⊡</span><span class="rtool-label"> Fit</span></button>
+    </div>
+    <div class="rtool-sep"></div>
+
+    <!-- Highlight -->
+    <button class="rtool-btn" id="hlBtn" onclick="toggleHighlightMode()" data-tip="Highlight Area" title="Highlight">
+      <span class="rtool-icon">🖊</span><span class="rtool-label"> Highlight</span>
+    </button>
+    <div class="color-picker-row" id="colorPicker" style="display:none;">
+      <div class="color-dot selected" style="background:#fde047;" data-color="#fde047" onclick="setHlColor('#fde047',this)" title="Yellow"></div>
+      <div class="color-dot" style="background:#86efac;" data-color="#86efac" onclick="setHlColor('#86efac',this)" title="Green"></div>
+      <div class="color-dot" style="background:#93c5fd;" data-color="#93c5fd" onclick="setHlColor('#93c5fd',this)" title="Blue"></div>
+      <div class="color-dot" style="background:#fca5a5;" data-color="#fca5a5" onclick="setHlColor('#fca5a5',this)" title="Red"></div>
+      <div class="color-dot" style="background:#c084fc;" data-color="#c084fc" onclick="setHlColor('#c084fc',this)" title="Purple"></div>
+    </div>
+    <button class="rtool-btn" onclick="toggleUnderlineMode()" id="ulBtn" data-tip="Underline Text" title="Underline">
+      <span class="rtool-icon" style="text-decoration:underline;">U</span><span class="rtool-label"> Underline</span>
+    </button>
+    <div class="rtool-sep"></div>
+
+    <!-- Bookmark / Panel -->
+    <button class="rtool-btn" onclick="addBookmark()" data-tip="Add Bookmark" title="Bookmark">
+      <span class="rtool-icon">🔖</span><span class="rtool-label"> Mark</span>
+    </button>
+    <button class="rtool-btn" onclick="toggleSidebar()" data-tip="Bookmarks & Notes Panel" title="Panel">
+      <span class="rtool-icon">☰</span><span class="rtool-label"> Panel</span>
+    </button>
+    <div class="rtool-sep"></div>
+
+    <!-- OCR -->
+    <button class="rtool-btn" id="ocrBtn" onclick="runOCR()" data-tip="Scan Page Text (OCR)" title="OCR Scan">
+      <span class="rtool-icon">🔍</span><span class="rtool-label"> OCR</span>
+    </button>
+    <div class="rtool-sep"></div>
+
+    <!-- View -->
+    <button class="rtool-btn" id="spreadBtn" onclick="toggleSpread()" data-tip="Toggle Two-Page Spread" title="Spread">
+      <span class="rtool-icon">⧉</span><span class="rtool-label"> Spread</span>
+    </button>
+    <button class="rtool-btn" onclick="toggleScrollMode()" id="scrollBtn" data-tip="Continuous Scroll Mode" title="Scroll mode">
+      <span class="rtool-icon">↕</span><span class="rtool-label"> Scroll</span>
+    </button>
+    <button class="rtool-btn" onclick="cycleReadingMode()" id="modeBtn" data-tip="Change Reading Theme" title="Reading mode">
+      <span class="rtool-icon">🌙</span><span class="rtool-label"> Theme</span>
+    </button>
+    <button class="rtool-btn" onclick="toggleFullscreen()" data-tip="Fullscreen" title="Fullscreen">
+      <span class="rtool-icon">⛶</span>
+    </button>
+    <div class="rtool-sep"></div>
+    <button class="rtool-btn" onclick="toggleFocusMode()" id="focusBtn" data-tip="Focus Mode (auto-hide toolbar)" title="Focus mode">
+      <span class="rtool-icon">🎯</span><span class="rtool-label"> Focus</span>
+    </button>
+    <button class="rtool-btn" onclick="openGuide()" data-tip="How to Use" title="Help">
+      <span class="rtool-icon">❓</span><span class="rtool-label"> Help</span>
+    </button>
+  </div>
+
+  <!-- Reader Body -->
+  <div class="reader-body" id="readerBody" tabindex="0">
+    <div class="nav-arrow left" onclick="prevPage()">‹</div>
+    <div class="book-spread" id="bookSpread">
+      <div class="page-wrapper left-page" id="leftPage">
+        <canvas id="leftCanvas"></canvas>
+        <canvas class="highlight-layer" id="leftHL"></canvas>
+        <svg class="highlight-layer" id="leftSVG" style="position:absolute;top:0;left:0;pointer-events:none;"></svg>
+        <div class="ocr-text-layer" id="leftOCR"></div>
+      </div>
+      <div class="book-gutter"></div>
+      <div class="page-wrapper right-page" id="rightPage">
+        <canvas id="rightCanvas"></canvas>
+        <canvas class="highlight-layer" id="rightHL"></canvas>
+        <svg class="highlight-layer" id="rightSVG" style="position:absolute;top:0;left:0;pointer-events:none;"></svg>
+        <div class="ocr-text-layer" id="rightOCR"></div>
+      </div>
+    </div>
+    <div class="nav-arrow right" onclick="nextPage()">›</div>
+    <div class="thumb-strip hidden" id="thumbStrip"></div>
+    <div class="note-popup" id="notePopup">
+      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:8px;">📝 Note</div>
+      <textarea id="noteText" placeholder="Type your note here..."></textarea>
+      <div style="display:flex;gap:6px;">
+        <button onclick="saveNote()" class="btn-primary" style="flex:1;padding:7px;font-size:.78rem;justify-content:center;">Save</button>
+        <button onclick="closeNotePopup()" class="btn-secondary" style="padding:7px 12px;font-size:.78rem;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reader-progress">
+    <div class="reader-progress-fill" id="readerProgressFill" style="width:0%"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="reader-sidebar" id="readerSidebar">
+    <div class="sidebar-header">
+      <h3>📑 Panel</h3>
+      <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+    </div>
+    <div class="sidebar-tabs">
+      <button class="stab active" onclick="switchSTab('bookmarks',this)">🔖 Marks</button>
+      <button class="stab" onclick="switchSTab('highlights',this)">🖊 Lights</button>
+      <button class="stab" onclick="switchSTab('notes',this)">📝 Notes</button>
+    </div>
+    <div class="sidebar-content" id="sidebarContent"></div>
+  </div>
+</div>
+
+<!-- ══ SHELF VIEW ══ -->
+<div id="shelview">
+<div class="page-wrap">
+
+  <div class="shelf-hero">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(168,124,245,.12);border:1px solid rgba(168,124,245,.3);border-radius:20px;padding:6px 16px;margin-bottom:16px;font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.07em;">📖 Free PDF Book Reader</div>
+    <h1>Read Like a <span class="hl">Real Book</span></h1>
+    <p>Upload any NEET PDF — NCERT, modules, PYQs — and read in a beautiful book-like interface.<br>Highlights, bookmarks, notes — all saved privately in your browser.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+      <div style="background:rgba(61,232,160,.08);border:1px solid rgba(61,232,160,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--bio);">🔒 100% Private</div>
+      <div style="background:rgba(61,191,255,.08);border:1px solid rgba(61,191,255,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--phy);">📦 Local Storage</div>
+      <div style="background:rgba(244,185,66,.08);border:1px solid rgba(244,185,66,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--chem);">📚 Book Feel</div>
+      <div style="background:rgba(168,124,245,.08);border:1px solid rgba(168,124,245,.2);border-radius:8px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--purple);">✨ Free Forever</div>
+    </div>
+    <button class="btn-primary" onclick="openGuide()" style="margin:0 auto;">📖 How to Use This Tool</button>
+  </div>
+
+  <!-- Add Book -->
+  <div class="add-book-section">
+    <h2>📥 Add a Book / PDF</h2>
+    <p>Load a PDF three ways: paste a direct URL (GitHub raw / Google Drive), upload from your device, or drag-and-drop. All annotations save to your browser automatically.</p>
+
+    <div class="guide-tabs">
+      <button class="guide-tab active" onclick="switchGuide('github',this)">GitHub Raw URL</button>
+      <button class="guide-tab" onclick="switchGuide('drive',this)">Google Drive</button>
+      <button class="guide-tab" onclick="switchGuide('local',this)">Local Upload</button>
+    </div>
+    <div id="guide-github" class="guide-content active">
+      <div class="guide-box">
+        <strong style="color:var(--phy);">How to get a GitHub Raw PDF URL:</strong>
+        <ol>
+          <li>Upload your PDF to any GitHub repository.</li>
+          <li>Open the file on GitHub → click the PDF filename.</li>
+          <li>Click the <code>Raw</code> button. Copy the URL from your browser address bar.</li>
+          <li>It should look like: <code>https://raw.githubusercontent.com/user/repo/main/book.pdf</code></li>
+          <li>Paste that URL in the field below and click Add Book.</li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(255,95,95,.08);border-radius:6px;border-left:2px solid var(--danger);font-size:.78rem;">
+          ⚠️ <strong>CORS note:</strong> GitHub raw URLs work directly. If any URL fails due to CORS, use local upload instead.
+        </div>
+      </div>
+    </div>
+    <div id="guide-drive" class="guide-content">
+      <div class="guide-box">
+        <strong style="color:var(--chem);">How to use Google Drive PDF:</strong>
+        <ol>
+          <li>Upload your PDF to Google Drive.</li>
+          <li>Right-click → <code>Share</code> → set to "Anyone with the link".</li>
+          <li>Copy the share link: <code>drive.google.com/file/d/FILE_ID/view</code></li>
+          <li>Paste below — the reader auto-converts it to a direct download link.</li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(244,185,66,.08);border-radius:6px;border-left:2px solid var(--chem);font-size:.78rem;">
+          💡 Drive PDFs may have CORS issues in some browsers. If it fails, download and use local upload.
+        </div>
+      </div>
+    </div>
+    <div id="guide-local" class="guide-content">
+      <div class="guide-box">
+        <strong style="color:var(--bio);">Upload from your device:</strong>
+        <ol>
+          <li>Click <strong>Upload PDF from Device</strong> below.</li>
+          <li>Select any PDF — NCERT, modules, PYQ books, notes.</li>
+          <li>The file loads directly in the browser — nothing is uploaded to any server.</li>
+          <li>Your annotations are saved locally per book.</li>
+        </ol>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(61,232,160,.08);border-radius:6px;border-left:2px solid var(--bio);font-size:.78rem;">
+          ✅ Local upload is the most reliable method. No internet needed after uploading.
+        </div>
+      </div>
+    </div>
+
+    <div class="book-form-grid" style="margin-top:18px;">
+      <div class="form-group">
+        <label>Book Title *</label>
+        <input type="text" id="newTitle" placeholder="e.g. NCERT Biology Class 12" />
+      </div>
+      <div class="form-group">
+        <label>Author / Source</label>
+        <input type="text" id="newAuthor" placeholder="e.g. NCERT, HC Verma" />
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="newSubject">
+          <option value="bio">🌿 Biology</option>
+          <option value="chem">⚗️ Chemistry</option>
+          <option value="phy">⚡ Physics</option>
+          <option value="gen">📌 General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>PDF URL (GitHub Raw / Drive share link)</label>
+        <input type="url" id="newUrl" placeholder="https://raw.githubusercontent.com/.../book.pdf" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-primary" onclick="addBook()">+ Add Book</button>
+      <button class="btn-secondary" onclick="document.getElementById('localFile').click()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload PDF from Device
+      </button>
+      <input type="file" id="localFile" accept=".pdf" style="display:none" onchange="handleLocalPDF(event)" />
+    </div>
+  </div>
+
+  <!-- Library -->
+  <div id="librarySection">
+    <h2 class="section-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      My Book Shelf
+      <span id="bookCount" style="font-size:.78rem;font-weight:500;color:var(--muted);"></span>
+    </h2>
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+
+  <!-- Backup -->
+  <div class="backup-section">
+    <h2>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Backup Annotations
+    </h2>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:14px;">All highlights, bookmarks, and notes are stored in your browser only. Export them regularly so you don't lose progress.</p>
+    <div class="backup-btns">
+      <button class="btn-secondary" onclick="exportAnnotations()">⬇ Export All Annotations (JSON)</button>
+      <button class="btn-secondary" onclick="document.getElementById('importAnnotFile').click()">⬆ Import Annotations</button>
+      <button class="btn-secondary" style="border-color:rgba(255,95,95,.3);color:var(--danger);" onclick="clearAllAnnotations()">🗑 Clear All Data</button>
+    </div>
+    <input type="file" id="importAnnotFile" accept=".json" style="display:none" onchange="importAnnotations(event)" />
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.1rem;margin-bottom:4px">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          NEETopia
+        </a>
+        <p>India ka sabse honest aur complete NEET preparation platform. NCERT se shuru, medical college tak — bilkul free.</p>
+        <div class="footer-social">
+          <a href="donate.html" class="social-btn" style="color:#a87cf5;border-color:rgba(168,124,245,0.3)">💜 Support / Donate</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subjects</h4>
+        <a href="subjects/biology/neet-biology.html">🌿 Biology</a>
+        <a href="subjects/chemistry/neet-chemistry.html">⚗️ Chemistry</a>
+        <a href="subjects/physics/neet-physics.html">⚡ Physics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="syllabus/neet-syllabus.html">Full Syllabus</a>
+        <a href="pattern/neet-exam-pattern-marking-scheme.html">Exam Pattern</a>
+        <a href="neet-pyq/neet-previous-year-questions.html">PYQs 2013–2024</a>
+        <a href="roadmap/neet-study-roadmap.html">Study Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="tools/neet-book-reader.html" style="color:var(--phy)">📖 Book Reader</a>
+        <a href="tools/neet-progress-tracker.html">📊 Progress Tracker</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <div class="footer-bottom-left"><p>Made with <span>♥</span> for Indian medical aspirants · © 2026 NEETopia</p></div>
+      <div class="footer-legal">
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="about.html">About</a>
+        <a href="donate.html" style="color:#a87cf5">💜 Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const BOOKS_KEY='neetopia-books-v1',ANNOT_KEY='neetopia-annotations-v1';
+
+/* ═ UTILS ═ */
+function showToast(msg,type='success'){const t=document.getElementById('toast');t.textContent=(type==='success'?'✅ ':'ℹ️ ')+msg;t.className=`toast ${type} show`;setTimeout(()=>t.className='toast',2600);}
+function getBooks(){try{return JSON.parse(localStorage.getItem(BOOKS_KEY)||'[]');}catch{return[];}}
+function saveBooks(b){localStorage.setItem(BOOKS_KEY,JSON.stringify(b));}
+function getAnnots(){try{return JSON.parse(localStorage.getItem(ANNOT_KEY)||'{}');}catch{return {};}}
+function saveAnnots(a){try{localStorage.setItem(ANNOT_KEY,JSON.stringify(a));}catch{showToast('Storage full! Export backup.','info');}}
+function getBookAnnots(id){const all=getAnnots();if(!all[id])all[id]={highlights:[],bookmarks:[],notes:[]};return all[id];}
+function saveBookAnnots(id,data){const all=getAnnots();all[id]=data;saveAnnots(all);}
+
+/* ═ THEME ═ */
+(function(){const btn=document.getElementById('themeToggle'),html=document.documentElement,saved=localStorage.getItem('neetopia-theme')||'dark';html.setAttribute('data-theme',saved);if(btn)btn.addEventListener('click',()=>{const t=html.getAttribute('data-theme'),next=t==='dark'?'light':'dark';html.setAttribute('data-theme',next);localStorage.setItem('neetopia-theme',next);});})();
+
+/* ═ MOBILE MENU ═ */
+function toggleMobileMenu(){const m=document.getElementById('mobileMenu'),o=document.getElementById('mobileOverlay'),open=m.classList.contains('open');if(open){m.classList.remove('open');o.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');o.classList.add('open');document.body.style.overflow='hidden';}}
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',toggleMobileMenu));
+
+/* ═ GUIDE MODAL ═ */
+function openGuide(){document.getElementById('guideModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeGuide(){document.getElementById('guideModal').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('guideModal').addEventListener('click',function(e){if(e.target===this)closeGuide();});
+
+/* ═ GUIDE TABS ═ */
+function switchGuide(name,btn){document.querySelectorAll('.guide-tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.guide-content').forEach(c=>c.classList.remove('active'));if(btn)btn.classList.add('active');const el=document.getElementById('guide-'+name);if(el)el.classList.add('active');}
+
+/* ═ SHELF ═ */
+const SUBJ_EMOJI={bio:'🌿',chem:'⚗️',phy:'⚡',gen:'📚'};
+const SUBJ_SPINE={bio:'bio-spine',chem:'chem-spine',phy:'phy-spine',gen:'gen-spine'};
+const SUBJ_COLOR={bio:'var(--bio)',chem:'var(--chem)',phy:'var(--phy)',gen:'var(--purple)'};
+
+function renderShelf(){
+  const books=getBooks(),grid=document.getElementById('booksGrid'),cnt=document.getElementById('bookCount');
+  if(cnt)cnt.textContent=`(${books.length} book${books.length!==1?'s':''})`;
+  if(!books.length){grid.innerHTML=`<div class="empty-shelf" style="grid-column:1/-1"><div class="ei">📚</div><h3>Your shelf is empty</h3><p style="font-size:.85rem">Add your first PDF — NCERT, modules, PYQs — and start reading!</p></div>`;return;}
+  grid.innerHTML=books.map(b=>{
+    const annots=getBookAnnots(b.id),hlCount=annots.highlights.length,bmCount=annots.bookmarks.length,pct=b.totalPages>0?Math.round((b.lastPage||1)/b.totalPages*100):0,col=SUBJ_COLOR[b.subject]||'var(--purple)';
+    return `<div class="book-card" id="bcard-${b.id}">
+      <div class="book-spine ${SUBJ_SPINE[b.subject]||'gen-spine'}"></div>
+      <div class="book-cover-art">${SUBJ_EMOJI[b.subject]||'📖'}</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author||'—'}</div>
+        <div class="book-progress-bar"><div class="book-progress-fill" style="width:${pct}%"></div></div>
+        <div class="book-meta">
+          <span style="color:${col};font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.72rem;">${pct}%</span>
+          <div style="display:flex;gap:6px;">
+            ${hlCount?`<span class="book-badge" style="color:var(--chem);border-color:rgba(244,185,66,.3);background:rgba(244,185,66,.08)">🖊 ${hlCount}</span>`:''}
+            ${bmCount?`<span class="book-badge" style="color:var(--accent);border-color:rgba(168,124,245,.3);background:rgba(168,124,245,.08)">🔖 ${bmCount}</span>`:''}
+          </div>
+        </div>
+      </div>
+      <div class="book-actions">
+        <button class="book-btn open-btn" onclick="openBook('${b.id}')">📖 Open</button>
+        <button class="book-btn" onclick="deleteBook('${b.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═ ADD BOOK ═ */
+function addBook(){
+  const title=document.getElementById('newTitle').value.trim();
+  if(!title){showToast('Enter book title','info');return;}
+  const url=document.getElementById('newUrl').value.trim();
+  if(!url){showToast('Enter PDF URL or use local upload','info');return;}
+  _addBookEntry(title,url,document.getElementById('newAuthor').value.trim(),document.getElementById('newSubject').value);
+}
+function _addBookEntry(title,url,author='',subject='gen',isLocal=false,localData=null){
+  const books=getBooks(),id='book-'+Date.now();
+  books.unshift({id,title,author,subject,url:isLocal?null:_convertDriveUrl(url),isLocal,localData:isLocal?localData:null,lastPage:1,totalPages:0,addedAt:new Date().toISOString()});
+  saveBooks(books);
+  ['newTitle','newAuthor','newUrl'].forEach(k=>{const el=document.getElementById(k);if(el)el.value='';});
+  renderShelf();showToast('Book added! 📚');
+}
+function _convertDriveUrl(url){const match=url.match(/\/file\/d\/([^/]+)/);if(match)return`https://drive.google.com/uc?export=download&id=${match[1]}`;return url;}
+function handleLocalPDF(event){
+  const file=event.target.files[0];if(!file)return;
+  const title=prompt('Enter book title:',file.name.replace('.pdf',''));if(!title){event.target.value='';return;}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const data=e.target.result,sizeMB=(data.length*3/4/1024/1024).toFixed(1);
+    if(parseFloat(sizeMB)>8){if(!confirm(`This PDF is ~${sizeMB}MB. Continue?`))return;}
+    const subj=prompt('Subject? bio/chem/phy/gen','bio')||'gen',author=prompt('Author/Source (optional):','')||'';
+    _addBookEntry(title,'',author,subj,true,data);showToast(`"${title}" uploaded! (${sizeMB}MB)`);
+  };
+  reader.readAsDataURL(file);event.target.value='';
+}
+function deleteBook(id){
+  if(!confirm('Remove this book?'))return;let books=getBooks();books=books.filter(b=>b.id!==id);saveBooks(books);
+  if(confirm('Also delete all annotations for this book?')){const all=getAnnots();delete all[id];saveAnnots(all);}
+  renderShelf();showToast('Book removed','info');
+}
+
+/* ═ READER STATE ═ */
+let _pdf=null,_currentBook=null,_currentPage=1,_totalPages=1,_zoom=1.0;
+let _spreadMode=true,_scrollMode=false,_highlightMode=false,_underlineMode=false;
+let _hlColor='#fde047',_sidebarTab='bookmarks',_readingMode=0,_focusMode=false,_thumbsBuilt=false;
+
+/* ═ OPEN BOOK ═ */
+async function openBook(id){
+  const books=getBooks(),book=books.find(b=>b.id===id);if(!book){showToast('Book not found','info');return;}
+  _currentBook=book;
+  document.getElementById('shelview').style.display='none';
+  const rv=document.getElementById('readerview');rv.style.display='flex';rv.classList.add('open');
+  document.getElementById('loadingOverlay').style.display='flex';
+  document.getElementById('loadingText').textContent='Loading PDF…';
+  document.getElementById('readerBookTitle').textContent=book.title;
+  _highlightMode=false;_underlineMode=false;_thumbsBuilt=false;_zoom=1.0;_scrollMode=false;
+  _spreadMode=window.innerWidth>700;
+  document.getElementById('hlBtn').classList.remove('active');
+  document.getElementById('ulBtn').classList.remove('active');
+  document.getElementById('colorPicker').style.display='none';
+  document.getElementById('readerBody').classList.remove('mode-sepia','mode-white');
+  _readingMode=0;
+  clearOCR();
+  try{
+    let pdfSource;
+    if(book.isLocal&&book.localData){
+      const b64=book.localData.split(',')[1],bin=atob(b64),arr=new Uint8Array(bin.length);
+      for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);pdfSource={data:arr};
+    }else{pdfSource={url:book.url};}
+    const loadTask=pdfjsLib.getDocument(pdfSource);
+    loadTask.onProgress=p=>{if(p.total){const pct=Math.round(p.loaded/p.total*100);document.getElementById('loadingText').textContent=`Loading PDF… ${pct}%`;}};
+    _pdf=await loadTask.promise;_totalPages=_pdf.numPages;
+    book.totalPages=_totalPages;_currentPage=book.lastPage||1;if(_currentPage>_totalPages)_currentPage=1;saveBooks(books);
+    document.getElementById('pageTotalLabel').textContent='/ '+_totalPages;
+    document.getElementById('loadingOverlay').style.display='none';
+    await renderCurrentPages();updateProgressBar();renderSidebar();buildThumbs();
+    // Auto-extract selectable text layer
+    await renderPDFTextLayer();
+  }catch(e){
+    document.getElementById('loadingText').textContent='❌ Failed to load PDF. Check URL or CORS.';console.error(e);
+    setTimeout(()=>{document.getElementById('loadingOverlay').style.display='none';showToast('Failed to load PDF. Try local upload.','info');},2000);
+  }
+}
+
+/* ═ RENDER PAGES ═ */
+async function renderCurrentPages(){
+  if(!_pdf)return;if(_scrollMode){await renderScrollMode();return;}
+  const body=document.getElementById('readerBody'),bodyH=body.clientHeight-40,bodyW=body.clientWidth-100;
+  const showSpread=_spreadMode&&window.innerWidth>700,availW=showSpread?Math.floor((bodyW-20)/2):bodyW;
+  let leftNum,rightNum;
+  if(showSpread){
+    if(_currentPage===1){leftNum=null;rightNum=1;}
+    else if(_currentPage%2===0){leftNum=_currentPage;rightNum=_currentPage+1<=_totalPages?_currentPage+1:null;}
+    else{leftNum=_currentPage-1;rightNum=_currentPage;}
+  }else{leftNum=_currentPage;rightNum=null;}
+  const leftPage=document.getElementById('leftPage'),rightPage=document.getElementById('rightPage');
+  const leftCanvas=document.getElementById('leftCanvas'),rightCanvas=document.getElementById('rightCanvas');
+  if(leftNum&&leftNum<=_totalPages){leftPage.style.display='block';await renderPageToCanvas(leftNum,leftCanvas,availW,bodyH);leftPage.style.width=leftCanvas.style.width;leftPage.style.height=leftCanvas.style.height;syncHLCanvas('left',leftCanvas);}
+  else{if(showSpread){leftPage.style.display='block';leftCanvas.width=availW;leftCanvas.height=bodyH;const ctx=leftCanvas.getContext('2d');ctx.fillStyle='#f5f5f5';ctx.fillRect(0,0,availW,bodyH);leftPage.style.width=availW+'px';leftPage.style.height=bodyH+'px';syncHLCanvas('left',leftCanvas);}else leftPage.style.display='none';}
+  rightPage.style.display=showSpread?'block':'none';
+  if(showSpread&&rightNum&&rightNum<=_totalPages){await renderPageToCanvas(rightNum,rightCanvas,availW,bodyH);rightPage.style.width=rightCanvas.style.width;rightPage.style.height=rightCanvas.style.height;syncHLCanvas('right',rightCanvas);}
+  else if(showSpread){rightCanvas.width=availW;rightCanvas.height=bodyH;const ctx=rightCanvas.getContext('2d');ctx.fillStyle='#f5f5f5';ctx.fillRect(0,0,availW,bodyH);rightPage.style.width=availW+'px';rightPage.style.height=bodyH+'px';syncHLCanvas('right',rightCanvas);}
+  document.getElementById('pageNumInput').value=_currentPage;
+  updateProgressBar();renderAnnotationsOnPage();saveLastPage();
+  await renderPDFTextLayer();
+}
+
+async function renderPageToCanvas(pageNum,canvas,maxW,maxH){
+  const page=await _pdf.getPage(pageNum),vp=page.getViewport({scale:1});
+  const scale=Math.min(maxW/vp.width,maxH/vp.height)*_zoom,viewport=page.getViewport({scale});
+  canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);
+  canvas.style.width=canvas.width+'px';canvas.style.height=canvas.height+'px';
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
+  await page.render({canvasContext:ctx,viewport}).promise;
+}
+
+function syncHLCanvas(side,mainCanvas){
+  const hlCanvas=document.getElementById(side+'HL'),hlSVG=document.getElementById(side+'SVG');
+  hlCanvas.width=mainCanvas.width;hlCanvas.height=mainCanvas.height;
+  hlCanvas.style.width=mainCanvas.style.width;hlCanvas.style.height=mainCanvas.style.height;
+  hlCanvas.style.position='absolute';hlCanvas.style.top='0';hlCanvas.style.left='0';
+  if(hlSVG){hlSVG.setAttribute('width',mainCanvas.width);hlSVG.setAttribute('height',mainCanvas.height);hlSVG.style.width=mainCanvas.style.width;hlSVG.style.height=mainCanvas.style.height;}
+}
+
+/* ═ NATIVE PDF TEXT LAYER (selectable text for digital PDFs) ═ */
+async function renderPDFTextLayer(){
+  if(!_pdf) return;
+  const showSpread=_spreadMode&&window.innerWidth>700;
+  const sides=[['left',_getLeftPageNum()],['right',_getRightPageNum()]];
+  for(const [side,pageNum] of sides){
+    const ocrDiv=document.getElementById(side+'OCR');
+    const canvas=document.getElementById(side+'Canvas');
+    if(!ocrDiv||!canvas)continue;
+    ocrDiv.innerHTML='';
+    if(!pageNum||pageNum>_totalPages)continue;
+    if(!showSpread&&side==='right')continue;
+    try{
+      const page=await _pdf.getPage(pageNum);
+      const textContent=await page.getTextContent();
+      const vp=page.getViewport({scale:1});
+      const scaleX=canvas.width/vp.width,scaleY=canvas.height/vp.height;
+      ocrDiv.style.width=canvas.style.width;ocrDiv.style.height=canvas.style.height;
+      textContent.items.forEach(item=>{
+        if(!item.str.trim())return;
+        const tx=item.transform;
+        const span=document.createElement('span');
+        const x=tx[4]*scaleX,y=canvas.height-(tx[5]+item.height)*scaleY;
+        const w=item.width*scaleX,h=item.height*scaleY;
+        span.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;font-size:${h*0.85}px;`;
+        span.textContent=item.str;
+        ocrDiv.appendChild(span);
+      });
+    }catch(e){/* text layer not available */}
+  }
+}
+
+function clearOCR(){
+  ['left','right'].forEach(side=>{const el=document.getElementById(side+'OCR');if(el)el.innerHTML='';});
+}
+
+/* ═ OCR (for scanned image PDFs) ═ */
+async function runOCR(){
+  if(!_pdf){showToast('No book open','info');return;}
+  const btn=document.getElementById('ocrBtn');
+  btn.classList.add('active');
+  showToast('Scanning page text… (OCR)','info');
+
+  // Render current page to a blob
+  try{
+    const page=await _pdf.getPage(_currentPage);
+    const vp=page.getViewport({scale:2.0}); // higher res for OCR
+    const tempCanvas=document.createElement('canvas');
+    tempCanvas.width=vp.width;tempCanvas.height=vp.height;
+    const ctx=tempCanvas.getContext('2d');
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,vp.width,vp.height);
+    await page.render({canvasContext:ctx,viewport:vp}).promise;
+    const blob=await new Promise(res=>tempCanvas.toBlob(res,'image/jpeg',0.9));
+    const formData=new FormData();
+    formData.append('file',blob,'page.jpg');
+    formData.append('language','eng');
+    formData.append('isOverlayRequired','true');
+    formData.append('apikey','helloworld'); // free OCR.space key
+
+    const res=await fetch('https://api.ocr.space/parse/image',{method:'POST',body:formData});
+    const data=await res.json();
+    if(data.ParsedResults&&data.ParsedResults[0]){
+      const result=data.ParsedResults[0];
+      const text=result.ParsedText||'';
+      if(text.trim()){
+        // Overlay selectable text
+        overlayOCRText(result);
+        showToast(`OCR done! ${text.split('\n').length} lines extracted.`);
+      }else{showToast('No text found on this page','info');}
+    }else{showToast('OCR failed. Try another page.','info');}
+  }catch(e){console.error(e);showToast('OCR error. Check internet.','info');}
+  btn.classList.remove('active');
+}
+
+function overlayOCRText(result){
+  const side=_spreadMode&&window.innerWidth>700?'right':'left';
+  const canvas=document.getElementById((_spreadMode&&window.innerWidth>700)?'rightCanvas':'leftCanvas');
+  const ocrDiv=document.getElementById(side+'OCR');
+  if(!ocrDiv||!canvas)return;
+  ocrDiv.innerHTML='';
+  ocrDiv.style.width=canvas.style.width;ocrDiv.style.height=canvas.style.height;
+
+  // overlay text lines
+  const lines=result.TextOverlay?.Lines||[];
+  if(!lines.length){
+    // fallback: plain text block
+    const span=document.createElement('span');
+    span.style.cssText='left:5px;top:5px;width:95%;height:95%;font-size:1px;line-height:1;word-break:break-all;white-space:pre-wrap;pointer-events:all;color:transparent;user-select:text;';
+    span.textContent=result.ParsedText;
+    ocrDiv.appendChild(span);return;
+  }
+  const scaleX=parseInt(canvas.style.width)/canvas.width;
+  lines.forEach(line=>{
+    const span=document.createElement('span');
+    const l=line.MinLeft*scaleX,t=line.MaxHeight?line.Words[0]?.Top*scaleX:0;
+    const h=line.MaxHeight?line.MaxHeight*scaleX:16;
+    span.style.cssText=`left:${l}px;top:${t}px;font-size:${h*0.85}px;height:${h}px;pointer-events:all;user-select:text;color:transparent;white-space:pre;`;
+    span.textContent=line.LineText;
+    ocrDiv.appendChild(span);
+  });
+  showToast('OCR text overlay added — now you can select & copy!');
+}
+
+/* ═ SCROLL MODE ═ */
+async function renderScrollMode(){
+  const spread=document.getElementById('bookSpread');spread.innerHTML='';
+  const body=document.getElementById('readerBody'),maxW=Math.min(body.clientWidth-60,900);
+  for(let p=1;p<=_totalPages;p++){
+    const wrapper=document.createElement('div');wrapper.className='page-wrapper';wrapper.id='scroll-page-'+p;wrapper.style.marginBottom='12px';
+    const canvas=document.createElement('canvas');wrapper.appendChild(canvas);spread.appendChild(wrapper);
+    const page=await _pdf.getPage(p),vp=page.getViewport({scale:1}),scale=(maxW/vp.width)*_zoom,viewport=page.getViewport({scale});
+    canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);
+    canvas.style.width=canvas.width+'px';canvas.style.height=canvas.height+'px';
+    const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({canvasContext:ctx,viewport}).promise;
+  }
+}
+
+/* ═ NAVIGATION ═ */
+function prevPage(){if(!_pdf||_scrollMode)return;const step=(_spreadMode&&window.innerWidth>700)?2:1;if(_currentPage<=1)return;_currentPage=Math.max(1,_currentPage-step);_animatePageTurn('left');renderCurrentPages();}
+function nextPage(){if(!_pdf||_scrollMode)return;const step=(_spreadMode&&window.innerWidth>700)?2:1;if(_currentPage>=_totalPages)return;_currentPage=Math.min(_totalPages,_currentPage+step);_animatePageTurn('right');renderCurrentPages();}
+function jumpToPage(n){if(!_pdf)return;n=Math.max(1,Math.min(_totalPages,n));_currentPage=n;renderCurrentPages();}
+function _animatePageTurn(dir){const el=document.getElementById(dir==='right'?'rightPage':'leftPage');if(!el)return;el.classList.add(dir==='right'?'page-turning-right':'page-turning-left');el.addEventListener('animationend',()=>el.classList.remove('page-turning-right','page-turning-left'),{once:true});}
+
+/* ═ KEYBOARD ═ */
+document.getElementById('readerBody').addEventListener('keydown',e=>{
+  if(!_pdf)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown')nextPage();
+  if(e.key==='ArrowLeft'||e.key==='PageUp')prevPage();
+  if(e.key==='Home')jumpToPage(1);if(e.key==='End')jumpToPage(_totalPages);
+  if(e.key==='+'||e.key==='=')changeZoom(0.1);if(e.key==='-')changeZoom(-0.1);
+  if(e.key==='Escape'){if(_highlightMode||_underlineMode){_highlightMode=false;_underlineMode=false;updateAnnotBtnStates();}else closeReader();}
+});
+
+/* ═ SWIPE ═ */
+let _touchStartX=0,_touchStartY=0;
+document.getElementById('readerBody').addEventListener('touchstart',e=>{_touchStartX=e.touches[0].clientX;_touchStartY=e.touches[0].clientY;},{passive:true});
+document.getElementById('readerBody').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-_touchStartX,dy=e.changedTouches[0].clientY-_touchStartY;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){if(dx<0)nextPage();else prevPage();}},{passive:true});
+
+/* ═ ZOOM ═ */
+function changeZoom(delta){_zoom=Math.max(0.5,Math.min(3.0,_zoom+delta));document.getElementById('zoomVal').textContent=Math.round(_zoom*100)+'%';renderCurrentPages();}
+function fitPage(){_zoom=1.0;document.getElementById('zoomVal').textContent='100%';renderCurrentPages();}
+
+/* ═ SPREAD ═ */
+function toggleSpread(){_spreadMode=!_spreadMode;document.getElementById('spreadBtn').classList.toggle('active',_spreadMode);renderCurrentPages();}
+
+/* ═ SCROLL MODE TOGGLE ═ */
+function toggleScrollMode(){
+  _scrollMode=!_scrollMode;document.getElementById('scrollBtn').classList.toggle('active',_scrollMode);
+  const body=document.getElementById('readerBody'),spread=document.getElementById('bookSpread');
+  if(_scrollMode){body.style.overflowY='auto';spread.style.flexDirection='column';spread.style.alignItems='center';spread.style.overflowY='auto';spread.style.maxHeight='100%';spread.style.padding='20px';document.querySelectorAll('.nav-arrow').forEach(a=>a.style.display='none');}
+  else{body.style.overflowY='';spread.style.cssText='';document.querySelectorAll('.nav-arrow').forEach(a=>a.style.display='');}
+  renderCurrentPages();
+}
+
+/* ═ READING MODE ═ */
+function cycleReadingMode(){
+  _readingMode=(_readingMode+1)%3;
+  const body=document.getElementById('readerBody'),btn=document.getElementById('modeBtn');
+  body.classList.remove('mode-sepia','mode-white');
+  if(_readingMode===1){body.classList.add('mode-sepia');btn.querySelector('.rtool-icon').textContent='📜';}
+  else if(_readingMode===2){body.classList.add('mode-white');btn.querySelector('.rtool-icon').textContent='☀️';}
+  else{btn.querySelector('.rtool-icon').textContent='🌙';}
+}
+
+/* ═ FULLSCREEN ═ */
+function toggleFullscreen(){if(!document.fullscreenElement)document.getElementById('readerview').requestFullscreen?.();else document.exitFullscreen?.();}
+
+/* ═ FOCUS MODE ═ */
+function toggleFocusMode(){_focusMode=!_focusMode;document.getElementById('readerview').classList.toggle('reading-mode-focus',_focusMode);document.getElementById('focusBtn').classList.toggle('active',_focusMode);showToast(_focusMode?'Focus mode ON':'Focus mode OFF','info');}
+
+/* ═ HIGHLIGHT ═ */
+function toggleHighlightMode(){_highlightMode=!_highlightMode;if(_highlightMode)_underlineMode=false;updateAnnotBtnStates();showToast(_highlightMode?'Click & drag on page to highlight':'Highlight mode off','info');}
+function toggleUnderlineMode(){_underlineMode=!_underlineMode;if(_underlineMode)_highlightMode=false;updateAnnotBtnStates();showToast(_underlineMode?'Click & drag to underline':'Underline mode off','info');}
+function updateAnnotBtnStates(){document.getElementById('hlBtn').classList.toggle('active',_highlightMode);document.getElementById('ulBtn').classList.toggle('active',_underlineMode);document.getElementById('colorPicker').style.display=_highlightMode?'flex':'none';}
+function setHlColor(col,dot){_hlColor=col;document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));dot.classList.add('selected');}
+
+/* ═ DRAW HIGHLIGHTS ═ */
+let _hlDragStart=null,_activeDragSide=null;
+['left','right'].forEach(side=>{
+  const canvas=document.getElementById(side+'Canvas');
+  canvas.addEventListener('mousedown',e=>{if(!_highlightMode&&!_underlineMode)return;_hlDragStart={x:e.offsetX,y:e.offsetY};_activeDragSide=side;e.preventDefault();});
+  canvas.addEventListener('mousemove',e=>{
+    if(!_hlDragStart||_activeDragSide!==side)return;
+    const hlCanvas=document.getElementById(side+'HL'),ctx=hlCanvas.getContext('2d');
+    ctx.clearRect(0,0,hlCanvas.width,hlCanvas.height);renderAnnotationsOnSide(side,ctx);
+    const x=Math.min(_hlDragStart.x,e.offsetX),y=Math.min(_hlDragStart.y,e.offsetY),w=Math.abs(e.offsetX-_hlDragStart.x),h=Math.abs(e.offsetY-_hlDragStart.y);
+    ctx.globalAlpha=0.35;ctx.fillStyle=_hlColor;ctx.fillRect(x,y,w,h);
+  });
+  canvas.addEventListener('mouseup',e=>{
+    if(!_hlDragStart||_activeDragSide!==side){_hlDragStart=null;return;}
+    const x=Math.min(_hlDragStart.x,e.offsetX),y=Math.min(_hlDragStart.y,e.offsetY),w=Math.abs(e.offsetX-_hlDragStart.x),h=Math.abs(e.offsetY-_hlDragStart.y);
+    _hlDragStart=null;if(w<5||h<3)return;
+    const pageNum=side==='left'?_getLeftPageNum():_getRightPageNum();if(!pageNum)return;
+    const annots=getBookAnnots(_currentBook.id);
+    if(_highlightMode){annots.highlights.push({id:Date.now(),page:pageNum,x,y,w,h,color:_hlColor,note:'',timestamp:new Date().toISOString()});showToast('Highlight saved!');}
+    else if(_underlineMode){annots.highlights.push({id:Date.now(),page:pageNum,x,y:y+h-2,w,h:3,color:_hlColor,type:'underline',note:'',timestamp:new Date().toISOString()});showToast('Underline saved!');}
+    saveBookAnnots(_currentBook.id,annots);renderAnnotationsOnPage();renderSidebar();
+  });
+  // Touch support for highlight
+  canvas.addEventListener('touchstart',e=>{if(!_highlightMode&&!_underlineMode)return;const r=canvas.getBoundingClientRect();_hlDragStart={x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};_activeDragSide=side;},{passive:true});
+  canvas.addEventListener('touchend',e=>{
+    if(!_hlDragStart||_activeDragSide!==side){_hlDragStart=null;return;}
+    const r=canvas.getBoundingClientRect(),x2=e.changedTouches[0].clientX-r.left,y2=e.changedTouches[0].clientY-r.top;
+    const x=Math.min(_hlDragStart.x,x2),y=Math.min(_hlDragStart.y,y2),w=Math.abs(x2-_hlDragStart.x),h=Math.abs(y2-_hlDragStart.y);
+    _hlDragStart=null;if(w<10||h<5)return;
+    const pageNum=side==='left'?_getLeftPageNum():_getRightPageNum();if(!pageNum)return;
+    const annots=getBookAnnots(_currentBook.id);
+    if(_highlightMode){annots.highlights.push({id:Date.now(),page:pageNum,x,y,w,h,color:_hlColor,note:'',timestamp:new Date().toISOString()});showToast('Highlight saved!');}
+    saveBookAnnots(_currentBook.id,annots);renderAnnotationsOnPage();renderSidebar();
+  },{passive:true});
+});
+
+function _getLeftPageNum(){if(!_spreadMode||window.innerWidth<=700)return _currentPage;if(_currentPage===1)return null;return _currentPage%2===0?_currentPage:_currentPage-1;}
+function _getRightPageNum(){if(!_spreadMode||window.innerWidth<=700)return _currentPage;if(_currentPage===1)return 1;return _currentPage%2===0?_currentPage+1:_currentPage;}
+
+function renderAnnotationsOnPage(){if(!_currentBook)return;['left','right'].forEach(side=>renderAnnotationsOnSide(side,null,true));}
+function renderAnnotationsOnSide(side,ctxOverride,clear=false){
+  const hlCanvas=document.getElementById(side+'HL');const pageNum=side==='left'?_getLeftPageNum():_getRightPageNum();
+  if(!pageNum||!hlCanvas)return;
+  const ctx=ctxOverride||hlCanvas.getContext('2d');
+  if(clear)ctx.clearRect(0,0,hlCanvas.width,hlCanvas.height);
+  if(!_currentBook)return;
+  const annots=getBookAnnots(_currentBook.id);
+  annots.highlights.filter(h=>h.page===pageNum).forEach(h=>{ctx.globalAlpha=h.type==='underline'?0.9:0.35;ctx.fillStyle=h.color;ctx.fillRect(h.x,h.y,h.w,h.h);ctx.globalAlpha=1;});
+}
+
+/* ═ BOOKMARKS ═ */
+function addBookmark(){
+  if(!_currentBook)return;const annots=getBookAnnots(_currentBook.id);
+  if(annots.bookmarks.find(b=>b.page===_currentPage)){showToast('Already bookmarked!','info');return;}
+  const label=prompt('Bookmark label:',`Page ${_currentPage}`)||`Page ${_currentPage}`;
+  annots.bookmarks.push({id:Date.now(),page:_currentPage,label,timestamp:new Date().toISOString()});
+  saveBookAnnots(_currentBook.id,annots);renderSidebar();renderShelf();showToast(`Bookmarked page ${_currentPage}! 🔖`);
+}
+
+/* ═ NOTES ═ */
+let _noteTarget=null;
+function openNotePopup(x,y){const popup=document.getElementById('notePopup');popup.style.left=Math.min(x,window.innerWidth-320)+'px';popup.style.top=Math.min(y,window.innerHeight-200)+'px';popup.classList.add('open');document.getElementById('noteText').value='';document.getElementById('noteText').focus();}
+function closeNotePopup(){document.getElementById('notePopup').classList.remove('open');_noteTarget=null;}
+function saveNote(){
+  if(!_currentBook||!_noteTarget)return;const text=document.getElementById('noteText').value.trim();if(!text){closeNotePopup();return;}
+  const annots=getBookAnnots(_currentBook.id);annots.notes.push({id:Date.now(),page:_currentPage,text,timestamp:new Date().toISOString()});
+  saveBookAnnots(_currentBook.id,annots);closeNotePopup();renderSidebar();showToast('Note saved! 📝');
+}
+document.getElementById('readerBody').addEventListener('contextmenu',e=>{if(!_currentBook)return;e.preventDefault();_noteTarget={x:e.clientX,y:e.clientY};openNotePopup(e.clientX,e.clientY);});
+
+/* ═ SIDEBAR ═ */
+function toggleSidebar(){document.getElementById('readerSidebar').classList.toggle('open');renderSidebar();}
+function switchSTab(tab,btn){_sidebarTab=tab;document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderSidebar();}
+function renderSidebar(){
+  if(!_currentBook)return;const annots=getBookAnnots(_currentBook.id),el=document.getElementById('sidebarContent');if(!el)return;
+  if(_sidebarTab==='bookmarks'){
+    if(!annots.bookmarks.length){el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No bookmarks yet.<br>Press 🔖 Mark to add one.</div>';return;}
+    el.innerHTML=annots.bookmarks.map(b=>`<div class="bookmark-item" onclick="jumpToPage(${b.page})"><div><div style="font-weight:600;font-size:.85rem;">${b.label}</div><div style="font-size:.7rem;color:var(--muted);">Page ${b.page}</div></div><button class="bm-del" onclick="event.stopPropagation();deleteBookmark(${b.id})">✕</button></div>`).join('');
+  }else if(_sidebarTab==='highlights'){
+    if(!annots.highlights.length){el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No highlights yet.<br>Use 🖊 Highlight to mark areas.</div>';return;}
+    el.innerHTML=annots.highlights.map(h=>`<div class="bookmark-item" onclick="jumpToPage(${h.page})" style="border-left:3px solid ${h.color};"><div style="flex:1;"><div style="font-size:.72rem;color:var(--muted);">${h.type==='underline'?'Underline':'Highlight'} · Page ${h.page}</div></div><button class="bm-del" onclick="event.stopPropagation();deleteHighlight(${h.id})">✕</button></div>`).join('');
+  }else if(_sidebarTab==='notes'){
+    if(!annots.notes.length){el.innerHTML='<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:20px;">No notes yet.<br>Right-click on page to add a note.</div>';return;}
+    el.innerHTML=annots.notes.map(n=>`<div class="bookmark-item" onclick="jumpToPage(${n.page})"><div style="flex:1;"><div style="font-size:.7rem;color:var(--muted);margin-bottom:3px;">Page ${n.page}</div><div style="font-size:.82rem;line-height:1.5;">${n.text.slice(0,120)}${n.text.length>120?'…':''}</div></div><button class="bm-del" onclick="event.stopPropagation();deleteNote(${n.id})">✕</button></div>`).join('');
+  }
+}
+function deleteBookmark(id){const a=getBookAnnots(_currentBook.id);a.bookmarks=a.bookmarks.filter(b=>b.id!==id);saveBookAnnots(_currentBook.id,a);renderSidebar();renderShelf();}
+function deleteHighlight(id){const a=getBookAnnots(_currentBook.id);a.highlights=a.highlights.filter(h=>h.id!==id);saveBookAnnots(_currentBook.id,a);renderSidebar();renderAnnotationsOnPage();}
+function deleteNote(id){const a=getBookAnnots(_currentBook.id);a.notes=a.notes.filter(n=>n.id!==id);saveBookAnnots(_currentBook.id,a);renderSidebar();}
+
+/* ═ THUMBNAILS ═ */
+async function buildThumbs(){
+  if(_thumbsBuilt||!_pdf)return;_thumbsBuilt=true;
+  const strip=document.getElementById('thumbStrip');strip.innerHTML='';strip.classList.remove('hidden');
+  const maxThumbs=Math.min(_totalPages,50);
+  for(let p=1;p<=maxThumbs;p++){
+    const div=document.createElement('div');div.className='thumb-page'+(p===_currentPage?' current':'');div.setAttribute('data-page',p);div.title='Page '+p;
+    div.onclick=()=>{strip.querySelectorAll('.thumb-page').forEach(t=>t.classList.remove('current'));div.classList.add('current');jumpToPage(p);};
+    const canvas=document.createElement('canvas');div.appendChild(canvas);strip.appendChild(div);
+    (async(page,cnv)=>{const pg=await _pdf.getPage(page),vp=pg.getViewport({scale:0.15});cnv.width=vp.width;cnv.height=vp.height;const ctx=cnv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,cnv.width,cnv.height);await pg.render({canvasContext:ctx,viewport:vp}).promise;})(p,canvas);
+  }
+  let hideTimer=setTimeout(()=>strip.classList.add('hidden'),3000);
+  strip.addEventListener('mouseenter',()=>{clearTimeout(hideTimer);strip.classList.remove('hidden');});
+  strip.addEventListener('mouseleave',()=>{hideTimer=setTimeout(()=>strip.classList.add('hidden'),2000);});
+  document.getElementById('readerBody').addEventListener('mousemove',()=>{strip.classList.remove('hidden');clearTimeout(hideTimer);hideTimer=setTimeout(()=>strip.classList.add('hidden'),3000);},{passive:true});
+}
+function updateThumbHighlight(){document.querySelectorAll('.thumb-page').forEach(t=>{t.classList.toggle('current',parseInt(t.getAttribute('data-page'))===_currentPage);});}
+
+/* ═ PROGRESS ═ */
+function updateProgressBar(){const pct=_totalPages>0?(_currentPage/_totalPages*100):0;document.getElementById('readerProgressFill').style.width=pct+'%';updateThumbHighlight();}
+function saveLastPage(){const books=getBooks(),b=books.find(b=>b.id===_currentBook?.id);if(b){b.lastPage=_currentPage;saveBooks(books);}}
+
+/* ═ CLOSE ═ */
+function closeReader(){saveLastPage();document.getElementById('readerview').classList.remove('open');document.getElementById('readerview').style.display='none';document.getElementById('shelview').style.display='block';_pdf=null;_currentBook=null;renderShelf();}
+
+/* ═ BACKUP ═ */
+function exportAnnotations(){
+  const data={books:getBooks().map(b=>({...b,localData:b.isLocal?'[LOCAL_FILE_NOT_INCLUDED]':null})),annotations:getAnnots(),exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='neetopia-reader-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Annotations exported!');
+}
+function importAnnotations(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);if(!confirm('Merge imported data with current? Continue?'))return;
+      const existing=getBooks(),imported=data.books||[];imported.forEach(b=>{if(!existing.find(x=>x.id===b.id)&&!b.isLocal)existing.push(b);});saveBooks(existing);
+      const ea=getAnnots(),ia=data.annotations||{};Object.keys(ia).forEach(k=>{if(!ea[k])ea[k]=ia[k];else{['highlights','bookmarks','notes'].forEach(arr=>{const ids=new Set((ea[k][arr]||[]).map(x=>x.id));(ia[k][arr]||[]).forEach(x=>{if(!ids.has(x.id))ea[k][arr].push(x);});});}});saveAnnots(ea);renderShelf();showToast('Backup imported!');
+    }catch(ex){showToast('Invalid backup file','info');}
+  };reader.readAsText(file);event.target.value='';
+}
+function clearAllAnnotations(){if(!confirm('Delete ALL annotations?'))return;if(!confirm('Cannot be undone. Sure?'))return;localStorage.removeItem(ANNOT_KEY);showToast('All annotations cleared','info');renderShelf();}
+
+/* ═ RESIZE ═ */
+let _resizeTimer=null;window.addEventListener('resize',()=>{clearTimeout(_resizeTimer);_resizeTimer=setTimeout(()=>{if(_pdf&&!_scrollMode)renderCurrentPages();},200);});
+
+/* ═ INIT ═ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderShelf();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('notePopup').classList.contains('open'))closeNotePopup();});
+});
+</script>
+</body>
+</html>
