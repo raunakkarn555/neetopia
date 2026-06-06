@@ -4306,6 +4306,8 @@
   <!-- Action Buttons -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">
 
+    <p style="font-size:.78rem;color:var(--bio);margin:0 0 14px;padding:8px 14px;background:rgba(61,232,160,.07);border:1px solid rgba(61,232,160,.2);border-radius:8px;">✅ Profile photo, journal, all topics, tests, timer sessions — everything is included in the backup JSON.</p>
+    
     <button onclick="exportData()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06));border:1.5px solid rgba(61,232,160,.4);border-radius:var(--card-radius);padding:18px 20px;color:var(--bio);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;" onmouseover="this.style.background='linear-gradient(135deg,rgba(61,232,160,.2),rgba(61,232,160,.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(61,232,160,.12),rgba(61,232,160,.06))'">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       <div style="text-align:left;">
@@ -5300,7 +5302,13 @@
 // ─── DATA STORE ───
 const STORE_KEY = 'neetopia-tracker-v2';
 function getData() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch { return {}; } }
-function setData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+function setData(d) {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(d));
+  } catch(e) {
+    showToast('Storage full! Go to Backup tab and export, then clear some photos.', 'info');
+  }
+}
 
 // ─── TOAST ───
 function showToast(msg, type='success') {
@@ -6574,10 +6582,11 @@ function handleAvatarUpload(event) {
     img.onload = function() {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, 160, 160);
-      const compressed = canvas.toDataURL('image/jpeg', 0.7);
-      const d = getData(); d['profile-avatar'] = compressed; setData(d);
-      showAvatarImg(compressed);
-      showToast('Profile photo updated!');
+     const compressed = canvas.toDataURL('image/jpeg', 0.7);
+const sizeKB = Math.round((compressed.length * 3) / 4 / 1024);
+const d = getData(); d['profile-avatar'] = compressed; setData(d);
+showAvatarImg(compressed);
+showToast('Profile photo saved! (' + sizeKB + ' KB)');
     };
     img.src = e.target.result;
   };
@@ -8790,14 +8799,16 @@ function updateStorageInfo() {
   // Stats grid
   const grid = document.getElementById('storageStatsGrid');
   if (grid) {
-    const stats = [
-      { label: 'Topics Tracked', val: topics,    icon: '✅', color: 'var(--bio)' },
-      { label: 'Tests Logged',   val: tests,     icon: '🧪', color: 'var(--phy)' },
-      { label: 'Journal Entries',val: journal,   icon: '📓', color: 'var(--purple)' },
-      { label: 'Photos Stored',  val: photos,    icon: '📸', color: 'var(--chem)' },
-      { label: 'Todos',          val: todos,     icon: '✔️', color: 'var(--accent)' },
-      { label: 'Resources',      val: resources, icon: '📚', color: 'var(--bio)' },
-    ];
+    const avatarSize = d['profile-avatar'] ? Math.round((d['profile-avatar'].length * 3) / 4 / 1024) + ' KB' : 'None';
+const stats = [
+  { label: 'Topics Tracked', val: topics,     icon: '✅', color: 'var(--bio)' },
+  { label: 'Tests Logged',   val: tests,      icon: '🧪', color: 'var(--phy)' },
+  { label: 'Journal Entries',val: journal,    icon: '📓', color: 'var(--purple)' },
+  { label: 'Photos Stored',  val: photos,     icon: '📸', color: 'var(--chem)' },
+  { label: 'Todos',          val: todos,      icon: '✔️', color: 'var(--accent)' },
+  { label: 'Resources',      val: resources,  icon: '📚', color: 'var(--bio)' },
+  { label: 'Profile Photo',  val: avatarSize, icon: '👤', color: 'var(--purple)' },
+];
     grid.innerHTML = stats.map(s => `
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
         <div style="font-size:1.2rem;margin-bottom:5px;">${s.icon}</div>
