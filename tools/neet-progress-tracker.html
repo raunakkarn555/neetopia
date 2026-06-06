@@ -6538,6 +6538,8 @@ function saveProfile() {
   d['profile-examdate'] = document.getElementById('inp-examdate')?.value || '';
   setData(d);
   loadProfile();
+  updateExamCountdown();
+  updateStats();
   showToast('Profile saved!');
 }
 
@@ -10694,6 +10696,11 @@ function tmr2Init(){
   } catch(e){}
 }
 
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(tmr2Init, 300);
+});
+
+})(); 
 
 
 function playTimerSound(type) {
@@ -11136,7 +11143,10 @@ function swInit(){
 const _origSwSwitch = window.switchSection;
 window.switchSection = function(s){
   if(_origSwSwitch) _origSwSwitch(s);
-  if(s==='timer') swInit();
+  if(s==='timer'){
+    swInit();
+    if(typeof tmr2Init === 'function') tmr2Init();
+  }
 };
 
 document.addEventListener('DOMContentLoaded', ()=>{
