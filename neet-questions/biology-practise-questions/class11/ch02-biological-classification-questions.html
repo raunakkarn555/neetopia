@@ -401,6 +401,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 0 2
 .footer-tracker-badge{margin-left:auto;font-family:var(--font-mono);font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--purple);background:rgba(168,124,245,0.15);border:1px solid rgba(168,124,245,0.3);padding:2px 7px;border-radius:99px}
 .nav-links .qp-link{color:var(--purple);background:rgba(168,124,245,0.08)}
 .nav-links .qp-link:hover{background:rgba(168,124,245,0.15)}
+
+.q-diagram-fallback{
+  display:flex;align-items:center;justify-content:center;
+  min-height:120px;background:var(--surface);border-radius:10px;
+  border:1px dashed var(--border2);color:var(--text2);
+  font-size:.82rem;text-align:center;padding:20px;line-height:1.6;
+  margin-bottom:16px;
+}
 </style>
 </head>
 <body>
@@ -949,7 +957,7 @@ const ALL_QUESTIONS = [
 {id:200,topic:'special',qtype:'ar',text:'ASSERTION–REASON Q:\nAssertion (A): Mycorrhiza is beneficial to both the plant and the fungus.\nReason (R): In mycorrhiza, the plant provides carbohydrates to the fungus, and the fungus provides minerals and water to the plant.\n\nOptions: A=Both true & R explains A | B=Both true but R doesn\'t explain A | C=A true, R false | D=A false, R true',opts:['A — Both true, R is correct explanation','B — Both true, R is NOT correct explanation','C — A true, R false','D — A false, R true'],ans:0,exp:'Assertion is TRUE: Mycorrhiza IS beneficial to both partners — it is a mutualistic symbiosis. Reason is TRUE: The plant (autotroph) provides photosynthetically produced carbohydrates/sugars to the heterotrophic fungus; the fungus provides minerals (especially phosphorus) and water absorbed through its extensive hyphal network. R correctly describes the mutual exchange, explaining why both benefit. Answer: A.'},
 
 // DIAGRAM-BASED (Q201–260)
-{id:201,topic:'special',qtype:'diagram',diagramUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Prokaryote_cell.svg/800px-Prokaryote_cell.svg.png',diagramCaption:'Diagram: Structure of a generalised bacterial (prokaryotic) cell',text:'[DIAGRAM QUESTION] Refer to the prokaryotic cell structure diagram above.\nWhich structure in a bacterial cell is responsible for locomotion?',opts:['Pili','Plasmid','Flagella','Cell wall'],ans:2,exp:'Flagella (singular: flagellum) are the structures responsible for bacterial locomotion. They are long, whip-like protein appendages made of flagellin subunits. Bacterial flagella rotate like a motor (360°), driven by a proton-motive force. Pili are for attachment/conjugation; Plasmid is extrachromosomal DNA; Cell wall provides shape and protection.'},
+{id:201,topic:'special',qtype:'diagram',diagramUrl:'https://www.microbiologyclass.net/wp-content/uploads/2021/04/Prokaryotic-cell-structure-diagram.jpg',diagramCaption:'Diagram: Structure of a generalised bacterial (prokaryotic) cell',text:'[DIAGRAM QUESTION] Refer to the prokaryotic cell structure diagram above.\nWhich structure in a bacterial cell is responsible for locomotion?',opts:['Pili','Plasmid','Flagella','Cell wall'],ans:2,exp:'Flagella (singular: flagellum) are the structures responsible for bacterial locomotion. They are long, whip-like protein appendages made of flagellin subunits. Bacterial flagella rotate like a motor (360°), driven by a proton-motive force. Pili are for attachment/conjugation; Plasmid is extrachromosomal DNA; Cell wall provides shape and protection.'},
 {id:202,topic:'special',qtype:'diagram',diagramUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Prokaryote_cell.svg/800px-Prokaryote_cell.svg.png',diagramCaption:'Diagram: Structure of a generalised bacterial cell',text:'[DIAGRAM QUESTION] In the bacterial cell diagram, which structure carries extrachromosomal DNA?',opts:['Nucleoid','Plasmid','Ribosome','Mesosome'],ans:1,exp:'Plasmid carries extrachromosomal DNA in bacteria. Plasmids are small, circular, double-stranded DNA molecules that replicate independently of the main chromosome. They often carry genes for antibiotic resistance, toxin production, or nitrogen fixation. The nucleoid region contains the main (chromosomal) DNA of the bacterium.'},
 {id:203,topic:'special',qtype:'diagram',diagramUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/TMV_structure_simple.png/640px-TMV_structure_simple.png',diagramCaption:'Diagram: Structure of Tobacco Mosaic Virus (TMV) — helical capsomeres around central RNA',text:'[DIAGRAM QUESTION] What is the nature of the central core (genetic material) of TMV?',opts:['ds DNA','ss RNA','ds RNA','ss DNA'],ans:1,exp:'The genetic material of TMV is single-stranded RNA (ssRNA+, positive sense). The RNA is coiled in a helix surrounded by 2130 identical coat protein subunits (capsomeres) arranged in a helical pattern. TMV was the first virus to be crystallized (Stanley, 1935) and the first virus shown to have RNA as genetic material (Fraenkel-Conrat, 1956).'},
 {id:204,topic:'special',qtype:'diagram',diagramUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/TMV_structure_simple.png/640px-TMV_structure_simple.png',diagramCaption:'Diagram: TMV structure showing protein subunits',text:'[DIAGRAM QUESTION] The individual protein subunits forming the capsid of TMV are called:',opts:['Nucleocapsids','Capsomeres','Prions','Virions'],ans:1,exp:'Capsomeres are the individual protein subunits that assemble to form the capsid (protein coat) of a virus. In TMV, 2130 identical capsomere subunits arrange helically around the RNA. The complete virus particle is called a virion. The nucleocapsid refers to the nucleic acid + capsid together. Prions are infectious proteins, not viral subunits.'},
@@ -1086,8 +1094,8 @@ function renderQuestions(){
     card.id='qcard-'+idx;
     var diagHtml='';
     if(q.diagramUrl){
-      diagHtml='<div class="q-diagram"><img src="'+q.diagramUrl+'" alt="'+q.diagramCaption+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.background=\'var(--surface)\'"><div class="q-diagram-caption">'+q.diagramCaption+'</div></div>';
-    }
+  diagHtml='<div class="q-diagram"><img src="'+q.diagramUrl+'" alt="'+q.diagramCaption+'" loading="lazy" crossorigin="anonymous" referrerpolicy="no-referrer" onerror="this.parentElement.innerHTML=\'<div class=\\\'q-diagram-fallback\\\'>🔬 <b>Diagram:</b> \'+q.diagramCaption+\'<br><span style=\\\"font-size:.75rem;color:var(--text3)\\\">Read the question carefully — all info needed is in the question text</span></div>\'"><div class="q-diagram-caption">'+q.diagramCaption+'</div></div>';
+}
     card.innerHTML=
       '<div class="q-meta">'+
         '<span class="q-number">Q'+(idx+1)+' of '+activeQuestions.length+'</span>'+
