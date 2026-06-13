@@ -244,6 +244,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);display:
 .q-diagram{margin-bottom:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface)}
 .q-diagram img{width:100%;max-height:260px;object-fit:contain;display:block;padding:12px;background:var(--bg3)}
 .q-diagram-caption{font-size:.72rem;color:var(--text3);font-family:var(--font-mono);padding:7px 12px;border-top:1px solid var(--border)}
+.svg-wrap{padding:12px;background:var(--bg3);display:flex;justify-content:center}
+.svg-wrap svg{max-width:100%;height:auto;max-height:260px}
 .options-grid{display:flex;flex-direction:column;gap:10px}
 .option-btn{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;text-align:left;width:100%;color:var(--text2);font-family:var(--font-body);font-size:.9rem;line-height:1.55}
 .option-btn:hover{border-color:var(--green);color:var(--text);background:rgba(61,232,160,0.04)}
@@ -1076,9 +1078,9 @@ function renderQuestions(){
     card.className='question-card'+(idx===0?' active':'');
     card.id='qcard-'+idx;
     var diagHtml='';
-    if(q.diagramUrl){
-      diagHtml='<div class="q-diagram"><img src="'+q.diagramUrl+'" alt="'+q.diagramCaption+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.background=\'var(--surface)\'"><div class="q-diagram-caption">'+q.diagramCaption+'</div></div>';
-    }
+if(q.diagramSVG){
+  diagHtml='<div class="q-diagram"><div class="svg-wrap">'+q.diagramSVG+'</div><div class="q-diagram-caption">'+(q.diagramCaption||'')+'</div></div>';
+}
     card.innerHTML=
       '<div class="q-meta">'+
         '<span class="q-number">Q'+(idx+1)+' of '+activeQuestions.length+'</span>'+
